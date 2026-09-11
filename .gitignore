@@ -1,0 +1,13 @@
+.DS_Store
+.playwright-cli/
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+test-results/
+playwright-report/
+# Raw retrievals stay local: avoid publishing full third-party articles.
+research/*
+!research/verified-players.json
+!research/data-policy.md
+!research/game-ledger.json

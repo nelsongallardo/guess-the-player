@@ -1,0 +1,1564 @@
+[
+  {
+    "id": "cristiano-ronaldo",
+    "name": "Cristiano Ronaldo",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Sporting CP",
+        "years": "2002–2003",
+        "note": "First competitive senior appearance: 14 August 2002, versus Inter; overlaps B-team games."
+      },
+      {
+        "name": "Sporting CP B",
+        "years": "2002–2003",
+        "note": "Senior third-tier reserve side; first B appearance 1 September 2002. Overlaps Sporting CP, not a transfer away."
+      },
+      {
+        "name": "Manchester United",
+        "years": "2003–2009"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2009–2018"
+      },
+      {
+        "name": "Juventus",
+        "years": "2018–2021"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2021–2022",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Al-Nassr",
+        "years": "2023–present",
+        "note": "Signed December 2022; competitive playing spell began January 2023. Current SPL player profile checked."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Cristiano_Ronaldo",
+        "title": "Cristiano Ronaldo - Wikipedia"
+      },
+      {
+        "url": "https://www.spl.com.sa/en/players/20094/cristiano-ronaldo",
+        "title": "Cristiano Ronaldo | Saudi Pro League"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Sporting_CP_B",
+        "title": "Sporting CP B - Wikipedia"
+      },
+      {
+        "url": "https://www.uefa.com/uefachampionsleague/news/023c-0e976af10937-6aed2a57b183-1000--memories-of-ronaldo-s-debut-on-this-day-in-2002/",
+        "title": "Memories of Ronaldo's debut: on this day in 2002 | UEFA Champions League 2017/18 | UEFA.com"
+      }
+    ],
+    "notes": "First team precedes B team by competitive debut, contrary to the conventional infobox ordering. These are overlapping 2002/03 spells, not a claim of a permanent demotion. Andorinha and Nacional were youth-only. Current Al-Nassr status corroborated on the Saudi Pro League website.",
+    "status": "active",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "zinedine-zidane",
+    "name": "Zinedine Zidane",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Cannes B",
+        "years": "1987/88–1989/90",
+        "note": "Senior French pyramid reserve team: NFT records 9 league appearances in 1987/88 and 5 in 1988/89; 1989/90 membership also listed, but its appearance count is unavailable."
+      },
+      {
+        "name": "Cannes",
+        "years": "1989–1992",
+        "note": "First-team debut 1989; overlaps reserve membership."
+      },
+      {
+        "name": "Bordeaux",
+        "years": "1992–1996"
+      },
+      {
+        "name": "Juventus",
+        "years": "1996–2001"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2001–2006"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Zinedine_Zidane",
+        "title": "Zinedine Zidane - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2456/Zinedine_Zidane.html",
+        "title": "Zinedine Zidane (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.realmadrid.com/en-US/the-club/history/football-legends/zinedine-zidane",
+        "title": "Zinedine Zidane - History and honours | Official website Real Madrid C.F."
+      },
+      {
+        "url": "https://www.footballdatabase.eu/en/player/details/12-zinedine-zidane",
+        "title": "Zinédine Zidane - Stats and titles won"
+      }
+    ],
+    "notes": "Cannes B, often omitted from first-team-only summaries, is confirmed in the senior French pyramid from 1987/88, before the first-team debut in 1989. Reserve membership is reported in seasons (not exact first/last appearance dates) and overlaps the first team. Real Madrid Castilla was a coaching role, not a playing club.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "dennis-bergkamp",
+    "name": "Dennis Bergkamp",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "1986–1993"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1993–1995"
+      },
+      {
+        "name": "Arsenal",
+        "years": "1995–2006"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Dennis_Bergkamp",
+        "title": "Dennis Bergkamp — senior career"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/10390/Dennis_Bergkamp.html",
+        "title": "Dennis Bergkamp (Player) | National Football Teams"
+      }
+    ],
+    "notes": "All three senior playing clubs and chronology cross-checked against the independent season-by-season record. Ajax youth and later assistant-coaching work are not additional playing spells.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "david-beckham",
+    "name": "David Beckham",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Manchester United",
+        "years": "1992–1995",
+        "note": "Competitive first-team debut in 1992 before the Preston loan."
+      },
+      {
+        "name": "Preston North End",
+        "years": "1995",
+        "note": "Loan; five league appearances."
+      },
+      {
+        "name": "Manchester United",
+        "years": "1995–2003",
+        "note": "Actual playing return; Premier League debut 2 April 1995."
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2003–2007"
+      },
+      {
+        "name": "LA Galaxy",
+        "years": "2007–2008"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2009",
+        "note": "First loan, during the 2008/09 European season."
+      },
+      {
+        "name": "LA Galaxy",
+        "years": "2009",
+        "note": "Played after the first Milan loan; reached MLS Cup final."
+      },
+      {
+        "name": "AC Milan",
+        "years": "2010",
+        "note": "Second, separate loan, during the 2009/10 European season."
+      },
+      {
+        "name": "LA Galaxy",
+        "years": "2010–2012",
+        "note": "Returned to competitive play 11 September 2010 after injury."
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2013"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/David_Beckham",
+        "title": "David Beckham - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2189.html",
+        "title": "David Beckham (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.britannica.com/biography/David-Beckham",
+        "title": "David Beckham | Knighthood, Career, Football, Age, Wife, Kids, & Facts | Britannica"
+      }
+    ],
+    "notes": "Both separate AC Milan loans and all actual parent-club returns are shown in playing order. No Tottenham playing spell: youth association/training is not a senior professional appearance. Inter Miami and Salford City are ownership roles.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "wayne-rooney",
+    "name": "Wayne Rooney",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Everton",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2004–2017"
+      },
+      {
+        "name": "Everton",
+        "years": "2017–2018",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "D.C. United",
+        "years": "2018–2019"
+      },
+      {
+        "name": "Derby County",
+        "years": "2020–2021",
+        "note": "Player-coach; retired from playing January 2021."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Wayne_Rooney",
+        "title": "Wayne Rooney - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2145.html",
+        "title": "Wayne Rooney (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.theguardian.com/football/2021/jan/15/wayne-rooney-calls-time-on-playing-career-to-become-derby-manager",
+        "title": "Wayne Rooney calls time on playing career to become Derby manager | Derby County | The Guardian"
+      }
+    ],
+    "notes": "Primarily a forward, later also a midfielder. D.C. United, Birmingham City and Plymouth Argyle managerial appointments after playing retirement are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "steven-gerrard",
+    "name": "Steven Gerrard",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Liverpool",
+        "years": "1998–2015"
+      },
+      {
+        "name": "LA Galaxy",
+        "years": "2015–2016"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Steven_Gerrard",
+        "title": "Steven Gerrard - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2181.html",
+        "title": "Steven Gerrard (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.smh.com.au/sport/soccer/former-liverpool-and-england-captain-steven-gerrard-retires-after-la-galaxy-20161124-gsx3y0.html",
+        "title": "Former Liverpool and England captain Steven Gerrard retires after LA Galaxy"
+      }
+    ],
+    "notes": "Retired from professional playing in November 2016. Later Liverpool training and coaching, Rangers, Aston Villa and Al-Ettifaq management are not playing spells.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "frank-lampard",
+    "name": "Frank Lampard",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Swansea City",
+        "years": "1995–1996",
+        "note": "Loan from West Ham, but the first senior playing club; debut October 1995."
+      },
+      {
+        "name": "West Ham United",
+        "years": "1996–2001",
+        "note": "First-team debut 31 January 1996, after Swansea loan. No pre-loan West Ham playing spell is inserted."
+      },
+      {
+        "name": "Chelsea",
+        "years": "2001–2014"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2014–2015",
+        "note": "Permanent/short-term direct City contract, not an NYCFC loan; Premier League clarification January 2015."
+      },
+      {
+        "name": "New York City FC",
+        "years": "2015–2016"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Frank_Lampard",
+        "title": "Frank Lampard - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2178.html",
+        "title": "Frank Lampard (Player) | National Football Teams"
+      },
+      {
+        "url": "https://inside.fifa.com/news/former-three-lions-midfielder-lampard-announces-retirement-2866027",
+        "title": "Lampard hangs up his boots"
+      },
+      {
+        "url": "https://www.irishexaminer.com/sport/soccer/arid-20305955.html",
+        "title": "‘Lampard never signed for New York City’"
+      }
+    ],
+    "notes": "Chronology is by competitive playing, not parent registration: Swansea precedes the West Ham first-team debut. Early publicity described Manchester City as a loan, but the Premier League subsequently confirmed a direct City contract and no NYCFC loan agreement. No Melbourne City spell. Retirement announced February 2017 after final playing season in 2016.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "paul-scholes",
+    "name": "Paul Scholes",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Manchester United",
+        "years": "1994–2011",
+        "note": "First competitive senior appearance 21 September 1994; professional contract began 1993."
+      },
+      {
+        "name": "Manchester United",
+        "years": "2012–2013",
+        "note": "Came out of retirement in January 2012; retired again in May 2013."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paul_Scholes",
+        "title": "Paul Scholes - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2185/Paul_Scholes.html",
+        "title": "Paul Scholes (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.bbc.com/sport/football/45385162",
+        "title": "Paul Scholes: Man Utd great plays for Royton Town in Manchester Premier League - BBC Sport"
+      }
+    ],
+    "notes": "Two distinct professional playing spells at the same club. Royton Town competitive amateur appearances in 2018 are real (not a testimonial), but excluded from this PROFESSIONAL career scope; do not claim he never played senior football elsewhere. Salford ownership/coaching and Oldham management excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "ryan-giggs",
+    "name": "Ryan Giggs",
+    "continent": "Europe",
+    "country": "Wales",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Manchester United",
+        "years": "1991–2014",
+        "note": "First competitive first-team appearance 2 March 1991; professional registration started in 1990."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ryan_Giggs",
+        "title": "Ryan Giggs - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/7293.html",
+        "title": "Ryan Giggs (Player) | National Football Teams"
+      },
+      {
+        "url": "https://espn.com/espn/print?id=37361331",
+        "title": "ESPN.com\n\t- Ryan Giggs announces retirement"
+      }
+    ],
+    "notes": "One professional playing club; left midfielder/winger. Manchester City was youth-only. Wales is the national-team country; Great Britain Olympic participation is not a club.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "francesco-totti",
+    "name": "Francesco Totti",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Roma",
+        "years": "1993–2017"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Francesco_Totti",
+        "title": "Francesco Totti - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/3353.html",
+        "title": "Francesco Totti (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.abc.net.au/news/2017-05-29/football-legend-francesco-tottis-emotional-roma-farewell/8567890",
+        "title": "Francesco Totti ends Roma career after 25 years and 786 games in emotional farewell - ABC News"
+      }
+    ],
+    "notes": "A forward/attacking midfielder. Roma was his sole professional senior club. Youth clubs, charity matches, small-sided football and later administrative roles excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "paolo-maldini",
+    "name": "Paolo Maldini",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "AC Milan",
+        "years": "1985–2009",
+        "note": "First-team competitive debut 20 January 1985; some infoboxes start senior registration in 1984."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paolo_Maldini",
+        "title": "Paolo Maldini - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/10722/Paolo_Maldini.html",
+        "title": "Paolo Maldini (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.acmilan.com/en/club/legends/players/paolo-maldini",
+        "title": "Paolo Maldini: stats and matches | AC Milan"
+      }
+    ],
+    "notes": "Entire senior professional playing career at AC Milan, primarily left-back and centre-back. Primavera is youth football; Miami FC ownership and AC Milan executive work excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "gianluigi-buffon",
+    "name": "Gianluigi Buffon",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Parma",
+        "years": "1995–2001"
+      },
+      {
+        "name": "Juventus",
+        "years": "2001–2018"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2018–2019"
+      },
+      {
+        "name": "Juventus",
+        "years": "2019–2021",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Parma",
+        "years": "2021–2023",
+        "note": "Second playing spell; retired August 2023."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gianluigi_Buffon",
+        "title": "Gianluigi Buffon - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/3381/Gianluigi_Buffon.html",
+        "title": "Gianluigi Buffon (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.bbc.com/sport/football/66378584",
+        "title": "Gianluigi Buffon: Italy legend retires aged 45 - BBC Sport"
+      }
+    ],
+    "notes": "Both Juventus and Parma returns are actual playing spells. Final contract reportedly ran to 2024, but retirement was in 2023; do not extend the career to the contract expiry.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "andres-iniesta",
+    "name": "Andrés Iniesta",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Barcelona B",
+        "years": "2001–2003",
+        "note": "Senior Segunda División B side. BDFutbol match-level data: first appearance 10 February 2001 versus Figueres, in the 2000/01 season."
+      },
+      {
+        "name": "Barcelona",
+        "years": "2002–2018",
+        "note": "First-team competitive debut 29 October 2002; overlaps B appearances through 2003."
+      },
+      {
+        "name": "Vissel Kobe",
+        "years": "2018–2023"
+      },
+      {
+        "name": "Emirates Club",
+        "years": "2023–2024"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Andrés_Iniesta",
+        "title": "Andrés Iniesta - Wikipedia"
+      },
+      {
+        "url": "http://national-football-teams.com/player/14348/Andres_Iniesta.html",
+        "title": "Andrés Iniesta (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.bbc.com/sport/football/articles/c1l47erqep4o",
+        "title": "Andres Iniesta: Spain and Barcelona great retires, aged 40 - BBC Sport"
+      },
+      {
+        "url": "https://www.bdfutbol.com/en/j/j159.html",
+        "title": "Iniesta, Andrés Iniesta Luján - Footballer | BDFutbol"
+      },
+      {
+        "url": "https://www.bdfutbol.com/en/p/j159.html?temp=2000-01",
+        "title": "Matches Iniesta, Andrés Iniesta Luján | BDFutbol"
+      }
+    ],
+    "notes": "Retired 8 October 2024. Important calendar correction: Wikipedia labels B tenure 2000–2003 from the 2000/01 season; BDFutbol individual match records place his first B appearance in February 2001. Barcelona B is not youth football. Albacete was youth-only; Gulf United is a later managerial role.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "xavi",
+    "name": "Xavi",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Barcelona B",
+        "years": "1997–1999",
+        "note": "Competitive senior reserve football in Segunda División B and Segunda División; overlaps first-team play."
+      },
+      {
+        "name": "Barcelona",
+        "years": "1998–2015"
+      },
+      {
+        "name": "Al Sadd",
+        "years": "2015–2019"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Xavi_(footballer,_born_1980)",
+        "title": "Xavi (footballer, born 1980) - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6247/Xavi_Hernandez.html",
+        "title": "Xavi Hernández (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.fcbarcelona.com/en/news/1205752/xavi-hernandez-to-retire-at-end-of-season",
+        "title": "Xavi Hernández to retire at end of season"
+      }
+    ],
+    "notes": "Correct subject is Xavi Hernández, born 1980; /wiki/Xavi currently resolves to a disambiguation page. Last professional playing season was 2018/19. Later Al Sadd and Barcelona coaching spells are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "zlatan-ibrahimovic",
+    "name": "Zlatan Ibrahimović",
+    "continent": "Europe",
+    "country": "Sweden",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Malmö FF",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Ajax",
+        "years": "2001–2004"
+      },
+      {
+        "name": "Juventus",
+        "years": "2004–2006"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2006–2009"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2009–2010",
+        "note": "Played a competitive Spanish Super Cup match in August 2010 before the Milan loan."
+      },
+      {
+        "name": "AC Milan",
+        "years": "2010–2012",
+        "note": "One uninterrupted playing spell: loan 2010–2011, made permanent in 2011. No Barcelona playing return in 2011."
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2012–2016"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2016–2018"
+      },
+      {
+        "name": "LA Galaxy",
+        "years": "2018–2019"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2020–2023",
+        "note": "Return announced December 2019; first competitive return appearance 6 January 2020."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Zlatan_Ibrahimović",
+        "title": "Zlatan Ibrahimović - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6367.html",
+        "title": "Zlatan Ibrahimović (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.uefa.com/uefachampionsleague/news/0294-1c8717433b49-dd570329dcf6-1000--zlatan-ibrahimovic-on-retirement-and-his-new-role-at-milan",
+        "title": "Zlatan Ibrahimović on retirement and his new role at Milan – interview | UEFA Champions League 2024/25 | UEFA.com"
+      }
+    ],
+    "notes": "Retired June 2023. Loan-to-permanent AC Milan transition does not create another club or a fictitious Barcelona return. Hammarby investment/training and post-retirement AC Milan advisory work are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "lionel-messi",
+    "name": "Lionel Messi",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Barcelona C",
+        "years": "2003–2004",
+        "note": "Competitive senior reserve side; 10 league appearances."
+      },
+      {
+        "name": "Barcelona B",
+        "years": "2004–2005",
+        "note": "Competitive senior reserve side; 22 league appearances. Overlaps first-team period."
+      },
+      {
+        "name": "Barcelona",
+        "years": "2004–2021"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2021–2023"
+      },
+      {
+        "name": "Inter Miami",
+        "years": "2023–present"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Lionel_Messi",
+        "title": "Lionel Messi"
+      },
+      {
+        "url": "https://www.intermiamicf.com/news/inter-miami-cf-signs-leo-messi-to-contract-extension",
+        "title": "Inter Miami CF Signs Leo Messi to Contract Extension | Inter Miami CF"
+      },
+      {
+        "url": "https://espn.com/espn/print?id=45570212",
+        "title": "ESPN.com - Lionel Messi extends Inter Miami contract through 2028"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/12066.html",
+        "title": "Lionel Messi (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Reserve and first-team stints ordered by competitive debut, not the November 2003 first-team friendly. Newell’s Old Boys was youth only. Current Inter Miami playing contract independently confirmed through 2028.",
+    "status": "active",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "neymar",
+    "name": "Neymar",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Santos",
+        "years": "2009–2013"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2013–2017"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2017–2023"
+      },
+      {
+        "name": "Al-Hilal",
+        "years": "2023–2025"
+      },
+      {
+        "name": "Santos",
+        "years": "2025–present",
+        "note": "Permanent return, not a loan."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Neymar_Jr.",
+        "title": "Neymar"
+      },
+      {
+        "url": "https://www.santosfc.com.br/santos-fc-e-neymar-jr-renovam-contrato-ate-o-fim-de-2026/",
+        "title": "Santos FC e Neymar Jr. renovam contrato até o fim de 2026 - Santos Futebol Clube"
+      },
+      {
+        "url": "http://www.national-football-teams.com/player/39625/Neymar.html",
+        "title": "Neymar (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Santos official 6 January 2026 announcement confirms contract through end of 2026; youth Portuguesa Santista excluded.",
+    "status": "active",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "luis-suarez",
+    "name": "Luis Suárez",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Nacional",
+        "years": "2005–2006"
+      },
+      {
+        "name": "Groningen",
+        "years": "2006–2007"
+      },
+      {
+        "name": "Ajax",
+        "years": "2007–2011"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2011–2014"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2014–2020"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2020–2022"
+      },
+      {
+        "name": "Nacional",
+        "years": "2022",
+        "note": "Permanent return."
+      },
+      {
+        "name": "Grêmio",
+        "years": "2023"
+      },
+      {
+        "name": "Inter Miami",
+        "years": "2024–present"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Luis_Suarez",
+        "title": "Luis Suárez"
+      },
+      {
+        "url": "https://www.intermiamicf.com/news/inter-miami-cf-signs-luis-suarez-to-a-new-contract",
+        "title": "Inter Miami CF Signs Luis Suárez to a New Contract | Inter Miami CF"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/20658.html",
+        "title": "Luis Suárez (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Miami announced signing in December 2023 for the 2024 campaign; dates use playing season. New contract through 2026 confirmed by club on 17 December 2025. International retirement does not mean club retirement.",
+    "status": "active",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "sergio-aguero",
+    "name": "Sergio Agüero",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Independiente",
+        "years": "2003–2006"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2006–2011"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2011–2021"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2021"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sergio_Aguero",
+        "title": "Sergio Agüero"
+      },
+      {
+        "url": "https://www.bbc.com/sport/football/59660727",
+        "title": "Sergio Aguero: Barcelona's former Man City striker retires - BBC Sport"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/15412.html",
+        "title": "Sergio Agüero (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Retired 15 December 2021 because of a heart condition. Later exhibitions and Kings League appearances are not professional eleven-a-side club spells.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "carlos-tevez",
+    "name": "Carlos Tevez",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Boca Juniors",
+        "years": "2001–2004"
+      },
+      {
+        "name": "Corinthians",
+        "years": "2005–2006"
+      },
+      {
+        "name": "West Ham United",
+        "years": "2006–2007"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2007–2009",
+        "note": "Two-year loan arrangement; no subsequent West Ham playing return."
+      },
+      {
+        "name": "Manchester City",
+        "years": "2009–2013"
+      },
+      {
+        "name": "Juventus",
+        "years": "2013–2015"
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Shanghai Shenhua",
+        "years": "2017–2018",
+        "note": "Transfer agreed December 2016; played in the 2017 season; contract ended January 2018."
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "2018–2021"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Carlos_T%C3%A9vez",
+        "title": "Carlos Tevez"
+      },
+      {
+        "url": "https://www.espn.com/soccer/story/_/id/37629044/ex-manchester-united-juventus-striker-hangs-boots-38",
+        "title": "Carlos Tevez retires: Ex-Manchester United, Juventus striker hangs up boots at 38 - ESPN"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/285.html",
+        "title": "Carlos Tévez (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Three genuine Boca Juniors spells. Final playing club Boca in 2021; retirement announced June 2022. Loan/ownership end dates are not additional playing stints.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "ronaldo",
+    "name": "Ronaldo Nazário",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Cruzeiro",
+        "years": "1993–1994"
+      },
+      {
+        "name": "PSV Eindhoven",
+        "years": "1994–1996"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1997–2002"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2002–2007"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2007–2008"
+      },
+      {
+        "name": "Corinthians",
+        "years": "2009–2011",
+        "note": "Signed December 2008; competitive debut in 2009."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ronaldo_(Brazilian_footballer)",
+        "title": "Ronaldo (Brazilian footballer) - Wikipedia"
+      },
+      {
+        "url": "https://newsapp.abc.net.au/news/2011-02-15/brazil-great-ronaldo-confirms-retirement/1942776",
+        "title": "Brazil great Ronaldo confirms retirement - ABC News"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/990.html",
+        "title": "Ronaldo (Player) | National Football Teams"
+      }
+    ],
+    "notes": "São Cristóvão was youth football. Flamengo training after injury was not a signed playing spell. Retired in February 2011. Corinthians years describe competitive play from 2009; the December 2008 signing is noted separately. NFT additionally lists São Cristovão in 1993 with no appearance figure; the biographical source classifies São Cristóvão as youth. Excluded from senior clubs rather than treating an unquantified database row as proof of senior play.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "ronaldinho",
+    "name": "Ronaldinho",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder / Forward",
+    "clubs": [
+      {
+        "name": "Grêmio",
+        "years": "1998–2001"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2001–2003"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2003–2008"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2008–2011"
+      },
+      {
+        "name": "Flamengo",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Atlético Mineiro",
+        "years": "2012–2014"
+      },
+      {
+        "name": "Querétaro",
+        "years": "2014–2015"
+      },
+      {
+        "name": "Fluminense",
+        "years": "2015"
+      },
+      {
+        "name": "Ravenna",
+        "years": "2026–present",
+        "note": "Current player signing announced June 2026. Registration included; competitive debut not established by the retrieved sources."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ronaldinho",
+        "title": "Ronaldinho - Wikipedia"
+      },
+      {
+        "url": "https://www.ravennafc.it/en/2026/06/23/ronaldinho-signs-with-ravenna-fc-by-cipriani-as-a-decades-long-vision-comes-to-life/",
+        "title": "Ronaldinho Signs with Ravenna FC by Cipriani as a Decades-Long Vision Comes to Life"
+      },
+      {
+        "url": "https://www.espn.com/soccer/story/_/id/49166021/ronaldinho-46-signs-italian-serie-c-club-ravenna",
+        "title": "Ronaldinho, 46, signs with Italian Serie C club Ravenna - ESPN"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1025/Ronaldinho_Gaucho.html",
+        "title": "Ronaldinho Gaúcho (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Do not label retired based on his 2015 final Fluminense games or 2018 retirement announcement: Ravenna officially announced a player contract and registration in June 2026. Excludes later futsal, exhibitions, legends teams and ownership stakes.",
+    "status": "active",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "kaka",
+    "name": "Kaká",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "São Paulo",
+        "years": "2001–2003",
+        "note": "Senior promotion in 2000; first competitive appearance in 2001."
+      },
+      {
+        "name": "AC Milan",
+        "years": "2003–2009"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2009–2013"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2013–2014"
+      },
+      {
+        "name": "São Paulo",
+        "years": "2014",
+        "note": "Six-month loan from Orlando City."
+      },
+      {
+        "name": "Orlando City",
+        "years": "2015–2017",
+        "note": "Joined the playing squad after São Paulo loan."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Kak%C3%A1",
+        "title": "Kaká - Wikipedia"
+      },
+      {
+        "url": "https://www.theguardian.com/football/2014/jul/01/brazil-star-kaka-orlando-city",
+        "title": "Brazilian star Kaká confirms move to MLS newcomers Orlando City | MLS | The Guardian"
+      },
+      {
+        "url": "https://socceroos.com.au/news/kaka-emotional-sao-paulo-return",
+        "title": "Kaka emotional on Sao Paulo return | Socceroos"
+      },
+      {
+        "url": "https://apnews.com/fl-state-wire-02e520a05bb0478ea90cb3fe3ec6ac67",
+        "title": "Brazil great Kaka retiring from soccer at age 35"
+      },
+      {
+        "url": "https://www.saopaulofc.net/obrigado-kaka/",
+        "title": "Obrigado, Kaká! - SPFC"
+      },
+      {
+        "url": "http://www.national-football-teams.com/player/1013/Kaka.html",
+        "title": "Kaká (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Timeline follows playing order: São Paulo loan in 2014 before Orlando MLS play in 2015. Orlando signed him in 2014 and immediately loaned him to São Paulo; that pre-debut contract does not create an extra Orlando playing node. Retired December 2017.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "roberto-carlos",
+    "name": "Roberto Carlos",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "União São João",
+        "years": "1991–1992"
+      },
+      {
+        "name": "Atlético Mineiro",
+        "years": "1992",
+        "note": "Friendly-only tour loan in August 1992; three friendlies, zero competitive appearances. Retained as a documented senior loan, not a league-playing spell."
+      },
+      {
+        "name": "União São João",
+        "years": "1992–1993",
+        "note": "Return following the August 1992 Atlético tour; Galo Digital explicitly says he then went back to play for União São João and lists the club in 1993."
+      },
+      {
+        "name": "Palmeiras",
+        "years": "1993–1995"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1996–2007"
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2007–2009"
+      },
+      {
+        "name": "Corinthians",
+        "years": "2010–2011"
+      },
+      {
+        "name": "Anzhi Makhachkala",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Delhi Dynamos",
+        "years": "2015",
+        "note": "Returned as player-manager; three competitive ISL appearances, his final professional playing games."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Roberto_Carlos",
+        "title": "Roberto Carlos - Wikipedia"
+      },
+      {
+        "url": "https://galodigital.com.br/enciclopedia/Roberto_Carlos_da_Silva",
+        "title": "Roberto Carlos da Silva - Clube Atletico Mineiro"
+      },
+      {
+        "url": "https://olympics.com/en/news/roberto-carlos-isl-indian-super-league-football",
+        "title": "Roberto Carlos in ISL: Know the Brazilian football legend’s records in India"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1007.html",
+        "title": "Roberto Carlos (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Atlético Mineiro retained only as a documented friendly-only tour loan. Galo Digital narrows it to August 1992 (not the infobox’s 1992–1993) and documents the subsequent União São João return. Delhi playing dates are 2015, not an inferred 2016 season. Sivasspor and Akhisarspor were managerial jobs; Bull in the Barne and Soccer Aid were exhibitions.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "javier-zanetti",
+    "name": "Javier Zanetti",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Talleres de Remedios de Escalada",
+        "years": "1992–1993"
+      },
+      {
+        "name": "Banfield",
+        "years": "1993–1995"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1995–2014"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Javier_Zanetti",
+        "title": "Javier Zanetti - Wikipedia"
+      },
+      {
+        "url": "https://www.inter.it/it/notizie/2021-12-14-inter-podcast-javier-zanetti-hall-of-fame",
+        "title": "Podcast | Inter Hall of Fame - Tre partite, una leggenda: Javier Zanetti | Inter.it"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/307.html",
+        "title": "Javier Zanetti (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Full-back who also played midfield. Talleres means the club from Remedios de Escalada, not Talleres de Córdoba. Independiente was youth only. Inter executive role after 2014 is not a playing spell.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "gabriel-batistuta",
+    "name": "Gabriel Batistuta",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Newell's Old Boys",
+        "years": "1988–1989"
+      },
+      {
+        "name": "River Plate",
+        "years": "1989–1990"
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "1990–1991"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1991–2000"
+      },
+      {
+        "name": "Roma",
+        "years": "2000–2003"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2003",
+        "note": "Loan from Roma; no additional Roma playing return established."
+      },
+      {
+        "name": "Al-Arabi",
+        "years": "2003–2005"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gabriel_Batistuta",
+        "title": "Gabriel Batistuta - Wikipedia"
+      },
+      {
+        "url": "https://www.worldsoccer.com/world-soccer-latest/batistuta-announces-retirement-62328",
+        "title": "Batistuta announces retirement - World Soccer"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13480.html",
+        "title": "Gabriel Batistuta (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Inter Milan’s 2003 loan is included despite omission from the World Soccer recap. Final club Al-Arabi of Qatar, not another club sharing that name. Retired March 2005; youth and later polo excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "hernan-crespo",
+    "name": "Hernán Crespo",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "1993–1996"
+      },
+      {
+        "name": "Parma",
+        "years": "1996–2000"
+      },
+      {
+        "name": "Lazio",
+        "years": "2000–2002"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2002–2003"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2003–2004"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2004–2005",
+        "note": "Loan from Chelsea."
+      },
+      {
+        "name": "Chelsea",
+        "years": "2005–2006",
+        "note": "Actual playing return, including the 2005 Community Shield and 2005–06 Premier League."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2006–2009",
+        "note": "Loan from Chelsea 2006–2008, then permanent from July 2008; continuous playing spell."
+      },
+      {
+        "name": "Genoa",
+        "years": "2009–2010"
+      },
+      {
+        "name": "Parma",
+        "years": "2010–2012"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Hern%C3%A1n_Crespo",
+        "title": "Hernán Crespo - Wikipedia"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Hernan_Crespo",
+        "title": "Hernán Crespo"
+      },
+      {
+        "url": "https://www.parmacalcio1913.com/en/parma-legends/hernan-crespo/",
+        "title": "Hernan Crespo | Parma Calcio 1913"
+      },
+      {
+        "url": "https://www.aljazeera.com/sports/2012/1/30/bidding-war-breaks-out-over-hernan-crespo",
+        "title": "Bidding war breaks out over Hernan Crespo | Football | Al Jazeera"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Premier_League_Soccer_(India)",
+        "title": "Premier League Soccer (India)"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/286.html",
+        "title": "Hernán Crespo (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Chelsea split around AC Milan loan to preserve actual 2005–2006 return. Inter’s 2006 loan-to-2008 permanent conversion is one continuous spell, not a fictitious Chelsea return. Exclude Bengal Tuskers: wrong auction franchise, and the proposed competition never started. Barasat likewise is an unrealized auction allocation, not a playing club. Parma calls February 2012 retirement; biography distinguishes February departure from November retirement confirmation. Coaching jobs excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "juan-sebastian-veron",
+    "name": "Juan Sebastián Verón",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Estudiantes",
+        "years": "1994–1996"
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "1996"
+      },
+      {
+        "name": "Sampdoria",
+        "years": "1996–1998"
+      },
+      {
+        "name": "Parma",
+        "years": "1998–1999"
+      },
+      {
+        "name": "Lazio",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2001–2003"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2003–2004",
+        "note": "Playing period; Chelsea registration continued during loans until 2007."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2004–2006",
+        "note": "Loan from Chelsea."
+      },
+      {
+        "name": "Estudiantes",
+        "years": "2006–2012",
+        "note": "Loan from Chelsea 2006–2007, then permanent; continuous playing spell."
+      },
+      {
+        "name": "Estudiantes",
+        "years": "2013–2014",
+        "note": "Professional return after 2012 retirement and amateur interlude."
+      },
+      {
+        "name": "Estudiantes",
+        "years": "2017",
+        "note": "Actual Copa Libertadores return; zero league appearances does not mean zero competitive matches."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Juan_Sebasti%C3%A1n_Ver%C3%B3n",
+        "title": "Juan Sebastián Verón - Wikipedia"
+      },
+      {
+        "url": "https://www.espn.com/soccer/story/_/id/37386811/veron-comes-retirement",
+        "title": "Juan Sebastian Veron comes out of retirement for one last season, donates wages to Estudiantes youth team - ESPN"
+      },
+      {
+        "url": "https://www.theguardian.com/football/2016/dec/28/juan-sebastian-veron-estudiantes",
+        "title": "Juan Sebastián Verón to return for Estudiantes and donate pay to club | Estudiantes | The Guardian"
+      },
+      {
+        "url": "https://argentina.as.com/argentina/2017/05/26/futbol/1495767644_921513.html",
+        "title": "Verón jugó con 42 años su último partido como profesional - AS Argentina"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/319.html",
+        "title": "Juan Sebastián Verón (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Four professional Estudiantes spells, including the 2013 and 2017 comebacks. The 2006–2007 loan became permanent without a Chelsea playing return. Exclude Brandsen and Estrella de Berisso as amateur football, not professional club history. The 2017 infobox zero is league-only; AS confirms competitive Libertadores play. Chairman/director duties excluded; no inferred extension to 2018 from contract length.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "juan-roman-riquelme",
+    "name": "Juan Román Riquelme",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Boca Juniors",
+        "years": "1996–2002"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2002–2003",
+        "note": "Actual playing season; registration continued during Villarreal loan until 2005."
+      },
+      {
+        "name": "Villarreal",
+        "years": "2003–2007",
+        "note": "Loan from Barcelona 2003–2005, then permanent; continuous playing spell."
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "2007–2012",
+        "note": "Initially a 2007 Villarreal loan, then permanent; no subsequent Villarreal competitive return established."
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "2013–2014",
+        "note": "Actual playing return after six-month hiatus following the 2012 Libertadores final, not a transfer to another club."
+      },
+      {
+        "name": "Argentinos Juniors",
+        "years": "2014–2015",
+        "note": "Senior return to his youth club; played in the 2014 promotion campaign and retired January 2015."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Juan_Rom%C3%A1n_Riquelme",
+        "title": "Juan Román Riquelme - Wikipedia"
+      },
+      {
+        "url": "https://www.theguardian.com/football/2015/jan/26/juan-roman-riquelme-announces-retirement",
+        "title": "Former Argentina international Juan Román Riquelme retires | Argentina | The Guardian"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/323.html",
+        "title": "Juan Román Riquelme (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Villarreal loan-to-permanent phase combined; Barcelona years distinguish play from ownership. Boca’s 2012–2013 hiatus and actual playing return are shown separately despite the infobox aggregating 2007–2014. Argentinos Juniors before Boca was youth only; the 2014 return was senior. Retirement January 2015; exhibitions and club presidency excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "pele",
+    "name": "Pelé",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Santos",
+        "years": "1956–1974"
+      },
+      {
+        "name": "New York Cosmos",
+        "years": "1975–1977"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Pel%C3%A9",
+        "title": "Pelé — senior career"
+      },
+      {
+        "url": "https://www.ussoccerhistory.org/national-soccer-hall-of-fame-biographies/national-soccer-hall-of-fame-player-biographies/pele/",
+        "title": "Pelé — Society for American Soccer History / Hall of Fame biography"
+      }
+    ],
+    "notes": "Both professional clubs cross-checked with the Hall of Fame biography. Bauru was youth football. Military, regional selections and exhibitions are outside professional club scope; the 1977 farewell against Santos is not another Santos playing spell. Cosmos means the historical NASL club, not NYCFC.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  }
+]

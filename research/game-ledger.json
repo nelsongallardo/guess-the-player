@@ -1,0 +1,629 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://en.wikipedia.org/wiki/Cristiano_Ronaldo",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 2,
+      "url": "https://www.spl.com.sa/en/players/20094/cristiano-ronaldo",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 3,
+      "url": "https://en.wikipedia.org/wiki/Sporting_CP_B",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 4,
+      "url": "https://www.uefa.com/uefachampionsleague/news/023c-0e976af10937-6aed2a57b183-1000--memories-of-ronaldo-s-debut-on-this-day-in-2002",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 5,
+      "url": "https://en.wikipedia.org/wiki/Zinedine_Zidane",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 6,
+      "url": "https://www.national-football-teams.com/player/2456/Zinedine_Zidane.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 7,
+      "url": "https://www.realmadrid.com/en-US/the-club/history/football-legends/zinedine-zidane",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 8,
+      "url": "https://www.footballdatabase.eu/en/player/details/12-zinedine-zidane",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 9,
+      "url": "https://en.wikipedia.org/wiki/Dennis_Bergkamp",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 10,
+      "url": "https://www.national-football-teams.com/player/10390/Dennis_Bergkamp.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 11,
+      "url": "https://en.wikipedia.org/wiki/David_Beckham",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 12,
+      "url": "https://www.national-football-teams.com/player/2189.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 13,
+      "url": "https://www.britannica.com/biography/David-Beckham",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 14,
+      "url": "https://en.wikipedia.org/wiki/Wayne_Rooney",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 15,
+      "url": "https://www.national-football-teams.com/player/2145.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 16,
+      "url": "https://www.theguardian.com/football/2021/jan/15/wayne-rooney-calls-time-on-playing-career-to-become-derby-manager",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 17,
+      "url": "https://en.wikipedia.org/wiki/Steven_Gerrard",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 18,
+      "url": "https://www.national-football-teams.com/player/2181.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 19,
+      "url": "https://www.smh.com.au/sport/soccer/former-liverpool-and-england-captain-steven-gerrard-retires-after-la-galaxy-20161124-gsx3y0.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 20,
+      "url": "https://en.wikipedia.org/wiki/Frank_Lampard",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 21,
+      "url": "https://www.national-football-teams.com/player/2178.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 22,
+      "url": "https://inside.fifa.com/news/former-three-lions-midfielder-lampard-announces-retirement-2866027",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 23,
+      "url": "https://www.irishexaminer.com/sport/soccer/arid-20305955.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 24,
+      "url": "https://en.wikipedia.org/wiki/Paul_Scholes",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 25,
+      "url": "https://www.national-football-teams.com/player/2185/Paul_Scholes.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 26,
+      "url": "https://www.bbc.com/sport/football/45385162",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 27,
+      "url": "https://en.wikipedia.org/wiki/Ryan_Giggs",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 28,
+      "url": "https://www.national-football-teams.com/player/7293.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 29,
+      "url": "https://espn.com/espn/print?id=37361331",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 30,
+      "url": "https://en.wikipedia.org/wiki/Francesco_Totti",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 31,
+      "url": "https://www.national-football-teams.com/player/3353.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 32,
+      "url": "https://www.abc.net.au/news/2017-05-29/football-legend-francesco-tottis-emotional-roma-farewell/8567890",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 33,
+      "url": "https://en.wikipedia.org/wiki/Paolo_Maldini",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 34,
+      "url": "https://www.national-football-teams.com/player/10722/Paolo_Maldini.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 35,
+      "url": "https://www.acmilan.com/en/club/legends/players/paolo-maldini",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 36,
+      "url": "https://en.wikipedia.org/wiki/Gianluigi_Buffon",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 37,
+      "url": "https://www.national-football-teams.com/player/3381/Gianluigi_Buffon.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 38,
+      "url": "https://www.bbc.com/sport/football/66378584",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 39,
+      "url": "https://en.wikipedia.org/wiki/Andrés_Iniesta",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 40,
+      "url": "http://national-football-teams.com/player/14348/Andres_Iniesta.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 41,
+      "url": "https://www.bbc.com/sport/football/articles/c1l47erqep4o",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 42,
+      "url": "https://www.bdfutbol.com/en/j/j159.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 43,
+      "url": "https://www.bdfutbol.com/en/p/j159.html?temp=2000-01",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 44,
+      "url": "https://en.wikipedia.org/wiki/Xavi_(footballer,_born_1980)",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 45,
+      "url": "https://www.national-football-teams.com/player/6247/Xavi_Hernandez.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 46,
+      "url": "https://www.fcbarcelona.com/en/news/1205752/xavi-hernandez-to-retire-at-end-of-season",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 47,
+      "url": "https://en.wikipedia.org/wiki/Zlatan_Ibrahimović",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 48,
+      "url": "https://www.national-football-teams.com/player/6367.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 49,
+      "url": "https://www.uefa.com/uefachampionsleague/news/0294-1c8717433b49-dd570329dcf6-1000--zlatan-ibrahimovic-on-retirement-and-his-new-role-at-milan",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 50,
+      "url": "https://en.wikipedia.org/wiki/Lionel_Messi",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 51,
+      "url": "https://www.intermiamicf.com/news/inter-miami-cf-signs-leo-messi-to-contract-extension",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 52,
+      "url": "https://espn.com/espn/print?id=45570212",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 53,
+      "url": "https://www.national-football-teams.com/player/12066.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 54,
+      "url": "https://en.wikipedia.org/wiki/Neymar_Jr.",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 55,
+      "url": "https://www.santosfc.com.br/santos-fc-e-neymar-jr-renovam-contrato-ate-o-fim-de-2026",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 56,
+      "url": "http://www.national-football-teams.com/player/39625/Neymar.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 57,
+      "url": "https://en.wikipedia.org/wiki/Luis_Suarez",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 58,
+      "url": "https://www.intermiamicf.com/news/inter-miami-cf-signs-luis-suarez-to-a-new-contract",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 59,
+      "url": "https://www.national-football-teams.com/player/20658.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 60,
+      "url": "https://en.wikipedia.org/wiki/Sergio_Aguero",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 61,
+      "url": "https://www.bbc.com/sport/football/59660727",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 62,
+      "url": "https://www.national-football-teams.com/player/15412.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 63,
+      "url": "https://en.wikipedia.org/wiki/Carlos_T%C3%A9vez",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 64,
+      "url": "https://www.espn.com/soccer/story/_/id/37629044/ex-manchester-united-juventus-striker-hangs-boots-38",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 65,
+      "url": "https://www.national-football-teams.com/player/285.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 66,
+      "url": "https://en.wikipedia.org/wiki/Ronaldo_(Brazilian_footballer)",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 67,
+      "url": "https://newsapp.abc.net.au/news/2011-02-15/brazil-great-ronaldo-confirms-retirement/1942776",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 68,
+      "url": "https://www.national-football-teams.com/player/990.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 69,
+      "url": "https://en.wikipedia.org/wiki/Ronaldinho",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 70,
+      "url": "https://www.ravennafc.it/en/2026/06/23/ronaldinho-signs-with-ravenna-fc-by-cipriani-as-a-decades-long-vision-comes-to-life",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 71,
+      "url": "https://www.espn.com/soccer/story/_/id/49166021/ronaldinho-46-signs-italian-serie-c-club-ravenna",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 72,
+      "url": "https://www.national-football-teams.com/player/1025/Ronaldinho_Gaucho.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 73,
+      "url": "https://en.wikipedia.org/wiki/Kak%C3%A1",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 74,
+      "url": "https://www.theguardian.com/football/2014/jul/01/brazil-star-kaka-orlando-city",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 75,
+      "url": "https://socceroos.com.au/news/kaka-emotional-sao-paulo-return",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 76,
+      "url": "https://apnews.com/fl-state-wire-02e520a05bb0478ea90cb3fe3ec6ac67",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 77,
+      "url": "https://www.saopaulofc.net/obrigado-kaka",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 78,
+      "url": "http://www.national-football-teams.com/player/1013/Kaka.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 79,
+      "url": "https://en.wikipedia.org/wiki/Roberto_Carlos",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 80,
+      "url": "https://galodigital.com.br/enciclopedia/Roberto_Carlos_da_Silva",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 81,
+      "url": "https://olympics.com/en/news/roberto-carlos-isl-indian-super-league-football",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 82,
+      "url": "https://www.national-football-teams.com/player/1007.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 83,
+      "url": "https://en.wikipedia.org/wiki/Javier_Zanetti",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 84,
+      "url": "https://www.inter.it/it/notizie/2021-12-14-inter-podcast-javier-zanetti-hall-of-fame",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 85,
+      "url": "https://www.national-football-teams.com/player/307.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 86,
+      "url": "https://en.wikipedia.org/wiki/Gabriel_Batistuta",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 87,
+      "url": "https://www.worldsoccer.com/world-soccer-latest/batistuta-announces-retirement-62328",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 88,
+      "url": "https://www.national-football-teams.com/player/13480.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 89,
+      "url": "https://en.wikipedia.org/wiki/Hern%C3%A1n_Crespo",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 90,
+      "url": "https://en.wikipedia.org/wiki/Hernan_Crespo",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 91,
+      "url": "https://www.parmacalcio1913.com/en/parma-legends/hernan-crespo",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 92,
+      "url": "https://www.aljazeera.com/sports/2012/1/30/bidding-war-breaks-out-over-hernan-crespo",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 93,
+      "url": "https://en.wikipedia.org/wiki/Premier_League_Soccer_(India)",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 94,
+      "url": "https://www.national-football-teams.com/player/286.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 95,
+      "url": "https://en.wikipedia.org/wiki/Juan_Sebasti%C3%A1n_Ver%C3%B3n",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 96,
+      "url": "https://www.espn.com/soccer/story/_/id/37386811/veron-comes-retirement",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 97,
+      "url": "https://www.theguardian.com/football/2016/dec/28/juan-sebastian-veron-estudiantes",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 98,
+      "url": "https://argentina.as.com/argentina/2017/05/26/futbol/1495767644_921513.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 99,
+      "url": "https://www.national-football-teams.com/player/319.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 100,
+      "url": "https://en.wikipedia.org/wiki/Juan_Rom%C3%A1n_Riquelme",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 101,
+      "url": "https://www.theguardian.com/football/2015/jan/26/juan-roman-riquelme-announces-retirement",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 102,
+      "url": "https://www.national-football-teams.com/player/323.html",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 103,
+      "url": "https://en.wikipedia.org/wiki/Pel%C3%A9",
+      "title": "",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": 104,
+      "url": "https://www.ussoccerhistory.org/national-soccer-hall-of-fame-biographies/national-soccer-hall-of-fame-player-biographies/pele",
+      "title": "",
+      "accessed": "2026-09-11"
+    }
+  ]
+}
