@@ -41,4 +41,4 @@ A football-career guessing game in one portable `index.html`: no build, framewor
 7. Persistence: reload recovers attempts, hints, choices, score and deck; malformed/old storage falls back safely; denied storage works.
 8. Browser: no console errors; all images decode; local file opening and HTTP both work; no runtime external requests; offline gameplay remains functional.
 9. Responsive/accessibility: 375px, 768px and 1440px widths; no whole-page horizontal overflow; buttons thumb-sized; chronology intentionally scrollable; keyboard navigation and focus; live feedback announcements; reduced motion.
-10. GitHub: inspect commit content for secrets/generated clutter, push to an explicitly private repo, read back remote default-branch SHA and visibility before claiming success.
+10. GitHub: inspect commit content for secrets/generated clutter and verify remote SHA/visibility. The owner requested a public repo for GitHub Pages hosting; deploy only the game artifact, require model/data checks first, and verify the public HTTPS response and gameplay before claiming publication.

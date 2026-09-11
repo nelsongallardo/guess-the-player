@@ -6,6 +6,7 @@ __pycache__/
 *.pyc
 test-results/
 playwright-report/
+_site/
 # Raw retrievals stay local: avoid publishing full third-party articles.
 research/*
 !research/verified-players.json

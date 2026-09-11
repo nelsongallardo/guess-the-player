@@ -4,6 +4,8 @@ A dark-mode football trivia game. Read the club-crest timeline, then identify th
 
 ## Play
 
+**Website:** <https://nelsongallardo.github.io/guess-the-player/>
+
 Download `index.html` and open it in a modern browser. No installation or server is required. The file includes the game, complete player database and crest images, so gameplay also works offline.
 
 For local development:
@@ -42,6 +44,8 @@ Country means the senior national team represented, not birthplace or every citi
 - `tests/` — reproducible browser/data checks.
 
 ## Test and edit
+
+GitHub Pages deploys automatically from `main` using `.github/workflows/pages.yml`. Every deployment first runs the model/data and source-identifier checks, then publishes **only `index.html`**. The repository is public at the owner's request; research and test files remain available in the repo but are not part of the deployed website.
 
 The delivered file needs **no build step**. Edit its CSS, the explicit `PLAYERS` array, `CREST_ASSETS`, or the model/UI scripts directly. When updating a career, update the matching curated record and source document as well. All images are embedded PNGs; retain original public URLs for attribution.
 
