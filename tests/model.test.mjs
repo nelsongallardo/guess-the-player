@@ -106,6 +106,17 @@ test('shuffle does not mutate inputs and decks never repeat a player',()=>{
   assert.ok(starts.size>10);
 });
 
+test('re-audit corrections: Swansea calendar year, signing evidence and unchanged Zanetti clubs',()=>{
+  const lampard=players.find(p=>p.id==='frank-lampard');
+  assert.equal(lampard.clubs[0].years,'1995');
+  const ronaldinho=players.find(p=>p.id==='ronaldinho');
+  assert.equal(ronaldinho.status,'signing-announced');
+  assert.equal(ronaldinho.clubs.at(-1).years,'2026');
+  assert.ok(ronaldinho.clubs.at(-1).note.includes('Completed federation registration and competitive debut not established'));
+  assert.deepEqual(plain(players.find(p=>p.id==='javier-zanetti').clubs.map(c=>c.name)),['Talleres de Remedios de Escalada','Banfield','Inter Milan']);
+  assert.ok(players.find(p=>p.id==='neymar').clubs[3].note.includes('4 November 2024'));
+});
+
 const localeContext=vm.createContext({});
 vm.runInContext(script('locale-data')+script('game-ui').split('function detectLanguage()')[0],localeContext);
 const localization=vm.runInContext('({COPY,COUNTRIES_ES,POSITIONS_ES,SPANISH_NOTES})',localeContext);
@@ -121,6 +132,10 @@ test('Spanish copy, all 30 career notes and every country/position are translate
     assert.equal(note.clubNotes.length,p.clubs.length);
     p.clubs.forEach((c,i)=>{assert.equal(Boolean(note.clubNotes[i]),Boolean(c.note));if(c.note)assert.notEqual(note.clubNotes[i],c.note);});
   }
+  assert.equal(COPY.en.path,'SENIOR CLUB CAREER');
+  assert.equal(COPY.es.path,'CARRERA SÉNIOR');
+  assert.ok(COPY.en.rules.includes('youth teams, national teams and coaching jobs are excluded'));
+  assert.ok(COPY.es.rules.includes('se excluyen juveniles, selecciones y etapas como entrenador'));
   assert.equal(COPY.es.question,'¿Quién es este jugador?');
   assert.equal(COPY.es.attempts(1),'Queda 1 intento');
   assert.equal(COPY.es.hints.join('|'),'País|Posición|Iniciales');

@@ -247,7 +247,7 @@
       {
         "name": "Derby County",
         "years": "2020–2021",
-        "note": "Player-coach; retired from playing January 2021."
+        "note": "Player-coach; last competitive appearance November 2020; retired from playing January 2021. The 2021 endpoint denotes player retirement, not a 2021 appearance."
       }
     ],
     "sources": [
@@ -262,6 +262,10 @@
       {
         "url": "https://www.theguardian.com/football/2021/jan/15/wayne-rooney-calls-time-on-playing-career-to-become-derby-manager",
         "title": "Wayne Rooney calls time on playing career to become Derby manager | Derby County | The Guardian"
+      },
+      {
+        "url": "https://skysports.com/football/news/11688/12188712/wayne-rooney-from-derby-county-player-to-manager-in-a-tumultuous-12-months",
+        "title": "Wayne Rooney: from Derby County player to manager — Sky Sports"
       }
     ],
     "notes": "Primarily a forward, later also a midfielder. D.C. United, Birmingham City and Plymouth Argyle managerial appointments after playing retirement are excluded.",
@@ -311,8 +315,8 @@
     "clubs": [
       {
         "name": "Swansea City",
-        "years": "1995–1996",
-        "note": "Loan from West Ham, but the first senior playing club; debut October 1995."
+        "years": "1995",
+        "note": "Loan from West Ham; first senior playing club. Swansea appearances were October–December 1995. Some biographies date the formal return January 1996; no Swansea competitive appearance in 1996 established."
       },
       {
         "name": "West Ham United",
@@ -349,6 +353,14 @@
       {
         "url": "https://www.irishexaminer.com/sport/soccer/arid-20305955.html",
         "title": "‘Lampard never signed for New York City’"
+      },
+      {
+        "url": "https://www.11v11.com/players/frank-lampard-556/season/1996/team/swansea-city/",
+        "title": "Frank Lampard: dated club history — 11v11"
+      },
+      {
+        "url": "https://walesonline.co.uk/sport/football/football-news/lampard-owes-rise-swans-spell-2433146",
+        "title": "Lampard owes rise to Swans spell — WalesOnline"
       }
     ],
     "notes": "Chronology is by competitive playing, not parent registration: Swansea precedes the West Ham first-team debut. Early publicity described Manchester City as a loan, but the Premier League subsequently confirmed a direct City contract and no NYCFC loan agreement. No Melbourne City spell. Retirement announced February 2017 after final playing season in 2016.",
@@ -764,7 +776,8 @@
       },
       {
         "name": "Al-Hilal",
-        "years": "2023–2025"
+        "years": "2023–2025",
+        "note": "Club tenure ended January 2025; last competitive appearance 4 November 2024. The 2025 endpoint denotes departure, not a 2025 appearance."
       },
       {
         "name": "Santos",
@@ -784,6 +797,10 @@
       {
         "url": "http://www.national-football-teams.com/player/39625/Neymar.html",
         "title": "Neymar (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.nytimes.com/athletic/6093149/2025/01/27/neymar-leave-al-hilal-contract-terminate/",
+        "title": "Neymar leaves Al Hilal after mutually agreeing to terminate contract — The Athletic"
       }
     ],
     "notes": "Santos official 6 January 2026 announcement confirms contract through end of 2026; youth Portuguesa Santista excluded.",
@@ -847,9 +864,17 @@
       {
         "url": "https://www.national-football-teams.com/player/20658.html",
         "title": "Luis Suárez (Player) | National Football Teams"
+      },
+      {
+        "url": "https://nl.wikipedia.org/wiki/Beloften_Eredivisie_(voetbal)",
+        "title": "Beloften Eredivisie: entry into the senior league pyramid"
+      },
+      {
+        "url": "https://www.fcgroningen.nl/nieuws/zinderende-ontknoping-nadert-voor-jong-fc-groningen/",
+        "title": "FC Groningen: reserve-team pyramid qualification in 2016"
       }
     ],
-    "notes": "Miami announced signing in December 2023 for the 2024 campaign; dates use playing season. New contract through 2026 confirmed by club on 17 December 2025. International retirement does not mean club retirement.",
+    "notes": "Miami announced signing in December 2023 for the 2024 campaign; dates use playing season. New contract through 2026 confirmed by club on 17 December 2025. International retirement does not mean club retirement. Reported Groningen second-team acclimatisation is not added as a separate node: the Dutch reserve league was outside the adult pyramid during his 2006–2007 spell.",
     "status": "active",
     "verifiedAt": "2026-09-11"
   },
@@ -1055,8 +1080,8 @@
       },
       {
         "name": "Ravenna",
-        "years": "2026–present",
-        "note": "Current player signing announced June 2026. Registration included; competitive debut not established by the retrieved sources."
+        "years": "2026",
+        "note": "Player signing announced 23–24 June 2026; the club said he would be registered. Completed federation registration and competitive debut not established by retrieved evidence."
       }
     ],
     "sources": [
@@ -1077,8 +1102,8 @@
         "title": "Ronaldinho Gaúcho (Player) | National Football Teams"
       }
     ],
-    "notes": "Do not label retired based on his 2015 final Fluminense games or 2018 retirement announcement: Ravenna officially announced a player contract and registration in June 2026. Excludes later futsal, exhibitions, legends teams and ownership stakes.",
-    "status": "active",
+    "notes": "Last confirmed competitive club in the retrieved career evidence: Fluminense (2015). Ravenna announced a new player signing in June 2026 using future-tense registration wording. Ravenna is retained only as a tagged signing exception, not proof of a competitive comeback. Excludes futsal, exhibitions, legends teams and ownership stakes.",
+    "status": "signing-announced",
     "verifiedAt": "2026-09-11"
   },
   {

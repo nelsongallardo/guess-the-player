@@ -28,7 +28,7 @@ A football-career guessing game in one portable `index.html`: no build, framewor
 - Research the full senior career and country/position using retrieved career records plus independent corroboration. Date the snapshot; do not imply active-player data remains current forever.
 - National teams, youth teams, coaching teams and testimonials never appear as timeline clubs. The documented Roberto Carlos senior tour loan is the explicit friendly-only exception and is visibly tagged.
 - Include senior reserve-team spells and actual loans/returns. Reserve/first-team dates can overlap; document ordering. Do not invent parent playing spells between back-to-back loans.
-- Explicitly label any senior registrations with zero appearances. Avoid mistaking a contract's end date for the end of the actual playing spell.
+- Distinguish announced signings from completed registration and appearances. Career-stint endpoints may denote departure or retirement rather than a last match; disclose this explicitly and never extend a retired career to an unfulfilled contract expiry. See DATA_AUDIT.md.
 - Preserve continuous loan-to-permanent spells as one node, annotated. Preserve genuinely separate return spells as separate nodes.
 - Embed fetched crest bytes as data URLs for reliable offline rendering. Keep original public image URLs for provenance. Crest trademarks remain their owners'; no club affiliation implied. Do not pretend a fallback is an authentic crest.
 

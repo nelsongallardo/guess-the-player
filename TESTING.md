@@ -1,6 +1,6 @@
 # Verification report
 
-Executed on **11 September 2026** using real Node and Chromium/Playwright runs. The final browser report began at `2026-09-11T09:38:08.708971+00:00`. Local environment: Node `v22.22.1`, Python `3.9.6`, Playwright CLI `0.1.13`.
+Executed on **11 September 2026** using real Node and Chromium/Playwright runs. The final browser report began at `2026-09-11T14:21:51.829652+00:00`. Local environment: Node `v22.22.1`, Python `3.9.6`, Playwright CLI `0.1.13`.
 
 ## Commands actually run
 
@@ -12,7 +12,7 @@ python3 tests/run-browser.py
 
 ## Results
 
-- **Model/data/localization tests: 10 passed, 0 failed.** Exactly 30 unique player records, 15 Europe / 15 South America; original career fields still match the frozen research snapshot. All Spanish country/position mappings and career-note translations are present.
+- **Model/data/localization tests: 11 passed, 0 failed.** Exactly 30 unique player records, 15 Europe / 15 South America; embedded career fields match the re-audited curated records. Regression checks cover Lampard’s corrected Swansea year, Ronaldinho’s qualified signing status, unchanged Zanetti clubs, and explicit bilingual senior-only scope. All Spanish country/position mappings and career-note translations are present.
 - **30,000 randomized option samples:** every sample had five distinct names, exactly one correct answer and four valid distractors. Exact duplicate career signatures are excluded from distractor pools.
 - **HTTP browser playthrough:** all 30 players appeared once. The mixed first-/second-/third-attempt-win and loss scenario finished with 23 wins, 2,300 points and a best streak of 3, as expected.
 - **Offline local-file playthrough:** all 30 rounds completed with the browser context explicitly offline, reaching 3,000 points and a streak of 30. All 68 used public crest-source assets decoded without network access.
@@ -26,7 +26,7 @@ python3 tests/run-browser.py
 - **Keyboard/motion:** help opens with Enter and closes with Escape; focus advances after guesses; timeline arrows and keyboard scrolling work; reduced-motion preference suppresses the success animation.
 - **Mobile scroll regression (RED → GREEN):** reproduced the next career completely offscreen at 375×667 (`top: -380.625`, `bottom: -177.625`). The new regression failed against the old artifact. Next/replay now explicitly reveal the career panel; the regression and both complete playthroughs pass against the fixed artifact.
 - **Visual inspection:** the final Spanish mobile screenshot passed with all 11 clubs visible, no clipped clubs, no overlapping controls and fully legible answer options. Secondary grid text was enlarged after the first pass. Desktop retains the previously verified design and explicit timeline arrows.
-- **Citation plumbing:** all 30 player sections and 66 cited literal URLs match the 104-entry retrieved URL ledger.
+- **Citation plumbing:** all 30 career-source sections and 110 cited literal URLs match the 110-entry career ledger. The separate re-audit contains all 30 player sections and 107 cited URLs, which also match their literal ledger values.
 
 Raw browser JSON and screenshots are generated locally in ignored `test-results/`, not committed as fabricated fixtures.
 
@@ -34,6 +34,6 @@ Raw browser JSON and screenshots are generated locally in ignored `test-results/
 
 These are Chromium tests with desktop viewport emulation, not a physical-device Safari/Firefox certification or a formal WCAG audit. Local-file persistence varies across browsers, but denied storage is handled without preventing play.
 
-The general-purpose citation verifier reports two false URL mismatches because it truncates literal closing parentheses in the Xavi and Ronaldo Wikipedia URLs, even in its own plain renderer output. The original URLs were preserved. `tests/source-check.py` independently verifies **exact full URL equality**, citation membership and all player sections; it passes. It validates citation plumbing, not the historical truth of a claim.
+The general-purpose citation verifier reports false URL mismatches because it truncates literal closing parentheses, including the Xavi, Ronaldo and Dutch reserve-league Wikipedia URLs in the re-audit, even in its own plain renderer output. The original URLs were preserved. `tests/source-check.py` independently verifies **exact full URL equality**, citation membership and all player sections; it passes. It validates citation plumbing, not the historical truth of a claim.
 
 Career records are a manually cross-checked dated snapshot. The source document and [data policy](research/data-policy.md) disclose reserve overlap, actual playing returns, exceptional registrations and source disagreements. Automated tests cannot establish historical truth or guarantee future data currency.

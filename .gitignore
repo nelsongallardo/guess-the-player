@@ -12,3 +12,4 @@ research/*
 !research/verified-players.json
 !research/data-policy.md
 !research/game-ledger.json
+!research/reaudit-citations.json

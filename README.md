@@ -35,9 +35,9 @@ Then open <http://127.0.0.1:4173>.
 
 ## Career-data policy
 
-This is a dated, manually researched snapshot, not a live transfer feed. See the research files for the retrieved sources, cross-checks and player-specific notes. Active-player careers require rechecking after future transfers.
+The complete 30-player [re-audit and corrections](DATA_AUDIT.md) distinguish corroborated club history from unresolved dates and registration evidence. This is a dated, manually researched snapshot, not a live transfer feed. See the research files for the retrieved sources, cross-checks and player-specific notes. Active-player careers require rechecking after future transfers.
 
-The timeline includes professional senior clubs, competitive senior reserve-team spells, loans, and distinct playing returns. National teams, youth sides, coaching jobs, training-only visits, testimonials and amateur post-retirement football are excluded. Two documented exceptions are clearly tagged: Roberto Carlos’s friendly-only Atlético Mineiro tour loan (**Tour loan**) and Ronaldinho’s current Ravenna signing (**Signing\***; no competitive debut established). Continuous loan-to-permanent spells are combined, with the loan noted. Parallel reserve/first-team spells can overlap in years. See [the data policy](research/data-policy.md) and [player-by-player sources](CAREER_SOURCES.md) for exact scope, chronology and evidence conflicts. Current club crests identify the clubs; they are not historical season-specific artwork.
+The timeline includes professional senior clubs, competitive senior reserve-team spells, loans, and distinct playing returns. National teams, youth sides, coaching jobs, training-only visits, testimonials and amateur post-retirement football are excluded. Two documented exceptions are clearly tagged: Roberto Carlos’s friendly-only Atlético Mineiro tour loan (**Tour loan**) and Ronaldinho’s announced Ravenna signing (**Signing\***; completed registration and competitive debut not established). Continuous loan-to-permanent spells are combined, with the loan noted. Parallel reserve/first-team spells can overlap in years. See [the data policy](research/data-policy.md) and [player-by-player sources](CAREER_SOURCES.md) for exact scope, chronology and evidence conflicts. Current club crests identify the clubs; they are not historical season-specific artwork.
 
 Country means the senior national team represented, not birthplace or every citizenship held. Position uses a broad playing-role category. Initials use the player's name as displayed in the answer options (so a mononym has one initial).
 
@@ -46,6 +46,7 @@ Country means the senior national team represented, not birthplace or every citi
 - `index.html` — the complete playable artifact; nothing else is required at runtime.
 - `DESIGN.md` — visual direction, gameplay contract and acceptance matrix.
 - `CAREER_SOURCES.md` — player-by-player chronology, caveats and numbered sources.
+- `DATA_AUDIT.md` — complete 30-player re-audit, corrections and remaining evidence limits.
 - `research/` — curated career records, data policy and public source-URL ledger. Raw third-party retrievals and assembly scratch files remain local and are not republished.
 - `tests/` — reproducible browser/data checks.
 

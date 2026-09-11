@@ -82,7 +82,6 @@
 </div>
 <dialog id="rules" aria-labelledby="rules-title"><h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>National teams are never in the timeline.</b></li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position → name initials</b>. They’re free.</li><li>A correct round earns <b>100 points</b> and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. All 30 players appear once before the final whistle.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> badge identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress is saved locally when your browser allows it. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play <span aria-hidden="true">→</span></button></form></dialog>
 <script id="roster-data">
-// Complete, explicit local database: 30 players, 15 from each continent.
 const PLAYERS = [
   {
     "id": "cristiano-ronaldo",
@@ -489,7 +488,7 @@ const PLAYERS = [
       {
         "name": "Derby County",
         "years": "2020–2021",
-        "note": "Player-coach; retired from playing January 2021."
+        "note": "Player-coach; last competitive appearance November 2020; retired from playing January 2021. The 2021 endpoint denotes player retirement, not a 2021 appearance."
       }
     ],
     "sources": [
@@ -504,6 +503,10 @@ const PLAYERS = [
       {
         "url": "https://www.theguardian.com/football/2021/jan/15/wayne-rooney-calls-time-on-playing-career-to-become-derby-manager",
         "title": "Wayne Rooney calls time on playing career to become Derby manager | Derby County | The Guardian"
+      },
+      {
+        "url": "https://skysports.com/football/news/11688/12188712/wayne-rooney-from-derby-county-player-to-manager-in-a-tumultuous-12-months",
+        "title": "Wayne Rooney: from Derby County player to manager — Sky Sports"
       }
     ],
     "notes": "Primarily a forward, later also a midfielder. D.C. United, Birmingham City and Plymouth Argyle managerial appointments after playing retirement are excluded.",
@@ -626,8 +629,8 @@ const PLAYERS = [
     "clubs": [
       {
         "name": "Swansea City",
-        "years": "1995–1996",
-        "note": "Loan from West Ham, but the first senior playing club; debut October 1995."
+        "years": "1995",
+        "note": "Loan from West Ham; first senior playing club. Swansea appearances were October–December 1995. Some biographies date the formal return January 1996; no Swansea competitive appearance in 1996 established."
       },
       {
         "name": "West Ham United",
@@ -664,6 +667,14 @@ const PLAYERS = [
       {
         "url": "https://www.irishexaminer.com/sport/soccer/arid-20305955.html",
         "title": "‘Lampard never signed for New York City’"
+      },
+      {
+        "url": "https://www.11v11.com/players/frank-lampard-556/season/1996/team/swansea-city/",
+        "title": "Frank Lampard: dated club history — 11v11"
+      },
+      {
+        "url": "https://walesonline.co.uk/sport/football/football-news/lampard-owes-rise-swans-spell-2433146",
+        "title": "Lampard owes rise to Swans spell — WalesOnline"
       }
     ],
     "notes": "Chronology is by competitive playing, not parent registration: Swansea precedes the West Ham first-team debut. Early publicity described Manchester City as a loan, but the Premier League subsequently confirmed a direct City contract and no NYCFC loan agreement. No Melbourne City spell. Retirement announced February 2017 after final playing season in 2016.",
@@ -1446,7 +1457,8 @@ const PLAYERS = [
       },
       {
         "name": "Al-Hilal",
-        "years": "2023–2025"
+        "years": "2023–2025",
+        "note": "Club tenure ended January 2025; last competitive appearance 4 November 2024. The 2025 endpoint denotes departure, not a 2025 appearance."
       },
       {
         "name": "Santos",
@@ -1466,6 +1478,10 @@ const PLAYERS = [
       {
         "url": "http://www.national-football-teams.com/player/39625/Neymar.html",
         "title": "Neymar (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.nytimes.com/athletic/6093149/2025/01/27/neymar-leave-al-hilal-contract-terminate/",
+        "title": "Neymar leaves Al Hilal after mutually agreeing to terminate contract — The Athletic"
       }
     ],
     "notes": "Santos official 6 January 2026 announcement confirms contract through end of 2026; youth Portuguesa Santista excluded.",
@@ -1567,9 +1583,17 @@ const PLAYERS = [
       {
         "url": "https://www.national-football-teams.com/player/20658.html",
         "title": "Luis Suárez (Player) | National Football Teams"
+      },
+      {
+        "url": "https://nl.wikipedia.org/wiki/Beloften_Eredivisie_(voetbal)",
+        "title": "Beloften Eredivisie: entry into the senior league pyramid"
+      },
+      {
+        "url": "https://www.fcgroningen.nl/nieuws/zinderende-ontknoping-nadert-voor-jong-fc-groningen/",
+        "title": "FC Groningen: reserve-team pyramid qualification in 2016"
       }
     ],
-    "notes": "Miami announced signing in December 2023 for the 2024 campaign; dates use playing season. New contract through 2026 confirmed by club on 17 December 2025. International retirement does not mean club retirement.",
+    "notes": "Miami announced signing in December 2023 for the 2024 campaign; dates use playing season. New contract through 2026 confirmed by club on 17 December 2025. International retirement does not mean club retirement. Reported Groningen second-team acclimatisation is not added as a separate node: the Dutch reserve league was outside the adult pyramid during his 2006–2007 spell.",
     "status": "active",
     "verifiedAt": "2026-09-11",
     "clubCrests": [
@@ -1936,8 +1960,8 @@ const PLAYERS = [
       },
       {
         "name": "Ravenna",
-        "years": "2026–present",
-        "note": "Current player signing announced June 2026. Registration included; competitive debut not established by the retrieved sources."
+        "years": "2026",
+        "note": "Player signing announced 23–24 June 2026; the club said he would be registered. Completed federation registration and competitive debut not established by retrieved evidence."
       }
     ],
     "sources": [
@@ -1958,8 +1982,8 @@ const PLAYERS = [
         "title": "Ronaldinho Gaúcho (Player) | National Football Teams"
       }
     ],
-    "notes": "Do not label retired based on his 2015 final Fluminense games or 2018 retirement announcement: Ravenna officially announced a player contract and registration in June 2026. Excludes later futsal, exhibitions, legends teams and ownership stakes.",
-    "status": "active",
+    "notes": "Last confirmed competitive club in the retrieved career evidence: Fluminense (2015). Ravenna announced a new player signing in June 2026 using future-tense registration wording. Ravenna is retained only as a tagged signing exception, not proof of a competitive comeback. Excludes futsal, exhibitions, legends teams and ownership stakes.",
+    "status": "signing-announced",
     "verifiedAt": "2026-09-11",
     "clubCrests": [
       "https://a.espncdn.com/i/teamlogos/soccer/500/6273.png",
@@ -3207,7 +3231,7 @@ const SPANISH_NOTES = {
       "",
       "Segunda etapa como jugador.",
       "",
-      "Jugador-entrenador; se retiró como jugador en enero de 2021."
+      "Jugador-entrenador; su último partido oficial fue en noviembre de 2020 y se retiró como jugador en enero de 2021. El año 2021 indica su retirada, no un partido disputado ese año."
     ]
   },
   "steven-gerrard": {
@@ -3220,7 +3244,7 @@ const SPANISH_NOTES = {
   "frank-lampard": {
     "notes": "La cronología sigue los partidos oficiales disputados, no la inscripción en el club de origen: Swansea precede al debut con el primer equipo de West Ham. Los primeros anuncios presentaron su llegada a Manchester City como una cesión, pero la Premier League confirmó después un contrato directo con City y la ausencia de un acuerdo de cesión con NYCFC. No hubo etapa en Melbourne City. Anunció su retirada en febrero de 2017, tras su última temporada como jugador en 2016.",
     "clubNotes": [
-      "Cedido por West Ham, pero fue su primer club con participación en categoría absoluta; debut en octubre de 1995.",
+      "Cesión del West Ham; fue su primer club como jugador sénior. Sus partidos con Swansea fueron entre octubre y diciembre de 1995. Algunas biografías sitúan el regreso formal en enero de 1996; no se ha acreditado un partido oficial con Swansea en 1996.",
       "Debut con el primer equipo el 31 de enero de 1996, tras la cesión a Swansea. No se añade una etapa como jugador en West Ham anterior a esa cesión.",
       "",
       "Contrato directo de corta duración con City, con incorporación definitiva y sin cesión de NYCFC; aclaración de la Premier League en enero de 2015.",
@@ -3310,12 +3334,12 @@ const SPANISH_NOTES = {
       "",
       "",
       "",
-      "",
+      "Su etapa contractual terminó en enero de 2025; su último partido oficial fue el 4 de noviembre de 2024. El año 2025 indica su salida, no un partido disputado ese año.",
       "Regreso mediante traspaso definitivo, sin cesión."
     ]
   },
   "luis-suarez": {
-    "notes": "Miami anunció su fichaje en diciembre de 2023 para la campaña de 2024; las fechas reflejan la temporada en la que jugó. El club confirmó un nuevo contrato hasta 2026 el 17 de diciembre de 2025. Retirarse de la selección no implica retirarse del fútbol de clubes.",
+    "notes": "Miami anunció su fichaje en diciembre de 2023 para la campaña de 2024; las fechas reflejan la temporada en la que jugó. El club confirmó un nuevo contrato hasta 2026 el 17 de diciembre de 2025. Retirarse de la selección no implica retirarse del fútbol de clubes. Su adaptación con el segundo equipo de Groningen, descrita en las biografías, no se añade como etapa independiente: la liga neerlandesa de reservas estaba fuera de la pirámide de ligas sénior durante su estancia en 2006–2007.",
     "clubNotes": [
       "",
       "",
@@ -3364,7 +3388,7 @@ const SPANISH_NOTES = {
     ]
   },
   "ronaldinho": {
-    "notes": "No debe figurar como retirado basándose en sus últimos partidos con Fluminense en 2015 o en su anuncio de retirada de 2018: Ravenna anunció oficialmente un contrato como jugador y su inscripción en junio de 2026. Se excluyen sus participaciones posteriores en fútbol sala, exhibiciones y equipos de leyendas, así como sus participaciones como propietario.",
+    "notes": "Último club con partidos oficiales confirmado por las fuentes de esta revisión: Fluminense (2015). Ravenna anunció su fichaje como jugador en junio de 2026 y habló de la inscripción en futuro. Ravenna se conserva únicamente como excepción etiquetada de fichaje, no como prueba de un regreso a la competición. Se excluyen fútbol sala, exhibiciones, equipos de leyendas y participaciones como propietario.",
     "clubNotes": [
       "",
       "",
@@ -3374,7 +3398,7 @@ const SPANISH_NOTES = {
       "",
       "",
       "",
-      "Fichaje como jugador actual anunciado en junio de 2026. Se incluye su inscripción; las fuentes consultadas no permiten confirmar un debut en partidos oficiales."
+      "Fichaje como jugador anunciado el 23–24 de junio de 2026; el club dijo que sería inscrito. Las fuentes consultadas no acreditan una inscripción federativa completada ni un debut oficial."
     ]
   },
   "kaka": {
@@ -3480,14 +3504,14 @@ const STORAGE_KEY = 'touchline.career.v1';
 const LANGUAGE_KEY = 'touchline.language.v1';
 const COPY = {
   en: {
-    title:'Guess the Player by their Career Path · Touchline',description:'Guess the football player from their club career. Thirty icons, five answers, three chances. Play offline too.',brand:'THE CAREER PATH GAME',edition:'FOOTBALL IQ / VOL. 01',help:'How to play',eyebrow:'Guess the player by their career path',headline:'Every club.<br> One <span>legend.</span>',intro:'Follow the badges. Connect the dots. Name the player.',scoreboard:'Scoreboard',score:'YOUR SCORE',streak:'WIN STREAK',row:'in a row',round:'Current round',career:'CAREER FILE',path:'DEBUT → LATEST CLUB',question:'Who is this player?',chances:'Five names. Three chances.',hints:['Country','Position','Initials'],hint:'Get Hint',allHints:'All hints revealed',revealed:'Revealed hints',next:'Next Player',results:'See results',sourceSummary:'Career notes & sources',whistle:'The final whistle',summary:'That’s a full career’s<br>worth of football.',replay:'Play again',review:'Review all 30 players',footer:'<span class="footer-brand">30 ICONS</span> · 15 EUROPE / 15 SOUTH AMERICA',snapshot:'RESEARCH SNAPSHOT · 11 SEP 2026',saved:'PROGRESS SAVED ON THIS DEVICE',unsaved:'STORAGE UNAVAILABLE · RELOAD RESTARTS',trust:'Trust your football memory. Hints are on the house.',found:'PLAYER FOUND',correct:'correct answer',incorrect:'incorrect',reviewWon:'✓ Correct',reviewLost:'× Missed',loss:'No attempts left. Your streak resets — your points stay.',wrong:'Not quite. Take another look.',sources:'Career sources',attribution:'Crest attribution',rights:'Crests are embedded for offline play. Club trademarks and image rights remain with their owners. Current/source-era badges are used, not historical season-by-season artwork.',original:'original public image',checked:'Research checked',crest:'crest',tags:{tour:'Tour loan',signing:'Signing*',reserve:'Senior reserve',loan:'Loan spell',return:'Return'},scroll:'Scroll or swipe to see every club',earlier:'Earlier clubs',later:'Later clubs',navigation:'Career timeline navigation',completed:'Completed rounds',timeline:'Club career in chronological order. Scroll horizontally for long careers.',grid:'Club career in chronological order. Read left to right, then the next row.',gridGuide:'LEFT → RIGHT · ROW BY ROW',scrollGuide:'SWIPE TO EXPLORE',present:'present',
+    title:'Guess the Player by their Career Path · Touchline',description:'Guess the football player from their club career. Thirty icons, five answers, three chances. Play offline too.',brand:'THE CAREER PATH GAME',edition:'FOOTBALL IQ / VOL. 01',help:'How to play',eyebrow:'Guess the player by their career path',headline:'Every club.<br> One <span>legend.</span>',intro:'Follow the badges. Connect the dots. Name the player.',scoreboard:'Scoreboard',score:'YOUR SCORE',streak:'WIN STREAK',row:'in a row',round:'Current round',career:'CAREER FILE',path:'SENIOR CLUB CAREER',question:'Who is this player?',chances:'Five names. Three chances.',hints:['Country','Position','Initials'],hint:'Get Hint',allHints:'All hints revealed',revealed:'Revealed hints',next:'Next Player',results:'See results',sourceSummary:'Career notes & sources',whistle:'The final whistle',summary:'That’s a full career’s<br>worth of football.',replay:'Play again',review:'Review all 30 players',footer:'<span class="footer-brand">30 ICONS</span> · 15 EUROPE / 15 SOUTH AMERICA',snapshot:'RESEARCH SNAPSHOT · 11 SEP 2026',saved:'PROGRESS SAVED ON THIS DEVICE',unsaved:'STORAGE UNAVAILABLE · RELOAD RESTARTS',trust:'Trust your football memory. Hints are on the house.',found:'PLAYER FOUND',correct:'correct answer',incorrect:'incorrect',reviewWon:'✓ Correct',reviewLost:'× Missed',loss:'No attempts left. Your streak resets — your points stay.',wrong:'Not quite. Take another look.',sources:'Career sources',attribution:'Crest attribution',rights:'Crests are embedded for offline play. Club trademarks and image rights remain with their owners. Current/source-era badges are used, not historical season-by-season artwork.',original:'original public image',checked:'Research checked',crest:'crest',tags:{tour:'Tour loan',signing:'Signing*',reserve:'Senior reserve',loan:'Loan spell',return:'Return'},scroll:'Scroll or swipe to see every club',earlier:'Earlier clubs',later:'Later clubs',navigation:'Career timeline navigation',completed:'Completed rounds',timeline:'Club career in chronological order. Scroll horizontally for long careers.',grid:'Club career in chronological order. Read left to right, then the next row.',gridGuide:'LEFT → RIGHT · ROW BY ROW',scrollGuide:'SWIPE TO EXPLORE',present:'present',
     attempts:n=>`${n} ${n===1?'attempt':'attempts'} left`,progress:n=>`${n} OF 30 COMPLETE`,spells:n=>`${n} SENIOR ${n===1?'SPELL':'SPELLS'}`,win:name=>`Get in! It’s ${name}.`,winDetail:n=>`+100 points · ${n} ${n===1?'win':'wins'} in a row. Keep it going.`,lost:name=>`This one was ${name}.`,wrongDetail:n=>`${n} ${n===1?'attempt remains':'attempts remain'}. The red answer is out of play.`,recap:s=>`${s.wins} / 30 players found · Best streak: ${s.best} · ${Math.round(s.wins/30*100)}% accuracy`,
-    rules:'<h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>National teams are never in the timeline.</b> On mobile, read the numbered rows from left to right, then continue on the next row.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position → name initials</b>. They’re free.</li><li>A correct round earns <b>100 points</b> and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. All 30 players appear once before the final whistle.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> tag identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress and language are saved locally when your browser allows it. Switching language does not restart the game. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play →</button></form>'
+    rules:'<h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>Only professional senior club careers: youth teams, national teams and coaching jobs are excluded.</b> On mobile, read the numbered rows from left to right, then continue on the next row.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position → name initials</b>. They’re free.</li><li>A correct round earns <b>100 points</b> and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. All 30 players appear once before the final whistle.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> tag identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Years describe club stints; departure or retirement can follow the final match. Notes distinguish these cases. Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress and language are saved locally when your browser allows it. Switching language does not restart the game. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play →</button></form>'
   },
   es: {
-    title:'Adivina al jugador por su trayectoria · Touchline',description:'Adivina al futbolista por los clubes de su carrera. Treinta leyendas, cinco opciones y tres intentos. También funciona sin conexión.',brand:'ADIVINA LA TRAYECTORIA',edition:'CUÁNTO SABES DE FÚTBOL / VOL. 01',help:'Cómo jugar',eyebrow:'Adivina al jugador por su trayectoria',headline:'Cada club.<br> Una <span>leyenda.</span>',intro:'Sigue los escudos. Une las pistas. Adivina al jugador.',scoreboard:'Marcador',score:'PUNTOS',streak:'RACHA',row:'seguidos',round:'Ronda actual',career:'TRAYECTORIA',path:'DEBUT → ÚLTIMO CLUB',question:'¿Quién es este jugador?',chances:'Cinco nombres. Tres intentos.',hints:['País','Posición','Iniciales'],hint:'Pedir pista',allHints:'Todas las pistas reveladas',revealed:'Pistas reveladas',next:'Siguiente jugador',results:'Ver resultados',sourceSummary:'Notas de la carrera y fuentes',whistle:'El pitido final',summary:'Una carrera completa.<br>¿Cuánto sabes de fútbol?',replay:'Volver a jugar',review:'Revisar los 30 jugadores',footer:'<span class="footer-brand">30 LEYENDAS</span> · 15 EUROPA / 15 SUDAMÉRICA',snapshot:'DATOS VERIFICADOS · 11 SEP 2026',saved:'PROGRESO GUARDADO EN ESTE DISPOSITIVO',unsaved:'NO SE PUEDE GUARDAR · RECARGAR REINICIA',trust:'Confía en tu memoria futbolera. Las pistas son gratis.',found:'¡JUGADOR ACERTADO!',correct:'respuesta correcta',incorrect:'incorrecto',reviewWon:'✓ Acertado',reviewLost:'× Fallado',loss:'Sin intentos. La racha vuelve a cero, pero conservas tus puntos.',wrong:'No es él. Mira la trayectoria otra vez.',sources:'Fuentes de la carrera',attribution:'Créditos de los escudos',rights:'Los escudos están incluidos para jugar sin conexión. Las marcas y los derechos de las imágenes pertenecen a sus propietarios. Se usan escudos actuales o de las fuentes consultadas, no diseños de cada temporada histórica.',original:'imagen pública original',checked:'Datos verificados',crest:'escudo',tags:{tour:'Gira',signing:'Fichaje*',reserve:'Filial',loan:'Préstamo',return:'Regreso'},scroll:'Desliza o usa las flechas para ver todos los clubes',earlier:'Clubes anteriores',later:'Clubes siguientes',navigation:'Navegación de la trayectoria',completed:'Rondas completadas',timeline:'Clubes en orden cronológico. Desplázate horizontalmente para ver las carreras largas.',grid:'Clubes en orden cronológico. Lee de izquierda a derecha y continúa en la fila siguiente.',gridGuide:'IZQ. → DER. · FILA POR FILA',scrollGuide:'DESLIZA PARA VER MÁS',present:'actualidad',
+    title:'Adivina al jugador por su trayectoria · Touchline',description:'Adivina al futbolista por los clubes de su carrera. Treinta leyendas, cinco opciones y tres intentos. También funciona sin conexión.',brand:'ADIVINA LA TRAYECTORIA',edition:'CUÁNTO SABES DE FÚTBOL / VOL. 01',help:'Cómo jugar',eyebrow:'Adivina al jugador por su trayectoria',headline:'Cada club.<br> Una <span>leyenda.</span>',intro:'Sigue los escudos. Une las pistas. Adivina al jugador.',scoreboard:'Marcador',score:'PUNTOS',streak:'RACHA',row:'seguidos',round:'Ronda actual',career:'TRAYECTORIA',path:'CARRERA SÉNIOR',question:'¿Quién es este jugador?',chances:'Cinco nombres. Tres intentos.',hints:['País','Posición','Iniciales'],hint:'Pedir pista',allHints:'Todas las pistas reveladas',revealed:'Pistas reveladas',next:'Siguiente jugador',results:'Ver resultados',sourceSummary:'Notas de la carrera y fuentes',whistle:'El pitido final',summary:'Una carrera completa.<br>¿Cuánto sabes de fútbol?',replay:'Volver a jugar',review:'Revisar los 30 jugadores',footer:'<span class="footer-brand">30 LEYENDAS</span> · 15 EUROPA / 15 SUDAMÉRICA',snapshot:'DATOS VERIFICADOS · 11 SEP 2026',saved:'PROGRESO GUARDADO EN ESTE DISPOSITIVO',unsaved:'NO SE PUEDE GUARDAR · RECARGAR REINICIA',trust:'Confía en tu memoria futbolera. Las pistas son gratis.',found:'¡JUGADOR ACERTADO!',correct:'respuesta correcta',incorrect:'incorrecto',reviewWon:'✓ Acertado',reviewLost:'× Fallado',loss:'Sin intentos. La racha vuelve a cero, pero conservas tus puntos.',wrong:'No es él. Mira la trayectoria otra vez.',sources:'Fuentes de la carrera',attribution:'Créditos de los escudos',rights:'Los escudos están incluidos para jugar sin conexión. Las marcas y los derechos de las imágenes pertenecen a sus propietarios. Se usan escudos actuales o de las fuentes consultadas, no diseños de cada temporada histórica.',original:'imagen pública original',checked:'Datos verificados',crest:'escudo',tags:{tour:'Gira',signing:'Fichaje*',reserve:'Filial',loan:'Préstamo',return:'Regreso'},scroll:'Desliza o usa las flechas para ver todos los clubes',earlier:'Clubes anteriores',later:'Clubes siguientes',navigation:'Navegación de la trayectoria',completed:'Rondas completadas',timeline:'Clubes en orden cronológico. Desplázate horizontalmente para ver las carreras largas.',grid:'Clubes en orden cronológico. Lee de izquierda a derecha y continúa en la fila siguiente.',gridGuide:'IZQ. → DER. · FILA POR FILA',scrollGuide:'DESLIZA PARA VER MÁS',present:'actualidad',
     attempts:n=>n===1?'Queda 1 intento':`Quedan ${n} intentos`,progress:n=>`${n} DE 30 COMPLETADAS`,spells:n=>`${n} ${n===1?'ETAPA':'ETAPAS'}`,win:name=>`¡Gol! Es ${name}.`,winDetail:n=>`+100 puntos · ${n} ${n===1?'acierto seguido':'aciertos seguidos'}. ¡A por el siguiente!`,lost:name=>`Era ${name}.`,wrongDetail:n=>`${n===1?'Queda 1 intento':`Quedan ${n} intentos`}. La opción roja ya está descartada.`,recap:s=>`${s.wins} / 30 jugadores acertados · Mejor racha: ${s.best} · ${Math.round(s.wins/30*100)}% de aciertos`,
-    rules:'<h2 id="rules-title">Lee la trayectoria.<br>Adivina la leyenda.</h2><ol><li>Sigue los escudos desde el debut hasta el último club. <b>Las selecciones nacionales nunca aparecen en la trayectoria.</b> En el móvil, lee las filas numeradas de izquierda a derecha y continúa en la fila siguiente.</li><li>Elige uno de los cinco jugadores. Tienes <b>tres intentos</b>; cada respuesta incorrecta queda desactivada.</li><li>¿Necesitas ayuda? Las pistas revelan <b>país → posición → iniciales del nombre</b>. Son gratis.</li><li>Acertar una ronda suma <b>100 puntos</b> y alarga tu racha. Fallar reinicia la racha, no los puntos.</li><li>Termina la ronda para pasar al <b>siguiente jugador</b>. Los 30 aparecen una sola vez antes del resultado final.</li></ol><p>Se incluyen filiales que compiten en ligas sénior y regresos reales como jugador. Algunas etapas del filial y del primer equipo se solapan. Las etiquetas <b>Gira</b> y <b>Fichaje*</b> señalan etapas excepcionales sin partidos oficiales acreditados; las notas y las fuentes aparecen al revelar la respuesta.</p><p>Las posiciones son categorías generales. Las iniciales corresponden al nombre mostrado en las opciones. Los datos son una revisión fechada, no un registro de fichajes en directo. Los escudos identifican clubes, no camisetas históricas.</p><p>No necesitas cuenta ni conexión; no hay seguimiento. El progreso y el idioma se guardan en el dispositivo cuando el navegador lo permite. Cambiar de idioma no reinicia la partida. Las marcas pertenecen a sus propietarios; este es un juego no oficial de aficionados.</p><form method="dialog"><button class="primary" type="submit">¡A jugar! →</button></form>'
+    rules:'<h2 id="rules-title">Lee la trayectoria.<br>Adivina la leyenda.</h2><ol><li>Sigue los escudos desde el debut hasta el último club. <b>Solo carreras profesionales sénior: se excluyen juveniles, selecciones y etapas como entrenador.</b> En el móvil, lee las filas numeradas de izquierda a derecha y continúa en la fila siguiente.</li><li>Elige uno de los cinco jugadores. Tienes <b>tres intentos</b>; cada respuesta incorrecta queda desactivada.</li><li>¿Necesitas ayuda? Las pistas revelan <b>país → posición → iniciales del nombre</b>. Son gratis.</li><li>Acertar una ronda suma <b>100 puntos</b> y alarga tu racha. Fallar reinicia la racha, no los puntos.</li><li>Termina la ronda para pasar al <b>siguiente jugador</b>. Los 30 aparecen una sola vez antes del resultado final.</li></ol><p>Se incluyen filiales que compiten en ligas sénior y regresos reales como jugador. Algunas etapas del filial y del primer equipo se solapan. Las etiquetas <b>Gira</b> y <b>Fichaje*</b> señalan etapas excepcionales sin partidos oficiales acreditados; las notas y las fuentes aparecen al revelar la respuesta.</p><p>Los años indican etapas en el club; la salida o retirada puede ser posterior al último partido. Las notas aclaran estos casos. Las posiciones son categorías generales. Las iniciales corresponden al nombre mostrado en las opciones. Los datos son una revisión fechada, no un registro de fichajes en directo. Los escudos identifican clubes, no camisetas históricas.</p><p>No necesitas cuenta ni conexión; no hay seguimiento. El progreso y el idioma se guardan en el dispositivo cuando el navegador lo permite. Cambiar de idioma no reinicia la partida. Las marcas pertenecen a sus propietarios; este es un juego no oficial de aficionados.</p><form method="dialog"><button class="primary" type="submit">¡A jugar! →</button></form>'
   }
 };
 const COUNTRIES_ES = {Portugal:'Portugal',France:'Francia',Netherlands:'Países Bajos',England:'Inglaterra',Wales:'Gales',Italy:'Italia',Spain:'España',Sweden:'Suecia',Argentina:'Argentina',Brazil:'Brasil',Uruguay:'Uruguay'};
