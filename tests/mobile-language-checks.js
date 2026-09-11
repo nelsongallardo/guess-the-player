@@ -27,12 +27,12 @@ async page => {
         }
         return checked;
       },{locale});
-      ok(rows.length===30&&new Set(rows).size===30,'Every player checked');cases.push({locale,width,players:rows.length});
+      ok(rows.length===40&&new Set(rows).size===40,'Every player checked');cases.push({locale,width,players:rows.length});
       ok(!await page.locator('#career-navigation').isVisible(),'No mobile scroll controls');
     }
   }
   await page.goto(url+'?lang=es');await page.setViewportSize({width:375,height:667});
-  await page.evaluate(()=>{state=CareerGame.create();const player=PLAYERS.find(p=>p.id==='juan-sebastian-veron');state.deck=[player.id,...state.deck.filter(id=>id!==player.id)];state.rounds=[{options:CareerGame.optionsFor(player),guesses:[],hints:0}];render(false,true);scrollTo(0,0);});
+  await page.evaluate(()=>{state=CareerGame.create();const player=[...PLAYERS].sort((a,b)=>b.clubs.length-a.clubs.length)[0];state.deck=[player.id,...state.deck.filter(id=>id!==player.id)];state.rounds=[{options:CareerGame.optionsFor(player),guesses:[],hints:0}];render(false,true);scrollTo(0,0);});
   await page.screenshot({path:'test-results/mobile-spanish.png',fullPage:true});
   ok(await page.locator('#timeline img').evaluateAll(images=>images.every(i=>{const r=i.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;})),'Longest career crests visible on initial 375x667 screen');
   ok(await page.locator('html').getAttribute('lang')==='es','Spanish HTML language');
@@ -53,16 +53,16 @@ async page => {
   // Real Spanish playthrough, alternating first-attempt wins and three-attempt losses.
   await page.evaluate(()=>{state=CareerGame.create();render(false,true);});
   let wins=0;const seen=new Set();
-  for(let i=0;i<30;i++){
+  for(let i=0;i<40;i++){
     const p=await page.evaluate(()=>({id:CareerGame.playerAt(state).id,name:CareerGame.playerAt(state).name,options:CareerGame.roundAt(state).options}));seen.add(p.id);
     const chosen=i%2===0?[p.name]:p.options.filter(n=>n!==p.name).slice(0,3);
     for(const name of chosen)await page.locator('#options button').nth(p.options.indexOf(name)).click();
     if(i%2===0){wins++;ok((await page.locator('#feedback').textContent()).startsWith('¡Gol!'),'Spanish success');}
     else ok((await page.locator('#feedback').textContent()).includes('Sin intentos'),'Spanish loss');
-    ok(await page.locator('#next-label').textContent()===(i===29?'Ver resultados':'Siguiente jugador'),'Spanish next/results');
+    ok(await page.locator('#next-label').textContent()===(i===39?'Ver resultados':'Siguiente jugador'),'Spanish next/results');
     await page.locator('#next').click();
   }
-  ok(seen.size===30,'Spanish all30 deck');ok((await page.locator('#summary-caption').textContent()).includes('15 / 30 jugadores acertados'),'Spanish recap');
+  ok(seen.size===40,'Spanish all40 deck');ok((await page.locator('#summary-caption').textContent()).includes('20 / 40 jugadores acertados'),'Spanish recap');
   const final=await page.evaluate(()=>JSON.stringify(state));await page.locator('#language').selectOption('en');ok(await page.evaluate(()=>JSON.stringify(state))===final,'Finished language switch preserves recap');
   await page.locator('#language').selectOption('es');await page.locator('#replay').click();ok(await page.evaluate(()=>language==='es'&&CareerGame.stats(state).score===0),'Spanish replay');
   const isolated=await page.context().browser().newContext({locale:'es-AR'});

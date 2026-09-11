@@ -24,23 +24,24 @@ Then open <http://127.0.0.1:4173>.
 
 ## Rules
 
-- Thirty players: fifteen representing European national teams and fifteen representing South American national teams.
+- Forty players: twenty representing European national teams and twenty representing South American national teams. The original stars are joined by Fabricio Coloccini, Juan Pablo Sorín, Pablo Aimar, Esteban Cambiasso, Diego Milito, Gaizka Mendieta, Tomáš Rosický, Iván de la Peña, Robbie Keane and Wesley Sneijder.
+- All ten additions are playable answers and eligible similarity-ranked distractors. Their researched notes and authentic club crests are included offline in both languages.
 - Five shuffled answers per round: one correct player and four distinct distractors, selected by difficulty.
 - **Easy / Fácil:** random rivals from the full eligible roster.
 - **Medium / Media (default):** four rivals sampled from the twelve most similar eligible players.
 - **Hard / Difícil:** the four most similar eligible players; answer positions are still shuffled.
-- Similarity prioritizes shared clubs, then national team, broad position, overlapping career years and career length. Identical ordered career paths remain excluded. Candidates come only from the existing researched 30-player roster; difficulty changes neither the facts nor the hints/attempts.
+- Similarity prioritizes shared clubs, then national team, broad position, overlapping career years and career length. Identical ordered career paths remain excluded. Candidates come only from the researched 40-player roster; difficulty changes neither the facts nor the hints/attempts.
 - The difficulty selector is just below the career timeline. A change applies immediately before any guess/hint; otherwise the current options stay fixed and the setting applies to the next player. A bilingual message explains pending changes. Progress is preserved, and reload/replay remembers the selection.
 - Three attempts. Wrong buttons turn red and cannot be selected again.
 - **Get Hint** reveals country, then position, then the initials of the displayed player name. Hints cost nothing.
 - Each correct round earns **100 points**, regardless of attempts or hints, and adds one to the consecutive win streak. Losing a round resets the streak, not the score.
 - **Next Player** appears only after winning or losing a round.
-- A shuffled deck visits every player once before the final recap. Play again starts a new deck and resets the score.
+- A new shuffled deck visits all 40 players once before the final recap. Existing 30-player saves retain their original deck and exact choices, score and hints; after finishing, Play again starts a 40-player deck, resets the score and retains difficulty.
 - Progress is saved in this browser when local storage is available. Browsers that block storage can still play, but reloading starts a new game. File-URL storage behavior varies by browser.
 
 ## Career-data policy
 
-The complete 30-player [re-audit and corrections](DATA_AUDIT.md) distinguish corroborated club history from unresolved dates and registration evidence. This is a dated, manually researched snapshot, not a live transfer feed. See the research files for the retrieved sources, cross-checks and player-specific notes. Active-player careers require rechecking after future transfers.
+The original audit and ten-player [research expansion](DATA_AUDIT.md) distinguish corroborated club history from unresolved dates and registration evidence. This is a dated, manually researched snapshot, not a live transfer feed. See the research files for the retrieved sources, cross-checks and player-specific notes. Active-player careers require rechecking after future transfers.
 
 The timeline includes professional senior clubs, competitive senior reserve-team spells, loans, and distinct playing returns. National teams, youth sides, coaching jobs, training-only visits, testimonials and amateur post-retirement football are excluded. Two documented exceptions are clearly tagged: Roberto Carlos’s friendly-only Atlético Mineiro tour loan (**Tour loan**) and Ronaldinho’s announced Ravenna signing (**Signing\***; completed registration and competitive debut not established). Continuous loan-to-permanent spells are combined, with the loan noted. Parallel reserve/first-team spells can overlap in years. See [the data policy](research/data-policy.md) and [player-by-player sources](CAREER_SOURCES.md) for exact scope, chronology and evidence conflicts. Current club crests identify the clubs; they are not historical season-specific artwork.
 
@@ -51,7 +52,7 @@ Country means the senior national team represented, not birthplace or every citi
 - `index.html` — the complete playable artifact; nothing else is required at runtime.
 - `DESIGN.md` — visual direction, gameplay contract and acceptance matrix.
 - `CAREER_SOURCES.md` — player-by-player chronology, caveats and numbered sources.
-- `DATA_AUDIT.md` — complete 30-player re-audit, corrections and remaining evidence limits.
+- `DATA_AUDIT.md` — original 30-player re-audit and researched expansion to 40, corrections and remaining evidence limits.
 - `research/` — curated career records, data policy and public source-URL ledger. Raw third-party retrievals and assembly scratch files remain local and are not republished.
 - `tests/` — reproducible browser/data checks.
 
@@ -68,7 +69,7 @@ python3 tests/source-check.py
 python3 tests/run-browser.py
 ```
 
-The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 30 rounds over HTTP, all 30 again in an offline local-file context, all 30 in Spanish, every career in both languages at five mobile/tablet widths, and all 30 rounds at each of the three difficulty levels in both languages. See [TESTING.md](TESTING.md) for the actual verification results and limits.
+The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 40 rounds over HTTP, all 40 again in an offline local-file context, all 40 in Spanish, every career in both languages at five mobile/tablet widths, and all 40 rounds at each of the three difficulty levels in both languages. See [TESTING.md](TESTING.md) for the actual verification results and limits.
 
 ## Accessibility
 

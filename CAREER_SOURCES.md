@@ -1,6 +1,6 @@
 # Career research & sources
 
-Snapshot checked **11 September 2026** and subsequently re-audited in [DATA_AUDIT.md](DATA_AUDIT.md). Exactly 30 selected players: 15 Europe and 15 South America. All player objects and the matching ordered crest URL arrays are fully written out in `index.html`.
+Snapshot checked **11 September 2026** and subsequently re-audited in [DATA_AUDIT.md](DATA_AUDIT.md). Expanded to 40 selected players: 20 Europe and 20 South America. The original 30 and ten newly researched additions are documented below. All player objects and the matching ordered crest URL arrays are fully written out in `index.html`.
 
 ## Scope and evidence
 
@@ -347,6 +347,156 @@ Thierry Henry was replaced by Dennis Bergkamp because the exact ordering of Henr
 
 Each player’s `clubCrests` field contains the ordered original public image URLs. `CREST_ASSETS` maps these URLs to locally embedded PNG bytes and their source pages. Club crests were decoded and checked before embedding. Current/source-era badges identify teams; they do not represent historical kit-by-kit artwork. No national-team image is used in a career timeline.
 
+## Roster expansion — 10 additional players
+
+The roster now includes 40 players (20 Europe / 20 South America). These ten additions were independently researched on 11 September 2026; date and reserve-classification qualifications are preserved below. Software tests do not prove historical accuracy.
+
+### Fabricio Coloccini
+
+**Argentina · Defender.** Boca Juniors (1999) → San Lorenzo (2001) → Deportivo Alavés (2001–2002) → Atlético Madrid (2002–2003) → Villarreal (2003–2004) → AC Milan (2004–2005) → Deportivo La Coruña (2005–2008) → Newcastle United (2008–2016) → San Lorenzo (2016–2021) → Aldosivi (2021).[111][112]
+
+Playing chronology differs from the ownership-based English infobox: Milan appears only after Villarreal. Boca youth arrival in 1998 and unused Milan membership before the loans are excluded. San Lorenzo began in calendar 2001; Deportivo began in January 2005. Retired at Aldosivi in 2021; later coaching jobs are excluded.[111][112]
+
+- **Boca Juniors (1999):** Senior debut in June 1999; the 1998 arrival was as a youth player.
+- **San Lorenzo (2001):** Loan from AC Milan; six-month playing spell in the 2001 Clausura.
+- **Deportivo Alavés (2001–2002):** Loan from AC Milan.
+- **Atlético Madrid (2002–2003):** Loan from AC Milan.
+- **Villarreal (2003–2004):** Loan from AC Milan.
+- **AC Milan (2004–2005):** Actual first-team playing spell after the loans; earlier ownership without appearances is omitted. Left in January 2005.
+- **Deportivo La Coruña (2005–2008):** Joined January 2005, not calendar 2004 despite the 2004/05 season label.
+- **San Lorenzo (2016–2021):** Second playing spell.
+- **Aldosivi (2021):** Retired in December 2021.
+
+Reviewed sources: [111], [112], [113], [114], [115].
+
+### Juan Pablo Sorín
+
+**Argentina · Defender.** Argentinos Juniors (1994–1995) → Juventus (1995–1996) → River Plate (1996–2000) → Cruzeiro (2000–2002) → Lazio (2002–2003) → Barcelona (2003) → Paris Saint-Germain (2003–2004) → Cruzeiro (2004) → Villarreal (2004–2006) → Hamburger SV (2006–2008) → Cruzeiro (2009).[116][117]
+
+Three separate Cruzeiro playing spells are retained, including the often-hidden 2004 return between PSG and Villarreal. The final spell starts with play in 2009 rather than the 2008 signing. Contemporary reporting confirms a March 2009 state-championship appearance, so the June Série A match was not his only competitive appearance.[116][117]
+
+- **River Plate (1996–2000):** Departure to Cruzeiro in 2000; last River playing season was 1999/00.
+- **Lazio (2002–2003):** Loan from Cruzeiro.
+- **Barcelona (2003):** Loan from Cruzeiro.
+- **Paris Saint-Germain (2003–2004):** Loan from Cruzeiro.
+- **Cruzeiro (2004):** Actual playing return after PSG; six Série A appearances in NFT.
+- **Cruzeiro (2009):** Signed again in August 2008 but returned to competitive play in March 2009; retired July 2009.
+
+Reviewed sources: [116], [117], [118].
+
+### Pablo Aimar
+
+**Argentina · Midfielder.** River Plate (1996–2001) → Valencia (2001–2006) → Real Zaragoza (2006–2008) → Benfica (2008–2013) → Johor Darul Ta'zim (2014) → River Plate (2015) → Estudiantes de Río Cuarto (2018).[119][120]
+
+Estudiantes de Río Cuarto youth football is excluded, but the official 2018 Copa Argentina comeback is included: contemporary Olé reporting explicitly calls it his last professional match. This is distinct from Estudiantes de La Plata. NFT stops in 2015 and therefore does not corroborate that cup-only comeback. Johor is dated by first play, not the 2013 signing.[119][120]
+
+- **River Plate (1996–2001):** Transferred January 2001; last appearance of the first spell was December 2000.
+- **Johor Darul Ta'zim (2014):** Signed in 2013; league playing spell began in 2014, before release in April.
+- **River Plate (2015):** Actual return to play in May; first retirement in July 2015.
+- **Estudiantes de Río Cuarto (2018):** One-match senior comeback in the Copa Argentina against Sportivo Belgrano on 23 January; not merely an amateur testimonial.
+
+Reviewed sources: [119], [120], [121].
+
+### Esteban Cambiasso
+
+**Argentina · Midfielder.** Real Madrid B (1996/97–1997/98) → Independiente (1998–2001) → River Plate (2001–2002) → Real Madrid (2002–2004) → Inter Milan (2004–2014) → Leicester City (2014–2015) → Olympiacos (2015–2017).[122][123]
+
+Real Madrid B is included as senior adult-pyramid football, not youth. Argentinos Juniors is excluded: the infobox classifies it as youth and NFT lists zero league appearances, despite loose professional-career wording in the biography. Real Madrid ownership/administrative returns without games are not separate nodes.[122][123]
+
+- **Real Madrid B (1996/97–1997/98):** Senior pyramid reserve side: NFT records 8 second-tier and 34 third-tier league appearances.
+- **Independiente (1998–2001):** Loan from Real Madrid.
+- **River Plate (2001–2002):** Loan from Real Madrid; no unused parent-club return inserted.
+- **Real Madrid (2002–2004):** First-team playing spell, distinct from the earlier B team.
+- **Olympiacos (2015–2017):** Retired in September 2017 after his contract expired.
+
+Reviewed sources: [122], [123], [124].
+
+### Diego Milito
+
+**Argentina · Forward.** Racing Club (1999–2004) → Genoa (2004–2005) → Real Zaragoza (2005–2008) → Genoa (2008–2009) → Inter Milan (2009–2014) → Racing Club (2014–2016).[125][126]
+
+Both Genoa and Racing returns are actual playing spells. Racing’s official history dates the first Genoa move to January 2004, correcting the infobox’s calendar-2003 start. The Zaragoza loan-to-permanent transition is a single continuous spell. Racing confirms the career ended on 21 May 2016; later executive roles and farewell exhibitions are excluded.[125][126]
+
+- **Racing Club (1999–2004):** Left for Genoa in January 2004; endpoint denotes departure.
+- **Genoa (2004–2005):** Joined January 2004; not calendar 2003 despite the 2003/04 season label.
+- **Real Zaragoza (2005–2008):** Initially on loan, then permanent from 2007; one uninterrupted playing spell.
+- **Genoa (2008–2009):** Second playing spell.
+- **Racing Club (2014–2016):** Second playing spell; final professional match on 21 May 2016.
+
+Reviewed sources: [125], [126], [127], [128].
+
+### Gaizka Mendieta
+
+**Spain · Midfielder.** Castellón (1991/92) → Valencia B (1992/93–1993/94) → Valencia (1993–2001) → Lazio (2001–2002) → Barcelona (2002–2003) → Middlesbrough (2003–2008).[129][130]
+
+Includes Valencia B in the adult pyramid. No invented Lazio return between Barcelona and Middlesbrough: ownership is not a playing spell. Middlesbrough endpoint is release/retirement, not last appearance.[129][130]
+
+- **Castellón (1991/92):** Second-tier senior season; infobox uses the calendar year 1992.
+- **Valencia B (1992/93–1993/94):** Senior third-tier reserve team; overlaps the first team. Sources disagree on appearance totals, not the two seasons.
+- **Valencia (1993–2001):** First-team debut 13 June 1993.
+- **Lazio (2001–2002):** Playing spell only; Lazio retained ownership during the subsequent loans until 2004.
+- **Barcelona (2002–2003):** Loan from Lazio.
+- **Middlesbrough (2003–2008):** Loan in 2003/04, permanent from July 2004: one continuous spell. Last match 26 December 2006; released and retired in 2008.
+
+Reviewed sources: [129], [130], [131].
+
+### Tomáš Rosický
+
+**Czech Republic · Midfielder.** Sparta Prague B (1998/99) → Sparta Prague (1999–2001) → Borussia Dortmund (2001–2006) → Arsenal (2006–2016) → Sparta Prague (2016–2017).[132][133]
+
+Sparta B is an adult-pyramid reserve side, not youth football. Its 1998/99 season overlaps the first team, whose competitive debut is corroborated as 14 April 1999. Reserve-first ordering remains provisional because the exact B-team debut is not independently resolved. Later sporting-director work is excluded.[132][133]
+
+- **Sparta Prague B (1998/99):** Third-tier senior reserve season: NFT lists membership; German Wikipedia records 19 league appearances. Exact debut ordering remains unconfirmed.
+- **Sparta Prague (1999–2001):** First-team competitive debut 14 April 1999, corroborated by German Wikipedia and the Transfermarkt debut table; overlaps the B team. English Wikipedia’s 1998 debut year is not followed.
+- **Arsenal (2006–2016):** No league appearances in 2015/16, but an FA Cup appearance keeps 2016 within the playing spell.
+- **Sparta Prague (2016–2017):** Actual return to playing; retired 20 December 2017.
+
+Reviewed sources: [132], [133], [134], [135].
+
+### Iván de la Peña
+
+**Spain · Midfielder.** Barcelona B (1993/94–1995/96) → Barcelona (1995–1998) → Lazio (1998–1999) → Marseille (1999–2000) → Barcelona (2000–2001) → Lazio (2001–2002) → Espanyol (2002–2011).[136][137]
+
+Barcelona B extends through 1995/96 according to the detailed statistics, despite the 1995 infobox endpoint. Barcelona C membership is listed by NFT in 1993/94 without an appearance total; senior appearances and exact ordering were not independently established, so C is not asserted here. Roma was coaching, not playing.[136][137]
+
+- **Barcelona B (1993/94–1995/96):** Senior second-tier reserves; three appearances in 1995/96 extend beyond the infobox endpoint and overlap the first team.
+- **Marseille (1999–2000):** Loan from Lazio.
+- **Barcelona (2000–2001):** Loan from Lazio; actual second Barcelona playing spell.
+- **Lazio (2001–2002):** Actual playing return: NFT records one Serie A appearance in 2001/02.
+
+Reviewed sources: [136], [137], [138].
+
+### Robbie Keane
+
+**Ireland · Forward.** Wolverhampton Wanderers (1997–1999) → Coventry City (1999–2000) → Inter Milan (2000) → Leeds United (2000–2002) → Tottenham Hotspur (2002–2008) → Liverpool (2008–2009) → Tottenham Hotspur (2009–2010) → Celtic (2010) → Tottenham Hotspur (2010–2011) → West Ham United (2011) → LA Galaxy (2011–2012) → Aston Villa (2012) → LA Galaxy (2012–2016) → ATK (2017–2018).[139][140]
+
+All senior professional clubs cross-checked against the complete NFT club table and Wikipedia. Tottenham is split around Liverpool and Celtic; LA Galaxy is split around Aston Villa. Leeds loan-to-permanent is continuous. No invented Inter or Tottenham ownership-only returns. Fettercairn, Crumlin United and Wolves youth, the New York Cosmos testimonial and later coaching-only roles are excluded. Dates describe playing stints, with departure endpoints where stated.[139][140]
+
+- **Wolverhampton Wanderers (1997–1999):** Professional debut 9 August 1997; the 1996 arrival was youth football.
+- **Inter Milan (2000):** Playing spell ends with the December 2000 Leeds loan; ownership continued until 2001.
+- **Leeds United (2000–2002):** Loan from December 2000, made permanent in 2001: one continuous spell. Leeds debut 23 December 2000.
+- **Tottenham Hotspur (2009–2010):** Actual return from Liverpool; interrupted by the Celtic loan in February 2010.
+- **Celtic (2010):** Loan from Tottenham; February to May 2010.
+- **Tottenham Hotspur (2010–2011):** Actual playing return after Celtic: seven league appearances in 2010/11, before the January 2011 West Ham loan.
+- **West Ham United (2011):** Loan from Tottenham. No subsequent Tottenham competitive playing spell is established before the LA Galaxy transfer.
+- **LA Galaxy (2011–2012):** First playing season 2011; departure on loan in January 2012, not a 2012 Galaxy appearance before Aston Villa.
+- **Aston Villa (2012):** Loan during the MLS off-season; January to February 2012.
+- **LA Galaxy (2012–2016):** Actual return after the Aston Villa loan; competitive appearances resumed in March 2012.
+- **ATK (2017–2018):** Includes competitive appearances as player-manager in 2018; later coaching-only jobs excluded.
+
+Reviewed sources: [139], [140], [141], [142], [143], [144].
+
+### Wesley Sneijder
+
+**Netherlands · Midfielder.** Ajax (2003–2007) → Real Madrid (2007–2009) → Inter Milan (2009–2013) → Galatasaray (2013–2017) → Nice (2017–2018) → Al-Gharafa (2018–2019).[145][146]
+
+All six professional first-team clubs cross-checked. Ajax begins with his actual 2003 debut rather than the 2002 infobox membership date. Youth and post-retirement activities are excluded; no senior-pyramid reserve spell is established in the retrieved career records.[145][146]
+
+- **Ajax (2003–2007):** First competitive debut 2 February 2003; December 2002 was an unused-bench call-up, not a playing appearance.
+- **Nice (2017–2018):** Joined August 2017; released before moving to Qatar in January 2018.
+
+Reviewed sources: [145], [146].
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -458,3 +608,39 @@ Sources:
 [108] https://www.nytimes.com/athletic/6093149/2025/01/27/neymar-leave-al-hilal-contract-terminate
 [109] https://nl.wikipedia.org/wiki/Beloften_Eredivisie_(voetbal)
 [110] https://www.fcgroningen.nl/nieuws/zinderende-ontknoping-nadert-voor-jong-fc-groningen
+[111] https://en.wikipedia.org/wiki/Fabricio_Coloccini
+[112] https://www.national-football-teams.com/player/8170/Fabricio_Coloccini.html
+[113] https://es.wikipedia.org/wiki/Fabricio_Coloccini
+[114] https://skysports.com/football/news/11678/12505702/fabricio-coloccini-former-newcastle-captain-retires-at-39
+[115] https://www.worldsoccer.com/world-soccer-latest/deportivo-sign-coloccini-61139
+[116] https://www.national-football-teams.com/player/303/Juan_Pablo_Sorin.html
+[117] https://en.wikipedia.org/wiki/Juan_Pablo_Sor%C3%ADn?useskin=vector
+[118] https://www.correiobraziliense.com.br/app/noticia/superesportes/2009/03/02/interna_superesportes,84612/cabeca-dura-sorin-admite-a-ansiedade-atrapalhou-a-recuperacao-no-cruzeiro.shtml
+[119] https://en.wikipedia.org/wiki/Pablo_Aimar
+[120] https://www.national-football-teams.com/player/322/Pablo_Aimar.html
+[121] https://www.ole.com.ar/copa-argentina/aimar-partido-despedida-estudiantes_0_ryVNQBHrG.html
+[122] https://en.wikipedia.org/wiki/Esteban_Cambiasso
+[123] https://www.national-football-teams.com/player/328/Esteban_Cambiasso.html
+[124] https://www.fotmob.com/players/30930/esteban-cambiasso
+[125] https://en.wikipedia.org/wiki/Diego_Milito
+[126] https://www.national-football-teams.com/player/291/Diego_Milito.html
+[127] https://www.racingclub.com.ar/idolos/diego-milito
+[128] https://lastwordonsports.com/football/2021/04/14/returning-players-diego-milito
+[129] https://en.wikipedia.org/wiki/Gaizka_Mendieta
+[130] https://www.national-football-teams.com/player/6248/Gaizka_Mendieta.html
+[131] https://www.fcbarcelona.com/en/football/barca-legends/players/1054288/mendieta
+[132] https://en.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Rosick%C3%BD
+[133] https://www.national-football-teams.com/player/1847/Tomas_Rosicky.html
+[134] https://de.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Rosick%C3%BD
+[135] https://www.transfermarkt.us/tomas-rosicky/debuets/spieler/132
+[136] https://en.wikipedia.org/wiki/Iv%C3%A1n_de_la_Pe%C3%B1a
+[137] https://www.national-football-teams.com/player/9990/Ivan_De_La_Pena.html
+[138] https://www.bdfutbol.com/en/j/j1141.html
+[139] https://en.wikipedia.org/wiki/Robbie_Keane
+[140] https://national-football-teams.com/player/3273/Robbie_Keane.html
+[141] https://www.lagalaxy.com/news/la-galaxy-forward-robbie-keane-join-aston-villa-loan
+[142] https://www.lagalaxy.com/news/two-goal-performance-has-keane-feeling-confident-again
+[143] https://www.tottenhamhotspur.com/the-club/history/legends/robbie-keane
+[144] https://www.sheridan-dictates.com/database-keane-robbie.php
+[145] https://en.wikipedia.org/wiki/Wesley_Sneijder
+[146] https://www.national-football-teams.com/player/4656/Wesley_Sneijder.html

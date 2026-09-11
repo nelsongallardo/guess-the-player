@@ -1,6 +1,6 @@
 # Verification report
 
-Executed on **11 September 2026** using real Node and Chromium/Playwright runs. The final browser report began at `2026-09-11T16:33:23.632086+00:00`. Local environment: Node `v22.22.1`, Python `3.9.6`, Playwright CLI `0.1.13`.
+Executed on **11 September 2026** using real Node and Chromium/Playwright runs. The roster-expansion browser report began at `2026-09-11T17:03:38.819497+00:00`.
 
 ## Commands actually run
 
@@ -10,33 +10,29 @@ python3 tests/source-check.py
 python3 tests/run-browser.py
 ```
 
-## Results
+## Expansion results
 
-- **Model/data/localization tests: 13 passed, 0 failed.** Exactly 30 unique player records, 15 Europe / 15 South America; embedded career fields match the re-audited curated records. Regression checks cover Lampard’s corrected Swansea year, Ronaldinho’s qualified signing status, unchanged Zanetti clubs, and explicit bilingual senior-only scope. All Spanish country/position mappings and career-note translations are present.
-- **30,000 randomized option samples:** every sample had five distinct names, exactly one correct answer and four valid distractors. Exact duplicate career signatures are excluded from distractor pools.
-- **Difficulty sampling:** 9,000 additional seeded option samples across all 30 players and all three levels. Hard always uses the top four eligible similarity scores; Medium uses the top twelve. Aggregate similarity increases Easy → Medium → Hard, while answer positions remain randomized.
-- **Difficulty browser playthroughs:** all 30 players at Easy, Medium and Hard in both English and Spanish (180 rounds), each ending at 3,000 points. New games default to Medium. Tests cover immediate selection, deferred changes after hints, pending labels in both languages, reload/replay persistence, legacy-save migration without reshuffling, and difficulty selection offline with localStorage denied. No browser errors.
-- **Difficulty RED → GREEN:** new model tests first failed because similarity ranking and difficulty state did not exist. They pass after implementation. A full browser regression caught added metadata altering legacy round serialization; migration now leaves stored round objects intact.
-- **HTTP browser playthrough:** all 30 players appeared once. The mixed first-/second-/third-attempt-win and loss scenario finished with 23 wins, 2,300 points and a best streak of 3, as expected.
-- **Offline local-file playthrough:** all 30 rounds completed with the browser context explicitly offline, reaching 3,000 points and a streak of 30. All 68 used public crest-source assets decoded without network access.
-- **Network/errors:** zero external requests during normal gameplay; zero HTTP(S) requests during offline gameplay; zero browser errors in both runs.
-- **Round behavior:** wrong answers turn red and disable; repeated guesses do not spend extra attempts; third misses end the round; third-attempt correct answers still win; completed rounds lock; rapid repeated Next clicks do not skip live rounds.
-- **Hints:** country, position, displayed-name initials; exactly three reveals; no score or attempt cost.
-- **Persistence:** exact choices, attempts, hints and progress survive reload; final recap survives reload; replay resets the deck and score; malformed JSON resets safely; deliberately denied localStorage does not stop gameplay.
-- **Responsive:** 300 player/language/viewport combinations passed: all 30 players, English and Spanish, at 320, 375, 430, 580 and 768px. Every club is contained in the numbered grid; all crests fit the viewport after the career panel is brought into view. There is no horizontal scrolling on mobile. The longest 11-spell career also fits the initial 375×667 Spanish screen. Desktop at 1440px retains horizontal timeline navigation. Answer buttons remain at least 58px/65px high.
-- **Spanish playthrough:** all 30 rounds completed with alternating wins/losses, yielding 15 wins. Spanish hints, feedback, rules, next/result buttons, recap and replay passed. Switching languages preserves exact game state, including guesses, hints and finished recaps. Explicit URL, saved preference and `es-AR` browser detection were exercised.
-- **Regression tests (RED → GREEN):** the new no-horizontal-scroll check failed against the old mobile timeline, then passed against the grid. A visual review also caught an existing badge-label bug: incidental/negated mentions of loans incorrectly marked permanent spells as loans. The new test failed for Verón/Chelsea before the tag matcher was corrected, then passed; the underlying career data was unchanged.
-- **Keyboard/motion:** help opens with Enter and closes with Escape; focus advances after guesses; timeline arrows and keyboard scrolling work; reduced-motion preference suppresses the success animation.
-- **Mobile scroll regression (RED → GREEN):** reproduced the next career completely offscreen at 375×667 (`top: -380.625`, `bottom: -177.625`). The new regression failed against the old artifact. Next/replay now explicitly reveal the career panel; the regression and both complete playthroughs pass against the fixed artifact.
-- **Visual inspection:** the final Spanish mobile screenshot passed with all 11 clubs visible, no clipped clubs, no overlapping controls and fully legible answer options. Secondary grid text was enlarged after the first pass. Desktop retains the previously verified design and explicit timeline arrows.
-- **Citation plumbing:** all 30 career-source sections and 110 cited literal URLs match the 110-entry career ledger. The separate re-audit contains all 30 player sections and 107 cited URLs, which also match their literal ledger values.
+- **Model/data/localization: 14 tests passed, 0 failed.** Exactly 40 unique researched players, split 20 Europe / 20 South America. Embedded career data matches the curated snapshot. All 40 Spanish career-note sets and national-team/position translations are present.
+- **40,000 randomized option samples:** five distinct names, one correct answer, valid distractors and no identical ordered career signatures. Another **12,000 seeded difficulty samples** check Hard's top-four pool, Medium's top-twelve pool, shuffled answer positions and increasing aggregate similarity from Easy to Hard.
+- **HTTP playthrough:** all 40 players and all 98 embedded crest-source assets exercised. Mixed win/loss test reached 30 wins, 3,000 points and a best streak of 3.
+- **Offline file playthrough:** all 40 rounds with network explicitly disabled, reaching 4,000 points and a streak of 40. All 98 crest assets decoded. File save/reload and deliberately denied localStorage passed. No network requests or browser errors.
+- **Spanish playthrough:** all 40 rounds, alternating wins/losses, ended with 20 wins. Hints, feedback, Next/Results, recap and replay passed. Language switching preserves progress. URL language, saved preference and Spanish browser detection passed.
+- **All difficulty/language combinations:** 40 rounds at each of Easy, Medium and Hard in English and Spanish, **240 rounds** in total. Each successful deck reached 4,000 points. Preference persistence, pending changes after hints, replay and offline play without storage passed.
+- **Published-save compatibility:** `tests/legacy-save.json` was generated by executing the previously published 30-player model, not invented as example output. A real browser reload preserves it exactly, including the 500-point score, current hint and answer order. Its remaining rounds finish at 30, the recap reads 30/30, and replay starts a 40-player deck while retaining Hard. The model suite also completes that legacy save.
+- **Responsive coverage:** all 40 players in both languages at 320, 375, 430, 580 and 768px — **400 player/language/viewport cases**. No mobile horizontal overflow; every badge fits the career grid. Robbie Keane's longest **14-spell** career fits the initial 375×667 Spanish screen. Desktop at 1440px retains horizontal timeline navigation. Answer targets remain at least 58px/65px high.
+- **New-player smoke tests:** Coloccini and Sorín are independently forced into playable Hard rounds in Spanish; their ten- and eleven-spell careers and five options render correctly. Screenshots were reviewed. A visual-review claim that the Argentinos Juniors badge belonged to Quilmes was rejected after checking ESPN club metadata and reading “ARGENTINOS JUNIORS” on the full-size source crest. No badge substitution was made.
+- **Gameplay regressions:** three attempts; wrong options red/disabled; third-attempt wins; loss reveals; hints in country/position/initials order; score/streak arithmetic; repeated-click guards; keyboard modal; focus; reduced motion; malformed-save recovery; and Next/Replay bringing the new career into view all pass.
+- **Citation plumbing:** 40 career-source sections and 146 cited literal source URLs; 40 audit sections and 142 cited URLs. Full identifiers match their ledgers. The checker accepts the renderer's optional source-title suffix without truncating parenthesized URLs.
+- **RED → GREEN:** the expanded-roster tests first failed against the 30-player artifact, then passed after data/UI integration. Existing-save tests exercise the actual earlier model's output.
 
-Raw browser JSON and screenshots are generated locally in ignored `test-results/`, not committed as fabricated fixtures.
+Raw reports and screenshots are generated in ignored `test-results/`, not committed as invented fixtures. Historical testing of the earlier 30-player releases is preserved in git history.
 
-## Limits and known tooling issue
+## Research and limits
 
-These are Chromium tests with desktop viewport emulation, not a physical-device Safari/Firefox certification or a formal WCAG audit. Local-file persistence varies across browsers, but denied storage is handled without preventing play.
+All ten additions have independently retrieved career sources. The curated notes preserve loans, actual playing returns, senior reserve overlaps, departures after a final appearance and Aimar's official 2018 cup comeback. Rosický's exact reserve debut order and De la Peña's Barcelona C membership/appearance boundary remain explicitly unresolved. Berbatov was not added because of a substantive conflicting Pirin record; Robbie Keane was researched instead. See [DATA_AUDIT.md](DATA_AUDIT.md) and [the data policy](research/data-policy.md).
 
-The general-purpose citation verifier reports false URL mismatches because it truncates literal closing parentheses, including the Xavi, Ronaldo and Dutch reserve-league Wikipedia URLs in the re-audit, even in its own plain renderer output. The original URLs were preserved. `tests/source-check.py` independently verifies **exact full URL equality**, citation membership and all player sections; it passes. It validates citation plumbing, not the historical truth of a claim.
+Software consistency and citation-link checks do **not** establish historical truth. These are dated, manually checked records, not a live transfer feed or an absolute guarantee against later corrections.
 
-Career records are a manually cross-checked dated snapshot. The source document and [data policy](research/data-policy.md) disclose reserve overlap, actual playing returns, exceptional registrations and source disagreements. Automated tests cannot establish historical truth or guarantee future data currency.
+Browser coverage is Chromium with emulated viewports, not physical-device Safari/Firefox certification or a formal accessibility audit. Local-file persistence varies by browser; denied storage does not prevent play.
+
+The general citation utility can truncate closing parentheses in bare URLs. `tests/source-check.py` preserves the original literal URLs and verifies complete equality instead of changing source identifiers to satisfy that parser.

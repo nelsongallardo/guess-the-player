@@ -30,14 +30,14 @@ async page => {
     await page.evaluate(()=>{state=CareerGame.create();render(false,true);});
     await page.locator('#difficulty').selectOption(difficulty);
     const seen=new Set();
-    for(let i=0;i<30;i++){
+    for(let i=0;i<40;i++){
       const p=await page.evaluate(()=>({id:CareerGame.playerAt(state).id,name:CareerGame.playerAt(state).name,difficulty:CareerGame.roundAt(state).difficulty,options:CareerGame.roundAt(state).options}));
       ok(p.difficulty===difficulty,'Selected difficulty applied to every round');seen.add(p.id);
       ok(p.options.length===5&&new Set(p.options).size===5,'Five unique options');
       await page.getByRole('button',{name:p.name,exact:true}).click();await page.locator('#next').click();
     }
-    ok(seen.size===30,'Full unique deck');
-    ok(await page.evaluate(()=>state.finished&&CareerGame.stats(state).score===3000),'Full playthrough score');
+    ok(seen.size===40,'Full unique deck');
+    ok(await page.evaluate(()=>state.finished&&CareerGame.stats(state).score===4000),'Full playthrough score');
     await page.locator('#replay').click();
     ok(await page.evaluate(level=>state.difficulty===level&&CareerGame.roundAt(state).difficulty===level&&CareerGame.stats(state).score===0,difficulty),'Replay keeps difficulty');
     ok(await page.locator('#difficulty').inputValue()===difficulty,'Selector matches replay');

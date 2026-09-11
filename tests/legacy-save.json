@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "difficulty": "hard",
+  "deck": [
+    "wayne-rooney",
+    "frank-lampard",
+    "juan-roman-riquelme",
+    "javier-zanetti",
+    "ryan-giggs",
+    "paolo-maldini",
+    "kaka",
+    "xavi",
+    "david-beckham",
+    "andres-iniesta",
+    "roberto-carlos",
+    "paul-scholes",
+    "zlatan-ibrahimovic",
+    "luis-suarez",
+    "cristiano-ronaldo",
+    "ronaldo",
+    "zinedine-zidane",
+    "lionel-messi",
+    "francesco-totti",
+    "steven-gerrard",
+    "sergio-aguero",
+    "gianluigi-buffon",
+    "pele",
+    "carlos-tevez",
+    "hernan-crespo",
+    "neymar",
+    "gabriel-batistuta",
+    "ronaldinho",
+    "dennis-bergkamp",
+    "juan-sebastian-veron"
+  ],
+  "roundIndex": 5,
+  "rounds": [
+    {
+      "options": [
+        "Carlos Tevez",
+        "Paul Scholes",
+        "Wayne Rooney",
+        "David Beckham",
+        "Cristiano Ronaldo"
+      ],
+      "guesses": [
+        "Wayne Rooney"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Juan Sebastián Verón",
+        "Carlos Tevez",
+        "Sergio Agüero",
+        "Hernán Crespo",
+        "Frank Lampard"
+      ],
+      "guesses": [
+        "Frank Lampard"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Lionel Messi",
+        "Sergio Agüero",
+        "Carlos Tevez",
+        "Juan Román Riquelme",
+        "Juan Sebastián Verón"
+      ],
+      "guesses": [
+        "Juan Román Riquelme"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Roberto Carlos",
+        "Javier Zanetti",
+        "Hernán Crespo",
+        "Gabriel Batistuta",
+        "Juan Sebastián Verón"
+      ],
+      "guesses": [
+        "Javier Zanetti"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Wayne Rooney",
+        "Paul Scholes",
+        "Juan Sebastián Verón",
+        "Ryan Giggs",
+        "David Beckham"
+      ],
+      "guesses": [
+        "Ryan Giggs"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Kaká",
+        "David Beckham",
+        "Hernán Crespo",
+        "Ronaldo Nazário",
+        "Paolo Maldini"
+      ],
+      "guesses": [],
+      "hints": 1,
+      "difficulty": "hard"
+    }
+  ],
+  "finished": false
+}

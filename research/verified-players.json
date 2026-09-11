@@ -1585,5 +1585,661 @@
     "notes": "Both professional clubs cross-checked with the Hall of Fame biography. Bauru was youth football. Military, regional selections and exhibitions are outside professional club scope; the 1977 farewell against Santos is not another Santos playing spell. Cosmos means the historical NASL club, not NYCFC.",
     "status": "retired",
     "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "fabricio-coloccini",
+    "name": "Fabricio Coloccini",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Boca Juniors",
+        "years": "1999",
+        "note": "Senior debut in June 1999; the 1998 arrival was as a youth player."
+      },
+      {
+        "name": "San Lorenzo",
+        "years": "2001",
+        "note": "Loan from AC Milan; six-month playing spell in the 2001 Clausura."
+      },
+      {
+        "name": "Deportivo Alavés",
+        "years": "2001–2002",
+        "note": "Loan from AC Milan."
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2002–2003",
+        "note": "Loan from AC Milan."
+      },
+      {
+        "name": "Villarreal",
+        "years": "2003–2004",
+        "note": "Loan from AC Milan."
+      },
+      {
+        "name": "AC Milan",
+        "years": "2004–2005",
+        "note": "Actual first-team playing spell after the loans; earlier ownership without appearances is omitted. Left in January 2005."
+      },
+      {
+        "name": "Deportivo La Coruña",
+        "years": "2005–2008",
+        "note": "Joined January 2005, not calendar 2004 despite the 2004/05 season label."
+      },
+      {
+        "name": "Newcastle United",
+        "years": "2008–2016"
+      },
+      {
+        "name": "San Lorenzo",
+        "years": "2016–2021",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Aldosivi",
+        "years": "2021",
+        "note": "Retired in December 2021."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fabricio_Coloccini",
+        "title": "Fabricio Coloccini"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/8170/Fabricio_Coloccini.html",
+        "title": "Fabricio Coloccini | National Football Teams"
+      },
+      {
+        "url": "https://es.wikipedia.org/wiki/Fabricio_Coloccini",
+        "title": "Fabricio Coloccini"
+      },
+      {
+        "url": "https://skysports.com/football/news/11678/12505702/fabricio-coloccini-former-newcastle-captain-retires-at-39",
+        "title": "Fabricio Coloccini: Former Newcastle captain retires at 39 | Football News | Sky Sports"
+      },
+      {
+        "url": "https://www.worldsoccer.com/world-soccer-latest/deportivo-sign-coloccini-61139",
+        "title": "Deportivo sign Coloccini - World Soccer"
+      }
+    ],
+    "notes": "Playing chronology differs from the ownership-based English infobox: Milan appears only after Villarreal. Boca youth arrival in 1998 and unused Milan membership before the loans are excluded. San Lorenzo began in calendar 2001; Deportivo began in January 2005. Retired at Aldosivi in 2021; later coaching jobs are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "juan-pablo-sorin",
+    "name": "Juan Pablo Sorín",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Argentinos Juniors",
+        "years": "1994–1995"
+      },
+      {
+        "name": "Juventus",
+        "years": "1995–1996"
+      },
+      {
+        "name": "River Plate",
+        "years": "1996–2000",
+        "note": "Departure to Cruzeiro in 2000; last River playing season was 1999/00."
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "2000–2002"
+      },
+      {
+        "name": "Lazio",
+        "years": "2002–2003",
+        "note": "Loan from Cruzeiro."
+      },
+      {
+        "name": "Barcelona",
+        "years": "2003",
+        "note": "Loan from Cruzeiro."
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2003–2004",
+        "note": "Loan from Cruzeiro."
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "2004",
+        "note": "Actual playing return after PSG; six Série A appearances in NFT."
+      },
+      {
+        "name": "Villarreal",
+        "years": "2004–2006"
+      },
+      {
+        "name": "Hamburger SV",
+        "years": "2006–2008"
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "2009",
+        "note": "Signed again in August 2008 but returned to competitive play in March 2009; retired July 2009."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://www.national-football-teams.com/player/303/Juan_Pablo_Sorin.html",
+        "title": "Juan Pablo Sorín | National Football Teams"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Juan_Pablo_Sor%C3%ADn?useskin=vector",
+        "title": "Juan Pablo Sorín"
+      },
+      {
+        "url": "https://www.correiobraziliense.com.br/app/noticia/superesportes/2009/03/02/interna_superesportes,84612/cabeca-dura-sorin-admite-a-ansiedade-atrapalhou-a-recuperacao-no-cruzeiro.shtml",
+        "title": "'Cabeça-dura', Sorín admite: a ansiedade atrapalhou a recuperação no Cruzeiro"
+      }
+    ],
+    "notes": "Three separate Cruzeiro playing spells are retained, including the often-hidden 2004 return between PSG and Villarreal. The final spell starts with play in 2009 rather than the 2008 signing. Contemporary reporting confirms a March 2009 state-championship appearance, so the June Série A match was not his only competitive appearance.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "pablo-aimar",
+    "name": "Pablo Aimar",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "1996–2001",
+        "note": "Transferred January 2001; last appearance of the first spell was December 2000."
+      },
+      {
+        "name": "Valencia",
+        "years": "2001–2006"
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "2006–2008"
+      },
+      {
+        "name": "Benfica",
+        "years": "2008–2013"
+      },
+      {
+        "name": "Johor Darul Ta'zim",
+        "years": "2014",
+        "note": "Signed in 2013; league playing spell began in 2014, before release in April."
+      },
+      {
+        "name": "River Plate",
+        "years": "2015",
+        "note": "Actual return to play in May; first retirement in July 2015."
+      },
+      {
+        "name": "Estudiantes de Río Cuarto",
+        "years": "2018",
+        "note": "One-match senior comeback in the Copa Argentina against Sportivo Belgrano on 23 January; not merely an amateur testimonial."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Pablo_Aimar",
+        "title": "Pablo Aimar"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/322/Pablo_Aimar.html",
+        "title": "Pablo Aimar | National Football Teams"
+      },
+      {
+        "url": "https://www.ole.com.ar/copa-argentina/aimar-partido-despedida-estudiantes_0_ryVNQBHrG.html",
+        "title": "Se despidió en su casa"
+      }
+    ],
+    "notes": "Estudiantes de Río Cuarto youth football is excluded, but the official 2018 Copa Argentina comeback is included: contemporary Olé reporting explicitly calls it his last professional match. This is distinct from Estudiantes de La Plata. NFT stops in 2015 and therefore does not corroborate that cup-only comeback. Johor is dated by first play, not the 2013 signing.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "esteban-cambiasso",
+    "name": "Esteban Cambiasso",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Real Madrid B",
+        "years": "1996/97–1997/98",
+        "note": "Senior pyramid reserve side: NFT records 8 second-tier and 34 third-tier league appearances."
+      },
+      {
+        "name": "Independiente",
+        "years": "1998–2001",
+        "note": "Loan from Real Madrid."
+      },
+      {
+        "name": "River Plate",
+        "years": "2001–2002",
+        "note": "Loan from Real Madrid; no unused parent-club return inserted."
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2002–2004",
+        "note": "First-team playing spell, distinct from the earlier B team."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2004–2014"
+      },
+      {
+        "name": "Leicester City",
+        "years": "2014–2015"
+      },
+      {
+        "name": "Olympiacos",
+        "years": "2015–2017",
+        "note": "Retired in September 2017 after his contract expired."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Esteban_Cambiasso",
+        "title": "Esteban Cambiasso"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/328/Esteban_Cambiasso.html",
+        "title": "Esteban Cambiasso | National Football Teams"
+      },
+      {
+        "url": "https://www.fotmob.com/players/30930/esteban-cambiasso",
+        "title": "Esteban Cambiasso - stats, career and market value"
+      }
+    ],
+    "notes": "Real Madrid B is included as senior adult-pyramid football, not youth. Argentinos Juniors is excluded: the infobox classifies it as youth and NFT lists zero league appearances, despite loose professional-career wording in the biography. Real Madrid ownership/administrative returns without games are not separate nodes.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "diego-milito",
+    "name": "Diego Milito",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Racing Club",
+        "years": "1999–2004",
+        "note": "Left for Genoa in January 2004; endpoint denotes departure."
+      },
+      {
+        "name": "Genoa",
+        "years": "2004–2005",
+        "note": "Joined January 2004; not calendar 2003 despite the 2003/04 season label."
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "2005–2008",
+        "note": "Initially on loan, then permanent from 2007; one uninterrupted playing spell."
+      },
+      {
+        "name": "Genoa",
+        "years": "2008–2009",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2009–2014"
+      },
+      {
+        "name": "Racing Club",
+        "years": "2014–2016",
+        "note": "Second playing spell; final professional match on 21 May 2016."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Diego_Milito",
+        "title": "Diego Milito"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/291/Diego_Milito.html",
+        "title": "Diego Milito | National Football Teams"
+      },
+      {
+        "url": "https://www.racingclub.com.ar/idolos/diego-milito",
+        "title": "Ídolos: Diego Milito | Racing Club - Sitio Oficial"
+      },
+      {
+        "url": "https://lastwordonsports.com/football/2021/04/14/returning-players-diego-milito/",
+        "title": "Returning Players: Diego Milito - Last Word On Football"
+      }
+    ],
+    "notes": "Both Genoa and Racing returns are actual playing spells. Racing’s official history dates the first Genoa move to January 2004, correcting the infobox’s calendar-2003 start. The Zaragoza loan-to-permanent transition is a single continuous spell. Racing confirms the career ended on 21 May 2016; later executive roles and farewell exhibitions are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "gaizka-mendieta",
+    "name": "Gaizka Mendieta",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Castellón",
+        "years": "1991/92",
+        "note": "Second-tier senior season; infobox uses the calendar year 1992."
+      },
+      {
+        "name": "Valencia B",
+        "years": "1992/93–1993/94",
+        "note": "Senior third-tier reserve team; overlaps the first team. Sources disagree on appearance totals, not the two seasons."
+      },
+      {
+        "name": "Valencia",
+        "years": "1993–2001",
+        "note": "First-team debut 13 June 1993."
+      },
+      {
+        "name": "Lazio",
+        "years": "2001–2002",
+        "note": "Playing spell only; Lazio retained ownership during the subsequent loans until 2004."
+      },
+      {
+        "name": "Barcelona",
+        "years": "2002–2003",
+        "note": "Loan from Lazio."
+      },
+      {
+        "name": "Middlesbrough",
+        "years": "2003–2008",
+        "note": "Loan in 2003/04, permanent from July 2004: one continuous spell. Last match 26 December 2006; released and retired in 2008."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gaizka_Mendieta",
+        "title": "Gaizka Mendieta"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6248/Gaizka_Mendieta.html",
+        "title": "Gaizka Mendieta (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.fcbarcelona.com/en/football/barca-legends/players/1054288/mendieta",
+        "title": "Gaizka Mendieta"
+      }
+    ],
+    "notes": "Includes Valencia B in the adult pyramid. No invented Lazio return between Barcelona and Middlesbrough: ownership is not a playing spell. Middlesbrough endpoint is release/retirement, not last appearance.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "tomas-rosicky",
+    "name": "Tomáš Rosický",
+    "continent": "Europe",
+    "country": "Czech Republic",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Sparta Prague B",
+        "years": "1998/99",
+        "note": "Third-tier senior reserve season: NFT lists membership; German Wikipedia records 19 league appearances. Exact debut ordering remains unconfirmed."
+      },
+      {
+        "name": "Sparta Prague",
+        "years": "1999–2001",
+        "note": "First-team competitive debut 14 April 1999, corroborated by German Wikipedia and the Transfermarkt debut table; overlaps the B team. English Wikipedia’s 1998 debut year is not followed."
+      },
+      {
+        "name": "Borussia Dortmund",
+        "years": "2001–2006"
+      },
+      {
+        "name": "Arsenal",
+        "years": "2006–2016",
+        "note": "No league appearances in 2015/16, but an FA Cup appearance keeps 2016 within the playing spell."
+      },
+      {
+        "name": "Sparta Prague",
+        "years": "2016–2017",
+        "note": "Actual return to playing; retired 20 December 2017."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Rosick%C3%BD",
+        "title": "Tomáš Rosický"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1847/Tomas_Rosicky.html",
+        "title": "Tomáš Rosický (Player) | National Football Teams"
+      },
+      {
+        "url": "https://de.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Rosick%C3%BD",
+        "title": "Tomáš Rosický"
+      },
+      {
+        "url": "https://www.transfermarkt.us/tomas-rosicky/debuets/spieler/132",
+        "title": "Tomáš Rosický - Debuts | Transfermarkt"
+      }
+    ],
+    "notes": "Sparta B is an adult-pyramid reserve side, not youth football. Its 1998/99 season overlaps the first team, whose competitive debut is corroborated as 14 April 1999. Reserve-first ordering remains provisional because the exact B-team debut is not independently resolved. Later sporting-director work is excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "ivan-de-la-pena",
+    "name": "Iván de la Peña",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Barcelona B",
+        "years": "1993/94–1995/96",
+        "note": "Senior second-tier reserves; three appearances in 1995/96 extend beyond the infobox endpoint and overlap the first team."
+      },
+      {
+        "name": "Barcelona",
+        "years": "1995–1998"
+      },
+      {
+        "name": "Lazio",
+        "years": "1998–1999"
+      },
+      {
+        "name": "Marseille",
+        "years": "1999–2000",
+        "note": "Loan from Lazio."
+      },
+      {
+        "name": "Barcelona",
+        "years": "2000–2001",
+        "note": "Loan from Lazio; actual second Barcelona playing spell."
+      },
+      {
+        "name": "Lazio",
+        "years": "2001–2002",
+        "note": "Actual playing return: NFT records one Serie A appearance in 2001/02."
+      },
+      {
+        "name": "Espanyol",
+        "years": "2002–2011"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Iv%C3%A1n_de_la_Pe%C3%B1a",
+        "title": "Iván de la Peña"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/9990/Ivan_De_La_Pena.html",
+        "title": "Iván de la Peña (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.bdfutbol.com/en/j/j1141.html",
+        "title": "De la Peña, Iván de la Peña López - Footballer"
+      }
+    ],
+    "notes": "Barcelona B extends through 1995/96 according to the detailed statistics, despite the 1995 infobox endpoint. Barcelona C membership is listed by NFT in 1993/94 without an appearance total; senior appearances and exact ordering were not independently established, so C is not asserted here. Roma was coaching, not playing.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "robbie-keane",
+    "name": "Robbie Keane",
+    "continent": "Europe",
+    "country": "Ireland",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Wolverhampton Wanderers",
+        "years": "1997–1999",
+        "note": "Professional debut 9 August 1997; the 1996 arrival was youth football."
+      },
+      {
+        "name": "Coventry City",
+        "years": "1999–2000"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2000",
+        "note": "Playing spell ends with the December 2000 Leeds loan; ownership continued until 2001."
+      },
+      {
+        "name": "Leeds United",
+        "years": "2000–2002",
+        "note": "Loan from December 2000, made permanent in 2001: one continuous spell. Leeds debut 23 December 2000."
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "2002–2008"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2008–2009"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "2009–2010",
+        "note": "Actual return from Liverpool; interrupted by the Celtic loan in February 2010."
+      },
+      {
+        "name": "Celtic",
+        "years": "2010",
+        "note": "Loan from Tottenham; February to May 2010."
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "2010–2011",
+        "note": "Actual playing return after Celtic: seven league appearances in 2010/11, before the January 2011 West Ham loan."
+      },
+      {
+        "name": "West Ham United",
+        "years": "2011",
+        "note": "Loan from Tottenham. No subsequent Tottenham competitive playing spell is established before the LA Galaxy transfer."
+      },
+      {
+        "name": "LA Galaxy",
+        "years": "2011–2012",
+        "note": "First playing season 2011; departure on loan in January 2012, not a 2012 Galaxy appearance before Aston Villa."
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2012",
+        "note": "Loan during the MLS off-season; January to February 2012."
+      },
+      {
+        "name": "LA Galaxy",
+        "years": "2012–2016",
+        "note": "Actual return after the Aston Villa loan; competitive appearances resumed in March 2012."
+      },
+      {
+        "name": "ATK",
+        "years": "2017–2018",
+        "note": "Includes competitive appearances as player-manager in 2018; later coaching-only jobs excluded."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Robbie_Keane",
+        "title": "Robbie Keane"
+      },
+      {
+        "url": "https://national-football-teams.com/player/3273/Robbie_Keane.html",
+        "title": "Robbie Keane (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.lagalaxy.com/news/la-galaxy-forward-robbie-keane-join-aston-villa-loan",
+        "title": "LA Galaxy Forward Robbie Keane to Join Aston Villa on Loan | LA Galaxy"
+      },
+      {
+        "url": "https://www.lagalaxy.com/news/two-goal-performance-has-keane-feeling-confident-again",
+        "title": "Two-goal performance has Keane feeling confident again | LA Galaxy"
+      },
+      {
+        "url": "https://www.tottenhamhotspur.com/the-club/history/legends/robbie-keane",
+        "title": "Robbie Keane | Tottenham Hotspur"
+      },
+      {
+        "url": "https://www.sheridan-dictates.com/database-keane-robbie.php",
+        "title": "Sheridan Dictates"
+      }
+    ],
+    "notes": "All senior professional clubs cross-checked against the complete NFT club table and Wikipedia. Tottenham is split around Liverpool and Celtic; LA Galaxy is split around Aston Villa. Leeds loan-to-permanent is continuous. No invented Inter or Tottenham ownership-only returns. Fettercairn, Crumlin United and Wolves youth, the New York Cosmos testimonial and later coaching-only roles are excluded. Dates describe playing stints, with departure endpoints where stated.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "wesley-sneijder",
+    "name": "Wesley Sneijder",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "2003–2007",
+        "note": "First competitive debut 2 February 2003; December 2002 was an unused-bench call-up, not a playing appearance."
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2007–2009"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2009–2013"
+      },
+      {
+        "name": "Galatasaray",
+        "years": "2013–2017"
+      },
+      {
+        "name": "Nice",
+        "years": "2017–2018",
+        "note": "Joined August 2017; released before moving to Qatar in January 2018."
+      },
+      {
+        "name": "Al-Gharafa",
+        "years": "2018–2019"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Wesley_Sneijder",
+        "title": "Wesley Sneijder"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4656/Wesley_Sneijder.html",
+        "title": "Wesley Sneijder (Player) | National Football Teams"
+      }
+    ],
+    "notes": "All six professional first-team clubs cross-checked. Ajax begins with his actual 2003 debut rather than the 2002 infobox membership date. Youth and post-retirement activities are excluded; no senior-pyramid reserve spell is established in the retrieved career records.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
   }
 ]
