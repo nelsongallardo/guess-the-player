@@ -18,6 +18,13 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .club-years{font-size:11px}.attempts{font-size:11px}.file-label{font-size:10px}.progress-track span,.page-footer{font-size:10px}.pitch-bottom{font-size:10px;gap:15px;line-height:1.5}.hints li{font-size:11px}.career-navigation{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:10px;color:var(--muted);font-size:11px}.career-navigation div{display:flex;gap:7px}.career-navigation button{border:1px solid var(--line);border-radius:8px;background:var(--panel);min-width:44px;min-height:44px;font-size:19px}.career-navigation button:hover:not(:disabled){border-color:var(--lime)}.career-navigation button:disabled{opacity:.35}
 /* Language control and complete mobile career grid. */
+.difficulty-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;margin:12px 0;color:var(--muted);font-size:12px}
+.difficulty-row label{font-weight:700;color:var(--text)}
+#difficulty{font:inherit;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:9px;min-height:44px;padding:8px;cursor:pointer}
+#difficulty:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+#difficulty-note{flex:1;min-width:150px;line-height:1.5}
+@media(max-width:580px){.difficulty-row{font-size:11px;gap:6px 8px}#difficulty-note{min-width:130px}}
+
 #language{font-family:inherit;font-size:12px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:9px;min-height:44px;padding:8px;max-width:112px;cursor:pointer}
 #language:focus-visible{outline:3px solid var(--lime);outline-offset:4px}
 .club-step{display:none}
@@ -70,6 +77,7 @@
 <div class="pitch"><div class="pitch-top"><div class="file-label">CAREER FILE <strong id="round-number">01 / 30</strong></div><div class="attempts"><span id="attempt-text">3 attempts left</span><div class="lives" id="lives" aria-hidden="true"></div></div></div><div id="timeline-scroll" class="timeline-scroll" tabindex="0" role="region" aria-label="Club career in chronological order. Scroll horizontally for long careers."><ol id="timeline" class="timeline"></ol></div><div class="pitch-bottom"><span class="path-label"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h8M7 1l3 3-3 3M14 12H6m3-3-3 3 3 3" stroke="currentColor" stroke-width="1.5"/></svg>DEBUT → LATEST CLUB</span><span id="club-count">SENIOR CLUB CAREER</span></div></div>
 <div id="career-navigation" class="career-navigation" hidden><span>Scroll or swipe to see every club</span><div role="group" aria-label="Career timeline navigation"><button type="button" id="career-back" aria-label="Earlier clubs" aria-controls="timeline-scroll">←</button><button type="button" id="career-forward" aria-label="Later clubs" aria-controls="timeline-scroll">→</button></div></div>
 <div class="progress-track"><progress id="progress" value="0" max="30" aria-label="Completed rounds"></progress><span id="progress-label">0 OF 30 COMPLETE</span></div>
+<div class="difficulty-row"><label for="difficulty" id="difficulty-label">Difficulty</label><select id="difficulty" aria-describedby="difficulty-note"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select><span id="difficulty-note" role="status" aria-live="polite"></span></div>
 <div class="answer-heading"><h2 id="question" tabindex="-1">Who is this player?</h2><p>Five names. Three chances.</p></div>
 <div id="options" class="options" role="group" aria-labelledby="question"></div>
 <div class="hint-row"><button class="hint-button" id="hint" type="button"><svg width="16" height="18" viewBox="0 0 18 20" fill="none" aria-hidden="true"><path d="M6 14c0-2-3-3-3-7a6 6 0 0 1 12 0c0 4-3 5-3 7H6Zm0 3h6m-5 2h4" stroke="currentColor" stroke-width="1.5"/></svg><span id="hint-label">Get Hint</span><small id="hint-count">0 / 3</small></button><ol id="hints" class="hints" aria-label="Revealed hints" aria-live="polite"></ol></div>
@@ -3118,17 +3126,58 @@ const CareerGame = (() => {
     }
     return copy;
   };
-  const optionsFor = (player, random = Math.random) => shuffle([player.name, ...shuffle(player.incorrectOptions, random).slice(0, 4)], random);
-  const makeRound = player => ({options: optionsFor(player), guesses: [], hints: 0});
+  const levels = ['easy', 'medium', 'hard'];
+  const normalizeDifficulty = value => levels.includes(value) ? value : 'medium';
+  const byName = new Map(PLAYERS.map(p => [p.name, p]));
+  // Score only the researched roster. Reserve teams share their parent for
+  // similarity; the stricter ordered-path exclusion remains in incorrectOptions.
+  const features = p => {
+    const years = p.clubs.flatMap(c => c.years.match(/\d{4}/g) || []).map(Number);
+    if (p.clubs.some(c => c.years.includes('present'))) years.push(Number(p.verifiedAt.slice(0, 4)));
+    return {clubs: new Set(p.clubs.map(c => c.name.replace(/ [BC]$/, ''))),
+      roles: p.position.split(' / '), start: Math.min(...years), end: Math.max(...years)};
+  };
+  const profiles = new Map(PLAYERS.map(p => [p.id, features(p)]));
+  const similarity = (a, b) => {
+    const x = profiles.get(a.id), y = profiles.get(b.id);
+    const shared = [...x.clubs].filter(c => y.clubs.has(c)).length;
+    const overlap = Math.max(0, Math.min(x.end, y.end) - Math.max(x.start, y.start) + 1);
+    const span = Math.max(x.end, y.end) - Math.min(x.start, y.start) + 1;
+    return shared * 12 + (a.country === b.country ? 5 : 0)
+      + (x.roles.some(role => y.roles.includes(role)) ? 4 : 0)
+      + 3 * overlap / span + 2 / (1 + Math.abs(x.clubs.size - y.clubs.size));
+  };
+  const optionsFor = (player, difficulty = 'medium', random = Math.random) => {
+    // Preserve the former (player, random) testing/helper signature.
+    if (typeof difficulty === 'function') {random = difficulty; difficulty = 'medium';}
+    const level = normalizeDifficulty(difficulty);
+    let pool = shuffle(player.incorrectOptions, random);
+    if (level !== 'easy') {
+      pool.sort((a, b) => similarity(player, byName.get(b)) - similarity(player, byName.get(a)));
+      pool = pool.slice(0, level === 'hard' ? 4 : 12);
+    }
+    return shuffle([player.name, ...shuffle(pool, random).slice(0, 4)], random);
+  };
+  const makeRound = (player, difficulty = 'medium') => ({options: optionsFor(player, difficulty), guesses: [], hints: 0, difficulty: normalizeDifficulty(difficulty)});
   const playerAt = (s, i = s.roundIndex) => byId.get(s.deck[i]);
   const roundAt = s => s.rounds[s.roundIndex];
   const outcome = (s, i = s.roundIndex) => {
     const r = s.rounds[i];
     return r.guesses.includes(playerAt(s, i).name) ? 'won' : r.guesses.length === 3 ? 'lost' : 'playing';
   };
-  const create = () => {
+  const create = (difficulty = 'medium') => {
+    difficulty = normalizeDifficulty(difficulty);
     const deck = shuffle(PLAYERS.map(p => p.id));
-    return {version: 1, deck, roundIndex: 0, rounds: [makeRound(byId.get(deck[0]))], finished: false};
+    return {version: 1, difficulty, deck, roundIndex: 0, rounds: [makeRound(byId.get(deck[0]), difficulty)], finished: false};
+  };
+  const setDifficulty = (s, difficulty) => {
+    if (!levels.includes(difficulty)) return false;
+    s.difficulty = difficulty;
+    const r = roundAt(s);
+    // Never erase guesses or hints, or expose a second option set mid-round.
+    if (!s.finished && r.guesses.length === 0 && r.hints === 0 && r.difficulty !== difficulty)
+      s.rounds[s.roundIndex] = makeRound(playerAt(s), difficulty);
+    return true;
   };
   const answer = (s, name) => {
     const r = roundAt(s);
@@ -3144,7 +3193,7 @@ const CareerGame = (() => {
   const next = s => {
     if (s.finished || outcome(s) === 'playing') return false;
     if (s.roundIndex === PLAYERS.length - 1) s.finished = true;
-    else {s.roundIndex++; s.rounds.push(makeRound(playerAt(s)));}
+    else {s.roundIndex++; s.rounds.push(makeRound(playerAt(s), s.difficulty));}
     return true;
   };
   const stats = s => {
@@ -3161,10 +3210,12 @@ const CareerGame = (() => {
   const validate = s => {
     try {
       if (!s || s.version !== 1 || typeof s.finished !== 'boolean' || !Array.isArray(s.deck) || s.deck.length !== 30 || new Set(s.deck).size !== 30 || !s.deck.every(id => byId.has(id))) return false;
+      if (s.difficulty !== undefined && !levels.includes(s.difficulty)) return false;
       if (!Number.isInteger(s.roundIndex) || s.roundIndex < 0 || s.roundIndex > 29 || !Array.isArray(s.rounds) || s.rounds.length !== s.roundIndex + 1) return false;
       for (let i = 0; i < s.rounds.length; i++) {
         const r = s.rounds[i], p = playerAt(s, i);
         if (!r || !Array.isArray(r.options) || r.options.length !== 5 || new Set(r.options).size !== 5 || !r.options.includes(p.name) || !r.options.every(n => n === p.name || p.incorrectOptions.includes(n))) return false;
+        if (r.difficulty !== undefined && !levels.includes(r.difficulty)) return false;
         if (!Array.isArray(r.guesses) || r.guesses.length > 3 || new Set(r.guesses).size !== r.guesses.length || !r.guesses.every(n => r.options.includes(n))) return false;
         const correctAt = r.guesses.indexOf(p.name);
         if (correctAt !== -1 && correctAt !== r.guesses.length - 1) return false;
@@ -3174,7 +3225,7 @@ const CareerGame = (() => {
       return !s.finished || (s.roundIndex === 29 && outcome(s) !== 'playing');
     } catch { return false; }
   };
-  return Object.freeze({shuffle, optionsFor, create, playerAt, roundAt, outcome, answer, hint, next, stats, initials, hintValues, validate});
+  return Object.freeze({shuffle, similarity, optionsFor, setDifficulty, create, playerAt, roundAt, outcome, answer, hint, next, stats, initials, hintValues, validate});
 })();
 </script>
 <script id="locale-data">
@@ -3504,14 +3555,16 @@ const STORAGE_KEY = 'touchline.career.v1';
 const LANGUAGE_KEY = 'touchline.language.v1';
 const COPY = {
   en: {
+    difficulty:'Difficulty',levels:{easy:'Easy',medium:'Medium',hard:'Hard'},difficultyDescriptions:{easy:'Random rivals from the full roster.',medium:'Similar rivals, with some variety.',hard:'The four closest career profiles.'},difficultyPending:(current,next)=>`This player: ${current}. Next player: ${next}.`,
     title:'Guess the Player by their Career Path · Touchline',description:'Guess the football player from their club career. Thirty icons, five answers, three chances. Play offline too.',brand:'THE CAREER PATH GAME',edition:'FOOTBALL IQ / VOL. 01',help:'How to play',eyebrow:'Guess the player by their career path',headline:'Every club.<br> One <span>legend.</span>',intro:'Follow the badges. Connect the dots. Name the player.',scoreboard:'Scoreboard',score:'YOUR SCORE',streak:'WIN STREAK',row:'in a row',round:'Current round',career:'CAREER FILE',path:'SENIOR CLUB CAREER',question:'Who is this player?',chances:'Five names. Three chances.',hints:['Country','Position','Initials'],hint:'Get Hint',allHints:'All hints revealed',revealed:'Revealed hints',next:'Next Player',results:'See results',sourceSummary:'Career notes & sources',whistle:'The final whistle',summary:'That’s a full career’s<br>worth of football.',replay:'Play again',review:'Review all 30 players',footer:'<span class="footer-brand">30 ICONS</span> · 15 EUROPE / 15 SOUTH AMERICA',snapshot:'RESEARCH SNAPSHOT · 11 SEP 2026',saved:'PROGRESS SAVED ON THIS DEVICE',unsaved:'STORAGE UNAVAILABLE · RELOAD RESTARTS',trust:'Trust your football memory. Hints are on the house.',found:'PLAYER FOUND',correct:'correct answer',incorrect:'incorrect',reviewWon:'✓ Correct',reviewLost:'× Missed',loss:'No attempts left. Your streak resets — your points stay.',wrong:'Not quite. Take another look.',sources:'Career sources',attribution:'Crest attribution',rights:'Crests are embedded for offline play. Club trademarks and image rights remain with their owners. Current/source-era badges are used, not historical season-by-season artwork.',original:'original public image',checked:'Research checked',crest:'crest',tags:{tour:'Tour loan',signing:'Signing*',reserve:'Senior reserve',loan:'Loan spell',return:'Return'},scroll:'Scroll or swipe to see every club',earlier:'Earlier clubs',later:'Later clubs',navigation:'Career timeline navigation',completed:'Completed rounds',timeline:'Club career in chronological order. Scroll horizontally for long careers.',grid:'Club career in chronological order. Read left to right, then the next row.',gridGuide:'LEFT → RIGHT · ROW BY ROW',scrollGuide:'SWIPE TO EXPLORE',present:'present',
     attempts:n=>`${n} ${n===1?'attempt':'attempts'} left`,progress:n=>`${n} OF 30 COMPLETE`,spells:n=>`${n} SENIOR ${n===1?'SPELL':'SPELLS'}`,win:name=>`Get in! It’s ${name}.`,winDetail:n=>`+100 points · ${n} ${n===1?'win':'wins'} in a row. Keep it going.`,lost:name=>`This one was ${name}.`,wrongDetail:n=>`${n} ${n===1?'attempt remains':'attempts remain'}. The red answer is out of play.`,recap:s=>`${s.wins} / 30 players found · Best streak: ${s.best} · ${Math.round(s.wins/30*100)}% accuracy`,
-    rules:'<h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>Only professional senior club careers: youth teams, national teams and coaching jobs are excluded.</b> On mobile, read the numbered rows from left to right, then continue on the next row.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position → name initials</b>. They’re free.</li><li>A correct round earns <b>100 points</b> and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. All 30 players appear once before the final whistle.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> tag identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Years describe club stints; departure or retirement can follow the final match. Notes distinguish these cases. Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress and language are saved locally when your browser allows it. Switching language does not restart the game. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play →</button></form>'
+    rules:'<h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>Only professional senior club careers: youth teams, national teams and coaching jobs are excluded.</b> On mobile, read the numbered rows from left to right, then continue on the next row.</li><li>Choose <b>Easy, Medium or Hard</b>. Medium is the default; Hard selects the closest rivals by shared clubs, country, position and playing era. Identical career paths are excluded. Change difficulty before guessing or using a hint to apply it now; otherwise it applies to the next player. Your progress stays intact.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position → name initials</b>. They’re free.</li><li>A correct round earns <b>100 points</b> and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. All 30 players appear once before the final whistle.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> tag identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Years describe club stints; departure or retirement can follow the final match. Notes distinguish these cases. Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress and language are saved locally when your browser allows it. Switching language does not restart the game. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play →</button></form>'
   },
   es: {
+    difficulty:'Dificultad',levels:{easy:'Fácil',medium:'Media',hard:'Difícil'},difficultyDescriptions:{easy:'Rivales al azar de toda la lista.',medium:'Rivales parecidos, con algo de variedad.',hard:'Los cuatro perfiles más parecidos.'},difficultyPending:(current,next)=>`Este jugador: ${current}. Siguiente: ${next}.`,
     title:'Adivina al jugador por su trayectoria · Touchline',description:'Adivina al futbolista por los clubes de su carrera. Treinta leyendas, cinco opciones y tres intentos. También funciona sin conexión.',brand:'ADIVINA LA TRAYECTORIA',edition:'CUÁNTO SABES DE FÚTBOL / VOL. 01',help:'Cómo jugar',eyebrow:'Adivina al jugador por su trayectoria',headline:'Cada club.<br> Una <span>leyenda.</span>',intro:'Sigue los escudos. Une las pistas. Adivina al jugador.',scoreboard:'Marcador',score:'PUNTOS',streak:'RACHA',row:'seguidos',round:'Ronda actual',career:'TRAYECTORIA',path:'CARRERA SÉNIOR',question:'¿Quién es este jugador?',chances:'Cinco nombres. Tres intentos.',hints:['País','Posición','Iniciales'],hint:'Pedir pista',allHints:'Todas las pistas reveladas',revealed:'Pistas reveladas',next:'Siguiente jugador',results:'Ver resultados',sourceSummary:'Notas de la carrera y fuentes',whistle:'El pitido final',summary:'Una carrera completa.<br>¿Cuánto sabes de fútbol?',replay:'Volver a jugar',review:'Revisar los 30 jugadores',footer:'<span class="footer-brand">30 LEYENDAS</span> · 15 EUROPA / 15 SUDAMÉRICA',snapshot:'DATOS VERIFICADOS · 11 SEP 2026',saved:'PROGRESO GUARDADO EN ESTE DISPOSITIVO',unsaved:'NO SE PUEDE GUARDAR · RECARGAR REINICIA',trust:'Confía en tu memoria futbolera. Las pistas son gratis.',found:'¡JUGADOR ACERTADO!',correct:'respuesta correcta',incorrect:'incorrecto',reviewWon:'✓ Acertado',reviewLost:'× Fallado',loss:'Sin intentos. La racha vuelve a cero, pero conservas tus puntos.',wrong:'No es él. Mira la trayectoria otra vez.',sources:'Fuentes de la carrera',attribution:'Créditos de los escudos',rights:'Los escudos están incluidos para jugar sin conexión. Las marcas y los derechos de las imágenes pertenecen a sus propietarios. Se usan escudos actuales o de las fuentes consultadas, no diseños de cada temporada histórica.',original:'imagen pública original',checked:'Datos verificados',crest:'escudo',tags:{tour:'Gira',signing:'Fichaje*',reserve:'Filial',loan:'Préstamo',return:'Regreso'},scroll:'Desliza o usa las flechas para ver todos los clubes',earlier:'Clubes anteriores',later:'Clubes siguientes',navigation:'Navegación de la trayectoria',completed:'Rondas completadas',timeline:'Clubes en orden cronológico. Desplázate horizontalmente para ver las carreras largas.',grid:'Clubes en orden cronológico. Lee de izquierda a derecha y continúa en la fila siguiente.',gridGuide:'IZQ. → DER. · FILA POR FILA',scrollGuide:'DESLIZA PARA VER MÁS',present:'actualidad',
     attempts:n=>n===1?'Queda 1 intento':`Quedan ${n} intentos`,progress:n=>`${n} DE 30 COMPLETADAS`,spells:n=>`${n} ${n===1?'ETAPA':'ETAPAS'}`,win:name=>`¡Gol! Es ${name}.`,winDetail:n=>`+100 puntos · ${n} ${n===1?'acierto seguido':'aciertos seguidos'}. ¡A por el siguiente!`,lost:name=>`Era ${name}.`,wrongDetail:n=>`${n===1?'Queda 1 intento':`Quedan ${n} intentos`}. La opción roja ya está descartada.`,recap:s=>`${s.wins} / 30 jugadores acertados · Mejor racha: ${s.best} · ${Math.round(s.wins/30*100)}% de aciertos`,
-    rules:'<h2 id="rules-title">Lee la trayectoria.<br>Adivina la leyenda.</h2><ol><li>Sigue los escudos desde el debut hasta el último club. <b>Solo carreras profesionales sénior: se excluyen juveniles, selecciones y etapas como entrenador.</b> En el móvil, lee las filas numeradas de izquierda a derecha y continúa en la fila siguiente.</li><li>Elige uno de los cinco jugadores. Tienes <b>tres intentos</b>; cada respuesta incorrecta queda desactivada.</li><li>¿Necesitas ayuda? Las pistas revelan <b>país → posición → iniciales del nombre</b>. Son gratis.</li><li>Acertar una ronda suma <b>100 puntos</b> y alarga tu racha. Fallar reinicia la racha, no los puntos.</li><li>Termina la ronda para pasar al <b>siguiente jugador</b>. Los 30 aparecen una sola vez antes del resultado final.</li></ol><p>Se incluyen filiales que compiten en ligas sénior y regresos reales como jugador. Algunas etapas del filial y del primer equipo se solapan. Las etiquetas <b>Gira</b> y <b>Fichaje*</b> señalan etapas excepcionales sin partidos oficiales acreditados; las notas y las fuentes aparecen al revelar la respuesta.</p><p>Los años indican etapas en el club; la salida o retirada puede ser posterior al último partido. Las notas aclaran estos casos. Las posiciones son categorías generales. Las iniciales corresponden al nombre mostrado en las opciones. Los datos son una revisión fechada, no un registro de fichajes en directo. Los escudos identifican clubes, no camisetas históricas.</p><p>No necesitas cuenta ni conexión; no hay seguimiento. El progreso y el idioma se guardan en el dispositivo cuando el navegador lo permite. Cambiar de idioma no reinicia la partida. Las marcas pertenecen a sus propietarios; este es un juego no oficial de aficionados.</p><form method="dialog"><button class="primary" type="submit">¡A jugar! →</button></form>'
+    rules:'<h2 id="rules-title">Lee la trayectoria.<br>Adivina la leyenda.</h2><ol><li>Sigue los escudos desde el debut hasta el último club. <b>Solo carreras profesionales sénior: se excluyen juveniles, selecciones y etapas como entrenador.</b> En el móvil, lee las filas numeradas de izquierda a derecha y continúa en la fila siguiente.</li><li>Elige dificultad <b>Fácil, Media o Difícil</b>. Media es la predeterminada; Difícil elige los rivales más parecidos por clubes compartidos, país, posición y época. Se excluyen trayectorias idénticas. Cambia la dificultad antes de responder o pedir una pista para aplicarla ahora; si no, se aplica al siguiente jugador. Conservas el progreso.</li><li>Elige uno de los cinco jugadores. Tienes <b>tres intentos</b>; cada respuesta incorrecta queda desactivada.</li><li>¿Necesitas ayuda? Las pistas revelan <b>país → posición → iniciales del nombre</b>. Son gratis.</li><li>Acertar una ronda suma <b>100 puntos</b> y alarga tu racha. Fallar reinicia la racha, no los puntos.</li><li>Termina la ronda para pasar al <b>siguiente jugador</b>. Los 30 aparecen una sola vez antes del resultado final.</li></ol><p>Se incluyen filiales que compiten en ligas sénior y regresos reales como jugador. Algunas etapas del filial y del primer equipo se solapan. Las etiquetas <b>Gira</b> y <b>Fichaje*</b> señalan etapas excepcionales sin partidos oficiales acreditados; las notas y las fuentes aparecen al revelar la respuesta.</p><p>Los años indican etapas en el club; la salida o retirada puede ser posterior al último partido. Las notas aclaran estos casos. Las posiciones son categorías generales. Las iniciales corresponden al nombre mostrado en las opciones. Los datos son una revisión fechada, no un registro de fichajes en directo. Los escudos identifican clubes, no camisetas históricas.</p><p>No necesitas cuenta ni conexión; no hay seguimiento. El progreso y el idioma se guardan en el dispositivo cuando el navegador lo permite. Cambiar de idioma no reinicia la partida. Las marcas pertenecen a sus propietarios; este es un juego no oficial de aficionados.</p><form method="dialog"><button class="primary" type="submit">¡A jugar! →</button></form>'
   }
 };
 const COUNTRIES_ES = {Portugal:'Portugal',France:'Francia',Netherlands:'Países Bajos',England:'Inglaterra',Wales:'Gales',Italy:'Italia',Spain:'España',Sweden:'Suecia',Argentina:'Argentina',Brazil:'Brasil',Uruguay:'Uruguay'};
@@ -3527,6 +3580,8 @@ let storageAvailable=true;
 let state;
 try {const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));state=CareerGame.validate(saved)?saved:CareerGame.create();}
 catch {state=CareerGame.create();}
+// Upgrade old saves without discarding the current answer set or progress.
+if(!state.difficulty)state.difficulty='medium';
 const $=id=>document.getElementById(id);
 const el=(tag,text,className)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(className)e.className=className;return e;};
 const copy=()=>COPY[language];
@@ -3595,7 +3650,14 @@ function renderSources(player){
   player.clubs.forEach((c,i)=>{if(visited.has(c.name))return;visited.add(c.name);const li=el('li'),a=el('a',`${c.name} — ${t.original}`);a.href=player.clubCrests[i];a.target='_blank';a.rel='noopener noreferrer';li.append(a);badges.append(li);});
   content.append(badges,el('p',t.rights));
 }
+function renderDifficulty(){
+  const t=copy(),selected=state.difficulty||'medium',current=CareerGame.roundAt(state).difficulty||'easy';
+  $('difficulty-label').textContent=t.difficulty;$('difficulty').value=selected;
+  for(const option of $('difficulty').options)option.textContent=t.levels[option.value];
+  $('difficulty-note').textContent=current===selected?t.difficultyDescriptions[selected]:t.difficultyPending(t.levels[current],t.levels[selected]);
+}
 function render(celebrate=false,newCareer=false){
+  renderDifficulty();
   const p=CareerGame.playerAt(state),r=CareerGame.roundAt(state),result=CareerGame.outcome(state),stats=CareerGame.stats(state),t=copy();
   $('score').textContent=String(stats.score).padStart(3,'0');$('streak').textContent=stats.streak;
   $('round-panel').hidden=state.finished;$('summary-panel').hidden=!state.finished;
@@ -3631,10 +3693,11 @@ function render(celebrate=false,newCareer=false){
 function showRoundStart(){(state.finished?$('summary-panel'):$('round-panel')).scrollIntoView({block:'start',behavior:'auto'});(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});}
 $('hint').addEventListener('click',()=>{if(CareerGame.hint(state)){render();if($('hint').disabled)$('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}});
 $('next').addEventListener('click',()=>{if(CareerGame.next(state)){render(false,true);showRoundStart();}});
-$('replay').addEventListener('click',()=>{if(!state.finished)return;state=CareerGame.create();render(false,true);showRoundStart();});
+$('replay').addEventListener('click',()=>{if(!state.finished)return;state=CareerGame.create(state.difficulty);render(false,true);showRoundStart();});
 $('help').addEventListener('click',()=>$('rules').showModal());$('career-back').addEventListener('click',()=>moveCareer(-1));$('career-forward').addEventListener('click',()=>moveCareer(1));
 $('timeline-scroll').addEventListener('scroll',updateNavigation,{passive:true});window.addEventListener('resize',updateNavigation,{passive:true});
 $('language').addEventListener('change',()=>{const value=$('language').value;if(value!=='en'&&value!=='es')return;language=value;const open=$('source-details').open;applyLanguage();render(false,true);$('source-details').open=open;try{const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);}catch{}});
+$('difficulty').addEventListener('change',()=>{if(CareerGame.setDifficulty(state,$('difficulty').value))render();});
 applyLanguage();render(false,true);
 </script>
 </body>

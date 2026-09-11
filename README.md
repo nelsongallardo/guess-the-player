@@ -25,7 +25,12 @@ Then open <http://127.0.0.1:4173>.
 ## Rules
 
 - Thirty players: fifteen representing European national teams and fifteen representing South American national teams.
-- Five shuffled answers per round: one correct player and four distinct randomly sampled distractors.
+- Five shuffled answers per round: one correct player and four distinct distractors, selected by difficulty.
+- **Easy / Fácil:** random rivals from the full eligible roster.
+- **Medium / Media (default):** four rivals sampled from the twelve most similar eligible players.
+- **Hard / Difícil:** the four most similar eligible players; answer positions are still shuffled.
+- Similarity prioritizes shared clubs, then national team, broad position, overlapping career years and career length. Identical ordered career paths remain excluded. Candidates come only from the existing researched 30-player roster; difficulty changes neither the facts nor the hints/attempts.
+- The difficulty selector is just below the career timeline. A change applies immediately before any guess/hint; otherwise the current options stay fixed and the setting applies to the next player. A bilingual message explains pending changes. Progress is preserved, and reload/replay remembers the selection.
 - Three attempts. Wrong buttons turn red and cannot be selected again.
 - **Get Hint** reveals country, then position, then the initials of the displayed player name. Hints cost nothing.
 - Each correct round earns **100 points**, regardless of attempts or hints, and adds one to the consecutive win streak. Losing a round resets the streak, not the score.
@@ -63,7 +68,7 @@ python3 tests/source-check.py
 python3 tests/run-browser.py
 ```
 
-The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 30 rounds over HTTP, all 30 again in an offline local-file context, all 30 in Spanish, and every career in both languages at five mobile/tablet widths. See [TESTING.md](TESTING.md) for the actual verification results and limits.
+The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 30 rounds over HTTP, all 30 again in an offline local-file context, all 30 in Spanish, every career in both languages at five mobile/tablet widths, and all 30 rounds at each of the three difficulty levels in both languages. See [TESTING.md](TESTING.md) for the actual verification results and limits.
 
 ## Accessibility
 

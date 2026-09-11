@@ -1,6 +1,6 @@
 # Verification report
 
-Executed on **11 September 2026** using real Node and Chromium/Playwright runs. The final browser report began at `2026-09-11T14:21:51.829652+00:00`. Local environment: Node `v22.22.1`, Python `3.9.6`, Playwright CLI `0.1.13`.
+Executed on **11 September 2026** using real Node and Chromium/Playwright runs. The final browser report began at `2026-09-11T16:33:23.632086+00:00`. Local environment: Node `v22.22.1`, Python `3.9.6`, Playwright CLI `0.1.13`.
 
 ## Commands actually run
 
@@ -12,8 +12,11 @@ python3 tests/run-browser.py
 
 ## Results
 
-- **Model/data/localization tests: 11 passed, 0 failed.** Exactly 30 unique player records, 15 Europe / 15 South America; embedded career fields match the re-audited curated records. Regression checks cover Lampard’s corrected Swansea year, Ronaldinho’s qualified signing status, unchanged Zanetti clubs, and explicit bilingual senior-only scope. All Spanish country/position mappings and career-note translations are present.
+- **Model/data/localization tests: 13 passed, 0 failed.** Exactly 30 unique player records, 15 Europe / 15 South America; embedded career fields match the re-audited curated records. Regression checks cover Lampard’s corrected Swansea year, Ronaldinho’s qualified signing status, unchanged Zanetti clubs, and explicit bilingual senior-only scope. All Spanish country/position mappings and career-note translations are present.
 - **30,000 randomized option samples:** every sample had five distinct names, exactly one correct answer and four valid distractors. Exact duplicate career signatures are excluded from distractor pools.
+- **Difficulty sampling:** 9,000 additional seeded option samples across all 30 players and all three levels. Hard always uses the top four eligible similarity scores; Medium uses the top twelve. Aggregate similarity increases Easy → Medium → Hard, while answer positions remain randomized.
+- **Difficulty browser playthroughs:** all 30 players at Easy, Medium and Hard in both English and Spanish (180 rounds), each ending at 3,000 points. New games default to Medium. Tests cover immediate selection, deferred changes after hints, pending labels in both languages, reload/replay persistence, legacy-save migration without reshuffling, and difficulty selection offline with localStorage denied. No browser errors.
+- **Difficulty RED → GREEN:** new model tests first failed because similarity ranking and difficulty state did not exist. They pass after implementation. A full browser regression caught added metadata altering legacy round serialization; migration now leaves stored round objects intact.
 - **HTTP browser playthrough:** all 30 players appeared once. The mixed first-/second-/third-attempt-win and loss scenario finished with 23 wins, 2,300 points and a best streak of 3, as expected.
 - **Offline local-file playthrough:** all 30 rounds completed with the browser context explicitly offline, reaching 3,000 points and a streak of 30. All 68 used public crest-source assets decoded without network access.
 - **Network/errors:** zero external requests during normal gameplay; zero HTTP(S) requests during offline gameplay; zero browser errors in both runs.

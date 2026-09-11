@@ -117,6 +117,50 @@ test('re-audit corrections: Swansea calendar year, signing evidence and unchange
   assert.ok(players.find(p=>p.id==='neymar').clubs[3].note.includes('4 November 2024'));
 });
 
+test('difficulty ranks plausible rivals and preserves five unambiguous randomized answers',()=>{
+  const averages={easy:0,medium:0,hard:0};
+  for(const p of players){
+    const ranked=p.incorrectOptions.map(name=>({name,score:g.similarity(p,players.find(q=>q.name===name))})).sort((a,b)=>b.score-a.score);
+    for(const level of ['easy','medium','hard']){
+      const orders=new Set();
+      for(let seed=1;seed<=100;seed++){
+        let x=seed;const random=()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296;};
+        const options=g.optionsFor(p,level,random);orders.add(options.join('|'));
+        assert.equal(options.length,5);assert.equal(new Set(options).size,5);assert.equal(options.filter(n=>n===p.name).length,1);
+        for(const n of options.filter(n=>n!==p.name)){
+          assert.ok(p.incorrectOptions.includes(n));
+          const score=g.similarity(p,players.find(q=>q.name===n));averages[level]+=score;
+          if(level==='hard')assert.ok(score>=ranked[3].score,'Hard must select the closest four rivals');
+          if(level==='medium')assert.ok(score>=ranked[11].score,'Medium must use the closest twelve rivals');
+        }
+      }
+      assert.ok(orders.size>10,'Answer positions remain randomized');
+    }
+  }
+  assert.ok(averages.hard>averages.medium&&averages.medium>averages.easy,JSON.stringify(averages));
+  const zanetti=players.find(p=>p.id==='javier-zanetti');
+  assert.ok(g.similarity(zanetti,players.find(p=>p.id==='juan-sebastian-veron'))>g.similarity(zanetti,players.find(p=>p.id==='pele')));
+});
+
+test('difficulty changes preserve progress and never reshuffle a started round',()=>{
+  const s=g.create();assert.equal(s.difficulty,'medium');assert.equal(g.roundAt(s).difficulty,'medium');
+  assert.equal(g.setDifficulty(s,'hard'),true);assert.equal(g.roundAt(s).difficulty,'hard');
+  assert.equal(g.setDifficulty(s,'bogus'),false);
+  const deck=plain(s.deck);g.hint(s);const started=plain(g.roundAt(s));
+  g.setDifficulty(s,'easy');assert.deepEqual(plain(g.roundAt(s)),started);assert.deepEqual(plain(s.deck),deck);
+  assert.equal(s.difficulty,'easy');g.answer(s,g.playerAt(s).name);g.next(s);
+  assert.equal(g.roundAt(s).difficulty,'easy');assert.equal(g.stats(s).score,100);assert.equal(g.validate(clone(s)),true);
+  const legacy=clone(s);delete legacy.difficulty;legacy.rounds.forEach(r=>delete r.difficulty);
+  assert.equal(g.validate(legacy),true,'Existing progress remains loadable');
+  assert.equal(g.validate({...clone(s),difficulty:'bogus'}),false);
+  const invalid=clone(s);invalid.rounds[0].difficulty='bogus';assert.equal(g.validate(invalid),false);
+  for(const level of ['easy','medium','hard']){
+    const game=g.create(level);
+    for(let i=0;i<30;i++){assert.equal(g.roundAt(game).difficulty,level);g.answer(game,g.playerAt(game).name);g.next(game);assert.equal(g.validate(clone(game)),true);}
+    assert.equal(game.finished,true);assert.equal(g.stats(game).score,3000);
+  }
+});
+
 const localeContext=vm.createContext({});
 vm.runInContext(script('locale-data')+script('game-ui').split('function detectLanguage()')[0],localeContext);
 const localization=vm.runInContext('({COPY,COUNTRIES_ES,POSITIONS_ES,SPANISH_NOTES})',localeContext);
