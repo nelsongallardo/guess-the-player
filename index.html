@@ -17,14 +17,55 @@
 @media(max-width:420px){.wrap{width:calc(100% - 32px)}.options{grid-template-columns:1fr;gap:8px}.option{min-height:58px;padding:11px 14px;font-size:13px}.option:last-child{grid-column:auto}.answer-heading p{max-width:110px;text-align:right}h1{font-size:35px}.feedback-row{align-items:flex-start;flex-direction:column;gap:13px}.feedback-row .primary{width:100%}.stat{padding:12px}.stat-value strong{font-size:24px}.stat-value small{font-size:9px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .club-years{font-size:11px}.attempts{font-size:11px}.file-label{font-size:10px}.progress-track span,.page-footer{font-size:10px}.pitch-bottom{font-size:10px;gap:15px;line-height:1.5}.hints li{font-size:11px}.career-navigation{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:10px;color:var(--muted);font-size:11px}.career-navigation div{display:flex;gap:7px}.career-navigation button{border:1px solid var(--line);border-radius:8px;background:var(--panel);min-width:44px;min-height:44px;font-size:19px}.career-navigation button:hover:not(:disabled){border-color:var(--lime)}.career-navigation button:disabled{opacity:.35}
+/* Language control and complete mobile career grid. */
+#language{font-family:inherit;font-size:12px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:9px;min-height:44px;padding:8px;max-width:112px;cursor:pointer}
+#language:focus-visible{outline:3px solid var(--lime);outline-offset:4px}
+.club-step{display:none}
+@media(max-width:800px){
+  .timeline-scroll{overflow:visible;padding:20px 14px;scrollbar-width:none}
+  .timeline-scroll::-webkit-scrollbar{display:none}
+  .timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;min-width:0;gap:16px 12px;align-items:start}
+  .club{width:auto;min-width:0;max-width:100%}
+  .crest-disc{width:56px;height:56px;border-radius:12px;margin-bottom:7px}
+  .crest-disc img{width:42px;height:42px}
+  .club-name{font-size:11px;line-height:1.25;min-height:28px;overflow-wrap:anywhere}
+  .club-years{font-size:10px;line-height:1.3;white-space:normal;overflow-wrap:anywhere}
+  .club-tag{font-size:9px;line-height:1.25;letter-spacing:0;min-height:0;overflow-wrap:anywhere;margin-top:4px}
+  .club-tag:empty{display:none}
+  .club-step{display:grid;place-items:center;position:absolute;z-index:2;left:calc(50% - 34px);top:-5px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:1px solid var(--lime);color:var(--lime);font:10px var(--mono)}
+  .club:not(:last-child):after{top:18px;right:-12px;font-size:13px}
+  .club:nth-child(4n):after{content:none}
+  #career-navigation{display:none!important}
+  .pitch:after{display:none}
+  .pitch:before{inset:50px 12px 43px}
+  .pitch-bottom{align-items:flex-start;font-size:9px;gap:12px;line-height:1.4}
+  #club-count{text-align:right;max-width:60%}
+}
+@media(max-width:580px){
+  .masthead{padding:12px 0;gap:8px}.brand{gap:8px}.brand small{display:none}.mark{width:30px;height:34px}.wordmark{font-size:20px}.masthead-right{gap:6px}
+  #language{width:82px;max-width:82px;font-size:11px;padding:6px}
+  #help{font-size:0;width:44px;min-width:44px;min-height:44px;padding:0}
+  #help::after{content:'?';font-size:17px}
+  .hero{padding:15px 0;gap:12px}.hero .eyebrow{font-size:9px;letter-spacing:.8px;margin-bottom:6px}.hero h1{font-size:26px;line-height:1.15;letter-spacing:-1px}.hero h1 br{display:none}.intro{display:none}
+  .stat{padding:8px 12px}.stat-value strong{font-size:22px}.stat-label{letter-spacing:.7px}
+  .pitch-top{padding:12px 12px 4px;gap:8px}.file-label{font-size:9px;letter-spacing:.4px}.attempts{font-size:10px;gap:6px}
+  .timeline-scroll{padding:14px 10px 12px}.timeline{gap:12px 10px}
+  .crest-disc{width:44px;height:44px;border-radius:10px;margin-bottom:6px}.crest-disc img{width:34px;height:34px}
+  .club-step{width:16px;height:16px;left:calc(50% - 29px);font-size:9px}
+  .club-name{font-size:10px;line-height:1.2;min-height:24px}.club-years{font-size:10px;line-height:1.25;margin-top:2px}.club-tag{font-size:9px;margin-top:3px}
+  .club:not(:last-child):after{top:12px;right:-10px;font-size:12px}
+  .pitch-bottom{padding:10px 12px;font-size:9px}
+  .path-label{gap:5px}.path-label svg{flex-shrink:0}
+  .hints li{min-width:0;overflow-wrap:anywhere;line-height:1.4}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header class="masthead"><div class="brand"><svg class="mark" viewBox="0 0 40 46" fill="none" aria-hidden="true"><path d="M3 3h34v22c0 9-17 18-17 18S3 34 3 25V3Z" stroke="currentColor" stroke-width="2"/><path d="M11 13h18M20 13v17M14 30h12" stroke="currentColor" stroke-width="3"/></svg><div><div class="wordmark">touchline<span style="color:var(--lime)">.</span></div><small>THE CAREER PATH GAME</small></div></div><div class="masthead-right"><span class="edition">FOOTBALL IQ / VOL. 01</span><button id="help" class="subtle" type="button">How to play <span aria-hidden="true">↗</span></button></div></header>
+<header class="masthead"><div class="brand"><svg class="mark" viewBox="0 0 40 46" fill="none" aria-hidden="true"><path d="M3 3h34v22c0 9-17 18-17 18S3 34 3 25V3Z" stroke="currentColor" stroke-width="2"/><path d="M11 13h18M20 13v17M14 30h12" stroke="currentColor" stroke-width="3"/></svg><div><div class="wordmark">touchline<span style="color:var(--lime)">.</span></div><small>THE CAREER PATH GAME</small></div></div><div class="masthead-right"><select id="language" aria-label="Language / Idioma" title="Language / Idioma"><option value="en">English</option><option value="es">Español</option></select><span class="edition">FOOTBALL IQ / VOL. 01</span><button id="help" class="subtle" type="button">How to play <span aria-hidden="true">↗</span></button></div></header>
 <main>
 <section class="hero" aria-labelledby="title"><div><div class="eyebrow">Guess the player by their career path</div><h1 id="title">Every club.<br>One <span>legend.</span></h1><p class="intro">Follow the badges. Connect the dots. Name the player.</p></div><div class="stats" aria-label="Scoreboard"><div class="stat"><div class="stat-label">YOUR SCORE</div><div class="stat-value"><strong id="score">000</strong><small>pts</small></div></div><div class="stat"><div class="stat-label">WIN STREAK <span class="streak-icon" aria-hidden="true">↗</span></div><div class="stat-value"><strong id="streak">0</strong><small>in a row</small></div></div></div></section>
-<noscript><p>This game needs JavaScript. Enable it in your browser and reload this file.</p></noscript>
+<noscript><p>This game needs JavaScript. Enable it and reload. / Este juego necesita JavaScript. Actívalo y recarga la página.</p></noscript>
 <section id="round-panel" aria-label="Current round">
 <div class="pitch"><div class="pitch-top"><div class="file-label">CAREER FILE <strong id="round-number">01 / 30</strong></div><div class="attempts"><span id="attempt-text">3 attempts left</span><div class="lives" id="lives" aria-hidden="true"></div></div></div><div id="timeline-scroll" class="timeline-scroll" tabindex="0" role="region" aria-label="Club career in chronological order. Scroll horizontally for long careers."><ol id="timeline" class="timeline"></ol></div><div class="pitch-bottom"><span class="path-label"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h8M7 1l3 3-3 3M14 12H6m3-3-3 3 3 3" stroke="currentColor" stroke-width="1.5"/></svg>DEBUT → LATEST CLUB</span><span id="club-count">SENIOR CLUB CAREER</span></div></div>
 <div id="career-navigation" class="career-navigation" hidden><span>Scroll or swipe to see every club</span><div role="group" aria-label="Career timeline navigation"><button type="button" id="career-back" aria-label="Earlier clubs" aria-controls="timeline-scroll">←</button><button type="button" id="career-forward" aria-label="Later clubs" aria-controls="timeline-scroll">→</button></div></div>
@@ -3112,142 +3153,465 @@ const CareerGame = (() => {
   return Object.freeze({shuffle, optionsFor, create, playerAt, roundAt, outcome, answer, hint, next, stats, initials, hintValues, validate});
 })();
 </script>
+<script id="locale-data">
+const SPANISH_NOTES = {
+  "cristiano-ronaldo": {
+    "notes": "El primer equipo aparece antes que el filial según la fecha del debut oficial, al contrario del orden habitual de las fichas biográficas. Ambas etapas se solapan en 2002/03; esto no implica un descenso permanente al filial. Andorinha y Nacional fueron etapas exclusivamente juveniles. Su situación actual en Al-Nassr está corroborada en la web de la Saudi Pro League.",
+    "clubNotes": [
+      "Primera aparición oficial en categoría absoluta: 14 de agosto de 2002, contra Inter; se solapa con sus partidos en el equipo B.",
+      "Filial de categoría absoluta en tercera división; primera aparición con el B el 1 de septiembre de 2002. Se solapa con Sporting CP, sin un traspaso a otro club.",
+      "",
+      "",
+      "",
+      "Segunda etapa como jugador.",
+      "Firmó en diciembre de 2022; comenzó a disputar partidos oficiales en enero de 2023. Se comprobó su ficha actual de jugador en la SPL."
+    ]
+  },
+  "zinedine-zidane": {
+    "notes": "Cannes B, a menudo omitido en los resúmenes que solo incluyen primeros equipos, está confirmado en la estructura de ligas francesas de categoría absoluta desde 1987/88, antes de su debut con el primer equipo en 1989. Su pertenencia al filial se indica por temporadas, sin fechas exactas de primera y última aparición, y se solapa con el primer equipo. Su etapa en Real Madrid Castilla fue como entrenador.",
+    "clubNotes": [
+      "Filial de la estructura de ligas francesas de categoría absoluta: NFT registra 9 partidos de liga en 1987/88 y 5 en 1988/89; también figura en la plantilla de 1989/90, aunque no está disponible el número de partidos de esa temporada.",
+      "Debut con el primer equipo en 1989; se solapa con su pertenencia al filial.",
+      "",
+      "",
+      ""
+    ]
+  },
+  "dennis-bergkamp": {
+    "notes": "Los 3 clubes de su carrera en categoría absoluta y su cronología se contrastaron con el registro independiente por temporadas. Su etapa juvenil en Ajax y su trabajo posterior como segundo entrenador no cuentan como etapas adicionales como jugador.",
+    "clubNotes": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "david-beckham": {
+    "notes": "Se muestran las 2 cesiones independientes a AC Milan y todos los regresos en los que volvió a jugar con su club de origen, en orden de participación. No se incluye una etapa como jugador en Tottenham: su vínculo juvenil y los entrenamientos no equivalen a una aparición profesional en categoría absoluta. Sus vínculos con Inter Miami y Salford City son como propietario.",
+    "clubNotes": [
+      "Debut oficial con el primer equipo en 1992, antes de la cesión a Preston.",
+      "Cesión; 5 partidos de liga.",
+      "Regreso con participación efectiva; debut en la Premier League el 2 de abril de 1995.",
+      "",
+      "",
+      "Primera cesión, durante la temporada europea 2008/09.",
+      "Volvió a jugar tras la primera cesión a Milan; llegó a la final de la MLS Cup.",
+      "Segunda cesión, independiente de la primera, durante la temporada europea 2009/10.",
+      "Volvió a disputar partidos oficiales el 11 de septiembre de 2010, tras una lesión.",
+      ""
+    ]
+  },
+  "wayne-rooney": {
+    "notes": "Principalmente delantero, también jugó como centrocampista en la última parte de su carrera. Se excluyen sus nombramientos como entrenador de D.C. United, Birmingham City y Plymouth Argyle tras retirarse como jugador.",
+    "clubNotes": [
+      "",
+      "",
+      "Segunda etapa como jugador.",
+      "",
+      "Jugador-entrenador; se retiró como jugador en enero de 2021."
+    ]
+  },
+  "steven-gerrard": {
+    "notes": "Se retiró como futbolista profesional en noviembre de 2016. Sus entrenamientos y su trabajo posterior como entrenador en Liverpool, así como sus etapas al frente de Rangers, Aston Villa y Al-Ettifaq, no cuentan como etapas como jugador.",
+    "clubNotes": [
+      "",
+      ""
+    ]
+  },
+  "frank-lampard": {
+    "notes": "La cronología sigue los partidos oficiales disputados, no la inscripción en el club de origen: Swansea precede al debut con el primer equipo de West Ham. Los primeros anuncios presentaron su llegada a Manchester City como una cesión, pero la Premier League confirmó después un contrato directo con City y la ausencia de un acuerdo de cesión con NYCFC. No hubo etapa en Melbourne City. Anunció su retirada en febrero de 2017, tras su última temporada como jugador en 2016.",
+    "clubNotes": [
+      "Cedido por West Ham, pero fue su primer club con participación en categoría absoluta; debut en octubre de 1995.",
+      "Debut con el primer equipo el 31 de enero de 1996, tras la cesión a Swansea. No se añade una etapa como jugador en West Ham anterior a esa cesión.",
+      "",
+      "Contrato directo de corta duración con City, con incorporación definitiva y sin cesión de NYCFC; aclaración de la Premier League en enero de 2015.",
+      ""
+    ]
+  },
+  "paul-scholes": {
+    "notes": "Tuvo 2 etapas profesionales distintas en el mismo club. Sus apariciones oficiales como aficionado con Royton Town en 2018 fueron reales, no un partido homenaje, pero quedan fuera del alcance de esta carrera PROFESIONAL; no debe afirmarse que nunca jugó en categoría absoluta en otro equipo. Se excluyen su participación como propietario y entrenador en Salford y su etapa como entrenador de Oldham.",
+    "clubNotes": [
+      "Primera aparición oficial en categoría absoluta el 21 de septiembre de 1994; su contrato profesional comenzó en 1993.",
+      "Salió del retiro en enero de 2012; se retiró de nuevo en mayo de 2013."
+    ]
+  },
+  "ryan-giggs": {
+    "notes": "Un único club como jugador profesional; centrocampista por la izquierda o extremo. Su etapa en Manchester City fue exclusivamente juvenil. Gales es el país de su selección; su participación olímpica con Gran Bretaña no corresponde a un club.",
+    "clubNotes": [
+      "Primera aparición oficial con el primer equipo el 2 de marzo de 1991; su inscripción profesional comenzó en 1990."
+    ]
+  },
+  "francesco-totti": {
+    "notes": "Delantero o mediapunta. Roma fue su único club profesional en categoría absoluta. Se excluyen los clubes juveniles, los partidos benéficos, el fútbol en formatos reducidos y sus cargos administrativos posteriores.",
+    "clubNotes": [
+      ""
+    ]
+  },
+  "paolo-maldini": {
+    "notes": "Desarrolló toda su carrera profesional en categoría absoluta en AC Milan, principalmente como lateral izquierdo y defensa central. Primavera es fútbol juvenil; se excluyen su participación como propietario de Miami FC y su trabajo como directivo de AC Milan.",
+    "clubNotes": [
+      "Debut oficial con el primer equipo el 20 de enero de 1985; algunas fichas biográficas sitúan el inicio de su inscripción en categoría absoluta en 1984."
+    ]
+  },
+  "gianluigi-buffon": {
+    "notes": "Sus regresos a Juventus y Parma incluyeron participación efectiva como jugador. Según las informaciones publicadas, su último contrato llegaba hasta 2024, pero se retiró en 2023; no debe extenderse su carrera hasta el vencimiento del contrato.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "Segunda etapa como jugador.",
+      "Segunda etapa como jugador; se retiró en agosto de 2023."
+    ]
+  },
+  "andres-iniesta": {
+    "notes": "Se retiró el 8 de octubre de 2024. Corrección importante de fechas: Wikipedia sitúa su etapa en el B en 2000–2003 a partir de la temporada 2000/01; los registros de partidos de BDFutbol sitúan su primera aparición con el B en febrero de 2001. Barcelona B compite en categoría absoluta. Albacete fue una etapa exclusivamente juvenil; Gulf United corresponde a un cargo posterior como entrenador.",
+    "clubNotes": [
+      "Equipo de categoría absoluta de Segunda División B. Datos por partido de BDFutbol: primera aparición el 10 de febrero de 2001 contra Figueres, en la temporada 2000/01.",
+      "Debut oficial con el primer equipo el 29 de octubre de 2002; se solapa con sus apariciones con el B hasta 2003.",
+      "",
+      ""
+    ]
+  },
+  "xavi": {
+    "notes": "El jugador correcto es Xavi Hernández, nacido en 1980; /wiki/Xavi lleva actualmente a una página de desambiguación. Su última temporada como jugador profesional fue 2018/19. Se excluyen sus etapas posteriores como entrenador de Al Sadd y Barcelona.",
+    "clubNotes": [
+      "Partidos oficiales con el filial en categoría absoluta, en Segunda División B y Segunda División; se solapan con sus apariciones en el primer equipo.",
+      "",
+      ""
+    ]
+  },
+  "zlatan-ibrahimovic": {
+    "notes": "Se retiró en junio de 2023. El paso de cesión a traspaso definitivo en AC Milan no genera otro club ni un regreso ficticio a Barcelona. Se excluyen su inversión y sus entrenamientos en Hammarby, así como su trabajo de asesor en AC Milan tras retirarse.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "",
+      "Disputó un partido oficial de la Supercopa de España en agosto de 2010, antes de la cesión a Milan.",
+      "Una única etapa ininterrumpida como jugador: cesión en 2010–2011, convertida en traspaso definitivo en 2011. No volvió a jugar en Barcelona en 2011.",
+      "",
+      "",
+      "",
+      "Regreso anunciado en diciembre de 2019; primera aparición oficial tras volver el 6 de enero de 2020."
+    ]
+  },
+  "lionel-messi": {
+    "notes": "Las etapas en los filiales y en el primer equipo se ordenan por el debut oficial, sin tomar como referencia el amistoso con el primer equipo de noviembre de 2003. Newell’s Old Boys fue una etapa exclusivamente juvenil. Su contrato actual como jugador de Inter Miami hasta 2028 está confirmado por una fuente independiente.",
+    "clubNotes": [
+      "Filial que compite oficialmente en categoría absoluta; 10 partidos de liga.",
+      "Filial que compite oficialmente en categoría absoluta; 22 partidos de liga. Se solapa con su etapa en el primer equipo.",
+      "",
+      "",
+      ""
+    ]
+  },
+  "neymar": {
+    "notes": "El anuncio oficial de Santos del 6 de enero de 2026 confirma un contrato hasta finales de 2026; se excluye su etapa juvenil en Portuguesa Santista.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "",
+      "Regreso mediante traspaso definitivo, sin cesión."
+    ]
+  },
+  "luis-suarez": {
+    "notes": "Miami anunció su fichaje en diciembre de 2023 para la campaña de 2024; las fechas reflejan la temporada en la que jugó. El club confirmó un nuevo contrato hasta 2026 el 17 de diciembre de 2025. Retirarse de la selección no implica retirarse del fútbol de clubes.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Regreso mediante traspaso definitivo.",
+      "",
+      ""
+    ]
+  },
+  "sergio-aguero": {
+    "notes": "Se retiró el 15 de diciembre de 2021 por una afección cardíaca. Las exhibiciones y sus apariciones posteriores en la Kings League quedan fuera de las etapas profesionales de fútbol de 11 jugadores.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "carlos-tevez": {
+    "notes": "Tuvo 3 etapas reales en Boca Juniors. Su último club como jugador fue Boca en 2021; anunció su retirada en junio de 2022. Las fechas de finalización de cesiones o de titularidad de sus derechos no crean etapas adicionales como jugador.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "Acuerdo de cesión de 2 años; no volvió a jugar en West Ham después.",
+      "",
+      "",
+      "",
+      "Traspaso acordado en diciembre de 2016; jugó la temporada 2017; su contrato terminó en enero de 2018.",
+      ""
+    ]
+  },
+  "ronaldo": {
+    "notes": "São Cristóvão fue una etapa de fútbol juvenil. Sus entrenamientos en Flamengo tras una lesión no constituyeron una etapa como jugador con contrato. Se retiró en febrero de 2011. Los años de Corinthians reflejan los partidos oficiales desde 2009; el fichaje de diciembre de 2008 se indica por separado. NFT también incluye una fila de São Cristovão en 1993 sin cifra de apariciones; la fuente biográfica clasifica São Cristóvão como fútbol juvenil. Se excluye de los clubes de categoría absoluta, ya que esa fila de la base de datos sin número de partidos no demuestra participación en dicha categoría.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Firmó en diciembre de 2008; debut oficial en 2009."
+    ]
+  },
+  "ronaldinho": {
+    "notes": "No debe figurar como retirado basándose en sus últimos partidos con Fluminense en 2015 o en su anuncio de retirada de 2018: Ravenna anunció oficialmente un contrato como jugador y su inscripción en junio de 2026. Se excluyen sus participaciones posteriores en fútbol sala, exhibiciones y equipos de leyendas, así como sus participaciones como propietario.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Fichaje como jugador actual anunciado en junio de 2026. Se incluye su inscripción; las fuentes consultadas no permiten confirmar un debut en partidos oficiales."
+    ]
+  },
+  "kaka": {
+    "notes": "La cronología sigue el orden en que jugó: cesión a São Paulo en 2014 antes de participar con Orlando en la MLS en 2015. Orlando lo fichó en 2014 y lo cedió inmediatamente a São Paulo; ese contrato anterior al debut no crea una etapa adicional como jugador de Orlando. Se retiró en diciembre de 2017.",
+    "clubNotes": [
+      "Ascendió al primer equipo en 2000; primera aparición oficial en 2001.",
+      "",
+      "",
+      "",
+      "Cesión de 6 meses desde Orlando City.",
+      "Se incorporó a la plantilla para jugar tras la cesión a São Paulo."
+    ]
+  },
+  "roberto-carlos": {
+    "notes": "Atlético Mineiro se conserva únicamente como una cesión documentada para una gira de amistosos. Galo Digital la sitúa en agosto de 1992, frente al período 1992–1993 de la ficha biográfica, y documenta el posterior regreso a União São João. Sus fechas como jugador en Delhi corresponden a 2015, sin deducir una temporada en 2016. Sivasspor y Akhisarspor fueron trabajos como entrenador; Bull in the Barne y Soccer Aid fueron exhibiciones.",
+    "clubNotes": [
+      "",
+      "Cesión exclusivamente para una gira de amistosos en agosto de 1992; 3 amistosos y 0 partidos oficiales. Se conserva como una cesión documentada en categoría absoluta, sin presentarla como una etapa con participación en liga.",
+      "Regreso tras la gira de Atlético de agosto de 1992; Galo Digital afirma expresamente que volvió a jugar en União São João e incluye al club en 1993.",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Regresó como jugador-entrenador; disputó 3 partidos oficiales en la ISL, los últimos de su carrera como jugador profesional."
+    ]
+  },
+  "javier-zanetti": {
+    "notes": "Lateral que también jugó como centrocampista. Talleres se refiere al club de Remedios de Escalada, no a Talleres de Córdoba. Independiente fue una etapa exclusivamente juvenil. Su cargo directivo en Inter después de 2014 queda fuera de su carrera como jugador.",
+    "clubNotes": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "gabriel-batistuta": {
+    "notes": "Se incluye la cesión a Inter Milan de 2003, aunque no aparezca en el resumen de World Soccer. Su último club fue Al-Arabi de Catar, no otro club con el mismo nombre. Se retiró en marzo de 2005; se excluyen el fútbol juvenil y su posterior actividad en el polo.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Cesión desde Roma; no se ha confirmado un regreso posterior con participación como jugador en Roma.",
+      ""
+    ]
+  },
+  "hernan-crespo": {
+    "notes": "La etapa en Chelsea se divide alrededor de la cesión a AC Milan para reflejar su regreso efectivo en 2005–2006. La cesión a Inter de 2006 y su conversión en traspaso definitivo en 2008 forman una única etapa continua, sin un regreso ficticio a Chelsea. Se excluye Bengal Tuskers: no fue la franquicia que lo obtuvo en la subasta y la competición propuesta nunca comenzó. Barasat también fue una adjudicación en subasta que no llegó a concretarse en una etapa como jugador. Parma sitúa su retirada en febrero de 2012; la biografía distingue entre su salida en febrero y la confirmación de la retirada en noviembre. Se excluyen sus trabajos como entrenador.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Cesión desde Chelsea.",
+      "Regreso con participación efectiva, incluida la Community Shield de 2005 y la Premier League 2005–06.",
+      "Cedido por Chelsea en 2006–2008 y con traspaso definitivo desde julio de 2008; etapa continua como jugador.",
+      "",
+      ""
+    ]
+  },
+  "juan-sebastian-veron": {
+    "notes": "Tuvo 4 etapas profesionales en Estudiantes, incluidos los regresos de 2013 y 2017. La cesión de 2006–2007 se convirtió en traspaso definitivo sin que volviera a jugar en Chelsea. Se excluyen Brandsen y Estrella de Berisso por ser fútbol aficionado, fuera de su trayectoria profesional de clubes. El 0 de la ficha biográfica de 2017 se refiere solo a la liga; AS confirma su participación en partidos oficiales de la Libertadores. Se excluyen sus funciones como presidente o directivo y no se extiende su carrera hasta 2018 a partir de la duración del contrato.",
+    "clubNotes": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Período con participación como jugador; su inscripción en Chelsea continuó durante las cesiones hasta 2007.",
+      "Cesión desde Chelsea.",
+      "Cedido por Chelsea en 2006–2007 y luego incorporado de forma definitiva; etapa continua como jugador.",
+      "Regreso al fútbol profesional tras retirarse en 2012 y pasar un período en el fútbol aficionado.",
+      "Regreso efectivo en la Copa Libertadores; 0 apariciones en liga no equivale a 0 partidos oficiales."
+    ]
+  },
+  "juan-roman-riquelme": {
+    "notes": "Se agrupan la cesión y el posterior traspaso definitivo a Villarreal; los años de Barcelona distinguen entre participación como jugador y titularidad de sus derechos. La pausa de 2012–2013 en Boca y su regreso efectivo se muestran por separado, aunque la ficha biográfica agrupe todo el período 2007–2014. Su etapa en Argentinos Juniors anterior a Boca fue exclusivamente juvenil; el regreso de 2014 fue en categoría absoluta. Se retiró en enero de 2015; se excluyen las exhibiciones y la presidencia del club.",
+    "clubNotes": [
+      "",
+      "Temporada con participación efectiva; su inscripción continuó durante la cesión a Villarreal hasta 2005.",
+      "Cedido por Barcelona en 2003–2005 y luego incorporado de forma definitiva; etapa continua como jugador.",
+      "Inicialmente cedido por Villarreal en 2007 y luego incorporado de forma definitiva; no se ha confirmado un regreso posterior con partidos oficiales en Villarreal.",
+      "Regreso efectivo como jugador tras una pausa de 6 meses después de la final de la Libertadores de 2012, sin traspaso a otro club.",
+      "Regreso en categoría absoluta al club de su etapa juvenil; jugó la campaña del ascenso de 2014 y se retiró en enero de 2015."
+    ]
+  },
+  "pele": {
+    "notes": "Sus 2 clubes profesionales se contrastaron con la biografía del Hall of Fame. Bauru fue una etapa de fútbol juvenil. El fútbol militar, las selecciones regionales y las exhibiciones quedan fuera del alcance de los clubes profesionales; la despedida de 1977 contra Santos no constituye otra etapa como jugador de Santos. Cosmos se refiere al club histórico de la NASL, no a NYCFC.",
+    "clubNotes": [
+      "",
+      ""
+    ]
+  }
+};
+</script>
 <script id="game-ui">
 'use strict';
 const STORAGE_KEY = 'touchline.career.v1';
-let storageAvailable = true;
-let state;
-try { const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); state = CareerGame.validate(saved) ? saved : CareerGame.create(); }
-catch { state = CareerGame.create(); }
-const $ = id => document.getElementById(id);
-const el = (tag, text, className) => {const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (className) e.className = className; return e;};
-function save() {
-  try {localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); storageAvailable = true;}
-  catch {storageAvailable = false;}
-  $('save-status').textContent = storageAvailable ? 'PROGRESS SAVED ON THIS DEVICE' : 'STORAGE UNAVAILABLE · RELOAD RESTARTS';
+const LANGUAGE_KEY = 'touchline.language.v1';
+const COPY = {
+  en: {
+    title:'Guess the Player by their Career Path · Touchline',description:'Guess the football player from their club career. Thirty icons, five answers, three chances. Play offline too.',brand:'THE CAREER PATH GAME',edition:'FOOTBALL IQ / VOL. 01',help:'How to play',eyebrow:'Guess the player by their career path',headline:'Every club.<br> One <span>legend.</span>',intro:'Follow the badges. Connect the dots. Name the player.',scoreboard:'Scoreboard',score:'YOUR SCORE',streak:'WIN STREAK',row:'in a row',round:'Current round',career:'CAREER FILE',path:'DEBUT → LATEST CLUB',question:'Who is this player?',chances:'Five names. Three chances.',hints:['Country','Position','Initials'],hint:'Get Hint',allHints:'All hints revealed',revealed:'Revealed hints',next:'Next Player',results:'See results',sourceSummary:'Career notes & sources',whistle:'The final whistle',summary:'That’s a full career’s<br>worth of football.',replay:'Play again',review:'Review all 30 players',footer:'<span class="footer-brand">30 ICONS</span> · 15 EUROPE / 15 SOUTH AMERICA',snapshot:'RESEARCH SNAPSHOT · 11 SEP 2026',saved:'PROGRESS SAVED ON THIS DEVICE',unsaved:'STORAGE UNAVAILABLE · RELOAD RESTARTS',trust:'Trust your football memory. Hints are on the house.',found:'PLAYER FOUND',correct:'correct answer',incorrect:'incorrect',reviewWon:'✓ Correct',reviewLost:'× Missed',loss:'No attempts left. Your streak resets — your points stay.',wrong:'Not quite. Take another look.',sources:'Career sources',attribution:'Crest attribution',rights:'Crests are embedded for offline play. Club trademarks and image rights remain with their owners. Current/source-era badges are used, not historical season-by-season artwork.',original:'original public image',checked:'Research checked',crest:'crest',tags:{tour:'Tour loan',signing:'Signing*',reserve:'Senior reserve',loan:'Loan spell',return:'Return'},scroll:'Scroll or swipe to see every club',earlier:'Earlier clubs',later:'Later clubs',navigation:'Career timeline navigation',completed:'Completed rounds',timeline:'Club career in chronological order. Scroll horizontally for long careers.',grid:'Club career in chronological order. Read left to right, then the next row.',gridGuide:'LEFT → RIGHT · ROW BY ROW',scrollGuide:'SWIPE TO EXPLORE',present:'present',
+    attempts:n=>`${n} ${n===1?'attempt':'attempts'} left`,progress:n=>`${n} OF 30 COMPLETE`,spells:n=>`${n} SENIOR ${n===1?'SPELL':'SPELLS'}`,win:name=>`Get in! It’s ${name}.`,winDetail:n=>`+100 points · ${n} ${n===1?'win':'wins'} in a row. Keep it going.`,lost:name=>`This one was ${name}.`,wrongDetail:n=>`${n} ${n===1?'attempt remains':'attempts remain'}. The red answer is out of play.`,recap:s=>`${s.wins} / 30 players found · Best streak: ${s.best} · ${Math.round(s.wins/30*100)}% accuracy`,
+    rules:'<h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>National teams are never in the timeline.</b> On mobile, read the numbered rows from left to right, then continue on the next row.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position → name initials</b>. They’re free.</li><li>A correct round earns <b>100 points</b> and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. All 30 players appear once before the final whistle.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> tag identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress and language are saved locally when your browser allows it. Switching language does not restart the game. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play →</button></form>'
+  },
+  es: {
+    title:'Adivina al jugador por su trayectoria · Touchline',description:'Adivina al futbolista por los clubes de su carrera. Treinta leyendas, cinco opciones y tres intentos. También funciona sin conexión.',brand:'ADIVINA LA TRAYECTORIA',edition:'CUÁNTO SABES DE FÚTBOL / VOL. 01',help:'Cómo jugar',eyebrow:'Adivina al jugador por su trayectoria',headline:'Cada club.<br> Una <span>leyenda.</span>',intro:'Sigue los escudos. Une las pistas. Adivina al jugador.',scoreboard:'Marcador',score:'PUNTOS',streak:'RACHA',row:'seguidos',round:'Ronda actual',career:'TRAYECTORIA',path:'DEBUT → ÚLTIMO CLUB',question:'¿Quién es este jugador?',chances:'Cinco nombres. Tres intentos.',hints:['País','Posición','Iniciales'],hint:'Pedir pista',allHints:'Todas las pistas reveladas',revealed:'Pistas reveladas',next:'Siguiente jugador',results:'Ver resultados',sourceSummary:'Notas de la carrera y fuentes',whistle:'El pitido final',summary:'Una carrera completa.<br>¿Cuánto sabes de fútbol?',replay:'Volver a jugar',review:'Revisar los 30 jugadores',footer:'<span class="footer-brand">30 LEYENDAS</span> · 15 EUROPA / 15 SUDAMÉRICA',snapshot:'DATOS VERIFICADOS · 11 SEP 2026',saved:'PROGRESO GUARDADO EN ESTE DISPOSITIVO',unsaved:'NO SE PUEDE GUARDAR · RECARGAR REINICIA',trust:'Confía en tu memoria futbolera. Las pistas son gratis.',found:'¡JUGADOR ACERTADO!',correct:'respuesta correcta',incorrect:'incorrecto',reviewWon:'✓ Acertado',reviewLost:'× Fallado',loss:'Sin intentos. La racha vuelve a cero, pero conservas tus puntos.',wrong:'No es él. Mira la trayectoria otra vez.',sources:'Fuentes de la carrera',attribution:'Créditos de los escudos',rights:'Los escudos están incluidos para jugar sin conexión. Las marcas y los derechos de las imágenes pertenecen a sus propietarios. Se usan escudos actuales o de las fuentes consultadas, no diseños de cada temporada histórica.',original:'imagen pública original',checked:'Datos verificados',crest:'escudo',tags:{tour:'Gira',signing:'Fichaje*',reserve:'Filial',loan:'Préstamo',return:'Regreso'},scroll:'Desliza o usa las flechas para ver todos los clubes',earlier:'Clubes anteriores',later:'Clubes siguientes',navigation:'Navegación de la trayectoria',completed:'Rondas completadas',timeline:'Clubes en orden cronológico. Desplázate horizontalmente para ver las carreras largas.',grid:'Clubes en orden cronológico. Lee de izquierda a derecha y continúa en la fila siguiente.',gridGuide:'IZQ. → DER. · FILA POR FILA',scrollGuide:'DESLIZA PARA VER MÁS',present:'actualidad',
+    attempts:n=>n===1?'Queda 1 intento':`Quedan ${n} intentos`,progress:n=>`${n} DE 30 COMPLETADAS`,spells:n=>`${n} ${n===1?'ETAPA':'ETAPAS'}`,win:name=>`¡Gol! Es ${name}.`,winDetail:n=>`+100 puntos · ${n} ${n===1?'acierto seguido':'aciertos seguidos'}. ¡A por el siguiente!`,lost:name=>`Era ${name}.`,wrongDetail:n=>`${n===1?'Queda 1 intento':`Quedan ${n} intentos`}. La opción roja ya está descartada.`,recap:s=>`${s.wins} / 30 jugadores acertados · Mejor racha: ${s.best} · ${Math.round(s.wins/30*100)}% de aciertos`,
+    rules:'<h2 id="rules-title">Lee la trayectoria.<br>Adivina la leyenda.</h2><ol><li>Sigue los escudos desde el debut hasta el último club. <b>Las selecciones nacionales nunca aparecen en la trayectoria.</b> En el móvil, lee las filas numeradas de izquierda a derecha y continúa en la fila siguiente.</li><li>Elige uno de los cinco jugadores. Tienes <b>tres intentos</b>; cada respuesta incorrecta queda desactivada.</li><li>¿Necesitas ayuda? Las pistas revelan <b>país → posición → iniciales del nombre</b>. Son gratis.</li><li>Acertar una ronda suma <b>100 puntos</b> y alarga tu racha. Fallar reinicia la racha, no los puntos.</li><li>Termina la ronda para pasar al <b>siguiente jugador</b>. Los 30 aparecen una sola vez antes del resultado final.</li></ol><p>Se incluyen filiales que compiten en ligas sénior y regresos reales como jugador. Algunas etapas del filial y del primer equipo se solapan. Las etiquetas <b>Gira</b> y <b>Fichaje*</b> señalan etapas excepcionales sin partidos oficiales acreditados; las notas y las fuentes aparecen al revelar la respuesta.</p><p>Las posiciones son categorías generales. Las iniciales corresponden al nombre mostrado en las opciones. Los datos son una revisión fechada, no un registro de fichajes en directo. Los escudos identifican clubes, no camisetas históricas.</p><p>No necesitas cuenta ni conexión; no hay seguimiento. El progreso y el idioma se guardan en el dispositivo cuando el navegador lo permite. Cambiar de idioma no reinicia la partida. Las marcas pertenecen a sus propietarios; este es un juego no oficial de aficionados.</p><form method="dialog"><button class="primary" type="submit">¡A jugar! →</button></form>'
+  }
+};
+const COUNTRIES_ES = {Portugal:'Portugal',France:'Francia',Netherlands:'Países Bajos',England:'Inglaterra',Wales:'Gales',Italy:'Italia',Spain:'España',Sweden:'Suecia',Argentina:'Argentina',Brazil:'Brasil',Uruguay:'Uruguay'};
+const POSITIONS_ES = {Forward:'Delantero',Midfielder:'Centrocampista',Defender:'Defensa',Goalkeeper:'Portero','Midfielder / Forward':'Centrocampista / Delantero'};
+function detectLanguage() {
+  const query = new URLSearchParams(location.search).get('lang');
+  if (query === 'es' || query === 'en') return query;
+  try {const stored=localStorage.getItem(LANGUAGE_KEY); if(stored==='es'||stored==='en')return stored;} catch {}
+  return (navigator.language||'en').toLowerCase().startsWith('es')?'es':'en';
 }
-function tagFor(club) {
-  if (/friendly-only/i.test(club.note || '')) return 'Tour loan';
-  if (/registration included|player signing/i.test(club.note || '')) return 'Signing*';
-  if (/ [BC]$/.test(club.name)) return 'Senior reserve';
-  if (/loan/i.test(club.note || '')) return 'Loan spell';
-  if (/return/i.test(club.note || '')) return 'Return';
+let language=detectLanguage();
+let storageAvailable=true;
+let state;
+try {const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));state=CareerGame.validate(saved)?saved:CareerGame.create();}
+catch {state=CareerGame.create();}
+const $=id=>document.getElementById(id);
+const el=(tag,text,className)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(className)e.className=className;return e;};
+const copy=()=>COPY[language];
+const mobile=()=>matchMedia('(max-width: 800px)').matches;
+const country=p=>language==='es'?COUNTRIES_ES[p.country]:p.country;
+const position=p=>language==='es'?POSITIONS_ES[p.position]:p.position;
+const hintValues=p=>[country(p),position(p),CareerGame.initials(p.name)];
+function applyLanguage() {
+  const t=copy();document.documentElement.lang=language;document.title=t.title;
+  document.querySelector('meta[name="description"]').content=t.description;
+  const text={'.brand small':t.brand,'.edition':t.edition,'#help':t.help,'.hero .eyebrow':t.eyebrow,'.intro':t.intro,'.stat:first-child .stat-label':t.score,'.stat:last-child .stat-label':t.streak,'.stat:last-child .stat-value small':t.row,'#question':t.question,'.answer-heading p':t.chances,'#source-details summary':t.sourceSummary,'#summary-panel .eyebrow':t.whistle,'#replay':t.replay+' ↻','.match-review summary':t.review,'.page-footer > span:last-child':t.snapshot,'#career-navigation > span':t.scroll};
+  for(const [selector,value] of Object.entries(text))document.querySelector(selector).textContent=value;
+  $('title').innerHTML=t.headline;$('summary-title').innerHTML=t.summary;
+  document.querySelector('.page-footer > span:first-child').innerHTML=t.footer;
+  document.querySelector('.file-label').firstChild.textContent=t.career+' ';
+  const path=document.querySelector('.path-label');path.lastChild.textContent=t.path;
+  const attributes={'.stats':t.scoreboard,'#round-panel':t.round,'#help':t.help,'#hints':t.revealed,'#progress':t.completed,'#career-back':t.earlier,'#career-forward':t.later,'#career-navigation [role="group"]':t.navigation};
+  for(const [selector,value] of Object.entries(attributes))document.querySelector(selector).setAttribute('aria-label',value);
+  $('rules').innerHTML=t.rules;$('language').value=language;
+  try {localStorage.setItem(LANGUAGE_KEY,language);} catch {}
+}
+function save(){
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));storageAvailable=true;}catch{storageAvailable=false;}
+  $('save-status').textContent=storageAvailable?copy().saved:copy().unsaved;
+}
+function tagFor(club){
+  const t=copy().tags,note=club.note||'';
+  if(/friendly-only/i.test(note))return t.tour;
+  if(/registration included|player signing/i.test(note))return t.signing;
+  if(/ [BC]$/.test(club.name))return t.reserve;
+  if(/^(?:Loan\b|First loan\b|Second, separate loan\b|Six-month loan\b|Two-year loan\b|Initially a .* loan\b|One uninterrupted playing spell: loan\b)/i.test(note))return t.loan;
+  if(/return/i.test(note))return t.return;
   return '';
 }
-function renderCareer(player) {
+function renderCareer(player){
   $('timeline').replaceChildren();
-  player.clubs.forEach((club, index) => {
-    const li = el('li', undefined, 'club');
-    const disc = el('div', undefined, 'crest-disc');
-    const img = el('img');
-    img.src = CREST_ASSETS[player.clubCrests[index]].dataUrl;
-    img.alt = `${club.name} crest`;
-    img.width = 57; img.height = 57; img.decoding = 'async';
-    img.addEventListener('error', () => {img.hidden = true; disc.append(el('span', club.name.split(' ').map(x => x[0]).join(''), 'option-letter'));}, {once: true});
+  player.clubs.forEach((club,index)=>{
+    const li=el('li',undefined,'club'),disc=el('div',undefined,'crest-disc'),img=el('img'),step=el('span',String(index+1),'club-step');
+    step.setAttribute('aria-hidden','true');
+    img.src=CREST_ASSETS[player.clubCrests[index]].dataUrl;img.alt=language==='es'?`Escudo de ${club.name}`:`${club.name} crest`;img.width=57;img.height=57;img.decoding='async';
+    img.addEventListener('error',()=>{img.hidden=true;disc.append(el('span',club.name.split(' ').map(x=>x[0]).join(''),'option-letter'));},{once:true});
     disc.append(img);
-    li.append(disc, el('div', club.name, 'club-name'), el('div', club.years, 'club-years'), el('div', tagFor(club), 'club-tag'));
+    li.append(step,disc,el('div',club.name,'club-name'),el('div',club.years.replace('present',copy().present),'club-years'),el('div',tagFor(club),'club-tag'));
     $('timeline').append(li);
   });
-  $('club-count').textContent = `${player.clubs.length} SENIOR ${player.clubs.length === 1 ? 'SPELL' : 'SPELLS'} · SWIPE TO EXPLORE`;
-  requestAnimationFrame(updateNavigation);
+  updateNavigation();requestAnimationFrame(updateNavigation);
 }
-function updateNavigation() {
-  const strip = $('timeline-scroll'), max = strip.scrollWidth - strip.clientWidth;
-  $('career-navigation').hidden = max <= 1;
-  $('career-back').disabled = strip.scrollLeft <= 1;
-  $('career-forward').disabled = strip.scrollLeft >= max - 1;
+function updateNavigation(){
+  const strip=$('timeline-scroll'),max=strip.scrollWidth-strip.clientWidth,isMobile=mobile(),t=copy();
+  $('career-navigation').hidden=isMobile||max<=1;
+  $('career-back').disabled=strip.scrollLeft<=1;$('career-forward').disabled=strip.scrollLeft>=max-1;
+  strip.tabIndex=isMobile?-1:0;strip.setAttribute('aria-label',isMobile?t.grid:t.timeline);
+  if(isMobile)strip.scrollLeft=0;
+  const count=CareerGame.playerAt(state).clubs.length;
+  $('club-count').textContent=`${t.spells(count)} · ${isMobile?t.gridGuide:t.scrollGuide}`;
 }
-function moveCareer(direction) {
-  const strip = $('timeline-scroll');
-  strip.scrollBy({left: direction * Math.max(120, strip.clientWidth * .75), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+function moveCareer(direction){const strip=$('timeline-scroll');strip.scrollBy({left:direction*Math.max(120,strip.clientWidth*.75),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+function renderSources(player){
+  const t=copy(),localized=language==='es'?SPANISH_NOTES[player.id]:null,content=$('source-content');content.replaceChildren();
+  content.append(el('p',`${player.name} · ${country(player)} · ${position(player)} · ${t.checked} ${player.verifiedAt}.`),el('p',localized?localized.notes:player.notes));
+  const notes=el('ul');player.clubs.forEach((c,i)=>{if(c.note)notes.append(el('li',`${c.name} (${c.years.replace('present',t.present)}): ${localized?localized.clubNotes[i]:c.note}`));});
+  if(notes.childElementCount)content.append(notes);
+  content.append(el('h3',t.sources));const links=el('ul');
+  player.sources.forEach(source=>{const li=el('li'),a=el('a',source.title);a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';li.append(a);links.append(li);});
+  content.append(links,el('h3',t.attribution));const badges=el('ul'),visited=new Set();
+  player.clubs.forEach((c,i)=>{if(visited.has(c.name))return;visited.add(c.name);const li=el('li'),a=el('a',`${c.name} — ${t.original}`);a.href=player.clubCrests[i];a.target='_blank';a.rel='noopener noreferrer';li.append(a);badges.append(li);});
+  content.append(badges,el('p',t.rights));
 }
-function renderSources(player) {
-  const content = $('source-content'); content.replaceChildren();
-  content.append(el('p', `${player.name} · ${player.country} · ${player.position} · Research checked ${player.verifiedAt}.`), el('p', player.notes));
-  const notes = el('ul');
-  player.clubs.filter(c => c.note).forEach(c => notes.append(el('li', `${c.name} (${c.years}): ${c.note}`)));
-  if (notes.childElementCount) content.append(notes);
-  content.append(el('h3', 'Career sources'));
-  const links = el('ul');
-  player.sources.forEach(source => {const li = el('li'); const a = el('a', source.title); a.href = source.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; li.append(a); links.append(li);});
-  content.append(links, el('h3', 'Crest attribution'));
-  const badges = el('ul');
-  const visited = new Set();
-  player.clubs.forEach((c, i) => {
-    if (visited.has(c.name)) return;
-    visited.add(c.name);
-    const li = el('li'); const a = el('a', `${c.name} — original public image`); a.href = player.clubCrests[i]; a.target = '_blank'; a.rel = 'noopener noreferrer'; li.append(a); badges.append(li);
-  });
-  content.append(badges, el('p', 'Crests are embedded for offline play. Club trademarks and image rights remain with their owners. Current/source-era badges are used, not historical season-by-season artwork.'));
-}
-function render(celebrate = false, newCareer = false) {
-  const p = CareerGame.playerAt(state), r = CareerGame.roundAt(state), result = CareerGame.outcome(state), stats = CareerGame.stats(state);
-  $('score').textContent = String(stats.score).padStart(3, '0'); $('streak').textContent = stats.streak;
-  $('round-panel').hidden = state.finished; $('summary-panel').hidden = !state.finished;
-  if (state.finished) {
-    $('final-score').textContent = stats.score.toLocaleString('en-GB');
-    $('summary-caption').textContent = `${stats.wins} / 30 players found · Best streak: ${stats.best} · ${Math.round(stats.wins / 30 * 100)}% accuracy`;
-    $('review').replaceChildren();
-    state.rounds.forEach((row, i) => {const won = CareerGame.outcome(state, i) === 'won'; const li = el('li'); li.append(el('span', CareerGame.playerAt(state, i).name), el('span', won ? '✓ Correct' : '× Missed', won ? 'review-won' : 'review-lost')); $('review').append(li);});
-    save(); return;
+function render(celebrate=false,newCareer=false){
+  const p=CareerGame.playerAt(state),r=CareerGame.roundAt(state),result=CareerGame.outcome(state),stats=CareerGame.stats(state),t=copy();
+  $('score').textContent=String(stats.score).padStart(3,'0');$('streak').textContent=stats.streak;
+  $('round-panel').hidden=state.finished;$('summary-panel').hidden=!state.finished;
+  if(state.finished){
+    $('final-score').textContent=stats.score.toLocaleString(language==='es'?'es-ES':'en-GB');$('summary-caption').textContent=t.recap(stats);$('review').replaceChildren();
+    state.rounds.forEach((row,i)=>{const won=CareerGame.outcome(state,i)==='won',li=el('li');li.append(el('span',CareerGame.playerAt(state,i).name),el('span',won?t.reviewWon:t.reviewLost,won?'review-won':'review-lost'));$('review').append(li);});
+    save();return;
   }
-  if (newCareer || !$('timeline').childElementCount) {renderCareer(p); $('timeline-scroll').scrollLeft = 0; $('source-details').open = false;}
-  $('round-number').textContent = `${String(state.roundIndex + 1).padStart(2, '0')} / 30`;
-  const left = 3 - r.guesses.filter(n => n !== p.name).length;
-  $('attempt-text').textContent = result === 'won' ? 'PLAYER FOUND' : `${left} ${left === 1 ? 'attempt' : 'attempts'} left`;
-  $('lives').replaceChildren(...Array.from({length: 3}, (_, i) => el('span', undefined, `life${i >= left ? ' used' : ''}`)));
-  $('progress').value = stats.completed; $('progress-label').textContent = `${stats.completed} OF 30 COMPLETE`;
-  $('options').replaceChildren();
-  r.options.forEach((name, i) => {
-    const wrong = r.guesses.includes(name) && name !== p.name, correct = result !== 'playing' && name === p.name;
-    const b = el('button', undefined, 'option'); b.type = 'button'; b.dataset.name = name;
-    b.disabled = wrong || result !== 'playing';
-    if (wrong) b.classList.add('wrong');
-    if (correct) b.classList.add('correct');
-    if (correct && celebrate && result === 'won') b.classList.add('goal');
-    if (result !== 'playing' && !wrong && !correct) b.classList.add('muted');
-    b.setAttribute('aria-label', `${name}${wrong ? ', incorrect' : correct ? ', correct answer' : ''}`);
-    const suffix = el('span', wrong ? '×' : correct ? '✓' : '↗', 'option-state'); suffix.setAttribute('aria-hidden', 'true');
-    const letter = el('span', String.fromCharCode(65 + i), 'option-letter'); letter.setAttribute('aria-hidden', 'true');
-    b.append(letter, el('span', name, 'option-name'), suffix);
-    b.addEventListener('click', () => {
-      if (!CareerGame.answer(state, name)) return;
-      render(true);
-      const target = CareerGame.outcome(state) !== 'playing' ? $('next') : $('options').querySelector('button:not(:disabled)');
-      target?.focus({preventScroll: true});
-    });
+  if(newCareer||!$('timeline').childElementCount){renderCareer(p);$('timeline-scroll').scrollLeft=0;$('source-details').open=false;}
+  $('round-number').textContent=`${String(state.roundIndex+1).padStart(2,'0')} / 30`;
+  const left=3-r.guesses.filter(n=>n!==p.name).length;
+  $('attempt-text').textContent=result==='won'?t.found:t.attempts(left);
+  $('lives').replaceChildren(...Array.from({length:3},(_,i)=>el('span',undefined,`life${i>=left?' used':''}`)));
+  $('progress').value=stats.completed;$('progress-label').textContent=t.progress(stats.completed);$('options').replaceChildren();
+  r.options.forEach((name,i)=>{
+    const wrong=r.guesses.includes(name)&&name!==p.name,correct=result!=='playing'&&name===p.name,b=el('button',undefined,'option');b.type='button';b.dataset.name=name;b.disabled=wrong||result!=='playing';
+    if(wrong)b.classList.add('wrong');if(correct)b.classList.add('correct');if(correct&&celebrate&&result==='won')b.classList.add('goal');if(result!=='playing'&&!wrong&&!correct)b.classList.add('muted');
+    b.setAttribute('aria-label',`${name}${wrong?', '+t.incorrect:correct?', '+t.correct:''}`);
+    const suffix=el('span',wrong?'×':correct?'✓':'↗','option-state'),letter=el('span',String.fromCharCode(65+i),'option-letter');suffix.setAttribute('aria-hidden','true');letter.setAttribute('aria-hidden','true');
+    b.append(letter,el('span',name,'option-name'),suffix);
+    b.addEventListener('click',()=>{if(!CareerGame.answer(state,name))return;render(true);const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');target?.focus({preventScroll:true});});
     $('options').append(b);
   });
-  const hintNames = ['Country', 'Position', 'Initials'], values = CareerGame.hintValues(p);
-  $('hints').replaceChildren(...hintNames.map((label, i) => el('li', i < r.hints ? `${label}: ${values[i]}` : `${i + 1}. ${label}`, i < r.hints ? 'revealed' : '')));
-  $('hint').disabled = r.hints >= 3 || result !== 'playing';
-  $('hint-label').textContent = r.hints === 3 ? 'All hints revealed' : 'Get Hint';
-  $('hint-count').textContent = `${r.hints} / 3`;
-  $('next').hidden = result === 'playing';
-  $('next-label').textContent = state.roundIndex === 29 ? 'See results' : 'Next Player';
-  $('feedback').className = `feedback ${result}`;
-  $('feedback').replaceChildren();
-  if (result === 'won') $('feedback').append(el('strong', `Get in! It’s ${p.name}.`), el('span', `+100 points · ${stats.streak} ${stats.streak === 1 ? 'win' : 'wins'} in a row. Keep it going.`));
-  else if (result === 'lost') $('feedback').append(el('strong', `This one was ${p.name}.`), el('span', 'No attempts left. Your streak resets — your points stay.'));
-  else if (r.guesses.length) $('feedback').append(el('strong', 'Not quite. Take another look.'), el('span', `${left} ${left === 1 ? 'attempt remains' : 'attempts remain'}. The red answer is out of play.`));
-  else $('feedback').textContent = 'Trust your football memory. Hints are on the house.';
-  $('source-details').hidden = result === 'playing';
-  if (result !== 'playing') renderSources(p); else $('source-content').replaceChildren();
-  save();
+  const values=hintValues(p);$('hints').replaceChildren(...t.hints.map((label,i)=>el('li',i<r.hints?`${label}: ${values[i]}`:`${i+1}. ${label}`,i<r.hints?'revealed':'')));
+  $('hint').disabled=r.hints>=3||result!=='playing';$('hint-label').textContent=r.hints===3?t.allHints:t.hint;$('hint-count').textContent=`${r.hints} / 3`;
+  $('next').hidden=result==='playing';$('next-label').textContent=state.roundIndex===29?t.results:t.next;$('feedback').className=`feedback ${result}`;$('feedback').replaceChildren();
+  if(result==='won')$('feedback').append(el('strong',t.win(p.name)),el('span',t.winDetail(stats.streak)));
+  else if(result==='lost')$('feedback').append(el('strong',t.lost(p.name)),el('span',t.loss));
+  else if(r.guesses.length)$('feedback').append(el('strong',t.wrong),el('span',t.wrongDetail(left)));
+  else $('feedback').textContent=t.trust;
+  $('source-details').hidden=result==='playing';if(result!=='playing')renderSources(p);else $('source-content').replaceChildren();save();
 }
-$('hint').addEventListener('click', () => {if (CareerGame.hint(state)) {render(); if ($('hint').disabled) $('options').querySelector('button:not(:disabled)')?.focus({preventScroll: true});}});
-function showRoundStart() {
-  (state.finished ? $('summary-panel') : $('round-panel')).scrollIntoView({block: 'start', behavior: 'auto'});
-  (state.finished ? $('summary-title') : $('question')).focus({preventScroll: true});
-}
-$('next').addEventListener('click', () => {if (CareerGame.next(state)) {render(false, true); showRoundStart();}});
-$('replay').addEventListener('click', () => {if (!state.finished) return; state = CareerGame.create(); render(false, true); showRoundStart();});
-$('help').addEventListener('click', () => $('rules').showModal());
-$('career-back').addEventListener('click', () => moveCareer(-1));
-$('career-forward').addEventListener('click', () => moveCareer(1));
-$('timeline-scroll').addEventListener('scroll', updateNavigation, {passive: true});
-window.addEventListener('resize', updateNavigation, {passive: true});
-render(false, true);
+function showRoundStart(){(state.finished?$('summary-panel'):$('round-panel')).scrollIntoView({block:'start',behavior:'auto'});(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});}
+$('hint').addEventListener('click',()=>{if(CareerGame.hint(state)){render();if($('hint').disabled)$('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}});
+$('next').addEventListener('click',()=>{if(CareerGame.next(state)){render(false,true);showRoundStart();}});
+$('replay').addEventListener('click',()=>{if(!state.finished)return;state=CareerGame.create();render(false,true);showRoundStart();});
+$('help').addEventListener('click',()=>$('rules').showModal());$('career-back').addEventListener('click',()=>moveCareer(-1));$('career-forward').addEventListener('click',()=>moveCareer(1));
+$('timeline-scroll').addEventListener('scroll',updateNavigation,{passive:true});window.addEventListener('resize',updateNavigation,{passive:true});
+$('language').addEventListener('change',()=>{const value=$('language').value;if(value!=='en'&&value!=='es')return;language=value;const open=$('source-details').open;applyLanguage();render(false,true);$('source-details').open=open;try{const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);}catch{}});
+applyLanguage();render(false,true);
 </script>
 </body>
 </html>

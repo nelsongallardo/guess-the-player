@@ -105,3 +105,38 @@ test('shuffle does not mutate inputs and decks never repeat a player',()=>{
   const starts=new Set();for(let i=0;i<200;i++){const s=g.create();assert.equal(new Set(s.deck).size,30);starts.add(s.deck[0]);assert.equal(g.validate(s),true);}
   assert.ok(starts.size>10);
 });
+
+const localeContext=vm.createContext({});
+vm.runInContext(script('locale-data')+script('game-ui').split('function detectLanguage()')[0],localeContext);
+const localization=vm.runInContext('({COPY,COUNTRIES_ES,POSITIONS_ES,SPANISH_NOTES})',localeContext);
+
+test('Spanish copy, all 30 career notes and every country/position are translated',()=>{
+  const {COPY,COUNTRIES_ES,POSITIONS_ES,SPANISH_NOTES}=localization;
+  assert.deepEqual(Object.keys(COPY.en).sort(),Object.keys(COPY.es).sort());
+  for(const key of Object.keys(COPY.en))assert.equal(typeof COPY.en[key],typeof COPY.es[key],key);
+  assert.equal(Object.keys(SPANISH_NOTES).length,30);
+  for(const p of players){
+    assert.ok(COUNTRIES_ES[p.country]&&POSITIONS_ES[p.position],p.name);
+    const note=SPANISH_NOTES[p.id];assert.ok(note.notes&&note.notes!==p.notes);
+    assert.equal(note.clubNotes.length,p.clubs.length);
+    p.clubs.forEach((c,i)=>{assert.equal(Boolean(note.clubNotes[i]),Boolean(c.note));if(c.note)assert.notEqual(note.clubNotes[i],c.note);});
+  }
+  assert.equal(COPY.es.question,'¿Quién es este jugador?');
+  assert.equal(COPY.es.attempts(1),'Queda 1 intento');
+  assert.equal(COPY.es.hints.join('|'),'País|Posición|Iniciales');
+});
+
+test('loan labels describe the actual spell, not incidental or negated loan mentions',()=>{
+  vm.runInContext('const copy=()=>COPY.en;'+script('game-ui').match(/function tagFor\(club\)\{[\s\S]*?\n\}/)[0],localeContext);
+  const tag=vm.runInContext('tagFor',localeContext);
+  const negative=[
+    ['juan-sebastian-veron','Chelsea'],['frank-lampard','Manchester City'],
+    ['frank-lampard','West Ham United'],['juan-roman-riquelme','Barcelona'],
+    ['zlatan-ibrahimovic','Barcelona'],['kaka','Orlando City'],
+  ];
+  for(const [id,name] of negative)assert.notEqual(tag(players.find(p=>p.id===id).clubs.find(c=>c.name===name)),'Loan spell',id+' '+name);
+  const neymar=players.find(p=>p.id==='neymar');assert.equal(tag(neymar.clubs.at(-1)),'Return');
+  assert.equal(tag(players.find(p=>p.id==='juan-sebastian-veron').clubs.find(c=>c.name==='Inter Milan')),'Loan spell');
+  assert.equal(tag(players.find(p=>p.id==='roberto-carlos').clubs.find(c=>c.name==='Atlético Mineiro')),'Tour loan');
+  assert.equal(tag(players.find(p=>p.id==='ronaldinho').clubs.at(-1)),'Signing*');
+});

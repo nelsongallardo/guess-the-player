@@ -6,6 +6,12 @@ A dark-mode football trivia game. Read the club-crest timeline, then identify th
 
 **Website:** <https://nelsongallardo.github.io/guess-the-player/>
 
+**Español:** <https://nelsongallardo.github.io/guess-the-player/?lang=es> · **English:** <https://nelsongallardo.github.io/guess-the-player/?lang=en>
+
+On mobile/tablet (800px and below), all club crests fit a compact, numbered four-column grid—read left to right, then the next row. No horizontal scrolling or hidden clubs. Desktop retains the horizontal timeline.
+
+Use the language selector to switch between English and Spanish without losing progress. Menus, hints, feedback, rules, accessibility labels and all player career notes are translated; original article titles and proper names are preserved. Selection order: explicit `?lang=en/es`, saved preference, then browser language. Both versions remain inside the same offline HTML file.
+
 Download `index.html` and open it in a modern browser. No installation or server is required. The file includes the game, complete player database and crest images, so gameplay also works offline.
 
 For local development:
@@ -56,11 +62,11 @@ python3 tests/source-check.py
 python3 tests/run-browser.py
 ```
 
-The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 30 rounds over HTTP, then all 30 again via a local file in an isolated offline browser context. See [TESTING.md](TESTING.md) for the actual verification results and limits.
+The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 30 rounds over HTTP, all 30 again in an offline local-file context, all 30 in Spanish, and every career in both languages at five mobile/tablet widths. See [TESTING.md](TESTING.md) for the actual verification results and limits.
 
 ## Accessibility
 
-Keyboard-operable buttons and timeline, visible focus styles, descriptive crest alternative text, text plus color for answers, live feedback announcements, and reduced-motion support. Narrow screens scroll only the timeline horizontally; the rest of the page fits the viewport.
+Keyboard-operable controls, visible focus styles, localized crest alternative text, text plus color for answers, live feedback announcements, and reduced-motion support. Narrow screens show the complete numbered career grid without horizontal scrolling; desktop timelines retain keyboard and arrow navigation.
 
 ## Assets and privacy
 

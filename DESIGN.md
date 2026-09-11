@@ -4,7 +4,7 @@
 A football-career guessing game in one portable `index.html`: no build, framework, account, API key, external fonts, or runtime network dependency. Thirty curated players, split equally between European and South American national teams. Data verification precedes app implementation; supporting research lives alongside (not required to play).
 
 ## Visual direction
-**Touchline / after-dark match programme.** Ink-black canvas, warm white typography, acid-lime accents, fine pitch markings and restrained motion. A compact football insignia and wordmark lead the page; a small season label and instructions live opposite. Big editorial question headline, clearly separated match stats, a horizontal crest runway inside a bordered pitch card, then generous two-column name buttons. The fifth option spans both columns on desktop; mobile uses one column at 420px and below. Club cards preserve a single horizontal chronology, with explicit arrow controls and keyboard/touch scrolling rather than squashing logos into illegibility.
+**Touchline / after-dark match programme.** Ink-black canvas, warm white typography, acid-lime accents, fine pitch markings and restrained motion. A compact football insignia and language selector lead the page. Desktop uses the horizontal crest runway with arrow/keyboard navigation. At 800px and below, show every club in numbered four-column rows, with no horizontal scrolling; preserve chronological DOM order and read left to right, then the next row. The mobile masthead/hero are compact enough for the longest career's badges to fit the initial 375×667 screen. Answer buttons use two columns on desktop, with the fifth spanning both; one column at 420px and below.
 
 - Background `#0b100e`; card `#121b16`; raised `#1a251e`; border `#2d3b31`.
 - Primary text `#f1f5ec`; muted `#a4b2a8`; lime `#c5f76a`.
@@ -22,6 +22,7 @@ A football-career guessing game in one portable `index.html`: no build, framewor
 - Finish a round before Next Player appears. All options and hints lock on completion. Rapid repeated clicks cannot award extra points or skip multiple rounds.
 - Display current score, current streak, round progress, and attempts left. Save valid game state locally when storage is available; restricted storage must not prevent playing.
 - Source links and career caveats become available after answer reveal, never leak the answer before play.
+- English/Spanish UI, hints, notes, rules and accessibility labels share one offline artifact. Language changes never reset game state. Explicit URL language overrides saved preference, which overrides browser-language detection. Preserve original proper names and source article titles.
 
 ## Data contract
 - Research the full senior career and country/position using retrieved career records plus independent corroboration. Date the snapshot; do not imply active-player data remains current forever.
@@ -40,5 +41,5 @@ A football-career guessing game in one portable `index.html`: no build, framewor
 6. Deck: all thirty distinct rounds before recap; replay resets session stats; rapid clicks do not skip rounds.
 7. Persistence: reload recovers attempts, hints, choices, score and deck; malformed/old storage falls back safely; denied storage works.
 8. Browser: no console errors; all images decode; local file opening and HTTP both work; no runtime external requests; offline gameplay remains functional.
-9. Responsive/accessibility: 375px, 768px and 1440px widths; no whole-page horizontal overflow; buttons thumb-sized; chronology intentionally scrollable; keyboard navigation and focus; live feedback announcements; reduced motion.
+9. Responsive/accessibility: every player in both languages at 320, 375, 430, 580 and 768px; every club visible in the numbered grid without horizontal overflow. Desktop 1440px keeps horizontal navigation. Thumb-sized answers, keyboard focus, translated live feedback, reduced motion, language persistence, and a complete Spanish playthrough are required.
 10. GitHub: inspect commit content for secrets/generated clutter and verify remote SHA/visibility. The owner requested a public repo for GitHub Pages hosting; deploy only the game artifact, require model/data checks first, and verify the public HTTPS response and gameplay before claiming publication.

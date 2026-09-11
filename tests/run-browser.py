@@ -17,8 +17,8 @@ browsers = subprocess.run(['playwright-cli', 'list'], cwd=root, capture_output=T
 if f'- {session}:' not in browsers.stdout:
     subprocess.run(['playwright-cli', f'-s={session}', 'open', 'http://127.0.0.1:4173/index.html'], cwd=root, check=True)
 results = {'checkedAt': datetime.datetime.now(datetime.timezone.utc).isoformat()}
-for filename in (['offline-checks.js'] if args.offline_only else ['browser-checks.js', 'offline-checks.js']):
-    script = (root / 'tests' / filename).read_text().replace('__FILE_URL__', json.dumps((root / 'index.html').as_uri()))
+for filename in (['offline-checks.js'] if args.offline_only else ['browser-checks.js', 'offline-checks.js', 'mobile-language-checks.js']):
+    script = (root / 'tests' / filename).read_text().replace('__FILE_URL__', json.dumps((root / 'index.html').as_uri() + '?lang=en'))
     result = subprocess.run(['playwright-cli', f'-s={session}', '--raw', 'run-code', script], cwd=root, capture_output=True, text=True, timeout=180)
     try:
         data = json.loads(result.stdout.strip())

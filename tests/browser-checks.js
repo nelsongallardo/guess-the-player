@@ -4,7 +4,7 @@ async page => {
   page.on('pageerror',error=>errors.push(error.message));
   page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
   page.on('request',request=>{if(/^https?:/.test(request.url())&&!request.url().startsWith('http://127.0.0.1:4173/'))external.push(request.url());});
-  const clean=async()=>{await page.goto('http://127.0.0.1:4173/index.html');await page.evaluate(()=>localStorage.removeItem('touchline.career.v1'));await page.reload();};
+  const clean=async()=>{await page.goto('http://127.0.0.1:4173/index.html?lang=en');await page.evaluate(()=>localStorage.removeItem('touchline.career.v1'));await page.reload();};
   const view=()=>page.evaluate(()=>({name:CareerGame.playerAt(state).name,id:CareerGame.playerAt(state).id,options:[...CareerGame.roundAt(state).options],guesses:[...CareerGame.roundAt(state).guesses],hints:CareerGame.roundAt(state).hints,result:CareerGame.outcome(state),stats:CareerGame.stats(state),index:state.roundIndex,finished:state.finished,valid:CareerGame.validate(state),hintValues:CareerGame.hintValues(CareerGame.playerAt(state)),crestUrls:CareerGame.playerAt(state).clubCrests}));
   const choose=async(name)=>{const s=await view();await page.locator('#options button').nth(s.options.indexOf(name)).click();};
   await clean();await page.setViewportSize({width:1440,height:1080});
@@ -43,7 +43,9 @@ async page => {
     await page.setViewportSize({width,height:1080});
     const layout=await page.evaluate(()=>({width:innerWidth,pageWidth:document.documentElement.scrollWidth,timelineWidth:document.querySelector('#timeline-scroll').clientWidth,timelineContent:document.querySelector('#timeline-scroll').scrollWidth,buttons:[...document.querySelectorAll('#options button')].map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})),first:document.querySelector('#timeline li').getBoundingClientRect().left}));
     ok(layout.pageWidth<=width,`No page overflow at ${width}px`);ok(layout.buttons.every(b=>b.h>=44&&b.w>=44),`Touch targets at ${width}px`);
-    ok(layout.timelineContent>layout.timelineWidth,'Long timeline scrolls independently');ok(layout.first>=0,'Debut crest visible, not clipped');layouts.push(layout);
+    if(width<=800)ok(layout.timelineContent<=layout.timelineWidth,'Mobile career fully fits without horizontal scroll');
+    else ok(layout.timelineContent>layout.timelineWidth,'Desktop long timeline scrolls independently');
+    ok(layout.first>=0,'Debut crest visible, not clipped');layouts.push(layout);
     if(width===375)await page.screenshot({path:'test-results/mobile.png',fullPage:true});
     if(width===1440)await page.screenshot({path:'test-results/desktop.png',fullPage:true});
   }
