@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "difficulty": "hard",
+  "deck": [
+    "roberto-carlos",
+    "gabriel-batistuta",
+    "gianluigi-buffon",
+    "kaka",
+    "wayne-rooney",
+    "juan-roman-riquelme",
+    "xavi",
+    "luis-suarez",
+    "juan-sebastian-veron",
+    "sergio-aguero",
+    "zinedine-zidane",
+    "ryan-giggs",
+    "pablo-aimar",
+    "juan-pablo-sorin",
+    "andres-iniesta",
+    "hernan-crespo",
+    "robbie-keane",
+    "lionel-messi",
+    "diego-milito",
+    "steven-gerrard",
+    "tomas-rosicky",
+    "javier-zanetti",
+    "david-beckham",
+    "neymar",
+    "cristiano-ronaldo",
+    "fabricio-coloccini",
+    "esteban-cambiasso",
+    "wesley-sneijder",
+    "ronaldinho",
+    "gaizka-mendieta",
+    "paul-scholes",
+    "pele",
+    "frank-lampard",
+    "zlatan-ibrahimovic",
+    "francesco-totti",
+    "carlos-tevez",
+    "dennis-bergkamp",
+    "paolo-maldini",
+    "ronaldo",
+    "ivan-de-la-pena"
+  ],
+  "roundIndex": 5,
+  "rounds": [
+    {
+      "options": [
+        "Ronaldo Nazário",
+        "Wesley Sneijder",
+        "Esteban Cambiasso",
+        "Roberto Carlos",
+        "Ronaldinho"
+      ],
+      "guesses": [
+        "Roberto Carlos"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Juan Sebastián Verón",
+        "Hernán Crespo",
+        "Gabriel Batistuta",
+        "Esteban Cambiasso",
+        "Carlos Tevez"
+      ],
+      "guesses": [
+        "Gabriel Batistuta"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Zlatan Ibrahimović",
+        "Lionel Messi",
+        "Cristiano Ronaldo",
+        "Gianluigi Buffon",
+        "Juan Pablo Sorín"
+      ],
+      "guesses": [
+        "Gianluigi Buffon"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Wesley Sneijder",
+        "Kaká",
+        "Ronaldinho",
+        "Ronaldo Nazário",
+        "David Beckham"
+      ],
+      "guesses": [
+        "Kaká"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "David Beckham",
+        "Paul Scholes",
+        "Wayne Rooney",
+        "Carlos Tevez",
+        "Cristiano Ronaldo"
+      ],
+      "guesses": [
+        "Wayne Rooney"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Sergio Agüero",
+        "Juan Román Riquelme",
+        "Juan Sebastián Verón",
+        "Juan Pablo Sorín",
+        "Fabricio Coloccini"
+      ],
+      "guesses": [
+        "Sergio Agüero"
+      ],
+      "hints": 1,
+      "difficulty": "hard"
+    }
+  ],
+  "finished": false
+}

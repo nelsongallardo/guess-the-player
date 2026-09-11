@@ -2241,5 +2241,739 @@
     "notes": "All six professional first-team clubs cross-checked. Ajax begins with his actual 2003 debut rather than the 2002 infobox membership date. Youth and post-retirement activities are excluded; no senior-pyramid reserve spell is established in the retrieved career records.",
     "status": "retired",
     "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "javier-saviola",
+    "name": "Javier Saviola",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "1998–2001"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2001–2004"
+      },
+      {
+        "name": "Monaco",
+        "years": "2004–2005",
+        "note": "Loan from Barcelona."
+      },
+      {
+        "name": "Sevilla",
+        "years": "2005–2006",
+        "note": "Loan from Barcelona; no unused parent-club return inserted."
+      },
+      {
+        "name": "Barcelona",
+        "years": "2006–2007",
+        "note": "Actual playing return after the two loans."
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2007–2009"
+      },
+      {
+        "name": "Benfica",
+        "years": "2009–2012"
+      },
+      {
+        "name": "Málaga",
+        "years": "2012–2013"
+      },
+      {
+        "name": "Olympiacos",
+        "years": "2013–2014"
+      },
+      {
+        "name": "Hellas Verona",
+        "years": "2014–2015"
+      },
+      {
+        "name": "River Plate",
+        "years": "2015–2016",
+        "note": "Second playing spell; played in 2015 and left in January 2016."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Javier_Saviola",
+        "title": "Javier Saviola | Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/290/Javier_Saviola.html",
+        "title": "Javier Saviola | National Football Teams"
+      },
+      {
+        "url": "https://barcaacademy.fcbarcelona.com/en/card/2691103/javier-saviola-assistant-coach-for-the-u19as",
+        "title": "Javier Saviola, assistant coach for the U19As"
+      },
+      {
+        "url": "https://www.squawka.com/en/cult-corner/where-are-they-now-malaga-champions-league",
+        "title": "Where are they now? The Malaga side from the 2012/13 Champions League | Squawka | EN"
+      }
+    ],
+    "notes": "Barcelona is split around the Monaco and Sevilla loans because he actually returned to play in 2006/07. River Plate was his final professional football club; the 2016 endpoint denotes departure, not a claim of competitive appearances that year. NFT lists FC Ordino in 2016/17 without appearances, but the biography identifies an assistant-coaching role, so it is excluded. Encamp was futsal, not this football timeline.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "andres-dalessandro",
+    "name": "Andrés D’Alessandro",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "2000–2003",
+        "note": "Senior debut in May 2000; the 1999/00 season is not a calendar-1999 debut."
+      },
+      {
+        "name": "VfL Wolfsburg",
+        "years": "2003–2006"
+      },
+      {
+        "name": "Portsmouth",
+        "years": "2006",
+        "note": "Loan from Wolfsburg."
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "2006–2008",
+        "note": "Initially on loan, permanent from 2007; one uninterrupted spell. Departure was in 2008."
+      },
+      {
+        "name": "San Lorenzo",
+        "years": "2008"
+      },
+      {
+        "name": "Internacional",
+        "years": "2008–2016",
+        "note": "First playing spell, including early-2016 appearances before the River loan."
+      },
+      {
+        "name": "River Plate",
+        "years": "2016",
+        "note": "Loan from Internacional; the 2016/17 season label does not extend this spell into 2017."
+      },
+      {
+        "name": "Internacional",
+        "years": "2017–2020",
+        "note": "Actual return after the River loan; left in December 2020 despite NFT’s 2020/21 season label."
+      },
+      {
+        "name": "Nacional",
+        "years": "2021"
+      },
+      {
+        "name": "Internacional",
+        "years": "2022",
+        "note": "Third playing spell; retired after the league match against Fortaleza on 17 April 2022."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Andr%C3%A9s_D%27Alessandro",
+        "title": "Andrés D’Alessandro | Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/338/Andres_D_Alessandro.html",
+        "title": "Andrés D’Alessandro | National Football Teams"
+      },
+      {
+        "url": "https://m.internacional.com.br/noticias/masculino/eu-amo-esse-clube-d-ale-se-despede-do-futebol-com-festa-e-vitoria",
+        "title": "\"Eu amo esse Clube!\" D'Ale se despede do futebol com festa e vitória | Sport Club Internacional"
+      },
+      {
+        "url": "https://espndeportes.espn.com/futbol/argentina/nota/_/id/6985060/a-20-anos-del-debut-de-dalessandro-en-la-primera-de-river",
+        "title": "ERROR: The request could not be satisfied"
+      },
+      {
+        "url": "https://www.ole.com.ar/futbol-internacional/d-alessandro-despedida-inter-brasil_0_kN4GgsQko.html",
+        "title": "D'Alessandro y un adiós de leyenda"
+      }
+    ],
+    "notes": "Three Internacional playing spells are retained, separated by River Plate and Nacional. NFT omits the final 2022 return; Internacional’s official farewell report confirms it was competitive league play, not a testimonial. The official report dates his final match to 17 April, correcting the biography’s 16 April. Unused Wolfsburg ownership returns and youth/reserve-league football are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "maxi-rodriguez",
+    "name": "Maxi Rodríguez",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Newell's Old Boys",
+        "years": "1999–2002"
+      },
+      {
+        "name": "Espanyol",
+        "years": "2002–2005"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2005–2010"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2010–2012",
+        "note": "Joined and debuted in January 2010, not calendar 2009."
+      },
+      {
+        "name": "Newell's Old Boys",
+        "years": "2012–2017",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Peñarol",
+        "years": "2017–2018"
+      },
+      {
+        "name": "Newell's Old Boys",
+        "years": "2019–2021",
+        "note": "Third playing spell; agreed the return in late 2018, played from 2019 and retired in 2021."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Maxi_Rodr%C3%ADguez",
+        "title": "Maxi Rodríguez | Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/8346/Maxi_Rodriguez.html",
+        "title": "Maxi Rodríguez | National Football Teams"
+      },
+      {
+        "url": "https://www.ole.com.ar/futbol-primera/scocco-maxi-rodriguez-liga-venadense_0_741IhryVM.html",
+        "title": "Scocco y Maxi Rodríguez jugarán en la Liga Venadense"
+      }
+    ],
+    "notes": "All three Newell’s playing spells are included. His final return was agreed in December 2018 but belongs to 2019 by first playing year. Subsequent Hughes regional-league football and the 2023 farewell exhibition are outside this professional-career scope. Midfielder covers his winger and attacking-midfield roles.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "claudio-pizarro",
+    "name": "Claudio Pizarro",
+    "continent": "South America",
+    "country": "Peru",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Deportivo Pesquero",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Alianza Lima",
+        "years": "1998–1999",
+        "note": "Playing years follow both season tables, rather than the infobox’s 1997 start."
+      },
+      {
+        "name": "Werder Bremen",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2001–2007"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2007–2008"
+      },
+      {
+        "name": "Werder Bremen",
+        "years": "2008–2012",
+        "note": "Loan from Chelsea in 2008/09, then permanent; one continuous playing spell."
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2012–2015",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Werder Bremen",
+        "years": "2015–2017",
+        "note": "Third continuous playing spell."
+      },
+      {
+        "name": "1. FC Köln",
+        "years": "2017–2018"
+      },
+      {
+        "name": "Werder Bremen",
+        "years": "2018–2020",
+        "note": "Fourth continuous playing spell; retired after the 2019/20 season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Claudio_Pizarro",
+        "title": "Claudio Pizarro | Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5170/Claudio_Pizarro.html",
+        "title": "Claudio Pizarro | National Football Teams"
+      }
+    ],
+    "notes": "Four continuous Werder Bremen playing spells, not five: the 2008/09 loan and 2009 permanent transfer are merged, with no unused Chelsea return. Both season tables place Alianza Lima appearances in 1998–1999 despite the Wikipedia infobox starting in 1997. Cantolao youth football and later ambassador or exhibition roles are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "walter-samuel",
+    "name": "Walter Samuel",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Newell's Old Boys",
+        "years": "1996–1997",
+        "note": "First senior playing year was 1996 within the 1995/96 season."
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "1997–2000"
+      },
+      {
+        "name": "Roma",
+        "years": "2000–2004"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2005–2014"
+      },
+      {
+        "name": "Basel",
+        "years": "2014–2016",
+        "note": "Final playing club; retired at the end of the 2015/16 season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Walter_Samuel",
+        "title": "Walter Samuel | Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/297/Walter_Samuel.html",
+        "title": "Walter Samuel | National Football Teams"
+      }
+    ],
+    "notes": "The 1995/96 season label does not mean a calendar-1995 debut: the biography dates senior play to 1996. Basel, not Inter, was his final playing club. Later Argentina coaching roles are excluded. The two sources disagree on some appearance totals, which are not part of this timeline.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "joe-cole",
+    "name": "Joe Cole",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "West Ham United",
+        "years": "1999–2003",
+        "note": "First-team debut was 2 January 1999; the 1998 membership date is not a senior playing start."
+      },
+      {
+        "name": "Chelsea",
+        "years": "2003–2010"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2010–2011"
+      },
+      {
+        "name": "Lille",
+        "years": "2011–2012",
+        "note": "Season-long loan from Liverpool."
+      },
+      {
+        "name": "Liverpool",
+        "years": "2012–2013",
+        "note": "Actual playing return after Lille, including six league appearances in 2012/13; departed in January 2013."
+      },
+      {
+        "name": "West Ham United",
+        "years": "2013–2014",
+        "note": "Actual second playing spell, beginning in January 2013."
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2014–2015",
+        "note": "Includes a 2015/16 League Cup appearance. Villa retained his registration until January 2016, but no playing return after the Coventry loan is established."
+      },
+      {
+        "name": "Coventry City",
+        "years": "2015–2016",
+        "note": "October 2015 loan from Aston Villa became permanent in January 2016; one continuous playing spell."
+      },
+      {
+        "name": "Tampa Bay Rowdies",
+        "years": "2016–2018",
+        "note": "Played from May 2016 through the 2018 season; continued playing after becoming player/assistant coach in June 2018, then retired in November."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Joe_Cole",
+        "title": "Joe Cole"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2179/Joe_Cole.html",
+        "title": "Joe Cole | National Football Teams"
+      },
+      {
+        "url": "https://liverpoolfc.com/news/first-team/127193-show-them-what-it-s-all-about",
+        "title": "Show them what it’s all about"
+      },
+      {
+        "url": "https://www.bbc.com/sport/football/35257601",
+        "title": "Joe Cole: Aston Villa midfielder completes Coventry free transfer"
+      },
+      {
+        "url": "https://www.rowdiessoccer.com/news/2018/11/13/joe-cole-announces-retirement-from-professional-football/",
+        "title": "Joe Cole Announces Retirement from Professional Football"
+      },
+      {
+        "url": "https://www.rowdiessoccer.com/news/2022/04/01/joe-cole-unretires-to-rejoin-rowdies/",
+        "title": "Joe Cole Unretires to Rejoin Rowdies (announcement only)"
+      }
+    ],
+    "notes": "Full professional senior playing career cross-checked against complete Wikipedia career text and the actual NFT HTML club table. Includes both Liverpool spells and the West Ham return; Coventry loan-to-permanent is one continuous spell. No adult-pyramid reserve spell is established. Youth and closed reserve football, later Chelsea coaching and post-retirement amateur Belstone appearances are excluded. An April 2022 Rowdies announcement is not evidence of a competitive playing comeback.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "freddie-ljungberg",
+    "name": "Freddie Ljungberg",
+    "continent": "Europe",
+    "country": "Sweden",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Halmstad",
+        "years": "1994–1998"
+      },
+      {
+        "name": "Arsenal",
+        "years": "1998–2007"
+      },
+      {
+        "name": "West Ham United",
+        "years": "2007–2008"
+      },
+      {
+        "name": "Seattle Sounders",
+        "years": "2009–2010",
+        "note": "First MLS playing season was 2009, despite the 2008 signing."
+      },
+      {
+        "name": "Chicago Fire",
+        "years": "2010"
+      },
+      {
+        "name": "Celtic",
+        "years": "2011",
+        "note": "Signed in December 2010; first playing season began in 2011."
+      },
+      {
+        "name": "Shimizu S-Pulse",
+        "years": "2011–2012",
+        "note": "2012 is the departure endpoint; NFT records league appearances only in 2011."
+      },
+      {
+        "name": "Mumbai City",
+        "years": "2014",
+        "note": "Professional comeback after his 2012 retirement; four league appearances."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Freddie_Ljungberg",
+        "title": "Freddie Ljungberg"
+      },
+      {
+        "url": "https://national-football-teams.com/player/6396/Fredrik_Ljungberg.html",
+        "title": "Fredrik Ljungberg (Player) | National Football Teams"
+      }
+    ],
+    "notes": "All eight senior clubs cross-checked against Wikipedia and the actual NFT HTML club table. Mumbai City is a genuine 2014 comeback, not coaching. No adult-pyramid reserve spell is established.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "john-arne-riise",
+    "name": "John Arne Riise",
+    "continent": "Europe",
+    "country": "Norway",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Aalesund",
+        "years": "1997–1998",
+        "note": "Detailed season tables begin in 1997; the Wikipedia infobox’s 1996 membership date is not treated as a senior appearance."
+      },
+      {
+        "name": "Monaco B",
+        "years": "1998/99",
+        "note": "Adult fourth-tier reserve side, nine league appearances; overlaps the first team. Exact debut order is unconfirmed."
+      },
+      {
+        "name": "Monaco",
+        "years": "1998–2001"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2001–2008"
+      },
+      {
+        "name": "Roma",
+        "years": "2008–2011"
+      },
+      {
+        "name": "Fulham",
+        "years": "2011–2014"
+      },
+      {
+        "name": "APOEL",
+        "years": "2014–2015"
+      },
+      {
+        "name": "Delhi Dynamos",
+        "years": "2015–2016",
+        "note": "League appearances in the 2015 ISL season; departed for Norway in March 2016."
+      },
+      {
+        "name": "Aalesund",
+        "years": "2016",
+        "note": "Actual playing return, followed by retirement in June 2016."
+      },
+      {
+        "name": "Chennaiyin",
+        "years": "2016",
+        "note": "Returned from retirement in August 2016 for the 2016 ISL season; ten league appearances. No 2017 playing season is asserted."
+      }
+    ],
+    "sources": [
+      {
+        "url": "http://en.wikipedia.org/wiki/John_Arne_Riise",
+        "title": "John Arne Riise"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4951/John_Arne_Riise.html",
+        "title": "John Arne Riise (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Includes Monaco B and the actual 2016 Aalesund return. Chennaiyin was a professional comeback after the June retirement. Later fifth-tier Rollon (2017) and Avaldsnes (2023) are excluded as post-retirement amateur football. Monaco reserve/first-team debut ordering remains provisional.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "luis-garcia",
+    "name": "Luis García",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Barcelona B",
+        "years": "1997/98–1998/99",
+        "note": "Adult third- then second-tier reserves; overlaps the 1998 first-team cup appearance."
+      },
+      {
+        "name": "Barcelona",
+        "years": "1998",
+        "note": "Competitive Supercopa appearance against Mallorca on 18 August 1998, despite no league appearances."
+      },
+      {
+        "name": "Real Valladolid",
+        "years": "1999–2000",
+        "note": "Loan from Barcelona."
+      },
+      {
+        "name": "Toledo",
+        "years": "2000",
+        "note": "Loan from Barcelona."
+      },
+      {
+        "name": "Tenerife",
+        "years": "2000–2001",
+        "note": "Loan from Barcelona."
+      },
+      {
+        "name": "Real Valladolid",
+        "years": "2001–2002",
+        "note": "Second actual playing loan spell."
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2002–2003"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2003–2004",
+        "note": "Actual playing return after Barcelona exercised its repurchase clause."
+      },
+      {
+        "name": "Liverpool",
+        "years": "2004–2007"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2007–2009",
+        "note": "Actual second playing spell."
+      },
+      {
+        "name": "Racing Santander",
+        "years": "2009–2010"
+      },
+      {
+        "name": "Panathinaikos",
+        "years": "2010–2011"
+      },
+      {
+        "name": "Puebla",
+        "years": "2011–2012"
+      },
+      {
+        "name": "UNAM",
+        "years": "2012–2014",
+        "note": "Retired in January 2014."
+      },
+      {
+        "name": "ATK",
+        "years": "2014",
+        "note": "Then Atlético de Kolkata; professional comeback for the inaugural ISL season."
+      },
+      {
+        "name": "Central Coast Mariners",
+        "years": "2016",
+        "note": "Signed in January 2016 for the remaining 2015/16 A-League season, not in 2015."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Luis_Garc%C3%ADa_(footballer,_born_1978)",
+        "title": "Luis García"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/10961/Luis_Garcia.html",
+        "title": "Luis García (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.transfermarkt.com/rcd-mallorca_fc-barcelona/index/spielbericht/2424035",
+        "title": "Mallorca–Barcelona, 18 August 1998 — match sheet"
+      }
+    ],
+    "notes": "Luis Javier García Sanz, born 24 June 1978, not either namesake. Includes Barcelona B, the competitive 1998 Supercopa cameo, four loans and actual returns. No ownership-only Barcelona returns between loans. India 2014 and Australia 2016 are playing comebacks; subsequent executive work is excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
+  },
+  {
+    "id": "eidur-gudjohnsen",
+    "name": "Eiður Guðjohnsen",
+    "continent": "Europe",
+    "country": "Iceland",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Valur",
+        "years": "1994"
+      },
+      {
+        "name": "PSV Eindhoven",
+        "years": "1995–1998",
+        "note": "Injury interrupted play; endpoint is departure, not a claim of appearances in every season."
+      },
+      {
+        "name": "KR Reykjavík",
+        "years": "1998"
+      },
+      {
+        "name": "Bolton Wanderers",
+        "years": "1998–2000"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2000–2006"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2006–2009"
+      },
+      {
+        "name": "Monaco",
+        "years": "2009–2010"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "2010",
+        "note": "Loan from Monaco; no subsequent Monaco playing return is established."
+      },
+      {
+        "name": "Stoke City",
+        "years": "2010–2011"
+      },
+      {
+        "name": "Fulham",
+        "years": "2011",
+        "note": "Loan from Stoke; no ownership-only return inserted."
+      },
+      {
+        "name": "AEK Athens",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Cercle Brugge",
+        "years": "2012–2013"
+      },
+      {
+        "name": "Club Brugge",
+        "years": "2013–2014"
+      },
+      {
+        "name": "Bolton Wanderers",
+        "years": "2014–2015",
+        "note": "Actual second playing spell, debuting in December 2014."
+      },
+      {
+        "name": "Shijiazhuang Ever Bright",
+        "years": "2015–2016",
+        "note": "Played in the 2015 Chinese Super League; left for Molde in February 2016."
+      },
+      {
+        "name": "Molde",
+        "years": "2016",
+        "note": "Played in Norway in 2016; released in August, not the unfulfilled two-year contract endpoint."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ei%C3%B0ur_Gu%C3%B0johnsen",
+        "title": "Eiður Guðjohnsen"
+      },
+      {
+        "url": "https://national-football-teams.com/player/3056/Ei_Ur_Smari_Gu_Johnsen.html",
+        "title": "Eiður Guðjohnsen (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.indiansuperleague.com/press-releases/injury-curtails-eidur-gudjohnsen-and-andre-bikey-s-fc-pune-city-campaign",
+        "title": "Injury curtails Eidur Gudjohnsen and Andre Bikey’s FC Pune City campaign"
+      }
+    ],
+    "notes": "All senior playing clubs cross-checked. Pune City signed him in 2016 but an injury ruled him out of the entire season, so no playing node is invented. The Seattle Sounders reserve trial was in a closed reserve competition, not the adult pyramid. Last club appearances were in 2016; retirement announced in 2017. No Monaco or Stoke ownership-only returns.",
+    "status": "retired",
+    "verifiedAt": "2026-09-11"
   }
 ]

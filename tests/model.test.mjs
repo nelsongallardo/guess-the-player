@@ -11,11 +11,11 @@ const clone = o => JSON.parse(JSON.stringify(o));
 const plain = o => JSON.parse(JSON.stringify(o));
 const wrong = s => g.roundAt(s).options.filter(n => n !== g.playerAt(s).name);
 
-test('exactly 40 explicit researched records: 20 Europe + 20 South America', () => {
-  assert.equal(players.length,40);
-  assert.equal(new Set(players.map(p=>p.name)).size,40);
-  assert.equal(new Set(players.map(p=>p.id)).size,40);
-  for (const continent of ['Europe','South America']) assert.equal(players.filter(p=>p.continent===continent).length,20);
+test('exactly 50 explicit researched records: 25 Europe + 25 South America', () => {
+  assert.equal(players.length,50);
+  assert.equal(new Set(players.map(p=>p.name)).size,50);
+  assert.equal(new Set(players.map(p=>p.id)).size,50);
+  for (const continent of ['Europe','South America']) assert.equal(players.filter(p=>p.continent===continent).length,25);
   const frozen=JSON.parse(fs.readFileSync(new URL('../research/verified-players.json', import.meta.url),'utf8'));
   assert.deepEqual(plain(players.map(({clubCrests,incorrectOptions,...p})=>p)),frozen);
   const nationalNames=new Set(players.map(p=>p.country));
@@ -41,7 +41,7 @@ test('every ordered public crest URL has a valid embedded PNG; no external depen
   assert.ok(!html.includes('__PLAYER_DATABASE__') && !html.includes('__CREST_ASSETS__'));
 });
 
-test('40,000 option samples always contain five unique names and exactly one correct answer',()=>{
+test('50,000 option samples always contain five unique names and exactly one correct answer',()=>{
   for(const p of players){
     const orders=new Set();
     for(let i=0;i<1000;i++){
@@ -57,9 +57,9 @@ test('40,000 option samples always contain five unique names and exactly one cor
   }
 });
 
-test('all 40 rounds: first/second/third-attempt wins, losses, score, streak and recap',()=>{
+test('all 50 rounds: first/second/third-attempt wins, losses, score, streak and recap',()=>{
   const s=g.create(); let wins=0,streak=0,best=0;
-  for(let i=0;i<40;i++){
+  for(let i=0;i<50;i++){
     assert.equal(s.roundIndex,i); assert.equal(g.validate(s),true); assert.equal(g.outcome(s),'playing');
     assert.equal(g.next(s),false); const incorrect=wrong(s);
     const missCount=i%4;
@@ -70,7 +70,7 @@ test('all 40 rounds: first/second/third-attempt wins, losses, score, streak and 
     assert.equal(g.answer(s,g.playerAt(s).name),false);assert.equal(g.hint(s),false);
     assert.equal(g.validate(s),true);assert.equal(g.next(s),true);
   }
-  assert.equal(s.finished,true);assert.equal(new Set(s.deck).size,40);assert.equal(g.validate(s),true);
+  assert.equal(s.finished,true);assert.equal(new Set(s.deck).size,50);assert.equal(g.validate(s),true);
   assert.equal(g.next(s),false);assert.equal(g.answer(s,'not an option'),false);assert.equal(g.hint(s),false);
   assert.equal(g.create().rounds.length,1);
 });
@@ -93,16 +93,16 @@ test('hints reveal exactly country, position, displayed-name initials and cost n
 
 test('persistence accepts every legitimate state and rejects malformed or impossible saves',()=>{
   const good=g.create();assert.equal(g.validate(clone(good)),true);
-  for(const bad of [null,{},42,'x',[],{...clone(good),finished:'true'},{...clone(good),version:2},{...clone(good),roundIndex:40},{...clone(good),roundIndex:-1},{...clone(good),roundIndex:.5},{...clone(good),finished:true}])assert.equal(g.validate(bad),false);
+  for(const bad of [null,{},42,'x',[],{...clone(good),finished:'true'},{...clone(good),version:2},{...clone(good),roundIndex:50},{...clone(good),roundIndex:-1},{...clone(good),roundIndex:.5},{...clone(good),finished:true}])assert.equal(g.validate(bad),false);
   const mutations=[s=>s.deck.pop(),s=>s.deck[1]=s.deck[0],s=>s.deck[0]='unknown',s=>s.rounds[0].options.pop(),s=>s.rounds[0].options[0]='unknown',s=>s.rounds[0].options.fill(g.playerAt(s).name),s=>s.rounds[0].hints=4,s=>s.rounds[0].hints=-1,s=>s.rounds[0].hints='1',s=>s.rounds[0].guesses=['unknown'],s=>s.rounds[0].guesses=[wrong(s)[0],wrong(s)[0]],s=>s.rounds[0].guesses=[g.playerAt(s).name,wrong(s)[0]],s=>s.rounds[0].guesses=wrong(s),s=>{s.roundIndex=1;s.rounds.push(clone(s.rounds[0]));}];
   for(const change of mutations){const s=clone(good);change(s);assert.equal(g.validate(s),false,String(change));}
-  for(let i=0;i<40;i++){g.answer(good,g.playerAt(good).name);assert.equal(g.validate(clone(good)),true);g.next(good);assert.equal(g.validate(clone(good)),true);}
-  assert.equal(g.stats(good).score,4000);assert.equal(g.stats(good).streak,40);
+  for(let i=0;i<50;i++){g.answer(good,g.playerAt(good).name);assert.equal(g.validate(clone(good)),true);g.next(good);assert.equal(g.validate(clone(good)),true);}
+  assert.equal(g.stats(good).score,5000);assert.equal(g.stats(good).streak,50);
 });
 
 test('shuffle does not mutate inputs and decks never repeat a player',()=>{
   const original=[1,2,3,4,5];g.shuffle(original);assert.deepEqual(original,[1,2,3,4,5]);
-  const starts=new Set();for(let i=0;i<200;i++){const s=g.create();assert.equal(new Set(s.deck).size,40);starts.add(s.deck[0]);assert.equal(g.validate(s),true);}
+  const starts=new Set();for(let i=0;i<200;i++){const s=g.create();assert.equal(new Set(s.deck).size,50);starts.add(s.deck[0]);assert.equal(g.validate(s),true);}
   assert.ok(starts.size>10);
 });
 
@@ -156,8 +156,8 @@ test('difficulty changes preserve progress and never reshuffle a started round',
   const invalid=clone(s);invalid.rounds[0].difficulty='bogus';assert.equal(g.validate(invalid),false);
   for(const level of ['easy','medium','hard']){
     const game=g.create(level);
-    for(let i=0;i<40;i++){assert.equal(g.roundAt(game).difficulty,level);g.answer(game,g.playerAt(game).name);g.next(game);assert.equal(g.validate(clone(game)),true);}
-    assert.equal(game.finished,true);assert.equal(g.stats(game).score,4000);
+    for(let i=0;i<50;i++){assert.equal(g.roundAt(game).difficulty,level);g.answer(game,g.playerAt(game).name);g.next(game);assert.equal(g.validate(clone(game)),true);}
+    assert.equal(game.finished,true);assert.equal(g.stats(game).score,5000);
   }
 });
 
@@ -167,19 +167,32 @@ test('published 30-player saves survive roster expansion and finish their origin
   assert.equal(g.stats(saved).score,500);assert.deepEqual(saved,original);
   for(let i=saved.roundIndex;i<30;i++){g.answer(saved,g.playerAt(saved).name);g.next(saved);assert.equal(g.validate(saved),true);}
   assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,3000);
-  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,40);assert.equal(fresh.difficulty,'hard');
+  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,50);assert.equal(fresh.difficulty,'hard');
   assert.ok(fresh.deck.includes('fabricio-coloccini'));assert.ok(fresh.deck.includes('juan-pablo-sorin'));
+});
+
+test('published 40-player saves preserve guesses, hints and order through expansion',()=>{
+  const saved=JSON.parse(fs.readFileSync(new URL('./legacy-save-40.json',import.meta.url),'utf8'));
+  const original=clone(saved);
+  assert.equal(saved.deck.length,40);assert.equal(g.validate(saved),true);
+  assert.equal(g.stats(saved).score,500);assert.equal(g.roundAt(saved).hints,1);assert.equal(g.roundAt(saved).guesses.length,1);
+  assert.deepEqual(saved,original);
+  for(let i=saved.roundIndex;i<saved.deck.length;i++){g.answer(saved,g.playerAt(saved).name);g.next(saved);assert.equal(g.validate(saved),true);}
+  assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,4000);
+  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,50);assert.equal(fresh.difficulty,'hard');
+  const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,10);
+  assert.ok(additions.some(p=>p.id==='javier-saviola'));assert.ok(additions.some(p=>p.id==='claudio-pizarro'));
 });
 
 const localeContext=vm.createContext({});
 vm.runInContext(script('locale-data')+script('game-ui').split('function detectLanguage()')[0],localeContext);
 const localization=vm.runInContext('({COPY,COUNTRIES_ES,POSITIONS_ES,SPANISH_NOTES})',localeContext);
 
-test('Spanish copy, all 40 career notes and every country/position are translated',()=>{
+test('Spanish copy, all 50 career notes and every country/position are translated',()=>{
   const {COPY,COUNTRIES_ES,POSITIONS_ES,SPANISH_NOTES}=localization;
   assert.deepEqual(Object.keys(COPY.en).sort(),Object.keys(COPY.es).sort());
   for(const key of Object.keys(COPY.en))assert.equal(typeof COPY.en[key],typeof COPY.es[key],key);
-  assert.equal(Object.keys(SPANISH_NOTES).length,40);
+  assert.equal(Object.keys(SPANISH_NOTES).length,50);
   for(const p of players){
     assert.ok(COUNTRIES_ES[p.country]&&POSITIONS_ES[p.position],p.name);
     const note=SPANISH_NOTES[p.id];assert.ok(note.notes&&note.notes!==p.notes);
@@ -190,6 +203,7 @@ test('Spanish copy, all 40 career notes and every country/position are translate
   assert.equal(COPY.es.path,'CARRERA SÉNIOR');
   assert.ok(COPY.en.rules.includes('youth teams, national teams and coaching jobs are excluded'));
   assert.ok(COPY.es.rules.includes('se excluyen juveniles, selecciones y etapas como entrenador'));
+  for(const lang of ['en','es']){assert.ok(COPY[lang].footer.includes('50 '));assert.ok(COPY[lang].footer.includes('25 '));assert.ok(COPY[lang].rules.includes('50 '));}
   assert.equal(COPY.es.question,'¿Quién es este jugador?');
   assert.equal(COPY.es.attempts(1),'Queda 1 intento');
   assert.equal(COPY.es.hints.join('|'),'País|Posición|Iniciales');

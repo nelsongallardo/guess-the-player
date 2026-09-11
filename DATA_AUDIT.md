@@ -2,7 +2,7 @@
 
 ## Result and limits
 
-**Current roster: 40 players.** The original 30-player re-audit is followed below by ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance.
+**Current roster: 50 players.** The original 30-player re-audit is followed below by two batches of ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance.
 
 The original **30 unique players** were rechecked against freshly retrieved external career records, with at least two distinct source URLs per player and independent corroboration. This is a historical-data audit, not a claim that passing software tests proves the facts. The original requested scope remains **professional senior clubs**, including reserve sides competing in the adult league pyramid; youth teams, closed reserve leagues, amateur post-retirement football and coaching jobs are excluded.
 
@@ -541,6 +541,174 @@ All six professional first-team clubs cross-checked. Ajax begins with his actual
 
 Reviewed sources: [143], [144].
 
+## Second roster expansion — 10 more players
+
+This second expansion brings the roster to 50 players (25 Europe / 25 South America). These ten additions were independently researched on 11 September 2026; date and reserve-classification qualifications are preserved below. Software tests do not prove historical accuracy.
+
+### Javier Saviola
+
+**Argentina · Forward.** River Plate (1998–2001) → Barcelona (2001–2004) → Monaco (2004–2005) → Sevilla (2005–2006) → Barcelona (2006–2007) → Real Madrid (2007–2009) → Benfica (2009–2012) → Málaga (2012–2013) → Olympiacos (2013–2014) → Hellas Verona (2014–2015) → River Plate (2015–2016).[146][147]
+
+Barcelona is split around the Monaco and Sevilla loans because he actually returned to play in 2006/07. River Plate was his final professional football club; the 2016 endpoint denotes departure, not a claim of competitive appearances that year. NFT lists FC Ordino in 2016/17 without appearances, but the biography identifies an assistant-coaching role, so it is excluded. Encamp was futsal, not this football timeline.[146][147]
+
+- **Monaco (2004–2005):** Loan from Barcelona.
+- **Sevilla (2005–2006):** Loan from Barcelona; no unused parent-club return inserted.
+- **Barcelona (2006–2007):** Actual playing return after the two loans.
+- **River Plate (2015–2016):** Second playing spell; played in 2015 and left in January 2016.
+
+**Research status:** verified-with-notes. Complete Wikipedia career and actual-name NFT HTML table retrieved independently. Argentina and forward corroborated.; Retain Barcelona 2006–2007 return. Official Barcelona report separately confirms both playing periods.; NFT Ordino row has missing appearance values, not proof of senior play; Wikipedia explicitly identifies assistant coaching. Exclude Ordino, Encamp futsal, coaching and legends games.; River 2015–2016 endpoint is January departure; NFT playing table ends in 2015. No adult-pyramid reserve appearances found in either career source.[146][147]
+
+Reviewed sources: [146], [147], [148], [149].
+
+### Andrés D’Alessandro
+
+**Argentina · Midfielder.** River Plate (2000–2003) → VfL Wolfsburg (2003–2006) → Portsmouth (2006) → Real Zaragoza (2006–2008) → San Lorenzo (2008) → Internacional (2008–2016) → River Plate (2016) → Internacional (2017–2020) → Nacional (2021) → Internacional (2022).[150][151]
+
+Three Internacional playing spells are retained, separated by River Plate and Nacional. NFT omits the final 2022 return; Internacional’s official farewell report confirms it was competitive league play, not a testimonial. The official report dates his final match to 17 April, correcting the biography’s 16 April. Unused Wolfsburg ownership returns and youth/reserve-league football are excluded.[150][151]
+
+- **River Plate (2000–2003):** Senior debut in May 2000; the 1999/00 season is not a calendar-1999 debut.
+- **Portsmouth (2006):** Loan from Wolfsburg.
+- **Real Zaragoza (2006–2008):** Initially on loan, permanent from 2007; one uninterrupted spell. Departure was in 2008.
+- **Internacional (2008–2016):** First playing spell, including early-2016 appearances before the River loan.
+- **River Plate (2016):** Loan from Internacional; the 2016/17 season label does not extend this spell into 2017.
+- **Internacional (2017–2020):** Actual return after the River loan; left in December 2020 despite NFT’s 2020/21 season label.
+- **Internacional (2022):** Third playing spell; retired after the league match against Fortaleza on 17 April 2022.
+
+**Research status:** verified-with-notes. Complete-career Wikipedia and actual-name NFT HTML retrieved; NFT is incomplete at the end and official Internacional report fills 2022 gap. Argentina/attacking midfielder verified.; River debut 28 May 2000, independently reported by ESPN; do not turn NFT 1999/00 into calendar 1999.; Zaragoza infobox says 2007 but 2007/08 playing table and 2008 San Lorenzo move support 2008 departure. Loan-to-permanent is a single node.; First Inter spell includes early 2016 competitive play in Wikipedia stats; no ownership-only Wolfsburg return. River loan finished in 2016; returned to Inter for 2017.; Final match was 17 April 2022 per official club report, not 16 April as Wikipedia prose states. No adult-pyramid reserve side established.[150][151]
+
+Reviewed sources: [150], [151], [152], [153], [154].
+
+### Maxi Rodríguez
+
+**Argentina · Midfielder.** Newell's Old Boys (1999–2002) → Espanyol (2002–2005) → Atlético Madrid (2005–2010) → Liverpool (2010–2012) → Newell's Old Boys (2012–2017) → Peñarol (2017–2018) → Newell's Old Boys (2019–2021).[155][156]
+
+All three Newell’s playing spells are included. His final return was agreed in December 2018 but belongs to 2019 by first playing year. Subsequent Hughes regional-league football and the 2023 farewell exhibition are outside this professional-career scope. Midfielder covers his winger and attacking-midfield roles.[155][156]
+
+- **Liverpool (2010–2012):** Joined and debuted in January 2010, not calendar 2009.
+- **Newell's Old Boys (2012–2017):** Second playing spell.
+- **Newell's Old Boys (2019–2021):** Third playing spell; agreed the return in late 2018, played from 2019 and retired in 2021.
+
+**Research status:** verified-with-notes. Complete Wikipedia career and NFT actual-name HTML table independently agree on all seven professional playing spells; no adult-pyramid reserve stint identified.; Argentina and winger/attacking midfielder verified. Broad role is Midfielder.; Final Newell’s spell starts in 2019 despite late-2018 signing and 2018/19 table label. Liverpool starts January 2010.; Exclude Hughes regional football after professional retirement and 2023 farewell exhibition; both disclosed in Wikipedia prose. Appearance totals differ between sources and are not imported.[155][156]
+
+Reviewed sources: [155], [156], [157].
+
+### Claudio Pizarro
+
+**Peru · Forward.** Deportivo Pesquero (1996–1997) → Alianza Lima (1998–1999) → Werder Bremen (1999–2001) → Bayern Munich (2001–2007) → Chelsea (2007–2008) → Werder Bremen (2008–2012) → Bayern Munich (2012–2015) → Werder Bremen (2015–2017) → 1. FC Köln (2017–2018) → Werder Bremen (2018–2020).[158][159]
+
+Four continuous Werder Bremen playing spells, not five: the 2008/09 loan and 2009 permanent transfer are merged, with no unused Chelsea return. Both season tables place Alianza Lima appearances in 1998–1999 despite the Wikipedia infobox starting in 1997. Cantolao youth football and later ambassador or exhibition roles are excluded.[158][159]
+
+- **Alianza Lima (1998–1999):** Playing years follow both season tables, rather than the infobox’s 1997 start.
+- **Werder Bremen (2008–2012):** Loan from Chelsea in 2008/09, then permanent; one continuous playing spell.
+- **Bayern Munich (2012–2015):** Second playing spell.
+- **Werder Bremen (2015–2017):** Third continuous playing spell.
+- **Werder Bremen (2018–2020):** Fourth continuous playing spell; retired after the 2019/20 season.
+
+**Research status:** verified-with-notes. Complete Wikipedia career and NFT actual-name HTML table retrieved; Peru and striker corroborated.; Alianza begins 1998 by both detailed season tables, correcting infobox 1997. Pesquero has 1996 and 1997 appearances.; Chelsea first-team play ends 2008; contract ownership to 2009 is not a second playing spell. Merge Werder loan/permanent in 2008–2012.; Four continuous Werder playing spells and two Bayern spells retained, including Cologne before last Werder return. No senior adult-pyramid reserve appearances established.; Final 2019/20 season and retirement in 2020 independently supported by both career tables/biography. Do not import inconsistent appearance totals or exact final-match opponent from Wikipedia.[158][159]
+
+Reviewed sources: [158], [159].
+
+### Walter Samuel
+
+**Argentina · Defender.** Newell's Old Boys (1996–1997) → Boca Juniors (1997–2000) → Roma (2000–2004) → Real Madrid (2004–2005) → Inter Milan (2005–2014) → Basel (2014–2016).[160][161]
+
+The 1995/96 season label does not mean a calendar-1995 debut: the biography dates senior play to 1996. Basel, not Inter, was his final playing club. Later Argentina coaching roles are excluded. The two sources disagree on some appearance totals, which are not part of this timeline.[160][161]
+
+- **Newell's Old Boys (1996–1997):** First senior playing year was 1996 within the 1995/96 season.
+- **Basel (2014–2016):** Final playing club; retired at the end of the 2015/16 season.
+
+**Research status:** verified-with-notes. Wikipedia complete career and actual-name NFT HTML table agree on all six senior clubs and seasons. Argentina/centre-back corroborated.; Start 1996 within NFT 1995/96 season. No adult-pyramid reserve stint or loan identified.; Basel 2014–2016 retained as final playing spell; retirement explicitly stated in Wikipedia. Do not conflate Argentina assistant-coaching career with playing.; Appearance totals contain discrepancies (including Basel) but club order and stint years agree.[160][161]
+
+Reviewed sources: [160], [161].
+
+### Joe Cole
+
+**England · Midfielder.** West Ham United (1999–2003) → Chelsea (2003–2010) → Liverpool (2010–2011) → Lille (2011–2012) → Liverpool (2012–2013) → West Ham United (2013–2014) → Aston Villa (2014–2015) → Coventry City (2015–2016) → Tampa Bay Rowdies (2016–2018).[162][163]
+
+Full professional senior playing career cross-checked against complete Wikipedia career text and the actual NFT HTML club table. Includes both Liverpool spells and the West Ham return; Coventry loan-to-permanent is one continuous spell. No adult-pyramid reserve spell is established. Youth and closed reserve football, later Chelsea coaching and post-retirement amateur Belstone appearances are excluded. An April 2022 Rowdies announcement is not evidence of a competitive playing comeback.[162][163]
+
+- **West Ham United (1999–2003):** First-team debut was 2 January 1999; the 1998 membership date is not a senior playing start.
+- **Lille (2011–2012):** Season-long loan from Liverpool.
+- **Liverpool (2012–2013):** Actual playing return after Lille, including six league appearances in 2012/13; departed in January 2013.
+- **West Ham United (2013–2014):** Actual second playing spell, beginning in January 2013.
+- **Aston Villa (2014–2015):** Includes a 2015/16 League Cup appearance. Villa retained his registration until January 2016, but no playing return after the Coventry loan is established.
+- **Coventry City (2015–2016):** October 2015 loan from Aston Villa became permanent in January 2016; one continuous playing spell.
+- **Tampa Bay Rowdies (2016–2018):** Played from May 2016 through the 2018 season; continued playing after becoming player/assistant coach in June 2018, then retired in November.
+
+**Research status:** verified-with-scope-notes. Nine professional playing spells corroborated by independently retrieved Wikipedia and National Football Teams. Full Wikipedia extracted text and original NFT HTML are saved in research/expansion2-joe-cole-evidence/; NFT club-name cells were extracted from the actual HTML table, not the incomplete markdown.; West Ham senior debut is January 1999, despite 1998 infobox membership; starts follow actual play. Liverpool 2012/13 return is supported by six NFT league appearances and an official Liverpool article describing appearances and goals after Lille.; Aston Villa played in 2014/15 and the 2015/16 League Cup; the NFT league-only table omits the latter. The playing node ends in 2015 before Coventry, while Villa ownership continued to January 2016. No ownership-only Villa return is inserted.; Coventry City October 2015 loan and January 2016 permanent move form one continuous playing node. BBC contemporaneous reporting confirms the permanent transfer; Wikipedia and NFT corroborate 22 league appearances across the combined spell.; Tampa Bay Rowdies May 2016 through November 2018 retirement is corroborated by the official club retirement article, explicitly confirming continued playing while assistant coach in 2018. NFT records 26 games for 2017 versus Wikipedia/club totals including 28; this appearance-count discrepancy does not change the spell. Counts are not included in the player timeline.; Youth, closed reserve leagues, Chelsea coaching and post-retirement amateur Belstone (including a 2021 cup appearance despite zero infobox league games) are excluded by data-policy.md. Neither full-career source establishes adult-pyramid reserve appearances.; The official 1 April 2022 Rowdies return announcement is saved for transparency but does not establish any competitive appearance; neither full-career playing table has a later Rowdies spell. Do not convert a signing announcement into a played comeback or claim its April-Fools nature as proven without further evidence.; All evidence quotes were checked as literal substrings of saved source text and passed the citation ledger quote gate. Wikipedia direct HTML returned 403; the full 27KB extraction, including complete senior statistics and Belstone section, was successfully retrieved instead. Official West Ham archived article returned HTTP 500 and is not used as body evidence.[162][163]
+
+Reviewed sources: [162], [163], [164], [165], [166], [167].
+
+### Freddie Ljungberg
+
+**Sweden · Midfielder.** Halmstad (1994–1998) → Arsenal (1998–2007) → West Ham United (2007–2008) → Seattle Sounders (2009–2010) → Chicago Fire (2010) → Celtic (2011) → Shimizu S-Pulse (2011–2012) → Mumbai City (2014).[168][169]
+
+All eight senior clubs cross-checked against Wikipedia and the actual NFT HTML club table. Mumbai City is a genuine 2014 comeback, not coaching. No adult-pyramid reserve spell is established.[168][169]
+
+- **Seattle Sounders (2009–2010):** First MLS playing season was 2009, despite the 2008 signing.
+- **Celtic (2011):** Signed in December 2010; first playing season began in 2011.
+- **Shimizu S-Pulse (2011–2012):** 2012 is the departure endpoint; NFT records league appearances only in 2011.
+- **Mumbai City (2014):** Professional comeback after his 2012 retirement; four league appearances.
+
+**Research status:** verified-with-scope-notes. All eight clubs match across the two full-career lists. NFT HTML preserves actual club names.; Seattle begins in the 2009 MLS season, Celtic in the 2011 playing year. Shimizu release endpoint differs from last league season.; Mumbai City 2014: both sources list four appearances; preserved as post-retirement comeback.[168][169]
+
+Reviewed sources: [168], [169].
+
+### John Arne Riise
+
+**Norway · Defender.** Aalesund (1997–1998) → Monaco B (1998/99) → Monaco (1998–2001) → Liverpool (2001–2008) → Roma (2008–2011) → Fulham (2011–2014) → APOEL (2014–2015) → Delhi Dynamos (2015–2016) → Aalesund (2016) → Chennaiyin (2016).[170][171]
+
+Includes Monaco B and the actual 2016 Aalesund return. Chennaiyin was a professional comeback after the June retirement. Later fifth-tier Rollon (2017) and Avaldsnes (2023) are excluded as post-retirement amateur football. Monaco reserve/first-team debut ordering remains provisional.[170][171]
+
+- **Aalesund (1997–1998):** Detailed season tables begin in 1997; the Wikipedia infobox’s 1996 membership date is not treated as a senior appearance.
+- **Monaco B (1998/99):** Adult fourth-tier reserve side, nine league appearances; overlaps the first team. Exact debut order is unconfirmed.
+- **Delhi Dynamos (2015–2016):** League appearances in the 2015 ISL season; departed for Norway in March 2016.
+- **Aalesund (2016):** Actual playing return, followed by retirement in June 2016.
+- **Chennaiyin (2016):** Returned from retirement in August 2016 for the 2016 ISL season; ten league appearances. No 2017 playing season is asserted.
+
+**Research status:** verified-with-scope-notes. NFT and Wikipedia detailed career tables both begin Aalesund senior statistics in 1997; 1996 infobox membership is not asserted as play.; Monaco B nine appearances corroborated by both domains; exact ordering within 1998/99 remains unresolved.; Delhi 2015 league season precedes March 2016 Aalesund return; Chennaiyin 2016 league season follows retirement and comeback. Wikipedia 2016–2017 infobox is not evidence of 2017 games.; Rollon 2017 and Avaldsnes 2023 are fifth-tier post-retirement appearances, excluded from professional scope; later management also excluded.[170][171]
+
+Reviewed sources: [170], [171].
+
+### Luis García
+
+**Spain · Midfielder.** Barcelona B (1997/98–1998/99) → Barcelona (1998) → Real Valladolid (1999–2000) → Toledo (2000) → Tenerife (2000–2001) → Real Valladolid (2001–2002) → Atlético Madrid (2002–2003) → Barcelona (2003–2004) → Liverpool (2004–2007) → Atlético Madrid (2007–2009) → Racing Santander (2009–2010) → Panathinaikos (2010–2011) → Puebla (2011–2012) → UNAM (2012–2014) → ATK (2014) → Central Coast Mariners (2016).[172][173]
+
+Luis Javier García Sanz, born 24 June 1978, not either namesake. Includes Barcelona B, the competitive 1998 Supercopa cameo, four loans and actual returns. No ownership-only Barcelona returns between loans. India 2014 and Australia 2016 are playing comebacks; subsequent executive work is excluded.[172][173]
+
+- **Barcelona B (1997/98–1998/99):** Adult third- then second-tier reserves; overlaps the 1998 first-team cup appearance.
+- **Barcelona (1998):** Competitive Supercopa appearance against Mallorca on 18 August 1998, despite no league appearances.
+- **Real Valladolid (1999–2000):** Loan from Barcelona.
+- **Toledo (2000):** Loan from Barcelona.
+- **Tenerife (2000–2001):** Loan from Barcelona.
+- **Real Valladolid (2001–2002):** Second actual playing loan spell.
+- **Barcelona (2003–2004):** Actual playing return after Barcelona exercised its repurchase clause.
+- **Atlético Madrid (2007–2009):** Actual second playing spell.
+- **UNAM (2012–2014):** Retired in January 2014.
+- **ATK (2014):** Then Atlético de Kolkata; professional comeback for the inaugural ISL season.
+- **Central Coast Mariners (2016):** Signed in January 2016 for the remaining 2015/16 A-League season, not in 2015.
+
+**Research status:** verified-with-scope-notes. Identity verified as Luis Javier García Sanz, born 1978-06-24.; NFT league-only career table omits Barcelona 1998: Wikipedia detailed all-competition table records one Supercopa appearance. Official Barcelona biography inaccurately calls October 2003 his first-team debut; treat its league-focused summary as incomplete.; Barcelona B 1997/98–1998/99, Valladolid twice, Toledo and Tenerife loans retained; no ownership-only Barcelona nodes.; UNAM endpoint is January 2014 retirement. Atlético de Kolkata mapped to existing ATK club identity. Central Coast begins January 2016 despite 2015/16 season label.; Parent independently retrieved Transfermarkt’s complete browser match sheet: Luis García (player ID 7920) replaced Boudewijn Zenden for Barcelona against Mallorca on 18 August 1998. This corroborates the cup-only first-team node omitted by league-only career summaries.[172][173]
+
+Reviewed sources: [172], [173], [145].
+
+### Eiður Guðjohnsen
+
+**Iceland · Forward.** Valur (1994) → PSV Eindhoven (1995–1998) → KR Reykjavík (1998) → Bolton Wanderers (1998–2000) → Chelsea (2000–2006) → Barcelona (2006–2009) → Monaco (2009–2010) → Tottenham Hotspur (2010) → Stoke City (2010–2011) → Fulham (2011) → AEK Athens (2011–2012) → Cercle Brugge (2012–2013) → Club Brugge (2013–2014) → Bolton Wanderers (2014–2015) → Shijiazhuang Ever Bright (2015–2016) → Molde (2016).[174][175]
+
+All senior playing clubs cross-checked. Pune City signed him in 2016 but an injury ruled him out of the entire season, so no playing node is invented. The Seattle Sounders reserve trial was in a closed reserve competition, not the adult pyramid. Last club appearances were in 2016; retirement announced in 2017. No Monaco or Stoke ownership-only returns.[174][175]
+
+- **PSV Eindhoven (1995–1998):** Injury interrupted play; endpoint is departure, not a claim of appearances in every season.
+- **Tottenham Hotspur (2010):** Loan from Monaco; no subsequent Monaco playing return is established.
+- **Fulham (2011):** Loan from Stoke; no ownership-only return inserted.
+- **Bolton Wanderers (2014–2015):** Actual second playing spell, debuting in December 2014.
+- **Shijiazhuang Ever Bright (2015–2016):** Played in the 2015 Chinese Super League; left for Molde in February 2016.
+- **Molde (2016):** Played in Norway in 2016; released in August, not the unfulfilled two-year contract endpoint.
+
+**Research status:** verified-with-scope-notes. NFT full HTML club table corroborates all 16 playing spells, including both Bolton periods, China 2015 and Norway 2016.; Pune City is a signing-only gap in the Wikipedia infobox (zero games); official league release says injury ended his campaign before the season. Excluded under actual-playing policy.; PSV and Shijiazhuang endpoints reflect departure after the last playing season. Molde contract announced for two years but ended in August 2016.; Seattle reserve trial excluded as closed reserve competition; FH and Iceland are coaching roles.[174][175]
+
+Reviewed sources: [174], [175], [176].
+
 Sources:
 [1] https://argentina.as.com/argentina/2021/12/02/futbol/1638473602_945874.html
 [4] https://en.wikipedia.org/wiki/Javier_Zanetti
@@ -684,3 +852,35 @@ Sources:
 [142] https://www.sheridan-dictates.com/database-keane-robbie.php
 [143] https://en.wikipedia.org/wiki/Wesley_Sneijder
 [144] https://www.national-football-teams.com/player/4656/Wesley_Sneijder.html
+[145] https://www.transfermarkt.com/rcd-mallorca_fc-barcelona/index/spielbericht/2424035 — Mallorca–Barcelona, 18 August 1998 — match sheet
+[146] https://en.wikipedia.org/wiki/Javier_Saviola
+[147] https://www.national-football-teams.com/player/290/Javier_Saviola.html
+[148] https://barcaacademy.fcbarcelona.com/en/card/2691103/javier-saviola-assistant-coach-for-the-u19as
+[149] https://www.squawka.com/en/cult-corner/where-are-they-now-malaga-champions-league
+[150] https://en.wikipedia.org/wiki/Andr%C3%A9s_D%27Alessandro
+[151] https://www.national-football-teams.com/player/338/Andres_D_Alessandro.html
+[152] https://m.internacional.com.br/noticias/masculino/eu-amo-esse-clube-d-ale-se-despede-do-futebol-com-festa-e-vitoria
+[153] https://espndeportes.espn.com/futbol/argentina/nota/_/id/6985060/a-20-anos-del-debut-de-dalessandro-en-la-primera-de-river
+[154] https://www.ole.com.ar/futbol-internacional/d-alessandro-despedida-inter-brasil_0_kN4GgsQko.html
+[155] https://en.wikipedia.org/wiki/Maxi_Rodr%C3%ADguez
+[156] https://www.national-football-teams.com/player/8346/Maxi_Rodriguez.html
+[157] https://www.ole.com.ar/futbol-primera/scocco-maxi-rodriguez-liga-venadense_0_741IhryVM.html
+[158] https://en.wikipedia.org/wiki/Claudio_Pizarro
+[159] https://www.national-football-teams.com/player/5170/Claudio_Pizarro.html
+[160] https://en.wikipedia.org/wiki/Walter_Samuel
+[161] https://www.national-football-teams.com/player/297/Walter_Samuel.html
+[162] https://en.wikipedia.org/wiki/Joe_Cole
+[163] https://www.national-football-teams.com/player/2179/Joe_Cole.html
+[164] https://liverpoolfc.com/news/first-team/127193-show-them-what-it-s-all-about
+[165] https://www.bbc.com/sport/football/35257601
+[166] https://www.rowdiessoccer.com/news/2018/11/13/joe-cole-announces-retirement-from-professional-football
+[167] https://www.rowdiessoccer.com/news/2022/04/01/joe-cole-unretires-to-rejoin-rowdies
+[168] https://en.wikipedia.org/wiki/Freddie_Ljungberg
+[169] https://national-football-teams.com/player/6396/Fredrik_Ljungberg.html
+[170] http://en.wikipedia.org/wiki/John_Arne_Riise
+[171] https://www.national-football-teams.com/player/4951/John_Arne_Riise.html
+[172] https://en.wikipedia.org/wiki/Luis_Garc%C3%ADa_(footballer,_born_1978)
+[173] https://www.national-football-teams.com/player/10961/Luis_Garcia.html
+[174] https://en.wikipedia.org/wiki/Ei%C3%B0ur_Gu%C3%B0johnsen
+[175] https://national-football-teams.com/player/3056/Ei_Ur_Smari_Gu_Johnsen.html
+[176] https://www.indiansuperleague.com/press-releases/injury-curtails-eidur-gudjohnsen-and-andre-bikey-s-fc-pune-city-campaign

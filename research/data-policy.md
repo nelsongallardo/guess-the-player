@@ -1,6 +1,6 @@
 # Career-data policy
 
-Research snapshot: **11 September 2026**. The initial 30-player input was frozen before app implementation and re-audited afterward; ten independently researched additions expand the roster to 40; see `../DATA_AUDIT.md` for the subsequent corrections and limits. `verified-players.json` is the selected research snapshot; the complete playable database, crest URL arrays and incorrect-answer pools are explicitly embedded in `index.html`. `../CAREER_SOURCES.md` contains the audit trail.
+Research snapshot: **11 September 2026**. The initial 30-player input was frozen before app implementation and re-audited afterward; two batches of ten independently researched additions expand the roster to 50; see `../DATA_AUDIT.md` for the subsequent corrections and limits. `verified-players.json` is the selected research snapshot; the complete playable database, crest URL arrays and incorrect-answer pools are explicitly embedded in `index.html`. `../CAREER_SOURCES.md` contains the audit trail.
 
 ## Timeline scope
 
@@ -18,6 +18,7 @@ Research snapshot: **11 September 2026**. The initial 30-player input was frozen
 - **Roberto Carlos / Atlético Mineiro:** the documented senior tour loan is retained and visibly tagged **Tour loan**. It was friendly-only, not a competitive league spell.
 - **Ronaldo / São Cristóvão:** a conflicting database row with no appearance total is not treated as proof of senior play; the biographical youth classification is followed and the conflict disclosed.
 - **Expansion evidence boundaries:** Rosický’s exact reserve debut/order and De la Peña’s zero-total Barcelona C membership remain qualified in player notes; they are not asserted as fully resolved. Berbatov was not added because the Pirin youth/senior conflict remained substantive; Robbie Keane was researched instead. Aimar’s 2018 Copa Argentina comeback is included as official senior play, not a testimonial.
+- **Second expansion:** Riise’s Monaco B appearances are corroborated, but reserve/first-team debut order within 1998/99 remains qualified. Luis García’s 1998 Barcelona cup cameo is independently confirmed by the full match sheet. Gudjohnsen’s unused Pune signing and Saviola’s Ordino coaching role are excluded. Giuly was replaced with Joe Cole because his Lyon B playing evidence remained unresolved.
 - **Henry and Dida:** incomplete candidate investigations were excluded; Bergkamp and Pelé occupy their final roster slots.
 
 Player-specific chronology, returns, evidence conflicts and exclusions are explained after each round and in the career-source document. This is a manually cross-checked snapshot, not a live database or an absolute guarantee against future discoveries/corrections.
