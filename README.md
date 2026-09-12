@@ -28,11 +28,11 @@ Then open <http://127.0.0.1:4173>.
 - The second expansion adds **Javier Saviola, Andrés D’Alessandro, Maxi Rodríguez, Claudio Pizarro, Walter Samuel, Joe Cole, Freddie Ljungberg, John Arne Riise, Luis García, Eiður Guðjohnsen**.
 - The third expansion adds **Fernando Torres, Xabi Alonso, Thierry Henry, Iker Casillas, Andrea Pirlo, Diego Maradona, Javier Mascherano, Cafu, Marcelo Salas, Rivaldo**.
 - All additions are playable answers and eligible similarity-ranked distractors. Their researched notes and authentic club crests are included offline in both languages.
-- **Choose a competition** — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players (the default) — from the button next to Difficulty, or "Change competition" on the recap screen. Each competition deals only the players who carry that club-membership tag; distractor names favour the same competition when there are enough of them. Choosing one starts a fresh deck in that competition; it never interrupts a round already in progress.
+- **Choose a competition** — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players (the default) — from the prominent competition badge at the top of the page, or "Change competition" on the recap screen. Each competition deals only the players who carry that club-membership tag; distractor names favour the same competition when there are enough of them. Choosing one starts a fresh deck in that competition; it never interrupts a round already in progress.
 - Five shuffled answers per round: one correct player and four distinct distractors, selected by difficulty.
 - **Easy / Fácil:** random rivals from the full eligible roster.
-- **Medium / Media (default):** four rivals sampled from the twelve most similar eligible players.
-- **Hard / Difícil:** the four most similar eligible players; answer positions are still shuffled.
+- **Medium / Media (default):** four rivals sampled from the sixteen most similar eligible players.
+- **Hard / Difícil:** four rivals sampled from the eight most similar eligible players; answer positions are still shuffled.
 - Similarity prioritizes shared clubs, then national team, broad position, overlapping career years and career length. Identical ordered career paths remain excluded. Candidates come from the active competition's players (or the full 60-player roster in All Players mode); difficulty changes neither the facts nor the hints/attempts.
 - The difficulty selector is just below the career timeline. A change applies immediately before any guess/hint; otherwise the current options stay fixed and the setting applies to the next player. A bilingual message explains pending changes. Progress is preserved, and reload/replay remembers the selection.
 - Three attempts. Wrong buttons turn red and cannot be selected again.

@@ -139,8 +139,8 @@ test('difficulty ranks plausible rivals and preserves five unambiguous randomize
         for(const n of options.filter(n=>n!==p.name)){
           assert.ok(p.incorrectOptions.includes(n));
           const score=g.similarity(p,players.find(q=>q.name===n));averages[level]+=score;
-          if(level==='hard')assert.ok(score>=ranked[3].score,'Hard must select the closest four rivals');
-          if(level==='medium')assert.ok(score>=ranked[11].score,'Medium must use the closest twelve rivals');
+          if(level==='hard')assert.ok(score>=ranked[Math.min(7,ranked.length-1)].score,'Hard must select from the closest eight rivals');
+          if(level==='medium')assert.ok(score>=ranked[Math.min(15,ranked.length-1)].score,'Medium must use from the closest sixteen rivals');
         }
       }
       assert.ok(orders.size>10,'Answer positions remain randomized');
