@@ -59,7 +59,12 @@
     ],
     "notes": "First team precedes B team by competitive debut, contrary to the conventional infobox ordering. These are overlapping 2002/03 spells, not a claim of a permanent demotion. Andorinha and Nacional were youth-only. Current Al-Nassr status corroborated on the Saudi Pro League website.",
     "status": "active",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
   },
   {
     "id": "zinedine-zidane",
@@ -111,7 +116,11 @@
     ],
     "notes": "Cannes B, often omitted from first-team-only summaries, is confirmed in the senior French pyramid from 1987/88, before the first-team debut in 1989. Reserve membership is reported in seasons (not exact first/last appearance dates) and overlaps the first team. Real Madrid Castilla was a coaching role, not a playing club.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
   },
   {
     "id": "dennis-bergkamp",
@@ -145,7 +154,11 @@
     ],
     "notes": "All three senior playing clubs and chronology cross-checked against the independent season-by-season record. Ajax youth and later assistant-coaching work are not additional playing spells.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "david-beckham",
@@ -218,7 +231,12 @@
     ],
     "notes": "Both separate AC Milan loans and all actual parent-club returns are shown in playing order. No Tottenham playing spell: youth association/training is not a senior professional appearance. Inter Miami and Salford City are ownership roles.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
   },
   {
     "id": "wayne-rooney",
@@ -270,7 +288,11 @@
     ],
     "notes": "Primarily a forward, later also a midfielder. D.C. United, Birmingham City and Plymouth Argyle managerial appointments after playing retirement are excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "steven-gerrard",
@@ -304,7 +326,11 @@
     ],
     "notes": "Retired from professional playing in November 2016. Later Liverpool training and coaching, Rangers, Aston Villa and Al-Ettifaq management are not playing spells.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "frank-lampard",
@@ -365,7 +391,11 @@
     ],
     "notes": "Chronology is by competitive playing, not parent registration: Swansea precedes the West Ham first-team debut. Early publicity described Manchester City as a loan, but the Premier League subsequently confirmed a direct City contract and no NYCFC loan agreement. No Melbourne City spell. Retirement announced February 2017 after final playing season in 2016.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "paul-scholes",
@@ -401,7 +431,11 @@
     ],
     "notes": "Two distinct professional playing spells at the same club. Royton Town competitive amateur appearances in 2018 are real (not a testimonial), but excluded from this PROFESSIONAL career scope; do not claim he never played senior football elsewhere. Salford ownership/coaching and Oldham management excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "ryan-giggs",
@@ -432,7 +466,11 @@
     ],
     "notes": "One professional playing club; left midfielder/winger. Manchester City was youth-only. Wales is the national-team country; Great Britain Olympic participation is not a club.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "francesco-totti",
@@ -462,7 +500,10 @@
     ],
     "notes": "A forward/attacking midfielder. Roma was his sole professional senior club. Youth clubs, charity matches, small-sided football and later administrative roles excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league"
+    ]
   },
   {
     "id": "paolo-maldini",
@@ -493,7 +534,10 @@
     ],
     "notes": "Entire senior professional playing career at AC Milan, primarily left-back and centre-back. Primavera is youth football; Miami FC ownership and AC Milan executive work excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league"
+    ]
   },
   {
     "id": "gianluigi-buffon",
@@ -541,7 +585,10 @@
     ],
     "notes": "Both Juventus and Parma returns are actual playing spells. Final contract reportedly ran to 2024, but retirement was in 2023; do not extend the career to the contract expiry.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league"
+    ]
   },
   {
     "id": "andres-iniesta",
@@ -593,7 +640,11 @@
     ],
     "notes": "Retired 8 October 2024. Important calendar correction: Wikipedia labels B tenure 2000–2003 from the 2000/01 season; BDFutbol individual match records place his first B appearance in February 2001. Barcelona B is not youth football. Albacete was youth-only; Gulf United is a later managerial role.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
   },
   {
     "id": "xavi",
@@ -632,7 +683,11 @@
     ],
     "notes": "Correct subject is Xavi Hernández, born 1980; /wiki/Xavi currently resolves to a disambiguation page. Last professional playing season was 2018/19. Later Al Sadd and Barcelona coaching spells are excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
   },
   {
     "id": "zlatan-ibrahimovic",
@@ -701,7 +756,12 @@
     ],
     "notes": "Retired June 2023. Loan-to-permanent AC Milan transition does not create another club or a fictitious Barcelona return. Hammarby investment/training and post-retirement AC Milan advisory work are excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
   },
   {
     "id": "lionel-messi",
@@ -753,7 +813,11 @@
     ],
     "notes": "Reserve and first-team stints ordered by competitive debut, not the November 2003 first-team friendly. Newell’s Old Boys was youth only. Current Inter Miami playing contract independently confirmed through 2028.",
     "status": "active",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
   },
   {
     "id": "neymar",
@@ -805,7 +869,12 @@
     ],
     "notes": "Santos official 6 January 2026 announcement confirms contract through end of 2026; youth Portuguesa Santista excluded.",
     "status": "active",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
   },
   {
     "id": "luis-suarez",
@@ -876,7 +945,13 @@
     ],
     "notes": "Miami announced signing in December 2023 for the 2024 campaign; dates use playing season. New contract through 2026 confirmed by club on 17 December 2025. International retirement does not mean club retirement. Reported Groningen second-team acclimatisation is not added as a separate node: the Dutch reserve league was outside the adult pyramid during his 2006–2007 spell.",
     "status": "active",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga",
+      "brasileirao"
+    ]
   },
   {
     "id": "sergio-aguero",
@@ -918,7 +993,13 @@
     ],
     "notes": "Retired 15 December 2021 because of a heart condition. Later exhibitions and Kings League appearances are not professional eleven-a-side club spells.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "carlos-tevez",
@@ -982,7 +1063,13 @@
     ],
     "notes": "Three genuine Boca Juniors spells. Final playing club Boca in 2021; retirement announced June 2022. Loan/ownership end dates are not additional playing stints.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera",
+      "brasileirao"
+    ]
   },
   {
     "id": "ronaldo",
@@ -1037,7 +1124,12 @@
     ],
     "notes": "São Cristóvão was youth football. Flamengo training after injury was not a signed playing spell. Retired in February 2011. Corinthians years describe competitive play from 2009; the December 2008 signing is noted separately. NFT additionally lists São Cristovão in 1993 with no appearance figure; the biographical source classifies São Cristóvão as youth. Excluded from senior clubs rather than treating an unquantified database row as proof of senior play.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
   },
   {
     "id": "ronaldinho",
@@ -1104,7 +1196,12 @@
     ],
     "notes": "Last confirmed competitive club in the retrieved career evidence: Fluminense (2015). Ravenna announced a new player signing in June 2026 using future-tense registration wording. Ravenna is retained only as a tagged signing exception, not proof of a competitive comeback. Excludes futsal, exhibitions, legends teams and ownership stakes.",
     "status": "signing-announced",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
   },
   {
     "id": "kaka",
@@ -1169,7 +1266,12 @@
     ],
     "notes": "Timeline follows playing order: São Paulo loan in 2014 before Orlando MLS play in 2015. Orlando signed him in 2014 and immediately loaned him to São Paulo; that pre-debut contract does not create an extra Orlando playing node. Retired December 2017.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
   },
   {
     "id": "roberto-carlos",
@@ -1242,7 +1344,12 @@
     ],
     "notes": "Atlético Mineiro retained only as a documented friendly-only tour loan. Galo Digital narrows it to August 1992 (not the infobox’s 1992–1993) and documents the subsequent União São João return. Delhi playing dates are 2015, not an inferred 2016 season. Sivasspor and Akhisarspor were managerial jobs; Bull in the Barne and Soccer Aid were exhibitions.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
   },
   {
     "id": "javier-zanetti",
@@ -1280,7 +1387,11 @@
     ],
     "notes": "Full-back who also played midfield. Talleres means the club from Remedios de Escalada, not Talleres de Córdoba. Independiente was youth only. Inter executive role after 2014 is not a playing spell.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ]
   },
   {
     "id": "gabriel-batistuta",
@@ -1335,7 +1446,11 @@
     ],
     "notes": "Inter Milan’s 2003 loan is included despite omission from the World Soccer recap. Final club Al-Arabi of Qatar, not another club sharing that name. Retired March 2005; youth and later polo excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ]
   },
   {
     "id": "hernan-crespo",
@@ -1416,7 +1531,12 @@
     ],
     "notes": "Chelsea split around AC Milan loan to preserve actual 2005–2006 return. Inter’s 2006 loan-to-2008 permanent conversion is one continuous spell, not a fictitious Chelsea return. Exclude Bengal Tuskers: wrong auction franchise, and the proposed competition never started. Barasat likewise is an unrealized auction allocation, not a playing club. Parma calls February 2012 retirement; biography distinguishes February departure from November retirement confirmation. Coaching jobs excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera"
+    ]
   },
   {
     "id": "juan-sebastian-veron",
@@ -1499,7 +1619,12 @@
     ],
     "notes": "Four professional Estudiantes spells, including the 2013 and 2017 comebacks. The 2006–2007 loan became permanent without a Chelsea playing return. Exclude Brandsen and Estrella de Berisso as amateur football, not professional club history. The 2017 infobox zero is league-only; AS confirms competitive Libertadores play. Chairman/director duties excluded; no inferred extension to 2018 from contract length.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera"
+    ]
   },
   {
     "id": "juan-roman-riquelme",
@@ -1554,7 +1679,12 @@
     ],
     "notes": "Villarreal loan-to-permanent phase combined; Barcelona years distinguish play from ownership. Boca’s 2012–2013 hiatus and actual playing return are shown separately despite the infobox aggregating 2007–2014. Argentinos Juniors before Boca was youth only; the 2014 return was senior. Retirement January 2015; exhibitions and club presidency excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "pele",
@@ -1584,7 +1714,10 @@
     ],
     "notes": "Both professional clubs cross-checked with the Hall of Fame biography. Bauru was youth football. Military, regional selections and exhibitions are outside professional club scope; the 1977 farewell against Santos is not another Santos playing spell. Cosmos means the historical NASL club, not NYCFC.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "brasileirao"
+    ]
   },
   {
     "id": "fabricio-coloccini",
@@ -1667,7 +1800,13 @@
     ],
     "notes": "Playing chronology differs from the ownership-based English infobox: Milan appears only after Villarreal. Boca youth arrival in 1998 and unused Milan membership before the loans are excluded. San Lorenzo began in calendar 2001; Deportivo began in January 2005. Retired at Aldosivi in 2021; later coaching jobs are excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "juan-pablo-sorin",
@@ -1743,7 +1882,13 @@
     ],
     "notes": "Three separate Cruzeiro playing spells are retained, including the often-hidden 2004 return between PSG and Villarreal. The final spell starts with play in 2009 rather than the 2008 signing. Contemporary reporting confirms a March 2009 state-championship appearance, so the June Série A match was not his only competitive appearance.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera",
+      "la-liga",
+      "brasileirao"
+    ]
   },
   {
     "id": "pablo-aimar",
@@ -1801,7 +1946,12 @@
     ],
     "notes": "Estudiantes de Río Cuarto youth football is excluded, but the official 2018 Copa Argentina comeback is included: contemporary Olé reporting explicitly calls it his last professional match. This is distinct from Estudiantes de La Plata. NFT stops in 2015 and therefore does not corroborate that cup-only comeback. Johor is dated by first play, not the 2013 signing.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "esteban-cambiasso",
@@ -1860,7 +2010,13 @@
     ],
     "notes": "Real Madrid B is included as senior adult-pyramid football, not youth. Argentinos Juniors is excluded: the infobox classifies it as youth and NFT lists zero league appearances, despite loose professional-career wording in the biography. Real Madrid ownership/administrative returns without games are not separate nodes.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "diego-milito",
@@ -1919,7 +2075,12 @@
     ],
     "notes": "Both Genoa and Racing returns are actual playing spells. Racing’s official history dates the first Genoa move to January 2004, correcting the infobox’s calendar-2003 start. The Zaragoza loan-to-permanent transition is a single continuous spell. Racing confirms the career ended on 21 May 2016; later executive roles and farewell exhibitions are excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "gaizka-mendieta",
@@ -1975,7 +2136,12 @@
     ],
     "notes": "Includes Valencia B in the adult pyramid. No invented Lazio return between Barcelona and Middlesbrough: ownership is not a playing spell. Middlesbrough endpoint is release/retirement, not last appearance.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
   },
   {
     "id": "tomas-rosicky",
@@ -2029,7 +2195,11 @@
     ],
     "notes": "Sparta B is an adult-pyramid reserve side, not youth football. Its 1998/99 season overlaps the first team, whose competitive debut is corroborated as 14 April 1999. Reserve-first ordering remains provisional because the exact B-team debut is not independently resolved. Later sporting-director work is excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "ivan-de-la-pena",
@@ -2087,7 +2257,11 @@
     ],
     "notes": "Barcelona B extends through 1995/96 according to the detailed statistics, despite the 1995 infobox endpoint. Barcelona C membership is listed by NFT in 1993/94 without an appearance total; senior appearances and exact ordering were not independently established, so C is not asserted here. Roma was coaching, not playing.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
   },
   {
     "id": "robbie-keane",
@@ -2192,7 +2366,11 @@
     ],
     "notes": "All senior professional clubs cross-checked against the complete NFT club table and Wikipedia. Tottenham is split around Liverpool and Celtic; LA Galaxy is split around Aston Villa. Leeds loan-to-permanent is continuous. No invented Inter or Tottenham ownership-only returns. Fettercairn, Crumlin United and Wolves youth, the New York Cosmos testimonial and later coaching-only roles are excluded. Dates describe playing stints, with departure endpoints where stated.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "wesley-sneijder",
@@ -2240,7 +2418,11 @@
     ],
     "notes": "All six professional first-team clubs cross-checked. Ajax begins with his actual 2003 debut rather than the 2002 infobox membership date. Youth and post-retirement activities are excluded; no senior-pyramid reserve spell is established in the retrieved career records.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
   },
   {
     "id": "javier-saviola",
@@ -2318,7 +2500,12 @@
     ],
     "notes": "Barcelona is split around the Monaco and Sevilla loans because he actually returned to play in 2006/07. River Plate was his final professional football club; the 2016 endpoint denotes departure, not a claim of competitive appearances that year. NFT lists FC Ordino in 2016/17 without appearances, but the biography identifies an assistant-coaching role, so it is excluded. Encamp was futsal, not this football timeline.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "andres-dalessandro",
@@ -2399,7 +2586,13 @@
     ],
     "notes": "Three Internacional playing spells are retained, separated by River Plate and Nacional. NFT omits the final 2022 return; Internacional’s official farewell report confirms it was competitive league play, not a testimonial. The official report dates his final match to 17 April, correcting the biography’s 16 April. Unused Wolfsburg ownership returns and youth/reserve-league football are excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera",
+      "la-liga",
+      "brasileirao"
+    ]
   },
   {
     "id": "maxi-rodriguez",
@@ -2456,7 +2649,13 @@
     ],
     "notes": "All three Newell’s playing spells are included. His final return was agreed in December 2018 but belongs to 2019 by first playing year. Subsequent Hughes regional-league football and the 2023 farewell exhibition are outside this professional-career scope. Midfielder covers his winger and attacking-midfield roles.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "claudio-pizarro",
@@ -2523,7 +2722,11 @@
     ],
     "notes": "Four continuous Werder Bremen playing spells, not five: the 2008/09 loan and 2009 permanent transfer are merged, with no unused Chelsea return. Both season tables place Alianza Lima appearances in 1998–1999 despite the Wikipedia infobox starting in 1997. Cantolao youth football and later ambassador or exhibition roles are excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "walter-samuel",
@@ -2571,7 +2774,12 @@
     ],
     "notes": "The 1995/96 season label does not mean a calendar-1995 debut: the biography dates senior play to 1996. Basel, not Inter, was his final playing club. Later Argentina coaching roles are excluded. The two sources disagree on some appearance totals, which are not part of this timeline.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "argentine-primera",
+      "la-liga"
+    ]
   },
   {
     "id": "joe-cole",
@@ -2652,7 +2860,11 @@
     ],
     "notes": "Full professional senior playing career cross-checked against complete Wikipedia career text and the actual NFT HTML club table. Includes both Liverpool spells and the West Ham return; Coventry loan-to-permanent is one continuous spell. No adult-pyramid reserve spell is established. Youth and closed reserve football, later Chelsea coaching and post-retirement amateur Belstone appearances are excluded. An April 2022 Rowdies announcement is not evidence of a competitive playing comeback.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "freddie-ljungberg",
@@ -2710,7 +2922,11 @@
     ],
     "notes": "All eight senior clubs cross-checked against Wikipedia and the actual NFT HTML club table. Mumbai City is a genuine 2014 comeback, not coaching. No adult-pyramid reserve spell is established.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "john-arne-riise",
@@ -2777,7 +2993,11 @@
     ],
     "notes": "Includes Monaco B and the actual 2016 Aalesund return. Chennaiyin was a professional comeback after the June retirement. Later fifth-tier Rollon (2017) and Avaldsnes (2023) are excluded as post-retirement amateur football. Monaco reserve/first-team debut ordering remains provisional.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
   },
   {
     "id": "luis-garcia",
@@ -2878,7 +3098,12 @@
     ],
     "notes": "Luis Javier García Sanz, born 24 June 1978, not either namesake. Includes Barcelona B, the competitive 1998 Supercopa cameo, four loans and actual returns. No ownership-only Barcelona returns between loans. India 2014 and Australia 2016 are playing comebacks; subsequent executive work is excluded.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
   },
   {
     "id": "eidur-gudjohnsen",
@@ -2974,6 +3199,588 @@
     ],
     "notes": "All senior playing clubs cross-checked. Pune City signed him in 2016 but an injury ruled him out of the entire season, so no playing node is invented. The Seattle Sounders reserve trial was in a closed reserve competition, not the adult pyramid. Last club appearances were in 2016; retirement announced in 2017. No Monaco or Stoke ownership-only returns.",
     "status": "retired",
-    "verifiedAt": "2026-09-11"
+    "verifiedAt": "2026-09-11",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "fernando-torres",
+    "name": "Fernando Torres",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Atlético Madrid",
+        "years": "2001–2007"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2007–2011"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2011–2014"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2014–2015",
+        "note": "Loan from Chelsea."
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2015–2018",
+        "note": "Second playing spell; loan from Chelsea in 2015, made permanent later that year; continuous playing spell."
+      },
+      {
+        "name": "Sagan Tosu",
+        "years": "2018–2019"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fernando_Torres",
+        "title": "Fernando Torres - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6219/Fernando_Torres.html",
+        "title": "Fernando Torres (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Chelsea registration is split around the AC Milan loan, then a further Atlético Madrid loan-to-permanent return, matching this project's continuous loan-to-permanent handling used elsewhere in the roster. Retired May 2019 after his final Sagan Tosu season. Youth Fuenlabrada football excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "xabi-alonso",
+    "name": "Xabi Alonso",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Real Sociedad B",
+        "years": "1999–2000",
+        "note": "Senior reserve side; overlaps first-team debut."
+      },
+      {
+        "name": "Real Sociedad",
+        "years": "1999–2004",
+        "note": "Captain from 2001."
+      },
+      {
+        "name": "SD Eibar",
+        "years": "2000–2001",
+        "note": "Loan from Real Sociedad, overlapping the first-team spell."
+      },
+      {
+        "name": "Liverpool",
+        "years": "2004–2009"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2009–2014"
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2014–2017"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Xabi_Alonso",
+        "title": "Xabi Alonso - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6255/Xabi_Alonso.html",
+        "title": "Xabi Alonso (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Real Sociedad B and the Eibar loan both overlap the first-team Real Sociedad spell rather than preceding or replacing it. Retired May 2017 after his final Bayern Munich season; subsequent Real Sociedad and Bayer Leverkusen posts are coaching roles, not playing spells.",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "thierry-henry",
+    "name": "Thierry Henry",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Monaco B",
+        "years": "1994–1995",
+        "note": "Senior reserve side; overlaps first-team debut."
+      },
+      {
+        "name": "Monaco",
+        "years": "1994–1999"
+      },
+      {
+        "name": "Juventus",
+        "years": "1999"
+      },
+      {
+        "name": "Arsenal",
+        "years": "1999–2007"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2007–2010"
+      },
+      {
+        "name": "New York Red Bulls",
+        "years": "2010–2012"
+      },
+      {
+        "name": "Arsenal",
+        "years": "2012",
+        "note": "Two-month loan return, January–February 2012; no permanent second Arsenal spell."
+      },
+      {
+        "name": "New York Red Bulls",
+        "years": "2012–2014",
+        "note": "Playing return after the Arsenal loan."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Thierry_Henry",
+        "title": "Thierry Henry - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2420/Thierry_Henry.html",
+        "title": "Thierry Henry (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The 2012 Arsenal loan splits the New York Red Bulls tenure into two nodes, matching how this project treats other mid-career loan returns (e.g. Beckham/LA Galaxy, Crespo/Chelsea). Retired December 2014. Coaching spells (Arsenal academy, Belgium, Monaco, France) excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "iker-casillas",
+    "name": "Iker Casillas",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Real Madrid C",
+        "years": "1998–1999",
+        "note": "Senior third-tier reserve side."
+      },
+      {
+        "name": "Real Madrid B",
+        "years": "1999–2000",
+        "note": "Senior reserve side; overlaps first-team debut."
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1999–2015",
+        "note": "First-team competitive debut September 1999, overlapping reserve appearances."
+      },
+      {
+        "name": "Porto",
+        "years": "2015–2020"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Iker_Casillas",
+        "title": "Iker Casillas - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6241/Iker_Casillas.html",
+        "title": "Iker Casillas (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Real Madrid C and B are both senior reserve sides preceding and overlapping the first-team debut. Retired August 2020 after a heart attack during Porto training; later Real Federación Española de Fútbol presidency campaign is not a playing spell.",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "andrea-pirlo",
+    "name": "Andrea Pirlo",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Brescia",
+        "years": "1995–1998"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1998–2001"
+      },
+      {
+        "name": "Reggina",
+        "years": "1999–2000",
+        "note": "Loan from Inter Milan, overlapping the Inter tenure."
+      },
+      {
+        "name": "Brescia",
+        "years": "2001",
+        "note": "Second, separate loan from Inter Milan."
+      },
+      {
+        "name": "AC Milan",
+        "years": "2001–2011"
+      },
+      {
+        "name": "Juventus",
+        "years": "2011–2015"
+      },
+      {
+        "name": "New York City FC",
+        "years": "2015–2017"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Andrea_Pirlo",
+        "title": "Andrea Pirlo - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/3384/Andrea_Pirlo.html",
+        "title": "Andrea Pirlo (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Both Reggina and the second Brescia spell are genuine, separate Inter Milan loans rather than a single continuous stint. Retired November 2017; subsequent Juventus front-office and Italy national-team coaching roles excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "diego-maradona",
+    "name": "Diego Maradona",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder / Forward",
+    "clubs": [
+      {
+        "name": "Argentinos Juniors",
+        "years": "1976–1981"
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "1981–1982"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1982–1984"
+      },
+      {
+        "name": "Napoli",
+        "years": "1984–1991"
+      },
+      {
+        "name": "Sevilla",
+        "years": "1992–1993"
+      },
+      {
+        "name": "Newell's Old Boys",
+        "years": "1993–1994"
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "1995–1997",
+        "note": "Second playing spell; retired October 1997."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Diego_Maradona",
+        "title": "Diego Maradona - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14124/Diego_Maradona.html",
+        "title": "Diego Maradona (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Attacking midfielder/second striker, recorded here under the project's combined Midfielder/Forward category used for similarly versatile players. Later Boca Juniors, Racing Club, Al-Wasl, Fujairah, Dorados and Gimnasia head-coaching jobs, and the Argentina national-team management spell, are not playing appearances.",
+    "status": "deceased",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "argentine-primera",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "javier-mascherano",
+    "name": "Javier Mascherano",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder / Defender",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "2003–2005"
+      },
+      {
+        "name": "Corinthians",
+        "years": "2005–2006"
+      },
+      {
+        "name": "West Ham United",
+        "years": "2006–2007"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2007–2010"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2010–2018"
+      },
+      {
+        "name": "Hebei China Fortune",
+        "years": "2018–2019"
+      },
+      {
+        "name": "Estudiantes",
+        "years": "2019–2020"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Javier_Mascherano",
+        "title": "Javier Mascherano - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/331/Javier_Mascherano.html",
+        "title": "Javier Mascherano (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Played primarily as a defensive midfielder at Liverpool and Barcelona, shifting to centre-back later at Barcelona and beyond; recorded under the project's combined Midfielder/Defender category. Retired February 2021 after his final Estudiantes season; later Argentina youth-coaching roles excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera",
+      "la-liga",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "cafu",
+    "name": "Cafu",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "São Paulo",
+        "years": "1989–1994"
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "1994–1995"
+      },
+      {
+        "name": "Juventude",
+        "years": "1995",
+        "note": "Brief spell between Real Zaragoza and Palmeiras; parent-club status not fully established in retrieved evidence."
+      },
+      {
+        "name": "Palmeiras",
+        "years": "1995–1997"
+      },
+      {
+        "name": "Roma",
+        "years": "1997–2003"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2003–2008"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Cafu",
+        "title": "Cafu - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/991/Cafu.html",
+        "title": "Cafu (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Right-back, Brazil's most-capped international player. Retired 2008 after his final AC Milan season; subsequent media/ambassadorial work excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "marcelo-salas",
+    "name": "Marcelo Salas",
+    "continent": "South America",
+    "country": "Chile",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Universidad de Chile",
+        "years": "1993–1996"
+      },
+      {
+        "name": "River Plate",
+        "years": "1996–1998"
+      },
+      {
+        "name": "Lazio",
+        "years": "1998–2001"
+      },
+      {
+        "name": "Juventus",
+        "years": "2001–2003",
+        "note": "Registration continued during loans-out until 2006; no further Juventus playing return established."
+      },
+      {
+        "name": "River Plate",
+        "years": "2003–2005",
+        "note": "Loan from Juventus."
+      },
+      {
+        "name": "Universidad de Chile",
+        "years": "2005–2008",
+        "note": "Loan from Juventus 2005–2006, then permanent from 2006; continuous playing spell. Retired 2008."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Marcelo_Salas",
+        "title": "Marcelo Salas - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1401/Marcelo_Salas.html",
+        "title": "Marcelo Salas (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Juventus is split at the first loan-out, matching how this project handles other registration-vs-playing gaps (e.g. Riquelme/Barcelona). The second Universidad de Chile spell combines its loan and permanent phases into one continuous node.",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "rivaldo",
+    "name": "Rivaldo",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder / Forward",
+    "clubs": [
+      {
+        "name": "Santa Cruz",
+        "years": "1988–1992"
+      },
+      {
+        "name": "Mogi Mirim",
+        "years": "1992–1994"
+      },
+      {
+        "name": "Corinthians",
+        "years": "1993–1994",
+        "note": "Loan from Mogi Mirim, overlapping that spell."
+      },
+      {
+        "name": "Palmeiras",
+        "years": "1994–1996"
+      },
+      {
+        "name": "Deportivo La Coruña",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1997–2002"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2002–2003"
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "2004"
+      },
+      {
+        "name": "Olympiacos",
+        "years": "2004–2007"
+      },
+      {
+        "name": "AEK Athens",
+        "years": "2007–2008"
+      },
+      {
+        "name": "Bunyodkor",
+        "years": "2008–2011"
+      },
+      {
+        "name": "São Paulo",
+        "years": "2011",
+        "note": "Loan from Bunyodkor."
+      },
+      {
+        "name": "Kabuscorp",
+        "years": "2012"
+      },
+      {
+        "name": "São Caetano",
+        "years": "2013"
+      },
+      {
+        "name": "Mogi Mirim",
+        "years": "2014–2015",
+        "note": "Second playing spell; retired 2015."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rivaldo",
+        "title": "Rivaldo - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1023/Rivaldo_1.html",
+        "title": "Rivaldo (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Attacking midfielder/left winger/forward, recorded under the project's combined Midfielder/Forward category. The full journeyman tail (Bunyodkor, Kabuscorp, São Caetano, second Mogi Mirim spell) is retained as documented senior professional football, matching this roster's existing long-tail entries (e.g. Guðjohnsen, Luis García).",
+    "status": "retired",
+    "verifiedAt": "2026-09-12",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
   }
 ]

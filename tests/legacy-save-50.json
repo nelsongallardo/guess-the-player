@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "difficulty": "hard",
+  "deck": [
+    "pablo-aimar",
+    "neymar",
+    "gianluigi-buffon",
+    "sergio-aguero",
+    "ivan-de-la-pena",
+    "ryan-giggs",
+    "robbie-keane",
+    "luis-garcia",
+    "joe-cole",
+    "david-beckham",
+    "zinedine-zidane",
+    "pele",
+    "andres-iniesta",
+    "wayne-rooney",
+    "tomas-rosicky",
+    "claudio-pizarro",
+    "cristiano-ronaldo",
+    "john-arne-riise",
+    "hernan-crespo",
+    "javier-zanetti",
+    "maxi-rodriguez",
+    "juan-roman-riquelme",
+    "eidur-gudjohnsen",
+    "xavi",
+    "gabriel-batistuta",
+    "carlos-tevez",
+    "paolo-maldini",
+    "juan-sebastian-veron",
+    "dennis-bergkamp",
+    "esteban-cambiasso",
+    "paul-scholes",
+    "wesley-sneijder",
+    "freddie-ljungberg",
+    "frank-lampard",
+    "kaka",
+    "francesco-totti",
+    "andres-dalessandro",
+    "gaizka-mendieta",
+    "zlatan-ibrahimovic",
+    "ronaldo",
+    "diego-milito",
+    "steven-gerrard",
+    "ronaldinho",
+    "fabricio-coloccini",
+    "walter-samuel",
+    "lionel-messi",
+    "javier-saviola",
+    "roberto-carlos",
+    "luis-suarez",
+    "juan-pablo-sorin"
+  ],
+  "roundIndex": 5,
+  "rounds": [
+    {
+      "options": [
+        "Zinedine Zidane",
+        "Pablo Aimar",
+        "Zlatan Ibrahimović",
+        "Juan Román Riquelme",
+        "Walter Samuel"
+      ],
+      "guesses": [
+        "Pablo Aimar"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Neymar",
+        "John Arne Riise",
+        "Lionel Messi",
+        "Dennis Bergkamp",
+        "Francesco Totti"
+      ],
+      "guesses": [
+        "Neymar"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Tomáš Rosický",
+        "Eiður Guðjohnsen",
+        "Gianluigi Buffon",
+        "Diego Milito",
+        "Gabriel Batistuta"
+      ],
+      "guesses": [
+        "Gianluigi Buffon"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Luis Suárez",
+        "Sergio Agüero",
+        "Eiður Guðjohnsen",
+        "Hernán Crespo",
+        "Gianluigi Buffon"
+      ],
+      "guesses": [
+        "Sergio Agüero"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Robbie Keane",
+        "Ronaldinho",
+        "Kaká",
+        "Wesley Sneijder",
+        "Iván de la Peña"
+      ],
+      "guesses": [
+        "Iván de la Peña"
+      ],
+      "hints": 0,
+      "difficulty": "hard"
+    },
+    {
+      "options": [
+        "Andrés Iniesta",
+        "Ryan Giggs",
+        "Carlos Tevez",
+        "Robbie Keane",
+        "Paolo Maldini"
+      ],
+      "guesses": [
+        "Andrés Iniesta"
+      ],
+      "hints": 1,
+      "difficulty": "hard"
+    }
+  ],
+  "finished": false
+}

@@ -27,7 +27,7 @@ async page => {
         }
         return checked;
       },{locale});
-      ok(rows.length===50&&new Set(rows).size===50,'Every player checked');cases.push({locale,width,players:rows.length});
+      ok(rows.length===60&&new Set(rows).size===60,'Every player checked');cases.push({locale,width,players:rows.length});
       ok(!await page.locator('#career-navigation').isVisible(),'No mobile scroll controls');
     }
   }
@@ -53,16 +53,16 @@ async page => {
   // Real Spanish playthrough, alternating first-attempt wins and three-attempt losses.
   await page.evaluate(()=>{state=CareerGame.create();render(false,true);});
   let wins=0;const seen=new Set();
-  for(let i=0;i<50;i++){
+  for(let i=0;i<60;i++){
     const p=await page.evaluate(()=>({id:CareerGame.playerAt(state).id,name:CareerGame.playerAt(state).name,options:CareerGame.roundAt(state).options}));seen.add(p.id);
     const chosen=i%2===0?[p.name]:p.options.filter(n=>n!==p.name).slice(0,3);
     for(const name of chosen)await page.locator('#options button').nth(p.options.indexOf(name)).click();
     if(i%2===0){wins++;ok((await page.locator('#feedback').textContent()).startsWith('¡Gol!'),'Spanish success');}
     else ok((await page.locator('#feedback').textContent()).includes('Sin intentos'),'Spanish loss');
-    ok(await page.locator('#next-label').textContent()===(i===49?'Ver resultados':'Siguiente jugador'),'Spanish next/results');
+    ok(await page.locator('#next-label').textContent()===(i===59?'Ver resultados':'Siguiente jugador'),'Spanish next/results');
     await page.locator('#next').click();
   }
-  ok(seen.size===50,'Spanish all50 deck');ok((await page.locator('#summary-caption').textContent()).includes('25 / 50 jugadores acertados'),'Spanish recap');
+  ok(seen.size===60,'Spanish all60 deck');ok((await page.locator('#summary-caption').textContent()).includes('30 / 60 jugadores acertados'),'Spanish recap');
   const final=await page.evaluate(()=>JSON.stringify(state));await page.locator('#language').selectOption('en');ok(await page.evaluate(()=>JSON.stringify(state))===final,'Finished language switch preserves recap');
   await page.locator('#language').selectOption('es');await page.locator('#replay').click();ok(await page.evaluate(()=>language==='es'&&CareerGame.stats(state).score===0),'Spanish replay');
   const isolated=await page.context().browser().newContext({locale:'es-AR'});

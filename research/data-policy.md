@@ -1,6 +1,6 @@
 # Career-data policy
 
-Research snapshot: **11 September 2026**. The initial 30-player input was frozen before app implementation and re-audited afterward; two batches of ten independently researched additions expand the roster to 50; see `../DATA_AUDIT.md` for the subsequent corrections and limits. `verified-players.json` is the selected research snapshot; the complete playable database, crest URL arrays and incorrect-answer pools are explicitly embedded in `index.html`. `../CAREER_SOURCES.md` contains the audit trail.
+Research snapshot: **11 September 2026**, with a third ten-player batch added **12 September 2026**. The initial 30-player input was frozen before app implementation and re-audited afterward; three batches of ten independently researched additions expand the roster to 60; see `../DATA_AUDIT.md` for the subsequent corrections and limits. `verified-players.json` is the selected research snapshot; the complete playable database, crest URL arrays and incorrect-answer pools are explicitly embedded in `index.html`. `../CAREER_SOURCES.md` contains the audit trail.
 
 ## Timeline scope
 
@@ -19,9 +19,14 @@ Research snapshot: **11 September 2026**. The initial 30-player input was frozen
 - **Ronaldo / São Cristóvão:** a conflicting database row with no appearance total is not treated as proof of senior play; the biographical youth classification is followed and the conflict disclosed.
 - **Expansion evidence boundaries:** Rosický’s exact reserve debut/order and De la Peña’s zero-total Barcelona C membership remain qualified in player notes; they are not asserted as fully resolved. Berbatov was not added because the Pirin youth/senior conflict remained substantive; Robbie Keane was researched instead. Aimar’s 2018 Copa Argentina comeback is included as official senior play, not a testimonial.
 - **Second expansion:** Riise’s Monaco B appearances are corroborated, but reserve/first-team debut order within 1998/99 remains qualified. Luis García’s 1998 Barcelona cup cameo is independently confirmed by the full match sheet. Gudjohnsen’s unused Pune signing and Saviola’s Ordino coaching role are excluded. Giuly was replaced with Joe Cole because his Lyon B playing evidence remained unresolved.
-- **Henry and Dida:** incomplete candidate investigations were excluded; Bergkamp and Pelé occupy their final roster slots.
+- **Henry and Dida:** incomplete candidate investigations were excluded from the second expansion; Bergkamp and Pelé occupied those final roster slots. Henry's chronology was fully resolved for the third expansion (his 2012 loan return to Arsenal mid-contract at New York Red Bulls is corroborated by both sources) and he is now included.
+- **Third expansion:** Cafu's brief 1995 Juventude spell is corroborated as senior play, but its exact parent-club/loan relationship to the surrounding Real Zaragoza and Palmeiras spells is not fully resolved and remains a disclosed qualification, not an assumption. Rivaldo's full late-career tail (Bunyodkor, Kabuscorp, São Caetano, a second Mogi Mirim spell) is retained in full as documented senior professional football rather than trimmed for brevity, matching this roster's existing long-tail entries.
 
 Player-specific chronology, returns, evidence conflicts and exclusions are explained after each round and in the career-source document. This is a manually cross-checked snapshot, not a live database or an absolute guarantee against future discoveries/corrections.
+
+## Competition tags
+
+Each player also carries a `competitions` array (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) used to let the game organize rounds by competition instead of only by the full roster. A club maps to a competition when it is a well-known, high-confidence participant in that competition at some point in its history — this is a broad roster-organization categorization derived from club membership, not a per-season or per-appearance sourced claim, the same distinction this document already draws for country and position. A player can carry several tags (most European-club legends qualify for Champions League; several South American-born stars who played in Europe qualify for multiple European tags as well as their South American league).
 
 ## Crests and source preservation
 

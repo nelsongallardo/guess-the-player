@@ -24,25 +24,29 @@ Then open <http://127.0.0.1:4173>.
 
 ## Rules
 
-- Fifty players: twenty-five representing European national teams and twenty-five representing South American national teams. The original stars are joined by Fabricio Coloccini, Juan Pablo Sorín, Pablo Aimar, Esteban Cambiasso, Diego Milito, Gaizka Mendieta, Tomáš Rosický, Iván de la Peña, Robbie Keane and Wesley Sneijder.
+- Sixty players: thirty representing European national teams and thirty representing South American national teams. The original stars are joined by Fabricio Coloccini, Juan Pablo Sorín, Pablo Aimar, Esteban Cambiasso, Diego Milito, Gaizka Mendieta, Tomáš Rosický, Iván de la Peña, Robbie Keane and Wesley Sneijder.
 - The second expansion adds **Javier Saviola, Andrés D’Alessandro, Maxi Rodríguez, Claudio Pizarro, Walter Samuel, Joe Cole, Freddie Ljungberg, John Arne Riise, Luis García, Eiður Guðjohnsen**.
+- The third expansion adds **Fernando Torres, Xabi Alonso, Thierry Henry, Iker Casillas, Andrea Pirlo, Diego Maradona, Javier Mascherano, Cafu, Marcelo Salas, Rivaldo**.
 - All additions are playable answers and eligible similarity-ranked distractors. Their researched notes and authentic club crests are included offline in both languages.
+- **Choose a competition** — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players (the default) — from the button next to Difficulty, or "Change competition" on the recap screen. Each competition deals only the players who carry that club-membership tag; distractor names favour the same competition when there are enough of them. Choosing one starts a fresh deck in that competition; it never interrupts a round already in progress.
 - Five shuffled answers per round: one correct player and four distinct distractors, selected by difficulty.
 - **Easy / Fácil:** random rivals from the full eligible roster.
 - **Medium / Media (default):** four rivals sampled from the twelve most similar eligible players.
 - **Hard / Difícil:** the four most similar eligible players; answer positions are still shuffled.
-- Similarity prioritizes shared clubs, then national team, broad position, overlapping career years and career length. Identical ordered career paths remain excluded. Candidates come only from the researched 50-player roster; difficulty changes neither the facts nor the hints/attempts.
+- Similarity prioritizes shared clubs, then national team, broad position, overlapping career years and career length. Identical ordered career paths remain excluded. Candidates come from the active competition's players (or the full 60-player roster in All Players mode); difficulty changes neither the facts nor the hints/attempts.
 - The difficulty selector is just below the career timeline. A change applies immediately before any guess/hint; otherwise the current options stay fixed and the setting applies to the next player. A bilingual message explains pending changes. Progress is preserved, and reload/replay remembers the selection.
 - Three attempts. Wrong buttons turn red and cannot be selected again.
 - **Get Hint** reveals country, then position, then the initials of the displayed player name. Hints cost nothing.
 - Each correct round earns **100 points**, regardless of attempts or hints, and adds one to the consecutive win streak. Losing a round resets the streak, not the score.
 - **Next Player** appears only after winning or losing a round.
-- A new shuffled deck visits all 50 players once before the final recap. Existing 30- and 40-player saves retain their original deck and exact choices, score and hints; after finishing, Play again starts a 50-player deck, resets the score and retains difficulty.
+- A new shuffled deck visits every player in the active competition once before the final recap (all 60 in All Players mode). Existing 30-, 40- and 50-player full-roster saves retain their original deck and exact choices, score and hints; after finishing, Play again starts a fresh deck in the same competition, resets the score and retains difficulty.
 - Progress is saved in this browser when local storage is available. Browsers that block storage can still play, but reloading starts a new game. File-URL storage behavior varies by browser.
 
 ## Career-data policy
 
-The original audit and two ten-player [research expansion](DATA_AUDIT.md) distinguish corroborated club history from unresolved dates and registration evidence. This is a dated, manually researched snapshot, not a live transfer feed. See the research files for the retrieved sources, cross-checks and player-specific notes. Active-player careers require rechecking after future transfers.
+The original audit and three ten-player [research expansions](DATA_AUDIT.md) distinguish corroborated club history from unresolved dates and registration evidence. This is a dated, manually researched snapshot, not a live transfer feed. See the research files for the retrieved sources, cross-checks and player-specific notes. Active-player careers require rechecking after future transfers.
+
+Competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) are a broad club-membership categorization used to organize gameplay, not a per-appearance sourced claim — see [the data policy](research/data-policy.md#competition-tags).
 
 The timeline includes professional senior clubs, competitive senior reserve-team spells, loans, and distinct playing returns. National teams, youth sides, coaching jobs, training-only visits, testimonials and amateur post-retirement football are excluded. Two documented exceptions are clearly tagged: Roberto Carlos’s friendly-only Atlético Mineiro tour loan (**Tour loan**) and Ronaldinho’s announced Ravenna signing (**Signing\***; completed registration and competitive debut not established). Continuous loan-to-permanent spells are combined, with the loan noted. Parallel reserve/first-team spells can overlap in years. See [the data policy](research/data-policy.md) and [player-by-player sources](CAREER_SOURCES.md) for exact scope, chronology and evidence conflicts. Current club crests identify the clubs; they are not historical season-specific artwork.
 
@@ -53,7 +57,7 @@ Country means the senior national team represented, not birthplace or every citi
 - `index.html` — the complete playable artifact; nothing else is required at runtime.
 - `DESIGN.md` — visual direction, gameplay contract and acceptance matrix.
 - `CAREER_SOURCES.md` — player-by-player chronology, caveats and numbered sources.
-- `DATA_AUDIT.md` — original 30-player re-audit and researched expansions to 50, corrections and remaining evidence limits.
+- `DATA_AUDIT.md` — original 30-player re-audit and researched expansions to 60, corrections and remaining evidence limits.
 - `research/` — curated career records, data policy and public source-URL ledger. Raw third-party retrievals and assembly scratch files remain local and are not republished.
 - `tests/` — reproducible browser/data checks.
 
@@ -70,7 +74,7 @@ python3 tests/source-check.py
 python3 tests/run-browser.py
 ```
 
-The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 50 rounds over HTTP, all 50 again in an offline local-file context, all 50 in Spanish, every career in both languages at five mobile/tablet widths, and all 50 rounds at each of the three difficulty levels in both languages. See [TESTING.md](TESTING.md) for the actual verification results and limits.
+The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 60 rounds over HTTP, all 60 again in an offline local-file context, all 60 in Spanish, every career in both languages at five mobile/tablet widths, and all 60 rounds at each of the three difficulty levels in both languages. See [TESTING.md](TESTING.md) for the actual verification results and limits.
 
 ## Accessibility
 

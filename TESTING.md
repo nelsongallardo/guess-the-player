@@ -38,3 +38,32 @@ Environment: Node v22.22.1; Python 3.9.6; playwright-cli 0.1.13. Pillow verifica
 Software/source consistency tests do **not** establish historical truth. Career evidence and remaining date/scope qualifications are in [DATA_AUDIT.md](DATA_AUDIT.md), including Riise’s overlapping Monaco reserve/first-team order and earlier roster qualifications. Professional playing spells exclude youth, coaching, unused registrations and post-retirement amateur football.
 
 Browser testing covers Chromium, not native iOS Safari or Firefox. Current/source-era club marks are not historical season-specific artwork. Raw articles, screenshots and execution JSON remain local under ignored research/test-result paths; only the standalone HTML is deployed.
+
+## Update — 12 September 2026: competitions and third player batch
+
+Added a competition-organization layer (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão, plus All Players) and a third ten-player batch (Fernando Torres, Xabi Alonso, Thierry Henry, Iker Casillas, Andrea Pirlo, Diego Maradona, Javier Mascherano, Cafu, Marcelo Salas, Rivaldo), bringing the roster to 60 (30 Europe / 30 South America).
+
+### Commands actually run
+
+```sh
+node --test tests/model.test.mjs
+python3 tests/source-check.py
+```
+
+Environment: Node v24.18.0, Python 3.11.4. Neither `playwright-cli` nor a Python `playwright` install was available in this environment, so `tests/run-browser.py` (and the browser-driven `difficulty-checks.js`/`expansion-checks.js`/`mobile-language-checks.js` it runs) could **not** be executed here. Those three files were still updated for the new 60-player/30-30 counts and a fourth legacy-save fixture, but their assertions are unverified until someone runs the suite with a real browser.
+
+### Passed
+
+- **Model/data/localization: 20 tests, 0 failures.** Exactly 60 unique players, 30 Europe / 30 South America. Every player carries a recognized competition tag. All 60 Spanish note sets and every country/position (including the new Chile and Midfielder/Defender combination) have translations, and all five competition labels are present in both languages.
+- **60,000 randomized option samples** (unscoped) plus a targeted competition-scoped sample check five distinct choices, one correct answer, no identical-career distractors, and — when a competition is active — distractors drawn from that competition first, with a verified fallback to the full pool when a synthetic scoped pool has fewer than four candidates.
+- **`create(difficulty, competitionId)`** produces a deck matching each competition's current pool size (Champions League 59, Premier League 30, La Liga 37, Argentine Primera División 19, Brasileirão 13, All Players 60) and falls back to All Players for an unrecognized id instead of erroring.
+- **`validate()`** accepts a legacy save with no `competition` field (treated as All Players), and rejects a deck whose length or membership no longer matches its stated competition.
+- **Real published-save compatibility:** `tests/legacy-save.json` (30 players), `tests/legacy-save-40.json` (40 players) and the new `tests/legacy-save-50.json` (50 players, generated directly against the pre-expansion 50-player roster with the same first-five-wins-then-one-in-progress-round shape as the existing 40-player fixture) all reload, finish their original decks, and replay into the current 60-player All Players deck while preserving Hard difficulty.
+- **Citation plumbing:** 60 source sections / 198 literal source URLs and 60 audit sections / 194 cited URLs, matched to their respective ledgers. The ten new records each cite at least two independent domains (Wikipedia plus National Football Teams).
+- **Crest assets:** all 16 newly embedded crests (Sagan Tosu, Real Sociedad, SD Eibar, New York Red Bulls, Porto, Brescia, Reggina, Napoli, Hebei China Fortune, Juventude, Universidad de Chile, Santa Cruz, Mogi Mirim, Bunyodkor, São Caetano, Kabuscorp) were fetched from their Wikipedia infobox crest files, checked for real PNG magic bytes and non-zero dimensions (the same check `model.test.mjs` runs on every embedded asset), and confirmed to be the only unused-vs-used assets in `CREST_ASSETS` (156 total, all referenced). No pixel-level visual review of the new crests was performed — that step used Pillow contact sheets in the prior expansion and could not be repeated without it here.
+
+### Not verified in this environment
+
+- No real-browser playthrough of the competition picker, the "change competition" flow, or the summary-panel button — the UI wiring was reviewed by reading the generated script and syntax-checking every `<script>` block with Node's `vm.Script`, not by clicking through it.
+- No responsive/accessibility pass at the five mobile widths for the new picker dialog or the ten new players' career timelines.
+- No visual crest review for the 16 new assets.

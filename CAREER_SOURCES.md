@@ -645,6 +645,118 @@ All senior playing clubs cross-checked. Pune City signed him in 2016 but an inju
 
 Reviewed sources: [176], [177], [178].
 
+## Third roster expansion — 10 more players
+
+### Fernando Torres
+
+**Spain · Forward.** Atlético Madrid (2001–2007) → Liverpool (2007–2011) → Chelsea (2011–2014) → AC Milan (2014–2015) → Atlético Madrid (2015–2018) → Sagan Tosu (2018–2019).[179][180]
+
+Chelsea registration is split around the AC Milan loan, then a further Atlético Madrid loan-to-permanent return, matching this project's continuous loan-to-permanent handling used elsewhere in the roster. Retired May 2019 after his final Sagan Tosu season. Youth Fuenlabrada football excluded.[179][180]
+
+- **AC Milan (2014–2015):** Loan from Chelsea.
+- **Atlético Madrid (2015–2018):** Second playing spell; loan from Chelsea in 2015, made permanent later that year; continuous playing spell.
+
+Reviewed source links: [179], [180].
+
+### Xabi Alonso
+
+**Spain · Midfielder.** Real Sociedad B (1999–2000) → Real Sociedad (1999–2004) → SD Eibar (2000–2001) → Liverpool (2004–2009) → Real Madrid (2009–2014) → Bayern Munich (2014–2017).[181][182]
+
+Real Sociedad B and the Eibar loan both overlap the first-team Real Sociedad spell rather than preceding or replacing it. Retired May 2017 after his final Bayern Munich season; subsequent Real Sociedad and Bayer Leverkusen posts are coaching roles, not playing spells.[181][182]
+
+- **Real Sociedad B (1999–2000):** Senior reserve side; overlaps first-team debut.
+- **Real Sociedad (1999–2004):** Captain from 2001.
+- **SD Eibar (2000–2001):** Loan from Real Sociedad, overlapping the first-team spell.
+
+Reviewed source links: [181], [182].
+
+### Thierry Henry
+
+**France · Forward.** Monaco B (1994–1995) → Monaco (1994–1999) → Juventus (1999) → Arsenal (1999–2007) → Barcelona (2007–2010) → New York Red Bulls (2010–2012) → Arsenal (2012) → New York Red Bulls (2012–2014).[183][184]
+
+The 2012 Arsenal loan splits the New York Red Bulls tenure into two nodes, matching how this project treats other mid-career loan returns (e.g. Beckham/LA Galaxy, Crespo/Chelsea). Retired December 2014. Coaching spells (Arsenal academy, Belgium, Monaco, France) excluded.[183][184]
+
+- **Monaco B (1994–1995):** Senior reserve side; overlaps first-team debut.
+- **Arsenal (2012):** Two-month loan return, January–February 2012; no permanent second Arsenal spell.
+- **New York Red Bulls (2012–2014):** Playing return after the Arsenal loan.
+
+Reviewed source links: [183], [184].
+
+### Iker Casillas
+
+**Spain · Goalkeeper.** Real Madrid C (1998–1999) → Real Madrid B (1999–2000) → Real Madrid (1999–2015) → Porto (2015–2020).[185][186]
+
+Real Madrid C and B are both senior reserve sides preceding and overlapping the first-team debut. Retired August 2020 after a heart attack during Porto training; later Real Federación Española de Fútbol presidency campaign is not a playing spell.[185][186]
+
+- **Real Madrid C (1998–1999):** Senior third-tier reserve side.
+- **Real Madrid B (1999–2000):** Senior reserve side; overlaps first-team debut.
+- **Real Madrid (1999–2015):** First-team competitive debut September 1999, overlapping reserve appearances.
+
+Reviewed source links: [185], [186].
+
+### Andrea Pirlo
+
+**Italy · Midfielder.** Brescia (1995–1998) → Inter Milan (1998–2001) → Reggina (1999–2000) → Brescia (2001) → AC Milan (2001–2011) → Juventus (2011–2015) → New York City FC (2015–2017).[187][188]
+
+Both Reggina and the second Brescia spell are genuine, separate Inter Milan loans rather than a single continuous stint. Retired November 2017; subsequent Juventus front-office and Italy national-team coaching roles excluded.[187][188]
+
+- **Reggina (1999–2000):** Loan from Inter Milan, overlapping the Inter tenure.
+- **Brescia (2001):** Second, separate loan from Inter Milan.
+
+Reviewed source links: [187], [188].
+
+### Diego Maradona
+
+**Argentina · Midfielder / Forward.** Argentinos Juniors (1976–1981) → Boca Juniors (1981–1982) → Barcelona (1982–1984) → Napoli (1984–1991) → Sevilla (1992–1993) → Newell's Old Boys (1993–1994) → Boca Juniors (1995–1997).[189][190]
+
+Attacking midfielder/second striker, recorded here under the project's combined Midfielder/Forward category used for similarly versatile players. Later Boca Juniors, Racing Club, Al-Wasl, Fujairah, Dorados and Gimnasia head-coaching jobs, and the Argentina national-team management spell, are not playing appearances.[189][190]
+
+- **Boca Juniors (1995–1997):** Second playing spell; retired October 1997.
+
+Reviewed source links: [189], [190].
+
+### Javier Mascherano
+
+**Argentina · Midfielder / Defender.** River Plate (2003–2005) → Corinthians (2005–2006) → West Ham United (2006–2007) → Liverpool (2007–2010) → Barcelona (2010–2018) → Hebei China Fortune (2018–2019) → Estudiantes (2019–2020).[191][192]
+
+Played primarily as a defensive midfielder at Liverpool and Barcelona, shifting to centre-back later at Barcelona and beyond; recorded under the project's combined Midfielder/Defender category. Retired February 2021 after his final Estudiantes season; later Argentina youth-coaching roles excluded.[191][192]
+
+Reviewed source links: [191], [192].
+
+### Cafu
+
+**Brazil · Defender.** São Paulo (1989–1994) → Real Zaragoza (1994–1995) → Juventude (1995) → Palmeiras (1995–1997) → Roma (1997–2003) → AC Milan (2003–2008).[193][194]
+
+Right-back, Brazil's most-capped international player. Retired 2008 after his final AC Milan season; subsequent media/ambassadorial work excluded.[193][194]
+
+- **Juventude (1995):** Brief spell between Real Zaragoza and Palmeiras; parent-club status not fully established in retrieved evidence.
+
+Reviewed source links: [193], [194].
+
+### Marcelo Salas
+
+**Chile · Forward.** Universidad de Chile (1993–1996) → River Plate (1996–1998) → Lazio (1998–2001) → Juventus (2001–2003) → River Plate (2003–2005) → Universidad de Chile (2005–2008).[195][196]
+
+Juventus is split at the first loan-out, matching how this project handles other registration-vs-playing gaps (e.g. Riquelme/Barcelona). The second Universidad de Chile spell combines its loan and permanent phases into one continuous node.[195][196]
+
+- **Juventus (2001–2003):** Registration continued during loans-out until 2006; no further Juventus playing return established.
+- **River Plate (2003–2005):** Loan from Juventus.
+- **Universidad de Chile (2005–2008):** Loan from Juventus 2005–2006, then permanent from 2006; continuous playing spell. Retired 2008.
+
+Reviewed source links: [195], [196].
+
+### Rivaldo
+
+**Brazil · Midfielder / Forward.** Santa Cruz (1988–1992) → Mogi Mirim (1992–1994) → Corinthians (1993–1994) → Palmeiras (1994–1996) → Deportivo La Coruña (1996–1997) → Barcelona (1997–2002) → AC Milan (2002–2003) → Cruzeiro (2004) → Olympiacos (2004–2007) → AEK Athens (2007–2008) → Bunyodkor (2008–2011) → São Paulo (2011) → Kabuscorp (2012) → São Caetano (2013) → Mogi Mirim (2014–2015).[197][198]
+
+Attacking midfielder/left winger/forward, recorded under the project's combined Midfielder/Forward category. The full journeyman tail (Bunyodkor, Kabuscorp, São Caetano, second Mogi Mirim spell) is retained as documented senior professional football, matching this roster's existing long-tail entries (e.g. Guðjohnsen, Luis García).[197][198]
+
+- **Corinthians (1993–1994):** Loan from Mogi Mirim, overlapping that spell.
+- **São Paulo (2011):** Loan from Bunyodkor.
+- **Mogi Mirim (2014–2015):** Second playing spell; retired 2015.
+
+Reviewed source links: [197], [198].
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -824,3 +936,23 @@ Sources:
 [176] https://en.wikipedia.org/wiki/Ei%C3%B0ur_Gu%C3%B0johnsen
 [177] https://national-football-teams.com/player/3056/Ei_Ur_Smari_Gu_Johnsen.html
 [178] https://www.indiansuperleague.com/press-releases/injury-curtails-eidur-gudjohnsen-and-andre-bikey-s-fc-pune-city-campaign
+[179] https://en.wikipedia.org/wiki/Fernando_Torres
+[180] https://www.national-football-teams.com/player/6219/Fernando_Torres.html
+[181] https://en.wikipedia.org/wiki/Xabi_Alonso
+[182] https://www.national-football-teams.com/player/6255/Xabi_Alonso.html
+[183] https://en.wikipedia.org/wiki/Thierry_Henry
+[184] https://www.national-football-teams.com/player/2420/Thierry_Henry.html
+[185] https://en.wikipedia.org/wiki/Iker_Casillas
+[186] https://www.national-football-teams.com/player/6241/Iker_Casillas.html
+[187] https://en.wikipedia.org/wiki/Andrea_Pirlo
+[188] https://www.national-football-teams.com/player/3384/Andrea_Pirlo.html
+[189] https://en.wikipedia.org/wiki/Diego_Maradona
+[190] https://www.national-football-teams.com/player/14124/Diego_Maradona.html
+[191] https://en.wikipedia.org/wiki/Javier_Mascherano
+[192] https://www.national-football-teams.com/player/331/Javier_Mascherano.html
+[193] https://en.wikipedia.org/wiki/Cafu
+[194] https://www.national-football-teams.com/player/991/Cafu.html
+[195] https://en.wikipedia.org/wiki/Marcelo_Salas
+[196] https://www.national-football-teams.com/player/1401/Marcelo_Salas.html
+[197] https://en.wikipedia.org/wiki/Rivaldo
+[198] https://www.national-football-teams.com/player/1023/Rivaldo_1.html

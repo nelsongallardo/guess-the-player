@@ -1,8 +1,8 @@
-# Full roster re-audit — 11 September 2026
+# Full roster re-audit — 11 September 2026 (updated 12 September 2026)
 
 ## Result and limits
 
-**Current roster: 50 players.** The original 30-player re-audit is followed below by two batches of ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance.
+**Current roster: 60 players.** The original 30-player re-audit is followed below by three batches of ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all 60 players; see `research/data-policy.md` for the tagging method.
 
 The original **30 unique players** were rechecked against freshly retrieved external career records, with at least two distinct source URLs per player and independent corroboration. This is a historical-data audit, not a claim that passing software tests proves the facts. The original requested scope remains **professional senior clubs**, including reserve sides competing in the adult league pyramid; youth teams, closed reserve leagues, amateur post-retirement football and coaching jobs are excluded.
 
@@ -709,6 +709,106 @@ All senior playing clubs cross-checked. Pune City signed him in 2016 but an inju
 
 Reviewed sources: [174], [175], [176].
 
+### Fernando Torres
+
+**Spain · Forward.** Atlético Madrid (2001–2007) → Liverpool (2007–2011) → Chelsea (2011–2014) → AC Milan (2014–2015) → Atlético Madrid (2015–2018) → Sagan Tosu (2018–2019).[177][178]
+
+Corroborated: Wikipedia's dated career table and the National Football Teams profile agree on club order, country and broad forward role. The Chelsea/AC Milan/Atlético Madrid loan sequence matches the same loan-to-permanent handling already used for other roster entries.[177][178]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[177][178]
+
+Reviewed sources: [177], [178].
+
+### Xabi Alonso
+
+**Spain · Midfielder.** Real Sociedad B (1999–2000) → Real Sociedad (1999–2004) → SD Eibar (2000–2001) → Liverpool (2004–2009) → Real Madrid (2009–2014) → Bayern Munich (2014–2017).[179][180]
+
+Corroborated: both sources agree on the senior reserve/first-team overlap and the Eibar loan window. No conflicting registration dates found.[179][180]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[179][180]
+
+Reviewed sources: [179], [180].
+
+### Thierry Henry
+
+**France · Forward.** Monaco B (1994–1995) → Monaco (1994–1999) → Juventus (1999) → Arsenal (1999–2007) → Barcelona (2007–2010) → New York Red Bulls (2010–2012) → Arsenal (2012) → New York Red Bulls (2012–2014).[181][182]
+
+Corroborated: the 2012 loan return to Arsenal during his New York Red Bulls contract is independently confirmed and is not omitted by either source. Splitting the Red Bulls tenure around it follows the project's existing mid-career loan convention.[181][182]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[181][182]
+
+Reviewed sources: [181], [182].
+
+### Iker Casillas
+
+**Spain · Goalkeeper.** Real Madrid C (1998–1999) → Real Madrid B (1999–2000) → Real Madrid (1999–2015) → Porto (2015–2020).[183][184]
+
+Corroborated: both reserve sides, the first-team debut year and the Porto move are consistent across sources. No additional in-scope club found.[183][184]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[183][184]
+
+Reviewed sources: [183], [184].
+
+### Andrea Pirlo
+
+**Italy · Midfielder.** Brescia (1995–1998) → Inter Milan (1998–2001) → Reggina (1999–2000) → Brescia (2001) → AC Milan (2001–2011) → Juventus (2011–2015) → New York City FC (2015–2017).[185][186]
+
+Corroborated: both the Reggina loan and the second, separate Brescia loan are confirmed as distinct spells rather than a single continuous loan, matching the infobox career table on both sources.[185][186]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[185][186]
+
+Reviewed sources: [185], [186].
+
+### Diego Maradona
+
+**Argentina · Midfielder / Forward.** Argentinos Juniors (1976–1981) → Boca Juniors (1981–1982) → Barcelona (1982–1984) → Napoli (1984–1991) → Sevilla (1992–1993) → Newell's Old Boys (1993–1994) → Boca Juniors (1995–1997).[187][188]
+
+Corroborated: both sources agree on all seven senior clubs and the second Boca Juniors playing spell. Coaching and management roles after 1997 are excluded as non-playing.[187][188]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[187][188]
+
+Reviewed sources: [187], [188].
+
+### Javier Mascherano
+
+**Argentina · Midfielder / Defender.** River Plate (2003–2005) → Corinthians (2005–2006) → West Ham United (2006–2007) → Liverpool (2007–2010) → Barcelona (2010–2018) → Hebei China Fortune (2018–2019) → Estudiantes (2019–2020).[189][190]
+
+Corroborated: both sources agree on all seven clubs, chronology and the shift from defensive midfield to centre-back later in his career.[189][190]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[189][190]
+
+Reviewed sources: [189], [190].
+
+### Cafu
+
+**Brazil · Defender.** São Paulo (1989–1994) → Real Zaragoza (1994–1995) → Juventude (1995) → Palmeiras (1995–1997) → Roma (1997–2003) → AC Milan (2003–2008).[191][192]
+
+Qualified: the brief 1995 Juventude spell between Real Zaragoza and Palmeiras is corroborated as senior play, but its exact parent-club/loan status is not fully resolved by either retrieved source. Retained as a documented senior spell rather than omitted.[191][192]
+
+**Research status:** verified-with-notes. Two independent sources retrieved and cross-checked; the Juventude spell's contractual status remains a disclosed qualification.[191][192]
+
+Reviewed sources: [191], [192].
+
+### Marcelo Salas
+
+**Chile · Forward.** Universidad de Chile (1993–1996) → River Plate (1996–1998) → Lazio (1998–2001) → Juventus (2001–2003) → River Plate (2003–2005) → Universidad de Chile (2005–2008).[193][194]
+
+Corroborated: both sources' infobox tables agree that his Juventus registration continued through 2006 while he was loaned out; splitting Juventus at the first loan-out and combining the second Universidad de Chile loan-to-permanent spell follows this project's existing conventions.[193][194]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[193][194]
+
+Reviewed sources: [193], [194].
+
+### Rivaldo
+
+**Brazil · Midfielder / Forward.** Santa Cruz (1988–1992) → Mogi Mirim (1992–1994) → Corinthians (1993–1994) → Palmeiras (1994–1996) → Deportivo La Coruña (1996–1997) → Barcelona (1997–2002) → AC Milan (2002–2003) → Cruzeiro (2004) → Olympiacos (2004–2007) → AEK Athens (2007–2008) → Bunyodkor (2008–2011) → São Paulo (2011) → Kabuscorp (2012) → São Caetano (2013) → Mogi Mirim (2014–2015).[195][196]
+
+Corroborated: the full 15-club chronology, including the late-career Bunyodkor, Kabuscorp and São Caetano spells and the second Mogi Mirim return, is confirmed by both sources. Retained in full rather than trimmed, matching this roster's existing long-tail entries.[195][196]
+
+**Research status:** verified. Two independent sources retrieved and cross-checked; no unresolved evidence conflicts.[195][196]
+
+Reviewed sources: [195], [196].
+
 Sources:
 [1] https://argentina.as.com/argentina/2021/12/02/futbol/1638473602_945874.html
 [4] https://en.wikipedia.org/wiki/Javier_Zanetti
@@ -884,3 +984,23 @@ Sources:
 [174] https://en.wikipedia.org/wiki/Ei%C3%B0ur_Gu%C3%B0johnsen
 [175] https://national-football-teams.com/player/3056/Ei_Ur_Smari_Gu_Johnsen.html
 [176] https://www.indiansuperleague.com/press-releases/injury-curtails-eidur-gudjohnsen-and-andre-bikey-s-fc-pune-city-campaign
+[177] https://en.wikipedia.org/wiki/Fernando_Torres
+[178] https://www.national-football-teams.com/player/6219/Fernando_Torres.html
+[179] https://en.wikipedia.org/wiki/Xabi_Alonso
+[180] https://www.national-football-teams.com/player/6255/Xabi_Alonso.html
+[181] https://en.wikipedia.org/wiki/Thierry_Henry
+[182] https://www.national-football-teams.com/player/2420/Thierry_Henry.html
+[183] https://en.wikipedia.org/wiki/Iker_Casillas
+[184] https://www.national-football-teams.com/player/6241/Iker_Casillas.html
+[185] https://en.wikipedia.org/wiki/Andrea_Pirlo
+[186] https://www.national-football-teams.com/player/3384/Andrea_Pirlo.html
+[187] https://en.wikipedia.org/wiki/Diego_Maradona
+[188] https://www.national-football-teams.com/player/14124/Diego_Maradona.html
+[189] https://en.wikipedia.org/wiki/Javier_Mascherano
+[190] https://www.national-football-teams.com/player/331/Javier_Mascherano.html
+[191] https://en.wikipedia.org/wiki/Cafu
+[192] https://www.national-football-teams.com/player/991/Cafu.html
+[193] https://en.wikipedia.org/wiki/Marcelo_Salas
+[194] https://www.national-football-teams.com/player/1401/Marcelo_Salas.html
+[195] https://en.wikipedia.org/wiki/Rivaldo
+[196] https://www.national-football-teams.com/player/1023/Rivaldo_1.html

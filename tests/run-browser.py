@@ -21,6 +21,7 @@ for filename in (['offline-checks.js'] if args.offline_only else ['browser-check
     script = (root / 'tests' / filename).read_text().replace('__FILE_URL__', json.dumps((root / 'index.html').as_uri() + '?lang=en'))
     script = script.replace('__LEGACY_SAVE__', (root / 'tests/legacy-save.json').read_text())
     script = script.replace('__LEGACY_SAVE_40__', (root / 'tests/legacy-save-40.json').read_text())
+    script = script.replace('__LEGACY_SAVE_50__', (root / 'tests/legacy-save-50.json').read_text())
     result = subprocess.run(['playwright-cli', f'-s={session}', '--raw', 'run-code', script], cwd=root, capture_output=True, text=True, timeout=180)
     try:
         data = json.loads(result.stdout.strip())
