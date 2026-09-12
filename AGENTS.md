@@ -37,11 +37,12 @@ Keep the single-file offline design unless the requested work explicitly changes
 
 ## Persistence and scoring
 
-- Storage keys are `touchline.career.v1` (current game), `touchline.language.v1` (language) and `touchline.history.v1` (results history). Browser storage can fail; gameplay must remain usable.
+- Storage keys are `touchline.career.v1` (current game), `touchline.language.v1` (language), `touchline.history.v1` (results history) and `touchline.lifetime.v1` (lifetime score/streak). Browser storage can fail; gameplay must remain usable.
 - Preserve saved decks, completed/engaged rounds, guesses, hints, points and history. On load, `refreshUnstartedRivals` repairs only the current round with zero guesses and zero hints when its origin/era tier composition is weaker than currently available choices. Compatible untouched rounds remain stable across reloads; do not clear saves or reroll engaged rounds. Normalize old preferences to Hard for future rounds. Keep published legacy-save fixtures valid.
 - A correct answer earns up to 100 points, reduced by hints and answer time. Do not restore flat scoring. See [the scoring/history ADR](docs/adr/0001-local-results-history-and-speed-based-scoring.md) for the formula and migration contract.
 - The round clock is in-memory UI state, not persisted elapsed time; resuming a game must not penalize time spent away. Tests that assert exact scores must control elapsed time and account for hints.
 - Record each completed game only once, including across reloads. Preserve the history cap and historical difficulty labels. The confirmed reset clears current gameplay and results history.
+- The header score/streak (and the recap's big final number) are a **lifetime running total** (`touchline.lifetime.v1`), tallied once per round resolution independent of `CareerGame.stats(state)`. Switching competition, replaying, or a legacy-preference migration must never reset it — only the confirmed Reset does. See [ADR 0004](docs/adr/0004-lifetime-score-persists-across-decks.md). `CareerGame.stats(state)` itself stays a pure per-deck projection; do not make it reach outside `state`.
 
 ## Career-data changes
 

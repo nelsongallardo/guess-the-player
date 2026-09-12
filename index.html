@@ -9941,6 +9941,7 @@ const STORAGE_KEY = 'touchline.career.v1';
 const LANGUAGE_KEY = 'touchline.language.v1';
 const HISTORY_KEY = 'touchline.history.v1';
 const HISTORY_LIMIT = 100;
+const LIFETIME_KEY = 'touchline.lifetime.v1';
 const COPY = {
   en: {
     levels:{easy:'Easy',medium:'Medium',hard:'Hard'},
@@ -9978,6 +9979,27 @@ CareerGame.refreshUnstartedRivals(state);
 // player is never penalized for time spent away from the page mid-round.
 let roundClockStart=Date.now();
 const resetRoundClock=()=>{roundClockStart=Date.now();};
+// Score/streak are a running lifetime total on this device, independent of
+// whichever deck (competition/difficulty/replay) happens to be active right
+// now: switching competition or replaying never zeroes them out, only the
+// footer's Reset button does. Each round is folded in exactly once, right
+// when it resolves (see the options click handler), so this never needs to
+// be recomputed from state and can't be double-counted by a reload.
+const defaultLifetime=()=>({score:0,streak:0,bestStreak:0,wins:0,rounds:0});
+function loadLifetime(){
+  try{const v=JSON.parse(localStorage.getItem(LIFETIME_KEY));
+    return v&&Number.isInteger(v.score)&&Number.isInteger(v.streak)?{...defaultLifetime(),...v}:defaultLifetime();
+  }catch{return defaultLifetime();}
+}
+let lifetime=loadLifetime();
+function saveLifetime(){try{localStorage.setItem(LIFETIME_KEY,JSON.stringify(lifetime));}catch{}}
+function tallyRound(previousResult){
+  const result=CareerGame.outcome(state);
+  if(result==='playing'||result===previousResult)return;
+  if(result==='won'){const points=CareerGame.roundAt(state).points??100;lifetime.score+=points;lifetime.wins++;lifetime.streak++;lifetime.bestStreak=Math.max(lifetime.bestStreak,lifetime.streak);}
+  else lifetime.streak=0;
+  lifetime.rounds++;saveLifetime();
+}
 const $=id=>document.getElementById(id);
 const el=(tag,text,className)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(className)e.className=className;return e;};
 const copy=()=>COPY[language];
@@ -10090,10 +10112,10 @@ function renderHistory(){
 }
 function render(celebrate=false,newCareer=false){
   const p=CareerGame.playerAt(state),r=CareerGame.roundAt(state),result=CareerGame.outcome(state),stats=CareerGame.stats(state),t=copy();
-  $('score').textContent=String(stats.score).padStart(3,'0');$('streak').textContent=stats.streak;
+  $('score').textContent=String(lifetime.score).padStart(3,'0');$('streak').textContent=lifetime.streak;
   $('round-panel').hidden=state.finished;$('summary-panel').hidden=!state.finished;
   if(state.finished){
-    $('final-score').textContent=stats.score.toLocaleString(language==='es'?'es-ES':'en-GB');$('summary-caption').textContent=t.recap(stats,state.deck.length);$('review').replaceChildren();
+    $('final-score').textContent=lifetime.score.toLocaleString(language==='es'?'es-ES':'en-GB');$('summary-caption').textContent=t.recap(stats,state.deck.length);$('review').replaceChildren();
     state.rounds.forEach((row,i)=>{const won=CareerGame.outcome(state,i)==='won',li=el('li');li.append(el('span',CareerGame.playerAt(state,i).name),el('span',won?t.reviewWon:t.reviewLost,won?'review-won':'review-lost'));$('review').append(li);});
     recordHistoryIfNeeded(stats);renderHistory();
     save();return;
@@ -10110,13 +10132,13 @@ function render(celebrate=false,newCareer=false){
     b.setAttribute('aria-label',`${name}${wrong?', '+t.incorrect:correct?', '+t.correct:''}`);
     const suffix=el('span',wrong?'×':correct?'✓':'↗','option-state'),letter=el('span',String.fromCharCode(65+i),'option-letter');suffix.setAttribute('aria-hidden','true');letter.setAttribute('aria-hidden','true');
     b.append(letter,el('span',name,'option-name'),suffix);
-    b.addEventListener('click',()=>{const elapsedMs=Date.now()-roundClockStart;if(!CareerGame.answer(state,name,elapsedMs))return;render(true);const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');target?.focus({preventScroll:true});});
+    b.addEventListener('click',()=>{const elapsedMs=Date.now()-roundClockStart,before=result;if(!CareerGame.answer(state,name,elapsedMs))return;tallyRound(before);render(true);const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');target?.focus({preventScroll:true});});
     $('options').append(b);
   });
   const values=hintValues(p);$('hints').replaceChildren(...t.hints.map((label,i)=>el('li',i<r.hints?`${label}: ${values[i]}`:`${i+1}. ${label}`,i<r.hints?'revealed':'')));
   $('hint').disabled=r.hints>=3||result!=='playing';$('hint-label').textContent=r.hints===3?t.allHints:t.hint;$('hint-count').textContent=`${r.hints} / 3`;
   $('next').hidden=result==='playing';$('next-label').textContent=state.roundIndex===state.deck.length-1?t.results:t.next;$('feedback').className=`feedback ${result}`;$('feedback').replaceChildren();
-  if(result==='won')$('feedback').append(el('strong',t.win(p.name)),el('span',t.winDetail(stats.streak,r.points??100)));
+  if(result==='won')$('feedback').append(el('strong',t.win(p.name)),el('span',t.winDetail(lifetime.streak,r.points??100)));
   else if(result==='lost')$('feedback').append(el('strong',t.lost(p.name)),el('span',t.loss));
   else if(r.guesses.length)$('feedback').append(el('strong',t.wrong),el('span',t.wrongDetail(left)));
   else $('feedback').textContent=t.trust;
@@ -10132,8 +10154,8 @@ $('timeline-scroll').addEventListener('scroll',updateNavigation,{passive:true});
 $('language').addEventListener('change',()=>{const value=$('language').value;if(value!=='en'&&value!=='es')return;language=value;const open=$('source-details').open;applyLanguage();render(false,true);$('source-details').open=open;try{const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);}catch{}});
 $('reset-progress').addEventListener('click',()=>{
   if(!confirm(copy().resetConfirm))return;
-  try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(HISTORY_KEY);}catch{}
-  state=CareerGame.create();resetRoundClock();applyLanguage();render(false,true);showRoundStart();
+  try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(HISTORY_KEY);localStorage.removeItem(LIFETIME_KEY);}catch{}
+  state=CareerGame.create();lifetime=defaultLifetime();resetRoundClock();applyLanguage();render(false,true);showRoundStart();
 });
 applyLanguage();render(false,true);
 </script>

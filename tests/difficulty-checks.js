@@ -48,21 +48,29 @@ async page => {
   // Keep the already-published competition, history and reset flows intact.
   ok(await page.evaluate(()=>loadHistory().length>0),'Finished games still recorded in local history');
   const historyBefore=await page.evaluate(()=>JSON.stringify(loadHistory()));
+  // The header score/streak are a lifetime running total (touchline.lifetime.v1),
+  // independent of whichever deck/competition is active; only Reset zeroes it.
+  const lifetimeBefore=await page.evaluate(()=>({score:lifetime.score,streak:lifetime.streak}));
+  ok(lifetimeBefore.score>0,'Lifetime score accumulated from the playthroughs above');
   const competitions=await page.evaluate(()=>['all',...CareerGame.COMPETITION_IDS]);
   for(const id of competitions){
     await page.locator('#change-competition').click();
     const label=await page.evaluate(id=>copy().competitions[id],id);
     await page.locator('#competition-options button').filter({hasText:label}).click();
     ok(await page.evaluate(id=>state.competition===id&&state.difficulty==='hard'&&state.deck.length===CareerGame.playersFor(id).length&&CareerGame.roundAt(state).difficulty==='hard',id),'Competition starts with current Hard behaviour');
+    ok(await page.evaluate(before=>lifetime.score===before.score&&lifetime.streak===before.streak&&document.getElementById('score').textContent===String(before.score).padStart(3,'0'),lifetimeBefore),'Competition change never resets the lifetime score/streak shown in the header');
     await page.reload();
     ok(await page.evaluate(id=>state.competition===id&&state.difficulty==='hard',id),'Competition and Hard survive reload');
+    ok(await page.evaluate(before=>lifetime.score===before.score&&lifetime.streak===before.streak,lifetimeBefore),'Lifetime score/streak survive reload too');
   }
   ok(await page.evaluate(()=>JSON.stringify(loadHistory()))===historyBefore,'Competition changes preserve results history');
+  await page.locator('#replay').click();
+  ok(await page.evaluate(before=>lifetime.score===before.score&&lifetime.streak===before.streak&&CareerGame.stats(state).score===0,lifetimeBefore),'Replay resets the current deck but never the lifetime score/streak');
   // The CLI owns native dialog events; capture confirmation in-page for this handler check.
   await page.evaluate(()=>{window.originalConfirm=window.confirm;window.confirm=message=>{window.resetConfirmation=message;return true;};});
   await page.locator('#reset-progress').click();
   ok(await page.evaluate(()=>{const confirmed=window.resetConfirmation===copy().resetConfirm;window.confirm=window.originalConfirm;return confirmed;}),'Reset requests localized confirmation');
-  ok(await page.evaluate(()=>loadHistory().length===0&&state.difficulty==='hard'&&state.competition==='all'&&CareerGame.stats(state).score===0),'Reset clears results and starts automatic Hard');
+  ok(await page.evaluate(()=>loadHistory().length===0&&state.difficulty==='hard'&&state.competition==='all'&&CareerGame.stats(state).score===0&&lifetime.score===0&&lifetime.streak===0&&localStorage.getItem('touchline.lifetime.v1')===null),'Reset clears results, the lifetime score/streak, and starts automatic Hard');
   const isolated=await page.context().browser().newContext({offline:true,viewport:{width:320,height:667}});
   try{
     await isolated.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('Storage denied');}});});
