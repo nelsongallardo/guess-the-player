@@ -13,3 +13,25 @@ research/*
 !research/data-policy.md
 !research/game-ledger.json
 !research/reaudit-citations.json
+
+# Reviewed contemporary profiles and bounded evidence excerpts (not raw retrievals).
+!research/verified-distractors.json
+!research/assemble-distractors.py
+!research/embed-distractors.py
+!research/audit-distractor-coverage.mjs
+!research/contemporary-distractors-research.json
+!research/CONTEMPORARY_DISTRACTOR_SOURCES.md
+!research/distractor-west-europe.json
+!research/DISTRACTOR_WEST_EUROPE_SOURCES.md
+!research/distractor-north-europe.json
+!research/DISTRACTOR_NORTH_EUROPE_SOURCES.md
+!research/distractor-south-america.json
+!research/DISTRACTOR_SOUTH_AMERICA_SOURCES.md
+!research/distractor-brazil-italy.json
+!research/DISTRACTOR_BRAZIL_ITALY_SOURCES.md
+!research/distractor-additional.json
+!research/DISTRACTOR_ADDITIONAL_SOURCES.md
+!research/distractor-netherlands-extra.json
+!research/DISTRACTOR_NETHERLANDS_EXTRA_SOURCES.md
+!research/distractor-era-gaps.json
+!research/DISTRACTOR_ERA_GAPS_SOURCES.md

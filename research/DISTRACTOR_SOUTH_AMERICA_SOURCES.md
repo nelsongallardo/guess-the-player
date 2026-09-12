@@ -1,0 +1,202 @@
+# South American contemporary wrong-answer evidence
+
+Recovered research snapshot: 12 September 2026. This is a distractor-only bank, not a playable-roster expansion. Country denotes the senior national team; system follows the first actual senior club. Numeric endpoints are the last evidenced playing/departure year, not a claim of present activity. Source excerpts below were recovered from saved browser/HTTP retrievals and checked literally against those retrievals. Maxi Pereira was freshly retrieved to replace the older Recoba candidate.
+
+## Scope and checks
+
+- Exactly 12 distinct profiles: four Peru-start, four Chile-start, four Uruguay-start.
+- Each profile has two or more independently retrieved domains. Wikipedia mirrors are not counted as independent sources.
+- All four peers in each system overlap the target career and fall within eight debut years of Claudio Pizarro (1996), Marcelo Salas (1993), or Luis Suárez (2005).
+- Youth, coaching and unused registrations are absent from the ordered routes. Actual playing returns, professional comebacks and positively evidenced cup/regional play are retained.
+- No current playable-roster names or other completed regional-bank IDs overlap this batch. No runtime or git changes were made.
+
+## Nolberto Solano (`nolberto-solano`)
+
+**Peru · Midfielder · 1992–2012 · peru senior origin.**[1][2]
+
+**Ordered senior route:** Sporting Cristal → Deportivo Municipal → Sporting Cristal → Boca Juniors → Newcastle United → Aston Villa → Newcastle United → West Ham United → AEL Larissa → Universitario → Leicester City → Hull City → Hartlepool United.[1][2]
+
+First senior system: Peru, Sporting Cristal. The contemporary DeChalaca retrospective documents his 12 April 1992 debut, overriding Wikipedia’s 1993 start and NFT’s omission of his first Cristal spell. Retain Municipal loan and both genuine Cristal/Newcastle returns. End is the 2012 playing endpoint, not subsequent management.[1][2][3]
+
+Independent domains: dechalaca.com, en.wikipedia.org, national-football-teams.com.
+
+## Jefferson Farfán (`jefferson-farfan`)
+
+**Peru · Midfielder / Forward · 2001–2022 · peru senior origin.**[4][5]
+
+**Ordered senior route:** Alianza Lima → PSV → Schalke 04 → Al-Jazira → Lokomotiv Moscow → Alianza Lima.[4][5]
+
+First senior system: Peru, Alianza Lima in 2001; Deportivo Municipal was youth football. Retain the 2021–2022 Alianza playing return. Winger is mapped to the existing broad Midfielder / Forward role. Both career sources show senior appearances through 2022.[4][5]
+
+Independent domains: en.wikipedia.org, national-football-teams.com.
+
+## Jorge Soto (`jorge-soto`)
+
+**Peru · Midfielder · 1990–2008 · peru senior origin.**[6][7]
+
+**Ordered senior route:** Deportivo Municipal → Sporting Cristal → Lanús → Sporting Cristal → San Luis → Sporting Cristal → Alianza Lima → Melgar.[6][7]
+
+First senior system: Peru, Deportivo Municipal. Exclude the unused 2000 Flamengo loan: Wikipedia gives zero league appearances, NFT omits it, and Globo explicitly reports that he never played a match. This is not a cup-only spell. Retain the two actual Sporting Cristal returns after Lanús and San Luis; coaching is excluded.[6][7][8]
+
+Independent domains: en.wikipedia.org, ge.globo.com, national-football-teams.com.
+
+## Juan Manuel Vargas (`juan-manuel-vargas`)
+
+**Peru · Defender · 2002–2018 · peru senior origin.**[9][10]
+
+**Ordered senior route:** Universitario → Colón → Catania → Fiorentina → Genoa → Fiorentina → Real Betis → Universitario.[9][10]
+
+First senior system: Peru, Universitario in 2002; Unión Minas was youth football. Left back/winger is represented by the broad Defender role. Include the Genoa loan and actual 2013–2015 Fiorentina return, independently visible in NFT season rows. End 2018 is the last evidenced senior playing season, not a claimed date of a retirement announcement.[9][10]
+
+Independent domains: en.wikipedia.org, national-football-teams.com.
+
+## Iván Zamorano (`ivan-zamorano`)
+
+**Chile · Forward · 1985–2003 · chile senior origin.**[11][12]
+
+**Ordered senior route:** Cobresal → Cobreandino → Cobresal → St. Gallen → Sevilla → Real Madrid → Inter Milan → América → Colo-Colo.[11][12]
+
+First senior system: Chile, Cobresal. Retain the Cobreandino loan (the historical name of Trasandino) and actual Cobresal return. NFT records 1985 Cobresal appearances before the 1986 Cobreandino season. Wikipedia’s prose explicitly states a December 1985 Cobresal start, a loan, and a return. Coaching/youth and any ownership-only parent return are excluded.[11][12]
+
+Independent domains: en.wikipedia.org, national-football-teams.com.
+
+## Fabián Estay (`fabian-estay`)
+
+**Chile · Midfielder · 1985–2006 · chile senior origin.**[13][14]
+
+**Ordered senior route:** Universidad Católica → St. Gallen → Universidad de Chile → Olympiacos → Colo-Colo → Toluca → América → Atlante → Santos Laguna → Acapulco → Toluca → América de Cali → Palestino.[13][14]
+
+First senior system: Chile, Universidad Católica. Start-year qualification: NFT records one senior league appearance in 1985, whereas Wikipedia labels 1985–1987 youth and starts its senior infobox in 1987. Use the positive senior-appearance row for the matching-era lower bound, not a claimed exact debut day; the source disagreement remains explicit. Both sources corroborate the club route, including second-tier Acapulco and the actual Toluca return, ending with Palestino in 2006.[13][14]
+
+Independent domains: en.wikipedia.org, national-football-teams.com.
+
+## David Pizarro (`david-pizarro`)
+
+**Chile · Midfielder · 1997–2018 · chile senior origin.**[15][16]
+
+**Ordered senior route:** Santiago Wanderers → Udinese → Universidad de Chile → Udinese → Inter Milan → Roma → Manchester City → Fiorentina → Santiago Wanderers → Universidad de Chile.[15][16]
+
+First senior system: Chile, Santiago Wanderers in 1997, not youth club Caupolicán. Retain the 2001 Universidad de Chile loan and actual Udinese return. Do not insert a Roma playing return after the Manchester City loan: both sources proceed directly to Fiorentina. Retain later playing returns to Wanderers and Universidad de Chile. End 2018 follows the final senior playing season and retirement.[15][16]
+
+Independent domains: en.wikipedia.org, national-football-teams.com.
+
+## Rodrigo Tello (`rodrigo-tello`)
+
+**Chile · Midfielder · 1999–2016 · chile senior origin.**[17][18]
+
+**Ordered senior route:** Universidad de Chile → Sporting CP → Beşiktaş → Eskişehirspor → Elazığspor → Şanlıurfaspor → Audax Italiano.[17][18]
+
+First senior system: Chile, Universidad de Chile in 1999; earlier Colo-Colo and Universidad de Chile youth football is excluded. NFT’s 2015/16 final season and Wikipedia’s 2015–2016 Audax spell support a 2016 endpoint. Use the existing broad Midfielder role.[17][18]
+
+Independent domains: en.wikipedia.org, national-football-teams.com.
+
+## Cristian Rodríguez (`cristian-rodriguez`)
+
+**Uruguay · Midfielder / Forward · 2002–2022 · uruguay senior origin.**[19][20]
+
+**Ordered senior route:** Peñarol → Paris Saint-Germain → Benfica → Porto → Atlético Madrid → Parma → Grêmio → Independiente → Peñarol → Plaza Colonia.[19][20]
+
+First senior system: Uruguay, Peñarol in 2002. Retain Grêmio despite zero Brazilian national-league appearances: Montevideo Portal reports two actual matches and 88 minutes in 2015. Preserve the Benfica, Parma and Grêmio loans without invented PSG or Atlético playing returns; retain the genuine later Peñarol return. End 2022 denotes final senior playing season at Plaza Colonia, not a later retirement-announcement date.[19][20][21]
+
+Independent domains: en.wikipedia.org, montevideo.com.uy, national-football-teams.com.
+
+## Vicente Sánchez (`vicente-sanchez`)
+
+**Uruguay · Midfielder / Forward · 1999–2021 · uruguay senior origin.**[22][23]
+
+**Ordered senior route:** Sud América → Tacuarembó → Nacional → Toluca → Schalke 04 → América → Nacional → Colorado Rapids → Defensor Sporting → Houston Dynamo → Rio Grande Valley FC.[22][23]
+
+First senior system: Uruguay, Sud América. NFT explicitly assigns 17 senior second-division appearances to 1999; prefer that playing evidence to the English Wikipedia infobox’s 2000 label and disclose the year discrepancy. Retain the actual Nacional return and 2021 Rio Grande Valley professional comeback after retirement following Houston in 2017. The USL announcement distinguishes player/coach from coaching-only; Wikipedia records 29 playing appearances. NFT omits the 2021 comeback. Do not use the USL article’s erroneous Nacional 2013–2016 aside to reorder the route.[22][23][24]
+
+Independent domains: en.wikipedia.org, national-football-teams.com, uslchampionship.com.
+
+## Edinson Cavani (`edinson-cavani`)
+
+**Uruguay · Forward · 2005–2026 · uruguay senior origin.**[25][26]
+
+**Ordered senior route:** Danubio → Palermo → Napoli → Paris Saint-Germain → Manchester United → Valencia → Boca Juniors.[25][26]
+
+First senior system: Uruguay, Danubio (Wikipedia 2005 start; NFT 2005/06 playing season). Napoli’s continuous loan-to-permanent period is one node. End 2026 is the latest evidenced playing/departure year, not an assertion that he retired: the retrieved July 2026 Times/AFP report confirms Boca departure and explicitly says he did not announce retirement. No future club or unused contract extension is included.[25][26][27]
+
+Independent domains: batimes.com.ar, en.wikipedia.org, national-football-teams.com.
+
+## Maxi Pereira (`maxi-pereira`)
+
+**Uruguay · Defender · 2002–2023 · uruguay senior origin.**[28][29]
+
+**Ordered senior route:** Defensor Sporting → Benfica → Porto → Peñarol → River Plate (Montevideo).[28][29]
+
+First senior system: Uruguay, Defensor Sporting in 2002; Bella Vista was youth football. River Plate is the Montevideo club, not the Argentine club. NFT labels three Peñarol appearances as the 2020 competition season, while Wikipedia dates his Peñarol spell to calendar 2021; neither changes the ordered route or career endpoints. Retain the post-Porto hiatus without inventing an intervening club. Selected instead of Álvaro Recoba because the 2002 debut is a closer contemporary of Luis Suárez’s 2005 start.[28][29]
+
+Independent domains: en.wikipedia.org, national-football-teams.com.
+
+## Qualifications and rejected alternatives
+
+Fabián Estay’s start remains an explicitly disclosed year-label conflict: the bank uses NFT’s positive 1985 senior appearance, not Wikipedia’s 1987 infobox start. Both values remain inside the required contemporary window. Vicente Sánchez similarly follows NFT’s 1999 senior season rather than the English Wikipedia 2000 label. These qualifications do not change either opening club or route.
+
+Álvaro Recoba was not used: his 1994 debut falls outside Suárez’s required 1997–2013 window. Maxi Pereira (2002) supplies the fourth in-window Uruguay-start peer. Jorge Soto’s unused Flamengo signing is excluded, while Cristian Rodríguez’s actually played Grêmio spell is retained.
+
+## Sources
+
+[1] https://en.wikipedia.org/wiki/Nolberto_Solano
+    > "Nolberto Solano Solano with Peru in 2007 Personal information Full name Nolberto Albino Solano Todco[1] Date of birth 12 December 1974 (age 51) Place of birth Callao, Lima, Peru Height 1.75 m (5 ft 9 in) Position Midfielder Team information Current team Pakistan (Manager) Youth career 1987–1990 Alianza Lima 1991–1992 Sporting Cristal Senior career* Years Team Apps (Gls) 1993 Sporting Cristal 11 (1) 1993 Deportivo Municipal 27 (7) 1994–1997 Sporting Cristal 97 (31) 1997–1998 Boca Juniors 32 (5) 1998–2004 Newcastle United 172 (29) 2004–2005 Aston Villa 49 (8) 2005–2007 Newcastle United 58 (8) 2007–2008 West Ham United 23 (4) 2008 AEL 17 (2) 2009 Universitario 32 (10) 2010 Leicester City 13 (0) 2010–2011 Hull City 11 (0) 2011–2012 Hartlepool United 14 (2) Total 556 (107) International career 1994–2009 Peru 95 (20)"
+[2] https://www.national-football-teams.com/player/5193/Nolberto_Solano.html
+    > "Club Appearances of Nolberto Solano Season Club M G R Cha Cup Season Club M G R Cha Cup 521 114 2011/12 Hartlepool United 14 2 13 (III) 2010/11 Hull City 11 0 11 (II) 2009/10 Leicester City 11 0 5 (II) 2009 Universitario de Deportes Lima 24 7 1 (I) 2008/09 AE Larisas 13 1 5 (I) 2007/08 West Ham United 23 4 10 (I) 2007/08 Newcastle United 1 0 12 (I) 2006/07 Newcastle United 28 2 13 (I) 2005/06 Newcastle United 29 6 7 (I) 2005/06 Aston Villa FC 3 0 16 (I) 2004/05 Aston Villa FC 36 8 10 (I) 2003/04 Aston Villa FC 9 0 6 (I) 2003/04 Newcastle United 12 0 5 (I) 2002/03 Newcastle United 31 7 3 (I) 2001/02 Newcastle United 37 7 4 (I) 2000/01 Newcastle United 33 6 11 (I) 1999/00 Newcastle United 30 3 11 (I) 1998/99 Newcastle United 29 6 13 (I) 1997/98 CA Boca Juniors 32 5 3 (I) 1997 Sporting Cristal Lima 11 7 3 (I) 1996 Sporting Cristal Lima 26 13 1 (I) 1995 Sporting Cristal Lima 38 12 1 (I) 1994 Sporting Cristal Lima 36 18 1 (I) 1993 Deportivo Municipal Lima 4 0 6 (I) 521 114"
+[3] https://dechalaca.com/informes/curiosidades/cuando-nol-era-nino-rata
+    > "El año 2012 está cerrando toda una época, y no porque se aproxime el fin del mundo. A los múltiples y merecidos agasajos que recibe el ‘Chorrillano’ Palacios tras su retiro, Nolberto Solano también ha anunciado su despedida. ‘Ñol’ colgará los chimpunes dos décadas después de su debut en la Primera División: fue la tarde del 12 de abril de 1992, en Matute, por la primera fecha del Descentralizado, y con Sporting Cristal enfrentando de visita a Deportivo San Agustín."
+[4] https://en.wikipedia.org/wiki/Jefferson_Farf%C3%A1n
+    > "Jefferson Farfán Farfán playing for Lokomotiv Moscow in 2018 Personal information Full name Jefferson Agustín Farfán Guadalupe Date of birth 26 October 1984 (age 41) Place of birth Lima, Peru Height 1.77 m (5 ft 10 in)[1] Position Winger Youth career 1993–1998 Deportivo Municipal 1998–2001 Alianza Lima[2] Senior career* Years Team Apps (Gls) 2001–2004 Alianza Lima 77 (28) 2004–2008 PSV 118 (57) 2008–2015 Schalke 04 170 (39) 2015–2016 Al-Jazira 12 (4) 2017–2020 Lokomotiv Moscow 51 (20) 2021–2022 Alianza Lima 17 (4) Total 445 (152) International career 2000–2001 Peru U17 22 (20) 2001 Peru U18 4 (3) 2002–2003 Peru U20 7 (1) 2003–2004 Peru U23 5 (0) 2003–2021 Peru 102 (27) Medal record * Club domestic league appearances and goals"
+[5] https://www.national-football-teams.com/player/5169/Jefferson_Farfan.html
+    > "Club Appearances of Jefferson Farfán Season Club M G R Cha Cup Season Club M G R Cha Cup 452 158 2022 Alianza Lima 3 0 2 (I) 2021 Alianza Lima 12 4 2 (I) 2019/20 Lokomotiv Moskva 3 1 2 (I) 2018/19 Lokomotiv Moskva 20 8 2 (I) 2017/18 Lokomotiv Moskva 22 10 1 (I) 2016/17 Lokomotiv Moskva 6 1 8 (I) 2016/17 Al-Jazira Abu Dhabi 3 2 1 (I) 2015/16 Al-Jazira Abu Dhabi 9 2 7 (I) 2014/15 Schalke 04 Gelsenkirchen 9 0 6 (I) 2013/14 Schalke 04 Gelsenkirchen 19 9 3 (I) 2012/13 Schalke 04 Gelsenkirchen 27 6 4 (I) 2011/12 Schalke 04 Gelsenkirchen 23 4 3 (I) 2010/11 Schalke 04 Gelsenkirchen 28 3 14 (I) 2009/10 Schalke 04 Gelsenkirchen 33 8 2 (I) 2008/09 Schalke 04 Gelsenkirchen 31 9 8 (I) 2007/08 PSV Eindhoven 29 7 1 (I) 2006/07 PSV Eindhoven 30 21 1 (I) 2005/06 PSV Eindhoven 31 21 1 (I) 2004/05 PSV Eindhoven 28 8 1 (I) 2004 Alianza Lima 23 18 1 (I) 2003 Alianza Lima 37 13 1 (I) 2002 Alianza Lima 25 3 2 (I) 2001 Alianza Lima 1 0 1 (I) 452 158"
+[6] https://en.wikipedia.org/wiki/Jorge_Soto_(footballer)
+    > "Jorge Soto Personal information Full name Jorge Antonio Soto Gómez Date of birth 27 October 1971 (age 54) Place of birth Lima, Peru Height 1.78 m (5 ft 10 in) Position Midfielder Team information Current team Sporting Cristal (assistant) Senior career* Years Team Apps (Gls) 1990–1992 Deportivo Municipal 42 (6) 1993–1999 Sporting Cristal 229 (61) 1999 Lanús 15 (3) 2000 Flamengo 0 (0) 2000–2003 Sporting Cristal 123 (54) 2003 San Luis 12 (0) 2004–2007 Sporting Cristal 132 (37) 2008 Alianza Lima 7 (0) 2008 Melgar 16 (2) Total 576 (163) International career 1992–2005 Peru 101 (9)"
+[7] https://www.national-football-teams.com/player/5184/Jorge_Soto.html
+    > "Club Appearances of Jorge Soto Season Club M G R Cha Cup Season Club M G R Cha Cup 576 163 2008 FBC Melgar Arequipa 16 2 8 (I) 2008 Alianza Lima 7 0 11 (I) 2007 Sporting Cristal Lima 19 2 10 (I) 2006 Sporting Cristal Lima 38 11 3 (I) 2005 Sporting Cristal Lima 41 12 1 (I) 2004 Sporting Cristal Lima 34 12 2 (I) 2003/04 San Luis FC 12 0 20 (I) 2003 Sporting Cristal Lima 21 12 2 (I) 2002 Sporting Cristal Lima 29 13 1 (I) 2001 Sporting Cristal Lima 43 18 3 (I) 2000 Sporting Cristal Lima 30 11 2 (I) 1999/00 CA Lanús 15 3 12 (I) 1999 Sporting Cristal Lima 16 7 3 (I) 1998 Sporting Cristal Lima 41 16 2 (I) 1997 Sporting Cristal Lima 27 11 3 (I) 1996 Sporting Cristal Lima 26 5 1 (I) 1995 Sporting Cristal Lima 39 8 1 (I) 1994 Sporting Cristal Lima 40 8 1 (I) 1993 Sporting Cristal Lima 40 6 5 (I) 1992 Deportivo Municipal Lima 25 5 10 (I) 1991 Deportivo Municipal Lima 15 1 - (I) 1990 Deportivo Municipal Lima 2 0 - (I) 576 163"
+[8] https://ge.globo.com/futebol/times/flamengo/noticia/2025/11/29/antes-de-guerrero-e-trauco-peruano-jorge-soto-teve-passagem-sem-sucesso-pelo-flamengo.ghtml
+    > "É compreensível a falha na memória, já que o ex-meia sequer atuou pelo [Flamengo](https://globoesporte.globo.com/futebol/times/flamengo/). Chegou com pompa em fevereiro de 2000, credenciado pela titularidade na seleção peruana e no Sporting Cristal, um dos principais clubes do país vizinho."
+    > "— Fiquei com o sabor na boca de não poder ter jogado uma partida só, mas tive a sorte de estar com Juan, Beto, Adriano e Athirson. Os jogadores me receberam muito bem — afirmou Jorge Soto em entrevista ao **ge**, há alguns anos."
+[9] https://en.wikipedia.org/wiki/Juan_Manuel_Vargas
+    > "Juan Manuel Vargas Vargas playing for Fiorentina in 2011 Personal information Full name Juan Manuel Vargas Risco Date of birth 5 October 1983 (age 42)[1] Place of birth Magdalena del Mar, Peru Height 1.80 m (5 ft 11 in) Positions Left backwinger Youth career 1995 Universitario 1995–1999 Union Minas 1999–2001 Universitario Senior career* Years Team Apps (Gls) 2002–2004 Universitario 69 (8) 2005–2006 Colón 54 (4) 2006–2008 Catania 69 (5) 2008–2015 Fiorentina 147 (17) 2012–2013 → Genoa (loan) 20 (0) 2015–2016 Real Betis 20 (3) 2017–2018 Universitario 47 (8) International career‡ 2004–2016 Peru 62 (4) Medal record * Club domestic league appearances and goals as of 20 January 2019 ‡ National team caps and goals as of 20 January 2019"
+[10] https://www.national-football-teams.com/player/9087/Juan_Vargas.html
+    > "Club Appearances of Juan Vargas Season Club M G R Cha Cup Season Club M G R Cha Cup 426 41 2018 Universitario de Deportes Lima 21 2 9 (I) 2017 Universitario de Deportes Lima 26 4 4 (I) 2015/16 Real Betis Sevilla 20 2 10 (I) 2014/15 AC Fiorentina 19 1 4 (I) 2013/14 AC Fiorentina 24 4 4 (I) 2012/13 Genoa CFC 20 0 17 (I) 2011/12 AC Fiorentina 24 0 13 (I) 2010/11 AC Fiorentina 24 4 9 (I) 2009/10 AC Fiorentina 29 5 11 (I) 2008/09 AC Fiorentina 27 3 4 (I) 2007/08 Calcio Catania 36 5 17 (I) 2006/07 Calcio Catania 33 0 13 (I) 2005/06 Colón Santa Fe 36 1 14 (I) 2004/05 Colón Santa Fe 18 3 11 (I) 2004 Universitario de Deportes Lima 41 6 5 (I) 2003 Universitario de Deportes Lima 25 1 9 (I) 2002 Universitario de Deportes Lima 3 0 5 (I) 426 41"
+[11] https://en.wikipedia.org/wiki/Iv%C3%A1n_Zamorano
+    > "Iván Zamorano Zamorano in 2013 Personal information Full name Iván Luis Zamorano Zamora Birth name Iván Luis Zamorano Zamora Date of birth 18 January 1967 (age 59) Place of birth Santiago, Chile Height 1.78 m (5 ft 10 in)[1] Position Striker Youth career 1983–1985 Cobresal Senior career* Years Team Apps (Gls) 1985–1988 Cobresal 45 (22) 1985–1986 → Cobreandino (loan) 29 (27) 1988–1990 St. Gallen 56 (34) 1990–1992 Sevilla 59 (21) 1992–1996 Real Madrid 137 (77) 1996–2001 Inter Milan 101 (25) 2001–2003 América 63 (33) 2003 Colo-Colo 14 (8) Total 504 (247) International career 2000 Chile Olympic (O.P.) 5 (6) 1987–2001 Chile 69 (34) Medal record * Club domestic league appearances and goals"
+[12] https://www.national-football-teams.com/player/13677/Ivan_Zamorano.html
+    > "Club Appearances of Iván Zamorano Season Club M G R Cha Cup Season Club M G R Cha Cup 500 244 2003 Colo Colo Santiago 14 8 2 (I) 2002/03 América México 11 4 2 (I) 2001/02 América México 32 17 8 (I) 2000/01 América México 13 9 2 (I) 2000/01 Inter Milano 2 1 5 (I) 1999/00 Inter Milano 30 7 4 (I) 1998/99 Inter Milano 25 9 8 (I) 1997/98 Inter Milano 13 1 2 (I) 1996/97 Inter Milano 31 7 3 (I) 1995/96 Real Madrid 29 12 6 (I) 1994/95 Real Madrid 38 28 1 (I) 1993/94 Real Madrid 36 11 4 (I) 1992/93 Real Madrid 34 25 2 (I) 1991/92 Sevilla FC 30 12 12 (I) 1990/91 Sevilla FC 29 9 8 (I) 1990/91 FC St. Gallen 6 1 9 (I) 1989/90 FC St. Gallen 33 23 5 (I) 1988/89 FC St. Gallen 17 10 11 (I) 1988 Cobresal El Salvador 14 14 2 (I) 1987 Cobresal El Salvador 29 8 4 (I) 1986 Cobreandino Los Andes 29 27 2 (II) 1985 Cobresal El Salvador 5 1 5 (I) 500 244"
+[13] https://en.wikipedia.org/wiki/Fabi%C3%A1n_Estay
+    > "Fabián Estay Personal information Full name Fabián Raphael Estay Silva Date of birth October 5, 1968 (age 57) Place of birth Santiago, Chile Height 1.73 m (5 ft 8 in) Position Midfielder Youth career 1985–1987 Universidad Católica Senior career* Years Team Apps (Gls) 1987–1991 Universidad Católica 111 (11) 1991–1993 St. Gallen 35 (8) 1993 Universidad de Chile 39 (2) 1993–1995 Olympiacos 20 (4) 1995–1996 Colo-Colo 32 (7) 1996–1999 Toluca 140 (23) 1999–2001 América 82 (11) 2001–2003 Atlante 57 (6) 2003 Santos Laguna 20 (2) 2004 Acapulco 11 (1) 2004–2005 Toluca 12 (1) 2005 América de Cali 14 (2) 2006 Palestino 32 (4) Total 605 (82) International career 1987 Chile U20 6 (0) 1990–2001 Chile 69 (5) * Club domestic league appearances and goals"
+[14] https://www.national-football-teams.com/player/13044/Fabian_Estay.html
+    > "Club Appearances of Fabián Estay Season Club M G R Cha Cup Season Club M G R Cha Cup 547 79 2006 Palestino Santiago 32 4 18 (I) 2005 América Cali 14 2 9 (I) 2004/05 CD Toluca 11 1 2 (I) 2003/04 CF Acapulco 11 1 - (II) 2003/04 Santos Laguna 18 2 9 (I) 2002/03 Atlante México 38 5 4 (I) 2001/02 Atlante México 17 1 13 (I) 2001/02 América México 6 0 8 (I) 2000/01 América México 32 5 2 (I) 1999/00 América México 34 6 5 (I) 1998/99 CD Toluca 34 9 1 (I) 1997/98 CD Toluca 33 8 5 (I) 1996/97 CD Toluca 32 4 7 (I) 1995/96 CD Toluca 15 1 15 (I) 1995 Colo Colo Santiago 32 7 3 (I) 1994/95 Olympiakos Piraios 6 3 2 (I) 1993/94 Olympiakos Piraios 14 1 3 (I) 1993 Universidad de Chile Santiago 22 0 4 (I) 1992/93 FC St. Gallen 21 5 10 (I) 1991/92 FC St. Gallen 14 3 8 (I) 1991 Universidad Católica Santiago 30 3 3 (I) 1990 Universidad Católica Santiago 30 2 2 (I) 1989 Universidad Católica Santiago 32 5 2 (I) 1988 Universidad Católica Santiago 14 1 4 (I) 1987 Universidad Católica Santiago 4 0 1 (I) 1986 Universidad Católica Santiago 0 0 6 (I) 1985 Universidad Católica Santiago 1 0 6 (I) 547 79"
+[15] https://en.wikipedia.org/wiki/David_Pizarro
+    > "David Pizarro Pizarro with Universidad de Chile in 2018 Personal information Full name David Marcelo Pizarro Cortez Date of birth 11 September 1979 (age 47) Place of birth Valparaíso, Chile Height 1.68 m (5 ft 6 in)[1] Position Midfielder Youth career Caupolicán Santiago Wanderers Senior career* Years Team Apps (Gls) 1997–1998 Santiago Wanderers 41 (3) 1999–2005 Udinese 126 (14) 2001 → Universidad de Chile (loan) 6 (1) 2005–2006 Inter Milan 24 (1) 2006–2012 Roma 148 (9) 2012 → Manchester City (loan) 5 (0) 2012–2015 Fiorentina 83 (4) 2015–2016 Santiago Wanderers 9 (0) 2017–2018 Universidad de Chile 52 (5) Total 494 (37) International career 1995 Chile U17 1999 Chile U20 9 (3) 2000 Chile U23 13 (2) 2001 Chile B 1 (0) 1999–2015 Chile 46 (2) Medal record * Club domestic league appearances and goals"
+[16] https://www.national-football-teams.com/player/1440/David_Pizarro.html
+    > "Club Appearances of David Pizarro Season Club M G R Cha Cup Season Club M G R Cha Cup 493 37 2018 Universidad de Chile Santiago 24 2 3 (I) 2017 Universidad de Chile Santiago 14 3 3 (I) 2016/17 Universidad de Chile Santiago 14 0 3 (I) 2015/16 Santiago Wanderers Valparaíso 8 0 6 (I) 2014/15 AC Fiorentina 26 0 4 (I) 2013/14 AC Fiorentina 28 1 4 (I) 2012/13 AC Fiorentina 29 3 4 (I) 2011/12 Manchester City 5 0 1 (I) 2011/12 AS Roma 7 0 7 (I) 2010/11 AS Roma 22 1 6 (I) 2009/10 AS Roma 31 2 2 (I) 2008/09 AS Roma 25 2 6 (I) 2007/08 AS Roma 31 3 2 (I) 2006/07 AS Roma 32 1 2 (I) 2005/06 Inter Milano 24 1 2 (I) 2004/05 Udinese Calcio 34 2 4 (I) 2003/04 Udinese Calcio 19 3 7 (I) 2002/03 Udinese Calcio 33 7 6 (I) 2001/02 Udinese Calcio 31 2 14 (I) 2001 Universidad de Chile Santiago 6 1 3 (I) 2000/01 Udinese Calcio 4 0 12 (I) 1999/00 Udinese Calcio 5 0 8 (I) 1999 Santiago Wanderers Valparaíso 0 0 2 (II) 1998 Santiago Wanderers Valparaíso 23 3 15 (I) 1997 Santiago Wanderers Valparaíso 18 0 14 (I) 493 37"
+[17] https://en.wikipedia.org/wiki/Rodrigo_Tello
+    > "Rodrigo Tello Tello playing for Beşiktaş in 2009 Personal information Full name Rodrigo Álvaro Tello Valenzuela Date of birth 14 October 1979 (age 46) Place of birth Santiago, Chile Height 1.70 m (5 ft 7 in) Position Midfielder Youth career 1992–1995 Colo-Colo 1995–1999 Universidad de Chile Senior career* Years Team Apps (Gls) 1999–2000 Universidad de Chile 53 (7) 2001–2007 Sporting CP 113 (8) 2007–2010 Beşiktaş 87 (15) 2010–2014 Eskişehirspor 79 (3) 2014 Elazığspor 14 (2) 2014–2015 Şanlıurfaspor 29 (2) 2015–2016 Audax Italiano 10 (0) Total 385 (37) International career 2000 Chile U23 5 (1) 2000–2010 Chile 36 (3) Medal record * Club domestic league appearances and goals"
+[18] https://www.national-football-teams.com/player/8302/Rodrigo_Tello.html
+    > "Club Appearances of Rodrigo Tello Season Club M G R Cha Cup Season Club M G R Cha Cup 384 35 2015/16 Audax Italiano Santiago 10 0 7 (I) 2014/15 Şanlıurfaspor 29 2 8 (II) 2013/14 Elazığspor 14 2 16 (I) 2013/14 Eskişehirspor 3 0 12 (I) 2012/13 Eskişehirspor 27 2 8 (I) 2011/12 Eskişehirspor 33 1 5 (I) 2010/11 Eskişehirspor 16 0 7 (I) 2009/10 Beşiktaş JK 27 4 4 (I) 2008/09 Beşiktaş JK 32 6 1 (I) 2007/08 Beşiktaş JK 29 5 3 (I) 2006/07 Sporting CP Lisboa 24 2 2 (I) 2005/06 Sporting CP Lisboa 19 1 2 (I) 2004/05 Sporting CP Lisboa 9 1 3 (I) 2003/04 Sporting CP Lisboa 21 1 3 (I) 2002/03 Sporting CP Lisboa 15 1 3 (I) 2001/02 Sporting CP Lisboa 15 0 1 (I) 2000/01 Sporting CP Lisboa 8 0 3 (I) 2000 Universidad de Chile Santiago 20 3 1 (I) 1999 Universidad de Chile Santiago 33 4 1 (I) 384 35"
+[19] https://en.wikipedia.org/wiki/Cristian_Rodr%C3%ADguez
+    > "Cristian Rodríguez Rodríguez with Peñarol in 2018 Personal information Full name Cristian Gabriel Rodríguez Barrotti[1] Date of birth 30 September 1985 (age 40)[1] Place of birth Juan Lacaze, Uruguay Height 1.78 m (5 ft 10 in)[2] Position Winger Youth career Peñarol Senior career* Years Team Apps (Gls) 2002–2005 Peñarol 55 (5) 2005–2008 Paris Saint-Germain 36 (1) 2007–2008 → Benfica (loan) 24 (6) 2008–2012 Porto 70 (12) 2012–2015 Atlético Madrid 59 (2) 2015 → Parma (loan) 5 (0) 2015 → Grêmio (loan) 0 (0) 2015–2016 Independiente 26 (3) 2017–2021 Peñarol 98 (31) 2021–2022 Plaza Colonia 37 (4) Total 410 (64) International career 2003–2005 Uruguay U20 13 (5) 2003–2018 Uruguay 110 (11) * Club domestic league appearances and goals"
+[20] https://www.national-football-teams.com/player/8178/Cristian_Rodriguez.html
+    > "Club Appearances of Cristian Rodríguez Season Club M G R Cha Cup Season Club M G R Cha Cup 391 60 2022 Plaza Colonia 22 0 14 (I) 2021 Plaza Colonia 27 4 3 (I) 2020 CA Peñarol 16 1 3 (I) 2019 CA Peñarol 23 5 2 (I) 2018 CA Peñarol 19 9 1 (I) 2017 CA Peñarol 27 15 1 (I) 2016/17 Independiente Avellaneda 9 0 6 (I) 2016 Independiente Avellaneda 9 0 6 (I) 2015 Independiente Avellaneda 5 1 5 (I) 2014/15 Parma FC 5 0 20 (I) 2014/15 Atlético Madrid 6 0 3 (I) 2013/14 Atlético Madrid 20 1 1 (I) 2012/13 Atlético Madrid 33 1 3 (I) 2011/12 FC Porto 10 1 1 (I) 2010/11 FC Porto 13 1 1 (I) 2009/10 FC Porto 18 4 3 (I) 2008/09 FC Porto 29 6 1 (I) 2007/08 Benfica Lisboa 24 6 4 (I) 2006/07 Paris Saint-Germain 25 1 15 (I) 2005/06 Paris Saint-Germain 11 0 9 (I) 2004 CA Peñarol 13 2 3 (I) 2003 CA Peñarol 21 2 1 (I) 2002 CA Peñarol 6 0 1 (I) 391 60"
+[21] https://www.montevideo.com.uy/Deportes/Cebolla-Rodriguez-rescindio-en-Gremio-uc270455
+    > "Rodríguez llegó a Porto Alegre el 10 de marzo de 2015, jugó dos partidos y sumó -entre ellos- 88 minutos con la camiseta tricolor. Felipe Scolari, entrenador de la institución, dijo: Son situaciones que ocurren en el fútbol. Él venía jugando pero ha sufrido algunas lesiones. Claro que frustra, a mí, al deportista y a la directiva."
+[22] https://en.wikipedia.org/wiki/Vicente_S%C3%A1nchez
+    > "Vicente Sánchez Personal information Full name Vicente Martín Sánchez Bragunde Date of birth 7 December 1979 (age 46) Place of birth Montevideo, Uruguay Height 1.69 m (5 ft 7 in) Position Winger Youth career 1998–1999 Sud América Senior career* Years Team Apps (Gls) 2000 Sud América 17 (0) 2000 Tacuarembó 11 (1) 2001 Nacional 9 (2) 2001–2007 Toluca 242 (85) 2008–2010 Schalke 04 50 (3) 2010–2012 América 49 (11) 2012–2013 Nacional 25 (4) 2013–2015 Colorado Rapids 55 (11) 2016 Defensor Sporting 10 (2) 2017 Houston Dynamo 21 (2) 2021 Rio Grande Valley FC 29 (2) International career 2001–2008 Uruguay 31 (5)"
+[23] https://www.national-football-teams.com/player/7030/Vicente_Sanchez.html
+    > "Club Appearances of Vicente Sánchez Season Club M G R Cha Cup Season Club M G R Cha Cup 439 105 2017 Houston Dynamo 21 2 10 (I) 2016 Defensor Sporting Montevideo 10 2 4 (I) 2015 Colorado Rapids 30 4 19 (I) 2014 Colorado Rapids 17 6 17 (I) 2013 Colorado Rapids 8 1 8 (I) 2012/13 Nacional Montevideo 14 4 3 (I) 2011/12 Nacional Montevideo 10 0 1 (I) 2011/12 América México 10 1 8 (I) 2010/11 América México 32 8 5 (I) 2009/10 Schalke 04 Gelsenkirchen 14 2 2 (I) 2008/09 Schalke 04 Gelsenkirchen 22 0 8 (I) 2007/08 Schalke 04 Gelsenkirchen 14 1 3 (I) 2007/08 CD Toluca 15 9 3 (I) 2006/07 CD Toluca 27 8 7 (I) 2005/06 CD Toluca 30 6 4 (I) 2004/05 CD Toluca 30 10 2 (I) 2003/04 CD Toluca 36 10 8 (I) 2002/03 CD Toluca 29 14 1 (I) 2001/02 CD Toluca 33 14 1 (I) 2001 Nacional Montevideo 9 2 2 (I) 2000 Tacuarembó FC 11 1 6 (I) 1999 Sud América Montevideo 17 0 - (II) 439 105"
+[24] https://www.uslchampionship.com/news_article/show/1155925
+    > "EDINBURG, Texas – Rio Grande Valley FC announced on Friday it had signed veteran forward Vicente Sánchez for the 2021 USL Championship season. The former Uruguayan international will come out of retirement to play for the Toros while also being a member of the coaching staff."
+    > "Sánchez retired following the 2017 season with the Houston Dynamo FC, where he played under Cabrera. The experienced attacker dressed for the Dynamo in 2017 making 21 appearances, three starts where he notched two goals and recorded five assists in a total of 517 minutes. Sánchez recorded the Dynamo’s fifth fastest goal in history at the 60-second of play in a 3-3 draw at FC Dallas on Aug. 23, 2017."
+[25] https://en.wikipedia.org/wiki/Edinson_Cavani
+    > "Edinson Cavani Cavani with Boca Juniors in 2023 Personal information Full name Edinson Roberto Cavani Gómez[1] Date of birth 14 February 1987 (age 39)[1] Place of birth Salto, Uruguay Height 1.85 m (6 ft 1 in)[1] Position Striker Youth career 2000–2005 Danubio Senior career* Years Team Apps (Gls) 2005–2007 Danubio 15 (5) 2007–2010 Palermo 109 (34) 2010–2013 Napoli 104 (78) 2013–2020 Paris Saint-Germain 200 (138) 2020–2022 Manchester United 41 (12) 2022–2023 Valencia 25 (5) 2023–2026 Boca Juniors 60 (16) International career 2006–2007 Uruguay U20 15 (11) 2012 Uruguay Olympic (O.P.) 5 (3) 2008–2022 Uruguay 136 (58) Medal record * Club domestic league appearances and goals as of February 20, 2026"
+[26] https://www.national-football-teams.com/player/25130/Edinson_Cavani.html
+    > "Club Appearances of Edinson Cavani Season Club M G R Cha Cup Season Club M G R Cha Cup 559 291 2026 CA Boca Juniors 2 0 - (I) 2025 CA Boca Juniors 18 4 2 (I) 2024 CA Boca Juniors 27 10 6 (I) 2023 CA Boca Juniors 8 1 6 (I) 2022/23 Valencia CF 25 5 16 (I) 2021/22 Manchester United 15 2 6 (I) 2020/21 Manchester United 26 10 2 (I) 2019/20 Paris Saint-Germain 14 4 1 (I) 2018/19 Paris Saint-Germain 21 18 1 (I) 2017/18 Paris Saint-Germain 32 28 1 (I) 2016/17 Paris Saint-Germain 36 35 2 (I) 2015/16 Paris Saint-Germain 32 19 1 (I) 2014/15 Paris Saint-Germain 35 18 1 (I) 2013/14 Paris Saint-Germain 30 16 1 (I) 2012/13 SSC Napoli 34 29 2 (I) 2011/12 SSC Napoli 35 23 5 (I) 2010/11 SSC Napoli 35 26 3 (I) 2009/10 US Palermo 34 13 5 (I) 2008/09 US Palermo 35 14 8 (I) 2007/08 US Palermo 33 5 11 (I) 2006/07 US Palermo 7 2 5 (I) 2006/07 Danubio Montevideo 15 5 1 (I) 2005/06 Danubio Montevideo 10 4 3 (I) 559 291"
+[27] https://batimes.com.ar/news/sports/uruguay-veteran-edison-cavani-departs-boca-juniors.phtml
+    > "Veteran Uruguayan striker Edinson Cavani has announced his departure from Boca Juniors after almost three years, bringing an injury-hit spell at the Argentine giants to an end."
+    > ""As a coach of mine once taught me, the journey is the reward. And the journey has been magnificent," Cavani said, without announcing his retirement from club football."
+    > "His final appearance for Boca came on February 15 in a goalless draw against Racing, after which his physical problems prevented him from returning."
+[28] https://en.wikipedia.org/wiki/Maxi_Pereira
+    > "Maxi Pereira Pereira with Porto in 2018 Personal information Full name Victorio Maximiliano Pereira Páez[1] Date of birth 8 June 1984 (age 42)[1] Place of birth Montevideo, Uruguay[1] Height 1.73 m (5 ft 8 in)[2] Position Right-back Youth career Bella Vista 2002 Defensor Senior career* Years Team Apps (Gls) 2002–2007 Defensor 125 (25) 2007–2015 Benfica 212 (13) 2015–2019 Porto 89 (3) 2021 Peñarol 20 (1) 2022–2023 River Plate (UY) 46 (1) Total 492 (43) International career 2005–2018 Uruguay 125 (3) Medal record * Club domestic league appearances and goals"
+[29] https://www.national-football-teams.com/player/13540/Maxi_Pereira.html
+    > "Club Appearances of Maxi Pereira Season Club M G R Cha Cup Season Club M G R Cha Cup 486 43 2023 River Plate Montevideo 12 1 9 (I) 2022 River Plate Montevideo 34 0 5 (I) 2021 CA Peñarol 17 1 1 (I) 2020 CA Peñarol 3 0 3 (I) 2018/19 FC Porto 18 0 2 (I) 2017/18 FC Porto 15 0 1 (I) 2016/17 FC Porto 24 2 2 (I) 2015/16 FC Porto 32 1 3 (I) 2014/15 Benfica Lisboa 32 5 1 (I) 2013/14 Benfica Lisboa 25 0 1 (I) 2012/13 Benfica Lisboa 28 3 2 (I) 2011/12 Benfica Lisboa 25 0 2 (I) 2010/11 Benfica Lisboa 26 0 2 (I) 2009/10 Benfica Lisboa 25 2 1 (I) 2008/09 Benfica Lisboa 28 1 3 (I) 2007/08 Benfica Lisboa 23 2 4 (I) 2006/07 Defensor Sporting Montevideo 23 3 3 (I) 2005/06 Defensor Sporting Montevideo 29 12 2 (I) 2005 Defensor Sporting Montevideo 9 4 2 (I) 2004 Defensor Sporting Montevideo 34 6 9 (I) 2003 Defensor Sporting Montevideo 19 0 6 (I) 2002 Defensor Sporting Montevideo 5 0 5 (I) 486 43"

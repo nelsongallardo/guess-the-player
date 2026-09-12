@@ -1,6 +1,6 @@
 # 2. Origin-first distractors
 
-Status: Accepted — implemented 2026-09-12.
+Status: Accepted — implemented 2026-09-12. The roster-only restriction and top-eight sampling below are superseded by [ADR 0003](0003-researched-contemporary-rivals.md); origin-first and save-preservation rules remain active.
 
 ## Problem
 

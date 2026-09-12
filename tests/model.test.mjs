@@ -1,4 +1,5 @@
 import './distractors.test.mjs';
+import './distractor-bank.test.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -58,9 +59,9 @@ test('60,000 option samples always contain five unique names and exactly one cor
       const names=g.optionsFor(p);
       assert.equal(names.length,5); assert.equal(new Set(names).size,5);
       assert.equal(names.filter(n=>n===p.name).length,1);
-      assert.ok(names.every(n=>n===p.name || p.incorrectOptions.includes(n)));
+      assert.ok(names.every(n=>n===p.name || g.eligibleRivals(p).includes(n)));
       // Identical badge paths (e.g. Scholes/Giggs) are never simultaneous answers.
-      for(const n of names.filter(n=>n!==p.name)) assert.notEqual(JSON.stringify(players.find(o=>o.name===n).clubs.map(c=>c.name)),JSON.stringify(p.clubs.map(c=>c.name)));
+      for(const n of names.filter(n=>n!==p.name)) assert.notEqual(JSON.stringify(g.candidates.find(o=>o.name===n).clubs.map(c=>c.name)),JSON.stringify(p.clubs.map(c=>c.name)));
       orders.add(names.join('|'));
     }
     assert.ok(orders.size>100);
@@ -167,7 +168,7 @@ test('legacy difficulty helpers preserve five eligible, distinct, shuffled answe
       let x=seed;const random=()=>{x=x*16807%2147483647;return (x-1)/2147483646;};
       const options=g.optionsFor(p,level,random);orders.add(options.join('|'));
       assert.equal(options.length,5);assert.equal(new Set(options).size,5);assert.equal(options.filter(n=>n===p.name).length,1);
-      assert.ok(options.every(n=>n===p.name||p.incorrectOptions.includes(n)));
+      assert.ok(options.every(n=>n===p.name||g.eligibleRivals(p).includes(n)));
     }
     assert.ok(orders.size>10,'Answer positions remain randomized');
   }

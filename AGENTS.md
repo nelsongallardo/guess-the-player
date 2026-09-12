@@ -28,7 +28,7 @@ Keep the single-file offline design unless the requested work explicitly changes
 
 ## Product invariants
 
-- **No difficulty selector.** New rounds use the already-published Hard algorithm: sample four distractors from the eight closest eligible career profiles, then shuffle all five answers. Preserve its variety and competition-scoped candidate selection; do not revert to a fixed closest four or reintroduce Easy/Medium controls without a new request.
+- **No difficulty selector.** New rounds use origin-first contemporary matching with a separately researched wrong-answer bank; playable decks remain unchanged. Within each origin tier prefer overlapping careers whose debuts are at most eight years apart, then rank by career similarity with at most three points of random noise. Preserve all tighter-tier matches. Do not restore uniform top-eight sampling or a competition-only wrong-answer filter. See [ADR 0003](docs/adr/0003-researched-contemporary-rivals.md).
 - Competition selection, the current researched roster, local results history and speed/hint-based scoring are established features. A narrow UI change must not roll them back.
 - Every round has one correct name and four distinct eligible distractors. Exclude identical ordered club careers that would make the answer ambiguous.
 - Decks have no repeated player. Derive progress, recap totals and final-round boundaries from the **saved deck**, not the current roster length. Read current data rather than assuming an old roster count.

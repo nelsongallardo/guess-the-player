@@ -34,6 +34,20 @@ Each player also carries a `competitions` array (Champions League, Premier Leagu
 
 Cross-border clubs follow the football system in which they play: Swansea is classified with England, Monaco with France. See the retrieved sources and detailed fallback/ranking contract in [ADR 0002](../docs/adr/0002-origin-first-distractors.md). The existing researched senior chronology remains the source for which club is first. No player facts or displayed career records are changed by this classification.
 
+## Contemporary wrong-answer bank
+
+Rebuild and audit after changing a reviewed source batch:
+
+```sh
+python3 research/assemble-distractors.py
+python3 research/embed-distractors.py
+node research/audit-distractor-coverage.mjs
+```
+
+The current bank has 59 profiles; every playable target has four same-system contemporaries under the explicit eight-year debut/overlapping-career heuristic. The assembler normalizes the controlled system/region/role vocabulary but preserves literal source URLs; Santos’s Pepe is displayed as `Pepe (José Macia)` to distinguish him from the modern Portuguese defender.
+
+`verified-distractors.json` stores additional researched candidate names and matching features, mirrored exactly in the HTML model. These are not playable timeline records and do not expand the 60-player deck. Wikipedia senior career evidence plus independent sources support first-club system, senior era, club route and broad role; regional `DISTRACTOR_*_SOURCES.md` ledgers and `CONTEMPORARY_DISTRACTOR_SOURCES.md` retain excerpts and caveats. Do not add youth/coaching rows or extend careers to unused contracts. Current endpoints are dated snapshots, not live facts. All bank roles use the existing broad model vocabulary. Raw article dumps are not published. See [ADR 0003](../docs/adr/0003-researched-contemporary-rivals.md).
+
 ## Crests and source preservation
 
 All used crest PNG bytes are embedded and tested offline. Original public URLs remain attached to the same ordered clubs, with attribution links after the reveal. Parent-club badges identify reserve sides. Current/source-era crests identify clubs; they are not historical season-specific artwork. Club marks remain the property of their owners.

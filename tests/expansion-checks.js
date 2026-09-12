@@ -1,13 +1,13 @@
 async page => {
   const ok=(value,message)=>{if(!value)throw new Error(message);};
-  const saves=[__LEGACY_SAVE__,__LEGACY_SAVE_40__,__LEGACY_SAVE_50__],results=[];
+  const saves=[__LEGACY_SAVE__,__LEGACY_SAVE_40__,__LEGACY_SAVE_50__,__LEGACY_SAVE_60__],results=[];
   for(const legacy of saves){
     const total=legacy.deck.length;
     await page.goto('http://127.0.0.1:4173/?lang=es');
     await page.evaluate(s=>localStorage.setItem('touchline.career.v1',JSON.stringify(s)),legacy);await page.reload();
     ok(await page.evaluate(old=>JSON.stringify(state)===JSON.stringify({...old,difficulty:'hard',competition:old.competition||'all'}),legacy),'Published rounds preserved exactly; only retired preference and missing competition are normalized');
     const expectedScore=await page.evaluate(()=>CareerGame.stats(state).score+state.deck.slice(state.roundIndex).reduce((sum,_,i)=>sum+CareerGame.pointsFor(i===0?CareerGame.roundAt(state).hints:0,0),0));
-    ok(await page.locator('#round-number').textContent()===`06 / ${total}`,'Legacy round total');
+    ok(await page.locator('#round-number').textContent()===`${String(legacy.roundIndex+1).padStart(2,'0')} / ${total}`,'Legacy round total');
     ok(await page.locator('#progress').getAttribute('max')===String(total),'Legacy progress denominator');
     for(let i=legacy.roundIndex;i<total;i++){
       const name=await page.evaluate(()=>{resetRoundClock();return CareerGame.playerAt(state).name;});

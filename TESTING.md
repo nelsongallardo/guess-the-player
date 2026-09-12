@@ -1,5 +1,36 @@
 # Verification report
 
+## Researched contemporaries — 13 September 2026
+
+- Added **59 wrong-answer-only profiles**, researched on 12 September, with literal source URLs, retrieved evidence excerpts and scope caveats. The existing 60 playable careers, crests, translations and competition counts are unchanged.
+- `python3 research/assemble-distractors.py` → 59 unique profiles across 8 reviewed batches; missing/draft records, unsupported ledger URLs and missing independent source domains fail the build.
+- `python3 research/embed-distractors.py` → curated bank embedded exactly; no runtime Wikipedia/API dependency.
+- `node research/audit-distractor-coverage.mjs` → **60/60 targets covered, zero gaps**: each has at least four same-system peers with overlapping careers and debut differences of at most eight years.
+- `node --test tests/model.test.mjs` → **31 passing tests**, including 60,000 option samples, strict origin/era tiers, bounded randomness, researched bank eligibility and preserved historical saves.
+- `python3 tests/run-browser.py` → **all seven suites passed**: HTTP game, offline file, bilingual/mobile, no difficulty selector, 30/40/50/60-save compatibility, brand, and actual Maradona/contemporary interactions.
+- `python3 tests/run-browser.py --offline-only` → all 60 rounds completed with the network disabled, saved-game reload and denied-storage play passing; zero network requests/browser errors.
+- `python3 tests/source-check.py` → original 60-player source and re-audit integrity passed.
+- Mobile visual review at 375px: no clipping or overflow; all five Maradona names legible; no difficulty selector.
+
+### Regressions and fixes
+
+The pre-change model dropped a clearly stronger Messi rival through uniform top-eight sampling; the seeded failure now passes with bounded `[0,3)` score noise. Maradona's four researched peers are Daniel Bertoni, Jorge Valdano, Ramón Díaz and Osvaldo Ardiles, not Argentina-start 1990s debutants.
+
+The new browser regression initially timed out because a rejected answer's accessible name correctly changes to `Name, incorrecto`. The assertion now checks that actual post-guess label and disabled state. Game behavior was correct; no UI workaround was added.
+
+A fixture generated from the published pre-bank 60-player model verifies that an existing Maradona round retains its original names, wrong guess and hint through reload and completion. Future rounds receive the expanded pool; existing rounds are never silently rewritten.
+
+### Reproducible evidence
+
+- `test-results/contemporary-coverage.json` — complete per-target coverage audit.
+- `test-results/browser-results.json` — seven-suite browser report.
+- `test-results/offline-results.json` — separate offline-only report (does not overwrite the seven-suite report).
+- `test-results/derabona-origin-maradona.png` — mobile screenshot, intentional rejected answer state.
+- `research/verified-distractors.json` and its per-profile `evidenceFile` — full curated bank and citation trail.
+
+The bank is not a promise of 59 extra playable timelines. A player who memorizes the target roster could still learn that bank-only names cannot be correct; promoting them to fully audited playable careers is separate work.
+
+
 ## Origin-first rivals — 12 September 2026
 
 Reproduced the user's Maradona/La Liga scenario with a failing seeded regression: the old matcher admitted a Spain-start rival into an Argentina-start career. The new matcher uses strict starting-football-system tiers before era/career ranking; selected competition is a small preference, not a hard wrong-answer filter. No roster, crest, score, deck-selection or saved-round migration changes were made. See [ADR 0002](docs/adr/0002-origin-first-distractors.md).
