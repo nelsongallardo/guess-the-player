@@ -1,6 +1,8 @@
-# Guess the Player by their Career Path
+# derabona
 
-A dark-mode football trivia game. Read the club-crest timeline, then identify the player from five names. Built with plain HTML, CSS and JavaScript in **one portable `index.html` file**.
+**Fútbol, de memoria.** A football-career quiz built around the spirit of a rabona: read the club-crest timeline, then identify the player from five names. An original rabona-player logo, lowercase wordmark and celeste/ink/paper interface give it an Argentinian football identity. Built with plain HTML, CSS and JavaScript in **one portable `index.html` file**.
+
+See [BRAND.md](BRAND.md) for the identity, editable SVG logo and PNG export. Existing saved games and all gameplay rules survive the rebrand; legacy storage identifiers and the website URL stay unchanged.
 
 ## Play
 
@@ -54,6 +56,7 @@ Country means the senior national team represented, not birthplace or every citi
 
 - `index.html` — the complete playable artifact; nothing else is required at runtime.
 - `DESIGN.md` — visual direction, gameplay contract and acceptance matrix.
+- `BRAND.md` and `assets/derabona-*` — brand guide, editable logo/mark and shareable PNG export. The live game embeds its own mark/favicon and stays self-contained.
 - `CAREER_SOURCES.md` — player-by-player chronology, caveats and numbered sources.
 - `DATA_AUDIT.md` — original 30-player re-audit and researched expansions to 60, corrections and remaining evidence limits.
 - `research/` — curated career records, data policy and public source-URL ledger. Raw third-party retrievals and assembly scratch files remain local and are not republished.

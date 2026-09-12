@@ -1,5 +1,24 @@
 # Verification report
 
+## derabona rebrand — 12 September 2026
+
+Rebranded the site with an original rabona-player SVG mark, an embedded favicon, a lowercase wordmark, editable SVG/PNG logo exports and a paper/ink/celeste UI. English and Spanish titles/copy are updated; Spanish brand copy uses Argentinian voseo. Repository URL and legacy storage keys are unchanged.
+
+Actual verification:
+
+- `node --test tests/model.test.mjs`: **21 passed, 0 failed**.
+- `python3 tests/source-check.py`: **60 player sections; 198 literal source URLs; passed**.
+- `python3 tests/run-browser.py`: **all six browser suites passed**, with no diagnostic exclusions. Run started at `2026-09-12T21:47:30.800098+00:00`; detailed output is in ignored `test-results/browser-results.json`.
+- HTTP and offline local-file 60-round journeys, denied localStorage, English/Spanish play, Hard selection, competition/reset/history flows and published 30/40/50-player save compatibility passed.
+- **600** player/language/viewport cases plus **14** header/branding cases passed. The previously failing longest-career initial 375×667 screen assertion now passes unchanged after mobile branding/layout adjustments.
+- Desktop/mobile and exported-logo screenshots were visually reviewed. No blocking overlap, clipping or logo defects remained; the mobile “¿Quién es?” stays together. PNG export is 1280 × 320.
+- Primary text/background contrast pairs were calculated: ink/paper 13.50:1, muted/paper 5.70:1, deep-blue/paper 6.24:1, light labels/ink 9.60:1 and celeste/ink 8.66:1. These are selected text pairs, not a claim of a complete accessibility audit.
+- Direct source comparison verified the roster, crest data, model, career translations and UI behaviour after the copy block are unchanged from the pre-rebrand commit. SVG XML and local documentation links were validated.
+
+During the tight responsive roster loop, Chromium rejected `decode()` on an already-loaded PNG. Yielding one animation frame after rendering each career resolved it; every image decode and every visibility assertion remains enforced. No tests were removed or weakened. Native Safari/Firefox remain outside the tested browser matrix.
+
+The sections below are historical verification records, not outstanding failures in this rebrand run.
+
 ## Selector removal — 12 September 2026
 
 Removed the difficulty control, explanatory status text and English/Spanish help instructions. All fresh games, future rounds, competition changes, reset and replay use the **already-published Hard behaviour: four rivals sampled from the closest eight**. Existing rounds are preserved exactly; saved Easy/Medium preferences no longer act as invisible settings. The published 60-player roster, competition controls, speed/hint scoring, results history and reset behaviour are retained.

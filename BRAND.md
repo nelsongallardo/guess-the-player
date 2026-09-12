@@ -1,0 +1,49 @@
+# derabona — brand guide
+
+## The idea
+
+**derabona** is a football-memory game built by friends. The name references a rabona: striking the ball with the kicking leg wrapped behind the standing leg. The identity should feel like football knowledge traded between friends, not a generic trivia app or an official national-team product.
+
+Write the public name as **derabona**, all lowercase. The Spanish signature is **FÚTBOL, DE MEMORIA.** The English equivalent is **FOOTBALL, FROM MEMORY.** Spanish brand copy uses an Argentinian voice: “Confiá”, “Demostrá”, “tenés”. Player names, sourced career information and competition names are not rewritten for branding.
+
+## Logo
+
+- [Rabona mark](assets/derabona-mark.svg): an original vector footballer badge. The celeste kicking leg passes behind the ivory standing leg toward the ball; a dark separation keeps the crossing readable.
+- [Horizontal logo](assets/derabona-logo.svg): badge, heavy italic lowercase wordmark and Spanish signature on warm paper.
+- [PNG export](assets/derabona-logo.png): a 1280 × 320 browser-rendered version for sharing.
+
+The mark is embedded directly into `index.html`; the favicon is an embedded SVG data URL. The standalone game does not fetch the files in `assets/`. Those files are editable source/export assets in the repository, not required runtime dependencies.
+
+Use the badge alone for small icons. Keep the wordmark readable, leave clear space around the logo, and omit the signature at small sizes. Do not replace the rabona pose with a generic ball, club crest or national-team badge. The wordmark uses locally available Arial Black/Arial; no external font request is made.
+
+## Palette
+
+- **Ink — `#122a38`:** wordmark, pitch card, scoreboard, primary buttons.
+- **Paper — `#f7f4eb`:** page canvas and light foregrounds on ink.
+- **Celeste — `#89cff0`:** badge accent, competition selector, pitch markers and scoreboard underline.
+- **Deep blue — `#176180`:** accessible accent text, links and progress on paper.
+- **Panel — `#fffdf7`:** answer cards, crest tiles and recap surface.
+- **Muted — `#52636a`:** supporting text on paper.
+- **Success — `#17613e`:** correct-answer state, paired with a pale green surface.
+- **Error — `#a93637`:** wrong-answer state, paired with a pale red surface.
+
+Celeste is not body text on paper. Use deep blue there; reserve light celeste text for the ink panel. Keep wrong/correct states distinguishable by text and icons, not color alone.
+
+## UI direction
+
+A warm match programme around a dark, pitch-like career card. Heavy editorial headings and an italic wordmark carry the personality; compact monospaced labels suggest team sheets and football records. Authentic club crests remain the most colorful information on screen.
+
+- Header: logo, existing competition control, language and help. At narrow widths, competition moves into its own row instead of squeezing the logo.
+- Hero: a short question, not a brand splash screen. Spanish: “Cada club cuenta. ¿Quién es?” Keep “¿Quién es?” together when wrapping.
+- Scoreboard: ink with a celeste underline; preserve score and streak visibility.
+- Career panel: ink, ivory crest tiles and light labels. Preserve desktop timeline navigation and the numbered four-column mobile grid.
+- Answers: warm-white cards, clear letter markers, visible hover/focus and explicit correct/incorrect states.
+- Mobile: compact header/hero; do not sacrifice readable dates, club names or touch targets to decoration. The longest-career initial-screen assertion remains enabled.
+
+The final `derabona` section inside the existing inline stylesheet defines the brand layer. Reuse its tokens rather than scattering new colors across components.
+
+## Compatibility and scope
+
+Branding does **not** change the roster, research, competition pools, Hard algorithm, hints, scoring, results history or replay rules. Keep `touchline.career.v1`, `touchline.language.v1` and `touchline.history.v1` as legacy storage identifiers: renaming them would strand saved progress. The repository name and GitHub Pages URL remain unchanged; a domain or repository migration is separate work.
+
+For future changes, run the documented model/source/browser checks. `tests/brand-checks.js` checks both language titles, the lowercase wordmark, embedded logo/favicon, unchanged storage namespaces and header layout at seven widths.

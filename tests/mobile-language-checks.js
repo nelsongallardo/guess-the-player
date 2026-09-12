@@ -12,6 +12,9 @@ async page => {
         const checked=[];
         for(const player of PLAYERS){
           state=CareerGame.create();state.deck=[player.id,...state.deck.filter(id=>id!==player.id)];state.rounds=[{options:CareerGame.optionsFor(player),guesses:[],hints:0}];render(false,true);document.querySelector('#round-panel').scrollIntoView({block:'start'});
+          // Let each newly rendered career reach a frame before decoding its images.
+          // Tight synchronous roster loops can reject decode() on already-loaded PNGs.
+          await new Promise(requestAnimationFrame);
           await Promise.all([...document.images].map(i=>i.decode()));
           const strip=document.querySelector('#timeline-scroll'),rect=strip.getBoundingClientRect(),clubs=[...document.querySelectorAll('#timeline .club')];
           const allVisible=clubs.every(c=>{const b=c.getBoundingClientRect();return b.left>=rect.left&&b.right<=rect.right+1&&b.top>=rect.top&&b.bottom<=rect.bottom+1;});

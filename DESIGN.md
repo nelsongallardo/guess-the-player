@@ -1,17 +1,18 @@
-# Guess the Player — design & acceptance contract
+# derabona — design & acceptance contract
 
 ## Product
 A football-career guessing game in one portable `index.html`: no build, framework, account, API key, external fonts, or runtime network dependency. Sixty curated players, split equally between European and South American national teams, organized into five competitions (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) plus an All Players mode. Data verification precedes app implementation; supporting research lives alongside (not required to play).
 
 ## Visual direction
-**Touchline / after-dark match programme.** Ink-black canvas, warm white typography, acid-lime accents, fine pitch markings and restrained motion. A compact football insignia and language selector lead the page. Desktop uses the horizontal crest runway with arrow/keyboard navigation. At 800px and below, show every club in numbered four-column rows, with no horizontal scrolling; preserve chronological DOM order and read left to right, then the next row. The mobile masthead/hero are compact enough for the longest career's badges to fit the initial 375×667 screen. Answer buttons use two columns on desktop, with the fifth spanning both; one column at 420px and below.
+**derabona / fútbol, de memoria.** An Argentinian football-memory identity with an original rabona-player badge and a heavy italic lowercase wordmark. Warm match-programme paper around an ink-blue pitch; celeste accents, compact records-style labels and authentic club crests. See [BRAND.md](BRAND.md) for logo sources, usage and tokens.
 
-- Background `#0b100e`; card `#121b16`; raised `#1a251e`; border `#2d3b31`.
-- Primary text `#f1f5ec`; muted `#a4b2a8`; lime `#c5f76a`.
-- Success `#83e7a8`; failure `#ff9999`. Text/icons accompany both colors.
-- System sans-serif headings, system monospace for small labels and numbers.
-- Options minimum height 58px on narrow mobile screens and 65px otherwise. All controls have visible `:focus-visible` outlines.
-- Respect `prefers-reduced-motion`; never require animation to understand state.
+- Paper `#f7f4eb`; ink `#122a38`; celeste `#89cff0`; deep-blue text accent `#176180`; panel `#fffdf7`; muted text `#52636a`.
+- Success `#17613e` on pale green; error `#a93637` on pale red. Text/icons accompany both colors.
+- System sans-serif body, heavy editorial headings and monospaced metadata. No runtime font downloads.
+- Desktop retains the horizontal career timeline and arrow/keyboard navigation. At 800px and below, show every club in numbered four-column rows in chronological DOM order; read left to right, then the next row.
+- On mobile, the competition selector gets its own header row. Keep logo/language/help separate without overlap. Keep the longest career's crests inside the initial 375×667 viewport and avoid horizontal scrolling.
+- Answer targets remain at least 58px on narrow mobile and 65px otherwise. Preserve keyboard focus, readable supporting text, localized live feedback and reduced-motion support.
+- The logo and favicon are embedded in `index.html`. Preserve legacy storage namespaces and all gameplay during the rebrand.
 
 ## Game contract
 - Choose a competition (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) or All Players (the default) from the prominent competition badge, reachable at any time and never forced. The chosen competition persists in the saved game state and survives reload.
