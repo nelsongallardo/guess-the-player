@@ -5,16 +5,17 @@ async page => {
     const total=legacy.deck.length;
     await page.goto('http://127.0.0.1:4173/?lang=es');
     await page.evaluate(s=>localStorage.setItem('touchline.career.v1',JSON.stringify(s)),legacy);await page.reload();
-    ok(await page.evaluate(()=>JSON.stringify(state))===JSON.stringify(legacy),'Published save preserved byte-for-byte');
+    ok(await page.evaluate(old=>JSON.stringify(state)===JSON.stringify({...old,difficulty:'hard',competition:old.competition||'all'}),legacy),'Published rounds preserved exactly; only retired preference and missing competition are normalized');
+    const expectedScore=await page.evaluate(()=>CareerGame.stats(state).score+state.deck.slice(state.roundIndex).reduce((sum,_,i)=>sum+CareerGame.pointsFor(i===0?CareerGame.roundAt(state).hints:0,0),0));
     ok(await page.locator('#round-number').textContent()===`06 / ${total}`,'Legacy round total');
     ok(await page.locator('#progress').getAttribute('max')===String(total),'Legacy progress denominator');
     for(let i=legacy.roundIndex;i<total;i++){
-      const name=await page.evaluate(()=>CareerGame.playerAt(state).name);
+      const name=await page.evaluate(()=>{resetRoundClock();return CareerGame.playerAt(state).name;});
       await page.getByRole('button',{name,exact:true}).click();
       ok(await page.locator('#next-label').textContent()===(i===total-1?'Ver resultados':'Siguiente jugador'),'Legacy final round boundary');
       await page.locator('#next').click();
     }
-    ok(await page.evaluate(n=>state.finished&&CareerGame.stats(state).score===n*100,total),'Legacy completes original length');
+    ok(await page.evaluate(n=>state.finished&&CareerGame.stats(state).score===n,expectedScore),'Legacy completes original length');
     ok((await page.locator('#summary-caption').textContent()).includes(`${total} / ${total}`),'Legacy recap denominator');
     await page.locator('#replay').click();
     ok(await page.evaluate(()=>state.deck.length===60&&state.difficulty==='hard'),'Replay upgrades to 60 and preserves level');

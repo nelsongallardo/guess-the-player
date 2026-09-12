@@ -29,18 +29,15 @@ Then open <http://127.0.0.1:4173>.
 - The third expansion adds **Fernando Torres, Xabi Alonso, Thierry Henry, Iker Casillas, Andrea Pirlo, Diego Maradona, Javier Mascherano, Cafu, Marcelo Salas, Rivaldo**.
 - All additions are playable answers and eligible similarity-ranked distractors. Their researched notes and authentic club crests are included offline in both languages.
 - **Choose a competition** — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players (the default) — from the prominent competition badge at the top of the page, or "Change competition" on the recap screen. Each competition deals only the players who carry that club-membership tag; distractor names favour the same competition when there are enough of them. Choosing one starts a fresh deck in that competition; it never interrupts a round already in progress.
-- Five shuffled answers per round: one correct player and four distinct distractors, selected by difficulty.
-- **Easy / Fácil:** random rivals from the full eligible roster.
-- **Medium / Media (default):** four rivals sampled from the sixteen most similar eligible players.
-- **Hard / Difícil:** four rivals sampled from the eight most similar eligible players; answer positions are still shuffled.
+- Five shuffled answers per round: one correct player and four distinct rivals sampled from the **eight most similar eligible players** — the existing Hard behaviour. No difficulty selector or extra setup decision.
 - Similarity prioritizes shared clubs, then national team, broad position, overlapping career years and career length. Identical ordered career paths remain excluded. Candidates come from the active competition's players (or the full 60-player roster in All Players mode); difficulty changes neither the facts nor the hints/attempts.
-- The difficulty selector is just below the career timeline. A change applies immediately before any guess/hint; otherwise the current options stay fixed and the setting applies to the next player. A bilingual message explains pending changes. Progress is preserved, and reload/replay remembers the selection.
+- Existing saves keep their exact rounds, answer order, guesses, hints and score. Older difficulty preferences are retired: new rounds, competition changes, reset and replay use Hard automatically.
 - Three attempts. Wrong buttons turn red and cannot be selected again.
 - **Get Hint** reveals country, then position, then the initials of the displayed player name. Hints cost nothing.
 - Each correct round earns **up to 100 points** and adds one to the consecutive win streak. Losing a round resets the streak, not the score. Points scale down 20% per hint used and by how long the round took to answer (full value inside 5 seconds, decaying to a 50% floor by 30 seconds) — see `docs/adr/0001-local-results-history-and-speed-based-scoring.md` for the exact formula and reasoning.
 - Every finished game is saved to a local results history on this device (not synced anywhere), shown on the recap screen with your best score/streak so far. A "Reset my results" button in the footer clears the current game and this history at any time.
 - **Next Player** appears only after winning or losing a round.
-- A new shuffled deck visits every player in the active competition once before the final recap (all 60 in All Players mode). Existing 30-, 40- and 50-player full-roster saves retain their original deck and exact choices, score and hints; after finishing, Play again starts a fresh deck in the same competition, resets the score and retains difficulty.
+- A new shuffled deck visits every player in the active competition once before the final recap (all 60 in All Players mode). Existing 30-, 40- and 50-player full-roster saves retain their original deck and exact choices, score and hints; after finishing, Play again starts a fresh deck in the same competition, resets the score and uses Hard.
 - Progress is saved in this browser when local storage is available. Browsers that block storage can still play, but reloading starts a new game. File-URL storage behavior varies by browser.
 
 ## Career-data policy
@@ -75,7 +72,7 @@ python3 tests/source-check.py
 python3 tests/run-browser.py
 ```
 
-The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 60 rounds over HTTP, all 60 again in an offline local-file context, all 60 in Spanish, every career in both languages at five mobile/tablet widths, and all 60 rounds at each of the three difficulty levels in both languages. See [TESTING.md](TESTING.md) for the actual verification results and limits.
+The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 60 rounds over HTTP, all 60 again in an offline local-file context, all 60 in Spanish, every career in both languages at five mobile/tablet widths, and all 60 rounds with automatic Hard selection in both languages. It also verifies removal of the selector and migration of old preferences without changing existing rounds. See [TESTING.md](TESTING.md) for the actual verification results and limits.
 
 ## Accessibility
 

@@ -1,5 +1,21 @@
 # Verification report
 
+## Selector removal — 12 September 2026
+
+Removed the difficulty control, explanatory status text and English/Spanish help instructions. All fresh games, future rounds, competition changes, reset and replay use the **already-published Hard behaviour: four rivals sampled from the closest eight**. Existing rounds are preserved exactly; saved Easy/Medium preferences no longer act as invisible settings. The published 60-player roster, competition controls, speed/hint scoring, results history and reset behaviour are retained.
+
+Executed `node --test tests/model.test.mjs`, `python3 tests/source-check.py` and `python3 tests/run-browser.py` after integrating published commit `2b9457f`. All **21 model tests** and source checks passed. The full browser runner is **not entirely green**: its initial-screen longest-career assertion fails at 375×667. Running that same test against an unchanged HTML artifact from `origin/main` reproduced the identical failure. The layout and failing assertion are deliberately left unchanged.
+
+The five browser scripts were then run individually through the same Playwright CLI session. HTTP, offline, selector and legacy-expansion suites passed unchanged. For the mobile/language diagnostic run only, the independently reproduced initial-screen assertion was omitted **in memory**, not from the checked-in test; all remaining checks passed. Results are saved locally in `test-results/selector-final-results.json`.
+
+- Selector absence and updated help verified in both languages; 60-round Hard playthrough in each language.
+- Easy, Medium, Hard and pre-difficulty saves retain exact existing rounds, guesses, hints and score; subsequent rounds use Hard.
+- All competition choices and reload preserve Hard; changing competitions preserves results history; reset clears results and starts Hard. Reset confirmation is captured in-page for this handler test because the CLI owns native dialogs.
+- HTTP, offline local-file play, denied localStorage, 600 responsive player/language/width cases and published 30/40/50-player save compatibility passed, subject to the separately documented initial-screen limitation.
+- Updated legacy browser assertions to account for the published competition migration and hint-adjusted scoring, without changing either production behaviour.
+
+## Prior roster-expansion verification (historical)
+
 Executed on **11 September 2026** using Node and real Chromium/Playwright. The final second-expansion browser run began at `2026-09-11T17:32:15.009118+00:00`.
 
 ## Commands actually run

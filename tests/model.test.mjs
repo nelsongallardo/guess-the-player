@@ -185,7 +185,7 @@ test('difficulty ranks plausible rivals and preserves five unambiguous randomize
 });
 
 test('difficulty changes preserve progress and never reshuffle a started round',()=>{
-  const s=g.create();assert.equal(s.difficulty,'medium');assert.equal(g.roundAt(s).difficulty,'medium');
+  const s=g.create();assert.equal(s.difficulty,'hard');assert.equal(g.roundAt(s).difficulty,'hard');
   assert.equal(g.setDifficulty(s,'hard'),true);assert.equal(g.roundAt(s).difficulty,'hard');
   assert.equal(g.setDifficulty(s,'bogus'),false);
   const deck=plain(s.deck);g.hint(s);const started=plain(g.roundAt(s));
