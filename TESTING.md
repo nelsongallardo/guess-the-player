@@ -1,5 +1,17 @@
 # Verification report
 
+## Saved Henry choices repaired — 13 September 2026
+
+The user’s screenshot showed Henry with Zidane, Scholes, Guðjohnsen and Totti. Reproduced that exact answer array on the public site: fresh generation produced France-start contemporaries, but the load path accepted and rendered the saved older array verbatim. Preserving every saved option set prevented the matching fix from reaching untouched resumed rounds.
+
+Added idempotent `refreshUnstartedRivals` to the actual load path. It changes only weaker origin/era option sets in the current round with **zero guesses and zero hints**. Compatible options, engaged/completed rounds, original deck, scores and history remain unchanged. No save deletion, game reset or new control.
+
+- RED browser reproduction: `Untouched saved Henry must not retain Scholes after reload`.
+- Added four model regressions: exact screenshot repair, repeated-reload stability, engaged-round preservation and prior earned-score preservation.
+- Added `saved-rivals-checks.js`: exact saved screenshot through real reload in both languages over HTTP and offline `file:`, real existing results history, and guessed/hinted saves.
+- **35 model tests and all eight browser suites passed**, plus the source-identifier checks. The four saved-round browser cases passed in English/Spanish over HTTP and offline file URLs with no browser errors. Previous sections are historical and their unconditional preservation policy is superseded only for untouched incompatible rounds.
+
+
 ## Researched contemporaries — 13 September 2026
 
 - Added **59 wrong-answer-only profiles**, researched on 12 September, with literal source URLs, retrieved evidence excerpts and scope caveats. The existing 60 playable careers, crests, translations and competition counts are unchanged.

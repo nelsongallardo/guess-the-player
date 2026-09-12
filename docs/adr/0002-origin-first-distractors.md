@@ -49,7 +49,7 @@ Origin coverage is mandatory when adding a player. An unmapped starting club is 
 
 ## Compatibility and limits
 
-- Existing saved options, guesses, hints, points and round order remain untouched. The improved matcher applies to newly generated rounds, including the next round of an existing save. Refreshing does not reroll the current round.
+- Existing saved options, guesses, hints, points and round order remain untouched. The improved matcher applies to newly generated rounds, including the next round of an existing save. The later ADR 0003 amendment repairs an untouched current round with outdated origin/era giveaways on reload; engaged rounds remain unchanged.
 - Keep current competition decks, all 60 player records, crests, scoring and UI unchanged apart from help text describing the new rival policy.
 - Small origin pools still need a regional fallback to provide five answers. Old legends also lack enough close-era peers in this roster. The algorithm cannot make every career equally hard, and must not fabricate researched players to fill gaps. Future roster expansion should target those gaps, especially earlier Argentine peers.
 

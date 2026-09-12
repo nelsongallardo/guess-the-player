@@ -39,7 +39,7 @@ The internal Medium helper retains its broader sampling within the new tiers. Ea
 
 ## Compatibility and limits
 
-- No migration rerolls an existing round, whether started or unstarted. Guesses, hints, order, points and history survive; only newly generated rounds use the bank and matcher.
+- **Amended 2026-09-13 after the saved Henry regression:** preserve all engaged/completed rounds and already-compatible untouched rounds. On load, `refreshUnstartedRivals` compares the current untouched round’s sorted origin/era tiers with the strongest four available tiers. Regenerate only a weaker set, with zero guesses and zero hints; otherwise leave it byte-for-byte unchanged. Preserve the target/deck, progress, score, competition and history. This idempotent repair prevents old saved giveaways from bypassing the new matcher without resetting a game.
 - Validate bank-backed wrong names against researched eligibility, but reject unknown names and bank IDs in playable decks.
 - The extra bank is intentionally distinct from the playable roster. A repeat player who learns the entire target roster could learn that these names are never correct; promoting researched profiles to full playable careers is a separate future improvement, not silently claimed here.
 - An origin/era match is not a guarantee of equal difficulty. Legends and short/single-club careers remain recognizable, and thin exact-era cohorts fall back explicitly rather than inventing data.

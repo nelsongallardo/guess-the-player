@@ -38,7 +38,7 @@ Keep the single-file offline design unless the requested work explicitly changes
 ## Persistence and scoring
 
 - Storage keys are `touchline.career.v1` (current game), `touchline.language.v1` (language) and `touchline.history.v1` (results history). Browser storage can fail; gameplay must remain usable.
-- Existing saves retain their exact deck, rounds, options/order, guesses, hints and earned points. Normalize old difficulty preferences for **future** rounds without rerolling existing rounds, even unstarted ones. Keep the published legacy-save fixtures valid.
+- Preserve saved decks, completed/engaged rounds, guesses, hints, points and history. On load, `refreshUnstartedRivals` repairs only the current round with zero guesses and zero hints when its origin/era tier composition is weaker than currently available choices. Compatible untouched rounds remain stable across reloads; do not clear saves or reroll engaged rounds. Normalize old preferences to Hard for future rounds. Keep published legacy-save fixtures valid.
 - A correct answer earns up to 100 points, reduced by hints and answer time. Do not restore flat scoring. See [the scoring/history ADR](docs/adr/0001-local-results-history-and-speed-based-scoring.md) for the formula and migration contract.
 - The round clock is in-memory UI state, not persisted elapsed time; resuming a game must not penalize time spent away. Tests that assert exact scores must control elapsed time and account for hints.
 - Record each completed game only once, including across reloads. Preserve the history cap and historical difficulty labels. The confirmed reset clears current gameplay and results history.

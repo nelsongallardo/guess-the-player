@@ -9137,6 +9137,20 @@ const CareerGame = (() => {
       s.rounds[s.roundIndex] = makeRound(playerAt(s), difficulty, s.competition);
     return true;
   };
+  // Repair stale untouched choices on load, not earned progress. Compare
+  // tier composition rather than rerolling every legacy or unversioned save.
+  const refreshUnstartedRivals = s => {
+    if (!validate(s) || s.finished) return false;
+    const r = roundAt(s), p = playerAt(s);
+    if (r.guesses.length || r.hints || outcome(s) !== 'playing') return false;
+    const tiers = names => names.map(name => matchTier(p, byName.get(name))).sort((a, b) => a - b);
+    const best = tiers(eligibleRivals(p)).slice(0, 4);
+    const current = tiers(r.options.filter(name => name !== p.name));
+    if (current.every((tier, i) => tier === best[i])) return false;
+    r.options = optionsFor(p, 'hard', Math.random, s.competition);
+    r.difficulty = 'hard';
+    return true;
+  };
   const answer = (s, name, elapsedMs = 0) => {
     const r = roundAt(s);
     if (s.finished || outcome(s) !== 'playing' || !r.options.includes(name) || r.guesses.includes(name)) return false;
@@ -9193,7 +9207,7 @@ const CareerGame = (() => {
       return !s.finished || (s.roundIndex === s.deck.length - 1 && outcome(s) !== 'playing');
     } catch { return false; }
   };
-  return Object.freeze({candidates, eligibleRivals, matchTier, shuffle, similarity, originFor, originTier, eraSimilarity, rivalScore, optionsFor, setDifficulty, create, playerAt, roundAt, outcome, answer, hint, next, stats, initials, hintValues, validate, COMPETITION_IDS, playersFor, pointsFor});
+  return Object.freeze({refreshUnstartedRivals, candidates, eligibleRivals, matchTier, shuffle, similarity, originFor, originTier, eraSimilarity, rivalScore, optionsFor, setDifficulty, create, playerAt, roundAt, outcome, answer, hint, next, stats, initials, hintValues, validate, COMPETITION_IDS, playersFor, pointsFor});
 })();
 </script>
 <script id="locale-data">
@@ -9954,9 +9968,10 @@ let storageAvailable=true;
 let state;
 try {const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));state=CareerGame.validate(saved)?saved:CareerGame.create();}
 catch {state=CareerGame.create();}
-// Retire saved preferences without changing existing rounds, guesses or hints.
+// Retire saved preferences; repair only untouched origin/era giveaways.
 state.difficulty='hard';
 if(!state.competition)state.competition='all';
+CareerGame.refreshUnstartedRivals(state);
 // The round's answer-speed clock is intentionally kept out of persisted
 // state: it lives only in this tab's memory and restarts whenever a round
 // becomes active (a fresh round, or resuming one after a reload), so a
