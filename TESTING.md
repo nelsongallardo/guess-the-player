@@ -1,5 +1,19 @@
 # Verification report
 
+## Origin-first rivals — 12 September 2026
+
+Reproduced the user's Maradona/La Liga scenario with a failing seeded regression: the old matcher admitted a Spain-start rival into an Argentina-start career. The new matcher uses strict starting-football-system tiers before era/career ranking; selected competition is a small preference, not a hard wrong-answer filter. No roster, crest, score, deck-selection or saved-round migration changes were made. See [ADR 0002](docs/adr/0002-origin-first-distractors.md).
+
+Actual final commands:
+
+- `node --test tests/model.test.mjs`: **26 passed, 0 failed**, including the imported origin regression suite.
+- `python3 tests/source-check.py`: **60 player sections / 198 literal source URLs; passed**.
+- `python3 tests/run-browser.py`: **all seven suites passed**, no exclusions; run started at `2026-09-12T22:15:40.115886+00:00`.
+
+The Maradona/La Liga model regression generates 500 seeded rounds; every rival starts in the Argentine senior system. The browser regression generates another 100, retains the 37-player La Liga deck, reloads exact choices, and completes hint/answer/Next with unchanged scoring. The rendered example offered Saviola, Crespo, Batistuta and Riquelme beside Maradona—not Henry or Mendieta. All-player/all-competition model checks cover origin-tier boundaries and mandatory retention of closer matches in thin pools. Messi, Cambiasso, Keane, Giggs, Swansea and Monaco classification exceptions are explicit tests.
+
+Existing 60,000 randomized option samples, offline/localStorage-denied play, bilingual playthroughs, 600 responsive cases, brand checks and 30/40/50-player save fixtures remain green. Current saved rounds are deliberately not rerolled; the fix takes effect on newly generated rounds. Sparse origin groups and older eras still need more researched peers; the matcher does not guarantee equal difficulty for every legend.
+
 ## derabona rebrand — 12 September 2026
 
 Rebranded the site with an original rabona-player SVG mark, an embedded favicon, a lowercase wordmark, editable SVG/PNG logo exports and a paper/ink/celeste UI. English and Spanish titles/copy are updated; Spanish brand copy uses Argentinian voseo. Repository URL and legacy storage keys are unchanged.

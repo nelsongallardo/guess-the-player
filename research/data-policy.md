@@ -28,6 +28,12 @@ Player-specific chronology, returns, evidence conflicts and exclusions are expla
 
 Each player also carries a `competitions` array (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) used to let the game organize rounds by competition instead of only by the full roster. A club maps to a competition when it is a well-known, high-confidence participant in that competition at some point in its history — this is a broad roster-organization categorization derived from club membership, not a per-season or per-appearance sourced claim, the same distinction this document already draws for country and position. A player can carry several tags (most European-club legends qualify for Champions League; several South American-born stars who played in Europe qualify for multiple European tags as well as their South American league).
 
+## Career-origin classification for distractors
+
+`ORIGIN_CLUBS` in the game model explicitly maps each first displayed senior club to its domestic football system. This is separate from the national-team `country` hint and does not infer birthplace or youth development. Reserve B/C clubs share their parent system. The map covers all current opening clubs; adding an unmapped club must fail tests instead of silently substituting nationality.
+
+Cross-border clubs follow the football system in which they play: Swansea is classified with England, Monaco with France. See the retrieved sources and detailed fallback/ranking contract in [ADR 0002](../docs/adr/0002-origin-first-distractors.md). The existing researched senior chronology remains the source for which club is first. No player facts or displayed career records are changed by this classification.
+
 ## Crests and source preservation
 
 All used crest PNG bytes are embedded and tested offline. Original public URLs remain attached to the same ordered clubs, with attribution links after the reveal. Parent-club badges identify reserve sides. Current/source-era crests identify clubs; they are not historical season-specific artwork. Club marks remain the property of their owners.

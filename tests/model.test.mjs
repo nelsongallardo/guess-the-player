@@ -1,3 +1,4 @@
+import './distractors.test.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -159,29 +160,17 @@ test('re-audit corrections: Swansea calendar year, signing evidence and unchange
   assert.ok(players.find(p=>p.id==='neymar').clubs[3].note.includes('4 November 2024'));
 });
 
-test('difficulty ranks plausible rivals and preserves five unambiguous randomized answers',()=>{
-  const averages={easy:0,medium:0,hard:0};
-  for(const p of players){
-    const ranked=p.incorrectOptions.map(name=>({name,score:g.similarity(p,players.find(q=>q.name===name))})).sort((a,b)=>b.score-a.score);
-    for(const level of ['easy','medium','hard']){
-      const orders=new Set();
-      for(let seed=1;seed<=100;seed++){
-        let x=seed;const random=()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296;};
-        const options=g.optionsFor(p,level,random);orders.add(options.join('|'));
-        assert.equal(options.length,5);assert.equal(new Set(options).size,5);assert.equal(options.filter(n=>n===p.name).length,1);
-        for(const n of options.filter(n=>n!==p.name)){
-          assert.ok(p.incorrectOptions.includes(n));
-          const score=g.similarity(p,players.find(q=>q.name===n));averages[level]+=score;
-          if(level==='hard')assert.ok(score>=ranked[Math.min(7,ranked.length-1)].score,'Hard must select from the closest eight rivals');
-          if(level==='medium')assert.ok(score>=ranked[Math.min(15,ranked.length-1)].score,'Medium must use from the closest sixteen rivals');
-        }
-      }
-      assert.ok(orders.size>10,'Answer positions remain randomized');
+test('legacy difficulty helpers preserve five eligible, distinct, shuffled answers',()=>{
+  for(const p of players)for(const level of ['easy','medium','hard']){
+    const orders=new Set();
+    for(let seed=1;seed<=100;seed++){
+      let x=seed;const random=()=>{x=x*16807%2147483647;return (x-1)/2147483646;};
+      const options=g.optionsFor(p,level,random);orders.add(options.join('|'));
+      assert.equal(options.length,5);assert.equal(new Set(options).size,5);assert.equal(options.filter(n=>n===p.name).length,1);
+      assert.ok(options.every(n=>n===p.name||p.incorrectOptions.includes(n)));
     }
+    assert.ok(orders.size>10,'Answer positions remain randomized');
   }
-  assert.ok(averages.hard>averages.medium&&averages.medium>averages.easy,JSON.stringify(averages));
-  const zanetti=players.find(p=>p.id==='javier-zanetti');
-  assert.ok(g.similarity(zanetti,players.find(p=>p.id==='juan-sebastian-veron'))>g.similarity(zanetti,players.find(p=>p.id==='pele')));
 });
 
 test('difficulty changes preserve progress and never reshuffle a started round',()=>{
@@ -259,10 +248,10 @@ test('create(difficulty, competitionId) restricts the deck to that competition, 
   const omitted=g.create('medium');assert.equal(omitted.competition,'all');assert.equal(omitted.deck.length,60);
 });
 
-test('competition-scoped rounds favour same-competition rivals, falling back when the pool is too thin',()=>{
+test('legacy Easy helper scopes rivals by competition and falls back when the pool is too thin',()=>{
   const messi=players.find(p=>p.id==='lionel-messi');
   for(let i=0;i<200;i++){
-    const options=g.optionsFor(messi,'medium',Math.random,'brasileirao');
+    const options=g.optionsFor(messi,'easy',Math.random,'brasileirao');
     const wrongOnes=options.filter(n=>n!==messi.name);
     assert.equal(wrongOnes.length,4);
     assert.ok(wrongOnes.every(n=>players.find(p=>p.name===n).competitions.includes('brasileirao')),'Brasileirão pool is large enough to stay scoped');
