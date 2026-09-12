@@ -37,7 +37,8 @@ Then open <http://127.0.0.1:4173>.
 - The difficulty selector is just below the career timeline. A change applies immediately before any guess/hint; otherwise the current options stay fixed and the setting applies to the next player. A bilingual message explains pending changes. Progress is preserved, and reload/replay remembers the selection.
 - Three attempts. Wrong buttons turn red and cannot be selected again.
 - **Get Hint** reveals country, then position, then the initials of the displayed player name. Hints cost nothing.
-- Each correct round earns **100 points**, regardless of attempts or hints, and adds one to the consecutive win streak. Losing a round resets the streak, not the score.
+- Each correct round earns **up to 100 points** and adds one to the consecutive win streak. Losing a round resets the streak, not the score. Points scale down 20% per hint used and by how long the round took to answer (full value inside 5 seconds, decaying to a 50% floor by 30 seconds) — see `docs/adr/0001-local-results-history-and-speed-based-scoring.md` for the exact formula and reasoning.
+- Every finished game is saved to a local results history on this device (not synced anywhere), shown on the recap screen with your best score/streak so far. A "Reset my results" button in the footer clears the current game and this history at any time.
 - **Next Player** appears only after winning or losing a round.
 - A new shuffled deck visits every player in the active competition once before the final recap (all 60 in All Players mode). Existing 30-, 40- and 50-player full-roster saves retain their original deck and exact choices, score and hints; after finishing, Play again starts a fresh deck in the same competition, resets the score and retains difficulty.
 - Progress is saved in this browser when local storage is available. Browsers that block storage can still play, but reloading starts a new game. File-URL storage behavior varies by browser.

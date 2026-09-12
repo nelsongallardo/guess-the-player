@@ -20,7 +20,8 @@ async page => {
   ok(await page.locator('#difficulty').inputValue()==='easy','Preference persisted');
   const correct=await page.evaluate(()=>CareerGame.playerAt(state).name);
   await page.getByRole('button',{name:correct,exact:true}).click();await page.locator('#next').click();
-  ok(await page.evaluate(()=>CareerGame.roundAt(state).difficulty==='easy'&&CareerGame.stats(state).score===100),'Next round applies preference without losing score');
+  // A hint was revealed on this round earlier (line 11), so its win scores 80 (100 x 0.8 hint multiplier).
+  ok(await page.evaluate(()=>CareerGame.roundAt(state).difficulty==='easy'&&CareerGame.stats(state).score===80),'Next round applies preference without losing score');
   // Legacy saves must retain their exact old options, hints and guesses.
   const legacy=await page.evaluate(()=>{const s=CareerGame.create();CareerGame.hint(s);delete s.difficulty;s.rounds.forEach(r=>delete r.difficulty);localStorage.setItem('touchline.career.v1',JSON.stringify(s));return s;});
   await page.reload();

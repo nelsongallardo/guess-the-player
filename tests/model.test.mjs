@@ -100,6 +100,39 @@ test('hints reveal exactly country, position, displayed-name initials and cost n
   assert.equal(g.initials('Lionel Messi'),'L. M.');assert.equal(g.initials('Pelé'),'P.');assert.equal(g.initials('  Andrés   Iniesta '),'A. I.');
 });
 
+test('scoring rewards speed and no-hint answers, floors gracefully, and is stable across reload', () => {
+  // Pure function: hints cap the ceiling (regardless of speed), elapsed time
+  // decays a round's value between a 5s grace window and a 30s floor.
+  assert.equal(g.pointsFor(0, 0), 100); assert.equal(g.pointsFor(0, 4999), 100); assert.equal(g.pointsFor(0, 5000), 100);
+  assert.equal(g.pointsFor(1, 0), 80); assert.equal(g.pointsFor(2, 0), 60); assert.equal(g.pointsFor(3, 0), 40);
+  assert.equal(g.pointsFor(0, 30000), 50); assert.equal(g.pointsFor(0, 60000), 50); // floor holds past 30s
+  assert.equal(g.pointsFor(0, 17500), 75); // interpolates halfway between the grace window and the floor
+  assert.equal(g.pointsFor(3, 30000), 20); // hint cap and time floor combine, never reaching zero
+  assert.ok(g.pointsFor(0, -50) === 100, 'negative elapsed (clock skew) never breaks or exceeds the ceiling');
+  // answer() takes elapsedMs from the caller (the UI owns the per-round
+  // clock) so the model itself has no wall-clock dependency and stays
+  // trivial to test; omitting it (as every other test in this file does)
+  // defaults to 0 elapsed, i.e. full marks when no hints were used.
+  const fast=g.create(); assert.equal(g.answer(fast,g.playerAt(fast).name,50),true); assert.equal(g.roundAt(fast).points,100);
+  const slow=g.create(); assert.equal(g.answer(slow,g.playerAt(slow).name,20000),true); assert.equal(g.roundAt(slow).points,Math.round(100*(1-0.5*(20000-5000)/25000)));
+  const hinted=g.create(); g.hint(hinted); g.hint(hinted); assert.equal(g.answer(hinted,g.playerAt(hinted).name,0),true); assert.equal(g.roundAt(hinted).points,60);
+  assert.equal(g.stats(hinted).score,60);
+  // A wrong guess never sets points, and a stored points value survives a
+  // save/reload round-trip (validate() bounds-checks it but never strips it).
+  const missed=g.create(); g.answer(missed,wrong(missed)[0],99999); assert.equal(g.roundAt(missed).points,undefined);
+  assert.equal(g.validate(clone(hinted)),true);
+  const roundTripped=clone(hinted); assert.equal(roundTripped.rounds[0].points,60); assert.equal(g.stats(roundTripped).score,60);
+  // Legacy rounds recorded before scoring existed have no points field at all
+  // and must keep scoring as a flat 100 per win, unchanged from before.
+  const legacyRound={options:hinted.rounds[0].options,guesses:hinted.rounds[0].guesses,hints:2,difficulty:'medium'};
+  const legacyState={...clone(hinted),rounds:[legacyRound]};
+  assert.equal(g.validate(legacyState),true); assert.equal(g.stats(legacyState).score,100);
+  // Bounds are enforced: an out-of-range or non-integer points value is invalid.
+  assert.equal(g.validate({...clone(hinted),rounds:[{...clone(hinted).rounds[0],points:101}]}),false);
+  assert.equal(g.validate({...clone(hinted),rounds:[{...clone(hinted).rounds[0],points:-1}]}),false);
+  assert.equal(g.validate({...clone(hinted),rounds:[{...clone(hinted).rounds[0],points:50.5}]}),false);
+});
+
 test('persistence accepts every legitimate state and rejects malformed or impossible saves',()=>{
   const good=g.create();assert.equal(g.validate(clone(good)),true);
   for(const bad of [null,{},42,'x',[],{...clone(good),finished:'true'},{...clone(good),version:2},{...clone(good),roundIndex:60},{...clone(good),roundIndex:-1},{...clone(good),roundIndex:.5},{...clone(good),finished:true}])assert.equal(g.validate(bad),false);
@@ -158,7 +191,7 @@ test('difficulty changes preserve progress and never reshuffle a started round',
   const deck=plain(s.deck);g.hint(s);const started=plain(g.roundAt(s));
   g.setDifficulty(s,'easy');assert.deepEqual(plain(g.roundAt(s)),started);assert.deepEqual(plain(s.deck),deck);
   assert.equal(s.difficulty,'easy');g.answer(s,g.playerAt(s).name);g.next(s);
-  assert.equal(g.roundAt(s).difficulty,'easy');assert.equal(g.stats(s).score,100);assert.equal(g.validate(clone(s)),true);
+  assert.equal(g.roundAt(s).difficulty,'easy');assert.equal(g.stats(s).score,80);assert.equal(g.validate(clone(s)),true);
   const legacy=clone(s);delete legacy.difficulty;legacy.rounds.forEach(r=>delete r.difficulty);
   assert.equal(g.validate(legacy),true,'Existing progress remains loadable');
   assert.equal(g.validate({...clone(s),difficulty:'bogus'}),false);
@@ -175,7 +208,9 @@ test('published 30-player saves survive roster expansion and finish their origin
   const original=clone(saved);assert.equal(saved.deck.length,30);assert.equal(g.validate(saved),true);
   assert.equal(g.stats(saved).score,500);assert.deepEqual(saved,original);
   for(let i=saved.roundIndex;i<30;i++){g.answer(saved,g.playerAt(saved).name);g.next(saved);assert.equal(g.validate(saved),true);}
-  assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,3000);
+  // The in-progress round already carried 1 hint when saved, so its win is
+  // scored at the reduced 80 (100 * 0.8 hint multiplier) instead of 100.
+  assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,2980);
   const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,60);assert.equal(fresh.difficulty,'hard');
   assert.ok(fresh.deck.includes('fabricio-coloccini'));assert.ok(fresh.deck.includes('juan-pablo-sorin'));
 });
@@ -187,7 +222,9 @@ test('published 40-player saves preserve guesses, hints and order through expans
   assert.equal(g.stats(saved).score,500);assert.equal(g.roundAt(saved).hints,1);assert.equal(g.roundAt(saved).guesses.length,1);
   assert.deepEqual(saved,original);
   for(let i=saved.roundIndex;i<saved.deck.length;i++){g.answer(saved,g.playerAt(saved).name);g.next(saved);assert.equal(g.validate(saved),true);}
-  assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,4000);
+  // The in-progress round already carried 1 hint when saved, so its win is
+  // scored at the reduced 80 (100 * 0.8 hint multiplier) instead of 100.
+  assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,3980);
   const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,60);assert.equal(fresh.difficulty,'hard');
   const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,20);
   assert.ok(additions.some(p=>p.id==='javier-saviola'));assert.ok(additions.some(p=>p.id==='claudio-pizarro'));
@@ -200,7 +237,8 @@ test('published 50-player saves finish their original deck after the third expan
   assert.equal(g.stats(saved).score,500);assert.equal(g.roundAt(saved).hints,1);assert.equal(g.roundAt(saved).guesses.length,1);
   assert.deepEqual(saved,original);
   for(let i=saved.roundIndex;i<saved.deck.length;i++){g.answer(saved,g.playerAt(saved).name);g.next(saved);assert.equal(g.validate(saved),true);}
-  assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,5000);
+  // Same reduced first-round score as the 40-player case (1 hint already used).
+  assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,4980);
   const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,60);assert.equal(fresh.difficulty,'hard');
   const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,10);
   assert.ok(additions.some(p=>p.id==='rivaldo'));assert.ok(additions.some(p=>p.id==='diego-maradona'));
