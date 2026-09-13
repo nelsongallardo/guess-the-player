@@ -28,6 +28,14 @@ uv run --with pillow python research/optimize-crests.py --source-ref f59fe51
 
 Local checks eliminated the measured startup layout shift. Production performance must be measured separately after deployment: the local Python server does not use GitHub's transfer compression. Audits are affected by hardware, network and randomly selected careers; compare more than one run before drawing fine-grained conclusions.
 
+## Loading: what actually waits
+
+The badges are embedded PNGs, not a set of third-party image downloads. A fresh visitor first transfers and parses the portable game HTML; a signed-in visitor also waits for the pinned account SDK/session and authoritative cloud progress, plus a round start and confirmation when needed. Do not bypass these identity/scoring boundaries or silently show guest gameplay as ranked to hide latency.
+
+On 13 September 2026, three fresh anonymous Chromium samples of release `0488d19` observed the club grid in **182–325ms**, with **796,632 bytes transferred as the encoded HTML body** (1,664,000 decoded). The standalone leaderboard HTML reached DOMContentLoaded in **20–106ms**, then its public API read took **461–549ms**; an earlier separate sample took **849ms** for that read. These unthrottled lab samples are not signed-in measurements or promises about mobile networks. Evidence is in ignored `test-results/loading-timing-before.json`.
+
+The remaining online wait needs visible, truthful loading feedback, not fake percentages, made-up ranks or a blank career panel. Keep placeholders decorative, status text translated and announced, reduced-motion respected, and clear busy state when ready or failed. Connection failures must expose retry/practice rather than spin indefinitely. Preserve the single-file offline game and all embedded crests; splitting the asset payload would be a separate architectural decision.
+
 ## Verification
 
 ```sh

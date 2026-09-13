@@ -209,7 +209,8 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 @media(max-width:360px){.mark{width:33px;height:33px}.wordmark{font-size:25px}.brand{gap:5px}#language{width:69px;max-width:69px}.hero h1{font-size:25px}.hero .eyebrow{letter-spacing:.7px}}
 
 .about-game{border-top:1px solid var(--line);margin-top:28px;padding:24px 0;color:var(--muted);max-width:850px;font-size:15px;line-height:1.65}.about-game h2{font-size:24px;line-height:1.25;color:var(--ink);letter-spacing:-.5px;margin-bottom:12px}.about-game p{margin:10px 0}.about-game details{border-top:1px solid var(--line);padding:10px 0}.about-game summary{cursor:pointer;color:var(--ink);font-weight:650;min-height:44px;display:list-item;padding:10px 0}.about-game ol{padding-left:24px}.about-game li{margin:8px 0}@media(max-width:580px){.about-game{font-size:14px}.about-game h2{font-size:21px}}
-.game-loading #round-panel{min-height:100svh;position:relative}.game-loading #round-panel>:not(#game-loading-status){visibility:hidden}.game-loading #game-loading-status{display:block!important;position:absolute;top:20px;left:0;color:var(--muted)}
+.game-loading #round-panel{min-height:100svh;position:relative}.game-loading #round-panel>*{visibility:hidden}.game-loading #game-loading-status{display:block!important}
+#game-loading-status{margin:12px 0 20px;padding:22px;border:1px solid var(--celeste);border-radius:12px;background:var(--ink);color:var(--paper);box-shadow:0 4px 0 #d9e5e5}#game-loading-status[hidden]{display:none}#game-loading-status.loading-compact{margin:8px 0 12px;padding:12px 14px;border-radius:8px;box-shadow:none}#game-loading-status.loading-compact .loading-brand,#game-loading-status.loading-compact .loading-skeleton{display:none}#game-loading-status.loading-compact .loading-heading{gap:10px;font-size:16px;line-height:24px}.loading-heading{display:flex;align-items:center;gap:12px;font-weight:750;font-size:18px}.loading-brand{display:block;margin-bottom:12px;font:11px var(--mono);letter-spacing:2px;color:var(--celeste)}.loading-spinner{width:24px;height:24px;flex:none;border:3px solid #89cff044;border-top-color:var(--celeste);border-radius:50%;animation:loading-spin .9s linear infinite}.loading-skeleton{display:flex;gap:12px;margin-top:20px}.loading-skeleton i{display:block;width:42px;height:48px;border:1px solid #89cff066;border-radius:8px;background:#89cff019}@keyframes loading-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.loading-spinner{animation:none}}
 .privacy-tools{margin:18px 0;text-align:center}.analytics-banner{position:fixed;z-index:10;bottom:12px;left:50%;transform:translateX(-50%);width:min(640px,calc(100% - 24px));padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 32px #122a3833}.analytics-banner h2{font-size:16px;margin:0 0 6px}.analytics-banner p{font-size:13px;margin:0 0 10px}.analytics-actions{display:flex;gap:8px;flex-wrap:wrap}.analytics-actions button{padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font-size:13px;min-height:42px}.analytics-actions button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}#privacy-dialog{max-width:540px;width:calc(100% - 32px)}#privacy-dialog p{line-height:1.65;font-size:14px}
 .account-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:7px 0;font:11px var(--mono)}.account-tools button{min-height:44px}.account-tools strong{color:var(--ink)}.account-actions{display:flex;gap:8px;flex-wrap:wrap}#account-dialog{width:min(580px,calc(100% - 24px));max-height:85svh;overflow:auto}#account-dialog p{font-size:14px;line-height:1.6}#account-dialog input{font:inherit;padding:10px;max-width:100%;min-height:44px}#account-notice{padding:10px 0;font-size:14px}.ranked-wait #round-panel,.ranked-wait #summary-panel{display:none}.account-tools [hidden],#account-dialog [hidden]{display:none!important}
 .page-nav{display:flex;gap:8px;padding:8px 0}.page-nav a{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;color:var(--ink)}.page-nav [aria-current]{background:var(--ink);color:var(--paper);box-shadow:0 3px var(--celeste)}.page-nav a:focus-visible{outline:3px solid #176180;outline-offset:3px}
@@ -238,8 +239,8 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 <div class="account-actions"><button id="ranked-retry" class="subtle" type="button" hidden>Reintentar</button><button id="practice" class="subtle" type="button" hidden>Práctica sin clasificación</button></div>
 <section class="hero" aria-labelledby="title"><div><div class="eyebrow">EL JUEGO DE LAS TRAYECTORIAS</div><h1 id="title">Adiviná al jugador.<br> <span>Por su carrera.</span></h1><p class="intro">Una carrera en escudos. Demostrá cuánto fútbol tenés.</p></div></section>
 <noscript><p>This game needs JavaScript. Enable it and reload. / Este juego necesita JavaScript. Actívalo y recarga la página.</p></noscript>
-<section id="round-panel" aria-label="Current round">
-<p id="game-loading-status" role="status" hidden>Preparando el desafío…</p>
+<div id="game-loading-status" role="status" aria-live="polite" aria-atomic="true" hidden><span class="loading-brand" aria-hidden="true">derabona · FÚTBOL</span><div class="loading-heading"><span class="loading-spinner" aria-hidden="true"></span><span id="game-loading-text">Preparando el desafío…</span></div><div class="loading-skeleton" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+<section id="round-panel" aria-label="Current round" aria-busy="false">
 <div class="pitch"><div class="pitch-top"><div class="file-label">CAREER FILE <strong id="round-number">01 / 50</strong></div><div class="attempts"><span id="attempt-text">3 attempts left</span><div class="lives" id="lives" aria-hidden="true"></div></div></div><div id="timeline-scroll" class="timeline-scroll" tabindex="0" role="region" aria-label="Club career in chronological order. Scroll horizontally for long careers."><ol id="timeline" class="timeline"></ol></div><div class="pitch-bottom"><span class="path-label"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h8M7 1l3 3-3 3M14 12H6m3-3-3 3 3 3" stroke="currentColor" stroke-width="1.5"/></svg>DEBUT → LATEST CLUB</span><span id="club-count">SENIOR CLUB CAREER</span></div></div>
 <div id="career-navigation" class="career-navigation" hidden><span>Scroll or swipe to see every club</span><div role="group" aria-label="Career timeline navigation"><button type="button" id="career-back" aria-label="Earlier clubs" aria-controls="timeline-scroll">←</button><button type="button" id="career-forward" aria-label="Later clubs" aria-controls="timeline-scroll">→</button></div></div>
 <div class="progress-track"><progress id="progress" value="0" max="50" aria-label="Completed rounds"></progress><span id="progress-label">0 OF 50 COMPLETE</span></div>
@@ -10525,7 +10526,7 @@ const RankedUI = (()=>{
   let mode=Accounts.configured&&(Accounts.hasStoredSession()||AuthCallback.code)?'loading':'guest';
   let userId=Accounts.session?.user?.id??null,pendingUserId=null;
   const current=(ticket,owner)=>ticket===epoch&&owner===userId&&owner===(Accounts.session?.user?.id??null);
-  let cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='';
+  let cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='',loadingPhase='';
   const t=()=>TEXT[language],isAccountMode=()=>!['guest','practice'].includes(mode);
   const player=()=>isAccountMode()&&cloud?.round?PLAYERS.find(p=>p.id===cloud.round.playerId):null;
   const competition=()=>cloud?.round?.competition||selected;
@@ -10546,9 +10547,15 @@ const RankedUI = (()=>{
     $('reset-progress').disabled=isAccountMode();
     $('ranked-retry').hidden=!['unavailable','practice'].includes(mode);$('ranked-retry').disabled=busy;
     $('practice').hidden=mode!=='unavailable';
-    $('account-notice').hidden=!isAccountMode()||mode==='ranked'&&!!cloud?.round;
+    const starting=busy&&pending?.action==='start',confirming=busy&&loadingPhase==='confirm';
+    const waiting=mode==='loading'||mode==='ranked'&&(starting||confirming);
+    $('game-loading-status').hidden=!waiting;
+    $('game-loading-status').classList.toggle('loading-compact',confirming&&!!cloud?.round);
+    $('game-loading-text').textContent=language==='es'?(confirming?'Confirmando el desafío…':starting?'Preparando el desafío…':signed?'Cargando tu progreso…':'Comprobando tu cuenta…'):(confirming?'Confirming your challenge…':starting?'Preparing your challenge…':signed?'Loading your progress…':'Checking your account…');
+    $('round-panel').setAttribute('aria-busy',String(waiting));
+    $('account-notice').hidden=waiting||!isAccountMode()||mode==='ranked'&&!!cloud?.round;
     $('account-notice').textContent=mode==='loading'?x.sync:mode==='ranked'?x.done:x.unavailable;
-    document.documentElement.classList.toggle('ranked-wait',isAccountMode()&&(mode!=='ranked'||!cloud?.round));
+    document.documentElement.classList.toggle('ranked-wait',isAccountMode()&&(mode!=='ranked'||!cloud?.round||starting));
     if(isAccountMode()){$('save-status').textContent=mode==='ranked'?x.saved:x.unavailable;$('score').textContent=mode==='ranked'?String(cloud?.progress?.totalPoints??0):'—';$('streak').textContent='—';}
     $('game-play-link').textContent=language==='en'?'Play':'Jugar';$('game-play-link').href='index.html?lang='+language;$('page-nav').ariaLabel=language==='en'?'Main navigation':'Navegación principal';$('leaderboard-open').href=(location.protocol==='file:'?'https://derabona.club/leaderboard.html':'leaderboard.html')+'?lang='+language;$('leaderboard-open').textContent=x.board+(location.protocol==='file:'?(language==='en'?' · online':' · en línea'):'');
   }
@@ -10590,18 +10597,20 @@ const RankedUI = (()=>{
     if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingUserId=userId;await sendPending();
   }
   async function sendPending(){
-    if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch;busy=true;update();renderRanked();
+    if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch;busy=true;loadingPhase='';update();renderRanked();
     try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data);pending=null;
+      // Show only this identity's authoritative start response early; answers stay locked.
+      if(payload.action==='start'){loadingPhase='confirm';update();renderRanked(true);}
       // Read back the exact account after mutations, not just an acknowledgement.
       const verified=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data.completed&&data.round===null?{...verified,round:null,completed:true}:verified);
     }catch(error){if(!current(ticket,owner))return;mode='unavailable';notice='unavailable';if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','INVALID_NICKNAME','NICKNAME_TAKEN','IDEMPOTENCY_CONFLICT','STALE_VERSION','ROUND_NOT_PLAYING','ROUND_COMPLETE','COMPETITION_COMPLETE','NO_PLAYERS','NO_UNSEEN_PLAYERS'].includes(error.code))pending=null;}
-    finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,true);if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}}}
+    finally{if(current(ticket,owner)){busy=false;loadingPhase='';applyLanguage();render(false,true);if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}}}
   }
-  function freshGuest(){userId=null;pendingUserId=null;epoch++;cloud=null;pending=null;busy=false;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();$('public-nickname').value='';applyLanguage();render(false,true);}
+  function freshGuest(){userId=null;pendingUserId=null;epoch++;cloud=null;pending=null;busy=false;loadingPhase='';notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();$('public-nickname').value='';applyLanguage();render(false,true);}
   function authChanged(event,session){
     const next=session?.user?.id??null;if(next===userId)return;
     if(!next){freshGuest();return;}
-    userId=next;epoch++;cloud=null;pending=null;pendingUserId=null;busy=false;notice='';mode='loading';selected='all';
+    userId=next;epoch++;cloud=null;pending=null;pendingUserId=null;busy=false;loadingPhase='';notice='';mode='loading';selected='all';
     $('public-nickname').value='';
     update();render(false,true);
     // Reconcile outside the SDK auth lock; invalidate identity synchronously.

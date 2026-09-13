@@ -1,5 +1,17 @@
 # Verification report
 
+## Loading feedback and early club preview — 13 September 2026
+
+- Measured production `0488d19` before edits: badges are embedded in the 796,632-byte encoded game HTML; fresh anonymous club-grid observations were 182–325ms. Public leaderboard API reads took 461–549ms across three samples, plus an earlier 849ms sample. These are unthrottled anonymous lab samples, not signed-in/field measurements or before/after speed guarantees. See `docs/seo.md`.
+- Added visible bilingual game and table loaders, decorative placeholders, status/busy semantics, reduced motion, and explicit cleanup. The game previews only the current identity's authoritative start receipt before the existing confirming progress read finishes; controls remain locked. A compact 50px confirmation strip keeps the first career row wholly visible at 375×667. No score-clock, backend, roster, crest, account-service or analytics changes.
+- Leaderboard credentials now have an overall five-second deadline; a stalled SDK/session read falls back to public results with an account warning. No private caching or speculative duplicate board reads. No-JS shows an explanation instead of an endless spinner; early script-enabled markup still paints the loader.
+- Final configured native PostgreSQL + Node run: **113 passed, 0 failed**. The reviewer's unconfigured PostgreSQL/psql setup failures are not product failures and are not represented as a successful independent backend run.
+- Final **seven focused Chromium suites passed**: game loading (**31 checks**), leaderboard (**56**), accounts (**58**), guest session (**16**), SEO, analytics and offline. Deferred SDK/API tests are explicitly mocked, including waits, timeouts, failure/retry, late identities, confirmation locks, completion and no-JS. Actual offline `file:` guest play also passed.
+- Real local HTML transfer throttled to 200kB/s + 150ms latency: **four checks passed**, including visible mobile loading before any crest exists and cleanup when playable. Immediate CDP capture verified the actual pending frame; normal Playwright screenshot waits for fonts can outlast this state.
+- Local leaderboard against the **real public API**: **14 checks passed**. Held actual responses briefly to inspect the pending state (no fabricated data), then compared real rows/points and verified cleanup, filters and widths 320/375/768/1280. Mobile screenshots inspected for overlaps and visibility.
+- Independent final SPEC **PASS** and QUALITY **APPROVED** after fixing the no-JS issue. Source identifiers and ranked-roster parity passed. A completed-round browser assertion now waits for the terminal notice rather than the panel being hidden (which also occurs during loading); it additionally verifies the loader is gone.
+- Evidence: ignored `test-results/loading-final-node.log`, `loading-final-browser.json`, `loading-timing-before.json`, `loading-download-smoke.json`, `loading-board-local-smoke.json`, `loading-approved-review.md` and screenshots. Publication and exact live readback remain separate release gates; historical broad-browser baseline limitations below are unchanged.
+
 ## Standalone leaderboard — 13 September 2026
 
 The ranking overlay was replaced by a lightweight, directly addressable `leaderboard.html` and primary Play / Leaderboard navigation. ADR 0008 records the read-only architecture and engagement design. Existing backend scoring and alias policies are unchanged.

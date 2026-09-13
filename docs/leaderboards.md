@@ -21,6 +21,10 @@ The Supabase schema and both Edge Functions are deployed. Hosted verification wi
 
 Global and competition filters use the existing server contract. Language and competition are shareable URL state; pagination is bounded and changing competition starts from the first page. Loading, failed reads with Retry, empty boards, guests and signed-in users without a result have distinct states. Equal scores retain server ties; no invented podium, weekly reset or rank movement. Nicknames render as text.
 
+The game shows a translated loading card during account verification, progress retrieval and round start. When the current identity's authoritative start receipt contains the career, that preview can render before the confirming progress read finishes, but answer/hint controls stay locked and a compact confirmation status remains. Errors hide the private round and expose retry/practice; this is not optimistic scoring or an extra request.
+
+The leaderboard shows a decorative table skeleton and announced loading status during account/API/filter/page waits, then removes the placeholder completely. A connection hint warms the existing API origin; it is not a new analytics dependency or a measured backend speed improvement. The entire SDK/session read has a five-second deadline, followed by an anonymous public read with an account-verification warning on failure; the board fetch retains its fifteen-second abort. No-JS shows an explanation rather than an endless loader. No private cache or speculative duplicate public/authenticated reads are introduced.
+
 The page keeps the cream/navy/celeste identity, semantic responsive table, strong numeric hierarchy, keyboard focus and touch-friendly navigation. It does not load analytics. Offline guest play remains self-contained in `index.html`; rankings need connectivity. See [ADR 0008](adr/0008-standalone-leaderboard-page.md).
 
 ## Progress and automatic public aliases
