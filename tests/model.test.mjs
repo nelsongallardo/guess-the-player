@@ -139,8 +139,12 @@ test('scoring rewards speed and no-hint answers, floors gracefully, and is stabl
 test('persistence accepts every legitimate state and rejects malformed or impossible saves',()=>{
   const good=g.create();assert.equal(g.validate(clone(good)),true);
   for(const bad of [null,{},42,'x',[],{...clone(good),finished:'true'},{...clone(good),version:2},{...clone(good),roundIndex:60},{...clone(good),roundIndex:-1},{...clone(good),roundIndex:.5},{...clone(good),finished:true}])assert.equal(g.validate(bad),false);
-  const mutations=[s=>s.deck.pop(),s=>s.deck[1]=s.deck[0],s=>s.deck[0]='unknown',s=>s.rounds[0].options.pop(),s=>s.rounds[0].options[0]='unknown',s=>s.rounds[0].options.fill(g.playerAt(s).name),s=>s.rounds[0].hints=4,s=>s.rounds[0].hints=-1,s=>s.rounds[0].hints='1',s=>s.rounds[0].guesses=['unknown'],s=>s.rounds[0].guesses=[wrong(s)[0],wrong(s)[0]],s=>s.rounds[0].guesses=[g.playerAt(s).name,wrong(s)[0]],s=>s.rounds[0].guesses=wrong(s),s=>{s.roundIndex=1;s.rounds.push(clone(s.rounds[0]));}];
+  const mutations=[s=>s.deck[1]=s.deck[0],s=>s.deck[0]='unknown',s=>s.rounds[0].options.pop(),s=>s.rounds[0].options[0]='unknown',s=>s.rounds[0].options.fill(g.playerAt(s).name),s=>s.rounds[0].hints=4,s=>s.rounds[0].hints=-1,s=>s.rounds[0].hints='1',s=>s.rounds[0].guesses=['unknown'],s=>s.rounds[0].guesses=[wrong(s)[0],wrong(s)[0]],s=>s.rounds[0].guesses=[g.playerAt(s).name,wrong(s)[0]],s=>s.rounds[0].guesses=wrong(s),s=>{s.roundIndex=1;s.rounds.push(clone(s.rounds[0]));},s=>{s.deck=[];s.rounds=[];}];
   for(const change of mutations){const s=clone(good);change(s);assert.equal(g.validate(s),false,String(change));}
+  // A deck missing a player the "seen" ledger has already excluded is a
+  // legitimate, smaller-than-full deck now, not corruption - see ADR 0005.
+  const shrunk=clone(good);shrunk.deck.pop();shrunk.rounds=[shrunk.rounds[0]];
+  assert.equal(g.validate(shrunk),true,'A deck missing an already-seen player validates fine');
   for(let i=0;i<60;i++){g.answer(good,g.playerAt(good).name);assert.equal(g.validate(clone(good)),true);g.next(good);assert.equal(g.validate(clone(good)),true);}
   assert.equal(g.stats(good).score,6000);assert.equal(g.stats(good).streak,60);
 });
@@ -275,8 +279,17 @@ test('validate() treats a missing competition as \'all\' and rejects an impossib
   assert.equal(g.validate(legacy),true,'Missing competition field defaults to all');
   const scoped=g.create('medium','argentine-primera');
   assert.equal(g.validate(scoped),true);
-  const wrongLength=clone(scoped);wrongLength.deck.pop();wrongLength.rounds=[wrongLength.rounds[0]];
-  assert.equal(g.validate(wrongLength),false,'Deck length must match the current competition pool size');
+  // The "seen" ledger legitimately shrinks a competition-scoped deck too
+  // (ADR 0005); the old exact-length requirement is gone, only the upper
+  // bound (can never exceed the competition's total pool) still applies.
+  const shrunkScoped=clone(scoped);shrunkScoped.deck.pop();shrunkScoped.rounds=[shrunkScoped.rounds[0]];
+  assert.equal(g.validate(shrunkScoped),true,'A smaller-than-full competition deck is valid');
+  const emptyScoped=clone(scoped);emptyScoped.deck=[];emptyScoped.rounds=[];
+  assert.equal(g.validate(emptyScoped),false,'An empty deck is still impossible');
+  const created=g.create('medium','argentine-primera',new Set([g.playersFor('argentine-primera')[0].id]));
+  assert.equal(created.deck.length,g.playersFor('argentine-primera').length-1,'create() with excludeIds removes exactly the excluded player');
+  assert.equal(g.validate(created),true);
+  assert.throws(()=>g.create('medium','argentine-primera',new Set(g.playersFor('argentine-primera').map(p=>p.id))),/No unseen players left/,'create() refuses to build an empty deck');
   const foreignPlayer=clone(scoped);
   const outsider=players.find(p=>!p.competitions.includes('argentine-primera'));
   foreignPlayer.deck[foreignPlayer.deck.length-1]=outsider.id;

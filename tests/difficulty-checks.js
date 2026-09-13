@@ -40,6 +40,12 @@ async page => {
     }
     ok(seen.size===60,'Full unique deck');
     ok(await page.evaluate(()=>state.finished&&CareerGame.stats(state).score===6000),'Full playthrough score');
+    // Finishing all 60 marks every player "seen" (ADR 0005), which would
+    // otherwise exhaust every competition including "all" - clear the
+    // ledger here so this replay click keeps testing only what it always
+    // tested (Hard/score reset on replay); the ledger itself gets its own
+    // dedicated section after the reset test below.
+    await page.evaluate(()=>{seen.clear();try{localStorage.removeItem('touchline.seen.v1');}catch{}});
     await page.locator('#replay').click();
     ok(await page.evaluate(()=>state.difficulty==='hard'&&CareerGame.roundAt(state).difficulty==='hard'&&CareerGame.stats(state).score===0),'Replay uses standard selection');
     ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No mobile overflow');
@@ -52,6 +58,10 @@ async page => {
   // independent of whichever deck/competition is active; only Reset zeroes it.
   const lifetimeBefore=await page.evaluate(()=>({score:lifetime.score,streak:lifetime.streak}));
   ok(lifetimeBefore.score>0,'Lifetime score accumulated from the playthroughs above');
+  // Same reason as above: this loop is testing competition-switch/reload
+  // mechanics, not the seen-ledger's exhaustion behaviour, so every
+  // competition needs to still be selectable here.
+  await page.evaluate(()=>{seen.clear();try{localStorage.removeItem('touchline.seen.v1');}catch{}});
   const competitions=await page.evaluate(()=>['all',...CareerGame.COMPETITION_IDS]);
   for(const id of competitions){
     await page.locator('#change-competition').click();
@@ -71,6 +81,33 @@ async page => {
   await page.locator('#reset-progress').click();
   ok(await page.evaluate(()=>{const confirmed=window.resetConfirmation===copy().resetConfirm;window.confirm=window.originalConfirm;return confirmed;}),'Reset requests localized confirmation');
   ok(await page.evaluate(()=>loadHistory().length===0&&state.difficulty==='hard'&&state.competition==='all'&&CareerGame.stats(state).score===0&&lifetime.score===0&&lifetime.streak===0&&localStorage.getItem('touchline.lifetime.v1')===null),'Reset clears results, the lifetime score/streak, and starts automatic Hard');
+  // ADR 0005: a player answered once (right or wrong) never repeats, in any
+  // competition or replay, until Reset. The reset above just ran, so the
+  // seen ledger is guaranteed empty here. Brasileirão (13 players) is small
+  // enough to fully exhaust quickly.
+  ok(await page.evaluate(()=>seen.size===0),'Reset above already cleared the seen ledger');
+  await page.locator('#change-competition').click();
+  const brasileiraoLabel=await page.evaluate(()=>copy().competitions['brasileirao']);
+  const brasileiraoTotal=await page.evaluate(()=>CareerGame.playersFor('brasileirao').length);
+  ok(await page.locator('#competition-options button').filter({hasText:brasileiraoLabel}).locator('.option-state').textContent()===String(brasileiraoTotal),'Brasileirão starts showing its full count, nothing seen yet');
+  await page.locator('#competition-options button').filter({hasText:brasileiraoLabel}).click();
+  ok(await page.evaluate(()=>state.competition==='brasileirao'&&state.deck.length===CareerGame.playersFor('brasileirao').length),'Brasileirão opens with its full, unseen pool');
+  for(let i=0;i<brasileiraoTotal;i++){
+    const name=await page.evaluate(()=>CareerGame.playerAt(state).name);
+    await page.getByRole('button',{name,exact:true}).click();
+    await page.locator('#next').click();
+  }
+  ok(await page.evaluate(total=>state.finished&&seen.size===total,brasileiraoTotal),'Every Brasileirão player is now in the permanent seen ledger');
+  await page.locator('#change-competition').click();
+  const brasileiraoOption=page.locator('#competition-options button').filter({hasText:brasileiraoLabel});
+  ok(await brasileiraoOption.isDisabled(),'A fully-seen competition is disabled in the picker');
+  ok(await brasileiraoOption.locator('.option-state').textContent()===await page.evaluate(()=>copy().competitionCompleted),'A fully-seen competition reads Completed, not a stale count');
+  await page.locator('#competitions-close').click();
+  const stateBeforeExhaustedReplay=await page.evaluate(()=>JSON.stringify(state));
+  await page.locator('#replay').click();
+  ok(await page.evaluate(before=>JSON.stringify(state)===before,stateBeforeExhaustedReplay),'Replaying a just-exhausted competition never builds a broken/empty deck');
+  ok(await page.locator('#competitions').isVisible(),'Replaying a just-exhausted competition reopens the picker instead');
+  await page.locator('#competitions-close').click();
   const isolated=await page.context().browser().newContext({offline:true,viewport:{width:320,height:667}});
   try{
     await isolated.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('Storage denied');}});});
