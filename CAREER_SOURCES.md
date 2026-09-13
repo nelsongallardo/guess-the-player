@@ -757,6 +757,116 @@ Attacking midfielder/left winger/forward, recorded under the project's combined 
 
 Reviewed source links: [197], [198].
 
+### David Villa
+
+**Spain · Europe · Forward.** Sporting Gijón B (2000–2001) → Sporting Gijón (2001–2003) → Real Zaragoza (2003–2005) → Valencia (2005–2010) → Barcelona (2010–2013) → Atlético Madrid (2013–2014) → New York City FC (2014–2018) → Melbourne City (2014) → Vissel Kobe (2019–2020).[199][200]
+
+Sporting Gijón B preceded his first-team debut, the same overlapping reserve-side convention used elsewhere in this roster (e.g. Cristiano Ronaldo's Sporting CP/Sporting CP B). The Melbourne City loan predates New York City FC's own 2015 MLS debut; both are labelled 2014, the season in which the loan actually took place.[199][200]
+
+- **Sporting Gijón B (2000–2001):** Third-tier reserve side that preceded his Sporting Gijón first-team debut.
+- **Melbourne City (2014):** Loan from New York City FC; both spells share the 2014 year label because the loan came ahead of New York City FC's own inaugural 2015 MLS season, not concurrent competitive minutes.
+
+Reviewed source links: [199], [200].
+
+### Alessandro Del Piero
+
+**Italy · Europe · Forward.** Padova (1991–1993) → Juventus (1993–2012) → Sydney FC (2012–2014) → Delhi Dynamos (2014).[201][202]
+
+Played mainly as a second striker/attacking forward across his career; recorded here under this project's broad Forward category. His final season was a single Indian Super League year at Delhi Dynamos before retirement.[201][202]
+
+Reviewed source links: [201], [202].
+
+### Raúl
+
+**Spain · Europe · Forward.** Real Madrid C (1994) → Real Madrid B (1994) → Real Madrid (1994–2010) → Schalke 04 (2010–2012) → Al Sadd (2012–2014) → New York Cosmos (2014–2015).[203][204]
+
+Real Madrid C and Real Madrid B are overlapping reserve steps within his 1994 breakthrough, the same pattern already used for Cristiano Ronaldo's Sporting CP/CP B and Iker Casillas's Real Madrid C/B entries elsewhere in this roster. Known mononymously as Raúl, matching this project's existing single-name entries (Kaká, Xavi, Pelé).[203][204]
+
+- **Real Madrid C (1994):** Third-tier reserve side; preceded his Real Madrid B and first-team promotion, both within 1994.
+- **Real Madrid B (1994):** Second-tier reserve side, immediately preceding his first-team debut later the same year.
+
+Reviewed source links: [203], [204].
+
+### Michael Owen
+
+**England · Europe · Forward.** Liverpool (1996–2004) → Real Madrid (2004–2005) → Newcastle United (2005–2009) → Manchester United (2009–2012) → Stoke City (2012–2013).[205][206]
+
+A clean five-club senior career with no reserve or loan spells in scope; his post-2013 media, ownership and horse-racing activities are not playing appearances and are excluded.[205][206]
+
+Reviewed source links: [205], [206].
+
+### Miroslav Klose
+
+**Germany · Europe · Forward.** FC Homburg (1998–1999) → 1. FC Kaiserslautern (1999–2004) → Werder Bremen (2004–2007) → Bayern Munich (2007–2011) → Lazio (2011–2016).[207][208]
+
+SG Blaubach-Diedelkopf (1987–1998, seventh-division amateur football) was youth/amateur development, not senior professional play, and is excluded; FC Homburg in 1998 is his first professional senior club per the reviewed sources.[207][208]
+
+Reviewed source links: [207], [208].
+
+### Diego Forlán
+
+**Uruguay · South America · Forward.** Independiente (1997–2002) → Manchester United (2002–2004) → Villarreal (2004–2007) → Atlético Madrid (2007–2011) → Inter Milan (2011–2012) → Internacional (2012–2014) → Cerezo Osaka (2014–2015) → Peñarol (2015–2016) → Mumbai City (2016) → Kitchee (2018).[209][210][211]
+
+His youth football was at Peñarol and Danubio, and further youth development at Independiente (1994–1997) preceded his 1997 senior debut there; no separate senior Danubio spell is asserted. He last played for Kitchee in 2018 and formally announced retirement in August 2019; the gap between the two dates is a stint/announcement boundary, not extended active registration, matching this project's existing convention for other late-career endpoints (e.g. Riquelme, Rooney).[209][210][211]
+
+Reviewed source links: [209], [210], [211].
+
+### Carlos Valderrama
+
+**Colombia · South America · Midfielder.** Unión Magdalena (1980–1984) → Millonarios (1984–1985) → Deportivo Cali (1985–1987) → Montpellier (1987–1991) → Real Valladolid (1991–1992) → Independiente Medellín (1992–1993) → Atlético Junior (1993–1995) → Tampa Bay Mutiny (1995–1997) → Deportivo Cali (1996–1997) → Miami Fusion (1997–1999) → Tampa Bay Mutiny (1999–2001) → Colorado Rapids (2001–2002).[212][213]
+
+Attacking/central midfielder and playmaker, recorded under this project's broad Midfielder category. The 1996–97 Deportivo Cali spell is a loan return from Tampa Bay Mutiny, not a full transfer, per the reviewed infobox; his two Tampa Bay Mutiny spells frame it on either side.[212][213]
+
+- **Deportivo Cali (1996–1997):** Loan from Tampa Bay Mutiny during MLS's mid-season break, overlapping that registration rather than a permanent transfer away.
+- **Tampa Bay Mutiny (1999–2001):** Second playing spell.
+
+Reviewed source links: [212], [213].
+
+### Roque Santa Cruz
+
+**Paraguay · South America · Forward.** Olimpia (1997–1999) → Bayern Munich (1999–2007) → Bayern Munich II (2005–2006) → Blackburn Rovers (2007–2009) → Manchester City (2009–2013) → Blackburn Rovers (2011) → Real Betis (2011–2012) → Málaga (2012–2013) → Málaga (2013–2014) → Cruz Azul (2015–2016) → Málaga (2015–2016) → Olimpia (2016–2021) → Libertad (2022–2025) → Nacional (Paraguay) (2026–present).[214][215][216]
+
+A long, well-documented journeyman tail is retained in full rather than trimmed for brevity, matching this roster's existing long-tail entries (e.g. Rivaldo, Romário). Nacional here is Club Nacional of Asunción, Paraguay - a different club from this roster's existing 'Nacional' (Club Nacional de Football, Uruguay) - and is displayed as 'Nacional (Paraguay)' to avoid conflating the two. His still-active 2026 Nacional spell is corroborated by independent contemporary reporting (RPP, and separately Depor and CNN en Español), not solely by a database row, mirroring this project's standard for exceptional still-active or very recent entries.[214][215][216]
+
+- **Bayern Munich II (2005–2006):** Reserve-team appearances recorded in parallel with his established Bayern Munich first-team place.
+- **Blackburn Rovers (2011):** Loan from Manchester City, overlapping that spell.
+- **Real Betis (2011–2012):** Loan from Manchester City.
+- **Málaga (2012–2013):** Loan from Manchester City.
+- **Málaga (2013–2014):** Permanent move following his loan spell there.
+- **Málaga (2015–2016):** Loan from Cruz Azul; his third spell there.
+- **Olimpia (2016–2021):** Second playing spell.
+- **Nacional (Paraguay) (2026–present):** Signed at age 44; corroborated as a genuinely active professional contract by multiple contemporary 2026 news reports, not a stale database entry.
+
+Reviewed source links: [214], [215], [216].
+
+### Zico
+
+**Brazil · South America · Midfielder.** Flamengo (1971–1983) → Udinese (1983–1985) → Flamengo (1985–1989) → Kashima Antlers (1991–1994).[217][218][219]
+
+Attacking midfielder and free-kick specialist, recorded under this project's broad Midfielder category. His roughly one-year gap between his 1989 Flamengo farewell match and his 1991 move to Japan is a corroborated transitional period, not an omitted club. His post-1994 Kashima roles (technical adviser, later technical director) are coaching/administrative, not playing appearances, and are excluded.[217][218][219]
+
+- **Flamengo (1985–1989):** Second playing spell.
+- **Kashima Antlers (1991–1994):** Signed in 1991 as Sumitomo Metal Industries; the club was renamed Kashima Antlers (chosen by public poll in July 1991) ahead of the J.League's 1993 launch season.
+
+Reviewed source links: [217], [218], [219].
+
+### Romário
+
+**Brazil · South America · Forward.** Vasco da Gama (1985–1988) → PSV Eindhoven (1988–1993) → Barcelona (1993–1995) → Flamengo (1995–1996) → Valencia (1996–1997) → Flamengo (1997) → Flamengo (1998–1999) → Vasco da Gama (2000–2002) → Fluminense (2002–2004) → Al Sadd (2003) → Vasco da Gama (2005–2006) → Miami FC (2006) → Adelaide United (2006) → Vasco da Gama (2007) → América-RJ (2009).[220][221][222][223]
+
+A long, well-documented return-heavy tail is retained in full rather than trimmed for brevity, matching this roster's existing long-tail entries (e.g. Rivaldo). The 1996-99 Valencia/Flamengo sequence follows Wikipedia's own infobox nodes plus contemporary reporting on the Aragonés/Ranieri disputes behind it; Miami FC (2006) is the NASL-era club later renamed Fort Lauderdale Strikers, whose current crest is used per this project's current/source-era crest convention.[220][221][222][223]
+
+- **Valencia (1996–1997):** Signed for the 1996/97 season; loaned back to Flamengo mid-season after conflict with coach Luis Aragonés, then returned to Valencia only briefly under Claudio Ranieri before leaving for good.
+- **Flamengo (1997):** Loan from Valencia, overlapping that spell.
+- **Flamengo (1998–1999):** Further loan/return from Valencia from January 1998; Valencia and Flamengo's repeated back-and-forth that season is not split into further nodes, matching Wikipedia's own infobox structure.
+- **Vasco da Gama (2000–2002):** Second playing spell.
+- **Al Sadd (2003):** Three-month loan from Fluminense, February-May 2003; returned without registering a goal in Qatar.
+- **Vasco da Gama (2005–2006):** Third playing spell.
+- **Adelaide United (2006):** Loan from Miami FC.
+- **Vasco da Gama (2007):** Fourth playing spell.
+
+Reviewed source links: [220], [221], [222], [223].
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -956,3 +1066,28 @@ Sources:
 [196] https://www.national-football-teams.com/player/1401/Marcelo_Salas.html
 [197] https://en.wikipedia.org/wiki/Rivaldo
 [198] https://www.national-football-teams.com/player/1023/Rivaldo_1.html
+[199] https://en.wikipedia.org/wiki/David_Villa
+[200] https://www.national-football-teams.com/player/9992/David_Villa.html
+[201] https://en.wikipedia.org/wiki/Alessandro_Del_Piero
+[202] https://www.national-football-teams.com/player/3362/Alessandro_Del_Piero.html
+[203] https://en.wikipedia.org/wiki/Ra%C3%BAl_Gonz%C3%A1lez
+[204] https://www.national-football-teams.com/player/6226/Raul.html
+[205] https://en.wikipedia.org/wiki/Michael_Owen
+[206] https://www.national-football-teams.com/player/2146/Michael_Owen.html
+[207] https://en.wikipedia.org/wiki/Miroslav_Klose
+[208] https://www.national-football-teams.com/player/2559/Miroslav_Klose.html
+[209] https://en.wikipedia.org/wiki/Diego_Forl%C3%A1n
+[210] https://www.national-football-teams.com/player/7025/Diego_Forlan.html
+[211] https://www.scmp.com/sport/hong-kong/article/3021853/beautiful-stage-closes-full-great-memories-former-uruguay-and
+[212] https://en.wikipedia.org/wiki/Carlos_Valderrama
+[213] https://www.national-football-teams.com/player/13683/Carlos_Valderrama.html
+[214] https://en.wikipedia.org/wiki/Roque_Santa_Cruz
+[215] https://www.national-football-teams.com/player/5126/Roque_Santa_Cruz.html
+[216] https://rpp.pe/futbol/futbol-mundial/a-los-44-anos-roque-santa-cruz-ficho-por-el-nacional-de-paraguay-y-disputara-la-copa-sudamericana-noticia-1669887
+[217] https://en.wikipedia.org/wiki/Zico_(footballer)
+[218] https://www.national-football-teams.com/player/17931/Zico_1.html
+[219] https://www.nippon.com/en/japan-topics/g02056
+[220] https://en.wikipedia.org/wiki/Rom%C3%A1rio
+[221] https://www.national-football-teams.com/player/10131/Romario.html
+[222] https://www.planetfootball.com/nostalgia/ortega-and-romario-at-valencia-discos-great-goals-and-fights-with-ranieri
+[223] https://www.emol.com/noticias/deportes/2003/06/14/114898/fluminense-derrotado-en-regreso-de-romario.html

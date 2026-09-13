@@ -63,7 +63,7 @@ async page => {
   await page.emulateMedia({reducedMotion:'no-preference'});
   checks.push('keyboard modal, malformed save recovery, 320/375/768/1440px layout, 44px touch targets');
   let wins=0,streak=0,best=0;
-  for(let i=0;i<60;i++){
+  for(let i=0;i<70;i++){
     if(i===49)await page.setViewportSize({width:375,height:667});
     const s=await view();ok(s.index===i&&s.valid,'Valid round index');ok(!seen.has(s.id),'No repeated player');seen.add(s.id);s.crestUrls.forEach(u=>crests.add(u));
     ok(await page.locator('#options button').count()===10,`${s.name}: ten options`);
@@ -75,11 +75,11 @@ async page => {
     await page.locator('#next').click();
   }
   ok((await view()).finished,'Final recap reached');ok(await page.locator('#summary-panel').isVisible(),'Final recap visible');
-  ok(await page.locator('#review li').count()===60,'All 60 result entries');ok((await page.locator('#summary-caption').textContent()).includes(`Best streak: ${best}`),'Best streak recap');
+  ok(await page.locator('#review li').count()===70,'All 70 result entries');ok((await page.locator('#summary-caption').textContent()).includes(`Best streak: ${best}`),'Best streak recap');
   await page.reload();ok((await view()).finished,'Final recap survives reload');
   await page.locator('#replay').click();ok((await view()).stats.score===0&&(await view()).index===0,'Replay resets deck and score');
   ok(await page.locator('#timeline-scroll').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'Mobile replay reveals first career');
-  checks.push('all 60 rounds and crest loads, mixed win/loss outcomes, recap, final-save reload, replay');
+  checks.push('all 70 rounds and crest loads, mixed win/loss outcomes, recap, final-save reload, replay');
   await page.emulateMedia({reducedMotion:'reduce'});const target=await view();await choose(target.name);
   ok(await page.locator('#options .correct').evaluate(button=>getComputedStyle(button).animationName)==='none','Reduced motion disables animation');
   await page.emulateMedia({reducedMotion:'no-preference'});

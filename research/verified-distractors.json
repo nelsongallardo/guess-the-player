@@ -1711,43 +1711,6 @@
     "evidenceFile": "research/DISTRACTOR_BRAZIL_ITALY_SOURCES.md"
   },
   {
-    "id": "alessandro-del-piero",
-    "name": "Alessandro Del Piero",
-    "country": "Italy",
-    "position": "Forward",
-    "start": 1992,
-    "end": 2014,
-    "clubs": [
-      "Padova",
-      "Juventus",
-      "Sydney FC",
-      "Delhi Dynamos"
-    ],
-    "system": "italy",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
-        "excerpt": "| Senior career\\* |\n| Years | **Team** | **Apps** | **(Gls)** |\n| 1991–1993 | [Padova](https://en.wikipedia.org/wiki/Calcio_Padova \"Calcio Padova\") | 14 | (1) |\n| 1993–2012 | [Juventus](https://en.wikipedia.org/wiki/Juventus_FC \"Juventus FC\") | 513 | (208) |\n| 2012–2014 | [Sydney FC](https://en.wikipedia.org/wiki/Sydney_FC \"Sydney FC\") | 48 | (24) |\n| 2014 | [Delhi Dynamos](https://en.wikipedia.org/wiki/Odisha_FC \"Odisha FC\") | 10 | (1) |\n| Total |  | **585** | **(234)** |"
-      },
-      {
-        "url": "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
-        "excerpt": "He joined the senior side during the [1991–92 season](https://en.wikipedia.org/wiki/1991%E2%80%9392_Serie_B \"1991–92 Serie B\"), at the age of 16, and at the age of 17, he made his debut in [Serie B](https://en.wikipedia.org/wiki/Serie_B \"Serie B\") against [Messina](https://en.wikipedia.org/wiki/Messina_F.C. \"Messina F.C.\"), under manager Mauro Sandreani, on 15 March 1992, coming on as a substitute for Roberto Putelli."
-      },
-      {
-        "url": "http://archivio.padovacalcio.it/22-11-1992-padova-ternana-delpiero-primo-gol/",
-        "excerpt": "Te Ricordito? 22/11/1992 Padova-Ternana 5-0 Primo gol tra i professionisti di Alessandro Del Piero"
-      },
-      {
-        "url": "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
-        "excerpt": "he retired in 2014, after a season with [Delhi Dynamos FC](https://en.wikipedia.org/wiki/Delhi_Dynamos_FC \"Delhi Dynamos FC\") in the [Indian Super League](https://en.wikipedia.org/wiki/Indian_Super_League \"Indian Super League\")."
-      }
-    ],
-    "notes": "Italy-start peer. Start 1992 is the documented professional debut on 15 March 1992, not the infobox senior-squad membership label 1991 or youth at San Vendemiano. Padova independently confirms professional first-team play in November 1992. Wikipedia gives final senior playing spell Delhi Dynamos in 2014 and retirement in 2014; the second source does not independently establish the endpoint. Preserve historical Delhi Dynamos name, not its later Odisha identity.",
-    "verifiedAt": "2026-09-12",
-    "evidenceFile": "research/DISTRACTOR_BRAZIL_ITALY_SOURCES.md"
-  },
-  {
     "id": "roberto-baggio",
     "name": "Roberto Baggio",
     "country": "Italy",
@@ -2186,5 +2149,543 @@
     "notes": "Wrong-answer-only profile for Diego Ribas da Cunha, born 28 February 1985, not Diego Maradona, Diego Ribas born 1980 or another Diego. Santos professional first-team debut in 2002 follows youth development; Flamengo playing career ends in 2022. Ordered career retains the actual Wolfsburg return after Atlético Madrid loan 2011–2012, then the separate Atlético return in January 2014. Reserve-team training punishment at Wolfsburg is not established competitive reserve play and adds no club node. Wikipedia dates retirement 12 November 2022 while Globo preview expected final game 13 November; endpoint is deliberately year-only. Brazil is the senior national team; attacking midfielder maps to Midfielder. Globo excerpts preserve the extraction encoding as retrieved.",
     "verifiedAt": "2026-09-12",
     "evidenceFile": "research/DISTRACTOR_ERA_GAPS_SOURCES.md"
+  },
+  {
+    "id": "michael-ballack",
+    "name": "Michael Ballack",
+    "country": "Germany",
+    "position": "Midfielder",
+    "start": 1995,
+    "end": 2012,
+    "clubs": [
+      "Chemnitzer FC",
+      "1. FC Kaiserslautern",
+      "Bayer Leverkusen",
+      "Bayern Munich",
+      "Chelsea",
+      "Bayer Leverkusen"
+    ],
+    "system": "germany",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Michael_Ballack",
+        "excerpt": "Michael Ballack ... Position(s) Midfielder ... Chemnitzer FC 1995-1997, 1. FC Kaiserslautern 1997-1999, Bayer Leverkusen 1999-2002, Bayern Munich 2002-2006, Chelsea 2006-2010, Bayer Leverkusen 2010-2012. National team Germany 1999-2010, 98 (42). Ballack retired from professional football in October 2012."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2585/Michael_Ballack.html",
+        "excerpt": "Michael Ballack, Centre Midfielder (CM), born 26-09-1976 in Goerlitz, Germany. 1.89m. FIFA Matches 98, FIFA Goals 42."
+      }
+    ],
+    "notes": "First senior system: Germany, Chemnitzer FC. A same-system, overlapping-career contemporary for Miroslav Klose (debut 1998); Ballack's 1995-2012 span overlaps Klose's 1998-2016 career.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "bastian-schweinsteiger",
+    "name": "Bastian Schweinsteiger",
+    "country": "Germany",
+    "position": "Midfielder",
+    "start": 2002,
+    "end": 2019,
+    "clubs": [
+      "Bayern Munich",
+      "Manchester United",
+      "Chicago Fire"
+    ],
+    "system": "germany",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Bastian_Schweinsteiger",
+        "excerpt": "Bastian Schweinsteiger ... Bayern Munich 2002-2015 (342 appearances), Manchester United 2015-2017 (18 appearances), Chicago Fire 2017-2019 (85 appearances). Germany national team 2004-2016, 121 caps, 24 goals. He announced his retirement in October 2019."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/7817/Bastian_Schweinsteiger.html",
+        "excerpt": "Bastian Schweinsteiger, Centre Midfielder (CM), born 01-08-1984 in Kolbermoor, Germany. 1.83m. FIFA Matches 120, FIFA Goals 24."
+      }
+    ],
+    "notes": "First senior system: Germany, Bayern Munich. Overlaps Miroslav Klose's 1998-2016 career (debut difference of 4 years).",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "philipp-lahm",
+    "name": "Philipp Lahm",
+    "country": "Germany",
+    "position": "Defender",
+    "start": 2002,
+    "end": 2017,
+    "clubs": [
+      "Bayern Munich",
+      "VfB Stuttgart",
+      "Bayern Munich"
+    ],
+    "system": "germany",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Philipp_Lahm",
+        "excerpt": "Philipp Lahm ... Bayern Munich 2002-2017, with a loan to VfB Stuttgart 2003-2005. Position(s): Right-back, left-back. Germany national team 2004-2014, 113 caps, 5 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2573/Philipp_Lahm.html",
+        "excerpt": "Philipp Lahm, Right Back (RB), born 11-11-1983 in Muenchen, Germany. 1.70m. FIFA Matches 113, FIFA Goals 5."
+      }
+    ],
+    "notes": "First senior system: Germany, Bayern Munich (his contract began there in 2002, with a two-season loan to VfB Stuttgart). Overlaps Miroslav Klose's 1998-2016 career.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "lukas-podolski",
+    "name": "Lukas Podolski",
+    "country": "Germany",
+    "position": "Forward",
+    "start": 2003,
+    "end": 2026,
+    "clubs": [
+      "1. FC Köln",
+      "Bayern Munich",
+      "1. FC Köln",
+      "Arsenal",
+      "Inter Milan",
+      "Galatasaray",
+      "Vissel Kobe",
+      "Antalyaspor",
+      "Górnik Zabrze"
+    ],
+    "system": "germany",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Lukas_Podolski",
+        "excerpt": "Lukas Podolski ... 1. FC Koeln 2003-2006, Bayern Munich 2006-2009, 1. FC Koeln 2009-2012, Arsenal 2012-2015, Inter Milan (loan) 2015, Galatasaray 2015-2017, Vissel Kobe 2017-2020, Antalyaspor 2020-2021, Goernik Zabrze 2021-2026. He retired in May 2026 after becoming majority owner of Goernik Zabrze."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/7818/Lukas_Podolski.html",
+        "excerpt": "Lukas Podolski, Left Winger (LW), born 04-06-1985 in Gliwice, Poland. 1.80m. FIFA Matches 128, FIFA Goals 49."
+      }
+    ],
+    "notes": "First senior system: Germany, 1. FC Koeln. Overlaps Miroslav Klose's 1998-2016 career (debut difference of 5 years); Podolski's own career only concluded in 2026, the same year this batch was researched.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "freddy-rincon",
+    "name": "Freddy Rincón",
+    "country": "Colombia",
+    "position": "Midfielder",
+    "start": 1986,
+    "end": 2004,
+    "clubs": [
+      "Atlético Buenaventura",
+      "Independiente Santa Fe",
+      "América de Cali",
+      "Palmeiras",
+      "Napoli",
+      "Real Madrid",
+      "Palmeiras",
+      "Corinthians",
+      "Santos",
+      "Cruzeiro",
+      "Corinthians"
+    ],
+    "system": "colombia",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Freddy_Rinc%C3%B3n",
+        "excerpt": "Freddy Rincon ... senior career: Atletico Buenaventura 1986-1988, Independiente Santa Fe 1988-1990, America de Cali 1990-1993, Palmeiras 1993-1995 (with a loan to Napoli 1994-1995), Real Madrid 1995-1997 (with a loan to Palmeiras 1996-1997), Corinthians 1997-2000, Santos 2000, Cruzeiro 2001, Corinthians 2004. Colombia national team 1990-2001, 84 caps, 17 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/10141/Freddy_Rincon.html",
+        "excerpt": "Freddy Rincon, Left Midfielder (LM), born 14-08-1966 in Buenaventura, Colombia. 1.85m. FIFA Matches 84, FIFA Goals 17. Died 13 April 2022."
+      }
+    ],
+    "notes": "First senior system: Colombia, Atletico Buenaventura. A same-system contemporary for Carlos Valderrama, whose Colombian debut (1980) is 6 years earlier and whose 1980-2002 career overlaps Rincon's 1986-2004 span.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "rene-higuita",
+    "name": "René Higuita",
+    "country": "Colombia",
+    "position": "Goalkeeper",
+    "start": 1985,
+    "end": 2010,
+    "clubs": [
+      "Millonarios",
+      "Atlético Nacional",
+      "Real Valladolid",
+      "Atlético Nacional",
+      "Veracruz",
+      "Independiente Medellín",
+      "Real Cartagena",
+      "Atlético Junior",
+      "Deportivo Pereira"
+    ],
+    "system": "colombia",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ren%C3%A9_Higuita",
+        "excerpt": "Rene Higuita ... senior career: Millonarios 1985, Atletico Nacional 1986-1991, Real Valladolid 1991-1992, Atletico Nacional 1993-1997, Veracruz 1997-1998, Independiente Medellin 1999-2000, Real Cartagena 2000-2001, Atletico Junior 2001-2002, Deportivo Pereira 2002-2003 and again 2008-2010. Colombia national team 1987-1999, 68 caps."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13686/Rene_Higuita.html",
+        "excerpt": "Rene Higuita, Goalkeeper (GK), born 28-08-1966 in Medellin, Colombia. 1.76m. FIFA Matches 67, FIFA Goals 3."
+      }
+    ],
+    "notes": "First senior system: Colombia, Millonarios. A same-system contemporary for Carlos Valderrama, overlapping his 1980-2002 career.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "faustino-asprilla",
+    "name": "Faustino Asprilla",
+    "country": "Colombia",
+    "position": "Forward",
+    "start": 1988,
+    "end": 2004,
+    "clubs": [
+      "Cúcuta Deportivo",
+      "Atlético Nacional",
+      "Parma",
+      "Newcastle United",
+      "Parma",
+      "Palmeiras",
+      "Fluminense",
+      "Atlante",
+      "Atlético Nacional",
+      "Universidad de Chile",
+      "Estudiantes de La Plata",
+      "Cortuluá"
+    ],
+    "system": "colombia",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Faustino_Asprilla",
+        "excerpt": "Faustino Asprilla ... senior career: Cucuta Deportivo 1988-1989, Atletico Nacional 1989-1992, Parma 1992-1996, Newcastle United 1996-1998, Parma 1998-1999, Palmeiras 1999-2000, Fluminense 2000-2001, Atlante 2001-2002, Atletico Nacional 2002, Universidad de Chile 2003, Estudiantes de La Plata 2003-2004, Cortulua 2004. Colombia national team 1993-2001, 57 caps, 20 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/12577/Faustino_Asprilla.html",
+        "excerpt": "Faustino Asprilla, Centre Forward (CF), born 10-11-1969 in Tulua, Colombia. 1.76m. FIFA Matches 57, FIFA Goals 20."
+      }
+    ],
+    "notes": "First senior system: Colombia, Cucuta Deportivo. A same-system contemporary for Carlos Valderrama, overlapping his 1980-2002 career.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "leonel-alvarez",
+    "name": "Leonel Álvarez",
+    "country": "Colombia",
+    "position": "Midfielder",
+    "start": 1983,
+    "end": 2004,
+    "clubs": [
+      "Independiente Medellín",
+      "Atlético Nacional",
+      "Real Valladolid",
+      "América de Cali",
+      "Veracruz",
+      "Dallas Burn",
+      "New England Revolution",
+      "Deportivo Pereira",
+      "Deportes Quindío"
+    ],
+    "system": "colombia",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Leonel_%C3%81lvarez_(footballer,_born_1965)",
+        "excerpt": "Leonel Alvarez (full name Leonel de Jesus Alvarez Zuleta) ... played for Independiente Medellin (1983-1986), Atletico Nacional (1987-1989), America de Cali (1990, 1992-1995), Real Valladolid (1990-1992), Dallas Burn (1996, 1998-1999), Veracruz (1997), New England Revolution (1999-2001), Deportivo Pereira (2002), and Deportes Quindio (2003-2004). Colombia national team 1985-1997, 101 caps."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13684/Leonel_Alvarez.html",
+        "excerpt": "Leonel Alvarez, Defensive Midfielder (DM), born 29-07-1965 in Remedios, Colombia. 1.85m. FIFA Matches 101."
+      }
+    ],
+    "notes": "First senior system: Colombia, Independiente Medellin. A same-system contemporary for Carlos Valderrama, overlapping his 1980-2002 career.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "denis-caniza",
+    "name": "Denis Caniza",
+    "country": "Paraguay",
+    "position": "Defender",
+    "start": 1994,
+    "end": 2014,
+    "clubs": [
+      "Olimpia",
+      "Lanús",
+      "Santos Laguna",
+      "Cruz Azul",
+      "Atlas",
+      "Olimpia",
+      "Nacional (Paraguay)",
+      "León",
+      "Nacional (Paraguay)",
+      "Irapuato",
+      "Nacional (Paraguay)",
+      "Sportivo Luqueño",
+      "Rubio Ñu"
+    ],
+    "system": "paraguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Denis_Caniza",
+        "excerpt": "Denis Caniza ... Olimpia Asuncion 1994-1999, Lanus 1999-2001, Santos Laguna 2001-2005, Cruz Azul 2005-2008 (with a loan to Atlas 2006-2007), Olimpia Asuncion 2008-2009, Nacional Asuncion 2009, Leon 2010-2011, Nacional Asuncion 2011, Irapuato 2011, Nacional Asuncion 2012, Sportivo Luqueno 2013, Rubio Nu 2014. Paraguay national team 1996-2010, 100 caps, the only Paraguayan to be selected for four FIFA World Cups (1998, 2002, 2006, 2010)."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5147/Denis_Caniza.html",
+        "excerpt": "Denis Caniza, Centre Back (CB), born 29-08-1974 in Bella Vista, Paraguay. 1.74m. FIFA Matches 100, FIFA Goals 1."
+      }
+    ],
+    "notes": "First senior system: Paraguay, Olimpia - the same club as Roque Santa Cruz's first senior club, corroborating the system. Overlaps Santa Cruz's 1997-2026 career.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "nelson-cuevas",
+    "name": "Nelson Cuevas",
+    "country": "Paraguay",
+    "position": "Forward",
+    "start": 1997,
+    "end": 2012,
+    "clubs": [
+      "Sport Colombia",
+      "Tembetary",
+      "River Plate",
+      "Pachuca",
+      "Club América",
+      "Libertad",
+      "Santos",
+      "Universidad de Chile",
+      "Olimpia",
+      "Albacete",
+      "Puebla",
+      "Cerro Porteño",
+      "Sportivo Luqueño",
+      "Sportivo Carapeguá"
+    ],
+    "system": "paraguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Nelson_Cuevas",
+        "excerpt": "Nelson Cuevas ... Sport Colombia 1997, Tembetary 1997-1998, River Plate 1998-2004 (with a loan to Shanghai COSCO Sanlin 2003), Pachuca 2005-2006, Club America 2006-2007, Libertad 2008, Santos 2008, Universidad de Chile 2009, Olimpia Asuncion 2009-2010, Albacete 2010, Puebla 2011, Cerro Porteno 2011, Sportivo Luqueno 2012, Sportivo Carapegua 2012. Paraguay national team 1999-2007, 41 caps, 6 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5133/Nelson_Cuevas.html",
+        "excerpt": "Nelson Cuevas, striker, born 10-01-1980 in Asuncion, Paraguay. 1.72m. FIFA Matches 41, FIFA Goals 6."
+      }
+    ],
+    "notes": "First senior system: Paraguay, Sport Colombia (a Paraguayan club despite the name). Overlaps Roque Santa Cruz's 1997-2026 career (identical debut year).",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "justo-villar",
+    "name": "Justo Villar",
+    "country": "Paraguay",
+    "position": "Goalkeeper",
+    "start": 1996,
+    "end": 2018,
+    "clubs": [
+      "Sol de América",
+      "Club Libertad",
+      "Newell's Old Boys",
+      "Real Valladolid",
+      "Estudiantes de La Plata",
+      "Club Nacional",
+      "Colo-Colo",
+      "Club Nacional"
+    ],
+    "system": "paraguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Justo_Villar",
+        "excerpt": "Justo Villar ... Sol de America 1996-2000, Club Libertad 2001-2004, Newell's Old Boys 2004-2008, Real Valladolid 2008-2011, Estudiantes de La Plata 2011-2012, Club Nacional 2013, Colo-Colo 2013-2017, Club Nacional 2017-2018. A 22-year senior career, 509 appearances across clubs in Paraguay, Argentina, Spain and Chile. Paraguay national team, 120 caps."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5152/Justo_Villar.html",
+        "excerpt": "Justo Villar, goalkeeper, born 30-06-1977 in Cerrito, Paraguay. 1.80m. FIFA Matches 120."
+      }
+    ],
+    "notes": "First senior system: Paraguay, Sol de America. Overlaps Roque Santa Cruz's 1997-2026 career (debut difference of 1 year).",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "paulo-da-silva",
+    "name": "Paulo da Silva",
+    "country": "Paraguay",
+    "position": "Defender",
+    "start": 1995,
+    "end": 2024,
+    "clubs": [
+      "Atlántida",
+      "Presidente Hayes",
+      "Sport Colombia",
+      "Cerro Porteño",
+      "Perugia",
+      "Lanús",
+      "Venezia",
+      "Cosenza",
+      "Libertad",
+      "Toluca",
+      "Sunderland",
+      "Real Zaragoza",
+      "Pachuca",
+      "Toluca",
+      "Libertad",
+      "12 de Octubre",
+      "Independiente (Paraguay)",
+      "12 de Junio",
+      "Atlántida"
+    ],
+    "system": "paraguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paulo_da_Silva",
+        "excerpt": "Paulo da Silva ... Atlantida 1995, Presidente Hayes 1996, Sport Colombia 1997, Cerro Porteno 1997-1998, Perugia 1998-1999, Lanus 1999-2000, Venezia 2000-2001, Cosenza 2001, Libertad 2002-2003, Toluca 2003-2009, Sunderland 2009-2011, Real Zaragoza 2011-2012, Pachuca 2012-2015 (with a loan return to Toluca 2013-2015), Toluca 2015-2017, Libertad 2017-2021, 12 de Octubre 2021-2022, Independiente 2023, 12 de Junio 2023, Atlantida 2024. Paraguay national team, 148 FIFA caps (150 per the Paraguayan federation)."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5149/Paulo_Da_Silva.html",
+        "excerpt": "Paulo da Silva, Centre Back (CB), born 01-02-1980 in Asuncion, Paraguay. 1.81m. FIFA Matches 148, FIFA Goals 3."
+      }
+    ],
+    "notes": "First senior system: Paraguay, Atlantida. Overlaps Roque Santa Cruz's 1997-2026 career (debut difference of 2 years). His late-career 'Independiente' (2023) is the Paraguayan club, distinguished here from Argentina's Independiente and Colombia's Independiente Medellin/Santa Fe.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
+  },
+  {
+    "id": "socrates",
+    "name": "Sócrates",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "start": 1973,
+    "end": 1989,
+    "clubs": [
+      "Botafogo-SP",
+      "Corinthians",
+      "Fiorentina",
+      "Flamengo",
+      "Santos",
+      "Botafogo-SP"
+    ],
+    "system": "brazil",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/S%C3%B3crates",
+        "excerpt": "Socrates ... senior career: Botafogo-SP 1973-1978 (99 apps), Corinthians 1978-1984 (297 apps), Fiorentina 1984-1985, Flamengo 1986-1987, Santos 1988-1989, Botafogo-SP 1989 (second spell). Brazil national team 1979-1986, 60 caps, 22 goals. He captained Brazil at the 1982 World Cup."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/17936/Socrates.html",
+        "excerpt": "Socrates, Attacking Midfielder, born 19-02-1954 in Belem, Brazil, died 04-12-2011. 1.92m. FIFA Matches 60, FIFA Goals 22."
+      }
+    ],
+    "notes": "First senior system: Brazil, Botafogo-SP. A one-off 2004 appearance for English amateur side Garforth Town (Northern Counties East League) was a publicity exhibition, not in-scope professional senior football, and is excluded, matching this project's existing exclusion of non-competitive/exhibition spells elsewhere in the bank. Overlaps Zico's 1971-1994 career (debut difference of 2 years).",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_ZICO_ERA_SOURCES.md"
+  },
+  {
+    "id": "paulo-roberto-falcao",
+    "name": "Falcão",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "start": 1972,
+    "end": 1986,
+    "clubs": [
+      "Internacional",
+      "Roma",
+      "São Paulo"
+    ],
+    "system": "brazil",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paulo_Roberto_Falc%C3%A3o",
+        "excerpt": "Paulo Roberto Falcao ... Sport Club Internacional 1972-1980 (342 league appearances, 58 goals), A.S. Roma 1980-1985 (107 league appearances, 22 goals), Sao Paulo FC 1985-1986 (12 league appearances). Brazil national team, 28 caps, 6 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/18056/Paulo_Falcao.html",
+        "excerpt": "Paulo Falcao, Centre Midfielder, born 16-10-1953 in Abelardo Luz (SC), Brazil. 1.83m. FIFA Matches 28, FIFA Goals 6."
+      }
+    ],
+    "notes": "First senior system: Brazil, Internacional. Overlaps Zico's 1971-1994 career (debut difference of 1 year). Known mononymously as Falcao in most English-language sources, matching this bank's Pele/Ronaldinho-style single-name display already used for playable roster entries.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_ZICO_ERA_SOURCES.md"
+  },
+  {
+    "id": "careca",
+    "name": "Careca",
+    "country": "Brazil",
+    "position": "Forward",
+    "start": 1978,
+    "end": 1999,
+    "clubs": [
+      "Guarani",
+      "São Paulo",
+      "Napoli",
+      "Kashiwa Reysol",
+      "Santos",
+      "Campinas",
+      "São José-RS"
+    ],
+    "system": "brazil",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Careca",
+        "excerpt": "Careca (Antonio de Oliveira Filho) ... Guarani 1978-1982 (77 apps, 46 goals), Sao Paulo 1983-1987 (67 apps, 54 goals), Napoli 1987-1993 (164 apps, 73 goals), Kashiwa Reysol 1993-1996 (60 apps, 31 goals), Santos 1997, Campinas 1998, Sao Jose-RS 1999. Brazil national team, 64 caps, 30 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13645/Careca_1.html",
+        "excerpt": "Careca, Centre Forward (CF), born 05-10-1960 in Araraquara, Sao Paulo, Brazil. 1.83m. FIFA Matches 60, FIFA Goals 28."
+      }
+    ],
+    "notes": "First senior system: Brazil, Guarani. Overlaps Zico's 1971-1994 career (debut difference of 7 years).",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_ZICO_ERA_SOURCES.md"
+  },
+  {
+    "id": "toninho-cerezo",
+    "name": "Toninho Cerezo",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "start": 1972,
+    "end": 1997,
+    "clubs": [
+      "Atlético Mineiro",
+      "Roma",
+      "Sampdoria",
+      "São Paulo",
+      "Cruzeiro",
+      "Atlético Mineiro"
+    ],
+    "system": "brazil",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Toninho_Cerezo",
+        "excerpt": "Toninho Cerezo ... Atletico Mineiro 1972-1983 (111 apps, 12 goals), Roma 1983-1986 (70 apps, 13 goals), Sampdoria 1986-1992 (145 apps, 14 goals), Sao Paulo 1992-1993 (72 apps, 7 goals), Cruzeiro 1994, further brief spells with Paulista, Sao Paulo again, America Mineiro and Atletico Mineiro through 1997. Brazil national team 1977-1985, 57 caps, 5 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/17938/Toninho_Cerezo.html",
+        "excerpt": "Toninho Cerezo, Right Midfielder (RM), born 21-04-1955 in Belo Horizonte, Brazil. 1.83m. FIFA Matches 57, FIFA Goals 5."
+      }
+    ],
+    "notes": "First senior system: Brazil, Atletico Mineiro. Overlaps Zico's 1971-1994 career (identical 1971/1972 debut era).",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_ZICO_ERA_SOURCES.md"
   }
 ]

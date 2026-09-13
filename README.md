@@ -25,7 +25,7 @@ Download `index.html` and open it in a modern browser for offline guest play. Al
 
 ## Rules
 
-- Sixty playable careers: thirty representing European national teams and thirty representing South American national teams. [Research and audit](DATA_AUDIT.md) document the three expansions and their evidence.
+- Seventy playable careers: thirty-five representing European national teams and thirty-five representing South American national teams. [Research and audit](DATA_AUDIT.md) document the four expansions and their evidence.
 - Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão or All Players from the competition badge. Selection changes the playable pool, not a strict rival filter. Finish the active round first; an account has only one active server round even across devices.
 - Ten shuffled choices in guest/practice play: one correct player and nine distinct eligible rivals, excluding identical ordered club careers (ranked accounts keep the original five: one correct plus four rivals). No difficulty selector: origin-first Hard is automatic.
 - Wrong answers draw from playable players plus **59 researched wrong-answer-only profiles**. Starting domestic football system takes precedence, then contemporary overlap with debuts at most eight years apart, then career similarity with bounded noise. This does not add playable rounds. See [ADR 0003](docs/adr/0003-researched-contemporary-rivals.md).

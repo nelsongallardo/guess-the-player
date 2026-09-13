@@ -3782,5 +3782,647 @@
       "la-liga",
       "brasileirao"
     ]
+  },
+  {
+    "id": "david-villa",
+    "name": "David Villa",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Sporting Gijón B",
+        "years": "2000–2001",
+        "note": "Third-tier reserve side that preceded his Sporting Gijón first-team debut."
+      },
+      {
+        "name": "Sporting Gijón",
+        "years": "2001–2003"
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "2003–2005"
+      },
+      {
+        "name": "Valencia",
+        "years": "2005–2010"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2010–2013"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2013–2014"
+      },
+      {
+        "name": "New York City FC",
+        "years": "2014–2018"
+      },
+      {
+        "name": "Melbourne City",
+        "years": "2014",
+        "note": "Loan from New York City FC; both spells share the 2014 year label because the loan came ahead of New York City FC's own inaugural 2015 MLS season, not concurrent competitive minutes."
+      },
+      {
+        "name": "Vissel Kobe",
+        "years": "2019–2020"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/David_Villa",
+        "title": "David Villa - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/9992/David_Villa.html",
+        "title": "David Villa (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Sporting Gijón B preceded his first-team debut, the same overlapping reserve-side convention used elsewhere in this roster (e.g. Cristiano Ronaldo's Sporting CP/Sporting CP B). The Melbourne City loan predates New York City FC's own 2015 MLS debut; both are labelled 2014, the season in which the loan actually took place.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "alessandro-del-piero",
+    "name": "Alessandro Del Piero",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Padova",
+        "years": "1991–1993"
+      },
+      {
+        "name": "Juventus",
+        "years": "1993–2012"
+      },
+      {
+        "name": "Sydney FC",
+        "years": "2012–2014"
+      },
+      {
+        "name": "Delhi Dynamos",
+        "years": "2014"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
+        "title": "Alessandro Del Piero - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/3362/Alessandro_Del_Piero.html",
+        "title": "Alessandro Del Piero (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Played mainly as a second striker/attacking forward across his career; recorded here under this project's broad Forward category. His final season was a single Indian Super League year at Delhi Dynamos before retirement.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "raul",
+    "name": "Raúl",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Real Madrid C",
+        "years": "1994",
+        "note": "Third-tier reserve side; preceded his Real Madrid B and first-team promotion, both within 1994."
+      },
+      {
+        "name": "Real Madrid B",
+        "years": "1994",
+        "note": "Second-tier reserve side, immediately preceding his first-team debut later the same year."
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1994–2010"
+      },
+      {
+        "name": "Schalke 04",
+        "years": "2010–2012"
+      },
+      {
+        "name": "Al Sadd",
+        "years": "2012–2014"
+      },
+      {
+        "name": "New York Cosmos",
+        "years": "2014–2015"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ra%C3%BAl_Gonz%C3%A1lez",
+        "title": "Raúl González - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6226/Raul.html",
+        "title": "Raúl (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Real Madrid C and Real Madrid B are overlapping reserve steps within his 1994 breakthrough, the same pattern already used for Cristiano Ronaldo's Sporting CP/CP B and Iker Casillas's Real Madrid C/B entries elsewhere in this roster. Known mononymously as Raúl, matching this project's existing single-name entries (Kaká, Xavi, Pelé).",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "michael-owen",
+    "name": "Michael Owen",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Liverpool",
+        "years": "1996–2004"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Newcastle United",
+        "years": "2005–2009"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2009–2012"
+      },
+      {
+        "name": "Stoke City",
+        "years": "2012–2013"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Michael_Owen",
+        "title": "Michael Owen - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2146/Michael_Owen.html",
+        "title": "Michael Owen (Player) | National Football Teams"
+      }
+    ],
+    "notes": "A clean five-club senior career with no reserve or loan spells in scope; his post-2013 media, ownership and horse-racing activities are not playing appearances and are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "miroslav-klose",
+    "name": "Miroslav Klose",
+    "continent": "Europe",
+    "country": "Germany",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "FC Homburg",
+        "years": "1998–1999"
+      },
+      {
+        "name": "1. FC Kaiserslautern",
+        "years": "1999–2004"
+      },
+      {
+        "name": "Werder Bremen",
+        "years": "2004–2007"
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2007–2011"
+      },
+      {
+        "name": "Lazio",
+        "years": "2011–2016"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Miroslav_Klose",
+        "title": "Miroslav Klose - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2559/Miroslav_Klose.html",
+        "title": "Miroslav Klose (Player) | National Football Teams"
+      }
+    ],
+    "notes": "SG Blaubach-Diedelkopf (1987–1998, seventh-division amateur football) was youth/amateur development, not senior professional play, and is excluded; FC Homburg in 1998 is his first professional senior club per the reviewed sources.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "diego-forlan",
+    "name": "Diego Forlán",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Independiente",
+        "years": "1997–2002"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Villarreal",
+        "years": "2004–2007"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2007–2011"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Internacional",
+        "years": "2012–2014"
+      },
+      {
+        "name": "Cerezo Osaka",
+        "years": "2014–2015"
+      },
+      {
+        "name": "Peñarol",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Mumbai City",
+        "years": "2016"
+      },
+      {
+        "name": "Kitchee",
+        "years": "2018"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Diego_Forl%C3%A1n",
+        "title": "Diego Forlán - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/7025/Diego_Forlan.html",
+        "title": "Diego Forlán (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.scmp.com/sport/hong-kong/article/3021853/beautiful-stage-closes-full-great-memories-former-uruguay-and",
+        "title": "'A beautiful stage closes full of great memories' - former Uruguay and Kitchee striker Diego Forlan announces retirement | South China Morning Post"
+      }
+    ],
+    "notes": "His youth football was at Peñarol and Danubio, and further youth development at Independiente (1994–1997) preceded his 1997 senior debut there; no separate senior Danubio spell is asserted. He last played for Kitchee in 2018 and formally announced retirement in August 2019; the gap between the two dates is a stint/announcement boundary, not extended active registration, matching this project's existing convention for other late-career endpoints (e.g. Riquelme, Rooney).",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga",
+      "argentine-primera",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "carlos-valderrama",
+    "name": "Carlos Valderrama",
+    "continent": "South America",
+    "country": "Colombia",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Unión Magdalena",
+        "years": "1980–1984"
+      },
+      {
+        "name": "Millonarios",
+        "years": "1984–1985"
+      },
+      {
+        "name": "Deportivo Cali",
+        "years": "1985–1987"
+      },
+      {
+        "name": "Montpellier",
+        "years": "1987–1991"
+      },
+      {
+        "name": "Real Valladolid",
+        "years": "1991–1992"
+      },
+      {
+        "name": "Independiente Medellín",
+        "years": "1992–1993"
+      },
+      {
+        "name": "Atlético Junior",
+        "years": "1993–1995"
+      },
+      {
+        "name": "Tampa Bay Mutiny",
+        "years": "1995–1997"
+      },
+      {
+        "name": "Deportivo Cali",
+        "years": "1996–1997",
+        "note": "Loan from Tampa Bay Mutiny during MLS's mid-season break, overlapping that registration rather than a permanent transfer away."
+      },
+      {
+        "name": "Miami Fusion",
+        "years": "1997–1999"
+      },
+      {
+        "name": "Tampa Bay Mutiny",
+        "years": "1999–2001",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Colorado Rapids",
+        "years": "2001–2002"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Carlos_Valderrama",
+        "title": "Carlos Valderrama - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13683/Carlos_Valderrama.html",
+        "title": "Carlos Valderrama (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Attacking/central midfielder and playmaker, recorded under this project's broad Midfielder category. The 1996–97 Deportivo Cali spell is a loan return from Tampa Bay Mutiny, not a full transfer, per the reviewed infobox; his two Tampa Bay Mutiny spells frame it on either side.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "la-liga"
+    ]
+  },
+  {
+    "id": "roque-santa-cruz",
+    "name": "Roque Santa Cruz",
+    "continent": "South America",
+    "country": "Paraguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Olimpia",
+        "years": "1997–1999"
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "1999–2007"
+      },
+      {
+        "name": "Bayern Munich II",
+        "years": "2005–2006",
+        "note": "Reserve-team appearances recorded in parallel with his established Bayern Munich first-team place."
+      },
+      {
+        "name": "Blackburn Rovers",
+        "years": "2007–2009"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2009–2013"
+      },
+      {
+        "name": "Blackburn Rovers",
+        "years": "2011",
+        "note": "Loan from Manchester City, overlapping that spell."
+      },
+      {
+        "name": "Real Betis",
+        "years": "2011–2012",
+        "note": "Loan from Manchester City."
+      },
+      {
+        "name": "Málaga",
+        "years": "2012–2013",
+        "note": "Loan from Manchester City."
+      },
+      {
+        "name": "Málaga",
+        "years": "2013–2014",
+        "note": "Permanent move following his loan spell there."
+      },
+      {
+        "name": "Cruz Azul",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Málaga",
+        "years": "2015–2016",
+        "note": "Loan from Cruz Azul; his third spell there."
+      },
+      {
+        "name": "Olimpia",
+        "years": "2016–2021",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Libertad",
+        "years": "2022–2025"
+      },
+      {
+        "name": "Nacional (Paraguay)",
+        "years": "2026–present",
+        "note": "Signed at age 44; corroborated as a genuinely active professional contract by multiple contemporary 2026 news reports, not a stale database entry."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Roque_Santa_Cruz",
+        "title": "Roque Santa Cruz - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5126/Roque_Santa_Cruz.html",
+        "title": "Roque Santa Cruz (Player) | National Football Teams"
+      },
+      {
+        "url": "https://rpp.pe/futbol/futbol-mundial/a-los-44-anos-roque-santa-cruz-ficho-por-el-nacional-de-paraguay-y-disputara-la-copa-sudamericana-noticia-1669887",
+        "title": "A los 44 años, Roque Santa Cruz fichó por el Nacional de Paraguay y disputará la Copa Sudamericana | RPP"
+      }
+    ],
+    "notes": "A long, well-documented journeyman tail is retained in full rather than trimmed for brevity, matching this roster's existing long-tail entries (e.g. Rivaldo, Romário). Nacional here is Club Nacional of Asunción, Paraguay - a different club from this roster's existing 'Nacional' (Club Nacional de Football, Uruguay) - and is displayed as 'Nacional (Paraguay)' to avoid conflating the two. His still-active 2026 Nacional spell is corroborated by independent contemporary reporting (RPP, and separately Depor and CNN en Español), not solely by a database row, mirroring this project's standard for exceptional still-active or very recent entries.",
+    "status": "active",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "zico",
+    "name": "Zico",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Flamengo",
+        "years": "1971–1983"
+      },
+      {
+        "name": "Udinese",
+        "years": "1983–1985"
+      },
+      {
+        "name": "Flamengo",
+        "years": "1985–1989",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Kashima Antlers",
+        "years": "1991–1994",
+        "note": "Signed in 1991 as Sumitomo Metal Industries; the club was renamed Kashima Antlers (chosen by public poll in July 1991) ahead of the J.League's 1993 launch season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Zico_(footballer)",
+        "title": "Zico (footballer) - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/17931/Zico_1.html",
+        "title": "Zico (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.nippon.com/en/japan-topics/g02056/",
+        "title": "Zico: Brazilian Soccer Legend's Deep Connection with Kashima and Japan | Nippon.com"
+      }
+    ],
+    "notes": "Attacking midfielder and free-kick specialist, recorded under this project's broad Midfielder category. His roughly one-year gap between his 1989 Flamengo farewell match and his 1991 move to Japan is a corroborated transitional period, not an omitted club. His post-1994 Kashima roles (technical adviser, later technical director) are coaching/administrative, not playing appearances, and are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "romario",
+    "name": "Romário",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Vasco da Gama",
+        "years": "1985–1988"
+      },
+      {
+        "name": "PSV Eindhoven",
+        "years": "1988–1993"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1993–1995"
+      },
+      {
+        "name": "Flamengo",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Valencia",
+        "years": "1996–1997",
+        "note": "Signed for the 1996/97 season; loaned back to Flamengo mid-season after conflict with coach Luis Aragonés, then returned to Valencia only briefly under Claudio Ranieri before leaving for good."
+      },
+      {
+        "name": "Flamengo",
+        "years": "1997",
+        "note": "Loan from Valencia, overlapping that spell."
+      },
+      {
+        "name": "Flamengo",
+        "years": "1998–1999",
+        "note": "Further loan/return from Valencia from January 1998; Valencia and Flamengo's repeated back-and-forth that season is not split into further nodes, matching Wikipedia's own infobox structure."
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "2000–2002",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Fluminense",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Al Sadd",
+        "years": "2003",
+        "note": "Three-month loan from Fluminense, February-May 2003; returned without registering a goal in Qatar."
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "2005–2006",
+        "note": "Third playing spell."
+      },
+      {
+        "name": "Miami FC",
+        "years": "2006"
+      },
+      {
+        "name": "Adelaide United",
+        "years": "2006",
+        "note": "Loan from Miami FC."
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "2007",
+        "note": "Fourth playing spell."
+      },
+      {
+        "name": "América-RJ",
+        "years": "2009"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rom%C3%A1rio",
+        "title": "Romário - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/10131/Romario.html",
+        "title": "Romário (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.planetfootball.com/nostalgia/ortega-and-romario-at-valencia-discos-great-goals-and-fights-with-ranieri",
+        "title": "Ariel Ortega & Romario at Valencia: Discos, great goals & fights with Ranieri | planetfootball.com"
+      },
+      {
+        "url": "https://www.emol.com/noticias/deportes/2003/06/14/114898/fluminense-derrotado-en-regreso-de-romario.html",
+        "title": "Fluminense derrotado en regreso de Romario | Emol"
+      }
+    ],
+    "notes": "A long, well-documented return-heavy tail is retained in full rather than trimmed for brevity, matching this roster's existing long-tail entries (e.g. Rivaldo). The 1996-99 Valencia/Flamengo sequence follows Wikipedia's own infobox nodes plus contemporary reporting on the Aragonés/Ranieri disputes behind it; Miami FC (2006) is the NASL-era club later renamed Fort Lauderdale Strikers, whose current crest is used per this project's current/source-era crest convention.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
   }
 ]

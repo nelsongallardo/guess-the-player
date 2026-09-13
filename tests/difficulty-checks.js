@@ -32,15 +32,15 @@ async page => {
     ok(!/difficulty|dificultad|Easy, Medium|Fácil, Media/i.test(await page.locator('#rules').innerText()),'Help no longer asks for a difficulty choice');
     await page.keyboard.press('Escape');
     const seen=new Set();
-    for(let i=0;i<60;i++){
+    for(let i=0;i<70;i++){
       const p=await page.evaluate(()=>({id:CareerGame.playerAt(state).id,name:CareerGame.playerAt(state).name,difficulty:CareerGame.roundAt(state).difficulty,options:CareerGame.roundAt(state).options}));
       ok(p.difficulty==='hard','Standard selection applied to every round');seen.add(p.id);
       ok(p.options.length===10&&new Set(p.options).size===10,'Ten unique options');
       await page.getByRole('button',{name:p.name,exact:true}).click();await page.locator('#next').click();
     }
-    ok(seen.size===60,'Full unique deck');
-    ok(await page.evaluate(()=>state.finished&&CareerGame.stats(state).score===6000),'Full playthrough score');
-    // Finishing all 60 marks every player "seen" (ADR 0005), which would
+    ok(seen.size===70,'Full unique deck');
+    ok(await page.evaluate(()=>state.finished&&CareerGame.stats(state).score===7000),'Full playthrough score');
+    // Finishing all 70 marks every player "seen" (ADR 0005), which would
     // otherwise exhaust every competition including "all" - clear the
     // ledger here so this replay click keeps testing only what it always
     // tested (Hard/score reset on replay); the ledger itself gets its own

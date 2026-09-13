@@ -37,3 +37,7 @@ research/*
 !research/DISTRACTOR_NETHERLANDS_EXTRA_SOURCES.md
 !research/distractor-era-gaps.json
 !research/DISTRACTOR_ERA_GAPS_SOURCES.md
+!research/distractor-fourth-expansion.json
+!research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md
+!research/distractor-zico-era.json
+!research/DISTRACTOR_ZICO_ERA_SOURCES.md

@@ -1,6 +1,8 @@
 # Brazil and Italy contemporary distractor-only research
 
-Retrieved 2026-09-12. Exactly **8** wrong-answer-only profiles: **4** Pelé-era Brazil starts, **2** Neymar-era Brazil starts, **2** Italy starts. No playable/runtime roster changes. Country is senior national-team identity; system and region follow the first professional senior club. Broad roles use Defender/Midfielder/Forward. Years follow actual dated senior debuts where established rather than youth or ownership-only membership.
+Retrieved 2026-09-12. Originally **8** wrong-answer-only profiles: **4** Pelé-era Brazil starts, **2** Neymar-era Brazil starts, **2** Italy starts. No playable/runtime roster changes. Country is senior national-team identity; system and region follow the first professional senior club. Broad roles use Defender/Midfielder/Forward. Years follow actual dated senior debuts where established rather than youth or ownership-only membership.
+
+**Update, fourth expansion (2026-09-14):** Alessandro Del Piero was independently researched and added to the *playable* roster (see `DATA_AUDIT.md`'s fourth-expansion section), so his wrong-answer-only profile below is removed from `distractor-brazil-italy.json` (now 7 entries) to avoid a name/id collision between a playable answer and a distractor. His evidence excerpts and citations remain below as a historical record of that original research; Roberto Baggio's Italy-start profile is unaffected and remains in the bank.
 
 ## Research decisions and limitations
 

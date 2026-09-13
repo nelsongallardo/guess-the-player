@@ -1,8 +1,8 @@
-# Full roster re-audit — 11 September 2026 (updated 12 September 2026)
+# Full roster re-audit — 11 September 2026 (updated 12 September 2026, then 14 September 2026)
 
 ## Result and limits
 
-**Current roster: 60 players.** The original 30-player re-audit is followed below by three batches of ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all 60 players; see `research/data-policy.md` for the tagging method.
+**Current roster: 70 players.** The original 30-player re-audit is followed below by four batches of ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all players; see `research/data-policy.md` for the tagging method. The fourth batch (14 September 2026) is five Europe/five South America, continuing the 35/35 continent split and adding this roster's first Germany, Colombia and Paraguay national-team players.
 
 The original **30 unique players** were rechecked against freshly retrieved external career records, with at least two distinct source URLs per player and independent corroboration. This is a historical-data audit, not a claim that passing software tests proves the facts. The original requested scope remains **professional senior clubs**, including reserve sides competing in the adult league pyramid; youth teams, closed reserve leagues, amateur post-retirement football and coaching jobs are excluded.
 
@@ -17,6 +17,7 @@ The app now labels the timeline **SENIOR CLUB CAREER / CARRERA SÉNIOR**, and bo
 - Ronaldinho: announced Ravenna signing is supported; completed federation registration and competitive return are not verified. It remains a clearly tagged signing exception, not a verified match span.
 - Date ranges are career-stint labels, not a match-by-match calendar. Endpoints can represent departure or retirement after the last match; Neymar, Rooney, Tevez and Riquelme have explicit distinctions.
 - Roberto Carlos: the friendly-only Atlético Mineiro tour loan is an explicitly marked exception, not competitive league football.
+- Fourth expansion: Alessandro Del Piero was originally researched only as a third-expansion wrong-answer-bank profile; independently re-researched and promoted to the playable roster here, his bank profile is removed to avoid a name/id collision (see `research/DISTRACTOR_BRAZIL_ITALY_SOURCES.md`). Roque Santa Cruz's still-active 2026 Nacional (Paraguay) signing at age 44 is corroborated by independent contemporary news reporting, not only a database row, mirroring the Ronaldinho/Ravenna precedent for exceptional still-active entries; "Nacional (Paraguay)" is displayed distinctly from this roster's existing "Nacional" (Uruguay) to avoid conflating two different clubs of the same common name. Romário's complex 1996–99 Valencia/Flamengo back-and-forth follows Wikipedia's own infobox node structure rather than resolving every day of the dispute. Germany, Colombia and Paraguay are new career-origin systems for this roster's distractor bank; fourteen further wrong-answer-only contemporary profiles (four Germany, four Colombia, four Paraguay, plus four earlier-era Brazil profiles for Zico) were researched to give every new player at least four same-system, overlapping-career rivals — see `research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md` and `research/DISTRACTOR_ZICO_ERA_SOURCES.md`.
 
 ## Player-by-player audit
 
@@ -809,6 +810,88 @@ Corroborated: the full 15-club chronology, including the late-career Bunyodkor, 
 
 Reviewed sources: [195], [196].
 
+## Fourth roster expansion — 10 additional players
+
+### David Villa
+
+**Spain · Forward.** Sporting Gijón B (2000–2001) → Sporting Gijón (2001–2003) → Real Zaragoza (2003–2005) → Valencia (2005–2010) → Barcelona (2010–2013) → Atlético Madrid (2013–2014) → New York City FC (2014–2018) → Melbourne City (2014) → Vissel Kobe (2019–2020).[197][198]
+
+Corroborated: Wikipedia's infobox chronology (Sporting Gijón B through Vissel Kobe) is independently corroborated by National Football Teams for his national-team status; no additional in-scope club or conflicting evidence was found. The Sporting Gijón B reserve step and the Melbourne City loan overlap are both explicit in the source table, not inferred.[197][198]
+
+Reviewed sources: [197], [198].
+
+### Alessandro Del Piero
+
+**Italy · Forward.** Padova (1991–1993) → Juventus (1993–2012) → Sydney FC (2012–2014) → Delhi Dynamos (2014).[199][200]
+
+Corroborated: Padova, Juventus, Sydney FC and Delhi Dynamos are corroborated across both sources; no additional professional club was established. Del Piero was originally researched only as a wrong-answer-bank profile for the third expansion's Italy cohort; that profile is retired from the bank now that he is independently verified and promoted to the playable roster.[199][200]
+
+Reviewed sources: [199], [200].
+
+### Raúl
+
+**Spain · Forward.** Real Madrid C (1994) → Real Madrid B (1994) → Real Madrid (1994–2010) → Schalke 04 (2010–2012) → Al Sadd (2012–2014) → New York Cosmos (2014–2015).[201][202]
+
+Corroborated: The Real Madrid C/B reserve sequence preceding his 1994 first-team debut, and the later Schalke 04/Al Sadd/New York Cosmos spells, are corroborated by both sources; no additional professional club was established.[201][202]
+
+Reviewed sources: [201], [202].
+
+### Michael Owen
+
+**England · Forward.** Liverpool (1996–2004) → Real Madrid (2004–2005) → Newcastle United (2005–2009) → Manchester United (2009–2012) → Stoke City (2012–2013).[203][204]
+
+Corroborated: A clean five-club chronology (Liverpool, Real Madrid, Newcastle United, Manchester United, Stoke City) is corroborated by both sources; no reserve, loan or additional professional club was established.[203][204]
+
+Reviewed sources: [203], [204].
+
+### Miroslav Klose
+
+**Germany · Forward.** FC Homburg (1998–1999) → 1. FC Kaiserslautern (1999–2004) → Werder Bremen (2004–2007) → Bayern Munich (2007–2011) → Lazio (2011–2016).[205][206]
+
+Corroborated: FC Homburg as the first professional senior club, followed by Kaiserslautern, Werder Bremen, Bayern Munich and Lazio, is corroborated by both sources. His earlier Blaubach-Diedelkopf football is seventh-division amateur/youth football, not asserted as an in-scope professional club.[205][206]
+
+Reviewed sources: [205], [206].
+
+### Diego Forlán
+
+**Uruguay · Forward.** Independiente (1997–2002) → Manchester United (2002–2004) → Villarreal (2004–2007) → Atlético Madrid (2007–2011) → Inter Milan (2011–2012) → Internacional (2012–2014) → Cerezo Osaka (2014–2015) → Peñarol (2015–2016) → Mumbai City (2016) → Kitchee (2018).[207][208]
+
+Corroborated: Independiente through Kitchee is corroborated by Wikipedia and National Football Teams; the South China Morning Post's contemporary retirement report independently corroborates the August 2019 retirement announcement following his final 2018 Kitchee appearances.[207][208]
+
+Reviewed sources: [207], [208].
+
+### Carlos Valderrama
+
+**Colombia · Midfielder.** Unión Magdalena (1980–1984) → Millonarios (1984–1985) → Deportivo Cali (1985–1987) → Montpellier (1987–1991) → Real Valladolid (1991–1992) → Independiente Medellín (1992–1993) → Atlético Junior (1993–1995) → Tampa Bay Mutiny (1995–1997) → Deportivo Cali (1996–1997) → Miami Fusion (1997–1999) → Tampa Bay Mutiny (1999–2001) → Colorado Rapids (2001–2002).[209][210]
+
+Corroborated: The twelve-club chronology, including the Deportivo Cali loan return framed by his two Tampa Bay Mutiny spells, is corroborated by both sources; no additional professional club was established.[209][210]
+
+Reviewed sources: [209], [210].
+
+### Roque Santa Cruz
+
+**Paraguay · Forward.** Olimpia (1997–1999) → Bayern Munich (1999–2007) → Bayern Munich II (2005–2006) → Blackburn Rovers (2007–2009) → Manchester City (2009–2013) → Blackburn Rovers (2011) → Real Betis (2011–2012) → Málaga (2012–2013) → Málaga (2013–2014) → Cruz Azul (2015–2016) → Málaga (2015–2016) → Olimpia (2016–2021) → Libertad (2022–2025) → Nacional (Paraguay) (2026–present).[211][212]
+
+Corroborated: The full journeyman chronology through his 2026 Nacional (Paraguay) signing is corroborated by Wikipedia and National Football Teams; the RPP report independently corroborates that the 2026 Nacional spell is a genuinely active professional contract, not a stale or erroneous database row.[211][212]
+
+Reviewed sources: [211], [212].
+
+### Zico
+
+**Brazil · Midfielder.** Flamengo (1971–1983) → Udinese (1983–1985) → Flamengo (1985–1989) → Kashima Antlers (1991–1994).[213][214]
+
+Corroborated: Flamengo, Udinese, Flamengo (second spell) and Kashima Antlers are corroborated by both sources; the Nippon.com feature independently corroborates the 1991 Sumitomo Metal Industries signing and the club's 1991/1993 renaming to Kashima Antlers.[213][214]
+
+Reviewed sources: [213], [214].
+
+### Romário
+
+**Brazil · Forward.** Vasco da Gama (1985–1988) → PSV Eindhoven (1988–1993) → Barcelona (1993–1995) → Flamengo (1995–1996) → Valencia (1996–1997) → Flamengo (1997) → Flamengo (1998–1999) → Vasco da Gama (2000–2002) → Fluminense (2002–2004) → Al Sadd (2003) → Vasco da Gama (2005–2006) → Miami FC (2006) → Adelaide United (2006) → Vasco da Gama (2007) → América-RJ (2009).[215][216]
+
+Corroborated: The fifteen-node return-heavy chronology is corroborated by Wikipedia and National Football Teams; PlanetFootball's contemporary feature independently corroborates the 1996-99 Valencia/Flamengo back-and-forth, and Emol's contemporary report independently corroborates the 2003 Al Sadd loan and scoreless Qatar spell.[215][216]
+
+Reviewed sources: [215], [216].
+
 Sources:
 [1] https://argentina.as.com/argentina/2021/12/02/futbol/1638473602_945874.html
 [4] https://en.wikipedia.org/wiki/Javier_Zanetti
@@ -1004,3 +1087,23 @@ Sources:
 [194] https://www.national-football-teams.com/player/1401/Marcelo_Salas.html
 [195] https://en.wikipedia.org/wiki/Rivaldo
 [196] https://www.national-football-teams.com/player/1023/Rivaldo_1.html
+[197] https://en.wikipedia.org/wiki/David_Villa
+[198] https://www.national-football-teams.com/player/9992/David_Villa.html
+[199] https://en.wikipedia.org/wiki/Alessandro_Del_Piero
+[200] https://www.national-football-teams.com/player/3362/Alessandro_Del_Piero.html
+[201] https://en.wikipedia.org/wiki/Ra%C3%BAl_Gonz%C3%A1lez
+[202] https://www.national-football-teams.com/player/6226/Raul.html
+[203] https://en.wikipedia.org/wiki/Michael_Owen
+[204] https://www.national-football-teams.com/player/2146/Michael_Owen.html
+[205] https://en.wikipedia.org/wiki/Miroslav_Klose
+[206] https://www.national-football-teams.com/player/2559/Miroslav_Klose.html
+[207] https://en.wikipedia.org/wiki/Diego_Forl%C3%A1n
+[208] https://www.national-football-teams.com/player/7025/Diego_Forlan.html
+[209] https://en.wikipedia.org/wiki/Carlos_Valderrama
+[210] https://www.national-football-teams.com/player/13683/Carlos_Valderrama.html
+[211] https://en.wikipedia.org/wiki/Roque_Santa_Cruz
+[212] https://www.national-football-teams.com/player/5126/Roque_Santa_Cruz.html
+[213] https://en.wikipedia.org/wiki/Zico_(footballer)
+[214] https://www.national-football-teams.com/player/17931/Zico_1.html
+[215] https://en.wikipedia.org/wiki/Rom%C3%A1rio
+[216] https://www.national-football-teams.com/player/10131/Romario.html

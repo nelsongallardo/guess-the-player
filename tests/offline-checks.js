@@ -9,7 +9,7 @@ async page => {
     file.on('request',request=>{if(/^https?:/.test(request.url()))requests.push(request.url());});
     await file.goto(__FILE_URL__);
     ok(await file.locator('#options button').count()===10,'Single file loads with browser network offline');
-    for(let i=0;i<60;i++){
+    for(let i=0;i<70;i++){
       const s=await file.evaluate(()=>({id:CareerGame.playerAt(state).id,name:CareerGame.playerAt(state).name,index:state.roundIndex,options:CareerGame.roundAt(state).options,crests:CareerGame.playerAt(state).clubCrests}));
       ok(s.index===i&&!seen.has(s.id),'Offline deck order');seen.add(s.id);s.crests.forEach(u=>crests.add(u));
       const decoded=await file.evaluate(async()=>{await Promise.all([...document.images].map(image=>image.decode()));return [...document.images].every(image=>image.naturalWidth>0&&!image.hidden);});ok(decoded,'Offline crest decoding');
@@ -17,8 +17,8 @@ async page => {
       await file.locator('#options button').nth(s.options.indexOf(s.name)).click();
       await file.locator('#next').click();
     }
-    // Round 0 used all three available hints (100 x 0.4 = 40); the other 59 first-try, no-hint wins score 100 each.
-    ok(await file.evaluate(()=>state.finished&&CareerGame.stats(state).score===5940&&CareerGame.stats(state).streak===60),'All 60 offline rounds complete');
+    // Round 0 used all three available hints (100 x 0.4 = 40); the other 69 first-try, no-hint wins score 100 each.
+    ok(await file.evaluate(()=>state.finished&&CareerGame.stats(state).score===6940&&CareerGame.stats(state).streak===70),'All 70 offline rounds complete');
     await file.reload();ok(await file.locator('#summary-panel').isVisible(),'File URL saves/reloads in Chromium');
     await isolated.addInitScript(()=>{for(const name of ['localStorage','sessionStorage'])Object.defineProperty(window,name,{configurable:true,get(){throw new DOMException('Storage blocked for test','SecurityError');}});});
     await file.reload();ok((await file.locator('#save-status').textContent()).includes('STORAGE UNAVAILABLE'),'Denied storage reported, not fatal');

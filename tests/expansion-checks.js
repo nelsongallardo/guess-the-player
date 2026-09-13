@@ -18,15 +18,15 @@ async page => {
     ok(await page.evaluate(n=>state.finished&&CareerGame.stats(state).score===n,expectedScore),'Legacy completes original length');
     ok((await page.locator('#summary-caption').textContent()).includes(`${total} / ${total}`),'Legacy recap denominator');
     await page.locator('#replay').click();
-    ok(await page.evaluate(()=>state.deck.length===60&&state.difficulty==='hard'),'Replay upgrades to 60 and preserves level');
-    ok(await page.locator('#round-number').textContent()==='01 / 60','New round total');
-    ok(await page.locator('#progress').getAttribute('max')==='60','New progress denominator');
-    results.push({legacyRoundCount:total,newRoundCount:60,exactSavePreserved:true});
+    ok(await page.evaluate(()=>state.deck.length===70&&state.difficulty==='hard'),'Replay upgrades to 70 and preserves level');
+    ok(await page.locator('#round-number').textContent()==='01 / 70','New round total');
+    ok(await page.locator('#progress').getAttribute('max')==='70','New progress denominator');
+    results.push({legacyRoundCount:total,newRoundCount:70,exactSavePreserved:true});
   }
   const additions40=await page.evaluate(old=>PLAYERS.filter(p=>!old.deck.includes(p.id)).map(p=>p.id),saves[1]);
-  ok(additions40.length===20&&additions40.includes('javier-saviola')&&additions40.includes('claudio-pizarro')&&additions40.includes('rivaldo')&&additions40.includes('diego-maradona'),'Both later batches playable from a 40-player save');
+  ok(additions40.length===30&&additions40.includes('javier-saviola')&&additions40.includes('claudio-pizarro')&&additions40.includes('rivaldo')&&additions40.includes('diego-maradona')&&additions40.includes('david-villa')&&additions40.includes('romario'),'Later batches playable from a 40-player save');
   const additions50=await page.evaluate(old=>PLAYERS.filter(p=>!old.deck.includes(p.id)).map(p=>p.id),saves[2]);
-  ok(additions50.length===10&&additions50.includes('rivaldo')&&additions50.includes('diego-maradona')&&additions50.includes('cafu'),'All ten third-batch players playable from a 50-player save');
+  ok(additions50.length===20&&additions50.includes('rivaldo')&&additions50.includes('diego-maradona')&&additions50.includes('cafu')&&additions50.includes('david-villa')&&additions50.includes('romario'),'Third and fourth batch players playable from a 50-player save');
   const examples=[];
   await page.setViewportSize({width:375,height:667});
   for(const id of ['rivaldo','diego-maradona']){

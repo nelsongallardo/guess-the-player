@@ -1,0 +1,90 @@
+[
+  {
+    "id": "socrates",
+    "name": "Sócrates",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "start": 1973,
+    "end": 1989,
+    "clubs": ["Botafogo-SP", "Corinthians", "Fiorentina", "Flamengo", "Santos", "Botafogo-SP"],
+    "system": "brazil",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/S%C3%B3crates",
+        "excerpt": "Socrates ... senior career: Botafogo-SP 1973-1978 (99 apps), Corinthians 1978-1984 (297 apps), Fiorentina 1984-1985, Flamengo 1986-1987, Santos 1988-1989, Botafogo-SP 1989 (second spell). Brazil national team 1979-1986, 60 caps, 22 goals. He captained Brazil at the 1982 World Cup."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/17936/Socrates.html",
+        "excerpt": "Socrates, Attacking Midfielder, born 19-02-1954 in Belem, Brazil, died 04-12-2011. 1.92m. FIFA Matches 60, FIFA Goals 22."
+      }
+    ],
+    "notes": "First senior system: Brazil, Botafogo-SP. A one-off 2004 appearance for English amateur side Garforth Town (Northern Counties East League) was a publicity exhibition, not in-scope professional senior football, and is excluded, matching this project's existing exclusion of non-competitive/exhibition spells elsewhere in the bank. Overlaps Zico's 1971-1994 career (debut difference of 2 years)."
+  },
+  {
+    "id": "paulo-roberto-falcao",
+    "name": "Falcão",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "start": 1972,
+    "end": 1986,
+    "clubs": ["Internacional", "Roma", "São Paulo"],
+    "system": "brazil",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paulo_Roberto_Falc%C3%A3o",
+        "excerpt": "Paulo Roberto Falcao ... Sport Club Internacional 1972-1980 (342 league appearances, 58 goals), A.S. Roma 1980-1985 (107 league appearances, 22 goals), Sao Paulo FC 1985-1986 (12 league appearances). Brazil national team, 28 caps, 6 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/18056/Paulo_Falcao.html",
+        "excerpt": "Paulo Falcao, Centre Midfielder, born 16-10-1953 in Abelardo Luz (SC), Brazil. 1.83m. FIFA Matches 28, FIFA Goals 6."
+      }
+    ],
+    "notes": "First senior system: Brazil, Internacional. Overlaps Zico's 1971-1994 career (debut difference of 1 year). Known mononymously as Falcao in most English-language sources, matching this bank's Pele/Ronaldinho-style single-name display already used for playable roster entries."
+  },
+  {
+    "id": "careca",
+    "name": "Careca",
+    "country": "Brazil",
+    "position": "Forward",
+    "start": 1978,
+    "end": 1999,
+    "clubs": ["Guarani", "São Paulo", "Napoli", "Kashiwa Reysol", "Santos", "Campinas", "São José-RS"],
+    "system": "brazil",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Careca",
+        "excerpt": "Careca (Antonio de Oliveira Filho) ... Guarani 1978-1982 (77 apps, 46 goals), Sao Paulo 1983-1987 (67 apps, 54 goals), Napoli 1987-1993 (164 apps, 73 goals), Kashiwa Reysol 1993-1996 (60 apps, 31 goals), Santos 1997, Campinas 1998, Sao Jose-RS 1999. Brazil national team, 64 caps, 30 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13645/Careca_1.html",
+        "excerpt": "Careca, Centre Forward (CF), born 05-10-1960 in Araraquara, Sao Paulo, Brazil. 1.83m. FIFA Matches 60, FIFA Goals 28."
+      }
+    ],
+    "notes": "First senior system: Brazil, Guarani. Overlaps Zico's 1971-1994 career (debut difference of 7 years)."
+  },
+  {
+    "id": "toninho-cerezo",
+    "name": "Toninho Cerezo",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "start": 1972,
+    "end": 1997,
+    "clubs": ["Atlético Mineiro", "Roma", "Sampdoria", "São Paulo", "Cruzeiro", "Atlético Mineiro"],
+    "system": "brazil",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Toninho_Cerezo",
+        "excerpt": "Toninho Cerezo ... Atletico Mineiro 1972-1983 (111 apps, 12 goals), Roma 1983-1986 (70 apps, 13 goals), Sampdoria 1986-1992 (145 apps, 14 goals), Sao Paulo 1992-1993 (72 apps, 7 goals), Cruzeiro 1994, further brief spells with Paulista, Sao Paulo again, America Mineiro and Atletico Mineiro through 1997. Brazil national team 1977-1985, 57 caps, 5 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/17938/Toninho_Cerezo.html",
+        "excerpt": "Toninho Cerezo, Right Midfielder (RM), born 21-04-1955 in Belo Horizonte, Brazil. 1.83m. FIFA Matches 57, FIFA Goals 5."
+      }
+    ],
+    "notes": "First senior system: Brazil, Atletico Mineiro. Overlaps Zico's 1971-1994 career (identical 1971/1972 debut era)."
+  }
+]

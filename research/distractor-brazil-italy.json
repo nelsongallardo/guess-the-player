@@ -192,41 +192,6 @@
     "notes": "Neymar-era Brazil-start peer. São Paulo first-team debut in 2010, followed by PSG, Tottenham and actual São Paulo return in 2023. Juventus-SP/Corinthians/São Paulo youth and Tottenham closed U21 football excluded. End 2026 is latest observed professional playing year, NOT retirement or predicted contract end: Wikipedia reports a current São Paulo spell and 2026 appearances; Soccerbase independently lists 2026 matches. Snapshot 2026-09-12, not live verification of every subsequent match."
   },
   {
-    "id": "alessandro-del-piero",
-    "name": "Alessandro Del Piero",
-    "country": "Italy",
-    "position": "Forward",
-    "start": 1992,
-    "end": 2014,
-    "clubs": [
-      "Padova",
-      "Juventus",
-      "Sydney FC",
-      "Delhi Dynamos"
-    ],
-    "system": "italy",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
-        "excerpt": "| Senior career\\* |\n| Years | **Team** | **Apps** | **(Gls)** |\n| 1991–1993 | [Padova](https://en.wikipedia.org/wiki/Calcio_Padova \"Calcio Padova\") | 14 | (1) |\n| 1993–2012 | [Juventus](https://en.wikipedia.org/wiki/Juventus_FC \"Juventus FC\") | 513 | (208) |\n| 2012–2014 | [Sydney FC](https://en.wikipedia.org/wiki/Sydney_FC \"Sydney FC\") | 48 | (24) |\n| 2014 | [Delhi Dynamos](https://en.wikipedia.org/wiki/Odisha_FC \"Odisha FC\") | 10 | (1) |\n| Total |  | **585** | **(234)** |"
-      },
-      {
-        "url": "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
-        "excerpt": "He joined the senior side during the [1991–92 season](https://en.wikipedia.org/wiki/1991%E2%80%9392_Serie_B \"1991–92 Serie B\"), at the age of 16, and at the age of 17, he made his debut in [Serie B](https://en.wikipedia.org/wiki/Serie_B \"Serie B\") against [Messina](https://en.wikipedia.org/wiki/Messina_F.C. \"Messina F.C.\"), under manager Mauro Sandreani, on 15 March 1992, coming on as a substitute for Roberto Putelli."
-      },
-      {
-        "url": "http://archivio.padovacalcio.it/22-11-1992-padova-ternana-delpiero-primo-gol/",
-        "excerpt": "Te Ricordito? 22/11/1992 Padova-Ternana 5-0 Primo gol tra i professionisti di Alessandro Del Piero"
-      },
-      {
-        "url": "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
-        "excerpt": "he retired in 2014, after a season with [Delhi Dynamos FC](https://en.wikipedia.org/wiki/Delhi_Dynamos_FC \"Delhi Dynamos FC\") in the [Indian Super League](https://en.wikipedia.org/wiki/Indian_Super_League \"Indian Super League\")."
-      }
-    ],
-    "notes": "Italy-start peer. Start 1992 is the documented professional debut on 15 March 1992, not the infobox senior-squad membership label 1991 or youth at San Vendemiano. Padova independently confirms professional first-team play in November 1992. Wikipedia gives final senior playing spell Delhi Dynamos in 2014 and retirement in 2014; the second source does not independently establish the endpoint. Preserve historical Delhi Dynamos name, not its later Odisha identity."
-  },
-  {
     "id": "roberto-baggio",
     "name": "Roberto Baggio",
     "country": "Italy",
