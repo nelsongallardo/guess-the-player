@@ -27,7 +27,7 @@ test('Useful visible explanation and semantic heading exist without JS', () => {
   assert.match(markup, /Un juego gratis para adivinar jugadores de fútbol/);
   assert.match(markup, /Cómo jugar a derabona/);
   assert.match(markup, /sin crear una cuenta/);
-  assert.match(markup, /Liga de Campeones/);
+  assert.match(markup, /Champions League/);
   assert.doesNotMatch(markup, /<meta[^>]*http-equiv="refresh"/i);
 });
 

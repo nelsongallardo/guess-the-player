@@ -16,6 +16,18 @@ The mark is embedded directly into `index.html`. The hosted site exposes a crawl
 
 Use the badge alone for small icons. Keep the wordmark readable, leave clear space around the logo, and omit the signature at small sizes. Do not replace the rabona pose with a generic ball, club crest or national-team badge. The wordmark uses locally available Arial Black/Arial; no external font request is made.
 
+## Competition logos
+
+The competition picker and the masthead badge show each competition's real, current logo next to its name (`COMPETITION_LOGOS` in `index.html`, a small script block separate from `CREST_ASSETS`). Sourced as public SVG files from Wikipedia/Wikimedia Commons, embedded as base64 data URLs for offline play, same rationale as club crests: current/official-source artwork, not historical or fictional. Original source URLs are kept for provenance:
+
+- Champions League: [UEFA Champions League](https://en.wikipedia.org/wiki/UEFA_Champions_League)
+- Premier League: [Premier League](https://en.wikipedia.org/wiki/Premier_League)
+- La Liga: [La Liga](https://en.wikipedia.org/wiki/La_Liga)
+- Argentine Primera División: [Argentine Primera División](https://en.wikipedia.org/wiki/Argentine_Primera_Divisi%C3%B3n)
+- Brasileirão: [Campeonato Brasileiro Série A](https://en.wikipedia.org/wiki/Campeonato_Brasileiro_S%C3%A9rie_A)
+
+"All Players" has no league logo; the picker keeps its plain layout there. Competition trademarks remain their owners'; this is an unofficial fan game.
+
 ## Link preview (Spanish)
 
 - Editable source: [social card SVG](assets/derabona-social-es-v1.svg). Hosted export: [1200 × 630 PNG](assets/derabona-social-es-v1.png). Reuses the existing logo, paper/ink/celeste palette and local fonts.
