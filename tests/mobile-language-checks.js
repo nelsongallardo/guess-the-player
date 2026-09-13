@@ -41,7 +41,8 @@ async page => {
   ok(await page.locator('html').getAttribute('lang')==='es','Spanish HTML language');
   ok(await page.locator('#question').textContent()==='¿Quién es este jugador?','Spanish question');
   const expected=await page.evaluate(()=>hintValues(CareerGame.playerAt(state)));
-  for(let h=0;h<2;h++){await page.locator('#hint').click();ok((await page.locator('#hints li').nth(h).textContent()).endsWith(expected[h]),'Spanish hint order and value');}
+  for(let h=0;h<3;h++){await page.locator('#hint').click();ok((await page.locator('#hints li').nth(h).textContent()).endsWith(expected[h]),'Spanish hint order and value');}
+  ok(await page.locator('.club-years').first().isVisible(),'Third hint reveals club years in Spanish too');
   const wrong=await page.evaluate(()=>CareerGame.roundAt(state).options.find(n=>n!==CareerGame.playerAt(state).name));
   await page.locator('#options button').filter({hasText:wrong}).click();
   ok((await page.locator('#feedback').textContent()).includes('Quedan 2 intentos'),'Spanish wrong-answer feedback');

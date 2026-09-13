@@ -14,7 +14,13 @@ async page => {
     await page.locator('#hint').click();const items=await page.locator('#hints li').allTextContents();
     ok(items[h].endsWith(first.hintValues[h]),`Hint ${h+1} order/value`);ok((await view()).guesses.length===0,'Hints cost no attempts');
   }
-  ok(await page.locator('#hint').isDisabled(),'Hint disabled after second reveal (initials hint removed)');
+  // Third hint reveals each club's years in the career timeline instead of a
+  // single scalar value (unlike country/position, years differ per club).
+  ok(!await page.locator('.club-years').first().isVisible(),'Years hidden in the timeline before the third hint');
+  await page.locator('#hint').click();
+  ok(await page.locator('.club-years').first().isVisible(),'Third hint reveals every club\'s years in the timeline');
+  ok((await view()).guesses.length===0,'Third hint also costs no attempts');
+  ok(await page.locator('#hint').isDisabled(),'Hint disabled after third reveal (initials hint removed)');
   const wrong=first.options.filter(n=>n!==first.name);
   await choose(wrong[0]);
   ok(await page.locator('#options .wrong:disabled').count()===1,'Wrong answer red and disabled');
@@ -22,7 +28,7 @@ async page => {
   await page.reload();ok(await page.evaluate(()=>localStorage.getItem('touchline.career.v1'))===stored,'Reload preserves exact state/options/guesses/hints');
   await page.locator('#options .wrong').evaluate(button=>button.click());ok((await view()).guesses.length===1,'Disabled answer cannot spend a second attempt');
   await choose(wrong[1]);ok((await page.locator('#attempt-text').textContent()).includes('1 attempt'),'One attempt remains');
-  await choose(first.name);ok((await view()).stats.score===60,'Third-attempt win with both hints revealed scores 60 (100 x 0.6 hint multiplier; hints capped at 2)');
+  await choose(first.name);ok((await view()).stats.score===40,'Third-attempt win with all three hints revealed scores 40 (100 x 0.4 hint multiplier; hints capped at 3)');
   ok(await page.locator('#options .correct.goal').count()===1,'Correct answer green with success animation');
   ok(await page.locator('#options button:disabled').count()===5,'Round locked after win');
   ok(await page.locator('#next').isVisible(),'Next visible after win');ok(await page.evaluate(()=>document.activeElement.id)==='next','Focus moves to Next');
@@ -30,7 +36,7 @@ async page => {
   await page.locator('#next').evaluate(button=>{button.click();button.click();});ok((await view()).index===1,'Rapid double Next cannot skip live round');
   ok(await page.locator('#timeline-scroll').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'Mobile Next reveals new career instead of retaining old bottom scroll');
   const second=await view();for(const name of second.options.filter(n=>n!==second.name).slice(0,3))await choose(name);
-  const lost=await view();ok(lost.result==='lost'&&lost.stats.score===60&&lost.stats.streak===0,'Three misses reset streak but retain points');
+  const lost=await view();ok(lost.result==='lost'&&lost.stats.score===40&&lost.stats.streak===0,'Three misses reset streak but retain points');
   ok(await page.locator('#options .wrong:disabled').count()===3,'Three incorrect answers disabled');
   ok((await page.locator('#feedback').textContent()).includes(second.name),'Loss reveals correct answer');ok(await page.locator('#next').isVisible(),'Next visible after loss');
   checks.push('hints, attempts, third-attempt win, disabled repeats, loss, score/streak, focus, persistence, double-click guards');
