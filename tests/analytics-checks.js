@@ -7,7 +7,7 @@ async page => {
   p.on('pageerror',e=>errors.push(e.message));
   await ctx.route('https://derabona.club/**',async route=>{const path=route.request().url().replace(/^https:\/\/[^/]+/,'').split('?')[0];if(path==='/'||path==='/index.html')return route.fulfill({contentType:'text/html',body:source});return route.fulfill({response:await p.request.get('http://127.0.0.1:4173'+path)});});
   await ctx.route(/https:\/\/[^/]*posthog\.com\//,async route=>{
-   requests.push(route.request().url());
+   requests.push({url:route.request().url(),method:route.request().method()});
    if(blocked)return route.abort('blockedbyclient');
    if(route.request().url().replace(/^https:\/\/[^/]+/,'').split('?')[0]==='/static/array.js')return route.continue();
    return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({status:1})});
@@ -30,7 +30,9 @@ async page => {
    await p.locator('#hint').click();
    const correct=await p.evaluate(()=>CareerGame.playerAt(state).name);await p.getByRole('button',{name:correct,exact:true}).click();
    await p.locator('#language').selectOption('en');
+   await p.waitForLoadState('networkidle');
    const events=await p.evaluate(()=>checkedEvents);
+   assert(requests.filter(r=>r.method==='POST').length>=events.length,'Events must reach SDK transport, not merely before_send');
    for(const name of ['hint_used','answer_submitted','round_completed','language_changed'])assert(events.some(e=>e.event===name),'Captured '+name);
    assert(events.every(e=>e.properties.$current_url==='https://derabona.club/'),'No query or fragment capture');
    assert(events.every(e=>!('$referrer'in e.properties)&&!('$initial_referrer'in e.properties)),'No full referrer URL');

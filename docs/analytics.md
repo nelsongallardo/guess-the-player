@@ -18,6 +18,7 @@ The owner selected **consent-first analytics with persistent anonymous identity*
 - File URLs, localhost/noncanonical hosts, an offline network status, Global Privacy Control and Do Not Track suppress collection. SDK/network/storage failures must not affect answers or progress.
 - Autocapture, pageleave capture, recordings, surveys, heatmaps, automatic exceptions, performance capture and feature-flag evaluation are disabled. Only explicit events below are allowed. Person profiles are never created.
 - Project-side IP anonymization is enabled. SDK `ip:false` and `$geoip_disable:true` further suppress IP/geolocation event enrichment. PostHog still necessarily receives a network request after consent; do not describe this as collecting no personal data or as a blanket legal-compliance guarantee.
+- Event filtering preserves the SDK-required public `token` property; deleting it makes the SDK drop events after `before_send`, even when hooks appear to fire. Tests must assert actual transport and backend ingestion, not only entry into the hook.
 - Event filtering strips full referrer URLs, query strings, fragments, free text and automatic person-property payloads. The current URL is always `https://derabona.club/`; only the referrer hostname is retained. SDK anonymous/session IDs and basic browser/device properties are retained after consent.
 
 ## Event contract

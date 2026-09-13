@@ -10050,7 +10050,7 @@ const Analytics = (()=>{
   const TOKEN='phc_yFExTpbLyKsrVayo4NFKeD6yHS4ku6ZdDgwT53KWt2oN',KEY='derabona.analytics-consent.v1';
   const events=new Set(['$pageview','round_viewed','answer_submitted','hint_used','round_completed','competition_selected','competition_completed','language_changed','help_opened','progress_reset']);
   const fields=new Set(['language','competition','player_id','round_index','guess_count','hints','result','points','correct']);
-  const sdkFields=new Set(['distinct_id','$device_id','$session_id','$window_id','$lib','$lib_version','$browser','$browser_version','$os','$os_version','$device_type','$screen_width','$screen_height','$viewport_width','$viewport_height','$process_person_profile']);
+  const sdkFields=new Set(['token','distinct_id','$device_id','$session_id','$window_id','$lib','$lib_version','$browser','$browser_version','$os','$os_version','$device_type','$screen_width','$screen_height','$viewport_width','$viewport_height','$process_person_profile']);
   const online=location.protocol==='https:'&&location.hostname==='derabona.club';
   const privacySignal=()=>navigator.globalPrivacyControl===true||navigator.doNotTrack==='1';
   let choice=null,lang='es',context=()=>({}),loading=false,ready=false,sdk=null,queue=[],pageviewSent=false;
