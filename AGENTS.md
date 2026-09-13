@@ -24,7 +24,7 @@ A clean working tree does not establish that the checkout is current. Other agen
 - `.github/workflows/pages.yml` validates the model and sources, then publishes **`index.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`** to GitHub Pages on pushes to `main`. CI does not run the browser suite.
 - `.playwright-cli/`, `test-results/`, `_site/` and raw research retrievals are ignored. Do not force-add browser state, full third-party articles, screenshots, credentials or generated clutter.
 
-Keep the single-file offline design unless the requested work explicitly changes the architecture. No analytics, accounts, external fonts, runtime network dependencies or framework/build scaffolding by default. Make focused edits; do not reconstruct the large HTML file or embedded assets from truncated or redacted tool output.
+Keep the single-file offline design unless the requested work explicitly changes the architecture. The owner-approved exception is consent-first PostHog EU analytics (see docs/analytics.md), loaded only after permission on the canonical HTTPS site. No other analytics, accounts, external fonts, required runtime network dependencies or framework/build scaffolding by default. Make focused edits; do not reconstruct the large HTML file or embedded assets from truncated or redacted tool output.
 
 ## Product invariants
 
@@ -47,6 +47,13 @@ Keep the single-file offline design unless the requested work explicitly changes
 - The round clock is in-memory UI state, not persisted elapsed time; resuming a game must not penalize time spent away. Tests that assert exact scores must control elapsed time and account for hints.
 - Record each completed game only once, including across reloads. Preserve the history cap and historical difficulty labels. The confirmed reset clears current gameplay, results history, the lifetime score/streak, and the permanent seen-players ledger.
 - The header score/streak (and the recap's big final number) are a **lifetime running total** (`touchline.lifetime.v1`), tallied once per round resolution independent of `CareerGame.stats(state)`. Switching competition, replaying, or a legacy-preference migration must never reset it — only the confirmed Reset does. See [ADR 0004](docs/adr/0004-lifetime-score-persists-across-decks.md). `CareerGame.stats(state)` itself stays a pure per-deck projection; do not make it reach outside `state`.
+
+## Analytics
+
+- Follow [docs/analytics.md](docs/analytics.md). The owner chose consent-first, anonymous persistent analytics. Do not change to automatic/cookieless tracking, add session recording or enable autocapture without approval.
+- Keep PostHog entirely silent before consent, after withdrawal, on file/localhost/noncanonical origins, while offline and when DNT/GPC is requested. Keep privacy settings bilingual and independent of gameplay Reset. SDK/ad-block/network/storage failures must never break the game.
+- Use only project 273163 (EU); the public project ingestion token may be in HTML, personal CLI/API credentials may not. Disable IP event storage and person profiles. Preserve event/property allowlists and sanitized URLs. Do not capture old completions on re-render or reload.
+- Run privacy model and real-SDK browser checks. Intercepted test requests are not proof of backend ingestion: read back uniquely marked live verification events from PostHog and exclude those events from dashboard metrics. Test-only bot-filter overrides must never become production defaults.
 
 ## Search and loading performance
 

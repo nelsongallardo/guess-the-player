@@ -10,7 +10,7 @@ import sys
 
 root = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
-SUITES = ['browser-checks.js', 'offline-checks.js', 'mobile-language-checks.js', 'difficulty-checks.js', 'expansion-checks.js', 'brand-checks.js', 'origin-checks.js', 'saved-rivals-checks.js', 'seo-checks.js']
+SUITES = ['browser-checks.js', 'offline-checks.js', 'mobile-language-checks.js', 'difficulty-checks.js', 'expansion-checks.js', 'brand-checks.js', 'origin-checks.js', 'saved-rivals-checks.js', 'seo-checks.js', 'analytics-checks.js']
 parser.add_argument('--offline-only', action='store_true')
 parser.add_argument('--suite', action='append', choices=SUITES, help='Run a named suite; repeat for multiple focused checks')
 args = parser.parse_args()

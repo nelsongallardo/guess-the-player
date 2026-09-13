@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+const source=()=>{const m=html.match(/<script id="analytics">([\s\S]*?)<\/script>/);assert.ok(m,'Analytics module exists');return m[1];};
+function harness({host='derabona.club',protocol='https:',stored=null,denied=false,networkOffline=false,dnt=false}={}){
+ const storage=new Map(stored?[['derabona.analytics-consent.v1',stored]]:[]),requests=[],sent=[];
+ const node=()=>({hidden:true,textContent:'',setAttribute(){},addEventListener(){},close(){},showModal(){},open:false});
+ const elements=new Map();const get=id=>{if(!elements.has(id))elements.set(id,node());return elements.get(id);};
+ const document={referrer:'https://example.org/private?email=secret@example.com',getElementById:get,querySelectorAll:()=>[],createElement:()=>({}),head:{appendChild:s=>requests.push(s)}};
+ let config;const sdk={init:(token,c)=>{config=c;c.loaded(sdk);},opt_in_capturing(){},opt_out_capturing(){},capture:(event,properties)=>{const result=config.before_send({event,properties:{distinct_id:'anonymous-test','$current_url':'https://derabona.club/?secret=yes',email:'never@example.com',...properties}});if(result)sent.push(result);}};
+ const c=vm.createContext({document,location:{hostname:host,protocol},navigator:{doNotTrack:dnt?'1':null,globalPrivacyControl:false,onLine:!networkOffline},localStorage:{get length(){return storage.size;},key:i=>[...storage.keys()][i],removeItem:k=>storage.delete(k),getItem:k=>{if(denied)throw Error('denied');return storage.get(k)||null;},setItem:(k,v)=>{if(denied)throw Error('denied');storage.set(k,v);}},URL,console,setTimeout,clearTimeout,window:{posthog:sdk},Map,Set});
+ vm.runInContext(source(),c);const api=vm.runInContext('Analytics',c);api.start(()=>({language:'es',competition:'all',player_id:'test',round_index:1}));
+ return {api,requests,sent,storage,load:()=>requests[0].onload(),config:()=>config};
+}
+test('No PostHog request or capture before affirmative consent',()=>{const h=harness();h.api.capture('hint_used');assert.equal(h.requests.length,0);assert.equal(h.sent.length,0);assert.equal(h.api.getConsent(),null);});
+test('Accept enables manual events with sanitization; withdrawal immediately stops events',()=>{const h=harness();h.api.setConsent(true);assert.equal(h.requests.length,1);h.load();assert.ok(h.sent.some(e=>e.event==='$pageview'));h.api.capture('hint_used',{hints:1,email:'no'});const e=h.sent.at(-1);assert.equal(e.properties.email,undefined);assert.equal(e.properties.$current_url,'https://derabona.club/');assert.equal(e.properties.referrer_host,'example.org');const n=h.sent.length;h.api.setConsent(false);h.api.capture('hint_used');assert.equal(h.sent.length,n);assert.equal(h.api.getConsent(),'declined');});
+test('Localhost and file play never load analytics even with prior consent',()=>{for(const params of [{host:'localhost'},{protocol:'file:'}]){const h=harness({...params,stored:'accepted'});h.api.setConsent(true);assert.equal(h.requests.length,0);}});
+test('Browser privacy requests and offline network status suppress all analytics',()=>{for(const params of [{networkOffline:true},{dnt:true}]){const h=harness({...params,stored:'accepted'});h.api.capture('hint_used');assert.equal(h.requests.length,0);assert.equal(h.sent.length,0);}});
+test('Revoking while SDK loads discards queued gameplay and pageview events',()=>{const h=harness();h.api.setConsent(true);h.api.capture('hint_used');h.api.setConsent(false);h.load();assert.equal(h.sent.length,0);});
+test('Withdrawal cleans previous identity before the SDK has loaded',()=>{const h=harness({stored:'accepted'});const token=source().match(/const TOKEN='([^']+)'/)[1];h.storage.set('ph_'+token+'_posthog','previous-identity');h.api.setConsent(false);assert.equal(h.storage.has('ph_'+token+'_posthog'),false);h.load();assert.equal(h.sent.length,0);});
+test('Denied storage does not break consent or gameplay integration',()=>{const h=harness({denied:true});h.api.setConsent(true);h.load();assert.ok(h.sent.length>0);h.api.setConsent(false);assert.equal(h.api.getConsent(),'declined');});
+test('Privacy configuration disables automatic capture, recordings and persistent profiles',()=>{const h=harness({stored:'accepted'});h.load();const c=h.config();for(const key of ['autocapture','capture_pageview','capture_pageleave','capture_dead_clicks','capture_heatmaps','capture_performance','capture_exceptions','ip'])assert.equal(c[key],false,key);assert.equal(c.disable_session_recording,true);assert.equal(c.person_profiles,'never');assert.equal(c.persistence,'localStorage');assert.equal(c.opt_out_capturing_by_default,true);assert.equal(c.before_send({event:'$autocapture',properties:{}}),null);});

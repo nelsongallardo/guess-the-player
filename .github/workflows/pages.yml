@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: '22'
       - name: Validate game data and model
-        run: node --test tests/model.test.mjs tests/social-preview.test.mjs tests/seo.test.mjs
+        run: node --test tests/model.test.mjs tests/social-preview.test.mjs tests/seo.test.mjs tests/analytics.test.mjs
       - name: Validate source identifiers
         run: python3 tests/source-check.py
       - name: Prepare game-only website

@@ -1,5 +1,13 @@
 # Verification report
 
+## Consent-first analytics
+
+- `tests/analytics.test.mjs` starts with failing pre-implementation tests and covers opt-in, withdrawal, load races, storage denial, DNT/offline suppression, property filtering and disabled SDK features.
+- `tests/analytics-checks.js` exercises the real CDN SDK with intercepted ingestion: zero requests before consent/after decline, consent persistence, accepted anonymous identity across reload, actual gameplay hooks, cleared identity after withdrawal and continued gameplay with a blocked SDK. Interception is not backend-ingestion evidence.
+- SEO, branding, 60-round offline gameplay, source identifiers, origin matching and saved-choice migration remain in the focused regression set. Legacy full-suite limitations below are not removed.
+- Live verification artifacts, including the marked PostHog query readback, belong under ignored `test-results/`; see [analytics docs](docs/analytics.md).
+
+
 ## SEO and initial-load performance — 13 September 2026
 
 - 45 model/social-preview/SEO checks passed; source-identifier checks passed. Six new SEO tests were first run red against the published baseline.

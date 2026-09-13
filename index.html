@@ -197,6 +197,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 
 .about-game{border-top:1px solid var(--line);margin-top:28px;padding:24px 0;color:var(--muted);max-width:850px;font-size:15px;line-height:1.65}.about-game h2{font-size:24px;line-height:1.25;color:var(--ink);letter-spacing:-.5px;margin-bottom:12px}.about-game p{margin:10px 0}.about-game details{border-top:1px solid var(--line);padding:10px 0}.about-game summary{cursor:pointer;color:var(--ink);font-weight:650;min-height:44px;display:list-item;padding:10px 0}.about-game ol{padding-left:24px}.about-game li{margin:8px 0}@media(max-width:580px){.about-game{font-size:14px}.about-game h2{font-size:21px}}
 .game-loading #round-panel{min-height:100svh;position:relative}.game-loading #round-panel>:not(#game-loading-status){visibility:hidden}.game-loading #game-loading-status{display:block!important;position:absolute;top:20px;left:0;color:var(--muted)}
+.privacy-tools{margin:18px 0;text-align:center}.analytics-banner{position:fixed;z-index:10;bottom:12px;left:50%;transform:translateX(-50%);width:min(640px,calc(100% - 24px));padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 32px #122a3833}.analytics-banner h2{font-size:16px;margin:0 0 6px}.analytics-banner p{font-size:13px;margin:0 0 10px}.analytics-actions{display:flex;gap:8px;flex-wrap:wrap}.analytics-actions button{padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font-size:13px;min-height:42px}.analytics-actions button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}#privacy-dialog{max-width:540px;width:calc(100% - 32px)}#privacy-dialog p{line-height:1.65;font-size:14px}
 </style>
 </head>
 <body>
@@ -244,6 +245,11 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 <p>Podés <a href="/index.html" download="derabona.html">descargar el juego como archivo HTML</a> y abrirlo sin conexión. Los escudos están incluidos. Necesitás JavaScript activado; no hacen falta cuentas ni servicios externos.</p></details>
 </section>
 </main>
+<div class="privacy-tools"><button id="analytics-settings" class="subtle" type="button" aria-haspopup="dialog">Privacidad y analítica</button></div>
+<section id="analytics-banner" class="analytics-banner" aria-labelledby="analytics-title" hidden>
+<h2 id="analytics-title">¿Nos ayudás a mejorar derabona?</h2><p id="analytics-intro">Con tu permiso medimos visitas y partidas con PostHog. Sin grabaciones de pantalla. Podés decir que no y jugar igual.</p>
+<div class="analytics-actions"><button type="button" data-analytics-consent="accepted">Permitir analítica</button><button type="button" data-analytics-consent="declined">No, gracias</button><button id="analytics-details" type="button">Info</button></div></section>
+<dialog id="privacy-dialog" aria-labelledby="privacy-title"><h2 id="privacy-title">Privacidad y analítica</h2><p id="privacy-status"></p><p id="privacy-detail">La analítica requiere tu permiso. Las partidas locales y sin conexión no se rastrean.</p><div class="analytics-actions"><button type="button" data-analytics-consent="accepted">Permitir analítica</button><button type="button" data-analytics-consent="declined">No, gracias</button><button id="privacy-close" type="button">Cerrar</button></div><p><a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">PostHog · Privacy</a></p></dialog>
 <footer class="page-footer"><span><span class="footer-brand">60 PLAYERS</span> · 30 EUROPE / 30 SOUTH AMERICA</span><span id="save-status" class="saved">PROGRESS SAVED ON THIS DEVICE</span><button type="button" id="reset-progress" class="footer-reset">Reset my results</button><span>RESEARCH SNAPSHOT · 12 SEP 2026</span></footer>
 </div>
 <dialog id="rules" aria-labelledby="rules-title"><h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>National teams are never in the timeline.</b></li><li>Pick a <b>competition</b> from the badge at the top of the page — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players — to choose which careers you will be quizzed on. Rival names prioritize similar career origins and eras.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position</b>. They’re free.</li><li>A correct round earns <b>up to 100 points</b> — less per hint used and the slower you answer — and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. Every player in your deck appears once before the final whistle.</li><li>Once you answer a player — right or wrong — they never come back, in any competition, until you use <b>Reset my results</b>. A competition shows <b>Completed</b> in the picker once none are left.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> badge identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress is saved locally when your browser allows it. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play <span aria-hidden="true">→</span></button></form></dialog>
@@ -10037,6 +10043,92 @@ const SPANISH_NOTES = {
   }
 };
 </script>
+<script id="analytics">
+const Analytics = (()=>{
+  'use strict';
+  // This is a public ingestion token, not a personal/admin API key.
+  const TOKEN='phc_yFExTpbLyKsrVayo4NFKeD6yHS4ku6ZdDgwT53KWt2oN',KEY='derabona.analytics-consent.v1';
+  const events=new Set(['$pageview','round_viewed','answer_submitted','hint_used','round_completed','competition_selected','competition_completed','language_changed','help_opened','progress_reset']);
+  const fields=new Set(['language','competition','player_id','round_index','guess_count','hints','result','points','correct']);
+  const sdkFields=new Set(['distinct_id','$device_id','$session_id','$window_id','$lib','$lib_version','$browser','$browser_version','$os','$os_version','$device_type','$screen_width','$screen_height','$viewport_width','$viewport_height','$process_person_profile']);
+  const online=location.protocol==='https:'&&location.hostname==='derabona.club';
+  const privacySignal=()=>navigator.globalPrivacyControl===true||navigator.doNotTrack==='1';
+  let choice=null,lang='es',context=()=>({}),loading=false,ready=false,sdk=null,queue=[],pageviewSent=false;
+  try{const saved=localStorage.getItem(KEY);if(saved==='accepted'||saved==='declined')choice=saved;}catch{}
+  const allowed=()=>online&&navigator.onLine!==false&&choice==='accepted'&&!privacySignal();
+  const text={
+    es:{title:'¿Nos ayudás a mejorar derabona?',short:'Con tu permiso medimos visitas y partidas con PostHog. Sin grabaciones de pantalla. Podés decir que no y jugar igual.',allow:'Permitir analítica',decline:'No, gracias',settings:'Privacidad y analítica',close:'Cerrar',status:{accepted:'Permiso de analítica: permitido.',declined:'Permiso de analítica: rechazado.',pending:'La analítica está desactivada hasta que la permitas.'},signal:'Tu navegador solicita no ser rastreado: no enviamos analítica.',offline:'Las partidas locales y sin conexión no se rastrean.',detail:'Si aceptás, PostHog (región UE) recibe visitas y eventos del juego: competición, intentos, pistas, resultados e idioma, junto con datos básicos del navegador y un identificador anónimo guardado en este navegador para medir visitas posteriores. No pedimos tu nombre ni tu email; no enviamos texto libre ni parámetros de la URL. La captura automática de clics, las grabaciones de sesión y el almacenamiento de IP en los eventos están desactivados. Tus partidas y tu progreso se guardan localmente, aunque rechaces la analítica. Podés retirar el permiso acá cuando quieras: se detienen los envíos futuros y se elimina el identificador analítico local; los eventos ya enviados no se borran automáticamente.'},
+    en:{title:'Help us improve derabona?',short:'With your permission, PostHog measures visits and gameplay. No screen recordings. You can decline and play normally.',allow:'Allow analytics',decline:'No thanks',settings:'Privacy and analytics',close:'Close',status:{accepted:'Analytics permission: allowed.',declined:'Analytics permission: declined.',pending:'Analytics is disabled until you allow it.'},signal:'Your browser requests no tracking: analytics is disabled.',offline:'Local and offline play is not tracked.',detail:'If you accept, PostHog (EU region) receives visits and game events: competition, guesses, hints, results and language, plus basic browser information and an anonymous identifier stored in this browser to measure returning visits. We do not ask for your name or email, and do not send free text or URL parameters. Automatic click capture, session recordings and IP storage in events are disabled. Your game and progress stay locally stored even when you decline analytics. You can withdraw permission here at any time: future collection stops and the local analytics identifier is removed; previously sent events are not automatically deleted.'}
+  };
+  function update(){
+    const t=text[lang],el=id=>document.getElementById(id);
+    const values={'analytics-title':t.title,'analytics-intro':t.short,'analytics-settings':t.settings,'privacy-title':t.settings,'privacy-detail':t.detail,'privacy-close':t.close,'privacy-status':!online?t.offline:privacySignal()?t.signal:t.status[choice||'pending']};
+    for(const [id,value]of Object.entries(values)){const n=el(id);if(n)n.textContent=value;}
+    for(const n of document.querySelectorAll('[data-analytics-consent]'))n.textContent=n.getAttribute('data-analytics-consent')==='accepted'?t.allow:t.decline;
+    if(el('analytics-banner'))el('analytics-banner').hidden=!online||choice!==null||privacySignal();
+  }
+  function properties(extra={}){
+    let base={};try{base=context()||{};}catch{}
+    const out={};for(const [key,value]of Object.entries({...base,...extra}))if(fields.has(key)&&(typeof value==='boolean'||(typeof value==='number'&&Number.isFinite(value))||(typeof value==='string'&&value.length<=64)))out[key]=value;
+    out.language=lang;out.$current_url='https://derabona.club/';out.$host='derabona.club';out.$pathname='/';out.$geoip_disable=true;
+    try{out.referrer_host=new URL(document.referrer).hostname;}catch{out.referrer_host='';}
+    return out;
+  }
+  function beforeSend(event){
+    if(!allowed()||!events.has(event.event))return null;
+    const clean={};for(const [key,value]of Object.entries(event.properties||{}))if(sdkFields.has(key)||fields.has(key)||['$current_url','$host','$pathname','$geoip_disable','referrer_host'].includes(key))clean[key]=value;
+    clean.$current_url='https://derabona.club/';clean.$pathname='/';clean.$host='derabona.club';clean.$geoip_disable=true;clean.$process_person_profile=false;
+    return {...event,properties:clean};
+  }
+  function capture(event,extra){
+    try{if(!allowed()||!events.has(event))return;const entry=[event,properties(extra)];if(ready)sdk.capture(...entry);else if(queue.length<30)queue.push(entry);}catch{}
+  }
+  function activate(){
+    if(!allowed())return;
+    if(!pageviewSent){capture('$pageview');capture('round_viewed');pageviewSent=true;}
+    if(ready){try{sdk.opt_in_capturing();}catch{}return;}
+    if(loading)return;loading=true;
+    try{
+      const script=document.createElement('script');script.async=true;script.crossOrigin='anonymous';script.src='https://eu-assets.i.posthog.com/static/array.js';
+      script.onerror=()=>{loading=false;queue=[];pageviewSent=false;};
+      script.onload=()=>{
+        loading=false;if(!allowed()){queue=[];return;}
+        try{sdk=window.posthog;sdk.init(TOKEN,{
+          api_host:'https://eu.i.posthog.com',ui_host:'https://eu.posthog.com',defaults:'2026-05-30',
+          persistence:'localStorage',person_profiles:'never',ip:false,
+          autocapture:false,capture_pageview:false,capture_pageleave:false,capture_dead_clicks:false,capture_heatmaps:false,capture_performance:false,capture_exceptions:false,
+          disable_session_recording:true,disable_surveys:true,advanced_disable_feature_flags:true,disable_external_dependency_loading:true,
+          opt_out_capturing_by_default:true,opt_out_persistence_by_default:true,respect_dnt:true,request_batching:false,
+          before_send:beforeSend,
+          loaded:instance=>{sdk=instance;if(!allowed()){queue=[];sdk.opt_out_capturing();return;}sdk.opt_in_capturing();ready=true;const pending=queue;queue=[];for(const entry of pending)if(allowed())try{sdk.capture(...entry);}catch{}}
+        });}catch{ready=false;queue=[];}
+      };
+      document.head.appendChild(script);
+    }catch{loading=false;queue=[];}
+  }
+  function clearIdentity(){
+    // Withdrawal must clean a prior visit's ID even if the SDK is blocked or still loading.
+    const stores=[];try{stores.push(localStorage);}catch{}try{stores.push(sessionStorage);}catch{}
+    for(const store of stores)try{for(let i=store.length-1;i>=0;i--){const key=store.key(i);if(key?.startsWith('ph_'+TOKEN))store.removeItem(key);}}catch{}
+  }
+  function setConsent(accept){
+    choice=accept?'accepted':'declined';try{localStorage.setItem(KEY,choice);}catch{}
+    if(!accept){queue=[];try{sdk?.opt_out_capturing({clear_persistence:true});}catch{}clearIdentity();}
+    else activate();update();
+  }
+  function setLanguage(value){lang=value==='en'?'en':'es';update();}
+  function start(getContext){
+    context=getContext;try{lang=context().language==='en'?'en':'es';}catch{}
+    for(const n of document.querySelectorAll('[data-analytics-consent]'))n.addEventListener('click',()=>{setConsent(n.getAttribute('data-analytics-consent')==='accepted');document.getElementById('privacy-dialog')?.close();});
+    document.getElementById('analytics-settings')?.addEventListener('click',()=>{update();document.getElementById('privacy-dialog').showModal();});
+    document.getElementById('analytics-details')?.addEventListener('click',()=>document.getElementById('privacy-dialog').showModal());
+    document.getElementById('privacy-close')?.addEventListener('click',()=>document.getElementById('privacy-dialog').close());
+    window.addEventListener?.('storage',event=>{if(event.key!==KEY)return;choice=event.newValue==='accepted'?'accepted':event.newValue==='declined'?'declined':null;if(!allowed()){queue=[];try{sdk?.opt_out_capturing({clear_persistence:true});}catch{}clearIdentity();}else activate();update();});
+    if(choice!=='accepted')clearIdentity();update();activate();
+  }
+  return {start,capture,setConsent,setLanguage,getConsent:()=>choice};
+})();
+</script>
 <script id="game-ui">
 'use strict';
 const STORAGE_KEY = 'touchline.career.v1';
@@ -10129,8 +10221,9 @@ const position=p=>language==='es'?POSITIONS_ES[p.position]:p.position;
 const hintValues=p=>[country(p),position(p)];
 const ABOUT_ES = $('about-game').innerHTML;
 const ABOUT_EN = "<h2 id=\"about-title\">A free football player guessing game</h2><p>In <strong>derabona</strong>, every badge is a clue: follow the clubs and years in a career to identify the footballer. Play this football quiz on your phone or computer, without creating an account or installing an app.</p><details><summary>How to play derabona</summary><ol><li>Read the career from the first club. On mobile, follow the numbered rows from left to right.</li><li>Choose one of five players. You have three attempts; incorrect answers are ruled out.</li><li>Need help? Reveal the player's country or position. Faster correct answers and fewer hints earn more points.</li></ol><p>Careers include senior clubs, reserve teams competing in senior leagues and actual return spells. Career notes and sources appear after you answer.</p></details><details><summary>Players from Europe and South America</summary><p>There are 60 players: 30 from Europe and 30 from South America. Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão, or all players. Competitions filter quiz targets; rival names are matched by career origin and era.</p></details><details><summary>Saved progress and offline play</summary><p>Your points, streak and answered players are saved in this browser when storage is available. A player you have answered will not repeat until you reset your results. Progress does not sync between devices.</p><p>You can <a href=\"/index.html\" download=\"derabona.html\">download the game as an HTML file</a> and open it offline. Club badges are included. JavaScript must be enabled; no account or external service is required.</p></details>";
+function analyticsContext(){const r=CareerGame.roundAt(state),p=CareerGame.playerAt(state);return {language,competition:state.competition,player_id:p?.id,round_index:state.roundIndex+1,guess_count:r?.guesses.length||0,hints:r?.hints||0,result:CareerGame.outcome(state),points:r?.points||0};}
 function applyLanguage() {
-  const t=copy();document.documentElement.lang=language;document.title=t.title;
+  const t=copy();document.documentElement.lang=language;document.title=t.title;Analytics.setLanguage(language);
   $('about-game').innerHTML=language==='es'?ABOUT_ES:ABOUT_EN;$('about-game').lang=language;
   document.querySelector('meta[name="description"]').content=t.description;
   const text={'.brand small':t.brand,'.edition':t.edition,'#help':t.help,'.hero .eyebrow':t.eyebrow,'.intro':t.intro,'#score-badge-label':t.score,'#streak-badge-label':t.streak,'#question':t.question,'.answer-heading p':t.chances,'#source-details summary':t.sourceSummary,'#summary-panel .eyebrow':t.whistle,'#replay':t.replay+' ↻','.match-review summary':t.review,'.page-footer > span:last-child':t.snapshot,'#career-navigation > span':t.scroll,'#history-details summary':t.historyTitle,'#history-empty':t.historyEmpty,'#reset-progress':t.resetLabel};
@@ -10159,7 +10252,7 @@ function renderCompetitionOptions(){
     // panel would push the masthead itself off-screen above the fold,
     // which reads as "the page jumped to the bottom." Just close the
     // dialog and let the page stay where the player already was.
-    b.addEventListener('click',()=>{const next=startGame(state.difficulty,id);if(!next)return;state=next;resetRoundClock();applyLanguage();render(false,true);$('competitions').close();(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});});
+    b.addEventListener('click',()=>{const next=startGame(state.difficulty,id);if(!next)return;state=next;Analytics.capture("competition_selected");Analytics.capture("round_viewed");resetRoundClock();applyLanguage();render(false,true);$('competitions').close();(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});});
     container.append(b);
   });
 }
@@ -10266,7 +10359,7 @@ function render(celebrate=false,newCareer=false){
     b.setAttribute('aria-label',`${name}${wrong?', '+t.incorrect:correct?', '+t.correct:''}`);
     const suffix=el('span',wrong?'×':correct?'✓':'↗','option-state'),letter=el('span',String.fromCharCode(65+i),'option-letter');suffix.setAttribute('aria-hidden','true');letter.setAttribute('aria-hidden','true');
     b.append(letter,el('span',name,'option-name'),suffix);
-    b.addEventListener('click',()=>{const elapsedMs=Date.now()-roundClockStart,before=result;if(!CareerGame.answer(state,name,elapsedMs))return;tallyRound(before);render(true);const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');target?.focus({preventScroll:true});});
+    b.addEventListener('click',()=>{const elapsedMs=Date.now()-roundClockStart,before=result;if(!CareerGame.answer(state,name,elapsedMs))return;tallyRound(before);Analytics.capture("answer_submitted",{correct:name===p.name});if(CareerGame.outcome(state)!=="playing")Analytics.capture("round_completed");render(true);const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');target?.focus({preventScroll:true});});
     $('options').append(b);
   });
   const values=hintValues(p);$('hints').replaceChildren(...t.hints.map((label,i)=>el('li',i<r.hints?`${label}: ${values[i]}`:`${i+1}. ${label}`,i<r.hints?'revealed':'')));
@@ -10279,8 +10372,8 @@ function render(celebrate=false,newCareer=false){
   $('source-details').hidden=result==='playing';if(result!=='playing')renderSources(p);else $('source-content').replaceChildren();save();
 }
 function showRoundStart(){(state.finished?$('summary-panel'):$('round-panel')).scrollIntoView({block:'start',behavior:'auto'});(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});}
-$('hint').addEventListener('click',()=>{if(CareerGame.hint(state)){render();if($('hint').disabled)$('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}});
-$('next').addEventListener('click',()=>{if(CareerGame.next(state)){resetRoundClock();render(false,true);showRoundStart();}});
+$('hint').addEventListener('click',()=>{if(CareerGame.hint(state)){Analytics.capture("hint_used");render();if($('hint').disabled)$('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}});
+$('next').addEventListener('click',()=>{if(CareerGame.next(state)){Analytics.capture(state.finished?"competition_completed":"round_viewed");resetRoundClock();render(false,true);showRoundStart();}});
 $('replay').addEventListener('click',()=>{
   if(!state.finished)return;
   // Finishing a deck means every one of its players is now in the "seen"
@@ -10292,16 +10385,16 @@ $('replay').addEventListener('click',()=>{
   state=next;resetRoundClock();render(false,true);showRoundStart();
 });
 document.querySelectorAll('#change-competition,#change-competition-summary').forEach(b=>b.addEventListener('click',()=>{renderCompetitionOptions();$('competitions').showModal();}));
-$('help').addEventListener('click',()=>$('rules').showModal());$('career-back').addEventListener('click',()=>moveCareer(-1));$('career-forward').addEventListener('click',()=>moveCareer(1));
+$('help').addEventListener('click',()=>{Analytics.capture('help_opened');$('rules').showModal();});$('career-back').addEventListener('click',()=>moveCareer(-1));$('career-forward').addEventListener('click',()=>moveCareer(1));
 $('timeline-scroll').addEventListener('scroll',updateNavigation,{passive:true});window.addEventListener('resize',updateNavigation,{passive:true});
-$('language').addEventListener('change',()=>{const value=$('language').value;if(value!=='en'&&value!=='es')return;language=value;const open=$('source-details').open;applyLanguage();render(false,true);$('source-details').open=open;try{const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);}catch{}});
+$('language').addEventListener('change',()=>{const value=$('language').value;if(value!=='en'&&value!=='es')return;language=value;Analytics.setLanguage(value);Analytics.capture('language_changed');const open=$('source-details').open;applyLanguage();render(false,true);$('source-details').open=open;try{const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);}catch{}});
 $('reset-progress').addEventListener('click',()=>{
-  if(!confirm(copy().resetConfirm))return;
+  if(!confirm(copy().resetConfirm))return;Analytics.capture("progress_reset");
   try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(HISTORY_KEY);localStorage.removeItem(LIFETIME_KEY);localStorage.removeItem(SEEN_KEY);}catch{}
   seen=new Set();state=CareerGame.create();lifetime=defaultLifetime();resetRoundClock();applyLanguage();render(false,true);showRoundStart();
 });
 applyLanguage();render(false,true);
-requestAnimationFrame(()=>document.documentElement.classList.remove('game-loading'));
+requestAnimationFrame(()=>{document.documentElement.classList.remove('game-loading');Analytics.start(analyticsContext);});
 </script>
 </body>
 </html>
