@@ -18,6 +18,7 @@ research/*
 !research/verified-distractors.json
 !research/assemble-distractors.py
 !research/embed-distractors.py
+!research/optimize-crests.py
 !research/audit-distractor-coverage.mjs
 !research/contemporary-distractors-research.json
 !research/CONTEMPORARY_DISTRACTOR_SOURCES.md

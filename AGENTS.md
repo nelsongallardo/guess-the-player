@@ -21,7 +21,7 @@ A clean working tree does not establish that the checkout is current. Other agen
 - Named script blocks include `roster-data`, `crest-data`, `game-model`, `locale-data` and `game-ui`. Model tests extract these blocks directly; preserve their IDs.
 - `research/verified-players.json` contains curated career records. `research/data-policy.md` defines inclusion and competition-tag policy. Citation ledgers, [CAREER_SOURCES.md](CAREER_SOURCES.md) and [DATA_AUDIT.md](DATA_AUDIT.md) support the dataset.
 - `tests/model.test.mjs` checks model, data, localization and save compatibility. `tests/source-check.py` checks literal source identifiers. `tests/run-browser.py` drives real browser checks.
-- `.github/workflows/pages.yml` validates the model and sources, then publishes **`index.html` plus `assets/derabona-social-es-v1.png`** to GitHub Pages on pushes to `main`. CI does not run the browser suite.
+- `.github/workflows/pages.yml` validates the model and sources, then publishes **`index.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`** to GitHub Pages on pushes to `main`. CI does not run the browser suite.
 - `.playwright-cli/`, `test-results/`, `_site/` and raw research retrievals are ignored. Do not force-add browser state, full third-party articles, screenshots, credentials or generated clutter.
 
 Keep the single-file offline design unless the requested work explicitly changes the architecture. No analytics, accounts, external fonts, runtime network dependencies or framework/build scaffolding by default. Make focused edits; do not reconstruct the large HTML file or embedded assets from truncated or redacted tool output.
@@ -47,6 +47,14 @@ Keep the single-file offline design unless the requested work explicitly changes
 - The round clock is in-memory UI state, not persisted elapsed time; resuming a game must not penalize time spent away. Tests that assert exact scores must control elapsed time and account for hints.
 - Record each completed game only once, including across reloads. Preserve the history cap and historical difficulty labels. The confirmed reset clears current gameplay, results history, the lifetime score/streak, and the permanent seen-players ledger.
 - The header score/streak (and the recap's big final number) are a **lifetime running total** (`touchline.lifetime.v1`), tallied once per round resolution independent of `CareerGame.stats(state)`. Switching competition, replaying, or a legacy-preference migration must never reset it — only the confirmed Reset does. See [ADR 0004](docs/adr/0004-lifetime-score-persists-across-decks.md). `CareerGame.stats(state)` itself stays a pure per-deck projection; do not make it reach outside `state`.
+
+## Search and loading performance
+
+- See [docs/seo.md](docs/seo.md). Keep the initial HTML title, heading and explanation in Spanish; query/saved language preferences override the Spanish default without resetting progress. The canonical sitemap contains only the real home page. Do not add fake ratings, doorway pages, invented sitemap dates or hreflang for non-existent localized pages.
+- Keep the explanatory section below gameplay, keyboard-accessible and translated in English mode. Its initial content must not depend on JavaScript.
+- The loading class reserves only the initial game viewport and must clear after successful first render. Do not leave a permanent oversized blank career panel.
+- Preserve all crest keys, PNG formats and source URLs when optimizing. Re-run `research/optimize-crests.py --source-ref ORIGINAL_GIT_SHA` via `uv run --with pillow python` against an original revision, not previously palette-reduced output; inspect its contact sheet and transparency guard.
+- `tests/seo.test.mjs` checks static contracts and the image budget; `python3 tests/run-browser.py --suite seo-checks.js` checks no-JS content, language precedence, mobile fit, offline icon and saved-state stability. Lighthouse lab scores are not proof of ranking, indexing or field Core Web Vitals.
 
 ## Career-data changes
 

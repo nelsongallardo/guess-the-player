@@ -12,7 +12,7 @@ See [BRAND.md](BRAND.md) for the identity, editable SVG logo and PNG export. Exi
 
 On mobile/tablet (800px and below), all club crests fit a compact, numbered four-column grid—read left to right, then the next row. No horizontal scrolling or hidden clubs. Desktop retains the horizontal timeline.
 
-Use the language selector to switch between English and Spanish without losing progress. Menus, hints, feedback, rules, accessibility labels and all player career notes are translated; original article titles and proper names are preserved. Selection order: explicit `?lang=en/es`, saved preference, then browser language. Both versions remain inside the same offline HTML file.
+Use the language selector to switch between English and Spanish without losing progress. Menus, hints, feedback, rules, accessibility labels and all player career notes are translated; original article titles and proper names are preserved. Selection order: explicit `?lang=en/es`, saved preference, then Spanish. The canonical home page consistently presents Spanish to new visitors and crawlers. Both versions remain inside the same offline HTML file.
 
 Download `index.html` and open it in a modern browser. No installation or server is required. The file includes the game, complete player database and crest images, so gameplay also works offline.
 
@@ -64,7 +64,7 @@ Country means the senior national team represented, not birthplace or every citi
 
 ## Test and edit
 
-GitHub Pages deploys automatically from `main` using `.github/workflows/pages.yml`. Every deployment first runs the model/data and source-identifier checks, then publishes **`index.html` and the Spanish link-preview PNG**. The public site is https://derabona.club/. Static Open Graph/Twitter metadata uses the branded image at `assets/derabona-social-es-v1.png`; the game itself remains self-contained and works offline. The repository is public at the owner's request; research and test files remain available in the repo but are not part of the deployed website.
+GitHub Pages deploys automatically from `main` using `.github/workflows/pages.yml`. Every deployment first runs the model/data and source-identifier checks, then publishes **`index.html`, the Spanish link-preview PNG, `robots.txt`, `sitemap.xml` and `favicon.svg`**. The public site is https://derabona.club/. Static Open Graph/Twitter metadata uses the branded image at `assets/derabona-social-es-v1.png`; the game itself remains self-contained and works offline. The repository is public at the owner's request; research and test files remain available in the repo but are not part of the deployed website.
 
 The delivered file needs **no build step**. Edit its CSS, the explicit `PLAYERS` array, `CREST_ASSETS`, or the model/UI scripts directly. When updating a career, update the matching curated record and source document as well. All images are embedded PNGs; retain original public URLs for attribution.
 

@@ -1,5 +1,14 @@
 # Verification report
 
+## SEO and initial-load performance — 13 September 2026
+
+- 45 model/social-preview/SEO checks passed; source-identifier checks passed. Six new SEO tests were first run red against the published baseline.
+- Focused browser suites passed: SEO, branding, full 60-round offline gameplay/storage denial, origin/contemporary rivals, and saved-choice migration. The new SEO suite covers five cases (no-JS, Spanish default, explicit English, saved English, offline).
+- The full pre-existing suite is not green. Replay score reset, longest-career viewport fit, replay visibility and legacy-progress denominator assertions also fail against unchanged upstream `f59fe51`; paired fresh-context diagnostics are in `test-results/seo-browser-audit.json`. No failing baseline assertions were deleted or loosened.
+- All 156 crest sources and metadata retained; 3,060,219 bytes of PNGs reduced to 743,566. Visually inspected all pairs and corrected a transparency issue before finalizing.
+- Lighthouse baseline live mobile performance 31/100, basic SEO 100/100, FCP/LCP 16.8s and CLS 0.494. Local candidate testing measured zero startup CLS; local timings are not directly comparable to production compression. See [SEO notes](docs/seo.md).
+
+
 ## Spanish messaging preview — 13 September 2026
 
 - Added four `tests/social-preview.test.mjs` checks: static Spanish metadata without JavaScript, OG/Twitter agreement, actual PNG format/dimensions/size, and deployment of the image. All four initially failed on the unchanged feature baseline and passed after implementation.

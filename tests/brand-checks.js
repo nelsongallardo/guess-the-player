@@ -8,7 +8,7 @@ async page => {
     ok(!/touchline/i.test(await page.locator('body').innerText()),'No old brand in visible page copy');
     ok(await page.locator('.mark').getAttribute('viewBox')==='0 0 96 96','New rabona mark embedded');
     const icon=await page.locator('link[rel="icon"]').getAttribute('href');
-    ok(icon.startsWith('data:image/svg+xml,')&&decodeURIComponent(icon).includes('derabona'),'Self-contained branded favicon');
+    ok(icon==='/favicon.svg','Crawlable branded favicon on the hosted game');
     ok(await page.evaluate(()=>STORAGE_KEY==='touchline.career.v1'&&LANGUAGE_KEY==='touchline.language.v1'&&HISTORY_KEY==='touchline.history.v1'),'Rebrand preserves storage namespaces');
     for(const width of [320,375,430,580,768,1024,1440]){
       await page.setViewportSize({width,height:800});
@@ -29,5 +29,5 @@ async page => {
     await page.keyboard.press('Escape');
   }
   ok(errors.length===0,errors.join('; '));
-  return {passed:true,brand:'derabona',headerCases:cases,storageNamespacesPreserved:true,embeddedLogoAndFavicon:true,browserErrors:errors};
+  return {passed:true,brand:'derabona',headerCases:cases,storageNamespacesPreserved:true,embeddedLogoAndHostedFavicon:true,browserErrors:errors};
 }
