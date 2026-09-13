@@ -46,6 +46,7 @@
 .competition-badge-value{font-size:13px;font-weight:800;letter-spacing:-.2px}
 .competition-badge-caret{font-size:10px;opacity:.65;margin-left:2px}
 @media(max-width:580px){.competition-badge{padding:7px 12px 7px 7px;gap:6px}.competition-badge-label{display:none}.competition-badge-value{font-size:12px}}
+.score-panel{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .score-badge{display:flex;align-items:baseline;gap:7px;background:var(--panel);border:1px solid var(--line);border-radius:100px;padding:8px 16px;min-height:42px;font-family:inherit}
 .score-badge-label{font:9px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
 .score-badge strong{font:16px var(--mono);color:var(--lime);letter-spacing:-.3px}
@@ -177,9 +178,9 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
   <path d="m81 64 4 3-2 5h-4l-2-5Z" fill="#122a38"/>
   <path d="m79 76-2-4m10-6-3 1m-5-8 2 5" stroke="#122a38" stroke-width="1.3"/>
   <path d="m79 53 3-5m-9 7-1-4" stroke="#89cff0" stroke-width="2" stroke-linecap="round"/>
-</svg><div><div class="wordmark">derabona</div><small>FOOTBALL, FROM MEMORY.</small></div></div><button id="change-competition" class="competition-badge" type="button" aria-haspopup="dialog"><span class="competition-badge-dot" aria-hidden="true"></span><span class="competition-badge-text"><span class="competition-badge-label" id="competition-badge-label">Competition</span><span id="competition-current" class="competition-badge-value">All Players</span></span><span class="competition-badge-caret" aria-hidden="true">▾</span></button><div class="score-badge" aria-live="polite"><span class="score-badge-label" id="score-badge-label">Score</span><strong id="score">000</strong></div></div><div class="masthead-right"><select id="language" aria-label="Language / Idioma" title="Language / Idioma"><option value="en">English</option><option value="es">Español</option></select><span class="edition">FÚTBOL ENTRE AMIGOS</span><button id="help" class="subtle" type="button">How to play <span aria-hidden="true">↗</span></button></div></header>
+</svg><div><div class="wordmark">derabona</div><small>FOOTBALL, FROM MEMORY.</small></div></div><button id="change-competition" class="competition-badge" type="button" aria-haspopup="dialog"><span class="competition-badge-dot" aria-hidden="true"></span><span class="competition-badge-text"><span class="competition-badge-label" id="competition-badge-label">Competition</span><span id="competition-current" class="competition-badge-value">All Players</span></span><span class="competition-badge-caret" aria-hidden="true">▾</span></button><div class="score-panel"><div class="score-badge" aria-live="polite"><span class="score-badge-label" id="score-badge-label">Score</span><strong id="score">000</strong></div><div class="score-badge" aria-live="polite"><span class="score-badge-label" id="streak-badge-label">Streak</span><strong id="streak">0</strong></div></div></div><div class="masthead-right"><select id="language" aria-label="Language / Idioma" title="Language / Idioma"><option value="en">English</option><option value="es">Español</option></select><span class="edition">FÚTBOL ENTRE AMIGOS</span><button id="help" class="subtle" type="button">How to play <span aria-hidden="true">↗</span></button></div></header>
 <main>
-<section class="hero" aria-labelledby="title"><div><div class="eyebrow">THE FOOTBALL CAREER QUIZ</div><h1 id="title">Know the clubs.<br> Name the <span>player.</span></h1><p class="intro">A career in club badges. A name only you can call.</p></div><div class="stats" aria-label="Scoreboard"><div class="stat"><div class="stat-label">WIN STREAK <span class="streak-icon" aria-hidden="true">↗</span></div><div class="stat-value"><strong id="streak">0</strong><small>in a row</small></div></div></div></section>
+<section class="hero" aria-labelledby="title"><div><div class="eyebrow">THE FOOTBALL CAREER QUIZ</div><h1 id="title">Know the clubs.<br> Name the <span>player.</span></h1><p class="intro">A career in club badges. A name only you can call.</p></div></section>
 <noscript><p>This game needs JavaScript. Enable it and reload. / Este juego necesita JavaScript. Actívalo y recarga la página.</p></noscript>
 <section id="round-panel" aria-label="Current round">
 <div class="pitch"><div class="pitch-top"><div class="file-label">CAREER FILE <strong id="round-number">01 / 50</strong></div><div class="attempts"><span id="attempt-text">3 attempts left</span><div class="lives" id="lives" aria-hidden="true"></div></div></div><div id="timeline-scroll" class="timeline-scroll" tabindex="0" role="region" aria-label="Club career in chronological order. Scroll horizontally for long careers."><ol id="timeline" class="timeline"></ol></div><div class="pitch-bottom"><span class="path-label"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h8M7 1l3 3-3 3M14 12H6m3-3-3 3 3 3" stroke="currentColor" stroke-width="1.5"/></svg>DEBUT → LATEST CLUB</span><span id="club-count">SENIOR CLUB CAREER</span></div></div>
@@ -10079,13 +10080,13 @@ const hintValues=p=>[country(p),position(p)];
 function applyLanguage() {
   const t=copy();document.documentElement.lang=language;document.title=t.title;
   document.querySelector('meta[name="description"]').content=t.description;
-  const text={'.brand small':t.brand,'.edition':t.edition,'#help':t.help,'.hero .eyebrow':t.eyebrow,'.intro':t.intro,'#score-badge-label':t.score,'.stat .stat-label':t.streak,'.stat .stat-value small':t.row,'#question':t.question,'.answer-heading p':t.chances,'#source-details summary':t.sourceSummary,'#summary-panel .eyebrow':t.whistle,'#replay':t.replay+' ↻','.match-review summary':t.review,'.page-footer > span:last-child':t.snapshot,'#career-navigation > span':t.scroll,'#history-details summary':t.historyTitle,'#history-empty':t.historyEmpty,'#reset-progress':t.resetLabel};
+  const text={'.brand small':t.brand,'.edition':t.edition,'#help':t.help,'.hero .eyebrow':t.eyebrow,'.intro':t.intro,'#score-badge-label':t.score,'#streak-badge-label':t.streak,'#question':t.question,'.answer-heading p':t.chances,'#source-details summary':t.sourceSummary,'#summary-panel .eyebrow':t.whistle,'#replay':t.replay+' ↻','.match-review summary':t.review,'.page-footer > span:last-child':t.snapshot,'#career-navigation > span':t.scroll,'#history-details summary':t.historyTitle,'#history-empty':t.historyEmpty,'#reset-progress':t.resetLabel};
   for(const [selector,value] of Object.entries(text))document.querySelector(selector).textContent=value;
   $('title').innerHTML=t.headline;$('summary-title').innerHTML=t.summary;
   document.querySelector('.page-footer > span:first-child').innerHTML=t.footer;
   document.querySelector('.file-label').firstChild.textContent=t.career+' ';
   const path=document.querySelector('.path-label');path.lastChild.textContent=t.path;
-  const attributes={'.stats':t.scoreboard,'#round-panel':t.round,'#help':t.help,'#hints':t.revealed,'#progress':t.completed,'#career-back':t.earlier,'#career-forward':t.later,'#career-navigation [role="group"]':t.navigation};
+  const attributes={'.score-panel':t.scoreboard,'#round-panel':t.round,'#help':t.help,'#hints':t.revealed,'#progress':t.completed,'#career-back':t.earlier,'#career-forward':t.later,'#career-navigation [role="group"]':t.navigation};
   for(const [selector,value] of Object.entries(attributes))document.querySelector(selector).setAttribute('aria-label',value);
   $('rules').innerHTML=t.rules;$('language').value=language;
   $('competitions-title').textContent=t.competitionsTitle;$('competitions-intro').textContent=t.competitionsIntro;$('competitions-close').textContent=t.competitionsClose;
@@ -10100,7 +10101,7 @@ function renderCompetitionOptions(){
     const remaining=remainingFor(id).length,completed=remaining===0,b=el('button',undefined,'option'+(completed?' muted':''));b.type='button';b.disabled=completed;
     b.append(el('span',t.competitions[id],'option-name'),el('span',completed?t.competitionCompleted:String(remaining),'option-state'));
     if(id===state.competition)b.setAttribute('aria-current','true');
-    b.addEventListener('click',()=>{const next=startGame(state.difficulty,id);if(!next)return;state=next;resetRoundClock();applyLanguage();render(false,true);showRoundStart();$('competitions').close();});
+    b.addEventListener('click',()=>{const next=startGame(state.difficulty,id);if(!next)return;state=next;resetRoundClock();applyLanguage();render(false,true);$('competitions').close();showRoundStart();});
     container.append(b);
   });
 }
