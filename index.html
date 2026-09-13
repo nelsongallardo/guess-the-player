@@ -10154,7 +10154,12 @@ function renderCompetitionOptions(){
     const remaining=remainingFor(id).length,completed=remaining===0,b=el('button',undefined,'option'+(completed?' muted':''));b.type='button';b.disabled=completed;
     b.append(el('span',t.competitions[id],'option-name'),el('span',completed?t.competitionCompleted:String(remaining),'option-state'));
     if(id===state.competition)b.setAttribute('aria-current','true');
-    b.addEventListener('click',()=>{const next=startGame(state.difficulty,id);if(!next)return;state=next;resetRoundClock();applyLanguage();render(false,true);$('competitions').close();showRoundStart();});
+    // No showRoundStart() here: this is picked from the masthead, at the
+    // top of the page already - forcibly scrollIntoView-ing the round
+    // panel would push the masthead itself off-screen above the fold,
+    // which reads as "the page jumped to the bottom." Just close the
+    // dialog and let the page stay where the player already was.
+    b.addEventListener('click',()=>{const next=startGame(state.difficulty,id);if(!next)return;state=next;resetRoundClock();applyLanguage();render(false,true);$('competitions').close();(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});});
     container.append(b);
   });
 }
