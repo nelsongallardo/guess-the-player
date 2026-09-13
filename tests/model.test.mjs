@@ -95,11 +95,13 @@ test('invalid/repeated guesses cannot spend attempts or award points twice',()=>
   assert.equal(g.stats(s).score,100);assert.equal(g.next(s),true);assert.equal(g.next(s),false);assert.equal(s.roundIndex,1);
 });
 
-test('hints reveal exactly country, position, displayed-name initials and cost no attempts',()=>{
+test('hints reveal exactly country and position (2 max), cost no attempts',()=>{
   const s=g.create(),p=g.playerAt(s);
-  assert.deepEqual(plain(g.hintValues(p)),[p.country,p.position,g.initials(p.name)]);
-  for(let i=1;i<=3;i++){assert.equal(g.hint(s),true);assert.equal(g.roundAt(s).hints,i);}
-  assert.equal(g.hint(s),false);assert.equal(g.roundAt(s).guesses.length,0);assert.equal(g.stats(s).score,0);
+  assert.deepEqual(plain(g.hintValues(p)),[p.country,p.position]);
+  for(let i=1;i<=2;i++){assert.equal(g.hint(s),true);assert.equal(g.roundAt(s).hints,i);}
+  assert.equal(g.hint(s),false,'Capped at 2 - initials was removed, too obvious alongside 5 visible options');
+  assert.equal(g.roundAt(s).guesses.length,0);assert.equal(g.stats(s).score,0);
+  // initials() itself is still a correct, tested utility even though hints no longer use it.
   assert.equal(g.initials('Lionel Messi'),'L. M.');assert.equal(g.initials('Pelé'),'P.');assert.equal(g.initials('  Andrés   Iniesta '),'A. I.');
 });
 
@@ -107,10 +109,14 @@ test('scoring rewards speed and no-hint answers, floors gracefully, and is stabl
   // Pure function: hints cap the ceiling (regardless of speed), elapsed time
   // decays a round's value between a 5s grace window and a 30s floor.
   assert.equal(g.pointsFor(0, 0), 100); assert.equal(g.pointsFor(0, 4999), 100); assert.equal(g.pointsFor(0, 5000), 100);
-  assert.equal(g.pointsFor(1, 0), 80); assert.equal(g.pointsFor(2, 0), 60); assert.equal(g.pointsFor(3, 0), 40);
+  // Only 2 hints are offerable in the UI now (see hint()'s cap), but pointsFor
+  // still clamps a stray/legacy hints=3 to the same value as 2, rather than
+  // over-penalizing it.
+  assert.equal(g.pointsFor(1, 0), 80); assert.equal(g.pointsFor(2, 0), 60); assert.equal(g.pointsFor(3, 0), 60);
   assert.equal(g.pointsFor(0, 30000), 50); assert.equal(g.pointsFor(0, 60000), 50); // floor holds past 30s
   assert.equal(g.pointsFor(0, 17500), 75); // interpolates halfway between the grace window and the floor
-  assert.equal(g.pointsFor(3, 30000), 20); // hint cap and time floor combine, never reaching zero
+  assert.equal(g.pointsFor(2, 30000), 30); // hint cap and time floor combine, never reaching zero
+  assert.equal(g.pointsFor(3, 30000), 30); // hints=3 clamps to the same value as 2
   assert.ok(g.pointsFor(0, -50) === 100, 'negative elapsed (clock skew) never breaks or exceeds the ceiling');
   // answer() takes elapsedMs from the caller (the UI owns the per-round
   // clock) so the model itself has no wall-clock dependency and stays
@@ -321,7 +327,7 @@ test('Spanish copy, all 60 career notes and every country/position are translate
   for(const lang of ['en','es']){assert.ok(COPY[lang].footer.includes('60 '));assert.ok(COPY[lang].footer.includes('30 '));assert.ok(COPY[lang].rules.includes('60 '));}
   assert.equal(COPY.es.question,'¿Quién es este jugador?');
   assert.equal(COPY.es.attempts(1),'Queda 1 intento');
-  assert.equal(COPY.es.hints.join('|'),'País|Posición|Iniciales');
+  assert.equal(COPY.es.hints.join('|'),'País|Posición');
   for(const lang of ['en','es']){
     for(const id of ['all',...g.COMPETITION_IDS])assert.ok(COPY[lang].competitions[id],`${lang}.competitions.${id}`);
   }
