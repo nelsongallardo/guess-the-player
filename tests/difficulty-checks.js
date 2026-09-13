@@ -35,7 +35,7 @@ async page => {
     for(let i=0;i<60;i++){
       const p=await page.evaluate(()=>({id:CareerGame.playerAt(state).id,name:CareerGame.playerAt(state).name,difficulty:CareerGame.roundAt(state).difficulty,options:CareerGame.roundAt(state).options}));
       ok(p.difficulty==='hard','Standard selection applied to every round');seen.add(p.id);
-      ok(p.options.length===5&&new Set(p.options).size===5,'Five unique options');
+      ok(p.options.length===10&&new Set(p.options).size===10,'Ten unique options');
       await page.getByRole('button',{name:p.name,exact:true}).click();await page.locator('#next').click();
     }
     ok(seen.size===60,'Full unique deck');

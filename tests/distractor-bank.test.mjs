@@ -40,11 +40,16 @@ test('every target has four same-system contemporaries; tight era tiers cannot b
   for(const p of players){
     const eligible=g.eligibleRivals(p).map(n=>byName.get(n));
     assert.ok(eligible.filter(q=>g.matchTier(p,q)===0).length>=4,p.name+' needs four researched same-system contemporaries');
+    // The 10-option format needs 9 distractors: only when a player has that
+    // many same-origin-system candidates is every wrong answer guaranteed
+    // to stay in-system; thinner pools legitimately widen (checked below via
+    // the tighter-tier-inclusion guarantee, still enforced at any pool size).
+    const sameSystem=eligible.filter(q=>g.originTier(p,q)===0).length;
     for(let seed=1;seed<=40;seed++){
       let x=seed;const random=()=>{x=x*16807%2147483647;return(x-1)/2147483646;};
       const options=g.optionsFor(p,'hard',random);
       const selected=options.filter(n=>n!==p.name).map(n=>byName.get(n));
-      assert.ok(selected.every(q=>g.originTier(p,q)===0),p.name);
+      if(sameSystem>=9)assert.ok(selected.every(q=>g.originTier(p,q)===0),p.name);
       const boundary=Math.max(...selected.map(q=>g.matchTier(p,q)));
       assert.ok(eligible.filter(q=>g.matchTier(p,q)<boundary).every(q=>options.includes(q.name)),p.name);
     }
@@ -55,7 +60,10 @@ test('bank answers remain valid after guesses, hints, save reload and Next',()=>
   const s=g.create('hard','la-liga'),p=players.find(p=>p.id==='diego-maradona');
   s.deck=[p.id,...s.deck.filter(id=>id!==p.id)];
   s.rounds=[{options:g.optionsFor(p),guesses:[],hints:0,difficulty:'hard'}];
-  const wrong=s.rounds[0].options.find(n=>n!==p.name);
+  // With 9 distractors now offered, pick specifically a bank-sourced wrong
+  // answer (guaranteed present) rather than whichever happens to shuffle
+  // first, since the remaining slots may legitimately include real players.
+  const wrong=s.rounds[0].options.find(n=>n!==p.name&&bank.some(q=>q.name===n));
   assert.ok(bank.some(q=>q.name===wrong));
   assert.equal(g.answer(s,wrong),true);assert.equal(g.hint(s),true);
   const saved=plain(s);assert.equal(g.validate(saved),true);assert.deepEqual(saved,plain(s));

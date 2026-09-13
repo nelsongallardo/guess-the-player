@@ -21,7 +21,7 @@ async page => {
       const lang=['query','saved'].includes(kind)?'en':'es';
       assert(await p.locator('html').getAttribute('lang')===lang,'Language precedence: '+kind);
       assert(await p.locator('#about-game').getAttribute('lang')===lang,'Explanation translated: '+kind);
-      assert(await p.locator('#options button').count()===5,'Game ready');
+      assert(await p.locator('#options button').count()===10,'Game ready');
       assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No mobile horizontal overflow');
       if(kind==='offline')assert((await p.locator('#site-icon').getAttribute('href')).startsWith('data:image/svg+xml,'),'Offline icon remains embedded');
       await p.evaluate(()=>Promise.all([...document.images].map(i=>i.decode())));

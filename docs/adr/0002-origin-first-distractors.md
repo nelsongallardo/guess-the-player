@@ -51,7 +51,9 @@ Origin coverage is mandatory when adding a player. An unmapped starting club is 
 
 - Existing saved options, guesses, hints, points and round order remain untouched. The improved matcher applies to newly generated rounds, including the next round of an existing save. The later ADR 0003 amendment repairs an untouched current round with outdated origin/era giveaways on reload; engaged rounds remain unchanged.
 - Keep current competition decks, all 60 player records, crests, scoring and UI unchanged apart from help text describing the new rival policy.
-- Small origin pools still need a regional fallback to provide five answers. Old legends also lack enough close-era peers in this roster. The algorithm cannot make every career equally hard, and must not fabricate researched players to fill gaps. Future roster expansion should target those gaps, especially earlier Argentine peers.
+- Small origin pools still need a regional fallback to provide enough answers. Old legends also lack enough close-era peers in this roster. The algorithm cannot make every career equally hard, and must not fabricate researched players to fill gaps. Future roster expansion should target those gaps, especially earlier Argentine peers.
+
+**2026 amendment - option count.** The live guest/practice Hard UI moved from 4 required distractors (5 options) to 9 (10 options), a deliberate harder-game decision; the tier-priority algorithm, noise-bounded ranking and every guarantee described above are otherwise unchanged, just parameterized on the new count (`optionsFor`'s `slotsNeeded`). The internal `'easy'`/`'medium'` helpers keep the original 4 for fixture/testing compatibility - no live path reaches them. Ranked mode's server schema is untouched and still deals 4/5; extending it needs a database migration, not just a client change.
 
 ## Verification
 

@@ -38,8 +38,8 @@ test('all Hard pools preserve the strongest origin tier and use only ranked boun
     const same=eligible.filter(q=>g.originFor(q).system===g.originFor(p).system);
     for(let seed=1;seed<=30;seed++){
       const options=g.optionsFor(p,'hard',randomFor(seed),competition),wrong=options.filter(n=>n!==p.name).map(n=>byName.get(n));
-      assert.equal(options.length,5);assert.equal(new Set(options).size,5);assert.equal(options.filter(n=>n===p.name).length,1);
-      if(same.length>=4)assert.ok(wrong.every(q=>g.originFor(q).system===g.originFor(p).system),p.id+' / '+competition);
+      assert.equal(options.length,10);assert.equal(new Set(options).size,10);assert.equal(options.filter(n=>n===p.name).length,1);
+      if(same.length>=9)assert.ok(wrong.every(q=>g.originFor(q).system===g.originFor(p).system),p.id+' / '+competition);
       else for(const q of same)assert.ok(options.includes(q.name),'Thin pools retain every closer-origin candidate: '+p.id);
       const boundary=Math.max(...wrong.map(q=>g.matchTier(p,q)));
       const tighter=eligible.filter(q=>g.matchTier(p,q)<boundary);
@@ -78,7 +78,13 @@ test('Maradona gets four researched Argentine contemporaries, not 1990s debutant
   const peers=new Set(['Daniel Bertoni','Jorge Valdano','Ramón Díaz','Osvaldo Ardiles']);
   for(let seed=1;seed<=500;seed++){
     const wrong=g.optionsFor(p,'hard',randomFor(seed),'la-liga').filter(n=>n!==p.name);
-    assert.ok(wrong.every(n=>peers.has(n)),wrong.join(', '));
+    // The 10-option format needs 9 distractors, but this exact-tier bank of
+    // researched contemporaries only has four - so all four are always
+    // included (the original regression this test guards against), and the
+    // remaining slots widen to the next tier rather than ever admitting a
+    // wrong-origin or era-mismatched "1990s debutant" giveaway.
+    for(const peer of peers)assert.ok(wrong.includes(peer),`${peer} missing: ${wrong.join(', ')}`);
+    assert.ok(wrong.every(n=>g.originFor(g.candidates.find(q=>q.name===n)).system==='argentina'),wrong.join(', '));
   }
   for(const n of peers){
     const q=candidates.find(q=>q.name===n);assert.ok(q,n);

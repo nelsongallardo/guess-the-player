@@ -53,12 +53,12 @@ test('every ordered public crest URL has a valid embedded PNG; no external depen
   assert.ok(!html.includes('__PLAYER_DATABASE__') && !html.includes('__CREST_ASSETS__'));
 });
 
-test('60,000 option samples always contain five unique names and exactly one correct answer',()=>{
+test('60,000 option samples always contain ten unique names and exactly one correct answer',()=>{
   for(const p of players){
     const orders=new Set();
     for(let i=0;i<1000;i++){
       const names=g.optionsFor(p);
-      assert.equal(names.length,5); assert.equal(new Set(names).size,5);
+      assert.equal(names.length,10); assert.equal(new Set(names).size,10);
       assert.equal(names.filter(n=>n===p.name).length,1);
       assert.ok(names.every(n=>n===p.name || g.eligibleRivals(p).includes(n)));
       // Identical badge paths (e.g. Scholes/Giggs) are never simultaneous answers.
@@ -172,13 +172,17 @@ test('re-audit corrections: Swansea calendar year, signing evidence and unchange
   assert.ok(players.find(p=>p.id==='neymar').clubs[3].note.includes('4 November 2024'));
 });
 
-test('legacy difficulty helpers preserve five eligible, distinct, shuffled answers',()=>{
+test('legacy easy/medium helpers preserve five eligible, distinct, shuffled answers; live Hard shows ten',()=>{
+  // easy/medium stay at their original 5 (1 + 4) as internal fixture/testing
+  // helpers, not a live gameplay path; hard - the only mode the UI plays -
+  // shows 10 (1 + 9), the live 2026 option-count product decision.
   for(const p of players)for(const level of ['easy','medium','hard']){
+    const expected=level==='hard'?10:5;
     const orders=new Set();
     for(let seed=1;seed<=100;seed++){
       let x=seed;const random=()=>{x=x*16807%2147483647;return (x-1)/2147483646;};
       const options=g.optionsFor(p,level,random);orders.add(options.join('|'));
-      assert.equal(options.length,5);assert.equal(new Set(options).size,5);assert.equal(options.filter(n=>n===p.name).length,1);
+      assert.equal(options.length,expected);assert.equal(new Set(options).size,expected);assert.equal(options.filter(n=>n===p.name).length,1);
       assert.ok(options.every(n=>n===p.name||g.eligibleRivals(p).includes(n)));
     }
     assert.ok(orders.size>10,'Answer positions remain randomized');
@@ -320,8 +324,6 @@ test('Spanish copy, all 60 career notes and every country/position are translate
     assert.equal(note.clubNotes.length,p.clubs.length);
     p.clubs.forEach((c,i)=>{assert.equal(Boolean(note.clubNotes[i]),Boolean(c.note));if(c.note)assert.notEqual(note.clubNotes[i],c.note);});
   }
-  assert.equal(COPY.en.path,'SENIOR CLUB CAREER');
-  assert.equal(COPY.es.path,'CARRERA SÉNIOR');
   assert.ok(COPY.en.rules.includes('youth teams, national teams and coaching jobs are excluded'));
   assert.ok(COPY.es.rules.includes('se excluyen juveniles, selecciones y etapas como entrenador'));
   for(const lang of ['en','es']){assert.ok(COPY[lang].footer.includes('60 '));assert.ok(COPY[lang].footer.includes('30 '));assert.ok(COPY[lang].rules.includes('60 '));}

@@ -4,18 +4,27 @@ async page => {
   await page.goto('http://127.0.0.1:4173/index.html?lang=es');
   await page.setViewportSize({width:375,height:667});
   const sampled=await page.evaluate(()=>{
+    // The 10-option format needs 9 distractors; Maradona's tight bank of
+    // researched contemporaries only has four, so those four must always be
+    // present and every wrong answer must stay Argentine, but the remaining
+    // slots legitimately widen to other real Argentine players (not just
+    // this exact four-name bank) rather than ever giving away wrong origin.
     const p=PLAYERS.find(p=>p.id==='diego-maradona'),byName=new Map(CareerGame.candidates.map(p=>[p.name,p])),names=new Set();
-    for(let i=0;i<100;i++)for(const n of CareerGame.optionsFor(p,'hard',Math.random,'la-liga').filter(n=>n!==p.name)){
-      if(CareerGame.originFor(byName.get(n)).system!=='argentina')throw Error('Wrong-origin rival: '+n);
-      if(!['Daniel Bertoni','Jorge Valdano','Ramón Díaz','Osvaldo Ardiles'].includes(n))throw Error('Not a researched Maradona contemporary: '+n);
-      names.add(n);
+    const peers=['Daniel Bertoni','Jorge Valdano','Ramón Díaz','Osvaldo Ardiles'];
+    for(let i=0;i<100;i++){
+      const wrong=CareerGame.optionsFor(p,'hard',Math.random,'la-liga').filter(n=>n!==p.name);
+      for(const n of wrong){
+        if(CareerGame.originFor(byName.get(n)).system!=='argentina')throw Error('Wrong-origin rival: '+n);
+        names.add(n);
+      }
+      for(const peer of peers)if(!wrong.includes(peer))throw Error('Missing researched Maradona contemporary: '+peer);
     }
     state=CareerGame.create('hard','la-liga');state.deck=[p.id,...state.deck.filter(id=>id!==p.id)];
     state.rounds=[{options:CareerGame.optionsFor(p,'hard',Math.random,'la-liga'),guesses:[],hints:0,difficulty:'hard'}];
     resetRoundClock();applyLanguage();render(false,true);scrollTo(0,0);
     return {rivals:[...names].sort(),displayedOptions:CareerGame.roundAt(state).options,roundCount:state.deck.length};
   });
-  ok(await page.locator('#options button').count()===5,'Five answers retained');
+  ok(await page.locator('#options button').count()===10,'Ten answers retained');
   ok((await page.locator('#round-number').innerText()).endsWith('/ '+sampled.roundCount),'La Liga still controls deck');
   const wrong=sampled.displayedOptions.find(n=>n!=='Diego Maradona');
   await page.getByRole('button',{name:wrong,exact:true}).click();
@@ -34,8 +43,16 @@ async page => {
     const byName=new Map(CareerGame.candidates.map(p=>[p.name,p]));
     const examples={};
     for(const p of PLAYERS){
+      const eligible=CareerGame.eligibleRivals(p).map(n=>byName.get(n));
       const options=CareerGame.optionsFor(p,'hard');
-      if(!options.filter(n=>n!==p.name).every(n=>CareerGame.matchTier(p,byName.get(n))===0))throw Error('Origin/era giveaway: '+p.name);
+      const wrong=options.filter(n=>n!==p.name).map(n=>byName.get(n));
+      // Only players with at least nine tightest-tier (matchTier 0) rivals
+      // are guaranteed to fill every slot from that tier alone; thinner
+      // pools legitimately widen, but must still never skip a tighter match.
+      const tier0=eligible.filter(q=>CareerGame.matchTier(p,q)===0).length;
+      if(tier0>=9&&!wrong.every(q=>CareerGame.matchTier(p,q)===0))throw Error('Origin/era giveaway: '+p.name);
+      const boundary=Math.max(...wrong.map(q=>CareerGame.matchTier(p,q)));
+      if(!eligible.filter(q=>CareerGame.matchTier(p,q)<boundary).every(q=>options.includes(q.name)))throw Error('Sampled away a stronger match: '+p.name);
       if(['pele','cristiano-ronaldo','thierry-henry','claudio-pizarro','eidur-gudjohnsen'].includes(p.id))examples[p.name]=options;
     }
     return {targets:PLAYERS.length,extraCandidates:CareerGame.candidates.length-PLAYERS.length,examples};

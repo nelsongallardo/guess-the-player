@@ -15,9 +15,13 @@ async page => {
   const old=await install('untouched');await p.reload();
   const loaded=await p.evaluate(()=>({state,stats:CareerGame.stats(state),buttons:[...document.querySelectorAll('#options button')].map(b=>b.getAttribute('aria-label'))}));
   ok(!loaded.state.rounds[0].options.includes('Paul Scholes'),'Untouched saved Henry must not retain Scholes after reload');
-  ok(JSON.stringify([...loaded.state.rounds[0].options].sort())===JSON.stringify(['Thierry Henry','Zinedine Zidane','Nicolas Anelka','Emmanuel Petit','Sylvain Wiltord'].sort()),'All four updated Henry contemporaries visible');
+  // The 10-option format needs 9 distractors; Henry has exactly four tight
+  // same-timeline contemporaries and no origin-tier-1 candidates, so those
+  // four are always present (not an exact full set - the remaining five
+  // widen to the next tier and can vary with near-boundary scoring noise).
+  for(const name of ['Thierry Henry','Zinedine Zidane','Nicolas Anelka','Emmanuel Petit','Sylvain Wiltord'])ok(loaded.state.rounds[0].options.includes(name),name+' missing from upgraded Henry options');
   ok(JSON.stringify(loaded.state.deck)===JSON.stringify(old.deck)&&loaded.state.roundIndex===0&&loaded.stats.completed===0&&loaded.stats.score===0,'Deck and progress preserved');
-  ok(loaded.buttons.length===5,'Five rendered answers');
+  ok(loaded.buttons.length===10,'Ten rendered answers');
   await p.reload();ok(await p.evaluate(saved=>JSON.stringify(state)===JSON.stringify(saved),loaded.state),'Upgraded choices persist, no reload reroll');
   for(const action of ['guess','hint']){
    const engaged=await install(action);await p.reload();

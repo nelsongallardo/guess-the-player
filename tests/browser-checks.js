@@ -8,7 +8,7 @@ async page => {
   const view=()=>page.evaluate(()=>({name:CareerGame.playerAt(state).name,id:CareerGame.playerAt(state).id,options:[...CareerGame.roundAt(state).options],guesses:[...CareerGame.roundAt(state).guesses],hints:CareerGame.roundAt(state).hints,result:CareerGame.outcome(state),stats:CareerGame.stats(state),index:state.roundIndex,finished:state.finished,valid:CareerGame.validate(state),hintValues:CareerGame.hintValues(CareerGame.playerAt(state)),crestUrls:CareerGame.playerAt(state).clubCrests}));
   const choose=async(name)=>{const s=await view();await page.locator('#options button').nth(s.options.indexOf(name)).click();};
   await clean();await page.setViewportSize({width:1440,height:1080});
-  ok(await page.locator('#options button').count()===5,'Initial five answers');ok(!await page.locator('#next').isVisible(),'Next hidden while playing');
+  ok(await page.locator('#options button').count()===10,'Initial ten answers');ok(!await page.locator('#next').isVisible(),'Next hidden while playing');
   const first=await view();
   for(let h=0;h<2;h++){
     await page.locator('#hint').click();const items=await page.locator('#hints li').allTextContents();
@@ -30,7 +30,7 @@ async page => {
   await choose(wrong[1]);ok((await page.locator('#attempt-text').textContent()).includes('1 attempt'),'One attempt remains');
   await choose(first.name);ok((await view()).stats.score===40,'Third-attempt win with all three hints revealed scores 40 (100 x 0.4 hint multiplier; hints capped at 3)');
   ok(await page.locator('#options .correct.goal').count()===1,'Correct answer green with success animation');
-  ok(await page.locator('#options button:disabled').count()===5,'Round locked after win');
+  ok(await page.locator('#options button:disabled').count()===10,'Round locked after win');
   ok(await page.locator('#next').isVisible(),'Next visible after win');ok(await page.evaluate(()=>document.activeElement.id)==='next','Focus moves to Next');
   await page.setViewportSize({width:375,height:667});await page.locator('#next').scrollIntoViewIfNeeded();
   await page.locator('#next').evaluate(button=>{button.click();button.click();});ok((await view()).index===1,'Rapid double Next cannot skip live round');
@@ -66,7 +66,7 @@ async page => {
   for(let i=0;i<60;i++){
     if(i===49)await page.setViewportSize({width:375,height:667});
     const s=await view();ok(s.index===i&&s.valid,'Valid round index');ok(!seen.has(s.id),'No repeated player');seen.add(s.id);s.crestUrls.forEach(u=>crests.add(u));
-    ok(await page.locator('#options button').count()===5,`${s.name}: five options`);
+    ok(await page.locator('#options button').count()===10,`${s.name}: ten options`);
     const images=await page.evaluate(async()=>{await Promise.all([...document.images].map(image=>image.decode()));return [...document.images].every(image=>image.complete&&image.naturalWidth>0&&!image.hidden&&image.alt.endsWith('crest'));});ok(images,`${s.name}: all crests decode`);
     const misses=i%4;for(const name of s.options.filter(n=>n!==s.name).slice(0,misses))await choose(name);
     if(misses<3){await choose(s.name);wins++;streak++;best=Math.max(best,streak);}else streak=0;

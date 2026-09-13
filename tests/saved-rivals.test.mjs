@@ -17,7 +17,15 @@ test('loading untouched Henry screenshot choices upgrades origin/era giveaways w
  assert.equal(g.refreshUnstartedRivals(s),true);
  assert.deepEqual(plain(s.deck),before.deck);assert.deepEqual(plain(g.stats(s)),stats);
  assert.equal(s.roundIndex,before.roundIndex);assert.equal(s.competition,before.competition);
- assert.deepEqual(new Set(s.rounds[0].options),new Set(['Thierry Henry','Zinedine Zidane','Emmanuel Petit','Nicolas Anelka','Sylvain Wiltord']));
+ // The legacy 5-name screenshot mismatch upgrades to today's 10-option
+ // format (1 correct + 9 distractors). Henry has exactly four tight
+ // same-timeline contemporaries and no origin-tier-1 candidates, so those
+ // four are always present and the remaining five widen to the next tier -
+ // not a fixed exact set, since near-boundary noise can vary which specific
+ // names fill it.
+ assert.equal(s.rounds[0].options.length,10);
+ assert.ok(s.rounds[0].options.includes('Thierry Henry'));
+ for(const name of ['Zinedine Zidane','Emmanuel Petit','Nicolas Anelka','Sylvain Wiltord'])assert.ok(s.rounds[0].options.includes(name),name);
  assert.deepEqual(plain(s.rounds[0].guesses),[]);assert.equal(s.rounds[0].hints,0);assert.ok(g.validate(s));
  const upgraded=plain(s);assert.equal(g.refreshUnstartedRivals(s),false);assert.deepEqual(plain(s),upgraded);
 });

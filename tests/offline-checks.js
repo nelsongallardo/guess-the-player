@@ -8,7 +8,7 @@ async page => {
     file.on('pageerror',error=>errors.push(error.message));
     file.on('request',request=>{if(/^https?:/.test(request.url()))requests.push(request.url());});
     await file.goto(__FILE_URL__);
-    ok(await file.locator('#options button').count()===5,'Single file loads with browser network offline');
+    ok(await file.locator('#options button').count()===10,'Single file loads with browser network offline');
     for(let i=0;i<60;i++){
       const s=await file.evaluate(()=>({id:CareerGame.playerAt(state).id,name:CareerGame.playerAt(state).name,index:state.roundIndex,options:CareerGame.roundAt(state).options,crests:CareerGame.playerAt(state).clubCrests}));
       ok(s.index===i&&!seen.has(s.id),'Offline deck order');seen.add(s.id);s.crests.forEach(u=>crests.add(u));

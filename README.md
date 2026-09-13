@@ -1,6 +1,6 @@
 # derabona
 
-A football-career quiz: read the club-crest timeline and identify the player from five names. Plain HTML, CSS and JavaScript; one portable `index.html` supports guest play without a build or network connection. Optional Google accounts use Supabase for persistent, server-scored progress and public nickname leaderboards.
+A football-career quiz: read the club-crest timeline and identify the player from ten names (five for ranked accounts). Plain HTML, CSS and JavaScript; one portable `index.html` supports guest play without a build or network connection. Optional Google accounts use Supabase for persistent, server-scored progress and public nickname leaderboards.
 
 **Website:** <https://derabona.club/> · [Leaderboard](https://derabona.club/leaderboard.html) · [Español](https://derabona.club/?lang=es) · [English](https://derabona.club/?lang=en)
 
@@ -27,9 +27,9 @@ Download `index.html` and open it in a modern browser for offline guest play. Al
 
 - Sixty playable careers: thirty representing European national teams and thirty representing South American national teams. [Research and audit](DATA_AUDIT.md) document the three expansions and their evidence.
 - Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão or All Players from the competition badge. Selection changes the playable pool, not a strict rival filter. Finish the active round first; an account has only one active server round even across devices.
-- Five shuffled choices: one correct player and four distinct eligible rivals, excluding identical ordered club careers. No difficulty selector: origin-first Hard is automatic.
+- Ten shuffled choices in guest/practice play: one correct player and nine distinct eligible rivals, excluding identical ordered club careers (ranked accounts keep the original five: one correct plus four rivals). No difficulty selector: origin-first Hard is automatic.
 - Wrong answers draw from playable players plus **59 researched wrong-answer-only profiles**. Starting domestic football system takes precedence, then contemporary overlap with debuts at most eight years apart, then career similarity with bounded noise. This does not add playable rounds. See [ADR 0003](docs/adr/0003-researched-contemporary-rivals.md).
-- Three attempts. Wrong choices are disabled. A correct answer or third error ends the round; only then does Next Player appear. Two hints reveal country, then position. Hints reduce points; there is no new initials hint.
+- Three attempts. Wrong choices are disabled. A correct answer or third error ends the round; only then does Next Player appear. Guest/practice hints reveal country, then position, then each club's years in the career timeline (three hints; ranked stays at two, country then position). Hints reduce points; there is no initials hint.
 - A correct answer earns up to 100 points, reduced by 20% per hint and answer time: full speed value inside five seconds, decaying to a 50% speed floor by thirty seconds. A loss earns zero. Guest elapsed time is an in-memory round clock; ranked time uses the persisted server start and includes time away. Reloading cannot restart ranked timing.
 - Resolved players, right or wrong, are excluded across competitions. Guests maintain that ledger for the tab session until unranked Reset. Accounts retain a permanent first result per player/ruleset. Exhausted competitions show Completed rather than offering ranked repeats.
 - The masthead score is global across competitions within the active mode, never combined guest/cloud points. Guest score and streak accumulate across decks; losing resets the streak, not points. Ranked mode currently displays cloud points, not an invented cloud streak.
