@@ -56,13 +56,7 @@ async page => {
     p.once('dialog',d=>d.accept());await p.locator('#google-login').click();await p.waitForFunction(()=>document.querySelector('#account-status').textContent.includes('did not complete'));
     ok(await p.evaluate(value=>JSON.stringify({state,lifetime,seen:[...seen]})===value,guest),'Mock OAuth cancellation preserves guest progress');
     ok(await p.evaluate(()=>window.__mockAuth.calls[0][1].provider==='google'&&window.__mockAuth.calls[0][1].options.redirectTo.endsWith('?lang=en')),'Google provider uses sanitized language redirect');
-    await p.locator('#account-close').click();await p.locator('#leaderboard-open').click();await p.waitForFunction(()=>document.querySelectorAll('#leaderboard-entries tr').length===20);
-    ok(calls.at(-1).headers.authorization===undefined,'Anonymous public board requires no bearer or auth SDK session');
-    ok(await p.locator('#leaderboard-entries img').count()===0,'Public nicknames render as text, never HTML');
-    await p.locator('#board-next').click();await p.waitForFunction(()=>document.querySelectorAll('#leaderboard-entries tr').length===3);ok(calls.at(-1).body.offset===20,'Leaderboard next page uses exact offset');
-    await p.locator('#board-prev').click();await p.waitForFunction(()=>document.querySelectorAll('#leaderboard-entries tr').length===20);ok(calls.at(-1).body.offset===0,'Leaderboard previous page restores offset');
-    await p.locator('#leaderboard-filter').selectOption('brasileirao');await p.waitForFunction(()=>document.querySelector('#leaderboard-table').hidden);ok(await p.locator('#board-next').isHidden(),'Empty league hides table and pagination');
-    boardFail=true;await p.locator('#leaderboard-filter').selectOption('la-liga');await p.locator('#board-retry').waitFor({state:'visible'});await p.locator('#board-retry').click();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(calls.at(-1).body.competition==='la-liga','Board network error retries same selected league');await p.locator('#leaderboard-close').click();
+    await p.locator('#account-close').click();
     // Explicit mocked callback, never a real Google login.
     holdProgress=true;await p.goto(origin+'/index.html?lang=en&code=EXPLICIT_SECRET&state=EXPLICIT_STATE#access_token=EXPLICIT_FRAGMENT&refresh_token=EXPLICIT_REFRESH');
     while(!releaseProgress)await p.waitForTimeout(10);
@@ -96,22 +90,22 @@ async page => {
     ok((await p.locator('#alias-tooltip').textContent()).includes('nombre de animal al azar')&&await p.locator('#enroll').textContent()==='Guardar apodo'&&(await p.locator('#nickname-label').textContent()).includes('opcional')&&(await p.locator('#enrolled-status').textContent()).includes('Otter-4821'),'Spanish tooltip, optional rename and alias are translated without changing identity');
     await p.locator('#account-close').click();await p.locator('#language').selectOption('en');
     await p.evaluate(()=>{window.__mockAuth.session={...window.__mockAuth.session,access_token:'REFRESHED_TEST_TOKEN'};});
-    await p.locator('#leaderboard-open').click();await p.locator('#leaderboard-table').waitFor({state:'visible'});
+    await p.evaluate(()=>Accounts.request({action:'leaderboard',competition:'all',limit:20,offset:0},'ranked-game',true));
     ok(calls.at(-1).headers.authorization==='Bearer REFRESHED_TEST_TOKEN','Public read refreshes SDK session instead of reusing cached token');
-    ok(await p.locator('#leaderboard-own').textContent()==='','Automatic alias alone does not create a rank before a verified result');
+    ok(await p.evaluate(async()=>(await Accounts.request({action:'leaderboard',competition:'all',limit:20,offset:0},'ranked-game',true)).own===null),'Automatic alias alone does not create a rank before a verified result');
     await p.evaluate(()=>{window.__mockAuth.session={...window.__mockAuth.session,access_token:'EXPIRED_TEST_TOKEN'};});
-    const beforeExpired=calls.length;await p.locator('#leaderboard-filter').selectOption('premier-league');await p.locator('#leaderboard-table').waitFor({state:'visible'});
+    const beforeExpired=calls.length;await p.evaluate(competition=>Accounts.request({action:'leaderboard',competition,limit:20,offset:0},'ranked-game',true),'premier-league');
     ok(calls.length===beforeExpired+2&&calls.at(-2).headers.authorization==='Bearer EXPIRED_TEST_TOKEN'&&!calls.at(-1).headers.authorization,'Expired authenticated league board retries once anonymously');
     const mutationCalls=calls.length;
     ok(await p.evaluate(async()=>{try{await Accounts.request({action:'hint'},'ranked-game',true);return false;}catch{return true;}}),'Even an incorrectly public-marked mutation rejects expired authentication');
     ok(calls.length===mutationCalls+1&&calls.at(-1).headers.authorization==='Bearer EXPIRED_TEST_TOKEN','Rejected mutation never retries anonymously');
     await p.evaluate(()=>{window.__mockAuth.session=null;});
-    await p.locator('#leaderboard-filter').selectOption('all');await p.locator('#leaderboard-table').waitFor({state:'visible'});
+    await p.evaluate(competition=>Accounts.request({action:'leaderboard',competition,limit:20,offset:0},'ranked-game',true),'all');
     ok(!calls.at(-1).headers.authorization,'Missing refreshed session leaves global public board usable');
     await p.evaluate(()=>{window.__mockAuth.refreshError=true;});
-    await p.locator('#leaderboard-filter').selectOption('la-liga');await p.locator('#leaderboard-table').waitFor({state:'visible'});
+    await p.evaluate(competition=>Accounts.request({action:'leaderboard',competition,limit:20,offset:0},'ranked-game',true),'la-liga');
     ok(!calls.at(-1).headers.authorization,'Refresh-token failure still renders anonymous league board');
-    await p.evaluate(()=>{window.__mockAuth.refreshError=false;window.__mockLogin();});await p.locator('#leaderboard-close').click();
+    await p.evaluate(()=>{window.__mockAuth.refreshError=false;window.__mockLogin();});
     ok(calls.filter(c=>c.body.action==='progress').every(c=>Object.keys(c.body).length===1),'Progress sends no guest state or score import');
     const localBefore=await p.evaluate(()=>sessionStorage.getItem(STORAGE_KEY));
     await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='1 / 2');await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='2 / 2');
@@ -123,13 +117,13 @@ async page => {
     const first=calls.filter(c=>c.body.action==='answer').at(-1);await p.locator('#ranked-retry').click();await p.locator('#next').waitFor({state:'visible'});
     const retry=calls.filter(c=>c.body.action==='answer').at(-1);ok(JSON.stringify(first.body)===JSON.stringify(retry.body),'Lost answer response retries byte-equivalent body and identical idempotency key');
     ok(await p.locator('#score').textContent()==='73'&&projection.progress.answered===1,'Receipt retry displays server points once');
-    await p.locator('#leaderboard-open').click();await p.waitForFunction(()=>document.querySelector('#leaderboard-own').textContent.includes('22'));ok(!calls.some(c=>c.body.action==='enroll'),'First verified result shows own rank automatically without nickname submission');await p.locator('#leaderboard-close').click();
+    const ownResult=await p.evaluate(()=>Accounts.request({action:'leaderboard',competition:'all',limit:20,offset:0},'ranked-game',true));ok(ownResult.own.rank===22&&!calls.some(c=>c.body.action==='enroll'),'First verified result shows own rank automatically without nickname submission');
     await p.locator('#next').click();await ready();ok(projection.round.playerId!==players[0].id,'Next server round excludes first resolved player');
     await p.locator('#account-open').click();await p.locator('#public-nickname').fill('Neutral Falcon');nicknameTaken=true;await p.locator('#enroll').click();await p.waitForFunction(()=>document.querySelector('#play-mode').textContent.includes('unavailable'));await p.locator('#account-close').click();await p.locator('#ranked-retry').click();await ready();
     await p.locator('#account-open').click();await p.locator('#public-nickname').fill('Neutral Eagle');await p.locator('#enroll').click();await p.waitForFunction(()=>document.querySelector('#enrolled-status').textContent.includes('Neutral Eagle'));
     ok(projection.profile.nickname==='Neutral Eagle','Nickname conflict releases rejected payload so user can correct it');
     ok(!JSON.stringify(calls).includes('MUST NEVER PUBLISH')&&!JSON.stringify(calls).includes('avatar_url'),'No Google name or photo sent to API');await p.locator('#account-close').click();
-    await p.locator('#leaderboard-open').click();await p.waitForFunction(()=>document.querySelector('#leaderboard-own').textContent.includes('22'));ok(await p.locator('#leaderboard-own').textContent()!=='','Signed-in board shows own server rank');await p.locator('#leaderboard-close').click();
+    ok((await p.evaluate(()=>Accounts.request({action:'leaderboard',competition:'all',limit:20,offset:0},'ranked-game',true))).own.rank===22,'Signed-in board shows own server rank');
     failAction='hint';await p.locator('#hint').click();await p.locator('#practice').waitFor({state:'visible'});await p.locator('#practice').click();const n=calls.length;await p.locator('#hint').click();ok(calls.length===n&&await p.locator('#play-mode').textContent()==='PRACTICE · UNRANKED','Network failure practice requires explicit action and sends no ranked mutation');
     await p.locator('#ranked-retry').click();await ready();ok(await p.locator('#score').textContent()==='73','Reconnect restores authoritative account total without practice import');
     const stableRound=JSON.stringify(projection.round);await p.locator('#language').selectOption('es');ok(await p.locator('#play-mode').textContent()==='CLASIFICADO · NUBE'&&JSON.stringify(projection.round)===stableRound,'Spanish account UI preserves active server round');await p.locator('#language').selectOption('en');
@@ -147,7 +141,7 @@ async page => {
     await p.locator('#hint').click();const beforeExpiredCode=await p.evaluate(()=>sessionStorage.getItem(STORAGE_KEY));
     await p.goto(origin+'/index.html?lang=en&code=EXPIRED_PKCE_CODE');await p.waitForFunction(()=>document.querySelector('#account-status').textContent.includes('did not complete'));
     ok(await p.evaluate(value=>sessionStorage.getItem(STORAGE_KEY)===value&&AuthCallback.code===null,beforeExpiredCode)&&p.url()===origin+'/index.html?lang=en','Expired PKCE callback preserves guest save and clears callback secrets');
-    await p.locator('#leaderboard-open').click();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(!calls.at(-1).headers.authorization,'Expired PKCE does not block public global leaderboard');await p.locator('#leaderboard-close').click();
+    await p.evaluate(()=>Accounts.request({action:'leaderboard',competition:'all',limit:20,offset:0},'ranked-game',true));ok(!calls.at(-1).headers.authorization,'Expired PKCE does not block public global leaderboard');
     ok(errors.length===0,'No JavaScript runtime errors in account and leaderboard journeys');
     return {passed:true,backend:'EXPLICIT SDK + API ROUTE MOCKS; NOT hosted OAuth/database verification',checks,errors,requestCount:calls.length};
   }finally{releaseProgress?.();await context.close();}

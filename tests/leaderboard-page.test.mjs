@@ -1,0 +1,34 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
+
+test('Leaderboard ships as a real independent static page with canonical metadata',()=>{
+  const html=read('leaderboard.html');
+  assert.match(html,/<html[^>]+lang="es"/);
+  assert.match(html,/<link[^>]+rel="canonical"[^>]+href="https:\/\/derabona.club\/leaderboard.html"/);
+  assert.match(html,/<h1\b/);
+  assert.match(html,/<main\b/);
+  assert.match(html,/aria-current="page"/);
+  assert.doesNotMatch(html,/<iframe\b|http-equiv="refresh"/i);
+  assert.doesNotMatch(html,/id="(?:roster-data|crest-data|game-model)"/);
+  assert.ok(Buffer.byteLength(html)<100_000,'Standalone board must not duplicate the heavy game artifact');
+  const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].filter(m=>m[1].trim()&&!m[0].includes('application/ld+json'));
+  assert.ok(scripts.length>0);
+  for(const script of scripts)new vm.Script(script[1]);
+});
+
+test('Read-only leaderboard shares public backend and auth storage configuration with game',()=>{
+  const game=read('index.html'),board=read('leaderboard.html');
+  const config=game.match(/Object\.freeze\(\{url:'([^']*)',anonKey:'([^']*)'\}\)/);
+  assert.ok(config,'Game public account configuration available');
+  for(const value of [config[1],config[2],'derabona.auth.v1','2.57.4'])assert.ok(board.includes(value),'Board and game configuration must agree');
+});
+
+test('Deployment packages the leaderboard and main game no longer has a ranking dialog',()=>{
+  assert.match(read('.github/workflows/pages.yml'),/cp[^\n]*leaderboard\.html[^\n]*_site\//);
+  const html=read('index.html');
+  assert.doesNotMatch(html,/<dialog[^>]+id="leaderboard-dialog"/);
+  assert.match(html,/<a\b[^>]*href="[^"]*leaderboard\.html[^\"]*"/);
+});

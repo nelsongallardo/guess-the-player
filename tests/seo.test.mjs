@@ -44,13 +44,13 @@ test('Honest structured data describes this free browser game, not fake ratings'
   assert.doesNotMatch(JSON.stringify(data), /aggregateRating|ratingValue|reviewCount|SearchAction/);
 });
 
-test('Robots allows crawling and sitemap includes only canonical HTTPS URL', () => {
+test('Robots allows crawling and sitemap includes the canonical game and leaderboard URLs', () => {
   assert.match(read('robots.txt'), /User-agent: \*/);
   assert.match(read('robots.txt'), /Allow: \//);
   assert.match(read('robots.txt'), /Sitemap: https:\/\/derabona.club\/sitemap.xml/);
   const sitemap = read('sitemap.xml');
   assert.match(sitemap, /xmlns="http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9"/);
-  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]), ['https://derabona.club/']);
+  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]), ['https://derabona.club/', 'https://derabona.club/leaderboard.html']);
   assert.doesNotMatch(sitemap, /lastmod|priority|changefreq/);
 });
 

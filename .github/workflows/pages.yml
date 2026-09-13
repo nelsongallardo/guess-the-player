@@ -62,7 +62,7 @@ jobs:
       - name: Prepare public website only
         run: |
           mkdir -p _site/assets
-          cp index.html privacy.html _site/
+          cp index.html privacy.html leaderboard.html _site/
           cp robots.txt sitemap.xml favicon.svg _site/
           cp assets/derabona-social-es-v1.png _site/assets/
       - name: Configure Pages

@@ -15,6 +15,14 @@ The Supabase schema and both Edge Functions are deployed. Hosted verification wi
 - `supabase/functions/ranked-game/index.ts`, `supabase/functions/account-delete/index.ts`: Edge entrypoints.
 - `supabase/config.toml`: local project/auth settings and function gateway configuration.
 
+## Standalone leaderboard destination
+
+`leaderboard.html` is a real static page, not a dialog or embedded game. Primary Play / Leaderboard links make rankings discoverable. The board is publicly readable without login and uses the same optional persistent Supabase session as the game to show the server-provided personal position, including outside the current page. Merely viewing it never starts a timed round or imports guest progress.
+
+Global and competition filters use the existing server contract. Language and competition are shareable URL state; pagination is bounded and changing competition starts from the first page. Loading, failed reads with Retry, empty boards, guests and signed-in users without a result have distinct states. Equal scores retain server ties; no invented podium, weekly reset or rank movement. Nicknames render as text.
+
+The page keeps the cream/navy/celeste identity, semantic responsive table, strong numeric hierarchy, keyboard focus and touch-friendly navigation. It does not load analytics. Offline guest play remains self-contained in `index.html`; rankings need connectivity. See [ADR 0008](adr/0008-standalone-leaderboard-page.md).
+
 ## Progress and automatic public aliases
 
 Guest gameplay is per-tab sessionStorage with memory fallback. Language and analytics retain independent localStorage lifecycles. Legacy localStorage gameplay migrates as one linked snapshot only after complete destination write/readback verification. Conflicting snapshots remain separate; explicit recovery can replace the tab snapshot. No guest, legacy or practice score is imported into ranked play. See [ADR 0006](adr/0006-accounts-and-ranked-progress.md).
@@ -92,13 +100,13 @@ If Deno dependency downloads stall, the recorded fallback installs the pinned SD
 With a verified local server on port 4173 and installed `playwright-cli`:
 
 ```sh
-python3 tests/run-browser.py --suite guest-session-checks.js --suite accounts-checks.js --suite offline-checks.js
+python3 tests/run-browser.py --suite guest-session-checks.js --suite accounts-checks.js --suite leaderboard-checks.js --suite offline-checks.js
 ```
 
 Account browser tests route-mock SDK/API. Label them as rendered frontend contract tests, not live OAuth or database evidence. Historical full-suite limitations remain in [TESTING.md](../TESTING.md).
 
 ## Separate release gates
 
-The Pages workflow validates branch pushes, PRs and manual runs with all Node tests (native PostgreSQL included), source/roster parity and Deno checks/tests. Browser suites are separate. Only validated non-PR `main` runs deploy `index.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. It never deploys Supabase or configures Google.
+The Pages workflow validates branch pushes, PRs and manual runs with all Node tests (native PostgreSQL included), source/roster parity and Deno checks/tests. Browser suites are separate. Only validated non-PR `main` runs deploy `index.html`, `leaderboard.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. It never deploys Supabase or configures Google.
 
 Before claiming hosted accounts work, the release owner must verify the intended project's migrations/functions and server-only environment; configure Google provider credentials and authorized Supabase callback; verify canonical/language-preserving redirect allowlists; and exercise real Google login, cancellation, session refresh, cross-device progress, identity rejection, anonymous/enrolled boards, offline practice isolation and approved account deletion/readback. Publish/read back the actual static artifact and privacy page and run deployed browser smoke checks. Keep credentials and disposable-user details out of public artifacts. Provisioning alone, mocked OAuth and local SQL success do not satisfy these gates.

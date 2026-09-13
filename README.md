@@ -2,7 +2,7 @@
 
 A football-career quiz: read the club-crest timeline and identify the player from five names. Plain HTML, CSS and JavaScript; one portable `index.html` supports guest play without a build or network connection. Optional Google accounts use Supabase for persistent, server-scored progress and public nickname leaderboards.
 
-**Website:** <https://derabona.club/> · [Español](https://derabona.club/?lang=es) · [English](https://derabona.club/?lang=en)
+**Website:** <https://derabona.club/> · [Leaderboard](https://derabona.club/leaderboard.html) · [Español](https://derabona.club/?lang=es) · [English](https://derabona.club/?lang=en)
 
 This documents the implemented account contract, **not a claim that accounts have been deployed or hosted OAuth verified**. Public frontend configuration, Google/Supabase setup and hosted release checks are separate gates; see [accounts and leaderboards](docs/leaderboards.md) and [verification evidence](TESTING.md).
 
@@ -51,6 +51,7 @@ Timelines include professional senior clubs, competitive senior reserve spells, 
 ## Files and delivery
 
 - `index.html` — complete offline guest artifact; inline account client uses optional remote services.
+- `leaderboard.html` — standalone online ranking destination: global/competition filters, personal placement, pagination, and Play navigation; no gameplay mutations or analytics.
 - `privacy.html` — public bilingual account/analytics privacy page; include it in the static website package.
 - `AGENTS.md` — shared agent guidance; `CLAUDE.md` imports it, not a second policy copy.
 - `DESIGN.md`, `TESTING.md`, `docs/adr/` — product contract, verification and decision history.
@@ -62,7 +63,7 @@ Timelines include professional senior clubs, competitive senior reserve spells, 
 - `CAREER_SOURCES.md`, `DATA_AUDIT.md`, `research/` — curated records, policy and source ledgers. Raw retrievals stay ignored.
 - `tests/` — model, storage, browser, Edge handler and real PostgreSQL checks.
 
-GitHub Pages serves static files; it does **not** deploy Supabase migrations/functions or configure Google OAuth. `.github/workflows/pages.yml` validates every push, pull request and manual run with Node/native PostgreSQL tests, source/roster checks and Deno checks/tests. Only validated non-PR runs on `main` deploy. Its public package is `index.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. Research, tests and private backend code are not website assets. The repository is public at the owner's request.
+GitHub Pages serves static files; it does **not** deploy Supabase migrations/functions or configure Google OAuth. `.github/workflows/pages.yml` validates every push, pull request and manual run with Node/native PostgreSQL tests, source/roster checks and Deno checks/tests. Only validated non-PR runs on `main` deploy. Its public package is `index.html`, `leaderboard.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. Research, tests and private backend code are not website assets. The repository is public at the owner's request.
 
 ## Test and edit
 
@@ -79,7 +80,7 @@ node --test tests/model.test.mjs tests/social-preview.test.mjs tests/seo.test.mj
 node scripts/export-ranked-roster.mjs --check
 python3 tests/source-check.py
 # Requires playwright-cli and the local server above:
-python3 tests/run-browser.py --suite guest-session-checks.js --suite accounts-checks.js --suite offline-checks.js
+python3 tests/run-browser.py --suite guest-session-checks.js --suite accounts-checks.js --suite leaderboard-checks.js --suite offline-checks.js
 # Full browser regression runner (historical limitations documented separately):
 python3 tests/run-browser.py
 ```

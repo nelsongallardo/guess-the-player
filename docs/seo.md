@@ -4,12 +4,12 @@
 
 Primary audience: Spanish-speaking football fans, with Argentinian wording. The primary intent is **adivinar jugadores de fútbol por su carrera**; supporting phrases are **quiz de fútbol**, **juego de fútbol gratis** and **trayectorias de futbolistas**. These are editorial intent choices, not claims about measured search volume or rankings.
 
-The canonical indexed URL is **https://derabona.club/**. It serves Spanish title, heading, description, explanatory content and structured data in the initial HTML. First-time visits use Spanish; explicit `?lang=en`/`?lang=es` and a saved preference still take precedence. The English toggle remains fully functional. Query variants canonicalize to the home page; do not add hreflang until there are genuine separately served, indexable language pages.
+The game’s canonical URL is **https://derabona.club/**; the standalone ranking destination canonicalizes to **https://derabona.club/leaderboard.html**. The sitemap lists both real pages. These declarations are not proof of search-engine indexing. It serves Spanish title, heading, description, explanatory content and structured data in the initial HTML. First-time visits use Spanish; explicit `?lang=en`/`?lang=es` and a saved preference still take precedence. The English toggle remains fully functional. Game query variants canonicalize to the home page and leaderboard language/competition variants to its own canonical page; do not add hreflang until there are genuine separately served, indexable language pages.
 
 ## Implemented
 
 - Descriptive Spanish title and natural meta description; existing branded OG/Twitter card retained.
-- One canonical URL, crawlable site-name `WebSite` and accurate `WebApplication` JSON-LD. No fabricated ratings, reviews, search action or unsupported rich-result promises. The markup describes the app; it does not establish Google's software-app rich-result eligibility.
+- One canonical URL per real page, crawlable site-name `WebSite` and accurate `WebApplication` JSON-LD. No fabricated ratings, reviews, search action or unsupported rich-result promises. The markup describes the app; it does not establish Google's software-app rich-result eligibility.
 - A concise explanation and expandable rules, competitions and offline/progress information below the game. Initial Spanish content does not require JavaScript; it translates when the UI language changes.
 - Root `robots.txt`, canonical-only `sitemap.xml`, and crawlable `favicon.svg`. No invented `lastmod` dates, priority values or keyword meta tags.
 - The deployment explicitly includes these assets; research and tests remain outside the published site.

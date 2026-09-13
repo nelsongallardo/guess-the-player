@@ -1,5 +1,17 @@
 # Verification report
 
+## Standalone leaderboard — 13 September 2026
+
+The ranking overlay was replaced by a lightweight, directly addressable `leaderboard.html` and primary Play / Leaderboard navigation. ADR 0008 records the read-only architecture and engagement design. Existing backend scoring and alias policies are unchanged.
+
+- Final parent Node run: **113 passed, 0 failed**, including the real native PostgreSQL suite, existing account boundaries, and three new standalone-page/configuration/deployment checks. The new static checks first failed against the absent page and old packaging.
+- Six focused Chromium suites passed: leaderboard, accounts, guest session, analytics, SEO and offline. The standalone suite includes **32 assertions**, with explicit SDK/API mocks: signed-in/off-page position, no-result versus failed/offline reads, retry, one anonymous retry for expired bearer, signout and stale identity responses, URL filter/history/language, actual Account CTA and game-save preservation. This is not hosted Google OAuth evidence.
+- Independent local-page smoke used the **actual public Supabase API**, compared returned names/points and row count with the rendered table, exercised filters/reload/language/game navigation, and passed **15 checks** with no runtime errors. No account mutation or round start was made by the leaderboard.
+- Desktop/mobile screenshots inspected. Final real-data table begins at about **569px on 375×667**; 320px and 375px table headers fit without word breaks, and 320/375/768/1280px layouts have no horizontal overflow. Mocked long-nickname tests and desktop visible-row geometry are separate assertions.
+- Spec review caught false no-result copy during signed-in network failure; a regression failed before the fix and passed afterward. Final independent spec and quality review both passed. Only successful authenticated `own: null` means no result; failures do not imply lost points.
+- Source-identifier and ranked-roster parity checks passed. Roster, crests, game model, locale data, account service, callback scrubber and analytics script bodies remain byte-identical to the previous release. No Supabase migration or OAuth configuration change is needed.
+- Evidence: ignored `test-results/leaderboard-final-node.log`, `leaderboard-final-browser.json`, `leaderboard-local-smoke.json`, screenshots, and `leaderboard-final-review.md`. The prior full-suite baseline limitations below remain; six focused suites are not a claim that every historical browser suite passes. Pages publication and exact live readback are separate release gates.
+
 ## Automatic animal aliases — 13 September 2026
 
 The owner removed manual public-nickname enrollment. Migration `202609130003` gives accounts stable random-animal aliases automatically, backfills existing accounts and preserves custom nicknames and results. Optional custom naming is explained by a bilingual keyboard/pointer/touch tooltip; analytics consent is unchanged.
@@ -9,7 +21,7 @@ The owner removed manual public-nickname enrollment. Migration `202609130003` gi
 - Migration 003 was applied and read back in the hosted registry. Existing custom nicknames and fingerprints of the owner's prior results were unchanged; `nelson` retained **176 points from two results** at verification.
 - A disposable real Supabase Auth account received an alias automatically on its first progress request; repeated progress retained it. No-result account stayed absent, and a completed result appeared on the actual public board **without an enroll request**. Optional rename persisted. Account deletion and exact Auth/database/public-board readback confirmed cleanup. This was an admin-created disposable identity, not a new interactive Google-login test.
 - The owner has now signed in through Google; hosted account state showed the Google provider and saved results. Original release-era unverified-OAuth wording below is historical, not a claim that login is still unobserved.
-- Reports: ignored `test-results/animal-alias-node.log`, `animal-alias-browser.json`, `animal-alias-hosted.json`; ADR 0007 supersedes manual enrollment in ADR 0006. The protected AGENTS.md update required approval and was not applied; current user requirements and ADR 0007 govern this change.
+- Reports: ignored `test-results/animal-alias-node.log`, `animal-alias-browser.json`, `animal-alias-hosted.json`; ADR 0007 supersedes manual enrollment in ADR 0006. The release-era protected AGENTS.md edit was not applied then; its stale manual-enrollment wording was corrected during the standalone leaderboard follow-up.
 
 ## Accounts and ranked progress — local evidence, 13 September 2026
 
