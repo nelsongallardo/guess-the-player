@@ -1,5 +1,15 @@
 # Verification report
 
+## Spanish messaging preview — 13 September 2026
+
+- Added four `tests/social-preview.test.mjs` checks: static Spanish metadata without JavaScript, OG/Twitter agreement, actual PNG format/dimensions/size, and deployment of the image. All four initially failed on the unchanged feature baseline and passed after implementation.
+- `node --test tests/model.test.mjs tests/social-preview.test.mjs`: 39 passing tests. Source-identifier checks passed.
+- Focused real-browser smoke: Spanish/English × HTTP/offline file (four contexts), plus a JavaScript-disabled crawler context fetching the PNG. Five cases passed. This was not a rerun of the full browser suite.
+- Rendered the 1200 × 630 PNG in Chrome and visually reviewed the final image: complete logo, correct accents, no clipping or overlaps.
+- Confirmed CSS, embedded assets, data and runtime scripts are byte-for-byte unchanged from the current upstream baseline. Only head metadata changed in `index.html`.
+- Platforms cache previews independently; serving valid metadata and image does not verify each platform's native cached rendering.
+
+
 ## Saved Henry choices repaired — 13 September 2026
 
 The user’s screenshot showed Henry with Zidane, Scholes, Guðjohnsen and Totti. Reproduced that exact answer array on the public site: fresh generation produced France-start contemporaries, but the load path accepted and rendered the saved older array verbatim. Preserving every saved option set prevented the matching fix from reaching untouched resumed rounds.

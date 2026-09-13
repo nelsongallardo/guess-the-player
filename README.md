@@ -64,7 +64,7 @@ Country means the senior national team represented, not birthplace or every citi
 
 ## Test and edit
 
-GitHub Pages deploys automatically from `main` using `.github/workflows/pages.yml`. Every deployment first runs the model/data and source-identifier checks, then publishes **only `index.html`**. The repository is public at the owner's request; research and test files remain available in the repo but are not part of the deployed website.
+GitHub Pages deploys automatically from `main` using `.github/workflows/pages.yml`. Every deployment first runs the model/data and source-identifier checks, then publishes **`index.html` and the Spanish link-preview PNG**. The public site is https://derabona.club/. Static Open Graph/Twitter metadata uses the branded image at `assets/derabona-social-es-v1.png`; the game itself remains self-contained and works offline. The repository is public at the owner's request; research and test files remain available in the repo but are not part of the deployed website.
 
 The delivered file needs **no build step**. Edit its CSS, the explicit `PLAYERS` array, `CREST_ASSETS`, or the model/UI scripts directly. When updating a career, update the matching curated record and source document as well. All images are embedded PNGs; retain original public URLs for attribution.
 

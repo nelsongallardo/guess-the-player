@@ -21,7 +21,7 @@ A clean working tree does not establish that the checkout is current. Other agen
 - Named script blocks include `roster-data`, `crest-data`, `game-model`, `locale-data` and `game-ui`. Model tests extract these blocks directly; preserve their IDs.
 - `research/verified-players.json` contains curated career records. `research/data-policy.md` defines inclusion and competition-tag policy. Citation ledgers, [CAREER_SOURCES.md](CAREER_SOURCES.md) and [DATA_AUDIT.md](DATA_AUDIT.md) support the dataset.
 - `tests/model.test.mjs` checks model, data, localization and save compatibility. `tests/source-check.py` checks literal source identifiers. `tests/run-browser.py` drives real browser checks.
-- `.github/workflows/pages.yml` validates the model and sources, then publishes **only `index.html`** to GitHub Pages on pushes to `main`. CI does not run the browser suite.
+- `.github/workflows/pages.yml` validates the model and sources, then publishes **`index.html` plus `assets/derabona-social-es-v1.png`** to GitHub Pages on pushes to `main`. CI does not run the browser suite.
 - `.playwright-cli/`, `test-results/`, `_site/` and raw research retrievals are ignored. Do not force-add browser state, full third-party articles, screenshots, credentials or generated clutter.
 
 Keep the single-file offline design unless the requested work explicitly changes the architecture. No analytics, accounts, external fonts, runtime network dependencies or framework/build scaffolding by default. Make focused edits; do not reconstruct the large HTML file or embedded assets from truncated or redacted tool output.
@@ -87,7 +87,8 @@ At the selector-removal change, `tests/mobile-language-checks.js` failed `Longes
 - Re-fetch before publishing and review the diff against current upstream. Keep changes scoped to the request; preserve already-pushed behaviour when resolving conflicts.
 - Run applicable checks and `git diff --check`. Stage only intended files; inspect commit contents for secrets or generated assets.
 - A push to `main` deploys the site. When publishing is in scope, verify the remote commit and the GitHub Actions result. For runtime changes, read back the public artifact and exercise the deployed game before claiming it is live.
-- Public site: <https://nelsongallardo.github.io/guess-the-player/>. Repository: `nelsongallardo/guess-the-player`.
+- Public site: <https://derabona.club/>; the old GitHub Pages URL redirects there. Repository: `nelsongallardo/guess-the-player`.
+- Link-preview metadata is static Spanish (`es_AR`) in the HTML head, independent of the selected game language. Keep Open Graph and Twitter copy aligned and point to the publicly deployed 1200 × 630 PNG via an absolute HTTPS URL. The share image is a crawler asset, not a runtime dependency; preserve single-file offline gameplay. Run `node --test tests/social-preview.test.mjs` after metadata/image/deployment changes.
 - Report what changed, what actually ran, and any failures or exclusions. Update affected product docs and verification notes; avoid turning historical results into claims about a new run.
 
 `AGENTS.md` is the shared source of agent guidance. Keep `CLAUDE.md` as a thin entry point rather than maintaining a second copy of these rules.

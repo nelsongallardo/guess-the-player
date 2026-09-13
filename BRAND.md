@@ -16,6 +16,14 @@ The mark is embedded directly into `index.html`; the favicon is an embedded SVG 
 
 Use the badge alone for small icons. Keep the wordmark readable, leave clear space around the logo, and omit the signature at small sizes. Do not replace the rabona pose with a generic ball, club crest or national-team badge. The wordmark uses locally available Arial Black/Arial; no external font request is made.
 
+## Link preview (Spanish)
+
+- Editable source: [social card SVG](assets/derabona-social-es-v1.svg). Hosted export: [1200 × 630 PNG](assets/derabona-social-es-v1.png). Reuses the existing logo, paper/ink/celeste palette and local fonts.
+- Headline: **Adiviná al jugador por su carrera.** Supporting copy: **Cinco nombres. Tres chances.**
+- Static Open Graph and Twitter metadata stays in Spanish (`es_AR`) even when the game UI switches language. The image must be a public absolute HTTPS PNG URL, not the embedded SVG favicon.
+- Pages publishes only the game and this preview PNG. The SVG remains editable repo source; gameplay stays fully self-contained/offline. For re-export, render the SVG inside a margin-free HTML wrapper at 1200 × 630 and device scale 1 in Chrome, then capture a PNG.
+- Platforms cache previews. Version the image filename when changing its design; metadata/image availability does not prove each platform has refreshed its cached card.
+
 ## Palette
 
 - **Ink — `#122a38`:** wordmark, pitch card, scoreboard, primary buttons.
@@ -44,6 +52,6 @@ The final `derabona` section inside the existing inline stylesheet defines the b
 
 ## Compatibility and scope
 
-Branding does **not** change the roster, research, competition pools, Hard algorithm, hints, scoring, results history or replay rules. Keep `touchline.career.v1`, `touchline.language.v1` and `touchline.history.v1` as legacy storage identifiers: renaming them would strand saved progress. The repository name and GitHub Pages URL remain unchanged; a domain or repository migration is separate work.
+Branding does **not** change the roster, research, competition pools, Hard algorithm, hints, scoring, results history or replay rules. Keep `touchline.career.v1`, `touchline.language.v1` and `touchline.history.v1` as legacy storage identifiers: renaming them would strand saved progress. The repository name remains unchanged; the public site is https://derabona.club/ and the original GitHub Pages URL redirects there.
 
 For future changes, run the documented model/source/browser checks. `tests/brand-checks.js` checks both language titles, the lowercase wordmark, embedded logo/favicon, unchanged storage namespaces and header layout at seven widths.
