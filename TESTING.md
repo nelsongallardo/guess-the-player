@@ -1,5 +1,16 @@
 # Verification report
 
+## Automatic animal aliases — 13 September 2026
+
+The owner removed manual public-nickname enrollment. Migration `202609130003` gives accounts stable random-animal aliases automatically, backfills existing accounts and preserves custom nicknames and results. Optional custom naming is explained by a bilingual keyboard/pointer/touch tooltip; analytics consent is unchanged.
+
+- Parent full Node run: **110 passed, 0 failed**, including **15 real PostgreSQL tests** for legacy backfill, exact history preservation, concurrent creation/collisions, stable aliases, optional rename and unchanged gameplay boundaries.
+- Five focused Chromium suites passed: accounts, guests, analytics, SEO and offline play. SDK/API mocks are explicit in the account suite; separate native SQL and hosted API checks supply backend evidence.
+- Migration 003 was applied and read back in the hosted registry. Existing custom nicknames and fingerprints of the owner's prior results were unchanged; `nelson` retained **176 points from two results** at verification.
+- A disposable real Supabase Auth account received an alias automatically on its first progress request; repeated progress retained it. No-result account stayed absent, and a completed result appeared on the actual public board **without an enroll request**. Optional rename persisted. Account deletion and exact Auth/database/public-board readback confirmed cleanup. This was an admin-created disposable identity, not a new interactive Google-login test.
+- The owner has now signed in through Google; hosted account state showed the Google provider and saved results. Original release-era unverified-OAuth wording below is historical, not a claim that login is still unobserved.
+- Reports: ignored `test-results/animal-alias-node.log`, `animal-alias-browser.json`, `animal-alias-hosted.json`; ADR 0007 supersedes manual enrollment in ADR 0006. The protected AGENTS.md update required approval and was not applied; current user requirements and ADR 0007 govern this change.
+
 ## Accounts and ranked progress — local evidence, 13 September 2026
 
 **Interactive Google OAuth remains unverified.** Fresh parent verification passed all 88 Node tests (including native PostgreSQL), five focused browser suites (guest, accounts, analytics, SEO, offline), seven Deno HTTP tests and production Edge entrypoint type checks. Final account-boundary fixes were then verified with **107/107 Node tests**, including 19 new source-extracted boundary regressions, plus the account browser suite with the implicit-token rejection case. These fixes remove unsolicited URL session imports and bind private state/mutations to authenticated identity across account changes. Hosted tests used a real disposable admin-created email Auth identity, not Google OAuth: enrollment-only exclusion, start/hint/answer, authoritative score readback, exact idempotent retry, global and every applicable membership board, then actual account deletion and exact Auth/database/public-board readback all passed. The disposable account and test results were removed. Hosted configuration readback confirmed Google enabled, email/anonymous signup disabled, both functions ACTIVE and both migrations applied. Evidence: ignored `test-results/accounts-final-node.log`, `accounts-final-browser.log` and `accounts-hosted-verification.json`.

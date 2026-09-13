@@ -1,7 +1,7 @@
 // Real isolated PostgreSQL integration tests; auth.users/roles are a explicitly
 // labelled Supabase-auth simulation, NOT proof of hosted JWT/OAuth verification.
 // PG_BIN=/path/to/postgres/bin node --test tests/ranked-backend.test.mjs
-import test, { before, after } from 'node:test';
+import test, { before, after, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -15,6 +15,8 @@ const root = new URL('../',import.meta.url);
 const pgBin = process.env.PG_BIN || (fs.existsSync('/opt/homebrew/opt/postgresql@17/bin/postgres') ? '/opt/homebrew/opt/postgresql@17/bin' : '');
 const bin = cmd => cmd === 'psql' && process.env.PG_CLIENT ? process.env.PG_CLIENT : pgBin ? path.join(pgBin,cmd) : cmd;
 let dir, running = false;
+let legacy, legacySnapshot;
+const aliasPattern = /^(Otter|Badger|Panda|Koala|Heron|Robin|Finch|Lynx|Seal|Dolphin|Turtle|Falcon|Penguin|Gecko|Wombat|Alpaca)-[0-9a-f]{8}$/;
 const quote = value => "'"+String(value).replaceAll("'","''")+"'";
 const args = () => ['-X','-qAt','-v','ON_ERROR_STOP=1','-h',dir,'-p','55439','-U','postgres','-d','postgres'];
 const sql = text => execFileSync(bin('psql'),[...args(),'-c',text],{encoding:'utf8',maxBuffer:16*1024*1024,stdio:['ignore','pipe','pipe']}).trim();
@@ -47,12 +49,77 @@ before(() => {
        create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
        grant usage on schema public to anon,authenticated,service_role;`);
   const migrations = fs.readdirSync(new URL('supabase/migrations/',root)).filter(f=>f.endsWith('.sql')).sort();
-  for(const f of migrations) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:16*1024*1024});
+  for(const f of migrations.filter(f=>f<'202609130003')) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:16*1024*1024});
+  legacy={anonymous:user(),custom:user(),empty:user()};
+  for(const uid of Object.values(legacy)) rpc(uid,{action:'progress'});
+  rpc(legacy.custom,mutation('enroll',{nickname:'Existing Custom'}));
+  for(const uid of [legacy.anonymous,legacy.custom]) { const r=start(uid).round;answer(uid,r,correct(r)); }
+  sql(`update ranked_private.accounts set enrolled=false where user_id=${quote(legacy.custom)}`);
+  legacySnapshot=Object.fromEntries(['rounds','results','receipts'].map(t=>[t,json(`select json_agg(x order by user_id) from ranked_private.${t} x`)]));
+  for(const f of migrations.filter(f=>f>='202609130003')) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:16*1024*1024});
   console.log('Real PostgreSQL isolated cluster; Supabase auth schema/roles SIMULATED; no cloud services used.');
 });
 after(() => {
   if (running) execFileSync(bin('pg_ctl'),['-D',path.join(dir,'data'),'-m','immediate','-w','stop'],{stdio:'pipe'});
   if(dir) fs.rmSync(dir,{recursive:true,force:true});
+});
+
+afterEach(()=>sql('delete from auth.users'));
+
+test('additive migration backfills legacy results, preserves custom names and immutable history',()=>{
+  const anonymous=rpc(legacy.anonymous,{action:'progress'});
+  assert.match(anonymous.profile?.nickname || '',aliasPattern);
+  assert.equal(anonymous.profile.enrolled,true);
+  assert.deepEqual(rpc(legacy.custom,{action:'progress'}).profile,{nickname:'Existing Custom',enrolled:true});
+  assert.equal(rpc(legacy.empty,{action:'progress'}).profile.enrolled,true);
+  for(const t of ['rounds','results','receipts']) assert.deepEqual(json(`select json_agg(x order by user_id) from ranked_private.${t} x`),legacySnapshot[t]);
+  const board=rpc(legacy.anonymous,{action:'leaderboard'});
+  assert.equal(board.total,2);assert.equal(board.own.nickname,anonymous.profile.nickname);noIdentity(board);
+  assert.equal(rpc(legacy.empty,{action:'leaderboard'}).own,null);
+});
+
+test('automatic aliases are stable, private, unique under concurrent first requests, and rename-compatible',async()=>{
+  const users=Array.from({length:16},user);
+  const profiles=await Promise.all(users.map(uid=>concurrentRPC(uid,{action:'progress'})));
+  assert.equal(new Set(profiles.map(p=>p.profile?.nickname?.toLowerCase())).size,users.length);
+  for(const [i,p] of profiles.entries()) {
+    assert.match(p.profile.nickname,aliasPattern);assert.equal(p.profile.enrolled,true);noIdentity(p.profile);
+    assert.deepEqual(rpc(users[i],{action:'progress'}).profile,p.profile);
+    assert.equal(rpc(users[i],{action:'leaderboard'}).own,null);
+  }
+  const uid=users[0], r=start(uid).round;
+  answer(uid,r,correct(r));
+  assert.equal(rpc(uid,{action:'leaderboard'}).own.nickname,profiles[0].profile.nickname);
+  assert.equal(rpc(null,{action:'leaderboard'}).total,1);
+  const renamed=rpc(uid,mutation('enroll',{nickname:'Custom Otter'}));
+  assert.equal(renamed.profile.nickname,'Custom Otter');
+  assert.deepEqual(rpc(uid,{action:'progress'}).profile,renamed.profile);
+  assertError(()=>rpc(users[1],mutation('enroll',{nickname:'custom otter'})),'NICKNAME_TAKEN');
+  assert.equal(rpc(uid,{action:'leaderboard'}).own.nickname,'Custom Otter');
+});
+
+test('forced case-insensitive alias collisions retry safely across concurrent accounts',async()=>{
+  const original=sql("select pg_get_functiondef('ranked_private.animal_alias_candidate()'::regprocedure)");
+  const existing=user();rpc(existing,mutation('enroll',{nickname:'OTTER-deadbeef'}));
+  const users=Array.from({length:16},user);
+  try {
+    sql(`create sequence ranked_private.alias_test_sequence;
+      create or replace function ranked_private.animal_alias_candidate() returns text
+      language sql volatile set search_path='' as $$
+        select case when n<=16 then 'Otter-deadbeef' when n<=32 then 'Otter-cafebabe'
+          else 'Otter-' || lpad(to_hex(n),8,'0') end
+        from (select nextval('ranked_private.alias_test_sequence') n) x $$;`);
+    const results=await Promise.all(users.map(uid=>concurrentRPC(uid,{action:'progress'})));
+    const names=results.map(p=>p.profile.nickname.toLowerCase());
+    assert.equal(new Set(names).size,users.length);
+    assert(!names.includes('otter-deadbeef'));assert(names.includes('otter-cafebabe'));
+    assert.equal(Number(sql(`select count(*) from ranked_private.accounts where user_id in (${[existing,...users].map(quote).join(',')})`)),17);
+    for(const uid of users) assert.equal(rpc(uid,{action:'progress'}).profile.enrolled,true);
+    for(const role of ['anon','authenticated','service_role']) {
+      assert.equal(sql(`select has_function_privilege('${role}','ranked_private.animal_alias_candidate()','EXECUTE')::integer`),'0');
+      assert.equal(sql(`select has_function_privilege('${role}','ranked_private.automatic_animal_alias()','EXECUTE')::integer`),'0');
+    }
+  } finally { sql(original);sql('drop sequence ranked_private.alias_test_sequence'); }
 });
 
 test('roster exporter is current and canonical membership/matching scores equal guest model',()=>{
@@ -94,7 +161,7 @@ test('anon/authenticated cannot read or mutate private tables or spoof service R
 
 test('single active round, stable opaque randomized options, reload preserves hints/guesses/clock',()=>{
   const uid=user();const initial=start(uid);let r=initial.round;
-  assert.equal(initial.profile,null);assert.equal(initial.progress.answered,0);
+  assert.match(initial.profile.nickname,aliasPattern);assert.equal(initial.profile.enrolled,true);assert.equal(initial.progress.answered,0);
   assert.equal(r.options.length,5);assert.equal(new Set(r.options.map(o=>o.id)).size,5);
   assert.equal(new Set(r.options.map(o=>o.label)).size,5);assert.equal(r.version,0);
   assert.equal(r.clueCountry,null);assert.equal(r.cluePosition,null);

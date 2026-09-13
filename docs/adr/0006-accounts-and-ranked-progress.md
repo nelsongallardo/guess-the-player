@@ -1,6 +1,6 @@
 # ADR 0006 — Optional accounts and server-authoritative ranked progress
 
-- Status: Accepted; implemented, hosted Google OAuth verification pending.
+- Status: Accepted; implemented. Manual nickname enrollment below is superseded by [ADR 0007](0007-automatic-animal-aliases.md); Google login and persisted results have since been observed in the hosted account state.
 - Date: 2026-09-13.
 - Supersedes the device-lifetime/reset scope of [ADR 0004](0004-lifetime-score-persists-across-decks.md) and [ADR 0005](0005-permanent-seen-ledger-and-completed-competitions.md), not the pure guest model, scoring formula or compatible-save guarantees.
 

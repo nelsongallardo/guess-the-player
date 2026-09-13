@@ -2,25 +2,26 @@
 
 ## Delivery status and architecture
 
-The Supabase schema and both Edge Functions are deployed. Hosted verification with a disposable admin-created Auth account passed ranked actions, idempotency, global/membership boards and account deletion with exact database readback; test data was removed. Google is the only enabled public signup provider, but interactive Google OAuth remains unverified. Static publication is a separate main-branch Pages workflow; see [TESTING.md](../TESTING.md) for the evidence boundaries.
+The Supabase schema and both Edge Functions are deployed. Hosted verification with a disposable admin-created Auth account passed ranked actions, idempotency, global/membership boards and account deletion with exact database readback; test data was removed. Google is the only enabled public signup provider, and the owner subsequently signed in through Google with saved ranked results observed in the hosted state. Full cancellation/refresh/cross-device browser coverage remains separate. Static publication is a separate main-branch Pages workflow; see [TESTING.md](../TESTING.md) for the evidence boundaries.
 
 `index.html` remains a portable offline guest game. Optional accounts load the pinned Supabase JS SDK (2.57.4), use Google OAuth/PKCE, and persist the session separately under `derabona.auth.v1`. Only the public project URL/publishable key belong in the browser. Never expose service-role keys, Google client secrets, access/refresh tokens or CLI credentials in docs, screenshots or commits.
 
 - `supabase/migrations/202609130001_ranked_schema.sql`: private state, grants/RLS, transactional RPC and score projections.
 - `supabase/migrations/202609130002_ranked_roster.sql`: frozen v1 roster, candidates, matching tiers/similarity and canonical memberships.
+- `supabase/migrations/202609130003_automatic_animal_aliases.sql`: automatic stable animal aliases, enrollment and legacy-account backfill; custom names and gameplay records are preserved.
 - `scripts/export-ranked-roster.mjs --check`: read-only parity check against the actual inline model. Do not rewrite a ruleset already used for results; plan a reviewed migration/version transition.
 - `supabase/functions/_shared/http.ts`: strict JSON/action validation and verified identity boundary.
 - `supabase/functions/_shared/supabase.ts`: server-only Supabase dependency adapter.
 - `supabase/functions/ranked-game/index.ts`, `supabase/functions/account-delete/index.ts`: Edge entrypoints.
 - `supabase/config.toml`: local project/auth settings and function gateway configuration.
 
-## Progress and public enrollment
+## Progress and automatic public aliases
 
 Guest gameplay is per-tab sessionStorage with memory fallback. Language and analytics retain independent localStorage lifecycles. Legacy localStorage gameplay migrates as one linked snapshot only after complete destination write/readback verification. Conflicting snapshots remain separate; explicit recovery can replace the tab snapshot. No guest, legacy or practice score is imported into ranked play. See [ADR 0006](adr/0006-accounts-and-ranked-progress.md).
 
 The server creates one active round per account across devices. A start for another competition resumes that round. Persisted server time includes time away; options, hints, guesses, points and terminal transitions are server-owned. There are at most two hints and three guesses. Only the first terminal result per account/player/ruleset counts; there is no ranked reset, replay or import endpoint. Exhausted start returns `completed: true` with `round: null`.
 
-Enrollment is optional and requires a user-chosen public nickname, not a Google identity-derived default. Nicknames are trimmed, 3–24 permitted letters/numbers/spaces/underscore/dot/hyphen, and case-insensitively unique. Use a neutral nickname rather than a real name. Public boards require both enrollment and at least one verified result in the selected board. Enrollment, an active round or preliminary wrong guesses alone produce no row. A terminal loss qualifies with zero points.
+Every account automatically receives a stable unique random-animal alias and leaderboard participation, without a form or checkbox. Existing unnamed accounts are backfilled without changing scores; existing custom nicknames are preserved. Names are independent of Google identity. An accessible bilingual tooltip explains optional custom naming in Account. Custom nicknames are trimmed, 3–24 permitted letters/numbers/spaces/underscore/dot/hyphen, and case-insensitively unique. Public boards still require at least one verified result in the selected board: an active round or preliminary wrong guesses alone produce no row. A terminal loss qualifies with zero points. See [ADR 0007](adr/0007-automatic-animal-aliases.md).
 
 Global points count each verified player once. Competition boards filter results through **all canonical memberships**, not the selected deck. These are overlapping views of the same result, not extra awards. Equal points share SQL `rank()` values; nickname order stabilizes pagination without breaking ties. Public rows expose only nickname, points, answered, correct and rank. The `own` projection uses verified identity internally without publishing it. Unrelated boards have no row for that result.
 
@@ -36,7 +37,7 @@ POST `application/json` to `/functions/v1/ranked-game`, with the project's publi
 | `start` | Optional `competition`; required UUID `idempotencyKey` |
 | `hint` | UUID `roundId`, integer `expectedVersion`, UUID `idempotencyKey` |
 | `answer` | Same as hint, plus opaque UUID `optionId` |
-| `enroll` | `nickname`, UUID `idempotencyKey` |
+| `enroll` | `nickname`, UUID `idempotencyKey`; retained API name for optional nickname changes |
 | `leaderboard` | Optional `competition`, integer `limit` (1–100, default 25), integer `offset` (0–10000, default 0) |
 
 Competition IDs: `all`, `champions-league`, `premier-league`, `la-liga`, `argentine-primera`, `brasileirao`. Omitted competition defaults to `all`. Expected versions must be nonnegative integers, at most 999999999.

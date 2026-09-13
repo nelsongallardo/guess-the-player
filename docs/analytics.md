@@ -23,7 +23,7 @@ The owner selected **consent-first analytics with persistent anonymous identity*
 
 ## Accounts remain separate
 
-Google/Supabase requests provide optional account functionality and do not require or grant analytics permission. Public nickname enrollment is separate consent again. Never send account IDs, nicknames, Google names/photos, email addresses, bearer tokens, authorization codes or saved account state to PostHog; no account `identify` or `alias` calls. Ranked-mode analytics context supplies only language, not cloud progress. The callback scrubber runs before analytics and removes OAuth callback query/fragment values while retaining supported language selection. Analytics anonymous identity is not linked to the Google account. See [account contract](leaderboards.md) and the [bilingual public privacy page](../privacy.html).
+Google/Supabase requests provide optional account functionality and do not require or grant analytics permission. Public leaderboard participation now uses an automatically assigned animal alias; optional nickname changes do not change analytics consent. Never send account IDs, nicknames, Google names/photos, email addresses, bearer tokens, authorization codes or saved account state to PostHog; no account `identify` or `alias` calls. Ranked-mode analytics context supplies only language, not cloud progress. The callback scrubber runs before analytics and removes OAuth callback query/fragment values while retaining supported language selection. Analytics anonymous identity is not linked to the Google account. See [account contract](leaderboards.md) and the [bilingual public privacy page](../privacy.html).
 
 ## Event contract
 

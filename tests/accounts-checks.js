@@ -6,11 +6,11 @@ async page => {
   const origin='http://127.0.0.1:4173',api='https://explicit-account-mock.invalid';
   const uuid=n=>'00000000-0000-4000-8000-'+String(n).padStart(12,'0');
   const competitions=['all','champions-league','premier-league','la-liga','argentine-primera','brasileirao'];
-  let projection={profile:null,progress:{totalPoints:0,answered:0,correct:0,seenPlayerIds:[],competitionCounts:Object.fromEntries(competitions.map(id=>[id,{answered:0,total:60}]))},round:null};
+  let projection={profile:{nickname:'Otter-4821',enrolled:true},progress:{totalPoints:0,answered:0,correct:0,seenPlayerIds:[],competitionCounts:Object.fromEntries(competitions.map(id=>[id,{answered:0,total:60}]))},round:null};
   let failAction=null,dropAnswer=false,boardFail=false,nicknameTaken=false,deleteFail=false,holdProgress=false,releaseProgress;
   let players=[],roundCounter=0;const receipts=new Map();
   const createRound=competition=>{const p=players[roundCounter++%players.length];return {id:uuid(100+roundCounter),version:0,playerId:p.id,competition,options:players.slice(0,5).map((p,i)=>({id:uuid(i+1),label:p.name})),guesses:[],hints:0,clueCountry:null,cluePosition:null,status:'playing',points:0,startedAt:new Date().toISOString()};};
-  const context=await browser.newContext({viewport:{width:375,height:667}});
+  const context=await browser.newContext({viewport:{width:375,height:667},hasTouch:true});
   try{
     await context.addInitScript(()=>{window.__mockAuth={session:null,calls:[],listener:null};window.__mockLogin=()=>{const m=window.__mockAuth;m.session={access_token:'EXPLICIT_TEST_TOKEN',user:{id:'00000000-0000-4000-8000-000000009999',user_metadata:{full_name:'MUST NEVER PUBLISH',avatar_url:'https://private.invalid/photo'}}};localStorage.setItem('derabona.auth.v1','EXPLICIT_TEST_SESSION');m.listener?.('SIGNED_IN',m.session);};});
     await context.route('**/index.html*',async route=>{const response=await route.fetch();let html=await response.text();html=html.replace(/Object\.freeze\(\{url:'[^']*',anonKey:'[^']*'\}\)/,`Object.freeze({url:'${api}',anonKey:'EXPLICIT_PUBLIC_MOCK_KEY'})`);await route.fulfill({response,body:html});});
@@ -26,9 +26,9 @@ async page => {
         if(boardFail){boardFail=false;return error('INTERNAL_ERROR',500);}
         const all=Array.from({length:23},(_,i)=>({rank:i<2?1:i+1,nickname:i===0?'<img src=x onerror=alert(1)>':'Neutral '+i,points:500-i,answered:7,correct:5}));
         const entries=body.competition==='brasileirao'?[]:all.slice(body.offset,body.offset+body.limit);
-        return respond({entries,total:body.competition==='brasileirao'?0:23,own:projection.profile?.enrolled?{rank:22,points:projection.progress.totalPoints}:null,competition:body.competition});
+        return respond({entries,total:body.competition==='brasileirao'?0:23,own:projection.profile?.enrolled&&projection.progress.answered>0?{rank:22,points:projection.progress.totalPoints}:null,competition:body.competition});
       }
-      if(body.action==='progress'){if(holdProgress){holdProgress=false;await new Promise(r=>releaseProgress=r);}return respond(projection);}
+      if(body.action==='progress'){if(!projection.profile)projection.profile={nickname:'Otter-4821',enrolled:true};if(holdProgress){holdProgress=false;await new Promise(r=>releaseProgress=r);}return respond(projection);}
       if(body.action===failAction){failAction=null;return error('VERSION_CONFLICT');}
       if(body.action==='enroll'&&nicknameTaken&&body.nickname==='Neutral Falcon')return error('NICKNAME_TAKEN');
       if(receipts.has(body.idempotencyKey))return respond(receipts.get(body.idempotencyKey));
@@ -73,9 +73,32 @@ async page => {
     ok(p.url()===origin+'/index.html?lang=en','Callback code, state and tokens scrub before SDK initialization');
     ok(await p.evaluate(()=>window.__mockAuth.calls[0][2]===location.href&&window.__mockAuth.config.auth.persistSession===true),'Mock auth observes clean URL and persistent account configuration');
     ok(await p.locator('#score').textContent()==='0','Ranked score comes from server, never guest');
+    await p.locator('#account-open').click();
+    ok(await p.locator('#enrolled-status').textContent()==='Public alias: Otter-4821'&&await p.locator('#nickname-consent').count()===0,'Automatic server animal alias is visible without enrollment gate');
+    await p.locator('#enroll').click();ok(!calls.some(c=>c.body.action==='enroll'),'Blank optional nickname keeps animal alias without a mutation');
+    await p.locator('#alias-help').tap();ok(await p.locator('#alias-tooltip').isVisible()&&(await p.locator('#alias-tooltip').textContent()).includes('random animal'),'Mobile tap exposes animal alias tooltip');
+    await p.locator('#public-nickname').focus();ok(await p.locator('#alias-tooltip').isHidden(),'Tooltip dismisses on blur');
+    await p.setViewportSize({width:1280,height:900});await p.locator('#alias-help').focus();ok(await p.locator('#alias-tooltip').isVisible(),'Desktop keyboard focus exposes tooltip');
+    await p.locator('#alias-help').hover();await p.mouse.move(0,0);
+    ok(await p.locator('#alias-help').evaluate(el=>el===document.activeElement)&&await p.locator('#alias-tooltip').isVisible(),'Pointer leaving focused trigger preserves tooltip');
+    await p.keyboard.press('Escape');ok(await p.locator('#alias-tooltip').isHidden()&&await p.locator('#account-dialog').isVisible(),'Escape dismisses tooltip without closing Account');
+    await p.locator('#public-nickname').focus();await p.locator('#alias-help').hover();ok(await p.locator('#alias-tooltip').isVisible(),'Desktop hover exposes tooltip');
+    const tooltipBox=await p.locator('#alias-tooltip').boundingBox();
+    await p.mouse.move(tooltipBox.x+tooltipBox.width/2,tooltipBox.y+tooltipBox.height/2,{steps:20});
+    ok(await p.locator('#alias-tooltip').isVisible()&&await p.locator('#alias-tooltip').evaluate(el=>el.matches(':hover')),'Pointer crosses trigger to hoverable tooltip content');
+    await p.mouse.move(0,0);ok(await p.locator('#alias-tooltip').isHidden(),'Leaving shared region without trigger focus dismisses tooltip');
+    await p.locator('#alias-help').tap();ok(await p.locator('#alias-tooltip').isVisible(),'Touch opens tooltip after pointer departure');
+    await p.locator('#alias-help').tap();ok(await p.locator('#alias-tooltip').isHidden(),'Second touch toggles tooltip closed');
+    await p.locator('#alias-help').tap();ok(await p.locator('#alias-tooltip').isVisible(),'Third touch reopens tooltip');
+    await p.locator('#public-nickname').tap();ok(await p.locator('#alias-tooltip').isHidden(),'Outside touch dismisses tooltip');
+    await p.locator('#account-close').click();await p.setViewportSize({width:375,height:667});
+    await p.locator('#language').selectOption('es');await p.locator('#account-open').click();await p.locator('#alias-help').tap();
+    ok((await p.locator('#alias-tooltip').textContent()).includes('nombre de animal al azar')&&await p.locator('#enroll').textContent()==='Guardar apodo'&&(await p.locator('#nickname-label').textContent()).includes('opcional')&&(await p.locator('#enrolled-status').textContent()).includes('Otter-4821'),'Spanish tooltip, optional rename and alias are translated without changing identity');
+    await p.locator('#account-close').click();await p.locator('#language').selectOption('en');
     await p.evaluate(()=>{window.__mockAuth.session={...window.__mockAuth.session,access_token:'REFRESHED_TEST_TOKEN'};});
     await p.locator('#leaderboard-open').click();await p.locator('#leaderboard-table').waitFor({state:'visible'});
     ok(calls.at(-1).headers.authorization==='Bearer REFRESHED_TEST_TOKEN','Public read refreshes SDK session instead of reusing cached token');
+    ok(await p.locator('#leaderboard-own').textContent()==='','Automatic alias alone does not create a rank before a verified result');
     await p.evaluate(()=>{window.__mockAuth.session={...window.__mockAuth.session,access_token:'EXPIRED_TEST_TOKEN'};});
     const beforeExpired=calls.length;await p.locator('#leaderboard-filter').selectOption('premier-league');await p.locator('#leaderboard-table').waitFor({state:'visible'});
     ok(calls.length===beforeExpired+2&&calls.at(-2).headers.authorization==='Bearer EXPIRED_TEST_TOKEN'&&!calls.at(-1).headers.authorization,'Expired authenticated league board retries once anonymously');
@@ -100,9 +123,9 @@ async page => {
     const first=calls.filter(c=>c.body.action==='answer').at(-1);await p.locator('#ranked-retry').click();await p.locator('#next').waitFor({state:'visible'});
     const retry=calls.filter(c=>c.body.action==='answer').at(-1);ok(JSON.stringify(first.body)===JSON.stringify(retry.body),'Lost answer response retries byte-equivalent body and identical idempotency key');
     ok(await p.locator('#score').textContent()==='73'&&projection.progress.answered===1,'Receipt retry displays server points once');
+    await p.locator('#leaderboard-open').click();await p.waitForFunction(()=>document.querySelector('#leaderboard-own').textContent.includes('22'));ok(!calls.some(c=>c.body.action==='enroll'),'First verified result shows own rank automatically without nickname submission');await p.locator('#leaderboard-close').click();
     await p.locator('#next').click();await ready();ok(projection.round.playerId!==players[0].id,'Next server round excludes first resolved player');
-    await p.locator('#account-open').click();await p.locator('#public-nickname').fill('Neutral Falcon');await p.locator('#enroll').click();ok(!calls.some(c=>c.body.action==='enroll'),'Public enrollment requires separate explicit checkbox consent');
-    await p.locator('#nickname-consent').check();nicknameTaken=true;await p.locator('#enroll').click();await p.waitForFunction(()=>document.querySelector('#play-mode').textContent.includes('unavailable'));await p.locator('#account-close').click();await p.locator('#ranked-retry').click();await ready();
+    await p.locator('#account-open').click();await p.locator('#public-nickname').fill('Neutral Falcon');nicknameTaken=true;await p.locator('#enroll').click();await p.waitForFunction(()=>document.querySelector('#play-mode').textContent.includes('unavailable'));await p.locator('#account-close').click();await p.locator('#ranked-retry').click();await ready();
     await p.locator('#account-open').click();await p.locator('#public-nickname').fill('Neutral Eagle');await p.locator('#enroll').click();await p.waitForFunction(()=>document.querySelector('#enrolled-status').textContent.includes('Neutral Eagle'));
     ok(projection.profile.nickname==='Neutral Eagle','Nickname conflict releases rejected payload so user can correct it');
     ok(!JSON.stringify(calls).includes('MUST NEVER PUBLISH')&&!JSON.stringify(calls).includes('avatar_url'),'No Google name or photo sent to API');await p.locator('#account-close').click();
@@ -116,7 +139,7 @@ async page => {
     await p.locator('#change-competition').click();await p.locator('#competition-options button').nth(3).click();await p.locator('#round-panel').waitFor({state:'hidden'});ok(await p.locator('#account-notice').isVisible(),'Completed start response stays completed despite progress readback of previous finished round');
     await p.locator('#change-competition').click();await p.locator('#competition-options button').first().click();await ready();
     ok(await p.locator('#round-panel').evaluate(el=>{const r=el.getBoundingClientRect();return r.top>=0&&r.top<667;}),'Next ranked career returns into short mobile viewport');
-    await p.reload();await ready();ok(await p.locator('#score').textContent()==='73','Persistent mock account reload restores cloud progress');
+    await p.reload();await ready();ok(await p.locator('#score').textContent()==='73','Persistent mock account reload restores cloud progress');await p.locator('#account-open').click();ok((await p.locator('#enrolled-status').textContent()).includes('Neutral Eagle'),'Custom nickname survives reload without replacement by animal alias');await p.locator('#account-close').click();
     await p.locator('#account-open').click();p.once('dialog',d=>d.dismiss());await p.locator('#account-delete').click();ok(!calls.some(c=>c.url.endsWith('account-delete')),'Deletion cancellation makes no delete request');
     deleteFail=true;p.once('dialog',d=>d.accept('DELETE'));await p.locator('#account-delete').click();await p.waitForFunction(()=>document.querySelector('#account-status').textContent.includes('could not be confirmed'));ok(await p.locator('#logout').isVisible(),'Failed deletion retains signed-in state');
     deleteFail=false;p.once('dialog',d=>d.accept('DELETE'));await p.locator('#account-delete').click();await p.waitForFunction(()=>document.querySelector('#play-mode').textContent==='GUEST · UNRANKED');ok(await p.evaluate(()=>lifetime.score===0&&seen.size===0&&!localStorage.getItem('derabona.auth.v1')),'Confirmed deletion clears account session and starts empty guest');
