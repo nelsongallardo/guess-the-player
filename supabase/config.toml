@@ -1,0 +1,13 @@
+project_id = "derabona"
+
+[auth]
+site_url = "https://derabona.club"
+additional_redirect_urls = ["http://localhost:4173", "http://127.0.0.1:4173"]
+
+# Functions validate bearer tokens with Supabase Auth getUser(). The public
+# leaderboard must work without a JWT; modern publishable keys are not JWTs.
+[functions.ranked-game]
+verify_jwt = false
+
+[functions.account-delete]
+verify_jwt = false

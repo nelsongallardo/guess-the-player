@@ -21,6 +21,10 @@ The owner selected **consent-first analytics with persistent anonymous identity*
 - Event filtering preserves the SDK-required public `token` property; deleting it makes the SDK drop events after `before_send`, even when hooks appear to fire. Tests must assert actual transport and backend ingestion, not only entry into the hook.
 - Event filtering strips full referrer URLs, query strings, fragments, free text and automatic person-property payloads. The current URL is always `https://derabona.club/`; only the referrer hostname is retained. SDK anonymous/session IDs and basic browser/device properties are retained after consent.
 
+## Accounts remain separate
+
+Google/Supabase requests provide optional account functionality and do not require or grant analytics permission. Public nickname enrollment is separate consent again. Never send account IDs, nicknames, Google names/photos, email addresses, bearer tokens, authorization codes or saved account state to PostHog; no account `identify` or `alias` calls. Ranked-mode analytics context supplies only language, not cloud progress. The callback scrubber runs before analytics and removes OAuth callback query/fragment values while retaining supported language selection. Analytics anonymous identity is not linked to the Google account. See [account contract](leaderboards.md) and the [bilingual public privacy page](../privacy.html).
+
 ## Event contract
 
 - `$pageview`: one consented page view per document.
@@ -47,6 +51,6 @@ The model/privacy tests use an explicitly mocked SDK. Browser regression tests d
 
 PostHog's bot filter blocks automated browsers, including `navigator.webdriver` and HeadlessChrome, even when the SDK loads and identity storage works. In test contexts only, use the documented `opt_out_useragent_filter:true` override, attach a verification marker after the production event filter, and read back the events. Never disable production bot filtering just to make tests pass. See [PostHog troubleshooting](https://posthog.com/docs/product-analytics/troubleshooting).
 
-The integration stays inline in `index.html`; no new deployment asset is needed. A push to `main` runs the new Node checks and deploys automatically. The CDN SDK is an optional, after-consent dependency only; the portable game remains usable entirely offline. Recheck no-consent mobile performance and the actual deployed version after changes.
+The analytics integration stays inline in `index.html`; the shared account/analytics explanation also lives in deployed `privacy.html`. The Pages workflow validates all pushes, pull requests and manual runs; only validated non-PR runs on `main` deploy the static package. Supabase deployment is separate. The CDN SDK is an optional, after-consent dependency only; the portable game remains usable entirely offline. Recheck no-consent mobile performance and the actual deployed version after changes.
 
 Official references: [data collection](https://posthog.com/docs/privacy/data-collection), [JS configuration](https://posthog.com/docs/libraries/js/config), [projects API](https://posthog.com/docs/api/projects), [insights API](https://posthog.com/docs/api/insights).

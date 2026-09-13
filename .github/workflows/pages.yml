@@ -1,25 +1,20 @@
-name: Test and deploy Touchline
+name: Test and deploy derabona
 
 on:
   push:
-    branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,14 +22,47 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate game data and model
-        run: node --test tests/model.test.mjs tests/social-preview.test.mjs tests/seo.test.mjs tests/analytics.test.mjs
-      - name: Validate source identifiers
-        run: python3 tests/source-check.py
-      - name: Prepare game-only website
+      - name: Install native PostgreSQL for isolated security tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql
+      - name: Validate model, persistence and real database contracts
+        run: |
+          for dir in /usr/lib/postgresql/*/bin; do
+            if test -x "$dir/postgres"; then export PG_BIN="$dir"; fi
+          done
+          test -n "$PG_BIN"
+          node --test tests/*.test.mjs
+      - name: Validate source and ranked roster parity
+        run: |
+          python3 tests/source-check.py
+          node scripts/export-ranked-roster.mjs --check
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Validate Edge Functions and HTTP boundary tests
+        run: |
+          deno check supabase/functions/ranked-game/index.ts supabase/functions/account-delete/index.ts
+          deno test tests/ranked-backend-edge.test.ts
+  deploy:
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Prepare public website only
         run: |
           mkdir -p _site/assets
-          cp index.html _site/index.html
+          cp index.html privacy.html _site/
           cp robots.txt sitemap.xml favicon.svg _site/
           cp assets/derabona-social-es-v1.png _site/assets/
       - name: Configure Pages

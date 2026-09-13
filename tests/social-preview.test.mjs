@@ -47,5 +47,5 @@ test('Pages deploys the preview asset and checks this contract', () => {
   const workflow = readFileSync(new URL('../.github/workflows/pages.yml', import.meta.url), 'utf8');
   assert.match(workflow, /mkdir -p _site\/assets/);
   assert.match(workflow, /cp assets\/derabona-social-es-v1\.png _site\/assets\//);
-  assert.match(workflow, /node --test[^\n]*tests\/social-preview\.test\.mjs/);
+  assert.match(workflow, /node --test[^\n]*tests\/(?:social-preview\.test\.mjs|\*\.test\.mjs)(?:\s|$)/);
 });

@@ -7,6 +7,7 @@ __pycache__/
 test-results/
 playwright-report/
 _site/
+supabase/.temp/
 # Raw retrievals stay local: avoid publishing full third-party articles.
 research/*
 !research/verified-players.json

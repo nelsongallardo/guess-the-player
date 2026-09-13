@@ -1,5 +1,20 @@
 # Verification report
 
+## Accounts and ranked progress — local evidence, 13 September 2026
+
+**Interactive Google OAuth remains unverified.** Fresh parent verification passed all 88 Node tests (including native PostgreSQL), five focused browser suites (guest, accounts, analytics, SEO, offline), seven Deno HTTP tests and production Edge entrypoint type checks. Final account-boundary fixes were then verified with **107/107 Node tests**, including 19 new source-extracted boundary regressions, plus the account browser suite with the implicit-token rejection case. These fixes remove unsolicited URL session imports and bind private state/mutations to authenticated identity across account changes. Hosted tests used a real disposable admin-created email Auth identity, not Google OAuth: enrollment-only exclusion, start/hint/answer, authoritative score readback, exact idempotent retry, global and every applicable membership board, then actual account deletion and exact Auth/database/public-board readback all passed. The disposable account and test results were removed. Hosted configuration readback confirmed Google enabled, email/anonymous signup disabled, both functions ACTIVE and both migrations applied. Evidence: ignored `test-results/accounts-final-node.log`, `accounts-final-browser.log` and `accounts-hosted-verification.json`.
+
+Existing worker reports under ignored `test-results/` record:
+
+- `backend-spec-fixes.md`: native PostgreSQL **12/12 passed**, after a red run demonstrating enrollment-only board leakage. Tests cover service-only access, server scoring, immutable first results, concurrency, versions/idempotency, canonical memberships, no-result exclusion, zero-point losses, ties/pagination, exhaustion, rate budgets and deletion cascades. Supabase Auth schema/roles are simulated; PostgreSQL itself is real.
+- `backend-contract.md`: earlier **11/11** SQL run, **7/7** Deno HTTP tests using injected Auth/RPC/deletion mocks, entrypoint type checks with the pinned real SDK, and exporter parity (60 players, 119 candidates, 7,080 rival rows, 218 memberships, six competitions). The later 12-test report supersedes its SQL count, not its hosted-verification caveat.
+- `frontend-spec-fixes.md`: **9/9** guest storage tests, **46** account browser checks and **16** guest browser checks passed, including offline file play and zero external guest requests. Account SDK/API are route-mocked; this is not Google login or database verification. Conflicting linked legacy snapshots remain intact, and public reads safely fall back anonymously without allowing mutations to do so.
+- `accounts-spec-review.md`: fresh **9/9** guest and **12/12** SQL tests, plus explicitly mocked ad-hoc auth transport probes; spec-stage PASS only, not production approval.
+
+Reproduction commands, API/security boundaries and hosted release gates: [docs/leaderboards.md](docs/leaderboards.md). CI runs all `tests/*.test.mjs` with native PostgreSQL, source/roster checks, Deno entrypoint checks and HTTP tests on branch pushes/PRs/manual runs. It does not run browser suites; only validated non-PR `main` runs deploy the six static assets, including `privacy.html`, and never Supabase.
+
+Remaining checks include actual Google sign-in/cancellation/session refresh and Google-authenticated cross-device authoritative progress. Recovery-control clicking and exhaustive auth-event race coverage were not established by the focused browser report. Historical browser failures and source-era storage assertions below remain historical evidence, not a claim that today's full regression is green. ADR 0006 supersedes their device-local persistence scope.
+
 ## Consent-first analytics
 
 - `tests/analytics.test.mjs` starts with failing pre-implementation tests and covers opt-in, withdrawal, load races, storage denial, DNT/offline suppression, property filtering and disabled SDK features.

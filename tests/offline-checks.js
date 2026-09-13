@@ -20,7 +20,7 @@ async page => {
     // Round 0 used both available hints (100 x 0.6 = 60); the other 59 first-try, no-hint wins score 100 each.
     ok(await file.evaluate(()=>state.finished&&CareerGame.stats(state).score===5960&&CareerGame.stats(state).streak===60),'All 60 offline rounds complete');
     await file.reload();ok(await file.locator('#summary-panel').isVisible(),'File URL saves/reloads in Chromium');
-    await isolated.addInitScript(()=>{Object.defineProperty(window,'localStorage',{configurable:true,get(){throw new DOMException('Storage blocked for test','SecurityError');}});});
+    await isolated.addInitScript(()=>{for(const name of ['localStorage','sessionStorage'])Object.defineProperty(window,name,{configurable:true,get(){throw new DOMException('Storage blocked for test','SecurityError');}});});
     await file.reload();ok((await file.locator('#save-status').textContent()).includes('STORAGE UNAVAILABLE'),'Denied storage reported, not fatal');
     const option=await file.evaluate(()=>CareerGame.roundAt(state).options.indexOf(CareerGame.playerAt(state).name));
     await file.locator('#options button').nth(option).click();ok(await file.evaluate(()=>CareerGame.stats(state).score===100),'Game works with localStorage denied');

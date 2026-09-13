@@ -3,6 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script id="auth-callback">
+// Capture OAuth secrets in memory, then remove them BEFORE any analytics SDK.
+const AuthCallback = (()=>{
+  const url=new URL(location.href),hash=new URLSearchParams(url.hash.slice(1));
+  const callback={code:url.searchParams.get('code'),error:url.searchParams.get('error')||hash.get('error')};
+  if(callback.code||hash.has('access_token')||hash.has('refresh_token')||url.searchParams.has('access_token')||url.searchParams.has('refresh_token')||callback.error||hash.has('error_description')||url.searchParams.has('error_description')){
+    const clean=new URL(url.origin==='null'?url.href:url.origin+url.pathname);clean.search='';clean.hash='';
+    const lang=url.searchParams.get('lang');if(lang==='en'||lang==='es')clean.searchParams.set('lang',lang);
+    history.replaceState(null,'',clean.href);
+  }
+  return callback;
+})();
+</script>
 <script id="loading-state">document.documentElement.classList.add('game-loading');</script>
 <meta name="theme-color" content="#f7f4eb">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -198,6 +211,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 .about-game{border-top:1px solid var(--line);margin-top:28px;padding:24px 0;color:var(--muted);max-width:850px;font-size:15px;line-height:1.65}.about-game h2{font-size:24px;line-height:1.25;color:var(--ink);letter-spacing:-.5px;margin-bottom:12px}.about-game p{margin:10px 0}.about-game details{border-top:1px solid var(--line);padding:10px 0}.about-game summary{cursor:pointer;color:var(--ink);font-weight:650;min-height:44px;display:list-item;padding:10px 0}.about-game ol{padding-left:24px}.about-game li{margin:8px 0}@media(max-width:580px){.about-game{font-size:14px}.about-game h2{font-size:21px}}
 .game-loading #round-panel{min-height:100svh;position:relative}.game-loading #round-panel>:not(#game-loading-status){visibility:hidden}.game-loading #game-loading-status{display:block!important;position:absolute;top:20px;left:0;color:var(--muted)}
 .privacy-tools{margin:18px 0;text-align:center}.analytics-banner{position:fixed;z-index:10;bottom:12px;left:50%;transform:translateX(-50%);width:min(640px,calc(100% - 24px));padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 32px #122a3833}.analytics-banner h2{font-size:16px;margin:0 0 6px}.analytics-banner p{font-size:13px;margin:0 0 10px}.analytics-actions{display:flex;gap:8px;flex-wrap:wrap}.analytics-actions button{padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font-size:13px;min-height:42px}.analytics-actions button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}#privacy-dialog{max-width:540px;width:calc(100% - 32px)}#privacy-dialog p{line-height:1.65;font-size:14px}
+.account-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:7px 0;font:11px var(--mono)}.account-tools button{min-height:44px}.account-tools strong{color:var(--ink)}.account-actions{display:flex;gap:8px;flex-wrap:wrap}#account-dialog,#leaderboard-dialog{width:min(580px,calc(100% - 24px));max-height:85svh;overflow:auto}#account-dialog p,#leaderboard-dialog p{font-size:14px;line-height:1.6}#account-dialog input,#leaderboard-dialog select{font:inherit;padding:10px;max-width:100%;min-height:44px}#account-notice{padding:10px 0;font-size:14px}#leaderboard-table{border-collapse:collapse;width:100%;font-size:13px}#leaderboard-table th,#leaderboard-table td{text-align:left;padding:10px 5px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}#leaderboard-table td:nth-child(2){max-width:160px}.ranked-wait #round-panel,.ranked-wait #summary-panel{display:none}.account-tools [hidden],#account-dialog [hidden],#leaderboard-dialog [hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -218,6 +232,9 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
   <path d="m79 53 3-5m-9 7-1-4" stroke="#89cff0" stroke-width="2" stroke-linecap="round"/>
 </svg><div><div class="wordmark">derabona</div><small>FOOTBALL, FROM MEMORY.</small></div></div><button id="change-competition" class="competition-badge" type="button" aria-haspopup="dialog"><span class="competition-badge-dot" aria-hidden="true"></span><span class="competition-badge-text"><span class="competition-badge-label" id="competition-badge-label">Competition</span><span id="competition-current" class="competition-badge-value">All Players</span></span><span class="competition-badge-caret" aria-hidden="true">▾</span></button><div class="score-panel"><div class="score-badge" aria-live="polite"><span class="score-badge-label" id="score-badge-label">Score</span><strong id="score">000</strong></div><div class="score-badge" aria-live="polite"><span class="score-badge-label" id="streak-badge-label">Streak</span><strong id="streak">0</strong></div></div></div><div class="masthead-right"><select id="language" aria-label="Language / Idioma" title="Language / Idioma"><option value="en">English</option><option value="es">Español</option></select><span class="edition">FÚTBOL ENTRE AMIGOS</span><button id="help" class="subtle" type="button">How to play <span aria-hidden="true">↗</span></button></div></header>
 <main>
+<div class="account-tools"><strong id="play-mode" role="status">INVITADO · SIN CLASIFICACIÓN</strong><div class="account-actions"><button id="account-open" class="subtle" type="button" aria-haspopup="dialog">Cuenta</button><button id="leaderboard-open" class="subtle" type="button" aria-haspopup="dialog">Clasificación</button></div></div>
+<div id="account-notice" role="status" hidden></div>
+<div class="account-actions"><button id="ranked-retry" class="subtle" type="button" hidden>Reintentar</button><button id="practice" class="subtle" type="button" hidden>Práctica sin clasificación</button></div>
 <section class="hero" aria-labelledby="title"><div><div class="eyebrow">EL JUEGO DE LAS TRAYECTORIAS</div><h1 id="title">Adiviná al jugador.<br> <span>Por su carrera.</span></h1><p class="intro">Una carrera en escudos. Demostrá cuánto fútbol tenés.</p></div></section>
 <noscript><p>This game needs JavaScript. Enable it and reload. / Este juego necesita JavaScript. Actívalo y recarga la página.</p></noscript>
 <section id="round-panel" aria-label="Current round">
@@ -241,7 +258,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 <details><summary>Jugadores de Europa y Sudamérica</summary>
 <p>El juego reúne 60 jugadores: 30 de Europa y 30 de Sudamérica. Podés elegir entre la Liga de Campeones, Premier League, La Liga, Primera División Argentina y Brasileirão, o jugar con todos. Las competiciones filtran las trayectorias del desafío; los nombres de las respuestas se eligen por origen y época de la carrera.</p></details>
 <details><summary>¿Se guarda el progreso? ¿Se puede jugar sin conexión?</summary>
-<p>Los puntos, la racha y los jugadores que ya contestaste se guardan en este navegador cuando el almacenamiento está disponible. Un jugador respondido no vuelve a aparecer hasta que reinicies tus resultados. El progreso no se sincroniza entre dispositivos.</p>
+<p>Como invitado, los puntos, la racha y los jugadores respondidos duran esta sesión de pestaña: recargar conserva el progreso y cerrar normalmente lo termina (restaurar la sesión del navegador puede conservarlo). Si se bloquea el almacenamiento, recargar reinicia. Google es opcional y guarda progreso clasificado entre dispositivos, sin importar puntos de invitado. Reiniciar solo borra resultados sin clasificación.</p>
 <p>Podés <a href="/index.html" download="derabona.html">descargar el juego como archivo HTML</a> y abrirlo sin conexión. Los escudos están incluidos. Necesitás JavaScript activado; no hacen falta cuentas ni servicios externos.</p></details>
 </section>
 </main>
@@ -254,6 +271,8 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 </div>
 <dialog id="rules" aria-labelledby="rules-title"><h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>National teams are never in the timeline.</b></li><li>Pick a <b>competition</b> from the badge at the top of the page — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players — to choose which careers you will be quizzed on. Rival names prioritize similar career origins and eras.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position</b>. They’re free.</li><li>A correct round earns <b>up to 100 points</b> — less per hint used and the slower you answer — and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. Every player in your deck appears once before the final whistle.</li><li>Once you answer a player — right or wrong — they never come back, in any competition, until you use <b>Reset my results</b>. A competition shows <b>Completed</b> in the picker once none are left.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> badge identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress is saved locally when your browser allows it. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play <span aria-hidden="true">→</span></button></form></dialog>
 <dialog id="competitions" aria-labelledby="competitions-title"><h2 id="competitions-title">Choose a competition</h2><p id="competitions-intro">Play within one competition, or take on the full roster.</p><div id="competition-options" class="competition-options" role="group" aria-label="Competitions"></div><form method="dialog"><button class="subtle" type="submit" id="competitions-close">Close</button></form></dialog>
+<dialog id="account-dialog" aria-labelledby="account-title"><h2 id="account-title">Cuenta y progreso</h2><p id="account-detail"></p><p id="account-status" role="status"></p><div class="account-actions"><button id="google-login" class="primary" type="button">Continuar con Google</button><button id="account-ranked" class="subtle" type="button" hidden>Volver a clasificación</button><button id="logout" class="subtle" type="button" hidden>Cerrar sesión</button></div><form id="enroll-form" hidden><p id="nickname-detail"></p><label id="nickname-label" for="public-nickname">Apodo público</label><input id="public-nickname" name="nickname" autocomplete="off" maxlength="24" minlength="3" value="" required><p><label><input id="nickname-consent" type="checkbox" required> <span id="nickname-consent-label">Quiero aparecer en la clasificación pública.</span></label></p><button id="enroll" class="primary" type="submit">Publicar mi apodo</button></form><p id="enrolled-status"></p><button id="account-delete" class="subtle" type="button" hidden>Eliminar cuenta</button><form method="dialog"><button id="account-close" class="subtle" type="submit">Cerrar</button></form></dialog>
+<dialog id="leaderboard-dialog" aria-labelledby="leaderboard-title"><h2 id="leaderboard-title">Clasificación</h2><p id="leaderboard-detail"></p><label id="leaderboard-filter-label" for="leaderboard-filter">Competición</label> <select id="leaderboard-filter"></select><p id="leaderboard-status" role="status"></p><p id="leaderboard-own"></p><table id="leaderboard-table" hidden><thead><tr><th id="board-rank" scope="col">Puesto</th><th id="board-name" scope="col">Apodo</th><th id="board-points" scope="col">Puntos</th><th id="board-answered" scope="col">Jugados</th><th id="board-correct" scope="col">Aciertos</th></tr></thead><tbody id="leaderboard-entries"></tbody></table><div class="account-actions"><button id="board-prev" class="subtle" type="button" hidden>Anterior</button><button id="board-next" class="subtle" type="button" hidden>Siguiente</button><button id="board-retry" class="subtle" type="button" hidden>Reintentar</button></div><form method="dialog"><button id="leaderboard-close" class="subtle" type="submit">Cerrar</button></form></dialog>
 <script id="roster-data">
 const PLAYERS = [
   {
@@ -10043,6 +10062,102 @@ const SPANISH_NOTES = {
   }
 };
 </script>
+<script id="guest-storage">
+const GuestStorage = (()=>{
+  'use strict';
+  const keys=['touchline.career.v1','touchline.history.v1','touchline.lifetime.v1','touchline.seen.v1'];
+  const memory=new Map();let persistent=true,legacy=[];
+  try{for(const key of keys){const value=sessionStorage.getItem(key);if(value!==null)memory.set(key,value);}}catch{persistent=false;}
+  try{legacy=keys.map(key=>[key,localStorage.getItem(key)]).filter(([,value])=>value!==null);}catch{}
+  // Gameplay keys form one snapshot: never fill gaps from another session.
+  const legacyMap=new Map(legacy);
+  let legacyConflict=legacy.length>0&&memory.size>0&&keys.some(key=>(memory.get(key)??null)!==(legacyMap.get(key)??null));
+  if(!legacyConflict)for(const [key,value]of legacy)memory.set(key,value);
+  try{
+    // Stage ALL keys and verify ALL readbacks before removing ANY old save.
+    for(const [key,value]of memory)sessionStorage.setItem(key,value);
+    sessionStorage.setItem('derabona.guest-probe','1');
+    if(sessionStorage.getItem('derabona.guest-probe')!=='1')throw Error('Storage unavailable');
+    sessionStorage.removeItem('derabona.guest-probe');
+    for(const [key,value]of memory)if(sessionStorage.getItem(key)!==value)throw Error('Save verification failed');
+    if(!legacyConflict)for(const [key]of legacy)localStorage.removeItem(key);
+  }catch{persistent=false;}
+  return {
+    get persistent(){return persistent;},
+    get legacyConflict(){return legacyConflict;},
+    restoreLegacy(){
+      // Explicit replacement only; keep every original if staging fails.
+      try{for(const key of keys){const value=legacyMap.get(key);if(value===undefined)sessionStorage.removeItem(key);else sessionStorage.setItem(key,value);}
+        for(const key of keys)if(sessionStorage.getItem(key)!==(legacyMap.get(key)??null))throw Error('Save verification failed');
+        for(const [key]of legacy)localStorage.removeItem(key);
+        memory.clear();for(const [key,value]of legacy)memory.set(key,value);legacyConflict=false;return true;
+      }catch{persistent=false;return false;}
+    },
+    getItem:key=>memory.get(key)??null,
+    setItem(key,value){memory.set(key,String(value));try{sessionStorage.setItem(key,String(value));if(sessionStorage.getItem(key)!==String(value))throw Error('Save verification failed');}catch{persistent=false;}},
+    removeItem(key){memory.delete(key);try{sessionStorage.removeItem(key);}catch{persistent=false;}},
+    clear(){for(const key of keys)this.removeItem(key);}
+  };
+})();
+</script>
+<script id="account-service">
+// Public project configuration only; service-role/OAuth secrets stay server-side.
+const ACCOUNT_CONFIG=Object.freeze({url:'https://iaebecfxjwjzkapqdeha.supabase.co',anonKey:'sb_publishable_67zB6W8GnDAwIftLW__xqA_x8sr7Pea'});
+const Accounts = (()=>{
+  'use strict';
+  const config=ACCOUNT_CONFIG,storageKey='derabona.auth.v1';
+  const configured=!!config.url&&!!config.anonKey&&/^https:\/\//.test(config.url)&&location.protocol!=='file:';
+  let client=null,loading=null,session=null,authRevision=0,subscription=null;
+  const hasStoredSession=()=>{try{return !!localStorage.getItem(storageKey);}catch{return false;}};
+  async function load(){
+    if(!configured)throw Error('NOT_CONFIGURED');if(client)return client;
+    if(!loading)loading=new Promise((resolve,reject)=>{
+      const script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';script.crossOrigin='anonymous';script.referrerPolicy='no-referrer';
+      const timer=setTimeout(()=>{script.remove();loading=null;reject(Error('AUTH_UNAVAILABLE'));},12000);
+      script.onerror=()=>{clearTimeout(timer);loading=null;script.remove();reject(Error('AUTH_UNAVAILABLE'));};
+      script.onload=()=>{clearTimeout(timer);try{client=window.supabase.createClient(config.url,config.anonKey,{auth:{storageKey,persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:'pkce'}});resolve(client);}catch{loading=null;reject(Error('AUTH_UNAVAILABLE'));}};
+      document.head.append(script);
+    });return loading;
+  }
+  async function init(onChange){
+    if(!configured)return null;
+    if(!hasStoredSession()&&!AuthCallback.code&&!AuthCallback.error)return null;
+    const c=await load();let result;
+    try{
+      if(AuthCallback.error)throw Error('AUTH_CANCELLED');
+      if(AuthCallback.code)result=await c.auth.exchangeCodeForSession(AuthCallback.code);
+      else result=await c.auth.getSession();
+      if(result.error)throw result.error;session=result.data.session;
+      // Do not await Supabase operations inside its auth-state lock.
+      subscription?.unsubscribe();
+      subscription=c.auth.onAuthStateChange((event,next)=>{session=next;++authRevision;onChange(event,next);}).data.subscription;
+      return session;
+    }finally{AuthCallback.code=null;AuthCallback.error=null;}
+  }
+  async function login(language){const c=await load();const redirect=new URL(location.href);redirect.search='';redirect.hash='';redirect.searchParams.set('lang',language);const {error}=await c.auth.signInWithOAuth({provider:'google',options:{redirectTo:redirect.href}});if(error)throw error;}
+  async function request(payload,endpoint='ranked-game',isPublic=false,expectedUserId=session?.user?.id??null){
+    if(!configured||navigator.onLine===false)throw Error('UNAVAILABLE');
+    // Only the leaderboard is eligible for anonymous fallback, never mutations.
+    const publicRead=isPublic&&endpoint==='ranked-game'&&payload.action==='leaderboard';
+    let credentials=null;
+    if(!publicRead||client||session||hasStoredSession()){
+      try{const c=await load(),revision=authRevision,{data,error}=await c.auth.getSession();if(error)throw error;credentials=revision===authRevision?data.session:session;if(!credentials&&!publicRead)throw Error('AUTH_REQUIRED');session=credentials;}
+      catch{if(!publicRead)throw Error('AUTH_REQUIRED');}
+    }
+    if(!publicRead&&credentials?.user?.id!==expectedUserId)throw Error('AUTH_CHANGED');
+    const headers={'Content-Type':'application/json',apikey:config.anonKey};if(credentials?.access_token)headers.Authorization='Bearer '+credentials.access_token;
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
+    try{
+      const send=()=>fetch(config.url+'/functions/v1/'+endpoint,{method:'POST',headers,body:JSON.stringify(payload),signal:controller.signal,referrerPolicy:'no-referrer'});
+      let response=await send();
+      if(publicRead&&headers.Authorization&&[401,403].includes(response.status)){delete headers.Authorization;response=await send();}
+      const data=await response.json();if(!response.ok){const error=Error(data.error?.code||'UNAVAILABLE');error.code=data.error?.code;throw error;}if(!publicRead&&session?.user?.id!==expectedUserId)throw Error('AUTH_CHANGED');return data;
+    }finally{clearTimeout(timer);}
+  }
+  async function logout(){const owner=session?.user?.id,c=await load();if(session?.user?.id!==owner)return;const {error}=await c.auth.signOut({scope:'local'});if(error)throw error;if(session?.user?.id===owner)session=null;}
+  return {configured,hasStoredSession,init,login,request,logout,get session(){return session;}};
+})();
+</script>
 <script id="analytics">
 const Analytics = (()=>{
   'use strict';
@@ -10057,8 +10172,8 @@ const Analytics = (()=>{
   try{const saved=localStorage.getItem(KEY);if(saved==='accepted'||saved==='declined')choice=saved;}catch{}
   const allowed=()=>online&&navigator.onLine!==false&&choice==='accepted'&&!privacySignal();
   const text={
-    es:{title:'¿Nos ayudás a mejorar derabona?',short:'Con tu permiso medimos visitas y partidas con PostHog. Sin grabaciones de pantalla. Podés decir que no y jugar igual.',allow:'Permitir analítica',decline:'No, gracias',settings:'Privacidad y analítica',close:'Cerrar',status:{accepted:'Permiso de analítica: permitido.',declined:'Permiso de analítica: rechazado.',pending:'La analítica está desactivada hasta que la permitas.'},signal:'Tu navegador solicita no ser rastreado: no enviamos analítica.',offline:'Las partidas locales y sin conexión no se rastrean.',detail:'Si aceptás, PostHog (región UE) recibe visitas y eventos del juego: competición, intentos, pistas, resultados e idioma, junto con datos básicos del navegador y un identificador anónimo guardado en este navegador para medir visitas posteriores. No pedimos tu nombre ni tu email; no enviamos texto libre ni parámetros de la URL. La captura automática de clics, las grabaciones de sesión y el almacenamiento de IP en los eventos están desactivados. Tus partidas y tu progreso se guardan localmente, aunque rechaces la analítica. Podés retirar el permiso acá cuando quieras: se detienen los envíos futuros y se elimina el identificador analítico local; los eventos ya enviados no se borran automáticamente.'},
-    en:{title:'Help us improve derabona?',short:'With your permission, PostHog measures visits and gameplay. No screen recordings. You can decline and play normally.',allow:'Allow analytics',decline:'No thanks',settings:'Privacy and analytics',close:'Close',status:{accepted:'Analytics permission: allowed.',declined:'Analytics permission: declined.',pending:'Analytics is disabled until you allow it.'},signal:'Your browser requests no tracking: analytics is disabled.',offline:'Local and offline play is not tracked.',detail:'If you accept, PostHog (EU region) receives visits and game events: competition, guesses, hints, results and language, plus basic browser information and an anonymous identifier stored in this browser to measure returning visits. We do not ask for your name or email, and do not send free text or URL parameters. Automatic click capture, session recordings and IP storage in events are disabled. Your game and progress stay locally stored even when you decline analytics. You can withdraw permission here at any time: future collection stops and the local analytics identifier is removed; previously sent events are not automatically deleted.'}
+    es:{title:'¿Nos ayudás a mejorar derabona?',short:'Con tu permiso medimos visitas y partidas con PostHog. Sin grabaciones de pantalla. Podés decir que no y jugar igual.',allow:'Permitir analítica',decline:'No, gracias',settings:'Privacidad y analítica',close:'Cerrar',status:{accepted:'Permiso de analítica: permitido.',declined:'Permiso de analítica: rechazado.',pending:'La analítica está desactivada hasta que la permitas.'},signal:'Tu navegador solicita no ser rastreado: no enviamos analítica.',offline:'Las partidas locales y sin conexión no se rastrean.',detail:'Si aceptás, PostHog (región UE) recibe visitas y eventos del juego: competición, intentos, pistas, resultados e idioma, junto con datos básicos del navegador y un identificador anónimo guardado en este navegador para medir visitas posteriores. No pedimos tu nombre ni tu email; no enviamos texto libre ni parámetros de la URL. La captura automática de clics, las grabaciones de sesión y el almacenamiento de IP en los eventos están desactivados. El progreso de invitado dura esta sesión de pestaña; el progreso clasificado con cuenta se guarda en la nube, independientemente del permiso de analítica. No enviamos nombres de Google, emails, IDs de cuenta ni tokens a PostHog. Podés retirar el permiso acá cuando quieras: se detienen los envíos futuros y se elimina el identificador analítico local; los eventos ya enviados no se borran automáticamente.'},
+    en:{title:'Help us improve derabona?',short:'With your permission, PostHog measures visits and gameplay. No screen recordings. You can decline and play normally.',allow:'Allow analytics',decline:'No thanks',settings:'Privacy and analytics',close:'Close',status:{accepted:'Analytics permission: allowed.',declined:'Analytics permission: declined.',pending:'Analytics is disabled until you allow it.'},signal:'Your browser requests no tracking: analytics is disabled.',offline:'Local and offline play is not tracked.',detail:'If you accept, PostHog (EU region) receives visits and game events: competition, guesses, hints, results and language, plus basic browser information and an anonymous identifier stored in this browser to measure returning visits. We do not ask for your name or email, and do not send free text or URL parameters. Automatic click capture, session recordings and IP storage in events are disabled. Guest progress stays in this tab session; signed-in ranked progress is stored in the cloud, independently of analytics permission. Google names, emails, account IDs and tokens are never sent to PostHog. You can withdraw permission here at any time: future collection stops and the local analytics identifier is removed; previously sent events are not automatically deleted.'}
   };
   function update(){
     const t=text[lang],el=id=>document.getElementById(id);
@@ -10140,15 +10255,15 @@ const SEEN_KEY = 'touchline.seen.v1';
 const COPY = {
   en: {
     levels:{easy:'Easy',medium:'Medium',hard:'Hard'},
-    title:'derabona — Guess the player',description:'Guess the football player from their club career. Sixty players across five competitions, five answers, three chances. Play offline too.',brand:'FOOTBALL, FROM MEMORY.',edition:'FÚTBOL ENTRE AMIGOS',help:'How to play',eyebrow:'THE FOOTBALL CAREER QUIZ',headline:'Know the clubs.<br> Name the <span>player.</span>',intro:'A career in club badges. A name only you can call.',scoreboard:'Scoreboard',score:'YOUR SCORE',streak:'WIN STREAK',row:'in a row',round:'Current round',career:'CAREER FILE',path:'SENIOR CLUB CAREER',question:'Who is this player?',chances:'Five names. Three chances.',hints:['Country','Position'],hint:'Get Hint',allHints:'All hints revealed',revealed:'Revealed hints',next:'Next Player',results:'See results',sourceSummary:'Career notes & sources',whistle:'The final whistle',summary:'That’s a full career’s<br>worth of football.',replay:'Play again',review:'Review this game',footer:'<span class="footer-brand">60 PLAYERS</span> · 30 EUROPE / 30 SOUTH AMERICA',snapshot:'RESEARCH SNAPSHOT · 12 SEP 2026',competitions:{all:'All Players','champions-league':'Champions League','premier-league':'Premier League','la-liga':'La Liga (Spain)','argentine-primera':'Argentine Primera División','brasileirao':'Brasileirão (Brazil)'},competitionsTitle:'Choose a competition',competitionsIntro:'Choose the careers you want to play. Rival names are matched by career origin and era. Each player answered here, right or wrong, never comes back — a competition marked Completed has none left until you reset.',changeCompetition:'Competition',competitionCompleted:'Completed',competitionsClose:'Close',competitionsChange:'Change competition',saved:'PROGRESS SAVED ON THIS DEVICE',unsaved:'STORAGE UNAVAILABLE · RELOAD RESTARTS',trust:'Back your football memory. Every club is a clue.',found:'PLAYER FOUND',correct:'correct answer',incorrect:'incorrect',reviewWon:'✓ Correct',reviewLost:'× Missed',loss:'No attempts left. Your streak resets — your points stay.',historyTitle:'Your results on this device',historyEmpty:'No finished games yet — your results will appear here after your first recap.',historySummary:(games,best,bestStreak)=>`${games} ${games===1?'game':'games'} played on this device · Best score: ${best} · Best streak: ${bestStreak}`,resetLabel:'Reset my results',resetConfirm:'Reset all saved progress and result history stored on this device? This cannot be undone.',wrong:'Not quite. Take another look.',sources:'Career sources',attribution:'Crest attribution',rights:'Crests are embedded for offline play. Club trademarks and image rights remain with their owners. Current/source-era badges are used, not historical season-by-season artwork.',original:'original public image',checked:'Research checked',crest:'crest',tags:{tour:'Tour loan',signing:'Signing*',reserve:'Senior reserve',loan:'Loan spell',return:'Return'},scroll:'Scroll or swipe to see every club',earlier:'Earlier clubs',later:'Later clubs',navigation:'Career timeline navigation',completed:'Completed rounds',timeline:'Club career in chronological order. Scroll horizontally for long careers.',grid:'Club career in chronological order. Read left to right, then the next row.',gridGuide:'LEFT → RIGHT · ROW BY ROW',scrollGuide:'SWIPE TO EXPLORE',present:'present',
+    title:'derabona — Guess the player',description:'Guess the football player from their club career. Sixty players across five competitions, five answers, three chances. Play offline too.',brand:'FOOTBALL, FROM MEMORY.',edition:'FÚTBOL ENTRE AMIGOS',help:'How to play',eyebrow:'THE FOOTBALL CAREER QUIZ',headline:'Know the clubs.<br> Name the <span>player.</span>',intro:'A career in club badges. A name only you can call.',scoreboard:'Scoreboard',score:'YOUR SCORE',streak:'WIN STREAK',row:'in a row',round:'Current round',career:'CAREER FILE',path:'SENIOR CLUB CAREER',question:'Who is this player?',chances:'Five names. Three chances.',hints:['Country','Position'],hint:'Get Hint',allHints:'All hints revealed',revealed:'Revealed hints',next:'Next Player',results:'See results',sourceSummary:'Career notes & sources',whistle:'The final whistle',summary:'That’s a full career’s<br>worth of football.',replay:'Play again',review:'Review this game',footer:'<span class="footer-brand">60 PLAYERS</span> · 30 EUROPE / 30 SOUTH AMERICA',snapshot:'RESEARCH SNAPSHOT · 12 SEP 2026',competitions:{all:'All Players','champions-league':'Champions League','premier-league':'Premier League','la-liga':'La Liga (Spain)','argentine-primera':'Argentine Primera División','brasileirao':'Brasileirão (Brazil)'},competitionsTitle:'Choose a competition',competitionsIntro:'Choose the careers you want to play. Rival names are matched by career origin and era. Each player answered here, right or wrong, never comes back — a competition marked Completed has none left until you reset.',changeCompetition:'Competition',competitionCompleted:'Completed',competitionsClose:'Close',competitionsChange:'Change competition',saved:'GUEST · SAVED FOR THIS TAB SESSION',unsaved:'STORAGE UNAVAILABLE · RELOAD RESTARTS',trust:'Back your football memory. Every club is a clue.',found:'PLAYER FOUND',correct:'correct answer',incorrect:'incorrect',reviewWon:'✓ Correct',reviewLost:'× Missed',loss:'No attempts left. Your streak resets — your points stay.',historyTitle:'Your results this session',historyEmpty:'No finished games yet — your results will appear here after your first recap.',historySummary:(games,best,bestStreak)=>`${games} ${games===1?'game':'games'} played on this device · Best score: ${best} · Best streak: ${bestStreak}`,resetLabel:'Reset my results',resetConfirm:'Reset this guest / practice session, history and answered players? Ranked records, language and analytics permission are not changed. This cannot be undone.',wrong:'Not quite. Take another look.',sources:'Career sources',attribution:'Crest attribution',rights:'Crests are embedded for offline play. Club trademarks and image rights remain with their owners. Current/source-era badges are used, not historical season-by-season artwork.',original:'original public image',checked:'Research checked',crest:'crest',tags:{tour:'Tour loan',signing:'Signing*',reserve:'Senior reserve',loan:'Loan spell',return:'Return'},scroll:'Scroll or swipe to see every club',earlier:'Earlier clubs',later:'Later clubs',navigation:'Career timeline navigation',completed:'Completed rounds',timeline:'Club career in chronological order. Scroll horizontally for long careers.',grid:'Club career in chronological order. Read left to right, then the next row.',gridGuide:'LEFT → RIGHT · ROW BY ROW',scrollGuide:'SWIPE TO EXPLORE',present:'present',
     attempts:n=>`${n} ${n===1?'attempt':'attempts'} left`,progress:(n,total)=>`${n} OF ${total} COMPLETE`,spells:n=>`${n} SENIOR ${n===1?'SPELL':'SPELLS'}`,win:name=>`Get in! It’s ${name}.`,winDetail:(n,points)=>`+${points} points · ${n} ${n===1?'win':'wins'} in a row. Keep it going.`,lost:name=>`This one was ${name}.`,wrongDetail:n=>`${n} ${n===1?'attempt remains':'attempts remain'}. The red answer is out of play.`,recap:(s,total)=>`${s.wins} / ${total} players found · Best streak: ${s.best} · ${Math.round(s.wins/total*100)}% accuracy`,
-    rules:'<h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>Only professional senior club careers: youth teams, national teams and coaching jobs are excluded.</b> On mobile, read the numbered rows from left to right, then continue on the next row.</li><li>Pick a <b>competition</b> from the badge at the top of the page — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players — to choose which careers you will be quizzed on. Rival names prioritize similar career origins and eras.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position</b>. They’re free.</li><li>A correct round earns <b>up to 100 points</b> — less per hint used and the slower you answer — and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. Every player in your deck appears once before the final whistle. New games contain all 60 players; saved 30-, 40- and 50-player games finish their original deck.</li><li>Once you answer a player — right or wrong — they never come back, in any competition, until you use <b>Reset my results</b>. A competition shows <b>Completed</b> in the picker once none are left.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> tag identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Years describe club stints; departure or retirement can follow the final match. Notes distinguish these cases. Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress and language are saved locally when your browser allows it. Switching language does not restart the game. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play →</button></form>'
+    rules:'<h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>Only professional senior club careers: youth teams, national teams and coaching jobs are excluded.</b> On mobile, read the numbered rows from left to right, then continue on the next row.</li><li>Pick a <b>competition</b> from the badge at the top of the page — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players — to choose which careers you will be quizzed on. Rival names prioritize similar career origins and eras.</li><li>Pick one of five players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>country → position</b>. They’re free.</li><li>A correct round earns <b>up to 100 points</b> — less per hint used and the slower you answer — and extends your streak. A lost round resets the streak, not your score.</li><li>Finish the round to unlock <b>Next Player</b>. Every player in your deck appears once before the final whistle. New games contain all 60 players; saved 30-, 40- and 50-player games finish their original deck.</li><li>Once you answer a player — right or wrong — they never come back, in any competition, until you use <b>Reset my results</b>. A competition shows <b>Completed</b> in the picker once none are left.</li></ol><p>Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> tag identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Years describe club stints; departure or retirement can follow the final match. Notes distinguish these cases. Positions are broad playing roles. Initials use the name shown on the buttons. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>Guest play needs no account or internet. Guest progress lasts for this tab session (refresh retained, normal close ends it; browser restore may retain it). Language stays on this device. Optional Google accounts save ranked progress in the cloud, without importing guest scores. Ranked records cannot be reset. Analytics is optional and requires permission. Switching language does not restart the game. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play →</button></form>'
   },
   es: {
     levels:{easy:'Fácil',medium:'Media',hard:'Difícil'},
-    title:'derabona — Adiviná jugadores de fútbol por su carrera',description:'Jugá gratis a adivinar jugadores de fútbol por los clubes de su carrera. Cinco opciones, tres intentos y pistas. Sin registro, en el celular o la compu.',brand:'FÚTBOL, DE MEMORIA.',edition:'FÚTBOL ENTRE AMIGOS',help:'Cómo jugar',eyebrow:'EL JUEGO DE LAS TRAYECTORIAS',headline:'Adiviná al jugador.<br> <span>Por su carrera.</span>',intro:'Una carrera en escudos. Demostrá cuánto fútbol tenés.',scoreboard:'Marcador',score:'PUNTOS',streak:'RACHA',row:'seguidos',round:'Ronda actual',career:'TRAYECTORIA',path:'CARRERA SÉNIOR',question:'¿Quién es este jugador?',chances:'Cinco nombres. Tres intentos.',hints:['País','Posición'],hint:'Pedir pista',allHints:'Todas las pistas reveladas',revealed:'Pistas reveladas',next:'Siguiente jugador',results:'Ver resultados',sourceSummary:'Notas de la carrera y fuentes',whistle:'El pitido final',summary:'Una carrera completa.<br>¿Cuánto sabes de fútbol?',replay:'Volver a jugar',review:'Revisar esta partida',footer:'<span class="footer-brand">60 JUGADORES</span> · 30 EUROPA / 30 SUDAMÉRICA',snapshot:'DATOS VERIFICADOS · 12 SEP 2026',competitions:{all:'Todos los jugadores','champions-league':'Liga de Campeones','premier-league':'Premier League','la-liga':'La Liga (España)','argentine-primera':'Primera División Argentina','brasileirao':'Brasileirão (Brasil)'},competitionsTitle:'Elige una competición',competitionsIntro:'Elegí las trayectorias que querés jugar. Los rivales se eligen por origen y época de su carrera. Cada jugador que contestás acá, bien o mal, no vuelve a aparecer — una competición marcada como Completada no tiene más hasta que reinicies.',changeCompetition:'Competición',competitionCompleted:'Completada',competitionsClose:'Cerrar',competitionsChange:'Cambiar competición',saved:'PROGRESO GUARDADO EN ESTE DISPOSITIVO',unsaved:'NO SE PUEDE GUARDAR · RECARGAR REINICIA',trust:'Confiá en tu memoria futbolera. Cada club es una pista.',found:'¡JUGADOR ACERTADO!',correct:'respuesta correcta',incorrect:'incorrecto',reviewWon:'✓ Acertado',reviewLost:'× Fallado',loss:'Sin intentos. La racha vuelve a cero, pero conservas tus puntos.',historyTitle:'Tus resultados en este dispositivo',historyEmpty:'Todavía no hay partidas terminadas — tus resultados aparecerán aquí después de tu primer resumen.',historySummary:(games,best,bestStreak)=>`${games} ${games===1?'partida jugada':'partidas jugadas'} en este dispositivo · Mejor puntaje: ${best} · Mejor racha: ${bestStreak}`,resetLabel:'Reiniciar mis resultados',resetConfirm:'¿Reiniciar todo el progreso y el historial guardados en este dispositivo? No se puede deshacer.',wrong:'No es él. Mira la trayectoria otra vez.',sources:'Fuentes de la carrera',attribution:'Créditos de los escudos',rights:'Los escudos están incluidos para jugar sin conexión. Las marcas y los derechos de las imágenes pertenecen a sus propietarios. Se usan escudos actuales o de las fuentes consultadas, no diseños de cada temporada histórica.',original:'imagen pública original',checked:'Datos verificados',crest:'escudo',tags:{tour:'Gira',signing:'Fichaje*',reserve:'Filial',loan:'Préstamo',return:'Regreso'},scroll:'Desliza o usa las flechas para ver todos los clubes',earlier:'Clubes anteriores',later:'Clubes siguientes',navigation:'Navegación de la trayectoria',completed:'Rondas completadas',timeline:'Clubes en orden cronológico. Desplázate horizontalmente para ver las carreras largas.',grid:'Clubes en orden cronológico. Lee de izquierda a derecha y continúa en la fila siguiente.',gridGuide:'IZQ. → DER. · FILA POR FILA',scrollGuide:'DESLIZA PARA VER MÁS',present:'actualidad',
+    title:'derabona — Adiviná jugadores de fútbol por su carrera',description:'Jugá gratis a adivinar jugadores de fútbol por los clubes de su carrera. Cinco opciones, tres intentos y pistas. Sin registro, en el celular o la compu.',brand:'FÚTBOL, DE MEMORIA.',edition:'FÚTBOL ENTRE AMIGOS',help:'Cómo jugar',eyebrow:'EL JUEGO DE LAS TRAYECTORIAS',headline:'Adiviná al jugador.<br> <span>Por su carrera.</span>',intro:'Una carrera en escudos. Demostrá cuánto fútbol tenés.',scoreboard:'Marcador',score:'PUNTOS',streak:'RACHA',row:'seguidos',round:'Ronda actual',career:'TRAYECTORIA',path:'CARRERA SÉNIOR',question:'¿Quién es este jugador?',chances:'Cinco nombres. Tres intentos.',hints:['País','Posición'],hint:'Pedir pista',allHints:'Todas las pistas reveladas',revealed:'Pistas reveladas',next:'Siguiente jugador',results:'Ver resultados',sourceSummary:'Notas de la carrera y fuentes',whistle:'El pitido final',summary:'Una carrera completa.<br>¿Cuánto sabes de fútbol?',replay:'Volver a jugar',review:'Revisar esta partida',footer:'<span class="footer-brand">60 JUGADORES</span> · 30 EUROPA / 30 SUDAMÉRICA',snapshot:'DATOS VERIFICADOS · 12 SEP 2026',competitions:{all:'Todos los jugadores','champions-league':'Liga de Campeones','premier-league':'Premier League','la-liga':'La Liga (España)','argentine-primera':'Primera División Argentina','brasileirao':'Brasileirão (Brasil)'},competitionsTitle:'Elige una competición',competitionsIntro:'Elegí las trayectorias que querés jugar. Los rivales se eligen por origen y época de su carrera. Cada jugador que contestás acá, bien o mal, no vuelve a aparecer — una competición marcada como Completada no tiene más hasta que reinicies.',changeCompetition:'Competición',competitionCompleted:'Completada',competitionsClose:'Cerrar',competitionsChange:'Cambiar competición',saved:'INVITADO · GUARDADO EN ESTA SESIÓN',unsaved:'NO SE PUEDE GUARDAR · RECARGAR REINICIA',trust:'Confiá en tu memoria futbolera. Cada club es una pista.',found:'¡JUGADOR ACERTADO!',correct:'respuesta correcta',incorrect:'incorrecto',reviewWon:'✓ Acertado',reviewLost:'× Fallado',loss:'Sin intentos. La racha vuelve a cero, pero conservas tus puntos.',historyTitle:'Tus resultados de esta sesión',historyEmpty:'Todavía no hay partidas terminadas — tus resultados aparecerán aquí después de tu primer resumen.',historySummary:(games,best,bestStreak)=>`${games} ${games===1?'partida jugada':'partidas jugadas'} en este dispositivo · Mejor puntaje: ${best} · Mejor racha: ${bestStreak}`,resetLabel:'Reiniciar mis resultados',resetConfirm:'¿Reiniciar esta sesión de invitado / práctica, historial y jugadores respondidos? No cambia resultados clasificados, idioma ni permiso de analítica. No se puede deshacer.',wrong:'No es él. Mira la trayectoria otra vez.',sources:'Fuentes de la carrera',attribution:'Créditos de los escudos',rights:'Los escudos están incluidos para jugar sin conexión. Las marcas y los derechos de las imágenes pertenecen a sus propietarios. Se usan escudos actuales o de las fuentes consultadas, no diseños de cada temporada histórica.',original:'imagen pública original',checked:'Datos verificados',crest:'escudo',tags:{tour:'Gira',signing:'Fichaje*',reserve:'Filial',loan:'Préstamo',return:'Regreso'},scroll:'Desliza o usa las flechas para ver todos los clubes',earlier:'Clubes anteriores',later:'Clubes siguientes',navigation:'Navegación de la trayectoria',completed:'Rondas completadas',timeline:'Clubes en orden cronológico. Desplázate horizontalmente para ver las carreras largas.',grid:'Clubes en orden cronológico. Lee de izquierda a derecha y continúa en la fila siguiente.',gridGuide:'IZQ. → DER. · FILA POR FILA',scrollGuide:'DESLIZA PARA VER MÁS',present:'actualidad',
     attempts:n=>n===1?'Queda 1 intento':`Quedan ${n} intentos`,progress:(n,total)=>`${n} DE ${total} COMPLETADAS`,spells:n=>`${n} ${n===1?'ETAPA':'ETAPAS'}`,win:name=>`¡Gol! Es ${name}.`,winDetail:(n,points)=>`+${points} puntos · ${n} ${n===1?'acierto seguido':'aciertos seguidos'}. ¡A por el siguiente!`,lost:name=>`Era ${name}.`,wrongDetail:n=>`${n===1?'Queda 1 intento':`Quedan ${n} intentos`}. La opción roja ya está descartada.`,recap:(s,total)=>`${s.wins} / ${total} jugadores acertados · Mejor racha: ${s.best} · ${Math.round(s.wins/total*100)}% de aciertos`,
-    rules:'<h2 id="rules-title">Lee la trayectoria.<br>Adivina la leyenda.</h2><ol><li>Sigue los escudos desde el debut hasta el último club. <b>Solo carreras profesionales sénior: se excluyen juveniles, selecciones y etapas como entrenador.</b> En el móvil, lee las filas numeradas de izquierda a derecha y continúa en la fila siguiente.</li><li>Elige una <b>competición</b> con la insignia en la parte superior de la página — Liga de Campeones, Premier League, La Liga, la Primera División Argentina, el Brasileirão o Todos los jugadores — para elegir las trayectorias de la partida. Los rivales priorizan orígenes y épocas de carrera parecidos.</li><li>Elige uno de los cinco jugadores. Tienes <b>tres intentos</b>; cada respuesta incorrecta queda desactivada.</li><li>¿Necesitas ayuda? Las pistas revelan <b>país → posición</b>. Son gratis.</li><li>Acertar una ronda suma <b>hasta 100 puntos</b> — menos por cada pista usada y cuanto más tardes en responder — y alarga tu racha. Fallar reinicia la racha, no los puntos.</li><li>Termina la ronda para pasar al <b>siguiente jugador</b>. Cada jugador de tu partida aparece una sola vez. Las partidas nuevas incluyen los 60 jugadores; las partidas guardadas de 30, 40 y 50 terminan con su lista original.</li><li>Una vez que contestás a un jugador —bien o mal— no vuelve a aparecer, en ninguna competición, hasta que uses <b>Reiniciar mis resultados</b>. Una competición aparece como <b>Completada</b> en el selector cuando ya no quedan jugadores.</li></ol><p>Se incluyen filiales que compiten en ligas sénior y regresos reales como jugador. Algunas etapas del filial y del primer equipo se solapan. Las etiquetas <b>Gira</b> y <b>Fichaje*</b> señalan etapas excepcionales sin partidos oficiales acreditados; las notas y las fuentes aparecen al revelar la respuesta.</p><p>Los años indican etapas en el club; la salida o retirada puede ser posterior al último partido. Las notas aclaran estos casos. Las posiciones son categorías generales. Las iniciales corresponden al nombre mostrado en las opciones. Los datos son una revisión fechada, no un registro de fichajes en directo. Los escudos identifican clubes, no camisetas históricas.</p><p>No necesitas cuenta ni conexión; no hay seguimiento. El progreso y el idioma se guardan en el dispositivo cuando el navegador lo permite. Cambiar de idioma no reinicia la partida. Las marcas pertenecen a sus propietarios; este es un juego no oficial de aficionados.</p><form method="dialog"><button class="primary" type="submit">¡A jugar! →</button></form>'
+    rules:'<h2 id="rules-title">Lee la trayectoria.<br>Adivina la leyenda.</h2><ol><li>Sigue los escudos desde el debut hasta el último club. <b>Solo carreras profesionales sénior: se excluyen juveniles, selecciones y etapas como entrenador.</b> En el móvil, lee las filas numeradas de izquierda a derecha y continúa en la fila siguiente.</li><li>Elige una <b>competición</b> con la insignia en la parte superior de la página — Liga de Campeones, Premier League, La Liga, la Primera División Argentina, el Brasileirão o Todos los jugadores — para elegir las trayectorias de la partida. Los rivales priorizan orígenes y épocas de carrera parecidos.</li><li>Elige uno de los cinco jugadores. Tienes <b>tres intentos</b>; cada respuesta incorrecta queda desactivada.</li><li>¿Necesitas ayuda? Las pistas revelan <b>país → posición</b>. Son gratis.</li><li>Acertar una ronda suma <b>hasta 100 puntos</b> — menos por cada pista usada y cuanto más tardes en responder — y alarga tu racha. Fallar reinicia la racha, no los puntos.</li><li>Termina la ronda para pasar al <b>siguiente jugador</b>. Cada jugador de tu partida aparece una sola vez. Las partidas nuevas incluyen los 60 jugadores; las partidas guardadas de 30, 40 y 50 terminan con su lista original.</li><li>Una vez que contestás a un jugador —bien o mal— no vuelve a aparecer, en ninguna competición, hasta que uses <b>Reiniciar mis resultados</b>. Una competición aparece como <b>Completada</b> en el selector cuando ya no quedan jugadores.</li></ol><p>Se incluyen filiales que compiten en ligas sénior y regresos reales como jugador. Algunas etapas del filial y del primer equipo se solapan. Las etiquetas <b>Gira</b> y <b>Fichaje*</b> señalan etapas excepcionales sin partidos oficiales acreditados; las notas y las fuentes aparecen al revelar la respuesta.</p><p>Los años indican etapas en el club; la salida o retirada puede ser posterior al último partido. Las notas aclaran estos casos. Las posiciones son categorías generales. Las iniciales corresponden al nombre mostrado en las opciones. Los datos son una revisión fechada, no un registro de fichajes en directo. Los escudos identifican clubes, no camisetas históricas.</p><p>Como invitado no necesitás cuenta ni conexión. El progreso dura esta sesión de pestaña (recargar lo conserva; cerrar normalmente lo termina; restaurar la sesión puede conservarlo). El idioma queda en el dispositivo. Google es opcional y guarda progreso clasificado en la nube, sin importar puntos de invitado. Los resultados clasificados no se pueden reiniciar. La analítica es opcional y requiere permiso. Cambiar de idioma no reinicia la partida. Las marcas pertenecen a sus propietarios; este es un juego no oficial de aficionados.</p><form method="dialog"><button class="primary" type="submit">¡A jugar! →</button></form>'
   }
 };
 const COUNTRIES_ES = {Portugal:'Portugal',France:'Francia',Netherlands:'Países Bajos',England:'Inglaterra',Wales:'Gales',Italy:'Italia',Spain:'España',Sweden:'Suecia',Argentina:'Argentina','Czech Republic':'Chequia',Bulgaria:'Bulgaria',Ireland:'Irlanda',Brazil:'Brasil',Uruguay:'Uruguay',Peru:'Perú',Norway:'Noruega',Iceland:'Islandia',Chile:'Chile'};
@@ -10167,10 +10282,10 @@ let storageAvailable=true;
 // current-game save, so it survives competition switches and replays the
 // same way the lifetime score does.
 function loadSeen(){
-  try{const list=JSON.parse(localStorage.getItem(SEEN_KEY));return new Set(Array.isArray(list)?list:[]);}catch{return new Set();}
+  try{const list=JSON.parse(GuestStorage.getItem(SEEN_KEY));return new Set(Array.isArray(list)?list:[]);}catch{return new Set();}
 }
 let seen=loadSeen();
-function saveSeen(){try{localStorage.setItem(SEEN_KEY,JSON.stringify([...seen]));}catch{}}
+function saveSeen(){try{GuestStorage.setItem(SEEN_KEY,JSON.stringify([...seen]));}catch{}}
 function remainingFor(competitionId){return CareerGame.playersFor(competitionId).filter(p=>!seen.has(p.id));}
 // Returns null (never a broken, player-less deck) when nothing unseen is
 // left for this competition, so callers can show a Completed state instead.
@@ -10178,7 +10293,7 @@ function startGame(difficulty,competitionId){
   return remainingFor(competitionId).length?CareerGame.create(difficulty,competitionId,seen):null;
 }
 let state;
-try {const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));state=CareerGame.validate(saved)?saved:(startGame('hard','all')||CareerGame.create());}
+try {const saved=JSON.parse(GuestStorage.getItem(STORAGE_KEY));state=CareerGame.validate(saved)?saved:(startGame('hard','all')||CareerGame.create());}
 catch {state=startGame('hard','all')||CareerGame.create();}
 // Retire saved preferences; repair only untouched origin/era giveaways.
 state.difficulty='hard';
@@ -10198,12 +10313,12 @@ const resetRoundClock=()=>{roundClockStart=Date.now();};
 // be recomputed from state and can't be double-counted by a reload.
 const defaultLifetime=()=>({score:0,streak:0,bestStreak:0,wins:0,rounds:0});
 function loadLifetime(){
-  try{const v=JSON.parse(localStorage.getItem(LIFETIME_KEY));
+  try{const v=JSON.parse(GuestStorage.getItem(LIFETIME_KEY));
     return v&&Number.isInteger(v.score)&&Number.isInteger(v.streak)?{...defaultLifetime(),...v}:defaultLifetime();
   }catch{return defaultLifetime();}
 }
 let lifetime=loadLifetime();
-function saveLifetime(){try{localStorage.setItem(LIFETIME_KEY,JSON.stringify(lifetime));}catch{}}
+function saveLifetime(){try{GuestStorage.setItem(LIFETIME_KEY,JSON.stringify(lifetime));}catch{}}
 function tallyRound(previousResult){
   const result=CareerGame.outcome(state);
   if(result==='playing'||result===previousResult)return;
@@ -10220,8 +10335,8 @@ const country=p=>language==='es'?COUNTRIES_ES[p.country]:p.country;
 const position=p=>language==='es'?POSITIONS_ES[p.position]:p.position;
 const hintValues=p=>[country(p),position(p)];
 const ABOUT_ES = $('about-game').innerHTML;
-const ABOUT_EN = "<h2 id=\"about-title\">A free football player guessing game</h2><p>In <strong>derabona</strong>, every badge is a clue: follow the clubs and years in a career to identify the footballer. Play this football quiz on your phone or computer, without creating an account or installing an app.</p><details><summary>How to play derabona</summary><ol><li>Read the career from the first club. On mobile, follow the numbered rows from left to right.</li><li>Choose one of five players. You have three attempts; incorrect answers are ruled out.</li><li>Need help? Reveal the player's country or position. Faster correct answers and fewer hints earn more points.</li></ol><p>Careers include senior clubs, reserve teams competing in senior leagues and actual return spells. Career notes and sources appear after you answer.</p></details><details><summary>Players from Europe and South America</summary><p>There are 60 players: 30 from Europe and 30 from South America. Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão, or all players. Competitions filter quiz targets; rival names are matched by career origin and era.</p></details><details><summary>Saved progress and offline play</summary><p>Your points, streak and answered players are saved in this browser when storage is available. A player you have answered will not repeat until you reset your results. Progress does not sync between devices.</p><p>You can <a href=\"/index.html\" download=\"derabona.html\">download the game as an HTML file</a> and open it offline. Club badges are included. JavaScript must be enabled; no account or external service is required.</p></details>";
-function analyticsContext(){const r=CareerGame.roundAt(state),p=CareerGame.playerAt(state);return {language,competition:state.competition,player_id:p?.id,round_index:state.roundIndex+1,guess_count:r?.guesses.length||0,hints:r?.hints||0,result:CareerGame.outcome(state),points:r?.points||0};}
+const ABOUT_EN = "<h2 id=\"about-title\">A free football player guessing game</h2><p>In <strong>derabona</strong>, every badge is a clue: follow the clubs and years in a career to identify the footballer. Play this football quiz on your phone or computer, without creating an account or installing an app.</p><details><summary>How to play derabona</summary><ol><li>Read the career from the first club. On mobile, follow the numbered rows from left to right.</li><li>Choose one of five players. You have three attempts; incorrect answers are ruled out.</li><li>Need help? Reveal the player's country or position. Faster correct answers and fewer hints earn more points.</li></ol><p>Careers include senior clubs, reserve teams competing in senior leagues and actual return spells. Career notes and sources appear after you answer.</p></details><details><summary>Players from Europe and South America</summary><p>There are 60 players: 30 from Europe and 30 from South America. Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão, or all players. Competitions filter quiz targets; rival names are matched by career origin and era.</p></details><details><summary>Saved progress and offline play</summary><p>Guest points, streak and answered players last for this tab session: refresh retains them and normal close ends them (browser session restore may retain them). Blocked storage means reloading restarts. Optional Google sign-in saves ranked progress across devices without importing guest scores. Reset only clears unranked results.</p><p>You can <a href=\"/index.html\" download=\"derabona.html\">download the game as an HTML file</a> and open it offline. Club badges are included. JavaScript must be enabled; no account or external service is required.</p></details>";
+function analyticsContext(){if(RankedUI.isAccountMode())return {language};const r=CareerGame.roundAt(state),p=CareerGame.playerAt(state);return {language,competition:state.competition,player_id:p?.id,round_index:state.roundIndex+1,guess_count:r?.guesses.length||0,hints:r?.hints||0,result:CareerGame.outcome(state),points:r?.points||0};}
 function applyLanguage() {
   const t=copy();document.documentElement.lang=language;document.title=t.title;Analytics.setLanguage(language);
   $('about-game').innerHTML=language==='es'?ABOUT_ES:ABOUT_EN;$('about-game').lang=language;
@@ -10238,10 +10353,11 @@ function applyLanguage() {
   $('competitions-title').textContent=t.competitionsTitle;$('competitions-intro').textContent=t.competitionsIntro;$('competitions-close').textContent=t.competitionsClose;
   $('competition-badge-label').textContent=t.changeCompetition;$('competition-current').textContent=t.competitions[state.competition];
   $('change-competition-summary').textContent=t.competitionsChange;
-  renderCompetitionOptions();
+  renderCompetitionOptions();RankedUI.update();
   try {localStorage.setItem(LANGUAGE_KEY,language);} catch {}
 }
 function renderCompetitionOptions(){
+  if(RankedUI.isAccountMode())return RankedUI.competitions();
   const t=copy(),container=$('competition-options');container.replaceChildren();
   ['all',...CareerGame.COMPETITION_IDS].forEach(id=>{
     const remaining=remainingFor(id).length,completed=remaining===0,b=el('button',undefined,'option'+(completed?' muted':''));b.type='button';b.disabled=completed;
@@ -10257,8 +10373,12 @@ function renderCompetitionOptions(){
   });
 }
 function save(){
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));storageAvailable=true;}catch{storageAvailable=false;}
+  try{GuestStorage.setItem(STORAGE_KEY,JSON.stringify(state));storageAvailable=GuestStorage.persistent;}catch{storageAvailable=false;}
   $('save-status').textContent=storageAvailable?copy().saved:copy().unsaved;
+  let recovery=$('legacy-recover');
+  if(!recovery){recovery=el('button');recovery.id='legacy-recover';recovery.type='button';$('save-status').after(recovery);recovery.onclick=()=>{if(!confirm(language==='en'?'Replace this tab’s guest progress with the older device save?':'¿Reemplazar el progreso de esta pestaña por el guardado anterior?'))return;if(GuestStorage.restoreLegacy())location.reload();else alert(copy().unsaved);};}
+  recovery.hidden=!GuestStorage.legacyConflict;
+  recovery.textContent=language==='en'?'Older device save kept separately · Restore':'Guardado anterior conservado por separado · Restaurar';
 }
 function tagFor(club){
   const t=copy().tags,note=club.note||'';
@@ -10288,7 +10408,7 @@ function updateNavigation(){
   $('career-back').disabled=strip.scrollLeft<=1;$('career-forward').disabled=strip.scrollLeft>=max-1;
   strip.tabIndex=isMobile?-1:0;strip.setAttribute('aria-label',isMobile?t.grid:t.timeline);
   if(isMobile)strip.scrollLeft=0;
-  const count=CareerGame.playerAt(state).clubs.length;
+  const count=(RankedUI.player()||CareerGame.playerAt(state)).clubs.length;
   $('club-count').textContent=`${t.spells(count)} · ${isMobile?t.gridGuide:t.scrollGuide}`;
 }
 function moveCareer(direction){const strip=$('timeline-scroll');strip.scrollBy({left:direction*Math.max(120,strip.clientWidth*.75),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
@@ -10304,7 +10424,7 @@ function renderSources(player){
   content.append(badges,el('p',t.rights));
 }
 function loadHistory(){
-  try{const list=JSON.parse(localStorage.getItem(HISTORY_KEY));return Array.isArray(list)?list:[];}catch{return [];}
+  try{const list=JSON.parse(GuestStorage.getItem(HISTORY_KEY));return Array.isArray(list)?list:[];}catch{return [];}
 }
 // Appends exactly once per finished game (state.historyLogged guards repeat
 // renders/reloads of the same recap from double-counting it), so this local
@@ -10315,7 +10435,7 @@ function recordHistoryIfNeeded(stats){
   try{
     const list=loadHistory();
     list.push({finishedAt:new Date().toISOString(),score:stats.score,wins:stats.wins,completed:stats.completed,best:stats.best,difficulty:state.difficulty,competition:state.competition});
-    localStorage.setItem(HISTORY_KEY,JSON.stringify(list.slice(-HISTORY_LIMIT)));
+    GuestStorage.setItem(HISTORY_KEY,JSON.stringify(list.slice(-HISTORY_LIMIT)));
   }catch{}
 }
 function renderHistory(){
@@ -10332,6 +10452,8 @@ function renderHistory(){
   $('history-summary').textContent=t.historySummary(games,bestScore,bestStreak);
 }
 function render(celebrate=false,newCareer=false){
+  RankedUI.update();if(RankedUI.isAccountMode())return RankedUI.render(newCareer);
+  $('next').disabled=false;
   const p=CareerGame.playerAt(state),r=CareerGame.roundAt(state),result=CareerGame.outcome(state),stats=CareerGame.stats(state),t=copy();
   $('score').textContent=String(lifetime.score).padStart(3,'0');$('streak').textContent=lifetime.streak;
   $('round-panel').hidden=state.finished;$('summary-panel').hidden=!state.finished;
@@ -10359,7 +10481,7 @@ function render(celebrate=false,newCareer=false){
     b.setAttribute('aria-label',`${name}${wrong?', '+t.incorrect:correct?', '+t.correct:''}`);
     const suffix=el('span',wrong?'×':correct?'✓':'↗','option-state'),letter=el('span',String.fromCharCode(65+i),'option-letter');suffix.setAttribute('aria-hidden','true');letter.setAttribute('aria-hidden','true');
     b.append(letter,el('span',name,'option-name'),suffix);
-    b.addEventListener('click',()=>{const elapsedMs=Date.now()-roundClockStart,before=result;if(!CareerGame.answer(state,name,elapsedMs))return;tallyRound(before);Analytics.capture("answer_submitted",{correct:name===p.name});if(CareerGame.outcome(state)!=="playing")Analytics.capture("round_completed");render(true);const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');target?.focus({preventScroll:true});});
+    b.addEventListener('click',()=>{if(RankedUI.isAccountMode())return;const elapsedMs=Date.now()-roundClockStart,before=result;if(!CareerGame.answer(state,name,elapsedMs))return;tallyRound(before);Analytics.capture("answer_submitted",{correct:name===p.name});if(CareerGame.outcome(state)!=="playing")Analytics.capture("round_completed");render(true);const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');target?.focus({preventScroll:true});});
     $('options').append(b);
   });
   const values=hintValues(p);$('hints').replaceChildren(...t.hints.map((label,i)=>el('li',i<r.hints?`${label}: ${values[i]}`:`${i+1}. ${label}`,i<r.hints?'revealed':'')));
@@ -10372,9 +10494,10 @@ function render(celebrate=false,newCareer=false){
   $('source-details').hidden=result==='playing';if(result!=='playing')renderSources(p);else $('source-content').replaceChildren();save();
 }
 function showRoundStart(){(state.finished?$('summary-panel'):$('round-panel')).scrollIntoView({block:'start',behavior:'auto'});(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});}
-$('hint').addEventListener('click',()=>{if(CareerGame.hint(state)){Analytics.capture("hint_used");render();if($('hint').disabled)$('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}});
-$('next').addEventListener('click',()=>{if(CareerGame.next(state)){Analytics.capture(state.finished?"competition_completed":"round_viewed");resetRoundClock();render(false,true);showRoundStart();}});
+$('hint').addEventListener('click',()=>{if(RankedUI.isAccountMode()){RankedUI.mutate('hint');return;}if(CareerGame.hint(state)){Analytics.capture("hint_used");render();if($('hint').disabled)$('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}});
+$('next').addEventListener('click',()=>{if(RankedUI.isAccountMode()){RankedUI.mutate('start',{competition:RankedUI.competition()});return;}if(CareerGame.next(state)){Analytics.capture(state.finished?"competition_completed":"round_viewed");resetRoundClock();render(false,true);showRoundStart();}});
 $('replay').addEventListener('click',()=>{
+  if(RankedUI.isAccountMode())return;
   if(!state.finished)return;
   // Finishing a deck means every one of its players is now in the "seen"
   // ledger, so replaying the SAME competition is normally exhausted the
@@ -10389,11 +10512,129 @@ $('help').addEventListener('click',()=>{Analytics.capture('help_opened');$('rule
 $('timeline-scroll').addEventListener('scroll',updateNavigation,{passive:true});window.addEventListener('resize',updateNavigation,{passive:true});
 $('language').addEventListener('change',()=>{const value=$('language').value;if(value!=='en'&&value!=='es')return;language=value;Analytics.setLanguage(value);Analytics.capture('language_changed');const open=$('source-details').open;applyLanguage();render(false,true);$('source-details').open=open;try{const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);}catch{}});
 $('reset-progress').addEventListener('click',()=>{
+  if(RankedUI.isAccountMode())return;
   if(!confirm(copy().resetConfirm))return;Analytics.capture("progress_reset");
-  try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(HISTORY_KEY);localStorage.removeItem(LIFETIME_KEY);localStorage.removeItem(SEEN_KEY);}catch{}
+  try{GuestStorage.removeItem(STORAGE_KEY);GuestStorage.removeItem(HISTORY_KEY);GuestStorage.removeItem(LIFETIME_KEY);GuestStorage.removeItem(SEEN_KEY);}catch{}
   seen=new Set();state=CareerGame.create();lifetime=defaultLifetime();resetRoundClock();applyLanguage();render(false,true);showRoundStart();
 });
-applyLanguage();render(false,true);
+const RankedUI = (()=>{
+  const TEXT={
+    en:{account:'Account',title:'Account and progress',guest:'GUEST · UNRANKED',practice:'PRACTICE · UNRANKED',ranked:'RANKED · CLOUD',loading:'Checking account…',unavailable:'Ranked play unavailable. No offline answers will count. Retry to load authoritative cloud progress, or choose unranked practice.',disabled:'Google sign-in and rankings are not configured yet. Guest play works normally.',detail:'Guests have no cloud account. This tab keeps unranked points, history and answered players through refresh, but a normal tab/window close ends the session (browser session restore may retain it). If storage is blocked, reloading restarts. Language and analytics permission remain on this device. Google sign-in saves ranked progress across devices; guest and old local scores are never imported.',login:'Continue with Google',loginWarn:'Your guest progress will NOT transfer to your account or any leaderboard. Continue to Google? Cancel keeps this guest session.',logout:'Sign out',close:'Close',retry:'Retry / reconnect',practiceAction:'Play unranked practice',returnRanked:'Return to ranked play',signed:'Signed in. Ranked records are permanent; Reset only affects unranked practice.',authError:'Sign-in did not complete. Your guest progress is unchanged. Try again when connected.',nickname:'Public nickname',nicknameDetail:'Publishing is optional. Choose a nickname (3–24 characters); do not use your real name. We never publish your Google name or photo.',consent:'Show my nickname and ranked results on the public leaderboards.',enroll:'Publish nickname',enrolled:'Public nickname: ',private:'Your results are private until you opt in.',delete:'Delete account',deleteConfirm:'Permanently delete your account, cloud progress and public leaderboard records? This cannot be undone. Type DELETE to confirm.',deleteError:'Account deletion could not be confirmed. Retry when connected.',board:'Leaderboards',boardDetail:'Global points count the first result for each player once. Competition boards filter those results by club membership, not the league selected when playing. Ties share ranks. Unranked scores never count.',global:'Global',empty:'No public scores yet.',boardError:'Leaderboard unavailable. Try again when connected.',boardLoading:'Loading leaderboard…',rank:'Rank',name:'Nickname',points:'Points',answered:'Played',correct:'Correct',own:'Your rank',total:'public players',prev:'Previous',next:'Next',reset:'Reset guest / practice results',saved:'RANKED · CLOUD PROGRESS',done:'No unseen players remain in this competition. Choose another competition. Ranked results cannot be reset.',sync:'Synchronizing ranked progress…',earned:'points · verified by server',rankRules:'Ranked: one open round per account; changing competitions resumes that round. The server keeps the clock running, including time away. Only the first result per player counts, permanently. Guest/practice Reset cannot clear ranked records.'},
+    es:{account:'Cuenta',title:'Cuenta y progreso',guest:'INVITADO · SIN CLASIFICACIÓN',practice:'PRÁCTICA · SIN CLASIFICACIÓN',ranked:'CLASIFICADO · NUBE',loading:'Comprobando cuenta…',unavailable:'Clasificación no disponible. Las respuestas sin conexión no suman. Reintentá para cargar el progreso de la nube o elegí práctica sin clasificación.',disabled:'Google y las clasificaciones todavía no están configurados. Podés jugar como invitado.',detail:'Los invitados no tienen cuenta en la nube. Esta pestaña conserva puntos sin clasificación, historial y jugadores respondidos al recargar; cerrar normalmente la pestaña o ventana termina la sesión (restaurar la sesión del navegador puede conservarla). Si se bloquea el almacenamiento, recargar reinicia. El idioma y el permiso de analítica quedan en el dispositivo. Google guarda el progreso clasificado entre dispositivos; nunca se importan puntos de invitado ni guardados antiguos.',login:'Continuar con Google',loginWarn:'Tu progreso de invitado NO se transfiere a la cuenta ni a la clasificación. ¿Continuar con Google? Cancelar conserva esta sesión.',logout:'Cerrar sesión',close:'Cerrar',retry:'Reintentar / reconectar',practiceAction:'Práctica sin clasificación',returnRanked:'Volver a clasificación',signed:'Sesión iniciada. Los resultados clasificados son permanentes; Reiniciar solo afecta la práctica sin clasificación.',authError:'No se completó el inicio de sesión. Tu progreso de invitado no cambió. Reintentá con conexión.',nickname:'Apodo público',nicknameDetail:'Publicar es opcional. Elegí un apodo (3–24 caracteres); no uses tu nombre real. Nunca publicamos tu nombre ni tu foto de Google.',consent:'Mostrar mi apodo y resultados en las clasificaciones públicas.',enroll:'Publicar mi apodo',enrolled:'Apodo público: ',private:'Tus resultados son privados hasta que aceptes publicarlos.',delete:'Eliminar cuenta',deleteConfirm:'¿Eliminar tu cuenta, progreso en la nube y resultados públicos para siempre? No se puede deshacer. Escribí DELETE para confirmar.',deleteError:'No se pudo confirmar la eliminación. Reintentá con conexión.',board:'Clasificación',boardDetail:'Los puntos globales cuentan una sola vez el primer resultado de cada jugador. Las tablas por competición filtran por clubes, no por la liga elegida al jugar. Los empates comparten puesto. Los puntos sin clasificación no cuentan.',global:'Global',empty:'Todavía no hay puntos públicos.',boardError:'Clasificación no disponible. Reintentá con conexión.',boardLoading:'Cargando clasificación…',rank:'Puesto',name:'Apodo',points:'Puntos',answered:'Jugados',correct:'Aciertos',own:'Tu puesto',total:'jugadores públicos',prev:'Anterior',next:'Siguiente',reset:'Reiniciar invitado / práctica',saved:'CLASIFICADO · PROGRESO EN LA NUBE',done:'No quedan jugadores sin responder en esta competición. Elegí otra. Los resultados clasificados no se pueden reiniciar.',sync:'Sincronizando progreso clasificado…',earned:'puntos · verificados por el servidor',rankRules:'Clasificado: una ronda abierta por cuenta; cambiar de competición retoma esa ronda. El reloj del servidor sigue corriendo, incluso al salir. Solo cuenta el primer resultado por jugador, para siempre. Reiniciar invitado/práctica no borra resultados clasificados.'}
+  };
+  let mode=Accounts.configured&&(Accounts.hasStoredSession()||AuthCallback.code)?'loading':'guest';
+  let userId=Accounts.session?.user?.id??null,pendingUserId=null;
+  const current=(ticket,owner)=>ticket===epoch&&owner===userId&&owner===(Accounts.session?.user?.id??null);
+  let cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='',boardEpoch=0,boardOffset=0,boardData=null;
+  const t=()=>TEXT[language],isAccountMode=()=>!['guest','practice'].includes(mode);
+  const player=()=>isAccountMode()&&cloud?.round?PLAYERS.find(p=>p.id===cloud.round.playerId):null;
+  const competition=()=>cloud?.round?.competition||selected;
+  function update(){
+    const x=t(),signed=!!Accounts.session;
+    const values={'account-open':x.account,'account-title':x.title,'account-detail':x.detail,'google-login':x.login,'logout':x.logout,'account-close':x.close,'account-ranked':x.returnRanked,'account-delete':x.delete,'nickname-label':x.nickname,'nickname-detail':x.nicknameDetail,'nickname-consent-label':x.consent,'enroll':x.enroll,'leaderboard-open':x.board,'leaderboard-title':x.board,'leaderboard-detail':x.boardDetail,'leaderboard-filter-label':copy().changeCompetition,'leaderboard-close':x.close,'board-rank':x.rank,'board-name':x.name,'board-points':x.points,'board-answered':x.answered,'board-correct':x.correct,'board-prev':x.prev,'board-next':x.next,'board-retry':x.retry,'ranked-retry':x.retry,'practice':x.practiceAction,'reset-progress':x.reset};
+    for(const [id,value]of Object.entries(values))$(id).textContent=value;
+    $('play-mode').textContent=mode==='loading'?x.loading:mode==='unavailable'?x.unavailable:mode==='ranked'?x.ranked:mode==='practice'?x.practice:x.guest;
+    $('account-status').textContent=!Accounts.configured?x.disabled:notice?x[notice]||x.unavailable:signed?x.signed:'';
+    $('google-login').hidden=signed;$('google-login').disabled=!Accounts.configured||busy||mode==='loading';
+    $('logout').hidden=!signed;$('logout').disabled=busy;
+    $('account-ranked').hidden=!signed||mode==='ranked';$('account-ranked').disabled=busy;
+    $('account-delete').hidden=!signed;$('account-delete').disabled=busy;
+    $('enroll-form').hidden=!signed||!cloud||mode!=='ranked';$('enroll').disabled=busy||!!pending;
+    $('enrolled-status').textContent=signed?(cloud?.profile?.enrolled?x.enrolled+cloud.profile.nickname:x.private):'';
+    $('reset-progress').disabled=isAccountMode();
+    $('ranked-retry').hidden=!['unavailable','practice'].includes(mode);$('ranked-retry').disabled=busy;
+    $('practice').hidden=mode!=='unavailable';
+    $('account-notice').hidden=!isAccountMode()||mode==='ranked'&&!!cloud?.round;
+    $('account-notice').textContent=mode==='loading'?x.sync:mode==='ranked'?x.done:x.unavailable;
+    document.documentElement.classList.toggle('ranked-wait',isAccountMode()&&(mode!=='ranked'||!cloud?.round));
+    if(isAccountMode()){$('save-status').textContent=mode==='ranked'?x.saved:x.unavailable;$('score').textContent=mode==='ranked'?String(cloud?.progress?.totalPoints??0):'—';$('streak').textContent='—';}
+    const filter=$('leaderboard-filter'),value=filter.value||'all';filter.replaceChildren();
+    for(const id of ['all',...CareerGame.COMPETITION_IDS]){const option=el('option',id==='all'?x.global:copy().competitions[id]);option.value=id;filter.append(option);}filter.value=value;
+    if(boardData)drawBoard(boardData);
+  }
+  function competitions(){
+    const container=$('competition-options');container.replaceChildren();$('competitions-intro').textContent=t().rankRules;
+    for(const id of ['all',...CareerGame.COMPETITION_IDS]){const count=cloud?.progress?.competitionCounts?.[id],done=count&&count.answered>=count.total,b=el('button',undefined,'option');b.type='button';b.disabled=busy||mode!=='ranked'||!!pending||!!done;b.append(el('span',copy().competitions[id],'option-name'),el('span',done?copy().competitionCompleted:count?String(count.total-count.answered):'','option-state'));if(id===competition())b.setAttribute('aria-current','true');b.onclick=()=>{selected=id;$('competitions').close();mutate('start',{competition:id});};container.append(b);}
+  }
+  function renderRanked(newCareer=false){
+    if(mode!=='ranked'||!cloud?.round)return;
+    const r=cloud.round,p=player(),x=copy();if(!p){mode='unavailable';update();return;}
+    $('summary-panel').hidden=true;$('round-panel').hidden=false;
+    $('competition-current').textContent=x.competitions[r.competition];
+    if(newCareer||$('timeline').dataset.rankedPlayer!==p.id){renderCareer(p);$('timeline').dataset.rankedPlayer=p.id;$('timeline-scroll').scrollLeft=0;$('source-details').open=false;}
+    const counts=cloud.progress.competitionCounts?.[r.competition]||{answered:cloud.progress.answered,total:PLAYERS.length};
+    $('round-number').textContent=t().ranked;$('progress').max=counts.total;$('progress').value=counts.answered;$('progress-label').textContent=x.progress(counts.answered,counts.total);
+    const left=r.status==='won'?Math.max(0,4-r.guesses.length):Math.max(0,3-r.guesses.length);
+    $('attempt-text').textContent=r.status==='won'?x.found:x.attempts(left);$('lives').replaceChildren(...Array.from({length:3},(_,i)=>el('span',undefined,'life'+(i>=left?' used':''))));
+    $('options').replaceChildren();r.options.forEach((option,i)=>{const guessed=r.guesses.includes(option.id),correct=r.status!=='playing'&&option.label===p.name,wrong=guessed&&!correct,b=el('button',undefined,'option'+(wrong?' wrong':correct?' correct':''));b.type='button';b.dataset.optionId=option.id;b.disabled=busy||!!pending||r.status!=='playing'||guessed;b.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',wrong?'×':correct?'✓':'↗','option-state'));b.setAttribute('aria-label',option.label+(wrong?', '+x.incorrect:correct?', '+x.correct:''));b.onclick=()=>mutate('answer',{optionId:option.id});$('options').append(b);});
+    const clues=[language==='es'?(COUNTRIES_ES[r.clueCountry]||r.clueCountry):r.clueCountry,language==='es'?(POSITIONS_ES[r.cluePosition]||r.cluePosition):r.cluePosition];
+    $('hints').replaceChildren(...x.hints.map((label,i)=>el('li',i<r.hints?label+': '+(clues[i]||'—'):`${i+1}. ${label}`,i<r.hints?'revealed':'')));
+    $('hint').disabled=busy||!!pending||r.hints>=2||r.status!=='playing';$('hint-label').textContent=r.hints>=2?x.allHints:x.hint;$('hint-count').textContent=`${r.hints} / 2`;
+    $('next').hidden=r.status==='playing';$('next').disabled=busy||!!pending;$('next-label').textContent=x.next;
+    $('feedback').className='feedback '+r.status;$('feedback').replaceChildren();
+    if(r.status==='won')$('feedback').append(el('strong',x.win(p.name)),el('span',`+${r.points} ${t().earned}`));else if(r.status==='lost')$('feedback').append(el('strong',x.lost(p.name)));else $('feedback').textContent=r.guesses.length?x.wrong:x.trust;
+    $('source-details').hidden=r.status==='playing';if(r.status!=='playing')renderSources(p);else $('source-content').replaceChildren();
+  }
+  function accept(data){if(!data||!data.progress||!Object.hasOwn(data,'round'))throw Error('INVALID_RESPONSE');cloud=data;mode='ranked';notice='';}
+  async function sync(){
+    if(busy)return;if(pending)return sendPending();userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch;busy=true;mode='loading';update();
+    try{if(!Accounts.session){await Accounts.init(authChanged);if(!Accounts.session)throw Error('AUTH_REQUIRED');}const data=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data);}
+    catch{if(current(ticket,owner)){mode='unavailable';notice='unavailable';}}
+    finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,true);}}
+    if(current(ticket,owner)&&mode==='ranked'&&!cloud.round){const count=cloud.progress.competitionCounts?.[selected];if(!count||count.answered<count.total)await mutate('start',{competition:selected});}
+  }
+  async function mutate(action,extra={}){
+    if(mode!=='ranked'||busy||pending)return;
+    const payload={action,...extra,idempotencyKey:crypto.randomUUID()};
+    if(action==='hint'||action==='answer'){if(!cloud?.round||cloud.round.status!=='playing')return;payload.roundId=cloud.round.id;payload.expectedVersion=cloud.round.version;}
+    if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingUserId=userId;await sendPending();
+  }
+  async function sendPending(){
+    if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch;busy=true;update();renderRanked();
+    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data);pending=null;
+      // Read back the exact account after mutations, not just an acknowledgement.
+      const verified=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data.completed&&data.round===null?{...verified,round:null,completed:true}:verified);
+    }catch(error){if(!current(ticket,owner))return;mode='unavailable';notice='unavailable';if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','INVALID_NICKNAME','NICKNAME_TAKEN','IDEMPOTENCY_CONFLICT','STALE_VERSION','ROUND_NOT_PLAYING','ROUND_COMPLETE','COMPETITION_COMPLETE','NO_PLAYERS','NO_UNSEEN_PLAYERS'].includes(error.code))pending=null;}
+    finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,true);if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}}}
+  }
+  function freshGuest(){userId=null;pendingUserId=null;epoch++;boardEpoch++;cloud=null;pending=null;busy=false;notice='';mode='guest';selected='all';boardData=null;GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();$('public-nickname').value='';$('nickname-consent').checked=false;$('leaderboard-entries').replaceChildren();$('leaderboard-own').textContent='';$('leaderboard-table').hidden=true;applyLanguage();render(false,true);}
+  function authChanged(event,session){
+    const next=session?.user?.id??null;if(next===userId)return;
+    if(!next){freshGuest();return;}
+    userId=next;epoch++;boardEpoch++;cloud=null;pending=null;pendingUserId=null;busy=false;notice='';mode='loading';selected='all';boardOffset=0;boardData=null;
+    $('public-nickname').value='';$('nickname-consent').checked=false;$('leaderboard-entries').replaceChildren();$('leaderboard-own').textContent='';$('leaderboard-status').textContent='';$('leaderboard-table').hidden=true;$('board-prev').hidden=true;$('board-next').hidden=true;
+    update();render(false,true);
+    // Reconcile outside the SDK auth lock; invalidate identity synchronously.
+    const ticket=epoch;setTimeout(()=>{if(current(ticket,next))sync();},0);
+  }
+  function drawBoard(data){
+    const x=t();$('leaderboard-entries').replaceChildren();
+    for(const entry of data.entries){const tr=el('tr');for(const value of [entry.rank,entry.nickname,entry.points,entry.answered,entry.correct])tr.append(el('td',String(value)));$('leaderboard-entries').append(tr);}
+    $('leaderboard-table').hidden=!data.entries.length;$('leaderboard-status').textContent=data.entries.length?`${data.total} ${x.total}`:x.empty;$('leaderboard-own').textContent=data.own?`${x.own}: ${data.own.rank} · ${data.own.points} ${x.points}`:'';
+    $('board-prev').hidden=boardOffset===0;$('board-next').hidden=boardOffset+data.entries.length>=data.total;$('board-retry').hidden=true;
+  }
+  async function board(){
+    const owner=Accounts.session?.user?.id??null,ticket=++boardEpoch;boardData=null;$('leaderboard-entries').replaceChildren();$('leaderboard-own').textContent='';$('leaderboard-table').hidden=true;$('board-prev').hidden=true;$('board-next').hidden=true;$('board-retry').hidden=true;$('leaderboard-status').textContent=Accounts.configured?t().boardLoading:t().disabled;if(!Accounts.configured)return;
+    try{const data=await Accounts.request({action:'leaderboard',competition:$('leaderboard-filter').value,limit:20,offset:boardOffset},'ranked-game',true);if(ticket!==boardEpoch||data.own&&owner!==(Accounts.session?.user?.id??null))return;if(!Array.isArray(data.entries)||!Number.isInteger(data.total))throw Error('INVALID_RESPONSE');boardData=data;drawBoard(data);}catch{if(ticket===boardEpoch){$('leaderboard-status').textContent=t().boardError;$('board-retry').hidden=false;}}
+  }
+  async function boot(){
+    if(!Accounts.configured)return;const ticket=epoch;
+    try{const session=await Accounts.init(authChanged);if(ticket!==epoch)return;if(session)await sync();else{mode='guest';update();render(false,true);}}
+    catch{if(ticket===epoch){mode=Accounts.hasStoredSession()?'unavailable':'guest';notice='authError';update();render(false,true);}}
+  }
+  $('account-open').onclick=()=>{update();$('account-dialog').showModal();};
+  $('google-login').onclick=async()=>{if(busy||!Accounts.configured)return;const engaged=lifetime.rounds||seen.size||loadHistory().length||state.rounds.some(r=>r.guesses.length||r.hints);if(engaged&&!confirm(t().loginWarn))return;busy=true;update();try{await Accounts.login(language);}catch{notice='authError';}finally{busy=false;update();}};
+  $('logout').onclick=async()=>{if(busy)return;const owner=userId,ticket=epoch;busy=true;update();try{await Accounts.logout();if(Accounts.session?.user?.id)return;freshGuest();$('account-dialog').close();}catch{if(current(ticket,owner)){notice='unavailable';busy=false;update();}}};
+  $('account-ranked').onclick=()=>{$('account-dialog').close();sync();};$('ranked-retry').onclick=()=>sync();
+  $('practice').onclick=()=>{if(busy)return;epoch++;mode='practice';notice='';update();render(false,true);};
+  $('enroll-form').onsubmit=event=>{event.preventDefault();if(!$('nickname-consent').checked)return;mutate('enroll',{nickname:$('public-nickname').value.trim()});};
+  $('account-delete').onclick=async()=>{if(busy||prompt(t().deleteConfirm)!=='DELETE')return;const owner=userId,ticket=epoch;busy=true;update();try{await Accounts.request({confirmation:'DELETE'},'account-delete',false,owner);if(!current(ticket,owner))return;await Accounts.logout();if(Accounts.session?.user?.id)return;freshGuest();$('account-dialog').close();}catch{if(current(ticket,owner)){notice='deleteError';busy=false;update();}}};
+  $('leaderboard-open').onclick=()=>{update();$('leaderboard-dialog').showModal();boardOffset=0;board();};$('leaderboard-filter').onchange=()=>{boardOffset=0;board();};$('board-prev').onclick=()=>{boardOffset=Math.max(0,boardOffset-20);board();};$('board-next').onclick=()=>{boardOffset+=20;board();};$('board-retry').onclick=board;
+  window.addEventListener('offline',()=>{if(mode==='ranked'){mode='unavailable';notice='unavailable';update();}});
+  // Reconnect is explicit; practice is never silently promoted to ranked.
+  return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot};
+})();
+applyLanguage();render(false,true);RankedUI.boot();
 requestAnimationFrame(()=>{document.documentElement.classList.remove('game-loading');Analytics.start(analyticsContext);});
 </script>
 </body>

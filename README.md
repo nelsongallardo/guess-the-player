@@ -1,88 +1,93 @@
 # derabona
 
-**Fútbol, de memoria.** A football-career quiz built around the spirit of a rabona: read the club-crest timeline, then identify the player from five names. An original rabona-player logo, lowercase wordmark and celeste/ink/paper interface give it an Argentinian football identity. Built with plain HTML, CSS and JavaScript in **one portable `index.html` file**.
+A football-career quiz: read the club-crest timeline and identify the player from five names. Plain HTML, CSS and JavaScript; one portable `index.html` supports guest play without a build or network connection. Optional Google accounts use Supabase for persistent, server-scored progress and public nickname leaderboards.
 
-See [BRAND.md](BRAND.md) for the identity, editable SVG logo and PNG export. Existing saved games and all gameplay rules survive the rebrand; legacy storage identifiers and the website URL stay unchanged.
+**Website:** <https://derabona.club/> · [Español](https://derabona.club/?lang=es) · [English](https://derabona.club/?lang=en)
 
-## Play
+This documents the implemented account contract, **not a claim that accounts have been deployed or hosted OAuth verified**. Public frontend configuration, Google/Supabase setup and hosted release checks are separate gates; see [accounts and leaderboards](docs/leaderboards.md) and [verification evidence](TESTING.md).
 
-**Website:** <https://nelsongallardo.github.io/guess-the-player/>
+## Play and progress
 
-**Español:** <https://nelsongallardo.github.io/guess-the-player/?lang=es> · **English:** <https://nelsongallardo.github.io/guess-the-player/?lang=en>
+Download `index.html` and open it in a modern browser for offline guest play. All playable careers, translations and crest images are embedded. Accounts/rankings require a configured backend and connectivity; local files are unranked only.
 
-On mobile/tablet (800px and below), all club crests fit a compact, numbered four-column grid—read left to right, then the next row. No horizontal scrolling or hidden clubs. Desktop retains the horizontal timeline.
+| Mode | Progress | Ranking and reset |
+| --- | --- | --- |
+| Guest | Per-tab `sessionStorage`, with in-memory fallback | Unranked; confirmed Reset clears this tab's gameplay |
+| Signed-in ranked | Supabase account, persistent across devices | First verified result per player/ruleset only; no ranked reset or replay farming |
+| Practice after cloud failure | Explicitly selected, uses unranked tab progress | Never uploaded or promoted to ranked, including after reconnect |
 
-Use the language selector to switch between English and Spanish without losing progress. Menus, hints, feedback, rules, accessibility labels and all player career notes are translated; original article titles and proper names are preserved. Selection order: explicit `?lang=en/es`, saved preference, then Spanish. The canonical home page consistently presents Spanish to new visitors and crawlers. Both versions remain inside the same offline HTML file.
+- Refresh normally retains guest progress. Normal tab/window closure ends the session; browser session restore may retain it. With storage blocked, reload starts again. There is no guaranteed long-term guest save.
+- Language and analytics permission remain separate device-local preferences. Reset does not change them. Signing out starts a fresh guest session, without deleting cloud results.
+- Old device-local saves migrate into unranked tab storage as a complete snapshot. Originals are removed only after successful write/readback of all gameplay keys. Conflicting snapshots are not merged: the old save is retained and explicit recovery can replace the tab snapshot. Failed migration preserves originals. **Guest and legacy scores never transfer to accounts or boards.**
+- Google sign-in saves account progress but does not publish a Google name, photo or email. Public listing requires separate nickname enrollment. Choose a neutral nickname rather than a real name; publishing is optional.
+- A board lists only enrolled accounts with at least one verified result in that board. A verified loss qualifies at zero points. Global points count each player once; competition boards filter by canonical player membership, regardless of where that player was answered. Equal points share rank; nickname ordering makes tied pages stable.
+- Cloud failure disables ranked mutations. Retry/reconnect retrieves authoritative account state; explicit practice remains unranked. Account deletion is a separate confirmation-gated action that removes cloud progress and public records, not a score-reset feature.
 
-Download `index.html` and open it in a modern browser. No installation or server is required. The file includes the game, complete player database and crest images, so gameplay also works offline.
+## Rules
 
-For local development:
+- Sixty playable careers: thirty representing European national teams and thirty representing South American national teams. [Research and audit](DATA_AUDIT.md) document the three expansions and their evidence.
+- Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão or All Players from the competition badge. Selection changes the playable pool, not a strict rival filter. Finish the active round first; an account has only one active server round even across devices.
+- Five shuffled choices: one correct player and four distinct eligible rivals, excluding identical ordered club careers. No difficulty selector: origin-first Hard is automatic.
+- Wrong answers draw from playable players plus **59 researched wrong-answer-only profiles**. Starting domestic football system takes precedence, then contemporary overlap with debuts at most eight years apart, then career similarity with bounded noise. This does not add playable rounds. See [ADR 0003](docs/adr/0003-researched-contemporary-rivals.md).
+- Three attempts. Wrong choices are disabled. A correct answer or third error ends the round; only then does Next Player appear. Two hints reveal country, then position. Hints reduce points; there is no new initials hint.
+- A correct answer earns up to 100 points, reduced by 20% per hint and answer time: full speed value inside five seconds, decaying to a 50% speed floor by thirty seconds. A loss earns zero. Guest elapsed time is an in-memory round clock; ranked time uses the persisted server start and includes time away. Reloading cannot restart ranked timing.
+- Resolved players, right or wrong, are excluded across competitions. Guests maintain that ledger for the tab session until unranked Reset. Accounts retain a permanent first result per player/ruleset. Exhausted competitions show Completed rather than offering ranked repeats.
+- The masthead score is global across competitions within the active mode, never combined guest/cloud points. Guest score and streak accumulate across decks; losing resets the streak, not points. Ranked mode currently displays cloud points, not an invented cloud streak.
+- Finished guest games appear in the tab's results history (last 100 games). Recap counts are based on the saved deck; competition completion counts include all resolved players in that competition. Replay does not clear accumulated points or the seen ledger.
+- Compatible legacy saves retain decks, engaged rounds, guesses, hints, points and history. Only an untouched current round with weaker origin/era options is repaired on load; existing three-hint rounds remain loadable even though new rounds cap hints at two.
+
+## Language and accessibility
+
+English and Spanish share the same offline artifact. Selection order: explicit `?lang=en/es`, saved preference, then Spanish. Language changes do not reset gameplay. UI, hints, notes and accessibility labels are translated; proper names and source article titles remain unchanged.
+
+Keyboard-operable controls, visible focus, text plus color feedback, live announcements and reduced-motion support are part of the contract. At widths of 800px and below, careers use a numbered four-column grid without horizontal scrolling; desktop retains horizontal timeline navigation. [TESTING.md](TESTING.md) records actual browser coverage and historical limitations rather than promising every browser or viewport is verified.
+
+## Career-data policy
+
+The roster is a dated, manually researched snapshot, not a live transfer feed. Active careers need rechecking after transfers. Competition tags are broad club-membership categories, not per-appearance verification; see [data policy](research/data-policy.md#competition-tags).
+
+Timelines include professional senior clubs, competitive senior reserve spells, loans and distinct playing returns. National teams, youth sides, coaching, training-only visits, testimonials and amateur post-retirement football are excluded. Roberto Carlos's friendly-only Atlético Mineiro tour loan and Ronaldinho's announced Ravenna signing are explicitly qualified. Continuous loan-to-permanent spells are combined; reserve/first-team dates can overlap. Country means senior national team represented; position is a broad playing role. See [career sources](CAREER_SOURCES.md) for chronology and conflicts. Crests identify clubs, not historical season-specific artwork.
+
+## Files and delivery
+
+- `index.html` — complete offline guest artifact; inline account client uses optional remote services.
+- `privacy.html` — public bilingual account/analytics privacy page; include it in the static website package.
+- `AGENTS.md` — shared agent guidance; `CLAUDE.md` imports it, not a second policy copy.
+- `DESIGN.md`, `TESTING.md`, `docs/adr/` — product contract, verification and decision history.
+- `docs/leaderboards.md` — server API, security boundaries, local tests and separate backend release gates.
+- `docs/analytics.md` — existing consent-first tracking contract, independent of accounts.
+- `supabase/` — schema/roster migrations, Edge Functions and local project configuration.
+- `scripts/export-ranked-roster.mjs` — exports the actual matching model for the frozen server ruleset; `--check` is read-only validation.
+- `BRAND.md`, `assets/derabona-*` — visual identity, editable logo/mark and social image. The game embeds its own mark/favicon.
+- `CAREER_SOURCES.md`, `DATA_AUDIT.md`, `research/` — curated records, policy and source ledgers. Raw retrievals stay ignored.
+- `tests/` — model, storage, browser, Edge handler and real PostgreSQL checks.
+
+GitHub Pages serves static files; it does **not** deploy Supabase migrations/functions or configure Google OAuth. `.github/workflows/pages.yml` validates every push, pull request and manual run with Node/native PostgreSQL tests, source/roster checks and Deno checks/tests. Only validated non-PR runs on `main` deploy. Its public package is `index.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. Research, tests and private backend code are not website assets. The repository is public at the owner's request.
+
+## Test and edit
+
+No frontend build step. Edit inline CSS/data/model/UI directly, preserving script IDs and embedded assets. Career edits must update curated records and citations too. Server roster changes require reviewed migrations; never overwrite a ruleset already used for ranked results.
 
 ```sh
 python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-Then open <http://127.0.0.1:4173>.
-
-## Rules
-
-- Sixty players: thirty representing European national teams and thirty representing South American national teams. The original stars are joined by Fabricio Coloccini, Juan Pablo Sorín, Pablo Aimar, Esteban Cambiasso, Diego Milito, Gaizka Mendieta, Tomáš Rosický, Iván de la Peña, Robbie Keane and Wesley Sneijder.
-- The second expansion adds **Javier Saviola, Andrés D’Alessandro, Maxi Rodríguez, Claudio Pizarro, Walter Samuel, Joe Cole, Freddie Ljungberg, John Arne Riise, Luis García, Eiður Guðjohnsen**.
-- The third expansion adds **Fernando Torres, Xabi Alonso, Thierry Henry, Iker Casillas, Andrea Pirlo, Diego Maradona, Javier Mascherano, Cafu, Marcelo Salas, Rivaldo**.
-- All additions are playable answers and eligible similarity-ranked distractors. Their researched notes and authentic club crests are included offline in both languages.
-- **Choose a competition** — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players (the default) — from the prominent competition badge at the top of the page, or "Change competition" on the recap screen. Each competition deals only the players who carry that club-membership tag; distractors prioritize compatible career origins and eras, with competition membership only a small bonus. Choosing one starts a fresh deck in that competition; it never interrupts a round already in progress.
-- Five shuffled answers per round: one correct player and four distinct rivals. **Career origin comes first:** if four eligible rivals began in the same domestic football system, all four wrong answers must come from it. No difficulty selector or extra setup decision.
-- Wrong answers draw from the playable roster **and a separately researched contemporary bank**, not just names already playable. Within each origin tier, overlapping careers with debuts at most eight years apart come first; career-route/role similarity then ranks the remaining choices. Small bounded randomness varies close matches without dropping clearly stronger rivals. The bank adds **59 researched rival profiles** without adding playable rounds or changing competition totals. Every one of the 60 targets has at least four same-system, overlapping-career peers within the eight-year debut window. See [the contemporary-rivals decision](docs/adr/0003-researched-contemporary-rivals.md) and `research/verified-distractors.json` for the exact policy, sources and limitations.
-- Existing saves keep their deck, guesses, hints, score and history. On reload, outdated wrong-answer sets are refreshed only if the current round has no guesses or hints; engaged rounds and already-compatible options keep their exact order. Older difficulty preferences are retired: new rounds, competition changes, reset and replay use Hard automatically.
-- Three attempts. Wrong buttons turn red and cannot be selected again.
-- **Get Hint** reveals country, then position, then the initials of the displayed player name. Hints cost nothing.
-- Each correct round earns **up to 100 points** and adds one to the consecutive win streak. Losing a round resets the streak, not the score. Points scale down 20% per hint used and by how long the round took to answer (full value inside 5 seconds, decaying to a 50% floor by 30 seconds) — see `docs/adr/0001-local-results-history-and-speed-based-scoring.md` for the exact formula and reasoning.
-- Every finished game is saved to a local results history on this device (not synced anywhere), shown on the recap screen with your best score/streak so far. A "Reset my results" button in the footer clears the current game and this history at any time.
-- **Next Player** appears only after winning or losing a round.
-- A new shuffled deck visits every player in the active competition once before the final recap (all 60 in All Players mode). Existing 30-, 40- and 50-player full-roster saves retain their original deck and exact choices, score and hints; after finishing, Play again starts a fresh deck in the same competition, resets the score and uses Hard.
-- Progress is saved in this browser when local storage is available. Browsers that block storage can still play, but reloading starts a new game. File-URL storage behavior varies by browser.
-
-## Career-data policy
-
-The original audit and three ten-player [research expansions](DATA_AUDIT.md) distinguish corroborated club history from unresolved dates and registration evidence. This is a dated, manually researched snapshot, not a live transfer feed. See the research files for the retrieved sources, cross-checks and player-specific notes. Active-player careers require rechecking after future transfers.
-
-Competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) are a broad club-membership categorization used to organize gameplay, not a per-appearance sourced claim — see [the data policy](research/data-policy.md#competition-tags).
-
-The timeline includes professional senior clubs, competitive senior reserve-team spells, loans, and distinct playing returns. National teams, youth sides, coaching jobs, training-only visits, testimonials and amateur post-retirement football are excluded. Two documented exceptions are clearly tagged: Roberto Carlos’s friendly-only Atlético Mineiro tour loan (**Tour loan**) and Ronaldinho’s announced Ravenna signing (**Signing\***; completed registration and competitive debut not established). Continuous loan-to-permanent spells are combined, with the loan noted. Parallel reserve/first-team spells can overlap in years. See [the data policy](research/data-policy.md) and [player-by-player sources](CAREER_SOURCES.md) for exact scope, chronology and evidence conflicts. Current club crests identify the clubs; they are not historical season-specific artwork.
-
-Country means the senior national team represented, not birthplace or every citizenship held. Position uses a broad playing-role category. Initials use the player's name as displayed in the answer options (so a mononym has one initial).
-
-## Files
-
-- `index.html` — the complete playable artifact; nothing else is required at runtime.
-- `DESIGN.md` — visual direction, gameplay contract and acceptance matrix.
-- `BRAND.md` and `assets/derabona-*` — brand guide, editable logo/mark and shareable PNG export. The live game embeds its own mark/favicon and stays self-contained.
-- `CAREER_SOURCES.md` — player-by-player chronology, caveats and numbered sources.
-- `DATA_AUDIT.md` — original 30-player re-audit and researched expansions to 60, corrections and remaining evidence limits.
-- `research/` — curated career records, data policy and public source-URL ledger. Raw third-party retrievals and assembly scratch files remain local and are not republished.
-- `tests/` — reproducible browser/data checks.
-
-## Test and edit
-
-GitHub Pages deploys automatically from `main` using `.github/workflows/pages.yml`. Every deployment first runs the model/data and source-identifier checks, then publishes **`index.html`, the Spanish link-preview PNG, `robots.txt`, `sitemap.xml` and `favicon.svg`**. The public site is https://derabona.club/. Static Open Graph/Twitter metadata uses the branded image at `assets/derabona-social-es-v1.png`; the game itself remains self-contained and works offline. The repository is public at the owner's request; research and test files remain available in the repo but are not part of the deployed website.
-
-The delivered file needs **no build step**. Edit its CSS, the explicit `PLAYERS` array, `CREST_ASSETS`, or the model/UI scripts directly. When updating a career, update the matching curated record and source document as well. All images are embedded PNGs; retain original public URLs for attribution.
+Open <http://127.0.0.1:4173>. In another terminal:
 
 ```sh
-node --test tests/model.test.mjs
+node --test tests/model.test.mjs tests/social-preview.test.mjs tests/seo.test.mjs tests/analytics.test.mjs tests/guest-session.test.mjs
+node scripts/export-ranked-roster.mjs --check
 python3 tests/source-check.py
-# With the local server above running and playwright-cli installed:
+# Requires playwright-cli and the local server above:
+python3 tests/run-browser.py --suite guest-session-checks.js --suite accounts-checks.js --suite offline-checks.js
+# Full browser regression runner (historical limitations documented separately):
 python3 tests/run-browser.py
 ```
 
-The browser runner reuses a named headless development session and writes screenshots/results under ignored `test-results/`. It tests all 60 rounds over HTTP, all 60 again in an offline local-file context, all 60 in Spanish, every career in both languages at five mobile/tablet widths, and all 60 rounds with automatic Hard selection in both languages. It also verifies removal of the selector and migration of old preferences, preservation of engaged rounds, and repair of untouched saved answer sets with outdated origin/era giveaways. See [TESTING.md](TESTING.md) for the actual verification results and limits.
-
-## Accessibility
-
-Keyboard-operable controls, visible focus styles, localized crest alternative text, text plus color for answers, live feedback announcements, and reduced-motion support. Narrow screens show the complete numbered career grid without horizontal scrolling; desktop timelines retain keyboard and arrow navigation.
+The runner uses a named headless non-persistent development session and ignored `test-results/` output. Account browser tests use mocked SDK/API responses: they are not live Google login or database evidence. Native PostgreSQL and Deno commands are in [docs/leaderboards.md](docs/leaderboards.md); observed results and remaining hosted checks are in [TESTING.md](TESTING.md).
 
 ## Assets and privacy
 
-Crests are embedded from public image sources, with source URLs retained for attribution. Club names and crests remain the trademarks/copyright of their respective owners. This is an unofficial educational/personal demo, not affiliated with or endorsed by the clubs or players. No blanket license to redistribute those marks is granted by this repository.
+Club crests/names remain their owners' trademarks/copyright. Public image-source URLs are retained for attribution. This is an unofficial educational/personal demo, not club/player endorsement or a blanket redistribution license. Source links open externally only when clicked.
 
-Optional **consent-first PostHog EU analytics** measures visits and gameplay only after the visitor selects Allow analytics. Declining does not affect play; permission can be withdrawn under Privacy and analytics. There are no session recordings, automatic click capture, advertising or account system. The public ingestion token is embedded, never personal API credentials. Offline/local play makes no analytics requests, and gameplay never depends on PostHog. See [analytics details](docs/analytics.md) and the [dashboard](https://eu.posthog.com/project/273163/dashboard/949592). Source links open externally only when explicitly clicked.
+Optional **consent-first PostHog EU analytics** measures visits/gameplay only after Allow analytics. Declining does not affect guest or account play; permission can be withdrawn under Privacy and analytics. No recordings, autocapture or advertising. Google/Supabase account identity is functional account data, not analytics identity: no account IDs, nicknames, Google names/photos, emails or tokens go to PostHog. Offline/local play makes no analytics requests. See [analytics details](docs/analytics.md), [privacy page](privacy.html) and [dashboard](https://eu.posthog.com/project/273163/dashboard/949592).

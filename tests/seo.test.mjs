@@ -59,7 +59,7 @@ test('Search favicon is crawlable and deployed alongside sitemap and robots', ()
   assert.match(read('favicon.svg'), /<svg/);
   const workflow = read('.github/workflows/pages.yml');
   assert.match(workflow, /cp robots.txt sitemap.xml favicon.svg _site\//);
-  assert.match(workflow, /tests\/seo.test.mjs/);
+  assert.match(workflow, /node --test[^\n]*tests\/(?:seo\.test\.mjs|\*\.test\.mjs)(?:\s|$)/);
 });
 
 test('All original crest keys remain embedded PNGs, within the transfer budget', () => {
