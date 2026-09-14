@@ -66,33 +66,6 @@
     "notes": "Ordered senior playing spells; the first Sporting season is 1996/97, with the Wikipedia career table identifying 1997. End is the final recorded playing year, 2015 at NorthEast United, rather than a later retirement or post-retirement appointment."
   },
   {
-    "id": "luis-figo",
-    "name": "Luís Figo",
-    "country": "Portugal",
-    "position": "Midfielder",
-    "start": 1990,
-    "end": 2009,
-    "clubs": [
-      "Sporting CP",
-      "Barcelona",
-      "Real Madrid",
-      "Inter Milan"
-    ],
-    "system": "portugal",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Lu%C3%ADs_Figo",
-        "excerpt": "Senior career***\n- Years: Team Apps ( Gls)\n- 1989–1995: Sporting CP 129 (16)\n- 1995–2000: Barcelona 172 (30)\n- 2000–2005: Real Madrid 164 (38)\n- 2005–2009: Inter Milan 105 (9)\n- Total: 570 (93)\n- **\n\n[…]\n\nFigo started his career at Sporting CP, making his league debut on 2 April 1990 during the 1989–90 season as a substitute for Marlon Brandão in a 1–0 home win against Marítimo. On 7 December 1991, Figo scored his first goal against Torreense in the 1991–92 season, equalising as Sporting won 2–1. He won his first senior international cap in 1991. Prior to that, he won the 1991 FIFA Under-20 World Championships and Under-16 European Championships with Portugal junior sides alongside Rui Costa and João Pinto. He was also a significant part of Portugal's \" Golden Generation \". In his final season at Sporting he won the 1994–95 Portuguese Cup.\n\n[…]\n\nFigo left Real Madrid to join the Italian club Inter Milan in the middle of 2005 on a free transfer after his contract with Madrid had expired. This meant that Figo would finally be able to play for a club in Italy, something he had the chance to do before his move to Barcelona, but was scuppered due to a dispute between the two clubs interested, Juventus and Parma. During the middle of 2008, Figo's compatriot José Mourinho joined Inter as manager. This has been said to please Figo, as he would have several Portuguese teammates during the remainder of his stay at Inter. On 16 May 2009, Figo announced his retirement from football, the same day Inter won the 2008–09 title, and re-confirmed this on 30 May; his final game was on 31 May against Atalanta at the San Siro. At Javier Zanetti 's insistence, Figo captained the side for his last match. He received a standing ovation from the crowd as he was substituted by Davide Santon. The free-kick he scored in extra time against Roma during the Supercoppa Italiana was his most memorable moment in Italy.\n\n[…]\n\nFigo said: \"I am leaving football, not Inter.\" He was interviewed by the Inter Channel after his last game against Atalanta, and also said: \"I hope to be able to help this club to become even greater also after my retirement. I will certainly work for Inter in the future on the club board. I never imagined that I was going to remain here for such a long time. What I will never forget is the love that I have received since my first day here from my teammates and president Massimo Moratti. I will never forget it; Inter has given me the chance to start a winning cycle with some extraordinary people.\" Figo was on the sidelines when Inter won the 2009–10 UEFA Champions League on 22 May 2010.\n\n[…]\n\nOn 18 February 2004, Figo earned his 100th cap in a 1–1 friendly draw with England at the Estádio Algarve, playing as captain despite regular skipper Fernando Couto being in the starting line-up. Later that year at the European Championship on home soil, he captained the side after Couto was dropped. He announced his retirement from international football following the Euro 2004 final upset-defeat by Greece due to an alleged rift between him and national coach Luiz Felipe Scolari, although this was denied. In June 2005, he reversed his decision and returned for the 2006 World Cup qualifying wins against Slovakia and Estonia under Scolari."
-      },
-      {
-        "url": "https://www.national-football-teams.com/old/player/5309/Luis_Figo.html",
-        "excerpt": "Season Club M G R Cha Cup 2008/09 Inter Milano 22 1 1 ( I ) - 2007/08 Inter Milano 17 1 1 ( I ) - 2006/07 Inter Milano 32 2 1 ( I ) - 2005/06 Inter Milano 34 5 2 ( I ) - 2004/05 Real Madrid 33 3 2 ( I ) - - 2003/04 Real Madrid 36 9 4 ( I ) - - 2002/03 Real Madrid 32 10 1 ( I ) - 2001/02 Real Madrid 28 7 3 ( I ) - - 2000/01 Real Madrid 34 9 1 ( I ) - 1999/00 FC Barcelona 32 9 2 ( I ) - - 1998/99 FC Barcelona 34 7 1 ( I ) - 1997/98 FC Barcelona 35 5 1 ( I ) 1996/97 FC Barcelona 36 4 2 ( I ) - 1995/96 FC Barcelona 35 5 3 ( I ) - - 1994/95 Sporting CP Lisboa 29 7 2 ( I ) - 1993/94 Sporting CP Lisboa 31 8 3 ( I ) - - 1992/93 Sporting CP Lisboa 32 0 3 ( I ) - - 1991/92 Sporting CP Lisboa 34 1 4 ( I ) - - 1990/91 Sporting CP Lisboa 1 0 3 ( I ) - - 1989/90 Sporting CP Lisboa 3 0 3 ( I ) - - 570 93"
-      }
-    ],
-    "notes": "Supplemental older Portugal-start option. Start follows the explicit league debut on 2 April 1990, not the infobox 1989 season-start label. Final match was 31 May 2009. Juventus and Parma were disputed transfer destinations, not senior playing clubs; post-retirement Inter board work is excluded."
-  },
-  {
     "id": "tiago-mendes",
     "name": "Tiago Mendes",
     "country": "Portugal",

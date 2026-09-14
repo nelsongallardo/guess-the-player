@@ -867,6 +867,109 @@ A long, well-documented return-heavy tail is retained in full rather than trimme
 
 Reviewed source links: [220], [221], [222], [223].
 
+### Luís Figo
+
+**Portugal · Europe · Midfielder.** Sporting CP (1989–1995) → Barcelona (1995–2000) → Real Madrid (2000–2005) → Inter Milan (2005–2009).[224][225]
+
+A clean four-club chronology with no reserve or loan spells in scope; corroborated by both sources. Winger/attacking midfielder, recorded under this project's broad Midfielder category.[224][225]
+
+Reviewed source links: [224], [225].
+
+### Philipp Lahm
+
+**Germany · Europe · Defender.** Bayern Munich II (2001–2003) → VfB Stuttgart (2003–2005) → Bayern Munich (2005–2017).[226][227]
+
+The Bayern Munich II reserve spell preceded a two-season Bundesliga loan to VfB Stuttgart and his permanent return to Bayern Munich's first team; corroborated by both sources. Right-back/left-back, recorded under this project's broad Defender category.[226][227]
+
+- **VfB Stuttgart (2003–2005):** Loan from Bayern Munich to gain first-team Bundesliga experience.
+
+Reviewed source links: [226], [227].
+
+### Alessandro Nesta
+
+**Italy · Europe · Defender.** Lazio (1993–2002) → AC Milan (2002–2012) → Montreal Impact (2012–2014) → Chennaiyin (2014).[228][229]
+
+A clean four-club chronology corroborated by both sources; no additional professional club was established. The current CF Montréal crest is used for the Montreal Impact-era club per this project's current/source-era crest convention.[228][229]
+
+- **Chennaiyin (2014):** Indian Super League's inaugural 2014 season, as a marquee foreign player.
+
+Reviewed source links: [228], [229].
+
+### David Silva
+
+**Spain · Europe · Midfielder.** Valencia B (2003–2004) → SD Eibar (2004–2005) → Celta Vigo (2005–2006) → Valencia (2006–2010) → Manchester City (2010–2020) → Real Sociedad (2020–2023).[230][231]
+
+The Valencia B reserve spell and two consecutive loan seasons at SD Eibar and Celta Vigo preceded his Valencia first-team debut; corroborated by both sources. Silva retired in July 2023 after a preseason anterior cruciate ligament injury.[230][231]
+
+- **SD Eibar (2004–2005):** Loan from Valencia.
+- **Celta Vigo (2005–2006):** Loan from Valencia.
+
+Reviewed source links: [230], [231].
+
+### Rio Ferdinand
+
+**England · Europe · Defender.** West Ham United (1995–2000) → AFC Bournemouth (1996–1997) → Leeds United (2000–2002) → Manchester United (2002–2014) → Queens Park Rangers (2014–2015).[232][233]
+
+A five-club chronology, including a season-long loan at AFC Bournemouth overlapping his West Ham United contract, corroborated by both sources; no additional professional club was established.[232][233]
+
+- **AFC Bournemouth (1996–1997):** Loan from West Ham United.
+
+Reviewed source links: [232], [233].
+
+### Marcelo
+
+**Brazil · South America · Defender.** Fluminense (2005–2007) → Real Madrid (2007–2022) → Olympiacos (2022–2023) → Fluminense (2023–2024).[234][235][236]
+
+Fluminense, Real Madrid, Olympiacos and the second Fluminense spell are corroborated by both primary sources; CONMEBOL's contemporary report independently corroborates the 6 February 2025 retirement announcement, three months after leaving Fluminense by mutual consent.[234][235][236]
+
+- **Fluminense (2023–2024):** Second playing spell.
+
+Reviewed source links: [234], [235], [236].
+
+### Gonzalo Higuaín
+
+**Argentina · South America · Forward.** River Plate (2005–2007) → Real Madrid (2007–2013) → Napoli (2013–2016) → Juventus (2016–2018) → AC Milan (2018–2019) → Chelsea (2019) → Juventus (2019–2020) → Inter Miami (2020–2022).[237][238]
+
+The full eight-node chronology, including the AC Milan and Chelsea loans during his Juventus contract, is corroborated by both sources; Higuaín retired at the end of Inter Miami's 2022 MLS season.[237][238]
+
+- **AC Milan (2018–2019):** Season-long loan from Juventus.
+- **Chelsea (2019):** Half-season loan from Juventus, January-June 2019.
+- **Juventus (2019–2020):** Returned from loan for a final season before departing for Inter Miami.
+
+Reviewed source links: [237], [238].
+
+### Fernando Redondo
+
+**Argentina · South America · Midfielder.** Argentinos Juniors (1985–1990) → Tenerife (1990–1994) → Real Madrid (1994–2000) → AC Milan (2000–2004).[239][240][241]
+
+The four-club chronology is corroborated by both primary sources; Football Italia's contemporary interview independently corroborates the severity of the Milan knee injuries that limited him to a handful of appearances there and ended his career without a further move. Defensive midfielder, recorded under this project's broad Midfielder category.[239][240][241]
+
+- **AC Milan (2000–2004):** A ruptured cruciate ligament within a month of arriving sidelined him for over two years; he retired in November 2004 after a further knee injury.
+
+Reviewed source links: [239], [240], [241].
+
+### Ángel Di María
+
+**Argentina · South America · Midfielder.** Rosario Central (2005–2007) → Benfica (2007–2010) → Real Madrid (2010–2014) → Manchester United (2014–2015) → Paris Saint-Germain (2015–2022) → Juventus (2022–2023) → Benfica (2023–2025) → Rosario Central (2025–present).[242][243][244]
+
+The full eight-node chronology, including both Rosario Central and both Benfica spells, is corroborated by both primary sources; Infobae's contemporary report independently corroborates the May 2025 free-transfer return to Rosario Central as active, currently ongoing professional football. Winger/attacking midfielder, recorded under this project's broad Midfielder category.[242][243][244]
+
+- **Benfica (2023–2025):** Second playing spell.
+- **Rosario Central (2025–present):** Second playing spell, on a free transfer after leaving Benfica.
+
+Reviewed source links: [242], [243], [244].
+
+### Juninho Pernambucano
+
+**Brazil · South America · Midfielder.** Sport Recife (1993–1995) → Vasco da Gama (1995–2001) → Lyon (2001–2009) → Al-Gharafa (2009–2011) → Vasco da Gama (2011–2012) → New York Red Bulls (2013) → Vasco da Gama (2013).[245][246][247]
+
+The seven-node chronology, including three separate Vasco da Gama spells, is corroborated by both primary sources; Gazeta do Povo's contemporary report independently corroborates the injury-forced February 2014 retirement announcement. Attacking midfielder and free-kick specialist, recorded under this project's broad Midfielder category.[245][246][247]
+
+- **Vasco da Gama (2011–2012):** Second playing spell.
+- **Vasco da Gama (2013):** Third playing spell; retired in February 2014 after a right thigh injury sustained that November.
+
+Reviewed source links: [245], [246], [247].
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -1091,3 +1194,27 @@ Sources:
 [221] https://www.national-football-teams.com/player/10131/Romario.html
 [222] https://www.planetfootball.com/nostalgia/ortega-and-romario-at-valencia-discos-great-goals-and-fights-with-ranieri
 [223] https://www.emol.com/noticias/deportes/2003/06/14/114898/fluminense-derrotado-en-regreso-de-romario.html
+[224] https://en.wikipedia.org/wiki/Lu%C3%ADs_Figo
+[225] https://www.national-football-teams.com/player/5309/Luis_Figo.html
+[226] https://en.wikipedia.org/wiki/Philipp_Lahm
+[227] https://www.national-football-teams.com/player/2573/Philipp_Lahm.html
+[228] https://en.wikipedia.org/wiki/Alessandro_Nesta
+[229] https://www.national-football-teams.com/player/3364/Alessandro_Nesta.html
+[230] https://en.wikipedia.org/wiki/David_Silva
+[231] https://www.national-football-teams.com/player/17397/David_Silva.html
+[232] https://en.wikipedia.org/wiki/Rio_Ferdinand
+[233] https://www.national-football-teams.com/player/2166/Rio_Ferdinand.html
+[234] https://en.wikipedia.org/wiki/Marcelo_(footballer,_born_1988)
+[235] https://www.national-football-teams.com/player/15093/Marcelo_1.html
+[236] https://www.conmebol.com/pt-br/noticias-pt-br/marcelo-anuncia-aposentadoria-apos-uma-carreira-historica
+[237] https://en.wikipedia.org/wiki/Gonzalo_Higua%C3%ADn
+[238] https://www.national-football-teams.com/player/20293/Gonzalo_Higuain.html
+[239] https://en.wikipedia.org/wiki/Fernando_Redondo
+[240] https://www.national-football-teams.com/player/15198/Fernando_Redondo.html
+[241] https://football-italia.net/redondo-milan-injury-nightmare
+[242] https://en.wikipedia.org/wiki/%C3%81ngel_Di_Mar%C3%ADa
+[243] https://www.national-football-teams.com/player/24743/Angel_Di_Maria.html
+[244] https://www.infobae.com/deportes/2025/05/29/rosario-central-anuncio-el-regreso-de-angel-di-maria-bienvenido-a-casa
+[245] https://en.wikipedia.org/wiki/Juninho_Pernambucano
+[246] https://www.national-football-teams.com/player/1035/Juninho_Pernambucano.html
+[247] https://www.gazetadopovo.com.br/esportes/futebol/vasco-confirma-que-juninho-pernambucano-ira-se-aposentar-9mvz4wifx73r4nazzykyzitzi

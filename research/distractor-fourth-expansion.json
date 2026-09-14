@@ -6,7 +6,14 @@
     "position": "Midfielder",
     "start": 1995,
     "end": 2012,
-    "clubs": ["Chemnitzer FC", "1. FC Kaiserslautern", "Bayer Leverkusen", "Bayern Munich", "Chelsea", "Bayer Leverkusen"],
+    "clubs": [
+      "Chemnitzer FC",
+      "1. FC Kaiserslautern",
+      "Bayer Leverkusen",
+      "Bayern Munich",
+      "Chelsea",
+      "Bayer Leverkusen"
+    ],
     "system": "germany",
     "region": "europe",
     "sources": [
@@ -28,7 +35,11 @@
     "position": "Midfielder",
     "start": 2002,
     "end": 2019,
-    "clubs": ["Bayern Munich", "Manchester United", "Chicago Fire"],
+    "clubs": [
+      "Bayern Munich",
+      "Manchester United",
+      "Chicago Fire"
+    ],
     "system": "germany",
     "region": "europe",
     "sources": [
@@ -44,35 +55,23 @@
     "notes": "First senior system: Germany, Bayern Munich. Overlaps Miroslav Klose's 1998-2016 career (debut difference of 4 years)."
   },
   {
-    "id": "philipp-lahm",
-    "name": "Philipp Lahm",
-    "country": "Germany",
-    "position": "Defender",
-    "start": 2002,
-    "end": 2017,
-    "clubs": ["Bayern Munich", "VfB Stuttgart", "Bayern Munich"],
-    "system": "germany",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Philipp_Lahm",
-        "excerpt": "Philipp Lahm ... Bayern Munich 2002-2017, with a loan to VfB Stuttgart 2003-2005. Position(s): Right-back, left-back. Germany national team 2004-2014, 113 caps, 5 goals."
-      },
-      {
-        "url": "https://www.national-football-teams.com/player/2573/Philipp_Lahm.html",
-        "excerpt": "Philipp Lahm, Right Back (RB), born 11-11-1983 in Muenchen, Germany. 1.70m. FIFA Matches 113, FIFA Goals 5."
-      }
-    ],
-    "notes": "First senior system: Germany, Bayern Munich (his contract began there in 2002, with a two-season loan to VfB Stuttgart). Overlaps Miroslav Klose's 1998-2016 career."
-  },
-  {
     "id": "lukas-podolski",
     "name": "Lukas Podolski",
     "country": "Germany",
     "position": "Forward",
     "start": 2003,
     "end": 2026,
-    "clubs": ["1. FC Köln", "Bayern Munich", "1. FC Köln", "Arsenal", "Inter Milan", "Galatasaray", "Vissel Kobe", "Antalyaspor", "Górnik Zabrze"],
+    "clubs": [
+      "1. FC Köln",
+      "Bayern Munich",
+      "1. FC Köln",
+      "Arsenal",
+      "Inter Milan",
+      "Galatasaray",
+      "Vissel Kobe",
+      "Antalyaspor",
+      "Górnik Zabrze"
+    ],
     "system": "germany",
     "region": "europe",
     "sources": [
@@ -94,7 +93,19 @@
     "position": "Midfielder",
     "start": 1986,
     "end": 2004,
-    "clubs": ["Atlético Buenaventura", "Independiente Santa Fe", "América de Cali", "Palmeiras", "Napoli", "Real Madrid", "Palmeiras", "Corinthians", "Santos", "Cruzeiro", "Corinthians"],
+    "clubs": [
+      "Atlético Buenaventura",
+      "Independiente Santa Fe",
+      "América de Cali",
+      "Palmeiras",
+      "Napoli",
+      "Real Madrid",
+      "Palmeiras",
+      "Corinthians",
+      "Santos",
+      "Cruzeiro",
+      "Corinthians"
+    ],
     "system": "colombia",
     "region": "south-america",
     "sources": [
@@ -116,7 +127,17 @@
     "position": "Goalkeeper",
     "start": 1985,
     "end": 2010,
-    "clubs": ["Millonarios", "Atlético Nacional", "Real Valladolid", "Atlético Nacional", "Veracruz", "Independiente Medellín", "Real Cartagena", "Atlético Junior", "Deportivo Pereira"],
+    "clubs": [
+      "Millonarios",
+      "Atlético Nacional",
+      "Real Valladolid",
+      "Atlético Nacional",
+      "Veracruz",
+      "Independiente Medellín",
+      "Real Cartagena",
+      "Atlético Junior",
+      "Deportivo Pereira"
+    ],
     "system": "colombia",
     "region": "south-america",
     "sources": [
@@ -138,7 +159,20 @@
     "position": "Forward",
     "start": 1988,
     "end": 2004,
-    "clubs": ["Cúcuta Deportivo", "Atlético Nacional", "Parma", "Newcastle United", "Parma", "Palmeiras", "Fluminense", "Atlante", "Atlético Nacional", "Universidad de Chile", "Estudiantes de La Plata", "Cortuluá"],
+    "clubs": [
+      "Cúcuta Deportivo",
+      "Atlético Nacional",
+      "Parma",
+      "Newcastle United",
+      "Parma",
+      "Palmeiras",
+      "Fluminense",
+      "Atlante",
+      "Atlético Nacional",
+      "Universidad de Chile",
+      "Estudiantes de La Plata",
+      "Cortuluá"
+    ],
     "system": "colombia",
     "region": "south-america",
     "sources": [
@@ -160,7 +194,17 @@
     "position": "Midfielder",
     "start": 1983,
     "end": 2004,
-    "clubs": ["Independiente Medellín", "Atlético Nacional", "Real Valladolid", "América de Cali", "Veracruz", "Dallas Burn", "New England Revolution", "Deportivo Pereira", "Deportes Quindío"],
+    "clubs": [
+      "Independiente Medellín",
+      "Atlético Nacional",
+      "Real Valladolid",
+      "América de Cali",
+      "Veracruz",
+      "Dallas Burn",
+      "New England Revolution",
+      "Deportivo Pereira",
+      "Deportes Quindío"
+    ],
     "system": "colombia",
     "region": "south-america",
     "sources": [
@@ -182,7 +226,21 @@
     "position": "Defender",
     "start": 1994,
     "end": 2014,
-    "clubs": ["Olimpia", "Lanús", "Santos Laguna", "Cruz Azul", "Atlas", "Olimpia", "Nacional (Paraguay)", "León", "Nacional (Paraguay)", "Irapuato", "Nacional (Paraguay)", "Sportivo Luqueño", "Rubio Ñu"],
+    "clubs": [
+      "Olimpia",
+      "Lanús",
+      "Santos Laguna",
+      "Cruz Azul",
+      "Atlas",
+      "Olimpia",
+      "Nacional (Paraguay)",
+      "León",
+      "Nacional (Paraguay)",
+      "Irapuato",
+      "Nacional (Paraguay)",
+      "Sportivo Luqueño",
+      "Rubio Ñu"
+    ],
     "system": "paraguay",
     "region": "south-america",
     "sources": [
@@ -204,7 +262,22 @@
     "position": "Forward",
     "start": 1997,
     "end": 2012,
-    "clubs": ["Sport Colombia", "Tembetary", "River Plate", "Pachuca", "Club América", "Libertad", "Santos", "Universidad de Chile", "Olimpia", "Albacete", "Puebla", "Cerro Porteño", "Sportivo Luqueño", "Sportivo Carapeguá"],
+    "clubs": [
+      "Sport Colombia",
+      "Tembetary",
+      "River Plate",
+      "Pachuca",
+      "Club América",
+      "Libertad",
+      "Santos",
+      "Universidad de Chile",
+      "Olimpia",
+      "Albacete",
+      "Puebla",
+      "Cerro Porteño",
+      "Sportivo Luqueño",
+      "Sportivo Carapeguá"
+    ],
     "system": "paraguay",
     "region": "south-america",
     "sources": [
@@ -226,7 +299,16 @@
     "position": "Goalkeeper",
     "start": 1996,
     "end": 2018,
-    "clubs": ["Sol de América", "Club Libertad", "Newell's Old Boys", "Real Valladolid", "Estudiantes de La Plata", "Club Nacional", "Colo-Colo", "Club Nacional"],
+    "clubs": [
+      "Sol de América",
+      "Club Libertad",
+      "Newell's Old Boys",
+      "Real Valladolid",
+      "Estudiantes de La Plata",
+      "Club Nacional",
+      "Colo-Colo",
+      "Club Nacional"
+    ],
     "system": "paraguay",
     "region": "south-america",
     "sources": [
@@ -248,7 +330,27 @@
     "position": "Defender",
     "start": 1995,
     "end": 2024,
-    "clubs": ["Atlántida", "Presidente Hayes", "Sport Colombia", "Cerro Porteño", "Perugia", "Lanús", "Venezia", "Cosenza", "Libertad", "Toluca", "Sunderland", "Real Zaragoza", "Pachuca", "Toluca", "Libertad", "12 de Octubre", "Independiente (Paraguay)", "12 de Junio", "Atlántida"],
+    "clubs": [
+      "Atlántida",
+      "Presidente Hayes",
+      "Sport Colombia",
+      "Cerro Porteño",
+      "Perugia",
+      "Lanús",
+      "Venezia",
+      "Cosenza",
+      "Libertad",
+      "Toluca",
+      "Sunderland",
+      "Real Zaragoza",
+      "Pachuca",
+      "Toluca",
+      "Libertad",
+      "12 de Octubre",
+      "Independiente (Paraguay)",
+      "12 de Junio",
+      "Atlántida"
+    ],
     "system": "paraguay",
     "region": "south-america",
     "sources": [

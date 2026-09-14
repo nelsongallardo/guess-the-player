@@ -4424,5 +4424,512 @@
       "la-liga",
       "brasileirao"
     ]
+  },
+  {
+    "id": "luis-figo",
+    "name": "Luís Figo",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Sporting CP",
+        "years": "1989–1995"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1995–2000"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2000–2005"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2005–2009"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Lu%C3%ADs_Figo",
+        "title": "Luís Figo - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5309/Luis_Figo.html",
+        "title": "Luis Figo (Player) | National Football Teams"
+      }
+    ],
+    "notes": "A clean four-club chronology (Sporting CP, Barcelona, Real Madrid, Inter Milan) is corroborated by both sources; no additional professional club or loan spell was established.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "philipp-lahm",
+    "name": "Philipp Lahm",
+    "continent": "Europe",
+    "country": "Germany",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Bayern Munich II",
+        "years": "2001–2003"
+      },
+      {
+        "name": "VfB Stuttgart",
+        "years": "2003–2005",
+        "note": "Loan from Bayern Munich to gain first-team Bundesliga experience."
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2005–2017"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Philipp_Lahm",
+        "title": "Philipp Lahm - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2573/Philipp_Lahm.html",
+        "title": "Philipp Lahm (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The Bayern Munich II reserve spell precedes the VfB Stuttgart loan and his permanent return to Bayern Munich's first team; corroborated by both sources. No additional professional club was established.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "alessandro-nesta",
+    "name": "Alessandro Nesta",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Lazio",
+        "years": "1993–2002"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2002–2012"
+      },
+      {
+        "name": "Montreal Impact",
+        "years": "2012–2014"
+      },
+      {
+        "name": "Chennaiyin",
+        "years": "2014",
+        "note": "Indian Super League's inaugural 2014 season, as a marquee foreign player."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Alessandro_Nesta",
+        "title": "Alessandro Nesta - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/3364/Alessandro_Nesta.html",
+        "title": "Alessandro Nesta (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Lazio, AC Milan, Montreal Impact and Chennaiyin are corroborated by both sources; no additional professional club was established. The current CF Montréal crest is used per this project's current/source-era crest convention, matching the Nesta-era 'Montreal Impact' club name.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "david-silva",
+    "name": "David Silva",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Valencia B",
+        "years": "2003–2004"
+      },
+      {
+        "name": "SD Eibar",
+        "years": "2004–2005",
+        "note": "Loan from Valencia."
+      },
+      {
+        "name": "Celta Vigo",
+        "years": "2005–2006",
+        "note": "Loan from Valencia."
+      },
+      {
+        "name": "Valencia",
+        "years": "2006–2010"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2010–2020"
+      },
+      {
+        "name": "Real Sociedad",
+        "years": "2020–2023"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/David_Silva",
+        "title": "David Silva - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/17397/David_Silva.html",
+        "title": "David Silva (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The Valencia B reserve spell, the two consecutive loan seasons at SD Eibar and Celta Vigo, and the later Valencia/Manchester City/Real Sociedad chronology are corroborated by both sources; no additional professional club was established. Silva retired in July 2023 after a preseason anterior cruciate ligament injury.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "la-liga",
+      "premier-league",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "rio-ferdinand",
+    "name": "Rio Ferdinand",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "West Ham United",
+        "years": "1995–2000"
+      },
+      {
+        "name": "AFC Bournemouth",
+        "years": "1996–1997",
+        "note": "Loan from West Ham United."
+      },
+      {
+        "name": "Leeds United",
+        "years": "2000–2002"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2002–2014"
+      },
+      {
+        "name": "Queens Park Rangers",
+        "years": "2014–2015"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rio_Ferdinand",
+        "title": "Rio Ferdinand - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2166/Rio_Ferdinand.html",
+        "title": "Rio Ferdinand (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The West Ham United/Bournemouth loan overlap and the later Leeds United, Manchester United and Queens Park Rangers spells are corroborated by both sources; no additional professional club was established.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "premier-league",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "marcelo",
+    "name": "Marcelo",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Fluminense",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2007–2022"
+      },
+      {
+        "name": "Olympiacos",
+        "years": "2022–2023"
+      },
+      {
+        "name": "Fluminense",
+        "years": "2023–2024",
+        "note": "Second playing spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Marcelo_(footballer,_born_1988)",
+        "title": "Marcelo (footballer, born 1988) - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/15093/Marcelo_1.html",
+        "title": "Marcelo (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.conmebol.com/pt-br/noticias-pt-br/marcelo-anuncia-aposentadoria-apos-uma-carreira-historica",
+        "title": "Marcelo anuncia aposentadoria após uma carreira histórica - CONMEBOL"
+      }
+    ],
+    "notes": "Fluminense, Real Madrid, Olympiacos and the second Fluminense spell are corroborated by both primary sources; CONMEBOL's contemporary report independently corroborates the 6 February 2025 retirement announcement, three months after leaving Fluminense by mutual consent.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "brasileirao",
+      "la-liga",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "gonzalo-higuain",
+    "name": "Gonzalo Higuaín",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2007–2013"
+      },
+      {
+        "name": "Napoli",
+        "years": "2013–2016"
+      },
+      {
+        "name": "Juventus",
+        "years": "2016–2018"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2018–2019",
+        "note": "Season-long loan from Juventus."
+      },
+      {
+        "name": "Chelsea",
+        "years": "2019",
+        "note": "Half-season loan from Juventus, January-June 2019."
+      },
+      {
+        "name": "Juventus",
+        "years": "2019–2020",
+        "note": "Returned from loan for a final season before departing for Inter Miami."
+      },
+      {
+        "name": "Inter Miami",
+        "years": "2020–2022"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gonzalo_Higua%C3%ADn",
+        "title": "Gonzalo Higuaín - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/20293/Gonzalo_Higuain.html",
+        "title": "Gonzalo Higuaín (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The full eight-node chronology, including the AC Milan and Chelsea loans during his Juventus contract, is corroborated by both sources; no additional professional club was established. Higuaín retired at the end of Inter Miami's 2022 MLS season.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "argentine-primera",
+      "la-liga",
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "fernando-redondo",
+    "name": "Fernando Redondo",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Argentinos Juniors",
+        "years": "1985–1990"
+      },
+      {
+        "name": "Tenerife",
+        "years": "1990–1994"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1994–2000"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2000–2004",
+        "note": "A ruptured cruciate ligament within a month of arriving sidelined him for over two years; he retired in November 2004 after a further knee injury."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fernando_Redondo",
+        "title": "Fernando Redondo - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/15198/Fernando_Redondo.html",
+        "title": "Fernando Redondo (Player) | National Football Teams"
+      },
+      {
+        "url": "https://football-italia.net/redondo-milan-injury-nightmare",
+        "title": "Redondo: 'Milan injury nightmare' - Football Italia"
+      }
+    ],
+    "notes": "The four-club chronology is corroborated by both primary sources; Football Italia's contemporary interview independently corroborates the severity of the Milan knee injuries that limited him to a handful of appearances there and ended his career without a further move.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "argentine-primera",
+      "la-liga",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "angel-di-maria",
+    "name": "Ángel Di María",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Rosario Central",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Benfica",
+        "years": "2007–2010"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2010–2014"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2014–2015"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2015–2022"
+      },
+      {
+        "name": "Juventus",
+        "years": "2022–2023"
+      },
+      {
+        "name": "Benfica",
+        "years": "2023–2025",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Rosario Central",
+        "years": "2025–present",
+        "note": "Second playing spell, on a free transfer after leaving Benfica."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/%C3%81ngel_Di_Mar%C3%ADa",
+        "title": "Ángel Di María - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/24743/Angel_Di_Maria.html",
+        "title": "Ángel Di María (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.infobae.com/deportes/2025/05/29/rosario-central-anuncio-el-regreso-de-angel-di-maria-bienvenido-a-casa",
+        "title": "Rosario Central anunció el regreso de Ángel Di María: \"Bienvenido a casa\" - Infobae"
+      }
+    ],
+    "notes": "The full eight-node chronology, including both Rosario Central and both Benfica spells, is corroborated by both primary sources; Infobae's contemporary report independently corroborates the May 2025 free-transfer return to Rosario Central as active, currently ongoing professional football.",
+    "status": "active",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "argentine-primera",
+      "la-liga",
+      "premier-league",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "juninho-pernambucano",
+    "name": "Juninho Pernambucano",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Sport Recife",
+        "years": "1993–1995"
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "1995–2001"
+      },
+      {
+        "name": "Lyon",
+        "years": "2001–2009"
+      },
+      {
+        "name": "Al-Gharafa",
+        "years": "2009–2011"
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "2011–2012",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "New York Red Bulls",
+        "years": "2013"
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "2013",
+        "note": "Third playing spell; retired in February 2014 after a right thigh injury sustained that November."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Juninho_Pernambucano",
+        "title": "Juninho Pernambucano - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1035/Juninho_Pernambucano.html",
+        "title": "Juninho Pernambucano (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.gazetadopovo.com.br/esportes/futebol/vasco-confirma-que-juninho-pernambucano-ira-se-aposentar-9mvz4wifx73r4nazzykyzitzi",
+        "title": "Vasco confirma que Juninho Pernambucano irá se aposentar - Gazeta do Povo"
+      }
+    ],
+    "notes": "The seven-node chronology, including three separate Vasco da Gama spells, is corroborated by both primary sources; Gazeta do Povo's contemporary report independently corroborates the injury-forced February 2014 retirement announcement.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "brasileirao",
+      "champions-league"
+    ]
   }
 ]

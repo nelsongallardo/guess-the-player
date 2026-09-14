@@ -232,35 +232,6 @@
     "evidenceFile": "research/DISTRACTOR_WEST_EUROPE_SOURCES.md"
   },
   {
-    "id": "luis-figo",
-    "name": "Luís Figo",
-    "country": "Portugal",
-    "position": "Midfielder",
-    "start": 1990,
-    "end": 2009,
-    "clubs": [
-      "Sporting CP",
-      "Barcelona",
-      "Real Madrid",
-      "Inter Milan"
-    ],
-    "system": "portugal",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Lu%C3%ADs_Figo",
-        "excerpt": "Senior career***\n- Years: Team Apps ( Gls)\n- 1989–1995: Sporting CP 129 (16)\n- 1995–2000: Barcelona 172 (30)\n- 2000–2005: Real Madrid 164 (38)\n- 2005–2009: Inter Milan 105 (9)\n- Total: 570 (93)\n- **\n\n[…]\n\nFigo started his career at Sporting CP, making his league debut on 2 April 1990 during the 1989–90 season as a substitute for Marlon Brandão in a 1–0 home win against Marítimo. On 7 December 1991, Figo scored his first goal against Torreense in the 1991–92 season, equalising as Sporting won 2–1. He won his first senior international cap in 1991. Prior to that, he won the 1991 FIFA Under-20 World Championships and Under-16 European Championships with Portugal junior sides alongside Rui Costa and João Pinto. He was also a significant part of Portugal's \" Golden Generation \". In his final season at Sporting he won the 1994–95 Portuguese Cup.\n\n[…]\n\nFigo left Real Madrid to join the Italian club Inter Milan in the middle of 2005 on a free transfer after his contract with Madrid had expired. This meant that Figo would finally be able to play for a club in Italy, something he had the chance to do before his move to Barcelona, but was scuppered due to a dispute between the two clubs interested, Juventus and Parma. During the middle of 2008, Figo's compatriot José Mourinho joined Inter as manager. This has been said to please Figo, as he would have several Portuguese teammates during the remainder of his stay at Inter. On 16 May 2009, Figo announced his retirement from football, the same day Inter won the 2008–09 title, and re-confirmed this on 30 May; his final game was on 31 May against Atalanta at the San Siro. At Javier Zanetti 's insistence, Figo captained the side for his last match. He received a standing ovation from the crowd as he was substituted by Davide Santon. The free-kick he scored in extra time against Roma during the Supercoppa Italiana was his most memorable moment in Italy.\n\n[…]\n\nFigo said: \"I am leaving football, not Inter.\" He was interviewed by the Inter Channel after his last game against Atalanta, and also said: \"I hope to be able to help this club to become even greater also after my retirement. I will certainly work for Inter in the future on the club board. I never imagined that I was going to remain here for such a long time. What I will never forget is the love that I have received since my first day here from my teammates and president Massimo Moratti. I will never forget it; Inter has given me the chance to start a winning cycle with some extraordinary people.\" Figo was on the sidelines when Inter won the 2009–10 UEFA Champions League on 22 May 2010.\n\n[…]\n\nOn 18 February 2004, Figo earned his 100th cap in a 1–1 friendly draw with England at the Estádio Algarve, playing as captain despite regular skipper Fernando Couto being in the starting line-up. Later that year at the European Championship on home soil, he captained the side after Couto was dropped. He announced his retirement from international football following the Euro 2004 final upset-defeat by Greece due to an alleged rift between him and national coach Luiz Felipe Scolari, although this was denied. In June 2005, he reversed his decision and returned for the 2006 World Cup qualifying wins against Slovakia and Estonia under Scolari."
-      },
-      {
-        "url": "https://www.national-football-teams.com/old/player/5309/Luis_Figo.html",
-        "excerpt": "Season Club M G R Cha Cup 2008/09 Inter Milano 22 1 1 ( I ) - 2007/08 Inter Milano 17 1 1 ( I ) - 2006/07 Inter Milano 32 2 1 ( I ) - 2005/06 Inter Milano 34 5 2 ( I ) - 2004/05 Real Madrid 33 3 2 ( I ) - - 2003/04 Real Madrid 36 9 4 ( I ) - - 2002/03 Real Madrid 32 10 1 ( I ) - 2001/02 Real Madrid 28 7 3 ( I ) - - 2000/01 Real Madrid 34 9 1 ( I ) - 1999/00 FC Barcelona 32 9 2 ( I ) - - 1998/99 FC Barcelona 34 7 1 ( I ) - 1997/98 FC Barcelona 35 5 1 ( I ) 1996/97 FC Barcelona 36 4 2 ( I ) - 1995/96 FC Barcelona 35 5 3 ( I ) - - 1994/95 Sporting CP Lisboa 29 7 2 ( I ) - 1993/94 Sporting CP Lisboa 31 8 3 ( I ) - - 1992/93 Sporting CP Lisboa 32 0 3 ( I ) - - 1991/92 Sporting CP Lisboa 34 1 4 ( I ) - - 1990/91 Sporting CP Lisboa 1 0 3 ( I ) - - 1989/90 Sporting CP Lisboa 3 0 3 ( I ) - - 570 93"
-      }
-    ],
-    "notes": "Supplemental older Portugal-start option. Start follows the explicit league debut on 2 April 1990, not the infobox 1989 season-start label. Final match was 31 May 2009. Juventus and Parma were disputed transfer destinations, not senior playing clubs; post-retirement Inter board work is excluded.",
-    "verifiedAt": "2026-09-12",
-    "evidenceFile": "research/DISTRACTOR_WEST_EUROPE_SOURCES.md"
-  },
-  {
     "id": "tiago-mendes",
     "name": "Tiago Mendes",
     "country": "Portugal",
@@ -1789,38 +1760,6 @@
     "evidenceFile": "research/DISTRACTOR_ADDITIONAL_SOURCES.md"
   },
   {
-    "id": "juninho-pernambucano",
-    "name": "Juninho Pernambucano",
-    "country": "Brazil",
-    "position": "Midfielder",
-    "start": 1993,
-    "end": 2013,
-    "clubs": [
-      "Sport Recife",
-      "Vasco da Gama",
-      "Lyon",
-      "Al-Gharafa",
-      "Vasco da Gama",
-      "New York Red Bulls",
-      "Vasco da Gama"
-    ],
-    "system": "brazil",
-    "region": "south-america",
-    "notes": "Wikipedia identifies the professional debut at Sport Recife in 1993 and the final played season at Vasco in 2013. The retrieved AP report independently corroborates his retirement after a 20-year career. Use the last played year 2013 for era matching, not the later announcement year; preserve the three Vasco spells. Coaching, commentary and sporting-director employment are excluded.",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Juninho_Pernambucano",
-        "excerpt": "- Position: Attacking midfielder\n- **Youth career**\n- 1991–1992: Sport Recife\n- **Senior career***\n- Years: Team Apps ( Gls)\n- 1993–1995: Sport Recife 24 (3)\n- 1995–2001: Vasco da Gama 121 (27)\n- 2001–2009: Lyon 248 (75)\n- 2009–2011: Al-Gharafa 40 (15)\n- 2011–2012: Vasco da Gama 50 (11)\n- 2013: New York Red Bulls 13 (0)\n- 2013: Vasco da Gama 21 (2)\n- Total: 517 (133)"
-      },
-      {
-        "url": "https://apnews.com/former-brazil-midfielder-juninho-retires-6d2352bcbe4a48968e0f33ee49369a9a",
-        "excerpt": "SAO PAULO (AP) — Former Brazil and Lyon midfielder Juninho has announced his retirement from football after a 20-year career.\n\n...\n\nJuninho says “it was privilege to play” as long as he did, “although it was harder than I thought.”\nThe midfielder will be a TV commentator during the World Cup and says he is already “considering a coaching career.”"
-      }
-    ],
-    "verifiedAt": "2026-09-12",
-    "evidenceFile": "research/DISTRACTOR_ADDITIONAL_SOURCES.md"
-  },
-  {
     "id": "aron-winter",
     "name": "Aron Winter",
     "country": "Netherlands",
@@ -2206,34 +2145,6 @@
       }
     ],
     "notes": "First senior system: Germany, Bayern Munich. Overlaps Miroslav Klose's 1998-2016 career (debut difference of 4 years).",
-    "verifiedAt": "2026-09-12",
-    "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
-  },
-  {
-    "id": "philipp-lahm",
-    "name": "Philipp Lahm",
-    "country": "Germany",
-    "position": "Defender",
-    "start": 2002,
-    "end": 2017,
-    "clubs": [
-      "Bayern Munich",
-      "VfB Stuttgart",
-      "Bayern Munich"
-    ],
-    "system": "germany",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Philipp_Lahm",
-        "excerpt": "Philipp Lahm ... Bayern Munich 2002-2017, with a loan to VfB Stuttgart 2003-2005. Position(s): Right-back, left-back. Germany national team 2004-2014, 113 caps, 5 goals."
-      },
-      {
-        "url": "https://www.national-football-teams.com/player/2573/Philipp_Lahm.html",
-        "excerpt": "Philipp Lahm, Right Back (RB), born 11-11-1983 in Muenchen, Germany. 1.70m. FIFA Matches 113, FIFA Goals 5."
-      }
-    ],
-    "notes": "First senior system: Germany, Bayern Munich (his contract began there in 2002, with a two-season loan to VfB Stuttgart). Overlaps Miroslav Klose's 1998-2016 career.",
     "verifiedAt": "2026-09-12",
     "evidenceFile": "research/DISTRACTOR_FOURTH_EXPANSION_SOURCES.md"
   },
@@ -2687,5 +2598,97 @@
     "notes": "First senior system: Brazil, Atletico Mineiro. Overlaps Zico's 1971-1994 career (identical 1971/1972 debut era).",
     "verifiedAt": "2026-09-12",
     "evidenceFile": "research/DISTRACTOR_ZICO_ERA_SOURCES.md"
+  },
+  {
+    "id": "rui-costa",
+    "name": "Rui Costa",
+    "country": "Portugal",
+    "position": "Midfielder",
+    "start": 1990,
+    "end": 2008,
+    "clubs": [
+      "Benfica",
+      "Fiorentina",
+      "AC Milan",
+      "Benfica"
+    ],
+    "system": "portugal",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rui_Costa",
+        "excerpt": "Rui Costa ... senior career: Benfica 1990-1994 (with a 1990-91 loan to Fafe), Fiorentina 1994-2001, AC Milan 2001-2006, Benfica 2006-2008 (second spell). Portugal national team 1993-2004, 94 caps, 26 goals. Described as a classic number 10, an attacking midfielder and part of Portugal's Golden Generation alongside Figo."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5298/Rui_Costa.html",
+        "excerpt": "Rui Costa, Attacking Midfielder (AM), other position Centre Midfielder (CM), born 29-03-1972 in Lisboa, Portugal. 1.80m. FIFA Matches 94, FIFA Goals 26. Club seasons 1990/91 AD Fafe, 1991/92-1993/94 Benfica Lisboa, 1994/95-2000/01 AC Fiorentina, 2001/02-2005/06 AC Milan, 2006/07-2007/08 Benfica Lisboa."
+      }
+    ],
+    "notes": "Wrong-answer-only profile researched to close a Figo-era Portugal contemporary gap: Figo (Sporting CP 1989-2009) had only one existing same-system, same-era rival (Simão). Rui Costa's senior debut and full chronology are corroborated by both sources; the 1990-91 Fafe loan and second Benfica spell are documented but the simplified club list omits the loan step, matching this bank's lighter evidentiary standard for wrong-answer-only profiles.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FIGO_ERA_SOURCES.md"
+  },
+  {
+    "id": "fernando-couto",
+    "name": "Fernando Couto",
+    "country": "Portugal",
+    "position": "Defender",
+    "start": 1988,
+    "end": 2008,
+    "clubs": [
+      "Porto",
+      "Parma",
+      "Barcelona",
+      "Lazio",
+      "Parma"
+    ],
+    "system": "portugal",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fernando_Couto",
+        "excerpt": "Fernando Couto ... senior career: FC Porto 1988, Famalicao 1988-89, Academica de Coimbra 1989-90, FC Porto 1990-1994 (second spell), Parma 1994-1996, Barcelona 1996-1998, Lazio 1998-2005, Parma 2005-2008 (second spell). Portugal national team 1990-2004, 110 caps, 8 goals. Centre back who won league and cup doubles in Portugal, Italy and Spain."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5289/Fernando_Couto.html",
+        "excerpt": "Fernando Couto, Centre Back (CB), born 02-08-1969 in Espinho, Portugal. 1.83m. FIFA Matches 110, FIFA Goals 8. Club seasons include FC Porto (1987/88, 1990/91-1993/94), Famalicao and Academica in between, AC Parma (1994/95-1995/96, 2005/06-2007/08), FC Barcelona (1996/97-1997/98) and Lazio Roma (1998/99-2004/05)."
+      }
+    ],
+    "notes": "Wrong-answer-only profile researched to close the same Figo-era Portugal contemporary gap. Both sources agree on Porto as the first senior system club (with Famalicao/Academica/Porto's second spell simplified out of the bank's plain club list) and the later Parma/Barcelona/Lazio/Parma chronology.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FIGO_ERA_SOURCES.md"
+  },
+  {
+    "id": "paulo-sousa",
+    "name": "Paulo Sousa",
+    "country": "Portugal",
+    "position": "Midfielder",
+    "start": 1989,
+    "end": 2002,
+    "clubs": [
+      "Benfica",
+      "Sporting CP",
+      "Juventus",
+      "Borussia Dortmund",
+      "Inter Milan",
+      "Parma",
+      "Panathinaikos",
+      "Espanyol"
+    ],
+    "system": "portugal",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paulo_Sousa",
+        "excerpt": "Paulo Sousa ... senior career: Benfica 1989-1993, Sporting CP 1993-1994, Juventus 1994-1996, Borussia Dortmund 1996-1997, Inter Milan 1998-2000, Parma 2000 (loan), Panathinaikos 2000-2001, Espanyol 2002. Portugal national team 1991-2002, 51 caps. Defensive midfielder, later became a coach."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14056/Paulo_Sousa.html",
+        "excerpt": "Paulo Sousa, Centre Midfielder (CM), other position Defensive Midfielder (DM), born 30-08-1970 in Viseu, Portugal. 1.77m. FIFA Matches 51. Club seasons: Benfica Lisboa (1989/90-1992/93), Sporting CP Lisboa (1993/94), Juventus Torino (1994/95-1995/96), Borussia Dortmund (1996/97-1997/98), Inter Milano (1997/98-1999/00), AC Parma (1999/00), Panathinaikos AO (2000/01-2001/02), Espanyol Barcelona (2001/02)."
+      }
+    ],
+    "notes": "Wrong-answer-only profile researched to close the same Figo-era Portugal contemporary gap. The eight-club chronology, including the brief Parma loan during his Inter Milan spell, is corroborated by both sources.",
+    "verifiedAt": "2026-09-12",
+    "evidenceFile": "research/DISTRACTOR_FIGO_ERA_SOURCES.md"
   }
 ]

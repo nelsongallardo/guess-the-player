@@ -1,8 +1,8 @@
-# Full roster re-audit — 11 September 2026 (updated 12 September 2026, then 14 September 2026)
+# Full roster re-audit — 11 September 2026 (updated 12 September 2026, then twice more on 14 September 2026)
 
 ## Result and limits
 
-**Current roster: 70 players.** The original 30-player re-audit is followed below by four batches of ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all players; see `research/data-policy.md` for the tagging method. The fourth batch (14 September 2026) is five Europe/five South America, continuing the 35/35 continent split and adding this roster's first Germany, Colombia and Paraguay national-team players.
+**Current roster: 80 players.** The original 30-player re-audit is followed below by five batches of ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all players; see `research/data-policy.md` for the tagging method. The fourth batch (14 September 2026) is five Europe/five South America, continuing the 35/35 continent split and adding this roster's first Germany, Colombia and Paraguay national-team players. The fifth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 40/40: five further Portugal, Germany, Italy, Spain and England national-team Europeans, plus three further Argentina-origin and two further Brazil-origin South Americans.
 
 The original **30 unique players** were rechecked against freshly retrieved external career records, with at least two distinct source URLs per player and independent corroboration. This is a historical-data audit, not a claim that passing software tests proves the facts. The original requested scope remains **professional senior clubs**, including reserve sides competing in the adult league pyramid; youth teams, closed reserve leagues, amateur post-retirement football and coaching jobs are excluded.
 
@@ -892,6 +892,92 @@ Corroborated: The fifteen-node return-heavy chronology is corroborated by Wikipe
 
 Reviewed sources: [215], [216].
 
+## Fifth roster expansion — 10 additional players
+
+Luís Figo, Philipp Lahm and Juninho Pernambucano were each promoted from the wrong-answer-only distractor bank to the playable roster, the same pattern already used for Alessandro Del Piero in the fourth expansion. Their now-redundant bank profiles are removed from `research/verified-distractors.json` (from the `distractor-west-europe.json`, `distractor-fourth-expansion.json` and `distractor-additional.json` source batches respectively) and their expected batch counts in `research/assemble-distractors.py` are reduced accordingly. Philipp Lahm's promoted playable record uses a more granular Bayern Munich II reserve-team opening node than his simpler bank profile did, matching this roster's existing Cristiano Ronaldo/Sporting CP precedent for reserve-then-first-team ordering; the bank profile's simpler single "Bayern Munich (2002-2017)" node reflected this bank's lighter evidentiary standard for wrong-answer-only profiles, not a factual conflict.
+
+Promoting Figo left him with only one existing same-system (Portugal), same-era contemporary (Simão) under the eight-year debut/overlapping-career heuristic; three further wrong-answer-only Portugal-origin profiles (Rui Costa, Fernando Couto, Paulo Sousa) were researched to close this gap, documented in `research/DISTRACTOR_FIGO_ERA_SOURCES.md`.
+
+### Luís Figo
+
+**Portugal · Midfielder.** Sporting CP (1989–1995) → Barcelona (1995–2000) → Real Madrid (2000–2005) → Inter Milan (2005–2009).[217][218]
+
+Corroborated: A clean four-club chronology is corroborated by Wikipedia and National Football Teams; no additional professional club or loan spell was established.[217][218]
+
+Reviewed sources: [217], [218].
+
+### Philipp Lahm
+
+**Germany · Defender.** Bayern Munich II (2001–2003) → VfB Stuttgart (2003–2005) → Bayern Munich (2005–2017).[219][220]
+
+Corroborated: The Bayern Munich II reserve spell, the two-season VfB Stuttgart loan and the permanent return to Bayern Munich's first team are corroborated by both sources; no additional professional club was established.[219][220]
+
+Reviewed sources: [219], [220].
+
+### Alessandro Nesta
+
+**Italy · Defender.** Lazio (1993–2002) → AC Milan (2002–2012) → Montreal Impact (2012–2014) → Chennaiyin (2014).[221][222]
+
+Corroborated: Lazio, AC Milan, Montreal Impact and Chennaiyin's 2014 inaugural Indian Super League season are corroborated by both sources; no additional professional club was established.[221][222]
+
+Reviewed sources: [221], [222].
+
+### David Silva
+
+**Spain · Midfielder.** Valencia B (2003–2004) → SD Eibar (2004–2005) → Celta Vigo (2005–2006) → Valencia (2006–2010) → Manchester City (2010–2020) → Real Sociedad (2020–2023).[223][224]
+
+Corroborated: The Valencia B reserve spell, the two consecutive loan seasons at SD Eibar and Celta Vigo, and the later Valencia/Manchester City/Real Sociedad chronology are corroborated by both sources; no additional professional club was established. Silva retired in July 2023 after a preseason anterior cruciate ligament injury.[223][224]
+
+Reviewed sources: [223], [224].
+
+### Rio Ferdinand
+
+**England · Defender.** West Ham United (1995–2000) → AFC Bournemouth (1996–1997) → Leeds United (2000–2002) → Manchester United (2002–2014) → Queens Park Rangers (2014–2015).[225][226]
+
+Corroborated: The West Ham United/Bournemouth loan overlap and the later Leeds United, Manchester United and Queens Park Rangers spells are corroborated by both sources; no additional professional club was established.[225][226]
+
+Reviewed sources: [225], [226].
+
+### Marcelo
+
+**Brazil · Defender.** Fluminense (2005–2007) → Real Madrid (2007–2022) → Olympiacos (2022–2023) → Fluminense (2023–2024).[227][228][229]
+
+Corroborated: Fluminense, Real Madrid, Olympiacos and the second Fluminense spell are corroborated by Wikipedia and National Football Teams; CONMEBOL's contemporary report independently corroborates the 6 February 2025 retirement announcement, three months after leaving Fluminense by mutual consent.[227][228][229]
+
+Reviewed sources: [227], [228], [229].
+
+### Gonzalo Higuaín
+
+**Argentina · Forward.** River Plate (2005–2007) → Real Madrid (2007–2013) → Napoli (2013–2016) → Juventus (2016–2018) → AC Milan (2018–2019) → Chelsea (2019) → Juventus (2019–2020) → Inter Miami (2020–2022).[230][231]
+
+Corroborated: The full eight-node chronology, including the AC Milan and Chelsea loans during his Juventus contract, is corroborated by both sources; no additional professional club was established. Higuaín retired at the end of Inter Miami's 2022 MLS season.[230][231]
+
+Reviewed sources: [230], [231].
+
+### Fernando Redondo
+
+**Argentina · Midfielder.** Argentinos Juniors (1985–1990) → Tenerife (1990–1994) → Real Madrid (1994–2000) → AC Milan (2000–2004).[232][233][234]
+
+Corroborated: The four-club chronology is corroborated by Wikipedia and National Football Teams; Football Italia's contemporary interview independently corroborates the severity of the Milan knee injuries that limited him to a handful of appearances there and ended his career without a further move.[232][233][234]
+
+Reviewed sources: [232], [233], [234].
+
+### Ángel Di María
+
+**Argentina · Midfielder.** Rosario Central (2005–2007) → Benfica (2007–2010) → Real Madrid (2010–2014) → Manchester United (2014–2015) → Paris Saint-Germain (2015–2022) → Juventus (2022–2023) → Benfica (2023–2025) → Rosario Central (2025–present).[235][236][237]
+
+Corroborated: The full eight-node chronology, including both Rosario Central and both Benfica spells, is corroborated by Wikipedia and National Football Teams; Infobae's contemporary report independently corroborates the May 2025 free-transfer return to Rosario Central as active, currently ongoing professional football.[235][236][237]
+
+Reviewed sources: [235], [236], [237].
+
+### Juninho Pernambucano
+
+**Brazil · Midfielder.** Sport Recife (1993–1995) → Vasco da Gama (1995–2001) → Lyon (2001–2009) → Al-Gharafa (2009–2011) → Vasco da Gama (2011–2012) → New York Red Bulls (2013) → Vasco da Gama (2013).[238][239][240]
+
+Corroborated: The seven-node chronology, including three separate Vasco da Gama spells, is corroborated by Wikipedia and National Football Teams; Gazeta do Povo's contemporary report independently corroborates the injury-forced February 2014 retirement announcement.[238][239][240]
+
+Reviewed sources: [238], [239], [240].
+
 Sources:
 [1] https://argentina.as.com/argentina/2021/12/02/futbol/1638473602_945874.html
 [4] https://en.wikipedia.org/wiki/Javier_Zanetti
@@ -1107,3 +1193,27 @@ Sources:
 [214] https://www.national-football-teams.com/player/17931/Zico_1.html
 [215] https://en.wikipedia.org/wiki/Rom%C3%A1rio
 [216] https://www.national-football-teams.com/player/10131/Romario.html
+[217] https://en.wikipedia.org/wiki/Lu%C3%ADs_Figo
+[218] https://www.national-football-teams.com/player/5309/Luis_Figo.html
+[219] https://en.wikipedia.org/wiki/Philipp_Lahm
+[220] https://www.national-football-teams.com/player/2573/Philipp_Lahm.html
+[221] https://en.wikipedia.org/wiki/Alessandro_Nesta
+[222] https://www.national-football-teams.com/player/3364/Alessandro_Nesta.html
+[223] https://en.wikipedia.org/wiki/David_Silva
+[224] https://www.national-football-teams.com/player/17397/David_Silva.html
+[225] https://en.wikipedia.org/wiki/Rio_Ferdinand
+[226] https://www.national-football-teams.com/player/2166/Rio_Ferdinand.html
+[227] https://en.wikipedia.org/wiki/Marcelo_(footballer,_born_1988)
+[228] https://www.national-football-teams.com/player/15093/Marcelo_1.html
+[229] https://www.conmebol.com/pt-br/noticias-pt-br/marcelo-anuncia-aposentadoria-apos-uma-carreira-historica
+[230] https://en.wikipedia.org/wiki/Gonzalo_Higua%C3%ADn
+[231] https://www.national-football-teams.com/player/20293/Gonzalo_Higuain.html
+[232] https://en.wikipedia.org/wiki/Fernando_Redondo
+[233] https://www.national-football-teams.com/player/15198/Fernando_Redondo.html
+[234] https://football-italia.net/redondo-milan-injury-nightmare
+[235] https://en.wikipedia.org/wiki/%C3%81ngel_Di_Mar%C3%ADa
+[236] https://www.national-football-teams.com/player/24743/Angel_Di_Maria.html
+[237] https://www.infobae.com/deportes/2025/05/29/rosario-central-anuncio-el-regreso-de-angel-di-maria-bienvenido-a-casa
+[238] https://en.wikipedia.org/wiki/Juninho_Pernambucano
+[239] https://www.national-football-teams.com/player/1035/Juninho_Pernambucano.html
+[240] https://www.gazetadopovo.com.br/esportes/futebol/vasco-confirma-que-juninho-pernambucano-ira-se-aposentar-9mvz4wifx73r4nazzykyzitzi

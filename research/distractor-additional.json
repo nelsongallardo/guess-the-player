@@ -38,35 +38,5 @@
       }
     ],
     "notes": "Senior debut2005, not Real Massamá/Sporting youth. Sporting loan and2018 return retained; no unused ownership-only Manchester United or Valencia return. The2024 retirement is superseded by the2026 Aktobe comeback. Wikipedia reports13 league appearances as of25 June2026; BBC corroborates the comeback signing. End2026 is the retrieved active-playing snapshot, not a retirement date or predicted contract expiry. Portugal News misnames Melbourne Victory as Melbourne City; use Wikipedia club identity."
-  },
-  {
-    "id": "juninho-pernambucano",
-    "name": "Juninho Pernambucano",
-    "country": "Brazil",
-    "position": "Midfielder",
-    "start": 1993,
-    "end": 2013,
-    "clubs": [
-      "Sport Recife",
-      "Vasco da Gama",
-      "Lyon",
-      "Al-Gharafa",
-      "Vasco da Gama",
-      "New York Red Bulls",
-      "Vasco da Gama"
-    ],
-    "system": "brazil",
-    "region": "south-america",
-    "notes": "Wikipedia identifies the professional debut at Sport Recife in 1993 and the final played season at Vasco in 2013. The retrieved AP report independently corroborates his retirement after a 20-year career. Use the last played year 2013 for era matching, not the later announcement year; preserve the three Vasco spells. Coaching, commentary and sporting-director employment are excluded.",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Juninho_Pernambucano",
-        "excerpt": "- Position: Attacking midfielder\n- **Youth career**\n- 1991–1992: Sport Recife\n- **Senior career***\n- Years: Team Apps ( Gls)\n- 1993–1995: Sport Recife 24 (3)\n- 1995–2001: Vasco da Gama 121 (27)\n- 2001–2009: Lyon 248 (75)\n- 2009–2011: Al-Gharafa 40 (15)\n- 2011–2012: Vasco da Gama 50 (11)\n- 2013: New York Red Bulls 13 (0)\n- 2013: Vasco da Gama 21 (2)\n- Total: 517 (133)"
-      },
-      {
-        "url": "https://apnews.com/former-brazil-midfielder-juninho-retires-6d2352bcbe4a48968e0f33ee49369a9a",
-        "excerpt": "SAO PAULO (AP) — Former Brazil and Lyon midfielder Juninho has announced his retirement from football after a 20-year career.\n\n...\n\nJuninho says “it was privilege to play” as long as he did, “although it was harder than I thought.”\nThe midfielder will be a TV commentator during the World Cup and says he is already “considering a coaching career.”"
-      }
-    ]
   }
 ]
