@@ -107,29 +107,31 @@ test('hints reveal country, position, then club years (3 max), cost no attempts'
 
 test('scoring rewards speed and no-hint answers, floors gracefully, and is stable across reload', () => {
   // Pure function: hints cap the ceiling (regardless of speed), elapsed time
-  // decays a round's value between a 2s grace window and a 12s floor (25%) -
-  // short enough that looking an answer up elsewhere can't out-score a fast,
-  // honest guess. See docs/adr/0001-local-results-history-and-speed-based-scoring.md.
+  // decays a round's value between a 2s grace window and a 24s floor (25%) -
+  // doubled from an original 12s once real players found that too tight to
+  // actually read a 10-option career, while staying short enough that
+  // looking an answer up elsewhere can't out-score a fast, honest guess.
+  // See docs/adr/0001-local-results-history-and-speed-based-scoring.md.
   assert.equal(g.pointsFor(0, 0), 100); assert.equal(g.pointsFor(0, 1999), 100); assert.equal(g.pointsFor(0, 2000), 100);
   // 3 hints are offerable in the UI (country, position, years - see hint()'s
   // cap), and pointsFor clamps a stray/legacy hints=4 to the same value as 3,
   // rather than over-penalizing it.
   assert.equal(g.pointsFor(1, 0), 80); assert.equal(g.pointsFor(2, 0), 60); assert.equal(g.pointsFor(3, 0), 40); assert.equal(g.pointsFor(4, 0), 40);
-  assert.equal(g.pointsFor(0, 12000), 25); assert.equal(g.pointsFor(0, 30000), 25); // floor reached by 12s and holds beyond
-  assert.equal(g.pointsFor(0, 7000), 63); // interpolates halfway between the grace window and the floor
-  assert.equal(g.pointsFor(3, 12000), 10); // hint cap and time floor combine, never reaching zero
-  assert.equal(g.pointsFor(4, 12000), 10); // hints=4 clamps to the same value as 3
+  assert.equal(g.pointsFor(0, 24000), 25); assert.equal(g.pointsFor(0, 50000), 25); // floor reached by 24s and holds beyond
+  assert.equal(g.pointsFor(0, 13000), 63); // interpolates halfway between the grace window and the floor
+  assert.equal(g.pointsFor(3, 24000), 10); // hint cap and time floor combine, never reaching zero
+  assert.equal(g.pointsFor(4, 24000), 10); // hints=4 clamps to the same value as 3
   assert.ok(g.pointsFor(0, -50) === 100, 'negative elapsed (clock skew) never breaks or exceeds the ceiling');
   // timeFactor is exported alongside pointsFor for the #speed-meter UI (game-ui), which
   // needs the raw 0..1 decay curve directly rather than a hint-priced point total.
-  assert.equal(g.timeFactor(0), 1); assert.equal(g.timeFactor(2000), 1); assert.equal(g.timeFactor(12000), 0.25); assert.equal(g.timeFactor(99999), 0.25);
-  assert.equal(g.pointsFor(0, 7000), Math.round(100 * g.timeFactor(7000)), 'pointsFor(0, x) is exactly 100 x timeFactor(x), rounded');
+  assert.equal(g.timeFactor(0), 1); assert.equal(g.timeFactor(2000), 1); assert.equal(g.timeFactor(24000), 0.25); assert.equal(g.timeFactor(99999), 0.25);
+  assert.equal(g.pointsFor(0, 13000), Math.round(100 * g.timeFactor(13000)), 'pointsFor(0, x) is exactly 100 x timeFactor(x), rounded');
   // answer() takes elapsedMs from the caller (the UI owns the per-round
   // clock) so the model itself has no wall-clock dependency and stays
   // trivial to test; omitting it (as every other test in this file does)
   // defaults to 0 elapsed, i.e. full marks when no hints were used.
   const fast=g.create(); assert.equal(g.answer(fast,g.playerAt(fast).name,50),true); assert.equal(g.roundAt(fast).points,100);
-  const slow=g.create(); assert.equal(g.answer(slow,g.playerAt(slow).name,20000),true); assert.equal(g.roundAt(slow).points,25); // already past the 12s floor, so it earns the floor, not zero
+  const slow=g.create(); assert.equal(g.answer(slow,g.playerAt(slow).name,30000),true); assert.equal(g.roundAt(slow).points,25); // already past the 24s floor, so it earns the floor, not zero
   const hinted=g.create(); g.hint(hinted); g.hint(hinted); assert.equal(g.answer(hinted,g.playerAt(hinted).name,0),true); assert.equal(g.roundAt(hinted).points,60);
   assert.equal(g.stats(hinted).score,60);
   // A wrong guess never sets points, and a stored points value survives a

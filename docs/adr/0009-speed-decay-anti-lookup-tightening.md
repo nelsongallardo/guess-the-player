@@ -1,6 +1,6 @@
 # 9. Tighter speed-decay window to discourage answer lookups
 
-Status: Accepted — implemented 2026-09-14. Amends [ADR 0001](0001-local-results-history-and-speed-based-scoring.md); the formula and mechanism (hints as a hard ceiling cut, elapsed time as a separate decaying multiplier) are unchanged, only three constants are retuned.
+Status: Accepted — implemented 2026-09-14. Amends [ADR 0001](0001-local-results-history-and-speed-based-scoring.md); the formula and mechanism (hints as a hard ceiling cut, elapsed time as a separate decaying multiplier) are unchanged, only three constants are retuned. The 12s floor-time below is itself superseded by [ADR 0011](0011-longer-decay-window-and-guest-clock-persistence.md) (now 24s); the grace window, floor value and rationale here are otherwise still current.
 
 ## Context
 
