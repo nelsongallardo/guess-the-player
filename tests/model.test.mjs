@@ -120,6 +120,10 @@ test('scoring rewards speed and no-hint answers, floors gracefully, and is stabl
   assert.equal(g.pointsFor(3, 12000), 10); // hint cap and time floor combine, never reaching zero
   assert.equal(g.pointsFor(4, 12000), 10); // hints=4 clamps to the same value as 3
   assert.ok(g.pointsFor(0, -50) === 100, 'negative elapsed (clock skew) never breaks or exceeds the ceiling');
+  // timeFactor is exported alongside pointsFor for the #speed-meter UI (game-ui), which
+  // needs the raw 0..1 decay curve directly rather than a hint-priced point total.
+  assert.equal(g.timeFactor(0), 1); assert.equal(g.timeFactor(2000), 1); assert.equal(g.timeFactor(12000), 0.25); assert.equal(g.timeFactor(99999), 0.25);
+  assert.equal(g.pointsFor(0, 7000), Math.round(100 * g.timeFactor(7000)), 'pointsFor(0, x) is exactly 100 x timeFactor(x), rounded');
   // answer() takes elapsedMs from the caller (the UI owns the per-round
   // clock) so the model itself has no wall-clock dependency and stays
   // trivial to test; omitting it (as every other test in this file does)

@@ -108,6 +108,8 @@ async page => {
     await p.evaluate(()=>{window.__mockAuth.refreshError=false;window.__mockLogin();});
     ok(calls.filter(c=>c.body.action==='progress').every(c=>Object.keys(c.body).length===1),'Progress sends no guest state or score import');
     const localBefore=await p.evaluate(()=>sessionStorage.getItem(STORAGE_KEY));
+    await p.waitForFunction(()=>{const m=document.querySelector('#speed-meter');return m&&!m.hidden&&!m.classList.contains('is-frozen');});
+    ok(true,'Ranked speed meter shows and runs for a playing round, reading the server startedAt clock');
     await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='1 / 3');await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='2 / 3');
     ok(!await p.locator('#timeline').evaluate(el=>el.classList.contains('years-revealed')),'Ranked years stay hidden before the third hint, same as guest/practice');
     await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='3 / 3');
@@ -120,6 +122,11 @@ async page => {
     const first=calls.filter(c=>c.body.action==='answer').at(-1);await p.locator('#ranked-retry').click();await p.locator('#next').waitFor({state:'visible'});
     const retry=calls.filter(c=>c.body.action==='answer').at(-1);ok(JSON.stringify(first.body)===JSON.stringify(retry.body),'Lost answer response retries byte-equivalent body and identical idempotency key');
     ok(await p.locator('#score').textContent()==='73'&&projection.progress.answered===1,'Receipt retry displays server points once');
+    await p.waitForFunction(()=>document.querySelector('.speed-meter').classList.contains('is-frozen'));
+    ok(true,'Ranked speed meter freezes once the round resolves');
+    await p.locator('#speed-meter').click();
+    ok((await p.locator('#speed-meter-note').textContent()).includes('3 hints used')&&(await p.locator('#speed-meter-note').textContent()).includes('73 points'),'Ranked speed meter explains the actual server hint count and points on click');
+    await p.locator('#speed-meter').click();
     const ownResult=await p.evaluate(()=>Accounts.request({action:'leaderboard',competition:'all',limit:20,offset:0},'ranked-game',true));ok(ownResult.own.rank===22&&!calls.some(c=>c.body.action==='enroll'),'First verified result shows own rank automatically without nickname submission');
     await p.locator('#next').click();await ready();ok(projection.round.playerId!==players[0].id,'Next server round excludes first resolved player');
     await p.locator('#account-open').click();await p.locator('#public-nickname').fill('Neutral Falcon');nicknameTaken=true;await p.locator('#enroll').click();await p.waitForFunction(()=>document.querySelector('#play-mode').textContent.includes('unavailable'));await p.locator('#account-close').click();await p.locator('#ranked-retry').click();await ready();
