@@ -1,0 +1,59 @@
+name: Deploy Supabase migrations
+
+# Manual only, on purpose: this applies supabase/migrations/*.sql straight to
+# the live production database. It never runs on push, so merging to main
+# (from anyone - a person or an agent) can never touch production by itself.
+# Trigger it from the Actions tab -> "Deploy Supabase migrations" -> Run
+# workflow, and type the confirmation phrase exactly.
+#
+# One-time setup before this can be used (repo admin, in GitHub Settings ->
+# Secrets and variables -> Actions):
+#   SUPABASE_ACCESS_TOKEN  - a personal access token from
+#     https://supabase.com/dashboard/account/tokens
+#   SUPABASE_DB_PASSWORD   - the project's Postgres password, from
+#     Project Settings -> Database in the Supabase dashboard
+#   SUPABASE_PROJECT_REF   - the project ref shown in Project Settings ->
+#     General (not secret, but kept alongside the others for convenience;
+#     a "Repository variable" works too if preferred over a secret)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "apply" to confirm - this changes the live production database'
+        required: true
+
+jobs:
+  deploy:
+    if: github.event.inputs.confirm == 'apply'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Link project
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: supabase link --project-ref "${{ secrets.SUPABASE_PROJECT_REF }}"
+
+      - name: Show pending migrations before applying
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: supabase migration list
+
+      - name: Apply migrations (supabase db push)
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: supabase db push
+
+      - name: Show migration state after applying
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: supabase migration list

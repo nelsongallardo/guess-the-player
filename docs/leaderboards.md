@@ -9,7 +9,15 @@ The Supabase schema and both Edge Functions are deployed. Hosted verification wi
 - `supabase/migrations/202609130001_ranked_schema.sql`: private state, grants/RLS, transactional RPC and score projections.
 - `supabase/migrations/202609130002_ranked_roster.sql`: frozen v1 roster, candidates, matching tiers/similarity and canonical memberships.
 - `supabase/migrations/202609130003_automatic_animal_aliases.sql`: automatic stable animal aliases, enrollment and legacy-account backfill; custom names and gameplay records are preserved.
+- `supabase/migrations/202609140001_faster_speed_decay.sql`: retunes `ranked_private.points()` to match [ADR 0009](adr/0009-speed-decay-anti-lookup-tightening.md)'s client-side speed-decay constants.
 - `scripts/export-ranked-roster.mjs --check`: read-only parity check against the actual inline model. Do not rewrite a ruleset already used for results; plan a reviewed migration/version transition.
+
+### Applying migrations to the hosted database
+
+A `main` push never applies `supabase/migrations/*.sql` to the live database (see below) - a new migration file only takes effect once someone with project access runs it. Two ways to do that:
+
+- **Manual, no setup**: `supabase login` (needs a personal access token from the Supabase dashboard's Account > Access Tokens), `supabase link --project-ref <ref>` (ref is in Project Settings > General), then `supabase db push`. Or paste each pending `.sql` file into the dashboard's SQL Editor in order - simpler for a one-off, but Supabase then has no record of it as an applied migration, so mix this with `db push` carefully (pick one method consistently, or `supabase migration repair` afterward).
+- **`.github/workflows/supabase-deploy.yml`**: a manual-only (`workflow_dispatch`, never on push) GitHub Action that runs `supabase db push` against the linked project. Requires repo secrets `SUPABASE_ACCESS_TOKEN`, `SUPABASE_DB_PASSWORD` and `SUPABASE_PROJECT_REF` (see the workflow file's header comment for where each comes from) added once by a repo admin in Settings > Secrets and variables > Actions. Deliberately gated behind a typed confirmation input and never triggered by a push, since it mutates the production schema directly and this repo has more than one person (and agent) pushing to `main`.
 - `supabase/functions/_shared/http.ts`: strict JSON/action validation and verified identity boundary.
 - `supabase/functions/_shared/supabase.ts`: server-only Supabase dependency adapter.
 - `supabase/functions/ranked-game/index.ts`, `supabase/functions/account-delete/index.ts`: Edge entrypoints.
@@ -111,6 +119,6 @@ Account browser tests route-mock SDK/API. Label them as rendered frontend contra
 
 ## Separate release gates
 
-The Pages workflow validates branch pushes, PRs and manual runs with all Node tests (native PostgreSQL included), source/roster parity and Deno checks/tests. Browser suites are separate. Only validated non-PR `main` runs deploy `index.html`, `leaderboard.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. It never deploys Supabase or configures Google.
+The Pages workflow validates branch pushes, PRs and manual runs with all Node tests (native PostgreSQL included), source/roster parity and Deno checks/tests. Browser suites are separate. Only validated non-PR `main` runs deploy `index.html`, `leaderboard.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. It never deploys Supabase or configures Google - `supabase-deploy.yml` is a separate, manual-only workflow for that (see "Applying migrations to the hosted database" above); it is not part of the Pages workflow and never triggers on push.
 
 Before claiming hosted accounts work, the release owner must verify the intended project's migrations/functions and server-only environment; configure Google provider credentials and authorized Supabase callback; verify canonical/language-preserving redirect allowlists; and exercise real Google login, cancellation, session refresh, cross-device progress, identity rejection, anonymous/enrolled boards, offline practice isolation and approved account deletion/readback. Publish/read back the actual static artifact and privacy page and run deployed browser smoke checks. Keep credentials and disposable-user details out of public artifacts. Provisioning alone, mocked OAuth and local SQL success do not satisfy these gates.
