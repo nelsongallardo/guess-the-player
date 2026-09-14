@@ -10,14 +10,14 @@ const english = JSON.parse(html.match(/const ABOUT_EN = ("[^\n]*");/)[1]);
 for (const [language, markup, heading, terms] of [
   ['Spanish', spanish, '¿Cómo funcionan los puntos?', [
     '100 puntos', 'tres respuestas incorrectas', '0 puntos',
-    '100, 80, 60', '40 puntos', '2 segundos', '12 segundos', '25%',
+    '100, 80, 60', '40 puntos', '2 segundos', '24 segundos', '25%',
     '20 puntos', 'redondea',
     'país', 'posición', 'años en cada club', 'servidor', 'recargar',
     'una sola vez', 'no se transfieren', 'competición',
   ]],
   ['English', english, 'How do points work?', [
     '100 points', 'three wrong guesses', '0 points',
-    '100, 80, 60', '40 points', '2 seconds', '12 seconds', '25%',
+    '100, 80, 60', '40 points', '2 seconds', '24 seconds', '25%',
     '20 points', 'rounded',
     'country', 'position', "club's years", 'server', 'refreshing',
     'only once', 'never transfer', 'competition',
@@ -48,7 +48,7 @@ test('FAQ hint ceilings and worked example match the guest scoring model', () =>
   assert.equal(vm.runInContext(`(() => {
     const state = CareerGame.create();
     CareerGame.hint(state);
-    CareerGame.answer(state, CareerGame.playerAt(state).name, 12000);
+    CareerGame.answer(state, CareerGame.playerAt(state).name, 24000);
     return CareerGame.roundAt(state).points;
   })()`, context), 20);
 });
