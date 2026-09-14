@@ -20,7 +20,16 @@ function ranked(){
   const nodes=new Map(),node=id=>{if(!nodes.has(id))nodes.set(id,{value:'all',dataset:{},addEventListener(){},replaceChildren(){},classList:{toggle(){}},querySelector(){return null;},focus(){},scrollIntoView(){}});return nodes.get(id);};
   const c={Accounts:{configured:true,hasStoredSession:()=>true,session:{user:{id:'A'}},request:()=>new Promise(()=>{})},AuthCallback:{},language:'en',$:node,document:{addEventListener(){},activeElement:null},window:{addEventListener(){}},setTimeout:()=>0,crypto:{randomUUID:()=> 'key'},GuestStorage:{clear(){}},seen:new Set(),defaultLifetime:()=>({}),CareerGame:{create:()=>({})},resetRoundClock(){},applyLanguage(){},render(){},PLAYERS:[]};vm.createContext(c);
   let source=html.slice(html.indexOf('const RankedUI = (()=>{'),html.indexOf('\napplyLanguage();render(false,true);RankedUI.boot();'));
-  source=source.replace('return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot};',`update=()=>{};renderRanked=()=>{};return {authChanged,sync,sendPending,seed(m){mode=m;cloud={private:'A'};pending={action:'enroll',nickname:'A nickname',idempotencyKey:'A key'};pendingUserId='A';userId='A';epoch=7;},snapshot(){return {mode,cloud,pending,epoch,busy};}};`);
+  const returnLine='return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock};';
+  // String.replace on a pattern that no longer matches RankedUI's actual
+  // return statement fails SILENTLY (source comes back unchanged), which
+  // previously let a real regression through undetected until CI: every
+  // test below then failed with the unhelpful "c.ui.seed is not a
+  // function" instead of pointing at this line. Keep this line's list of
+  // exported names in sync with RankedUI's actual `return {...}` in
+  // index.html whenever that changes.
+  if(!source.includes(returnLine))throw new Error('RankedUI\'s return statement no longer matches this harness\'s extraction pattern - update returnLine in tests/account-boundaries.test.mjs to match index.html');
+  source=source.replace(returnLine,`update=()=>{};renderRanked=()=>{};return {authChanged,sync,sendPending,seed(m){mode=m;cloud={private:'A'};pending={action:'enroll',nickname:'A nickname',idempotencyKey:'A key'};pendingUserId='A';userId='A';epoch=7;},snapshot(){return {mode,cloud,pending,epoch,busy};}};`);
   vm.runInContext(source+'\nglobalThis.ui=RankedUI;',c);return c;
 }
 for(const mode of ['ranked','loading','unavailable','practice'])for(const event of ['SIGNED_IN','TOKEN_REFRESHED','USER_UPDATED'])test(`identity change invalidates ${mode} on ${event}`,()=>{const c=ranked();c.ui.seed(mode);c.Accounts.session={user:{id:'B'}};c.ui.authChanged(event,c.Accounts.session);const s=c.ui.snapshot();assert.equal(s.cloud,null);assert.equal(s.pending,null);assert.ok(s.epoch>7);});
