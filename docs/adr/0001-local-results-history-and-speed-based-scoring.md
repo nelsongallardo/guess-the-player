@@ -1,6 +1,6 @@
 # 1. Local results history and speed/hint-based scoring
 
-Status: Accepted — implemented 2026-09-12.
+Status: Accepted — implemented 2026-09-12. The speed-decay constants below (5s grace, 30s floor, 50% floor value) are superseded by [ADR 0009](0009-speed-decay-anti-lookup-tightening.md) (2s/12s/25%); the formula and hint-penalty mechanism remain as described here.
 
 ## Context
 
