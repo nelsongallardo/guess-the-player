@@ -2,6 +2,24 @@ async page => {
   const assert=(value,message)=>{if(!value)throw new Error(message);};
   const browser=page.context().browser();
   const results=[];
+  const checkPointsFAQ=async(p,lang)=>{
+    const faq=p.locator('#points-faq'),summary=faq.locator('summary');
+    assert(await summary.innerText()===(lang==='es'?'¿Cómo funcionan los puntos?':'How do points work?'),'Points FAQ translated');
+    assert(!await faq.evaluate(el=>el.open),'Points FAQ starts collapsed');
+    await summary.focus();await summary.press('Enter');
+    assert(await faq.evaluate(el=>el.open),'Keyboard opens points FAQ');
+    assert((await faq.innerText()).includes(lang==='es'?'64 puntos':'64 points'),'Worked scoring example visible');
+    for(const width of [320,375,1280]){
+      await p.setViewportSize({width,height:667});
+      assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Expanded FAQ fits width '+width);
+      assert(await faq.locator('p').evaluateAll(nodes=>nodes.every(el=>el.scrollWidth<=el.clientWidth)),'FAQ text does not overflow '+width);
+    }
+    await summary.press('Space');
+    assert(!await faq.evaluate(el=>el.open),'Keyboard closes points FAQ');
+    await summary.click();assert(await faq.evaluate(el=>el.open),'Pointer opens points FAQ');
+    await summary.click();assert(!await faq.evaluate(el=>el.open),'Pointer closes points FAQ');
+    await p.setViewportSize({width:375,height:812});
+  };
   const base='http://127.0.0.1:4173/index.html';
   const noJS=await browser.newContext({javaScriptEnabled:false});
   try {
@@ -9,7 +27,8 @@ async page => {
     assert(await p.locator('html').getAttribute('lang')==='es','Static HTML is Spanish');
     assert((await p.locator('#about-game').innerText()).includes('Un juego gratis'),'Indexable explanation exists without JS');
     assert((await p.title()).includes('jugadores de fútbol'),'Descriptive static title');
-    results.push('No-JavaScript crawler content');
+    await checkPointsFAQ(p,'es');
+    results.push('No-JavaScript crawler content and native points FAQ');
   }finally{await noJS.close();}
   for(const kind of ['default','query','saved','offline']){
     const ctx=await browser.newContext({locale:'en-GB',viewport:{width:375,height:812},offline:kind==='offline'});
@@ -28,8 +47,11 @@ async page => {
       const correct=await p.evaluate(()=>CareerGame.playerAt(state).name);
       await p.getByRole('button',{name:correct,exact:true}).click();
       const saved=await p.evaluate(()=>JSON.stringify(state));
+      await checkPointsFAQ(p,lang);
+      assert(await p.evaluate(()=>JSON.stringify(state))===saved,'Reading FAQ preserves answered round');
       await p.locator('#language').selectOption(lang==='es'?'en':'es');
-      assert(await p.evaluate(()=>JSON.stringify(state))===saved,'Switch preserves answered round');
+      await checkPointsFAQ(p,lang==='es'?'en':'es');
+      assert(await p.evaluate(()=>JSON.stringify(state))===saved,'Language switch and FAQ preserve answered round');
       assert(errors.length===0,errors.join('; '));results.push(kind);
       if(kind==='default'){
         await p.locator('#language').selectOption('es');

@@ -1,5 +1,13 @@
 # Verification report
 
+## Bilingual points FAQ — local verification
+
+- Added an expandable “¿Cómo funcionan los puntos?” / “How do points work?” entry immediately after the how-to-play explanation. Covers wins/losses, hint ceilings, time decay/rounding, a 64-point example, ranked timing, one-time results and overlapping competition totals. Adjacent how-to copy now distinguishes ten guest/practice choices from five ranked choices and the guest-only club-years hint. No gameplay, styling, backend, analytics or saved-state changes.
+- Based on fetched upstream `5a1a128` in the isolated `content/points-faq` worktree. Spanish/English FAQ tests first failed because the entry was absent; the example already matched the actual model. Final Node command passed **65 tests, 0 failures**: `node --test tests/points-faq.test.mjs tests/model.test.mjs tests/social-preview.test.mjs tests/seo.test.mjs tests/analytics.test.mjs tests/guest-session.test.mjs`. Ranked-roster parity, source identifiers and `git diff --check` passed.
+- Served this worktree on `127.0.0.1:4187`, verified the HTTP body byte-for-byte, and used a fresh named headless Chromium session. Ran `tests/seo-checks.js` through Playwright CLI with only the base URL and offline artifact path adapted in memory. The full focused suite stops at its existing all-image `decode()` assertion with `EncodingError`; the same error reproduced using the unchanged upstream HTML **and** unchanged upstream suite. The checked-in assertion remains intact.
+- A separately labelled diagnostic run excluded only that image-decode assertion in memory. All five cases passed: JavaScript-disabled Spanish, default Spanish, explicit English, saved English and network-disabled `file:` play. FAQ checks cover both translations, keyboard/pointer expansion and collapse, widths 320/375/1280, worked-example visibility and unchanged completed-round state after reading the FAQ and switching languages. This is not a claim that the full browser suite or image checks passed.
+- Evidence is in ignored `test-results/points-faq-browser.json`, `points-faq-browser*.log` and `points-faq-baseline-browser.log`. No production publication, live OAuth or hosted backend verification was performed for this copy-only change.
+
 ## Loading feedback and early club preview — 13 September 2026
 
 - Measured production `0488d19` before edits: badges are embedded in the 796,632-byte encoded game HTML; fresh anonymous club-grid observations were 182–325ms. Public leaderboard API reads took 461–549ms across three samples, plus an earlier 849ms sample. These are unthrottled anonymous lab samples, not signed-in/field measurements or before/after speed guarantees. See `docs/seo.md`.
