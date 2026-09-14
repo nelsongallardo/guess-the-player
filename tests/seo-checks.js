@@ -8,7 +8,7 @@ async page => {
     assert(!await faq.evaluate(el=>el.open),'Points FAQ starts collapsed');
     await summary.focus();await summary.press('Enter');
     assert(await faq.evaluate(el=>el.open),'Keyboard opens points FAQ');
-    assert((await faq.innerText()).includes(lang==='es'?'64 puntos':'64 points'),'Worked scoring example visible');
+    assert((await faq.innerText()).includes(lang==='es'?'20 puntos':'20 points'),'Worked scoring example visible');
     for(const width of [320,375,1280]){
       await p.setViewportSize({width,height:667});
       assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Expanded FAQ fits width '+width);

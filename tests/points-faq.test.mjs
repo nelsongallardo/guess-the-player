@@ -10,15 +10,15 @@ const english = JSON.parse(html.match(/const ABOUT_EN = ("[^\n]*");/)[1]);
 for (const [language, markup, heading, terms] of [
   ['Spanish', spanish, '¿Cómo funcionan los puntos?', [
     '100 puntos', 'tres respuestas incorrectas', '0 puntos',
-    '100, 80 o 60', '40 puntos', '5 segundos', '30 segundos', '50%',
-    '15 segundos', '64 puntos', 'redondea',
+    '100, 80 o 60', '40 puntos', '2 segundos', '12 segundos', '25%',
+    '20 puntos', 'redondea',
     'país y posición', 'años en cada club', 'servidor', 'recargar',
     'una sola vez', 'no se transfieren', 'competición',
   ]],
   ['English', english, 'How do points work?', [
     '100 points', 'three wrong guesses', '0 points',
-    '100, 80 or 60', '40 points', '5 seconds', '30 seconds', '50%',
-    '15 seconds', '64 points', 'rounded',
+    '100, 80 or 60', '40 points', '2 seconds', '12 seconds', '25%',
+    '20 points', 'rounded',
     'country and position', 'club years', 'server', 'refreshing',
     'only once', 'never transfer', 'competition',
   ]],
@@ -41,14 +41,14 @@ test('FAQ hint ceilings and worked example match the guest scoring model', () =>
   const examples = vm.runInContext(`JSON.stringify([0,1,2,3].map(hints => {
     const state = CareerGame.create();
     for (let i=0;i<hints;i++) CareerGame.hint(state);
-    CareerGame.answer(state, CareerGame.playerAt(state).name, 5000);
+    CareerGame.answer(state, CareerGame.playerAt(state).name, 2000);
     return CareerGame.roundAt(state).points;
   }))`, context);
   assert.deepEqual(JSON.parse(examples), [100, 80, 60, 40]);
   assert.equal(vm.runInContext(`(() => {
     const state = CareerGame.create();
     CareerGame.hint(state);
-    CareerGame.answer(state, CareerGame.playerAt(state).name, 15000);
+    CareerGame.answer(state, CareerGame.playerAt(state).name, 12000);
     return CareerGame.roundAt(state).points;
-  })()`, context), 64);
+  })()`, context), 20);
 });
