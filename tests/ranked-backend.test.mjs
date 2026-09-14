@@ -192,7 +192,7 @@ test('hint/guess limits, invalid options, stale versions and terminal rounds can
   assert.notEqual(start(uid).round.playerId,r.playerId);
 });
 
-test('server scoring uses persisted time and exactly preserves the 100/80/60 ceilings and 50/40/30 floor',()=>{
+test('server scoring uses persisted time and exactly preserves the 100/80/60 ceilings and 25/20/15 floor',()=>{
   for(const h of [0,1,2]) for(const slow of [false,true]) {
     const uid=user();let r=start(uid).round;
     for(let i=0;i<h;i++) r=hint(uid,r).round;
@@ -200,7 +200,7 @@ test('server scoring uses persisted time and exactly preserves the 100/80/60 cei
     else sql(`update ranked_private.rounds set started_at=clock_timestamp() where id=${quote(r.id)}`);
     const resumed=rpc(uid,{action:'progress'}).round;
     const won=answer(uid,resumed,correct(resumed));
-    assert.equal(won.round.status,'won');assert.equal(won.round.points,(100-20*h)*(slow?0.5:1));
+    assert.equal(won.round.status,'won');assert.equal(won.round.points,(100-20*h)*(slow?0.25:1));
     assert.equal(won.progress.totalPoints,won.round.points);assert.equal(won.progress.correct,1);
     assert.throws(()=>sql(`update ranked_private.results set points=100 where user_id=${quote(uid)}`),/RESULT_IMMUTABLE/);
   }
@@ -283,13 +283,13 @@ test('every result contributes globally and to every canonical membership, not s
   const a=user(),b=user();rpc(a,mutation('enroll',{nickname:'Equal Alpha'}));rpc(b,mutation('enroll',{nickname:'Equal Beta'}));
   const r=start(a,'la-liga').round;
   sql(`update ranked_private.rounds set started_at=clock_timestamp()-interval '40 seconds' where id=${quote(r.id)}`);
-  const won=answer(a,r,correct(r));assert.equal(won.round.points,50);
+  const won=answer(a,r,correct(r));assert.equal(won.round.points,25);
   const memberships=json(`select json_agg(competition) from ranked_private.memberships where player_id=${quote(r.playerId)}`);
   const competitions=json('select json_agg(id) from ranked_private.competitions');
   for(const c of competitions) {
     const board=rpc(a,{action:'leaderboard',competition:c,limit:100,offset:0});noIdentity(board);
     if(memberships.includes(c)) {
-      assert.equal(board.own.points,50);assert.equal(board.own.answered,1);
+      assert.equal(board.own.points,25);assert.equal(board.own.answered,1);
     } else {
       assert.equal(board.own,null);
       assert(!board.entries.some(e=>e.nickname==='Equal Alpha'));
