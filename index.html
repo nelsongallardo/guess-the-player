@@ -15342,6 +15342,17 @@ applyLanguage();render(false,true);RankedUI.boot();
 // changed" call site (start/next/replay/competition switch/etc.) to notify
 // it; the same freeze self-clears the moment a *new* round is playing again.
 const currentRoundClock=()=>RankedUI.isAccountMode()?RankedUI.roundClock():guestClock();
+// timeFactor(elapsedMs) never drops below the score's own floor (currently
+// 25%, see ADR 0009) - a correct-but-slow answer is never worth zero. A bar
+// that visually stops partway full once time is "up" read as stuck/broken
+// rather than intentional, so the bar rescales that 0..1 output to make the
+// floor read as fully empty instead - a simplified pressure gauge, not a
+// literal points meter. speedMeterFloor is computed from timeFactor itself
+// (a very large elapsed value), not a duplicated constant, so this stays
+// correct if the curve is ever retuned again. The click-to-reveal note still
+// states the real points, which never actually reach zero for a win.
+const speedMeterFloor=CareerGame.timeFactor(1e9);
+const speedMeterFraction=elapsedMs=>Math.max(0,(CareerGame.timeFactor(elapsedMs)-speedMeterFloor)/(1-speedMeterFloor));
 let speedMeterOpen=false,speedMeterFrozenAt=null;
 function renderSpeedMeter(){
   const clock=currentRoundClock(),meter=$('speed-meter'),note=$('speed-meter-note');
@@ -15349,7 +15360,7 @@ function renderSpeedMeter(){
   meter.hidden=false;
   if(clock.playing)speedMeterFrozenAt=null;else if(speedMeterFrozenAt===null)speedMeterFrozenAt=clock;
   const shown=speedMeterFrozenAt||clock;
-  $('speed-meter-fill').style.width=(CareerGame.timeFactor(shown.elapsedMs)*100)+'%';
+  $('speed-meter-fill').style.width=(speedMeterFraction(shown.elapsedMs)*100)+'%';
   meter.classList.toggle('is-frozen',!clock.playing);meter.setAttribute('aria-expanded',String(speedMeterOpen));
   if(speedMeterOpen){
     const t=copy(),seconds=(shown.elapsedMs/1000).toFixed(1);
