@@ -218,6 +218,18 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 .google-login:hover:not(:disabled){box-shadow:0 1px 3px 1px #00000026;background:#f8f9fa}
 .google-login:disabled{opacity:.5}
 .google-login-icon{flex-shrink:0}
+/* A deliberately subtle per-competition watermark inside the career panel
+   only (never the page background): the selected competition's own crest
+   as a soft, oversized, off-corner silhouette - low enough opacity to read
+   as texture, not branding, unless someone looks closely. Sits behind
+   .pitch-top/.timeline-scroll (both z-index:1) since it has no z-index of
+   its own. grayscale+brightness(0)+invert turns any source logo (full
+   color PNG or the brand SVG) into a flat white silhouette so it never
+   clashes with the dark .pitch background regardless of the source art.
+   Its background-image is set in JS (setCompetitionLogo) since it depends
+   on the selected competition, not on language/viewport. */
+.pitch-skin{position:absolute;inset:0;pointer-events:none;background-repeat:no-repeat;background-position:right -4% bottom -14%;background-size:150px;opacity:.045;filter:grayscale(1) brightness(0) invert(1)}
+@media(max-width:580px){.pitch-skin{background-size:95px;background-position:right -6% bottom -10%}}
 /* A compact, static bar-chart illustrating the speed-decay scoring curve
    inside the "How to play" dialog - three fixed example rows (grace window,
    mid-decay, floor), not a rendering of live game state. */
@@ -258,7 +270,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 <noscript><p>This game needs JavaScript. Enable it and reload. / Este juego necesita JavaScript. Actívalo y recarga la página.</p></noscript>
 <div id="game-loading-status" role="status" aria-live="polite" aria-atomic="true" hidden><span class="loading-brand" aria-hidden="true">derabona · FÚTBOL</span><div class="loading-heading"><span class="loading-spinner" aria-hidden="true"></span><span id="game-loading-text">Preparando el desafío…</span></div><div class="loading-skeleton" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
 <section id="round-panel" aria-label="Current round" aria-busy="false">
-<div class="pitch"><div class="pitch-top"><div class="file-label">CAREER FILE <strong id="round-number">01 / 50</strong></div><div class="attempts"><span id="attempt-text">3 attempts left</span><div class="lives" id="lives" aria-hidden="true"></div></div></div><div id="timeline-scroll" class="timeline-scroll" tabindex="0" role="region" aria-label="Club career in chronological order. Scroll horizontally for long careers."><ol id="timeline" class="timeline"></ol></div></div>
+<div class="pitch"><div class="pitch-skin" id="pitch-skin" aria-hidden="true"></div><div class="pitch-top"><div class="file-label">CAREER FILE <strong id="round-number">01 / 50</strong></div><div class="attempts"><span id="attempt-text">3 attempts left</span><div class="lives" id="lives" aria-hidden="true"></div></div></div><div id="timeline-scroll" class="timeline-scroll" tabindex="0" role="region" aria-label="Club career in chronological order. Scroll horizontally for long careers."><ol id="timeline" class="timeline"></ol></div></div>
 <div id="career-navigation" class="career-navigation" hidden><span>Scroll or swipe to see every club</span><div role="group" aria-label="Career timeline navigation"><button type="button" id="career-back" aria-label="Earlier clubs" aria-controls="timeline-scroll">←</button><button type="button" id="career-forward" aria-label="Later clubs" aria-controls="timeline-scroll">→</button></div></div>
 <div class="progress-track"><progress id="progress" value="0" max="50" aria-label="Completed rounds"></progress><span id="progress-label">0 OF 50 COMPLETE</span></div>
 <div class="answer-heading"><h2 id="question" tabindex="-1">Who is this player?</h2><p id="answer-caption">Five names. Three chances.</p></div>
@@ -14935,7 +14947,16 @@ function tallyRound(previousResult){
 }
 const $=id=>document.getElementById(id);
 const el=(tag,text,className)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(className)e.className=className;return e;};
-function setCompetitionLogo(id){const logo=$('competition-current-logo'),asset=COMPETITION_LOGOS[id];logo.hidden=!asset;if(asset)logo.src=asset.dataUrl;}
+// All Players has no competition crest, so its subtle career-panel
+// watermark (see .pitch-skin) reuses the brand mark itself instead - the
+// same SVG already in the masthead, serialized once here rather than
+// duplicating its path data as a second copy.
+// A standalone data:image/svg+xml document needs its own xmlns declaration -
+// the inline masthead <svg> doesn't carry one since the browser doesn't
+// require it there, so it must be added here or the serialized image
+// silently fails to decode as a background-image.
+const BRAND_MARK_SKIN=(()=>{const svg=document.querySelector('.mark').cloneNode(true);svg.querySelector('rect').remove();svg.setAttribute('xmlns','http://www.w3.org/2000/svg');return `url("data:image/svg+xml,${encodeURIComponent(svg.outerHTML)}")`;})();
+function setCompetitionLogo(id){const logo=$('competition-current-logo'),asset=COMPETITION_LOGOS[id];logo.hidden=!asset;if(asset)logo.src=asset.dataUrl;$('pitch-skin').style.backgroundImage=asset?`url("${asset.dataUrl}")`:BRAND_MARK_SKIN;}
 const copy=()=>COPY[language];
 const mobile=()=>matchMedia('(max-width: 800px)').matches;
 const country=p=>language==='es'?COUNTRIES_ES[p.country]:p.country;
