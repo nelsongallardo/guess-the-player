@@ -4931,5 +4931,559 @@
       "brasileirao",
       "champions-league"
     ]
+  },
+  {
+    "id": "ronald-koeman",
+    "name": "Ronald Koeman",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Groningen",
+        "years": "1980–1983"
+      },
+      {
+        "name": "Ajax",
+        "years": "1983–1986"
+      },
+      {
+        "name": "PSV Eindhoven",
+        "years": "1986–1989"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1989–1995"
+      },
+      {
+        "name": "Feyenoord",
+        "years": "1995–1997"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ronald_Koeman",
+        "title": "Ronald Koeman - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14122/Ronald_Koeman.html",
+        "title": "Ronald Koeman (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.fcbarcelona.com/en/news/763938/one-of-ours-ronald-koeman",
+        "title": "One of ours: Ronald Koeman | FC Barcelona"
+      }
+    ],
+    "notes": "A clean five-club chronology spanning Dutch football's traditional 'Big Three' (Ajax, PSV, Feyenoord) plus Barcelona, corroborated by both primary sources. FC Barcelona's own retrospective independently corroborates his six-season Camp Nou spell, including the free-kick that won the 1992 European Cup final. Sweeper/libero recorded under this project's broad Defender category.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "patrick-vieira",
+    "name": "Patrick Vieira",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Cannes",
+        "years": "1993–1996",
+        "note": "National-football-teams.com separately lists an overlapping 1993–1994 Cannes B reserve spell not present in Wikipedia's infobox; both sources agree on the senior Cannes first-team years shown here."
+      },
+      {
+        "name": "AC Milan",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Arsenal",
+        "years": "1996–2005"
+      },
+      {
+        "name": "Juventus",
+        "years": "2005–2006"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2006–2010"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2010–2011"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Patrick_Vieira",
+        "title": "Patrick Vieira - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2446/Patrick_Vieira.html",
+        "title": "Patrick Vieira (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.aljazeera.com/sports/2011/7/14/vieira-says-au-revoir-to-playing-days",
+        "title": "Vieira says au revoir to playing days | Al Jazeera"
+      }
+    ],
+    "notes": "A six-club chronology corroborated by both primary sources; Al Jazeera's contemporary report independently corroborates the January 2010 Manchester City move and the July 2011 retirement announcement, resolving a minor NFT season-label discrepancy at the Inter Milan/Manchester City boundary in Wikipedia's favour. Defensive midfielder recorded under this project's broad Midfielder category.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "roberto-baggio",
+    "name": "Roberto Baggio",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Vicenza",
+        "years": "1982–1985",
+        "note": "Infobox membership starts 1982; Wikipedia dates his actual Serie C1 debut to 5 June 1983."
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1985–1990"
+      },
+      {
+        "name": "Juventus",
+        "years": "1990–1995"
+      },
+      {
+        "name": "AC Milan",
+        "years": "1995–1997"
+      },
+      {
+        "name": "Bologna",
+        "years": "1997–1998"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1998–2000"
+      },
+      {
+        "name": "Brescia",
+        "years": "2000–2004"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Roberto_Baggio",
+        "title": "Roberto Baggio - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14074/Roberto_Baggio.html",
+        "title": "Roberto Baggio (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.acmilan.com/en/club/legends/players/baggio",
+        "title": "Roberto Baggio | AC Milan Legends"
+      }
+    ],
+    "notes": "Promoted from this project's researched wrong-answer bank (previously `research/distractor-brazil-italy.json`); its now-redundant bank profile is removed and `research/assemble-distractors.py`'s expected count for that batch is reduced accordingly, the same pattern used for Del Piero, Figo, Lahm and Juninho Pernambucano. A clean seven-club chronology corroborated by both primary sources; AC Milan's own retrospective independently corroborates the 2004 Brescia/San Siro retirement. Second striker/attacking midfielder recorded under this project's broad Forward category.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "robert-pires",
+    "name": "Robert Pirès",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Reims",
+        "years": "1991–1992",
+        "note": "Wikipedia's infobox lists this as a senior Reims spell (5 apps, 2 goals); national-football-teams.com labels the same 1990/91 season 'Stade Reims B'. The reserve-classification is not fully resolved between sources and is disclosed rather than silently picked."
+      },
+      {
+        "name": "Metz B",
+        "years": "1992–1993",
+        "note": "Senior French pyramid reserve side, preceding the first-team breakthrough."
+      },
+      {
+        "name": "Metz",
+        "years": "1993–1998"
+      },
+      {
+        "name": "Marseille",
+        "years": "1998–2000"
+      },
+      {
+        "name": "Arsenal",
+        "years": "2000–2006"
+      },
+      {
+        "name": "Villarreal",
+        "years": "2006–2010"
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2010–2011"
+      },
+      {
+        "name": "FC Goa",
+        "years": "2014",
+        "note": "Marquee signing for the Indian Super League's inaugural 2014 season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Robert_Pires",
+        "title": "Robert Pirès - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2447/Robert_Pires.html",
+        "title": "Robert Pires (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.espn.co.uk/football/story/_/id/37384167/robert-pires-play-goa-indian-super-league",
+        "title": "Robert Pires to play for FC Goa in Indian Super League - ESPN"
+      }
+    ],
+    "notes": "An eight-node chronology corroborated by both primary sources; ESPN's contemporary report independently corroborates the 2014 FC Goa signing as active, competitive senior football. Winger/attacking midfielder recorded under this project's broad Midfielder category.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "edwin-van-der-sar",
+    "name": "Edwin van der Sar",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "1990–1999",
+        "note": "National-football-teams.com additionally lists an early 1989–1990 VV Noordwijk season; Wikipedia's infobox treats that period as youth football, not senior play, and that classification is followed here."
+      },
+      {
+        "name": "Juventus",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Fulham",
+        "years": "2001–2005"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2005–2011"
+      },
+      {
+        "name": "VV Noordwijk",
+        "years": "2016",
+        "note": "One-match senior comeback for his amateur boyhood club in a Hoofdklasse fixture on 12 March 2016, with special permission from the Dutch FA during an injury crisis; not a testimonial."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Edwin_van_der_Sar",
+        "title": "Edwin van der Sar - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4650/Edwin_Van_Der_Sar.html",
+        "title": "Edwin van der Sar (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.nbcsports.com/soccer/news/legendary-goalkeeper-edwin-van-der-sar-comes-out-of-retirement-saves-penalty",
+        "title": "Legendary goalkeeper Edwin van der Sar comes out of retirement, saves penalty - NBC Sports"
+      }
+    ],
+    "notes": "A five-node chronology corroborated by both primary sources; NBC Sports' contemporary report independently corroborates the 12 March 2016 VV Noordwijk comeback, including the saved penalty, as a genuine competitive fixture rather than an exhibition. Won the European Cup/Champions League with two different clubs (Ajax 1995, Manchester United 2008).",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "enzo-francescoli",
+    "name": "Enzo Francescoli",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Montevideo Wanderers",
+        "years": "1980–1982"
+      },
+      {
+        "name": "River Plate",
+        "years": "1983–1986"
+      },
+      {
+        "name": "Racing Club de France",
+        "years": "1986–1989"
+      },
+      {
+        "name": "Marseille",
+        "years": "1989–1990"
+      },
+      {
+        "name": "Cagliari",
+        "years": "1990–1993"
+      },
+      {
+        "name": "Torino",
+        "years": "1993–1994"
+      },
+      {
+        "name": "River Plate",
+        "years": "1994–1998",
+        "note": "Second playing spell; won the 1996 Copa Libertadores. Career concluded in early 1998."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Enzo_Francescoli",
+        "title": "Enzo Francescoli - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14170/Enzo_Francescoli.html",
+        "title": "Enzo Francescoli (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.infobae.com/deportes-2/2019/04/25/enzo-francescoli-intimo-la-anecdota-de-su-hijo-con-zidane-y-el-sentido-mensaje-de-pablo-aimar",
+        "title": "Enzo Francescoli, íntimo: la anécdota de su hijo con Zidane - Infobae"
+      }
+    ],
+    "notes": "A seven-node chronology across two River Plate spells is corroborated by both primary sources; Infobae's contemporary report independently corroborates his enduring standing at River Plate, including Zinedine Zidane naming his eldest son Enzo in tribute. Attacking forward, recorded under this project's broad Forward category.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "diego-simeone",
+    "name": "Diego Simeone",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Vélez Sarsfield",
+        "years": "1987–1990"
+      },
+      {
+        "name": "Pisa",
+        "years": "1990–1992"
+      },
+      {
+        "name": "Sevilla",
+        "years": "1992–1994"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "1994–1997"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1997–1999"
+      },
+      {
+        "name": "Lazio",
+        "years": "1999–2003"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2003–2005",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Racing Club",
+        "years": "2005–2006",
+        "note": "Final playing season; retired as a player in February 2006 and immediately began managing the same club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Diego_Simeone",
+        "title": "Diego Simeone - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/10041/Diego_Simeone.html",
+        "title": "Diego Simeone (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.uefa.com/news-media/news/01b2-0e6d64b1ad9d-aec47af6e433-1000--simeone-ends-glittering-career",
+        "title": "Simeone ends glittering career | UEFA"
+      }
+    ],
+    "notes": "An eight-node chronology across two Atlético Madrid spells is corroborated by both primary sources; UEFA's contemporary report independently corroborates the February 2006 playing retirement at Racing Club. Playing career only; his subsequent, much longer managerial career at Atlético Madrid is out of scope.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "socrates",
+    "name": "Sócrates",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Botafogo-SP",
+        "years": "1973–1978",
+        "note": "Botafogo Futebol Clube of Ribeirão Preto, São Paulo state; distinct from Rio de Janeiro's Botafogo."
+      },
+      {
+        "name": "Corinthians",
+        "years": "1978–1984"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1984–1985"
+      },
+      {
+        "name": "Flamengo",
+        "years": "1986–1987"
+      },
+      {
+        "name": "Santos",
+        "years": "1988–1989"
+      },
+      {
+        "name": "Botafogo-SP",
+        "years": "1989",
+        "note": "Second playing spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/S%C3%B3crates_(footballer)",
+        "title": "Sócrates - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/17936/Socrates.html",
+        "title": "Sócrates (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Promoted from this project's researched wrong-answer bank (previously `research/distractor-zico-era.json`); its now-redundant bank profile is removed and `research/assemble-distractors.py`'s expected count for that batch is reduced accordingly, the same pattern used for Del Piero, Figo, Lahm and Juninho Pernambucano. A clean six-node chronology across two Botafogo-SP spells is corroborated by both primary sources. Consistent with the bank's existing researched judgment, a one-off November 2004 appearance for English amateur side Garforth Town remains excluded as a publicity exhibition arranged after retirement, not in-scope professional senior football. Captained Brazil at the 1982 World Cup.",
+    "status": "deceased",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "paulo-roberto-falcao",
+    "name": "Falcão",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Internacional",
+        "years": "1972–1980"
+      },
+      {
+        "name": "Roma",
+        "years": "1980–1985"
+      },
+      {
+        "name": "São Paulo",
+        "years": "1985–1986"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paulo_Roberto_Falc%C3%A3o",
+        "title": "Paulo Roberto Falcão - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/18056/Paulo_Falcao.html",
+        "title": "Paulo Falcao (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.asroma.com/en/club/history/hall-of-fame/15244/paulo-roberto-falcao",
+        "title": "Paulo Roberto Falcao - AS Roma Hall of Fame"
+      }
+    ],
+    "notes": "Promoted from this project's researched wrong-answer bank (previously `research/distractor-zico-era.json`); its now-redundant bank profile is removed and `research/assemble-distractors.py`'s expected count for that batch is reduced accordingly, the same pattern used for Del Piero, Figo, Lahm and Juninho Pernambucano. A clean three-club chronology corroborated by both primary sources; AS Roma's own Hall of Fame page independently corroborates the 1980–1985 spell and 'Ottavo Re di Roma' (Eighth King of Rome) nickname. Known mononymously as Falcão in most English-language sources, matching this roster's existing Pelé/Zico/Ronaldinho-style single-name display. Deep-lying playmaker recorded under this project's broad Midfielder category.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "champions-league",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "martin-palermo",
+    "name": "Martín Palermo",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Estudiantes",
+        "years": "1992–1997"
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "1997–2001"
+      },
+      {
+        "name": "Villarreal",
+        "years": "2001–2003"
+      },
+      {
+        "name": "Real Betis",
+        "years": "2003–2004"
+      },
+      {
+        "name": "Deportivo Alavés",
+        "years": "2004"
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "2004–2011",
+        "note": "Second playing spell; retired 18 June 2011 as the club's all-time leading scorer."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Mart%C3%ADn_Palermo",
+        "title": "Martín Palermo - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4850/Martin_Palermo.html",
+        "title": "Martín Palermo (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.foxsports.com/stories/soccer/martin-palermo-says-farewell-to-bombonera",
+        "title": "Martin Palermo says farewell to Bombonera - Fox Sports"
+      }
+    ],
+    "notes": "A six-node chronology across two Boca Juniors spells is corroborated by both primary sources; Fox Sports' contemporary report independently corroborates the 12 June 2011 La Bombonera farewell and 18 June 2011 official retirement. Boca Juniors' all-time leading goalscorer.",
+    "status": "retired",
+    "verifiedAt": "2026-09-14",
+    "competitions": [
+      "la-liga",
+      "argentine-primera",
+      "champions-league"
+    ]
   }
 ]

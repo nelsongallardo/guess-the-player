@@ -190,39 +190,5 @@
       }
     ],
     "notes": "Neymar-era Brazil-start peer. São Paulo first-team debut in 2010, followed by PSG, Tottenham and actual São Paulo return in 2023. Juventus-SP/Corinthians/São Paulo youth and Tottenham closed U21 football excluded. End 2026 is latest observed professional playing year, NOT retirement or predicted contract end: Wikipedia reports a current São Paulo spell and 2026 appearances; Soccerbase independently lists 2026 matches. Snapshot 2026-09-12, not live verification of every subsequent match."
-  },
-  {
-    "id": "roberto-baggio",
-    "name": "Roberto Baggio",
-    "country": "Italy",
-    "position": "Forward",
-    "start": 1983,
-    "end": 2004,
-    "clubs": [
-      "Vicenza",
-      "Fiorentina",
-      "Juventus",
-      "AC Milan",
-      "Bologna",
-      "Inter Milan",
-      "Brescia"
-    ],
-    "system": "italy",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Roberto_Baggio",
-        "excerpt": "| Senior career\\* |\n| Years | **Team** | **Apps** | **(Gls)** |\n| 1982–1985 | [Vicenza](https://en.wikipedia.org/wiki/Vicenza_Calcio \"Vicenza Calcio\") | 36 | (13) |\n| 1985–1990 | [Fiorentina](https://en.wikipedia.org/wiki/ACF_Fiorentina \"ACF Fiorentina\") | 94 | (39) |\n| 1990–1995 | [Juventus](https://en.wikipedia.org/wiki/Juventus_FC \"Juventus FC\") | 141 | (78) |\n| 1995–1997 | [AC Milan](https://en.wikipedia.org/wiki/AC_Milan \"AC Milan\") | 51 | (12) |\n| 1997–1998 | [Bologna](https://en.wikipedia.org/wiki/Bologna_FC_1909 \"Bologna FC 1909\") | 30 | (22) |\n| 1998–2000 | [Inter Milan](https://en.wikipedia.org/wiki/Inter_Milan \"Inter Milan\") | 41 | (9) |\n| 2000–2004 | [Brescia](https://en.wikipedia.org/wiki/Brescia_Calcio \"Brescia Calcio\") | 95 | (45) |\n| Total |  | **488** | **(218)** |"
-      },
-      {
-        "url": "https://en.wikipedia.org/wiki/Roberto_Baggio",
-        "excerpt": "At the age of 16, Baggio made his [Serie C1](https://en.wikipedia.org/wiki/Serie_C1 \"Serie C1\") debut with Vicenza on 5 June 1983, a 1–0 home loss against [Piacenza](https://en.wikipedia.org/wiki/Piacenza_Calcio_1919 \"Piacenza Calcio 1919\"), in the final league match of the season, coming on as a second-half substitute."
-      },
-      {
-        "url": "https://www.acmilan.com/en/club/legends/players/baggio",
-        "excerpt": "His retirement from football occurred at San Siro, but with the jersey of Brescia with which he played his last season as a professional player in 2004."
-      }
-    ],
-    "notes": "Italy-start peer. Start 1983 follows Wikipedia’s dated Vicenza senior debut, 5 June 1983, rather than infobox/season membership starting 1982. No Caldogno or youth Vicenza. AC Milan independently confirms the final professional season at Brescia in 2004. Broad forward role covers second striker/attacking midfielder. Administrative work after retirement excluded."
   }
 ]

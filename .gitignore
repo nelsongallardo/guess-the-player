@@ -43,3 +43,5 @@ research/*
 !research/DISTRACTOR_ZICO_ERA_SOURCES.md
 !research/distractor-figo-era.json
 !research/DISTRACTOR_FIGO_ERA_SOURCES.md
+!research/distractor-roster-batch7-gaps.json
+!research/DISTRACTOR_ROSTER_BATCH7_GAPS_SOURCES.md

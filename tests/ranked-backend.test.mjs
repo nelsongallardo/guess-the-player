@@ -136,6 +136,7 @@ test('roster exporter is current and canonical membership/matching scores equal 
   const byId=new Map(g.candidates.map(p=>[p.id,p]));
   for(const r of rows) {
     const p=byId.get(r.player_id),q=byId.get(r.candidate_id);
+    if(r.similarity!==g.similarity(p,q)) console.error('SIM MISMATCH DEBUG',r.player_id,r.candidate_id,'stored',r.similarity,'fresh',g.similarity(p,q));
     assert.equal(r.tier,g.matchTier(p,q));assert.equal(r.similarity,g.similarity(p,q));
     assert(g.eligibleRivals(p).includes(q.name));
   }

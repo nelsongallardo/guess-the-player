@@ -1,0 +1,178 @@
+[
+  {
+    "id": "marco-van-basten",
+    "name": "Marco van Basten",
+    "country": "Netherlands",
+    "position": "Forward",
+    "start": 1981,
+    "end": 1995,
+    "clubs": ["Ajax", "AC Milan"],
+    "system": "netherlands",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Marco_van_Basten",
+        "excerpt": "Ajax (1981-1987): 133 league appearances, 128 goals. AC Milan (1987-1995): 147 league appearances, 90 goals. Van Basten retired in 1995 at age 30 due to recurring ankle injuries."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14119/Marco_Van_Basten.html",
+        "excerpt": "Marco van Basten, Centre Forward, born 31-10-1964 in Utrecht, Netherlands. 1.88m. FIFA Matches 58, FIFA Goals 24."
+      }
+    ],
+    "notes": "Netherlands-start peer for Ronald Koeman, closing his contemporary gap after Sócrates/Falcão were promoted out of the bank. Two-club chronology, no reserve/loan ambiguity."
+  },
+  {
+    "id": "gianluca-vialli",
+    "name": "Gianluca Vialli",
+    "country": "Italy",
+    "position": "Forward",
+    "start": 1980,
+    "end": 1999,
+    "clubs": ["Cremonese", "Sampdoria", "Juventus", "Chelsea"],
+    "system": "italy",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gianluca_Vialli",
+        "excerpt": "Cremonese (1980-1984): 105 league appearances, 23 goals. Sampdoria (1984-1992): 223 league appearances, 85 goals. Juventus (1992-1996). Chelsea (1996-1999)."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/15049/Gianluca_Vialli.html",
+        "excerpt": "Gianluca Vialli, Centre Forward, born 09-07-1964 in Cremona, Italy. 1.80m. FIFA Matches 59, FIFA Goals 16."
+      }
+    ],
+    "notes": "Italy-start peer for Roberto Baggio, closing part of his contemporary gap now that he is a playable roster entry rather than a bank profile."
+  },
+  {
+    "id": "roberto-mancini",
+    "name": "Roberto Mancini",
+    "country": "Italy",
+    "position": "Forward / Midfielder",
+    "start": 1980,
+    "end": 2001,
+    "clubs": ["Bologna", "Sampdoria", "Lazio", "Leicester City"],
+    "system": "italy",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Roberto_Mancini",
+        "excerpt": "Bologna (1980-1982): 30 appearances, 9 goals. Sampdoria (1982-1997): 424 appearances, 132 goals. Lazio (1997-2001): 87 appearances, 15 goals. Leicester City (2001, loan): 4 appearances, 0 goals."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14131/Roberto_Mancini.html",
+        "excerpt": "Roberto Mancini, born 27-11-1964 in Jesi, Italy. 1.80m."
+      }
+    ],
+    "notes": "Italy-start peer for Roberto Baggio, closing part of his contemporary gap. Playing career only; his much longer managerial career is out of scope. The single Leicester City loan appearance is a genuine competitive senior spell, not excluded."
+  },
+  {
+    "id": "franco-baresi",
+    "name": "Franco Baresi",
+    "country": "Italy",
+    "position": "Defender",
+    "start": 1977,
+    "end": 1997,
+    "clubs": ["AC Milan"],
+    "system": "italy",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Franco_Baresi",
+        "excerpt": "AC Milan (1977-1997) - 532 appearances, 16 goals. Baresi spent his entire 20-year career with Serie A club AC Milan."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14117/Franco_Baresi.html",
+        "excerpt": "Franco Baresi, Sweeper (SW), born 08-05-1960 in Travagliato, Italy. FIFA Matches 81, FIFA Goals 1."
+      }
+    ],
+    "notes": "Italy-start peer for Roberto Baggio, closing the remainder of his contemporary gap. Genuine one-club career, no reserve or loan ambiguity."
+  },
+  {
+    "id": "ruben-sosa",
+    "name": "Rubén Sosa",
+    "country": "Uruguay",
+    "position": "Forward",
+    "start": 1982,
+    "end": 2006,
+    "clubs": ["Danubio", "Real Zaragoza", "Lazio", "Inter Milan", "Borussia Dortmund", "CD Logroñés", "Nacional", "Shanghai Shenhua", "Nacional", "Racing Club de Montevideo"],
+    "system": "uruguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rub%C3%A9n_Sosa",
+        "excerpt": "Danubio (1982-1985): 72 appearances, 27 goals. Real Zaragoza (1985-1988). S.S. Lazio (1988-1992). Inter Milan (1992-1995). Club Nacional de Football (1997-2001). Racing Club de Montevideo (2006)."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14469/Ruben_Sosa.html",
+        "excerpt": "Rubén Sosa, Left Winger, born 25-04-1966 in Montevideo, Uruguay. 1.75m. FIFA Matches 46."
+      }
+    ],
+    "notes": "Uruguay-start peer for Enzo Francescoli, closing part of his contemporary gap. Long, return-heavy career tail retained in full, matching this project's existing precedent (Rivaldo, Romário, Roque Santa Cruz)."
+  },
+  {
+    "id": "daniel-fonseca",
+    "name": "Daniel Fonseca",
+    "country": "Uruguay",
+    "position": "Forward",
+    "start": 1988,
+    "end": 2003,
+    "clubs": ["Nacional", "Cagliari", "Napoli", "Roma", "Juventus", "River Plate", "Nacional", "Como"],
+    "system": "uruguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Daniel_Fonseca",
+        "excerpt": "Club Nacional de Football (1988-1990): 14 appearances, 3 goals. Cagliari Calcio (1990-1992). SSC Napoli (1992-1994). AS Roma (1994-1997). Juventus FC (1997-2001). Club Atlético River Plate (2001-2002). Club Nacional de Football (2002). Como Calcio (2002-2003)."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/12628/Daniel_Fonseca.html",
+        "excerpt": "Daniel Fonseca, Centre Forward, born 13-09-1969 in Montevideo, Uruguay. 1.83m. FIFA Matches 30, FIFA Goals 10."
+      }
+    ],
+    "notes": "Uruguay-start peer for Enzo Francescoli, closing part of his contemporary gap (debut exactly at the eight-year boundary). The 2001-2002 River Plate (Argentina) spell with zero recorded appearances is retained as documented rather than silently dropped."
+  },
+  {
+    "id": "carlos-aguilera",
+    "name": "Carlos Aguilera",
+    "country": "Uruguay",
+    "position": "Forward",
+    "start": 1980,
+    "end": 1999,
+    "clubs": ["River Plate Montevideo", "Nacional", "Independiente Medellín", "Racing Club", "Tecos UAG", "Genoa", "Torino", "Peñarol"],
+    "system": "uruguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Carlos_Aguilera_(Uruguayan_footballer)",
+        "excerpt": "River Plate Montevideo (1980-1982): 45 apps, 19 goals. Club Nacional de Football (1983-1984). Independiente Medellín (1985). Racing Club de Avellaneda (1986-1987). Tecos UAG (1987-1988). Genoa C.F.C. (1989-1992). Torino F.C. (1992-1994). C.A. Peñarol (1994-1999)."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14466/Carlos_Aguilera.html",
+        "excerpt": "Carlos Aguilera, Centre Forward, born 21-09-1964 in Montevideo, Uruguay. 1.66m. FIFA Matches 65, FIFA Goals 23."
+      }
+    ],
+    "notes": "Uruguay-start peer for Enzo Francescoli, closing part of his contemporary gap (same debut year, 1980). First club is 'River Plate Montevideo', distinct from Argentina's River Plate; newly added to ORIGIN_CLUBS as its own Uruguay-system first club rather than reusing the Argentina-system 'River Plate' entry."
+  },
+  {
+    "id": "ruben-paz",
+    "name": "Rubén Paz",
+    "country": "Uruguay",
+    "position": "Midfielder",
+    "start": 1977,
+    "end": 2006,
+    "clubs": ["Peñarol", "Internacional", "Racing Club de France", "Racing Club", "Genoa", "Racing Club", "Rampla Juniors", "Frontera Rivera", "Godoy Cruz", "Wanderers Artigas", "Frontera Rivera", "Nacional San José de Mayo", "Tito Borjas", "Pirata Juniors"],
+    "system": "uruguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rub%C3%A9n_Paz",
+        "excerpt": "Peñarol de Artigas (1975-1977). Peñarol (1977-1982) - 82 appearances, 39 goals. Internacional (1982-1986) - 44 appearances, 10 goals. Racing Paris (1986-1987). Racing Club (1987-1989). Genoa (1989-1990). Racing Club (1990-1993). Rampla Juniors (1994). Frontera Rivera (1995). Godoy Cruz (1995-1996). Wanderers Artigas (1996). Frontera Rivera (1997-2000). Nacional San José de Mayo (2002). Tito Borjas (2003-2005). Pirata Juniors (2006). Paz retired in 2006 at age 47."
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/15731/Ruben_Paz.html",
+        "excerpt": "Rubén Paz, Left Midfielder, born 08-08-1959 in Artigas, Uruguay. 1.74m. FIFA Matches 45, FIFA Goals 8."
+      }
+    ],
+    "notes": "Uruguay-start peer for Enzo Francescoli, closing the remainder of his contemporary gap. Wikipedia's earlier 1975-1977 'Peñarol de Artigas' entry carries no appearance total and is a distinct, minor Artigas-department club, not the major Montevideo institution of the same generic name; it is excluded as an unresolved/lower-tier start in the same spirit as this project's established youth exclusions, with Peñarol (Montevideo) used as the first senior club instead. The long, return-heavy lower-division tail is retained in full as documented, matching this project's existing precedent (Rivaldo, Romário, Roque Santa Cruz)."
+  }
+]

@@ -970,6 +970,107 @@ The seven-node chronology, including three separate Vasco da Gama spells, is cor
 
 Reviewed source links: [245], [246], [247].
 
+### Ronald Koeman
+
+**Netherlands · Europe · Defender.** Groningen (1980–1983) → Ajax (1983–1986) → PSV Eindhoven (1986–1989) → Barcelona (1989–1995) → Feyenoord (1995–1997).[248][249][250]
+
+A clean five-club chronology spanning Dutch football's traditional 'Big Three' (Ajax, PSV, Feyenoord) plus Barcelona is corroborated by both primary sources; FC Barcelona's own retrospective independently corroborates his six-season Camp Nou spell, including the free-kick that won the 1992 European Cup final. Sweeper/libero, recorded under this project's broad Defender category.[248][249][250]
+
+Reviewed source links: [248], [249], [250].
+
+### Patrick Vieira
+
+**France · Europe · Midfielder.** Cannes (1993–1996) → AC Milan (1995–1996) → Arsenal (1996–2005) → Juventus (2005–2006) → Inter Milan (2006–2010) → Manchester City (2010–2011).[251][252][253]
+
+A six-club chronology is corroborated by both primary sources; Al Jazeera's contemporary report independently corroborates the January 2010 Manchester City move and the July 2011 retirement announcement, resolving a minor NFT season-label discrepancy at the Inter Milan/Manchester City boundary in Wikipedia's favour. Defensive midfielder, recorded under this project's broad Midfielder category.[251][252][253]
+
+- **Cannes (1993–1996):** National-football-teams.com separately lists an overlapping 1993–1994 Cannes B reserve spell not present in Wikipedia's infobox; both sources agree on the senior Cannes first-team years shown here.
+
+Reviewed source links: [251], [252], [253].
+
+### Roberto Baggio
+
+**Italy · Europe · Forward.** Vicenza (1982–1985) → Fiorentina (1985–1990) → Juventus (1990–1995) → AC Milan (1995–1997) → Bologna (1997–1998) → Inter Milan (1998–2000) → Brescia (2000–2004).[254][255][256]
+
+Promoted from this project's researched wrong-answer bank (previously `research/distractor-brazil-italy.json`); its now-redundant bank profile is removed and `research/assemble-distractors.py`'s expected count for that batch is reduced accordingly, the same pattern used for Del Piero, Figo, Lahm and Juninho Pernambucano. A clean seven-club chronology is corroborated by both primary sources; AC Milan's own retrospective independently corroborates the 2004 Brescia/San Siro retirement. Second striker/attacking midfielder, recorded under this project's broad Forward category.[254][255][256]
+
+- **Vicenza (1982–1985):** Infobox membership starts 1982; Wikipedia dates his actual Serie C1 debut to 5 June 1983.
+
+Reviewed source links: [254], [255], [256].
+
+### Robert Pirès
+
+**France · Europe · Midfielder.** Reims (1991–1992) → Metz B (1992–1993) → Metz (1993–1998) → Marseille (1998–2000) → Arsenal (2000–2006) → Villarreal (2006–2010) → Aston Villa (2010–2011) → FC Goa (2014).[257][258][259]
+
+An eight-node chronology is corroborated by both primary sources; ESPN's contemporary report independently corroborates the 2014 FC Goa signing as active, competitive senior football. Winger/attacking midfielder, recorded under this project's broad Midfielder category.[257][258][259]
+
+- **Reims (1991–1992):** Wikipedia's infobox lists this as a senior Reims first-team spell (5 appearances, 2 goals); national-football-teams.com labels the same 1990/91 season 'Stade Reims B'. The reserve classification is not fully resolved between sources and is disclosed rather than silently picked.
+- **Metz B (1992–1993):** Senior French-pyramid reserve side, preceding the first-team breakthrough.
+- **FC Goa (2014):** Marquee signing for the Indian Super League's inaugural 2014 season.
+
+Reviewed source links: [257], [258], [259].
+
+### Edwin van der Sar
+
+**Netherlands · Europe · Goalkeeper.** Ajax (1990–1999) → Juventus (1999–2001) → Fulham (2001–2005) → Manchester United (2005–2011) → VV Noordwijk (2016).[260][261][262]
+
+A five-node chronology is corroborated by both primary sources; NBC Sports' contemporary report independently corroborates the 12 March 2016 VV Noordwijk comeback, including the saved penalty, as a genuine competitive fixture rather than an exhibition. Won the European Cup/Champions League with two different clubs (Ajax 1995, Manchester United 2008).[260][261][262]
+
+- **Ajax (1990–1999):** National-football-teams.com additionally lists an early 1989–1990 VV Noordwijk season; Wikipedia's infobox treats that period as youth football, not senior play, and that classification is followed here.
+- **VV Noordwijk (2016):** One-match senior comeback for his amateur boyhood club in a Hoofdklasse fixture on 12 March 2016, with special permission from the Dutch FA during an injury crisis; not a testimonial.
+
+Reviewed source links: [260], [261], [262].
+
+### Enzo Francescoli
+
+**Uruguay · South America · Forward.** Montevideo Wanderers (1980–1982) → River Plate (1983–1986) → Racing Club de France (1986–1989) → Marseille (1989–1990) → Cagliari (1990–1993) → Torino (1993–1994) → River Plate (1994–1998).[263][264][265]
+
+A seven-node chronology across two River Plate spells is corroborated by both primary sources; Infobae's contemporary report independently corroborates his enduring standing at River Plate, including Zinedine Zidane naming his eldest son Enzo in tribute. Attacking forward, recorded under this project's broad Forward category.[263][264][265]
+
+- **River Plate (1994–1998):** Second playing spell; won the 1996 Copa Libertadores. Career concluded in early 1998.
+
+Reviewed source links: [263], [264], [265].
+
+### Diego Simeone
+
+**Argentina · South America · Midfielder.** Vélez Sarsfield (1987–1990) → Pisa (1990–1992) → Sevilla (1992–1994) → Atlético Madrid (1994–1997) → Inter Milan (1997–1999) → Lazio (1999–2003) → Atlético Madrid (2003–2005) → Racing Club (2005–2006).[266][267][268]
+
+An eight-node chronology across two Atlético Madrid spells is corroborated by both primary sources; UEFA's contemporary report independently corroborates the February 2006 playing retirement at Racing Club. Playing career only; his subsequent, much longer managerial career at Atlético Madrid is out of scope.[266][267][268]
+
+- **Atlético Madrid (2003–2005):** Second playing spell.
+- **Racing Club (2005–2006):** Final playing season; retired as a player in February 2006 and immediately began managing the same club.
+
+Reviewed source links: [266], [267], [268].
+
+### Sócrates
+
+**Brazil · South America · Midfielder.** Botafogo-SP (1973–1978) → Corinthians (1978–1984) → Fiorentina (1984–1985) → Flamengo (1986–1987) → Santos (1988–1989) → Botafogo-SP (1989).[269][270]
+
+Promoted from this project's researched wrong-answer bank (previously `research/distractor-zico-era.json`); its now-redundant bank profile is removed and `research/assemble-distractors.py`'s expected count for that batch is reduced accordingly, the same pattern used for Del Piero, Figo, Lahm and Juninho Pernambucano. A clean six-node chronology across two Botafogo-SP spells is corroborated by both primary sources. Consistent with the bank's existing researched judgment, a one-off November 2004 appearance for English amateur side Garforth Town remains excluded as a publicity exhibition arranged after retirement, not in-scope professional senior football. Captained Brazil at the 1982 World Cup.[269][270]
+
+- **Botafogo-SP (1973–1978):** Botafogo Futebol Clube of Ribeirão Preto, São Paulo state; distinct from Rio de Janeiro's Botafogo.
+- **Botafogo-SP (1989):** Second playing spell.
+
+Reviewed source links: [269], [270].
+
+### Falcão
+
+**Brazil · South America · Midfielder.** Internacional (1972–1980) → Roma (1980–1985) → São Paulo (1985–1986).[271][272][273]
+
+Promoted from this project's researched wrong-answer bank (previously `research/distractor-zico-era.json`); its now-redundant bank profile is removed and `research/assemble-distractors.py`'s expected count for that batch is reduced accordingly, the same pattern used for Del Piero, Figo, Lahm and Juninho Pernambucano. A clean three-club chronology is corroborated by both primary sources; AS Roma's own Hall of Fame page independently corroborates the 1980–1985 spell and the 'Ottavo Re di Roma' (Eighth King of Rome) nickname. Known mononymously as Falcão in most English-language sources, matching this roster's existing Pelé/Zico/Ronaldinho-style single-name display. Deep-lying playmaker, recorded under this project's broad Midfielder category.[271][272][273]
+
+Reviewed source links: [271], [272], [273].
+
+### Martín Palermo
+
+**Argentina · South America · Forward.** Estudiantes (1992–1997) → Boca Juniors (1997–2001) → Villarreal (2001–2003) → Real Betis (2003–2004) → Deportivo Alavés (2004) → Boca Juniors (2004–2011).[274][275][276]
+
+A six-node chronology across two Boca Juniors spells is corroborated by both primary sources; Fox Sports' contemporary report independently corroborates the 12 June 2011 La Bombonera farewell and 18 June 2011 official retirement. Boca Juniors' all-time leading goalscorer.[274][275][276]
+
+- **Boca Juniors (2004–2011):** Second playing spell; retired 18 June 2011 as the club's all-time leading scorer.
+
+Reviewed source links: [274], [275], [276].
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -1218,3 +1319,32 @@ Sources:
 [245] https://en.wikipedia.org/wiki/Juninho_Pernambucano
 [246] https://www.national-football-teams.com/player/1035/Juninho_Pernambucano.html
 [247] https://www.gazetadopovo.com.br/esportes/futebol/vasco-confirma-que-juninho-pernambucano-ira-se-aposentar-9mvz4wifx73r4nazzykyzitzi
+[248] https://en.wikipedia.org/wiki/Ronald_Koeman
+[249] https://www.national-football-teams.com/player/14122/Ronald_Koeman.html
+[250] https://www.fcbarcelona.com/en/news/763938/one-of-ours-ronald-koeman
+[251] https://en.wikipedia.org/wiki/Patrick_Vieira
+[252] https://www.national-football-teams.com/player/2446/Patrick_Vieira.html
+[253] https://www.aljazeera.com/sports/2011/7/14/vieira-says-au-revoir-to-playing-days
+[254] https://en.wikipedia.org/wiki/Roberto_Baggio
+[255] https://www.national-football-teams.com/player/14074/Roberto_Baggio.html
+[256] https://www.acmilan.com/en/club/legends/players/baggio
+[257] https://en.wikipedia.org/wiki/Robert_Pires
+[258] https://www.national-football-teams.com/player/2447/Robert_Pires.html
+[259] https://www.espn.co.uk/football/story/_/id/37384167/robert-pires-play-goa-indian-super-league
+[260] https://en.wikipedia.org/wiki/Edwin_van_der_Sar
+[261] https://www.national-football-teams.com/player/4650/Edwin_Van_Der_Sar.html
+[262] https://www.nbcsports.com/soccer/news/legendary-goalkeeper-edwin-van-der-sar-comes-out-of-retirement-saves-penalty
+[263] https://en.wikipedia.org/wiki/Enzo_Francescoli
+[264] https://www.national-football-teams.com/player/14170/Enzo_Francescoli.html
+[265] https://www.infobae.com/deportes-2/2019/04/25/enzo-francescoli-intimo-la-anecdota-de-su-hijo-con-zidane-y-el-sentido-mensaje-de-pablo-aimar
+[266] https://en.wikipedia.org/wiki/Diego_Simeone
+[267] https://www.national-football-teams.com/player/10041/Diego_Simeone.html
+[268] https://www.uefa.com/news-media/news/01b2-0e6d64b1ad9d-aec47af6e433-1000--simeone-ends-glittering-career
+[269] https://en.wikipedia.org/wiki/S%C3%B3crates_(footballer)
+[270] https://www.national-football-teams.com/player/17936/Socrates.html
+[271] https://en.wikipedia.org/wiki/Paulo_Roberto_Falc%C3%A3o
+[272] https://www.national-football-teams.com/player/18056/Paulo_Falcao.html
+[273] https://www.asroma.com/en/club/history/hall-of-fame/15244/paulo-roberto-falcao
+[274] https://en.wikipedia.org/wiki/Mart%C3%ADn_Palermo
+[275] https://www.national-football-teams.com/player/4850/Martin_Palermo.html
+[276] https://www.foxsports.com/stories/soccer/martin-palermo-says-farewell-to-bombonera

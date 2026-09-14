@@ -11,13 +11,14 @@ BATCHES = [
     ('distractor-west-europe.json', 9, 'DISTRACTOR_WEST_EUROPE_SOURCES.md'),
     ('distractor-north-europe.json', 15, 'DISTRACTOR_NORTH_EUROPE_SOURCES.md'),
     ('distractor-south-america.json', 12, 'DISTRACTOR_SOUTH_AMERICA_SOURCES.md'),
-    ('distractor-brazil-italy.json', 7, 'DISTRACTOR_BRAZIL_ITALY_SOURCES.md'),
+    ('distractor-brazil-italy.json', 6, 'DISTRACTOR_BRAZIL_ITALY_SOURCES.md'),
     ('distractor-additional.json', 1, 'DISTRACTOR_ADDITIONAL_SOURCES.md'),
     ('distractor-netherlands-extra.json', 5, 'DISTRACTOR_NETHERLANDS_EXTRA_SOURCES.md'),
     ('distractor-era-gaps.json', 3, 'DISTRACTOR_ERA_GAPS_SOURCES.md'),
     ('distractor-fourth-expansion.json', 11, 'DISTRACTOR_FOURTH_EXPANSION_SOURCES.md'),
-    ('distractor-zico-era.json', 4, 'DISTRACTOR_ZICO_ERA_SOURCES.md'),
+    ('distractor-zico-era.json', 2, 'DISTRACTOR_ZICO_ERA_SOURCES.md'),
     ('distractor-figo-era.json', 3, 'DISTRACTOR_FIGO_ERA_SOURCES.md'),
+    ('distractor-roster-batch7-gaps.json', 8, 'DISTRACTOR_ROSTER_BATCH7_GAPS_SOURCES.md'),
 ]
 bank = []
 for filename, expected, ledger_name in BATCHES:
