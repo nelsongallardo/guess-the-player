@@ -1,5 +1,13 @@
 # Verification report
 
+## Speed-decay retuning (ADR 0009) — local + CI verification, 14 September 2026
+
+- Retuned `pointsFor`'s `timeFactor` (grace 5s→2s, floor-at 30s→12s, floor value 50%→25%) and its server-side mirror `ranked_private.points()` (new migration `202609140001_faster_speed_decay.sql`, `create or replace function`, not an edit to the already-applied schema migration). Also updated the "How to play" dialog's scoring bullet (both languages) with a static bar-chart example, and synced nelson's `987f431` points FAQ prose/worked example (was 15s/1 hint/64pts under the old curve, now 12s/1 hint/20pts).
+- `node --test tests/model.test.mjs tests/social-preview.test.mjs tests/seo.test.mjs tests/analytics.test.mjs tests/guest-session.test.mjs tests/points-faq.test.mjs tests/ranked-backend.test.mjs` — **80 tests, 0 failures**, including a real isolated-Postgres run (`tests/ranked-backend.test.mjs`, 15/15) exercising the SQL/JS `pointsFor` parity sweep. `python3 tests/source-check.py` and `node scripts/export-ranked-roster.mjs --check` also passed.
+- First push (`dd87acf`) went out without running `tests/ranked-backend.test.mjs` locally (no Postgres binaries had been confirmed yet) and broke CI: two hardcoded expectations there still assumed the old 50% floor. Fixed in `05b9b59` and re-verified against a real local Postgres cluster before pushing again — CI is the authority on the ranked-backend outcome for that commit, but the fix commit was validated locally first this time.
+- Real-Chrome check (system Chrome via Playwright, `127.0.0.1:4173`) confirmed the new bar-chart example in the rules dialog renders correctly in both languages and its illustrated values (100/63/25) exactly match `CareerGame.pointsFor(0, {1000,7000,15000})` computed live in the page — screenshots taken, no console errors.
+- No leaderboard/UI layout changes beyond the rules-dialog addition; no live OAuth or hosted-database verification (this change doesn't touch auth), and the live Supabase database still needs the new migration applied separately — pushing to `main` only deploys the static site.
+
 ## Bilingual points FAQ — local verification
 
 - Added an expandable “¿Cómo funcionan los puntos?” / “How do points work?” entry immediately after the how-to-play explanation. Covers wins/losses, hint ceilings, time decay/rounding, a 64-point example, ranked timing, one-time results and overlapping competition totals. Adjacent how-to copy now distinguishes ten guest/practice choices from five ranked choices and the guest-only club-years hint. No gameplay, styling, backend, analytics or saved-state changes.
