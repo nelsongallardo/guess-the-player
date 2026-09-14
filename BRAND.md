@@ -4,7 +4,7 @@
 
 **derabona** is a football-memory game built by friends. The name references a rabona: striking the ball with the kicking leg wrapped behind the standing leg. The identity should feel like football knowledge traded between friends, not a generic trivia app or an official national-team product.
 
-Write the public name as **derabona**, all lowercase. The Spanish signature is **FÚTBOL, DE MEMORIA.** The English equivalent is **FOOTBALL, FROM MEMORY.** Spanish brand copy uses an Argentinian voice: “Confiá”, “Demostrá”, “tenés”. Player names, sourced career information and competition names are not rewritten for branding.
+Write the public name as **derabona**, all lowercase. The masthead signature (directly under the wordmark, both pages) is **"Adiviná al jugador. De memoria. De rabona."**, with the first clause in muted ink and the rest in the accent color - the same two-tone treatment as the hero headline's colored final phrase. It plays on the brand name itself ("de rabona" is both the backheel trick shot in the logo mark and, split apart, half of "derabona"). The English equivalent is **"Guess the player. From memory. With a rabona."** ("rabona" is standard English football vocabulary for the same trick shot, so the pun mostly survives translation). Spanish brand copy uses an Argentinian voice: "Confiá", "Demostrá", "tenés". Player names, sourced career information and competition names are not rewritten for branding.
 
 ## Logo
 
