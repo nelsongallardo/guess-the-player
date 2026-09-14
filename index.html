@@ -200,7 +200,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 
 .about-game{border-top:1px solid var(--line);margin-top:28px;padding:24px 0;color:var(--muted);max-width:850px;font-size:15px;line-height:1.65}.about-game h2{font-size:24px;line-height:1.25;color:var(--ink);letter-spacing:-.5px;margin-bottom:12px}.about-game p{margin:10px 0}.about-game details{border-top:1px solid var(--line);padding:10px 0}.about-game summary{cursor:pointer;color:var(--ink);font-weight:650;min-height:44px;display:list-item;padding:10px 0}.about-game ol{padding-left:24px}.about-game li{margin:8px 0}@media(max-width:580px){.about-game{font-size:14px}.about-game h2{font-size:21px}}
 .game-loading #round-panel{min-height:100svh;position:relative}.game-loading #round-panel>*{visibility:hidden}.game-loading #game-loading-status{display:block!important}
-#game-loading-status{margin:12px 0 20px;padding:22px;border:1px solid var(--celeste);border-radius:12px;background:var(--ink);color:var(--paper);box-shadow:0 4px 0 #d9e5e5}#game-loading-status[hidden]{display:none}#game-loading-status.loading-compact{margin:8px 0 12px;padding:12px 14px;border-radius:8px;box-shadow:none}#game-loading-status.loading-compact .loading-brand,#game-loading-status.loading-compact .loading-skeleton{display:none}#game-loading-status.loading-compact .loading-heading{gap:10px;font-size:16px;line-height:24px}.loading-heading{display:flex;align-items:center;gap:12px;font-weight:750;font-size:18px}.loading-brand{display:block;margin-bottom:12px;font:11px var(--mono);letter-spacing:2px;color:var(--celeste)}.loading-spinner{width:24px;height:24px;flex:none;border:3px solid #89cff044;border-top-color:var(--celeste);border-radius:50%;animation:loading-spin .9s linear infinite}.loading-skeleton{display:flex;gap:12px;margin-top:20px}.loading-skeleton i{display:block;width:42px;height:48px;border:1px solid #89cff066;border-radius:8px;background:#89cff019}@keyframes loading-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.loading-spinner{animation:none}}
+#game-loading-status{margin:12px 0 20px;padding:22px;border:1px solid var(--celeste);border-radius:12px;background:var(--ink);color:var(--paper);box-shadow:0 4px 0 #d9e5e5}#game-loading-status[hidden]{display:none}.loading-heading{display:flex;align-items:center;gap:12px;font-weight:750;font-size:18px}.loading-brand{display:block;margin-bottom:12px;font:11px var(--mono);letter-spacing:2px;color:var(--celeste)}.loading-spinner{width:24px;height:24px;flex:none;border:3px solid #89cff044;border-top-color:var(--celeste);border-radius:50%;animation:loading-spin .9s linear infinite}.loading-skeleton{display:flex;gap:12px;margin-top:20px}.loading-skeleton i{display:block;width:42px;height:48px;border:1px solid #89cff066;border-radius:8px;background:#89cff019}@keyframes loading-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.loading-spinner{animation:none}}
 .analytics-banner{position:fixed;z-index:10;bottom:12px;left:50%;transform:translateX(-50%);width:min(640px,calc(100% - 24px));padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 32px #122a3833}.analytics-banner h2{font-size:16px;margin:0 0 6px}.analytics-banner p{font-size:13px;margin:0 0 10px}.analytics-actions{display:flex;gap:8px;flex-wrap:wrap}.analytics-actions button{padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font-size:13px;min-height:42px}.analytics-actions button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}#privacy-dialog{max-width:540px;width:calc(100% - 32px)}#privacy-dialog p{line-height:1.65;font-size:14px}
 .page-nav-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 0}.page-nav-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.competition-badge-icon{flex-shrink:0}.play-mode{display:none;font:11px var(--mono);color:var(--ink)}.play-mode.play-mode-show{display:block}.account-actions{display:flex;gap:8px;flex-wrap:wrap}.account-actions button{min-height:44px}#account-dialog{width:min(580px,calc(100% - 24px));max-height:85svh;overflow:auto}#account-dialog p{font-size:14px;line-height:1.6}#account-dialog input{font:inherit;padding:10px;max-width:100%;min-height:44px}#account-notice{padding:10px 0;font-size:14px}.ranked-wait #round-panel,.ranked-wait #summary-panel{display:none}#account-dialog [hidden]{display:none!important}
 .account-pitch{font-weight:650;color:var(--ink)}
@@ -16091,7 +16091,7 @@ const RankedUI = (()=>{
   let mode=Accounts.configured&&(Accounts.hasStoredSession()||AuthCallback.code)?'loading':'guest';
   let userId=Accounts.session?.user?.id??null,pendingUserId=null;
   const current=(ticket,owner)=>ticket===epoch&&owner===userId&&owner===(Accounts.session?.user?.id??null);
-  let cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='',loadingPhase='';
+  let cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='';
   const t=()=>TEXT[language],isAccountMode=()=>!['guest','practice'].includes(mode);
   const player=()=>isAccountMode()&&cloud?.round?PLAYERS.find(p=>p.id===cloud.round.playerId):null;
   const competition=()=>cloud?.round?.competition||selected;
@@ -16130,11 +16130,10 @@ const RankedUI = (()=>{
     $('reset-progress').disabled=isAccountMode();
     $('ranked-retry').hidden=!['unavailable','practice'].includes(mode);$('ranked-retry').disabled=busy;
     $('practice').hidden=mode!=='unavailable';
-    const starting=busy&&pending?.action==='start',confirming=busy&&loadingPhase==='confirm';
-    const waiting=mode==='loading'||mode==='ranked'&&(starting||confirming);
+    const starting=busy&&pending?.action==='start';
+    const waiting=mode==='loading'||mode==='ranked'&&starting;
     $('game-loading-status').hidden=!waiting;
-    $('game-loading-status').classList.toggle('loading-compact',confirming&&!!cloud?.round);
-    $('game-loading-text').textContent=language==='es'?(confirming?'Confirmando el desafío…':starting?'Preparando el desafío…':signed?'Cargando tu progreso…':'Comprobando tu cuenta…'):(confirming?'Confirming your challenge…':starting?'Preparing your challenge…':signed?'Loading your progress…':'Checking your account…');
+    $('game-loading-text').textContent=language==='es'?(starting?'Preparando el desafío…':signed?'Cargando tu progreso…':'Comprobando tu cuenta…'):(starting?'Preparing your challenge…':signed?'Loading your progress…':'Checking your account…');
     $('round-panel').setAttribute('aria-busy',String(waiting));
     $('account-notice').hidden=waiting||!isAccountMode()||mode==='ranked'&&!!cloud?.round;
     $('account-notice').textContent=mode==='loading'?x.sync:mode==='ranked'?x.done:x.unavailable;
@@ -16217,20 +16216,24 @@ const RankedUI = (()=>{
     if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingUserId=userId;await sendPending();
   }
   async function sendPending(){
-    if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch;busy=true;loadingPhase='';update();renderRanked();
+    if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch;busy=true;update();renderRanked();
+    // ranked_game's own response IS already a full ranked_private.projection()
+    // (round + progress + profile) for every action, hint/answer/start/enroll
+    // alike - the same shape a separate {action:'progress'} call would return.
+    // This used to fetch that separate confirmation read anyway ("not just an
+    // acknowledgement"), doubling every ranked interaction's latency for a
+    // reconfirmation with nothing new to say, on a single-primary Postgres
+    // database with no read-replica lag to guard against. Removed - see
+    // docs/adr/0013-single-round-trip-ranked-mutations.md.
     try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data);pending=null;
-      // Show only this identity's authoritative start response early; answers stay locked.
-      if(payload.action==='start'){loadingPhase='confirm';update();renderRanked(true);}
-      // Read back the exact account after mutations, not just an acknowledgement.
-      const verified=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data.completed&&data.round===null?{...verified,round:null,completed:true}:verified);
     }catch(error){if(!current(ticket,owner))return;mode='unavailable';notice='unavailable';if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','INVALID_NICKNAME','NICKNAME_TAKEN','IDEMPOTENCY_CONFLICT','STALE_VERSION','ROUND_NOT_PLAYING','ROUND_COMPLETE','COMPETITION_COMPLETE','NO_PLAYERS','NO_UNSEEN_PLAYERS'].includes(error.code))pending=null;}
-    finally{if(current(ticket,owner)){busy=false;loadingPhase='';applyLanguage();render(false,true);if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}}}
+    finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,true);if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}}}
   }
-  function freshGuest(){userId=null;pendingUserId=null;epoch++;cloud=null;pending=null;busy=false;loadingPhase='';notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();$('public-nickname').value='';applyLanguage();render(false,true);}
+  function freshGuest(){userId=null;pendingUserId=null;epoch++;cloud=null;pending=null;busy=false;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();$('public-nickname').value='';applyLanguage();render(false,true);}
   function authChanged(event,session){
     const next=session?.user?.id??null;if(next===userId)return;
     if(!next){freshGuest();return;}
-    userId=next;epoch++;cloud=null;pending=null;pendingUserId=null;busy=false;loadingPhase='';notice='';mode='loading';selected='all';
+    userId=next;epoch++;cloud=null;pending=null;pendingUserId=null;busy=false;notice='';mode='loading';selected='all';
     $('public-nickname').value='';
     update();render(false,true);
     // Reconcile outside the SDK auth lock; invalidate identity synchronously.
