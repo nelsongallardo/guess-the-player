@@ -12,8 +12,11 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   assert.match(html,/<main\b/);
   // A single contextual nav action (not a two-tab pair with an active-page
   // indicator): each page only links to the *other* page, so there is
-  // deliberately no aria-current here any more - see DESIGN.md.
-  assert.match(html,/<nav\b[^>]*>\s*<a id="play-link" href="index\.html">/);
+  // deliberately no aria-current here any more - see DESIGN.md. The
+  // standalone top "Jugar"/"Play" nav button was later removed entirely -
+  // the "Your place on the board" panel's own CTA (login when signed out,
+  // play when signed in) is the one contextual nav action back to the game.
+  assert.match(html,/<a class="cta" id="account-link" href="index\.html\?account=1">/);
   assert.doesNotMatch(html,/<iframe\b|http-equiv="refresh"/i);
   assert.doesNotMatch(html,/id="(?:roster-data|crest-data|game-model)"/);
   assert.ok(Buffer.byteLength(html)<100_000,'Standalone board must not duplicate the heavy game artifact');
