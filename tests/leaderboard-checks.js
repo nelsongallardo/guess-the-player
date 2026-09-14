@@ -15,7 +15,7 @@ async page => {
  await p.locator('#leaderboard-table').waitFor({state:'visible'});await settled(p,'Ready');
  ok(await p.locator('h1').textContent()==='Leaderboard','Standalone English page');
  ok(!p.url().includes('SECRET')&&p.url().includes('competition=all'),'URL normalized and OAuth secrets discarded');
- ok(await p.locator('nav [aria-current="page"]').textContent()==='Leaderboard','Active semantic navigation');
+ ok((await p.locator('#play-link').textContent()).trim().startsWith('Play'),'Single contextual nav action back to the game');
  ok(await p.locator('#leaderboard-entries tr').count()===20&&!await p.locator('#leaderboard-entries img').count(),'Twenty safe text rows');
  ok(!calls.at(-1).headers.authorization,'Guest board anonymous');
  ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Short mobile has no horizontal overflow');
@@ -23,7 +23,7 @@ async page => {
  hold=true;await p.locator('#leaderboard-filter').selectOption('brasileirao');await loading(p,'Deferred filter');while(!release)await p.waitForTimeout(10);release();release=null;await p.waitForFunction(()=>document.querySelector('#leaderboard-status').dataset.state==='empty');ok(calls.at(-1).body.offset===0&&await p.locator('#board-next').isHidden(),'Empty filter resets pagination');await settled(p,'Empty');
  fail=true;await p.locator('#leaderboard-filter').selectOption('la-liga');await p.locator('#board-retry').waitFor({state:'visible'});await settled(p,'Error');await p.locator('#board-retry').click();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(calls.at(-1).body.competition==='la-liga','Error retry retains competition');
  await p.goBack();await p.waitForFunction(()=>document.querySelector('#leaderboard-filter').value==='brasileirao');await p.goForward();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(await p.locator('#leaderboard-filter').inputValue()==='la-liga','Back and forward restore filter');
- await p.locator('#language').selectOption('es');ok(await p.locator('h1').textContent()==='Clasificación'&&await p.locator('#play-link').textContent()==='Jugar','Spanish UI and navigation');
+ await p.locator('#language').selectOption('es');ok(await p.locator('h1').textContent()==='Clasificación'&&await p.locator('#play-link-label').textContent()==='Jugar','Spanish UI and navigation');
  await p.evaluate(()=>{window.mockSession={access_token:'TEST_TOKEN',user:{id:'user-a'}};localStorage.setItem('derabona.auth.v1','MOCK');window.dispatchEvent(new StorageEvent('storage',{key:'derabona.auth.v1'}));});
  await p.waitForFunction(()=>document.querySelector('#leaderboard-own').textContent.includes('42'));ok((await p.locator('#leaderboard-own').textContent()).includes('73'),'Own off-page rank and points');
  fail=true;await p.locator('#leaderboard-filter').selectOption('premier-league');await p.locator('#board-retry').waitFor({state:'visible'});ok((await p.locator('#personal-detail').textContent()).includes('No pudimos cargar tu posición'),'Signed-in error does not claim no rank');await p.locator('#board-retry').click();await p.waitForFunction(()=>document.querySelector('#leaderboard-own').textContent.includes('42'));ok(true,'Signed-in error retry restores own rank');

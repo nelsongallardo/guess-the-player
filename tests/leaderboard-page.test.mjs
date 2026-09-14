@@ -10,7 +10,10 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   assert.match(html,/<link[^>]+rel="canonical"[^>]+href="https:\/\/derabona.club\/leaderboard.html"/);
   assert.match(html,/<h1\b/);
   assert.match(html,/<main\b/);
-  assert.match(html,/aria-current="page"/);
+  // A single contextual nav action (not a two-tab pair with an active-page
+  // indicator): each page only links to the *other* page, so there is
+  // deliberately no aria-current here any more - see DESIGN.md.
+  assert.match(html,/<nav\b[^>]*>\s*<a id="play-link" href="index\.html">/);
   assert.doesNotMatch(html,/<iframe\b|http-equiv="refresh"/i);
   assert.doesNotMatch(html,/id="(?:roster-data|crest-data|game-model)"/);
   assert.ok(Buffer.byteLength(html)<100_000,'Standalone board must not duplicate the heavy game artifact');
