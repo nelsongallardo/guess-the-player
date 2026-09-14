@@ -16106,14 +16106,18 @@ const RankedUI = (()=>{
     for(const [id,value]of Object.entries(values))$(id).textContent=value;
     $('account-open').classList.toggle('account-open-signed',signed);
     $('play-mode').textContent=mode==='loading'?x.loading:mode==='unavailable'?x.unavailable:mode==='ranked'?x.ranked:mode==='practice'?x.practice:x.guest;
-    // On mobile the default "guest" state (the vast majority of visits) is
-    // hidden entirely rather than spending a full row on stating the
-    // absence of an account - the masthead's own account-open button
-    // ("Sign in"/"Iniciar sesión") already communicates that. The other,
-    // rarer states (ranked/practice/loading/unavailable) carry information
-    // worth a glance (e.g. practice explicitly warns points won't count),
-    // so they stay visible even on mobile.
-    $('play-mode').classList.toggle('play-mode-show',mode!=='guest');
+    // The default "guest" state (the vast majority of visits) is hidden
+    // entirely rather than spending a row on stating the absence of an
+    // account - the masthead's own account-open button ("Sign in"/"Iniciar
+    // sesión") already communicates that. "ranked" is hidden for the same
+    // reason once signed in: account-open already carries the point total
+    // and reads as "you're ranked" on its own (see $('score').hidden above)
+    // - a second "CLASIFICADO · NUBE" pill next to it stated nothing new
+    // and read as a stray, unexplained label. The remaining states
+    // (practice/loading/unavailable) carry information worth a glance
+    // (e.g. practice explicitly warns points won't count), so they still
+    // show.
+    $('play-mode').classList.toggle('play-mode-show',mode!=='guest'&&mode!=='ranked');
     $('account-status').textContent=!Accounts.configured?x.disabled:notice?x[notice]||x.unavailable:signed?x.signed:'';
     $('google-login').hidden=signed;$('google-login').disabled=!Accounts.configured||busy||mode==='loading';$('account-pitch').hidden=signed||!Accounts.configured;
     $('logout').hidden=!signed;$('logout').disabled=busy;
@@ -16167,7 +16171,14 @@ const RankedUI = (()=>{
     // mode's roundAt(state).hints>=3.
     $('timeline').classList.toggle('years-revealed',r.hints>=3);
     const counts=cloud.progress.competitionCounts?.[r.competition]||{answered:cloud.progress.answered,total:PLAYERS.length};
-    $('round-number').textContent=t().ranked;$('progress').max=counts.total;$('progress').value=counts.answered;$('progress-label').textContent=x.progress(counts.answered,counts.total);
+    // This used to read t().ranked ("CLASIFICADO · NUBE") - the same string
+    // as the #play-mode status pill, copy-pasted into the wrong place. It
+    // belongs here as the current round's position, mirroring guest's own
+    // `${roundIndex+1} / deck.length` (see the non-ranked render above):
+    // answered-so-far + 1 for the round now on screen, capped at total so a
+    // just-finished last round can't overshoot it.
+    $('round-number').textContent=`${String(Math.min(counts.answered+1,counts.total)).padStart(2,'0')} / ${counts.total}`;
+    $('progress').max=counts.total;$('progress').value=counts.answered;$('progress-label').textContent=x.progress(counts.answered,counts.total);
     const left=r.status==='won'?Math.max(0,4-r.guesses.length):Math.max(0,3-r.guesses.length);
     $('attempt-text').textContent=r.status==='won'?x.found:x.attempts(left);$('lives').replaceChildren(...Array.from({length:3},(_,i)=>el('span',undefined,'life'+(i>=left?' used':''))));
     $('options').replaceChildren();r.options.forEach((option,i)=>{const guessed=r.guesses.includes(option.id),correct=r.status!=='playing'&&option.label===p.name,wrong=guessed&&!correct,b=el('button',undefined,'option'+(wrong?' wrong':correct?' correct':''));b.type='button';b.dataset.optionId=option.id;b.disabled=busy||!!pending||r.status!=='playing'||guessed;b.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',wrong?'×':correct?'✓':'↗','option-state'));b.setAttribute('aria-label',option.label+(wrong?', '+x.incorrect:correct?', '+x.correct:''));b.onclick=()=>mutate('answer',{optionId:option.id});$('options').append(b);});
