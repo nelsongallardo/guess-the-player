@@ -4,6 +4,8 @@
 
 The Supabase schema and both Edge Functions are deployed. Hosted verification with a disposable admin-created Auth account passed ranked actions, idempotency, global/membership boards and account deletion with exact database readback; test data was removed. Google is the only enabled public signup provider, and the owner subsequently signed in through Google with saved ranked results observed in the hosted state. Full cancellation/refresh/cross-device browser coverage remains separate. Static publication is a separate main-branch Pages workflow; see [TESTING.md](../TESTING.md) for the evidence boundaries.
 
+All migrations through `202609140003_roster_sync_60_to_80.sql` are applied to the live database (owner-run `supabase db push` via the CLI, 2026-09-14). The database had drifted to 60 players/119 candidates (last actually deployed there) while the roster in `index.html`/`202609130002_ranked_roster.sql` had grown to 80/154 through several undeployed batches; the gap was found by diffing a live read against the current computed roster (not assumed) before writing the additive sync migration. The 2 existing accounts' 13 `results` rows were confirmed untouched before and after.
+
 `index.html` remains a portable offline guest game. Optional accounts load the pinned Supabase JS SDK (2.57.4), use Google OAuth/PKCE, and persist the session separately under `derabona.auth.v1`. Only the public project URL/publishable key belong in the browser. Never expose service-role keys, Google client secrets, access/refresh tokens or CLI credentials in docs, screenshots or commits.
 
 - `supabase/migrations/202609130001_ranked_schema.sql`: private state, grants/RLS, transactional RPC and score projections.
@@ -11,6 +13,7 @@ The Supabase schema and both Edge Functions are deployed. Hosted verification wi
 - `supabase/migrations/202609130003_automatic_animal_aliases.sql`: automatic stable animal aliases, enrollment and legacy-account backfill; custom names and gameplay records are preserved.
 - `supabase/migrations/202609140001_faster_speed_decay.sql`: retunes `ranked_private.points()` to match [ADR 0009](adr/0009-speed-decay-anti-lookup-tightening.md)'s client-side speed-decay constants.
 - `supabase/migrations/202609140002_ranked_third_hint.sql`: raises the hint cap from 2 to 3 (adds the club-years hint) and its matching `ranked_private.points()` pricing - see [ADR 0010](adr/0010-ranked-third-hint-parity.md).
+- `supabase/migrations/202609140003_roster_sync_60_to_80.sql`: additive-only sync of the 20 players added across roster batches since the database was last actually deployed (it was live at 60 players; `202609130002`'s file content had since been regenerated in place to 80 without ever being re-deployed - see that file's own "do not overwrite" warning). Diffed against a live read of the database rather than assumed; zero existing rows touched. Every insert has `on conflict do nothing`, so it's also a safe no-op on a from-scratch deploy where `202609130002` alone already has all 80.
 - `scripts/export-ranked-roster.mjs --check`: read-only parity check against the actual inline model. Do not rewrite a ruleset already used for results; plan a reviewed migration/version transition.
 
 ### Applying migrations to the hosted database
