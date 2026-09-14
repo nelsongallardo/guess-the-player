@@ -16064,7 +16064,16 @@ $('replay').addEventListener('click',()=>{
   if(!next){renderCompetitionOptions();$('competitions').showModal();return;}
   state=next;resetRoundClock();render(false,true);showRoundStart();
 });
-document.querySelectorAll('#change-competition,#change-competition-summary').forEach(b=>b.addEventListener('click',()=>{renderCompetitionOptions();$('competitions').showModal();}));
+document.querySelectorAll('#change-competition,#change-competition-summary').forEach(b=>b.addEventListener('click',()=>{
+  renderCompetitionOptions();$('competitions').showModal();
+  // showModal() defaults to focusing the FIRST focusable element in the
+  // dialog (always "All Players", since it's first in DOM order) rather
+  // than the one already marked aria-current="true" - so without this,
+  // the visible focus ring lands on the wrong option and makes the
+  // current competition look unselected while All Players looks chosen,
+  // no matter what's actually active. Move focus to the real current one.
+  $('competition-options').querySelector('[aria-current="true"]')?.focus();
+}));
 document.querySelectorAll('#stats-detail-open').forEach(b=>b.addEventListener('click',()=>{$('best-streak').textContent=lifetime.bestStreak;renderHistory();$('stats-detail').showModal();}));
 $('help').addEventListener('click',()=>{Analytics.capture('help_opened');$('rules').showModal();});$('career-back').addEventListener('click',()=>moveCareer(-1));$('career-forward').addEventListener('click',()=>moveCareer(1));
 $('timeline-scroll').addEventListener('scroll',updateNavigation,{passive:true});window.addEventListener('resize',updateNavigation,{passive:true});
