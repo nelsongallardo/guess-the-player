@@ -22,7 +22,7 @@ test('Canonical Spanish page has descriptive title and stable language', () => {
 });
 
 test('Useful visible explanation and semantic heading exist without JS', () => {
-  assert.match(markup, /<h1 id="title">Adiviná al jugador\.<br> <span>Por su carrera\.<\/span><\/h1>/);
+  assert.match(markup, /<h1 id="title">ADIVINÁ AL JUGADOR\. <span>DE MEMORIA\. DE RABONA\.<\/span><\/h1>/);
   assert.match(markup, /id="about-game"/);
   assert.match(markup, /Un juego gratis para adivinar jugadores de fútbol/);
   assert.match(markup, /Cómo jugar a derabona/);
