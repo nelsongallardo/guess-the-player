@@ -108,8 +108,11 @@ async page => {
     await p.evaluate(()=>{window.__mockAuth.refreshError=false;window.__mockLogin();});
     ok(calls.filter(c=>c.body.action==='progress').every(c=>Object.keys(c.body).length===1),'Progress sends no guest state or score import');
     const localBefore=await p.evaluate(()=>sessionStorage.getItem(STORAGE_KEY));
-    await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='1 / 2');await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='2 / 2');
-    ok(await p.locator('#hint').isDisabled(),'Server hint projection enforces two-hint UI cap');
+    await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='1 / 3');await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='2 / 3');
+    ok(!await p.locator('#timeline').evaluate(el=>el.classList.contains('years-revealed')),'Ranked years stay hidden before the third hint, same as guest/practice');
+    await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='3 / 3');
+    ok(await p.locator('#timeline').evaluate(el=>el.classList.contains('years-revealed')),'Third ranked hint reveals club years, same as guest/practice');
+    ok(await p.locator('#hint').isDisabled(),'Server hint projection enforces three-hint UI cap');
     const active=projection.round.id;await p.locator('#change-competition').click();await p.locator('#competition-options button').nth(2).click();await p.waitForFunction(()=>!document.querySelector('#options button').disabled);
     ok(projection.round.id===active&&await p.evaluate(()=>document.querySelector('#competition-current').textContent===copy().competitions.all),'Selecting another league cannot replace server active round');
     dropAnswer=true;await p.locator('#options button').first().click();await p.locator('#ranked-retry').waitFor({state:'visible'});

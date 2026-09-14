@@ -10,16 +10,16 @@ const english = JSON.parse(html.match(/const ABOUT_EN = ("[^\n]*");/)[1]);
 for (const [language, markup, heading, terms] of [
   ['Spanish', spanish, '¿Cómo funcionan los puntos?', [
     '100 puntos', 'tres respuestas incorrectas', '0 puntos',
-    '100, 80 o 60', '40 puntos', '2 segundos', '12 segundos', '25%',
+    '100, 80, 60', '40 puntos', '2 segundos', '12 segundos', '25%',
     '20 puntos', 'redondea',
-    'país y posición', 'años en cada club', 'servidor', 'recargar',
+    'país', 'posición', 'años en cada club', 'servidor', 'recargar',
     'una sola vez', 'no se transfieren', 'competición',
   ]],
   ['English', english, 'How do points work?', [
     '100 points', 'three wrong guesses', '0 points',
-    '100, 80 or 60', '40 points', '2 seconds', '12 seconds', '25%',
+    '100, 80, 60', '40 points', '2 seconds', '12 seconds', '25%',
     '20 points', 'rounded',
-    'country and position', 'club years', 'server', 'refreshing',
+    'country', 'position', "club's years", 'server', 'refreshing',
     'only once', 'never transfer', 'competition',
   ]],
 ]) {
