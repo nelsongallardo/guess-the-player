@@ -73,8 +73,13 @@ test('additive migration backfills legacy results, preserves custom names and im
   assert.deepEqual(rpc(legacy.custom,{action:'progress'}).profile,{nickname:'Existing Custom',enrolled:true});
   assert.equal(rpc(legacy.empty,{action:'progress'}).profile.enrolled,true);
   for(const t of ['rounds','results','receipts']) assert.deepEqual(json(`select json_agg(x order by user_id) from ranked_private.${t} x`),legacySnapshot[t]);
+  // The legacy rows above are byte-for-byte preserved (still ruleset='v1',
+  // still 5 options each) - but ADR 0012's ten-option v2 ruleset filters the
+  // active leaderboard/progress to ruleset='v2' only, by design: it's a
+  // deliberate reset, not a bug, so these untouched v1-only results now
+  // correctly fall off the (now v2) board rather than still counting.
   const board=rpc(legacy.anonymous,{action:'leaderboard'});
-  assert.equal(board.total,2);assert.equal(board.own.nickname,anonymous.profile.nickname);noIdentity(board);
+  assert.equal(board.total,0);assert.equal(board.own,null);noIdentity(board);
   assert.equal(rpc(legacy.empty,{action:'leaderboard'}).own,null);
 });
 
@@ -170,8 +175,8 @@ test('anon/authenticated cannot read or mutate private tables or spoof service R
 test('single active round, stable opaque randomized options, reload preserves hints/guesses/clock',()=>{
   const uid=user();const initial=start(uid);let r=initial.round;
   assert.match(initial.profile.nickname,aliasPattern);assert.equal(initial.profile.enrolled,true);assert.equal(initial.progress.answered,0);
-  assert.equal(r.options.length,5);assert.equal(new Set(r.options.map(o=>o.id)).size,5);
-  assert.equal(new Set(r.options.map(o=>o.label)).size,5);assert.equal(r.version,0);
+  assert.equal(r.options.length,10);assert.equal(new Set(r.options.map(o=>o.id)).size,10);
+  assert.equal(new Set(r.options.map(o=>o.label)).size,10);assert.equal(r.version,0);
   assert.equal(r.clueCountry,null);assert.equal(r.cluePosition,null);
   const raw=JSON.stringify(r);assert(!raw.includes('correct_option'));assert(!raw.includes('candidate_id'));
   const chosen=wrongs(r)[0];r=answer(uid,r,chosen).round;

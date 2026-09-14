@@ -1,6 +1,6 @@
 # 2. Origin-first distractors
 
-Status: Accepted — implemented 2026-09-12. The roster-only restriction and top-eight sampling below are superseded by [ADR 0003](0003-researched-contemporary-rivals.md); origin-first and save-preservation rules remain active.
+Status: Accepted — implemented 2026-09-12. The roster-only restriction and top-eight sampling below are superseded by [ADR 0003](0003-researched-contemporary-rivals.md); origin-first and save-preservation rules remain active. The "2026 amendment" below, which left ranked mode's schema at 4/5 options on purpose, is itself superseded by [ADR 0012](0012-ranked-ten-options-v2-ruleset.md): ranked now deals 10 too, under a new v2 ruleset.
 
 ## Problem
 
