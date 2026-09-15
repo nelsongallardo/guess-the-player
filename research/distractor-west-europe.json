@@ -193,36 +193,6 @@
     "notes": "Includes Rennes B in the adult French third tier from 1991/92; 1991 is a season-based reserve start, not a verified calendar debut. NFT first-team appearances begin in 1992/93, despite Wikipedia labeling the Rennes spell from 1991. Deportivo La Coruña is excluded: the table records zero appearances and the prose describes the Rennes loan-back followed by the Bordeaux move. Initial Rennes service is continuous, not two playing spells. The 2007 Rennes return is genuine. Includes the documented 2011 Nantes comeback; final retirement was 11 June 2012."
   },
   {
-    "id": "patrick-kluivert",
-    "name": "Patrick Kluivert",
-    "country": "Netherlands",
-    "position": "Forward",
-    "start": 1994,
-    "end": 2008,
-    "clubs": [
-      "Ajax",
-      "AC Milan",
-      "Barcelona",
-      "Newcastle United",
-      "Valencia",
-      "PSV",
-      "Lille"
-    ],
-    "system": "netherlands",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Patrick_Kluivert",
-        "excerpt": "Senior career* | | | |\n| Years | Team | Apps | (Gls) |\n| 1994â1997 | Ajax | 70 | (39) |\n| 1997â1998 | AC Milan | 27 | (6) |\n| 1998â2004 | Barcelona | 182 | (90) |\n| 2004â2005 | Newcastle United | 25 | (6) |\n| 2005â2006 | Valencia | 10 | (1) |\n| 2006â2007 | PSV | 16 | (3) |\n| 2007â2008 | Lille | 14 | (4) |\n| Total | | 343 | (149) |\n|\n\n[…]\n\n"
-      },
-      {
-        "url": "https://www.national-football-teams.com/old/player/4633/Patrick_Kluivert.html",
-        "excerpt": "Season Club M G R Cha Cup 2007/08 Lille OSC 13 4 7 ( I ) - - 2006/07 PSV Eindhoven 16 3 1 ( I ) - 2005/06 Valencia CF 10 1 3 ( I ) - - 2004/05 Newcastle United 25 6 14 ( I ) - - 2003/04 FC Barcelona 21 8 2 ( I ) - - 2002/03 FC Barcelona 36 16 6 ( I ) - - 2001/02 FC Barcelona 33 18 4 ( I ) - - 2000/01 FC Barcelona 31 18 4 ( I ) - - 1999/00 FC Barcelona 26 15 2 ( I ) - - 1998/99 FC Barcelona 34 15 1 ( I ) - 1997/98 AC Milan 27 6 10 ( I ) - - 1996/97 Ajax Amsterdam 17 6 4 ( I ) - - 1995/96 Ajax Amsterdam 28 15 1 ( I ) - 1994/95 Ajax Amsterdam 25 18 1 ( I ) - 342 149"
-      }
-    ],
-    "notes": "Ordered senior playing spells agree across the two sources. The Wikipedia table gives 1994 for the Ajax start and 2008 for the Lille end; NFT supplies the corresponding 1994/95 and 2007/08 seasons. Lille appearance totals differ (Wikipedia 14; NFT 13), without affecting the route. Original encoding damage in the Wikipedia excerpt is preserved."
-  },
-  {
     "id": "rafael-van-der-vaart",
     "name": "Rafael van der Vaart",
     "country": "Netherlands",

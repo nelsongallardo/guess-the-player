@@ -1058,6 +1058,86 @@ Corroborated: A six-node chronology across two Boca Juniors spells is corroborat
 
 Reviewed sources: [267], [268], [269].
 
+### Gary Neville
+
+**England · Defender.** Manchester United (1992–2011).[270][271][272]
+
+Corroborated: A one-club senior career is corroborated by both primary sources; UEFA's contemporary report independently corroborates the 2 February 2011 retirement announcement. Competitive debut 16 September 1992 in a UEFA Cup tie versus Torpedo Moscow; final appearance 1 January 2011 versus West Bromwich Albion.[270][271][272]
+
+Reviewed sources: [270], [271], [272].
+
+### Carles Puyol
+
+**Spain · Defender.** Barcelona C (1996) → Barcelona B (1997–1999) → Barcelona (1999–2014).[273][274][275]
+
+Corroborated: A one-club, three-tier chronology is corroborated by both primary sources, the same reserve-to-first-team pattern already used for Cristiano Ronaldo/Sporting CP and Philipp Lahm/Bayern Munich II; FC Barcelona's own retirement announcement independently corroborates the May 2014 farewell after knee injuries. Long-serving Barcelona captain and part of Spain's 2010 FIFA World Cup-winning squad.[273][274][275]
+
+Reviewed sources: [273], [274], [275].
+
+### Fabio Cannavaro
+
+**Italy · Defender.** Napoli (1992–1995) → Parma (1995–2002) → Inter Milan (2002–2004) → Juventus (2004–2006) → Real Madrid (2006–2009) → Juventus (2009–2010) → Al Ahli Dubai (2010–2011).[276][277][278]
+
+Corroborated: Promoted from this project's researched wrong-answer bank (previously `research/distractor-era-gaps.json`); its now-redundant bank profile is removed and `research/assemble-distractors.py`'s expected count for that batch is reduced accordingly, the same pattern used for Del Piero, Figo, Lahm, Juninho Pernambucano, Roberto Baggio, Sócrates and Falcão. A seven-node chronology across two Juventus spells is corroborated by both primary sources; Real Madrid's own legends page independently corroborates his 2006–2009 spell there. The Napoli start year is corrected to 1992 (first playing season, Serie A debut 7 March 1993) rather than Wikipedia's bare 1991 club-membership year, reusing this project's own prior research on that exact ambiguity from the bank profile. Captained Italy to the 2006 World Cup and won the 2006 Ballon d'Or that same year.[276][277][278]
+
+Reviewed sources: [276], [277], [278].
+
+### Lilian Thuram
+
+**France · Defender.** Monaco (1991–1996) → Parma (1996–2001) → Juventus (2001–2006) → Barcelona (2006–2008).[279][280][281]
+
+Corroborated: A clean four-club chronology is corroborated by both primary sources; France 24's contemporary report independently corroborates the August 2008 retirement after a heart condition was discovered during a medical for a proposed transfer to Paris Saint-Germain. Held the France national-team appearance record (142 caps) for over a decade after retiring, until Hugo Lloris surpassed it in 2022.[279][280][281]
+
+Reviewed sources: [279], [280], [281].
+
+### Patrick Kluivert
+
+**Netherlands · Forward.** Ajax (1994–1997) → AC Milan (1997–1998) → Barcelona (1998–2004) → Newcastle United (2004–2005) → Valencia (2005–2006) → PSV Eindhoven (2006–2007) → Lille (2007–2008).[282][283][284]
+
+Corroborated: Promoted from this project's researched wrong-answer bank (previously `research/distractor-west-europe.json`); its now-redundant bank profile is removed and `research/assemble-distractors.py`'s expected count for that batch is reduced accordingly, the same pattern used for Del Piero, Figo, Lahm, Juninho Pernambucano, Roberto Baggio, Sócrates and Falcão. A seven-node chronology is corroborated by both primary sources; FC Barcelona's own retrospective independently corroborates his 1998–2004 spell there. Scored the winning goal in the 1995 European Cup final for Ajax aged 18.[282][283][284]
+
+Reviewed sources: [282], [283], [284].
+
+### Claudio Caniggia
+
+**Argentina · Forward.** River Plate (1985–1988) → Hellas Verona (1988–1989) → Atalanta (1989–1992) → Roma (1992–1994) → Benfica (1994–1995) → Boca Juniors (1995–1998) → Atalanta (1999–2000) → Dundee (2000–2001) → Rangers (2001–2003) → Qatar SC (2003–2004).[285][286][287]
+
+Corroborated: A ten-node chronology across two Atalanta spells is corroborated by both primary sources; 101greatgoals.com's contemporary report independently corroborates the excluded Wembley FC appearance. Consistent with this project's existing Sócrates/Garforth Town precedent, a single August 2012 appearance for English ninth-tier Wembley FC at age 45 is excluded as an ex-professionals publicity initiative organised with Terry Venables and David Seaman for a televised FA Cup documentary, not in-scope professional senior football.[285][286][287]
+
+Reviewed sources: [285], [286], [287].
+
+### Roberto Ayala
+
+**Argentina · Defender.** Ferro Carril Oeste (1991–1993) → River Plate (1993–1995) → Napoli (1995–1998) → AC Milan (1998–2000) → Valencia (2000–2007) → Real Zaragoza (2007–2010) → Racing Club (2010–2011).[288][289][290]
+
+Corroborated: A seven-node chronology is corroborated by both primary sources; Valencia CF's own retrospective interview independently corroborates his seven-season, two-La-Liga-title spell there. Known as 'El Ratón' (The Mouse); captained Argentina a record number of times, including matches at the 2006 World Cup, and was an overage player on the gold medal-winning 2004 Athens Olympic squad.[288][289][290]
+
+Reviewed sources: [288], [289], [290].
+
+### Ariel Ortega
+
+**Argentina · Midfielder / Forward.** River Plate (1991–1996) → Valencia (1997–1998) → Sampdoria (1998–1999) → Parma (1999–2000) → River Plate (2000–2002) → Fenerbahçe (2002–2003) → Newell's Old Boys (2004–2006) → River Plate (2006–2012).[291][292][293]
+
+Corroborated: An eight-node chronology across three River Plate spells is corroborated by both primary sources; ESPN's profile independently corroborates his enduring standing as a River Plate idol. The third River Plate spell's interleaving with three short outgoing loans (Independiente Rivadavia, All Boys, Defensores de Belgrano) is disclosed as a qualification rather than asserted with exact day-level precision, the same treatment this project already gives Riise's Monaco B order and Cafu's Juventude spell.[291][292][293]
+
+Reviewed sources: [291], [292], [293].
+
+### Bebeto
+
+**Brazil · Forward.** Vitória (1982) → Flamengo (1983–1989) → Vasco da Gama (1989–1992) → Deportivo La Coruña (1992–1996) → Flamengo (1996) → Sevilla (1996–1997) → Vitória (1997) → Cruzeiro (1997) → Botafogo (1998–1999) → Toros Neza (1999) → Kashima Antlers (2000) → Vitória (2000) → Vasco da Gama (2001) → Al-Ittihad (2002).[294][295][296]
+
+Corroborated: A fourteen-node chronology across three Vitória and two Flamengo/Vasco da Gama spells is retained in full, matching this roster's existing Romário/Rivaldo/Roque Santa Cruz long-tail precedent; both primary sources corroborate it, and FIFA's own retrospective independently corroborates his and Romário's strike partnership at the 1994 World Cup. Originated football's iconic baby-cradling goal celebration in the 1994 quarter-final against the Netherlands.[294][295][296]
+
+Reviewed sources: [294], [295], [296].
+
+### Dunga
+
+**Brazil · Midfielder.** Internacional (1980–1984) → Corinthians (1984–1985) → Santos (1985–1987) → Vasco da Gama (1987) → Pisa (1987–1988) → Fiorentina (1988–1992) → Pescara (1992–1993) → VfB Stuttgart (1993–1995) → Júbilo Iwata (1995–1998) → Internacional (1999–2000).[297][298][299]
+
+Corroborated: A ten-node chronology across two Internacional spells is corroborated by both primary sources; Sports Illustrated's retrospective independently corroborates his captaincy of Brazil's 1994 World Cup-winning squad. Defensive midfielder known for tactical discipline; later managed Brazil across two spells, out of scope for this playing-career record.[297][298][299]
+
+Reviewed sources: [297], [298], [299].
+
 Sources:
 [1] https://argentina.as.com/argentina/2021/12/02/futbol/1638473602_945874.html
 [4] https://en.wikipedia.org/wiki/Javier_Zanetti
@@ -1326,3 +1406,33 @@ Sources:
 [267] https://en.wikipedia.org/wiki/Mart%C3%ADn_Palermo
 [268] https://www.national-football-teams.com/player/4850/Martin_Palermo.html
 [269] https://www.foxsports.com/stories/soccer/martin-palermo-says-farewell-to-bombonera
+[270] https://en.wikipedia.org/wiki/Gary_Neville
+[271] https://www.national-football-teams.com/player/2165/Gary_Neville.html
+[272] https://www.uefa.com/uefachampionsleague/news/01ee-0e76fbcab522-2f043d6b1660-1000--united-and-england-stalwart-neville-retires
+[273] https://en.wikipedia.org/wiki/Carles_Puyol
+[274] https://www.national-football-teams.com/player/6233/Carles_Puyol.html
+[275] https://www.fcbarcelona.com/en/news/1127439/carles-puyol-announces-he-is-leaving-fc-barcelona-at-the-end-of-the-season
+[276] https://en.wikipedia.org/wiki/Fabio_Cannavaro
+[277] https://www.national-football-teams.com/player/3372/Fabio_Cannavaro.html
+[278] https://www.realmadrid.com/en-US/the-club/history/football-legends/fabio-cannavaro
+[279] https://en.wikipedia.org/wiki/Lilian_Thuram
+[280] https://www.national-football-teams.com/player/2438/Lilian_Thuram.html
+[281] https://www.france24.com/en/20080801-french-football-icon-thuram-retires-football-france
+[282] https://en.wikipedia.org/wiki/Patrick_Kluivert
+[283] https://www.national-football-teams.com/player/4633/Patrick_Kluivert.html
+[284] https://www.fcbarcelona.com/en/news/1141559/legenday-goals-patrick-kluivert
+[285] https://en.wikipedia.org/wiki/Claudio_Caniggia
+[286] https://www.national-football-teams.com/player/13481/Claudio_Caniggia.html
+[287] https://www.101greatgoals.com/blog/still-got-it-45-year-old-claudio-caniggia-scores-for-wembley-in-the-fa-cup-v-langford
+[288] https://en.wikipedia.org/wiki/Roberto_Ayala
+[289] https://www.national-football-teams.com/player/305/Roberto_Ayala.html
+[290] https://www.valenciacf.com/en-extensive-interview-with-ayala-on-47th-birthday-2020-04-14
+[291] https://en.wikipedia.org/wiki/Ariel_Ortega
+[292] https://www.national-football-teams.com/player/339/Ariel_Ortega.html
+[293] https://espndeportes.espn.com/futbol/argentina/nota/_/id/11037559/ariel-ortega-burrito-river-plate-idolo-perfil-carrera
+[294] https://en.wikipedia.org/wiki/Bebeto
+[295] https://www.national-football-teams.com/player/13642/Bebeto.html
+[296] https://www.fifa.com/en/articles/94-days-to-go-qatar-2022-romario-bebeto-brazil-1994-fifa-world-cup
+[297] https://en.wikipedia.org/wiki/Dunga
+[298] https://www.national-football-teams.com/player/13640/Dunga.html
+[299] https://www.si.com/soccer/brazil-1994-world-cup-winning-squad-where-are-they-now

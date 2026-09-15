@@ -5485,5 +5485,609 @@
       "argentine-primera",
       "champions-league"
     ]
+  },
+  {
+    "id": "gary-neville",
+    "name": "Gary Neville",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Manchester United",
+        "years": "1992–2011"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gary_Neville",
+        "title": "Gary Neville - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2165/Gary_Neville.html",
+        "title": "Gary Neville (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.uefa.com/uefachampionsleague/news/01ee-0e76fbcab522-2f043d6b1660-1000--united-and-england-stalwart-neville-retires",
+        "title": "United and England stalwart Neville retires | UEFA Champions League | UEFA.com"
+      }
+    ],
+    "notes": "A one-club senior career is corroborated by both primary sources; UEFA's contemporary report independently corroborates the 2 February 2011 retirement announcement. Competitive debut 16 September 1992 in a UEFA Cup tie versus Torpedo Moscow; final appearance 1 January 2011 versus West Bromwich Albion.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "carles-puyol",
+    "name": "Carles Puyol",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Barcelona C",
+        "years": "1996",
+        "note": "Senior third-tier reserve side; single-season debut before promotion to Barcelona B."
+      },
+      {
+        "name": "Barcelona B",
+        "years": "1997–1999",
+        "note": "Senior second/third-tier reserve side, promoted to the first team by Louis van Gaal in 1999."
+      },
+      {
+        "name": "Barcelona",
+        "years": "1999–2014",
+        "note": "La Liga debut 2 October 1999."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Carles_Puyol",
+        "title": "Carles Puyol - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6233/Carles_Puyol.html",
+        "title": "Carles Puyol (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.fcbarcelona.com/en/news/1127439/carles-puyol-announces-he-is-leaving-fc-barcelona-at-the-end-of-the-season",
+        "title": "Carles Puyol announces he is leaving FC Barcelona at the end of the season | FC Barcelona"
+      }
+    ],
+    "notes": "A one-club, three-tier chronology (Barcelona C, then B, then the first team) is corroborated by both primary sources, the same reserve-to-first-team pattern already used for Cristiano Ronaldo/Sporting CP and Philipp Lahm/Bayern Munich II; FC Barcelona's own retirement announcement independently corroborates the May 2014 farewell after knee injuries. Long-serving Barcelona captain; part of Spain's 2010 FIFA World Cup-winning squad.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "fabio-cannavaro",
+    "name": "Fabio Cannavaro",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Napoli",
+        "years": "1992–1995",
+        "note": "Wikipedia's infobox lists 1991 club membership, but that year's own season table shows zero appearances; the first playing season and Serie A debut (7 March 1993) fall in 1992–93."
+      },
+      {
+        "name": "Parma",
+        "years": "1995–2002"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Juventus",
+        "years": "2004–2006"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2006–2009"
+      },
+      {
+        "name": "Juventus",
+        "years": "2009–2010",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Al Ahli Dubai",
+        "years": "2010–2011"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fabio_Cannavaro",
+        "title": "Fabio Cannavaro - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/3372/Fabio_Cannavaro.html",
+        "title": "Fabio Cannavaro (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.realmadrid.com/en-US/the-club/history/football-legends/fabio-cannavaro",
+        "title": "Fabio Cannavaro - History and honours | Official website Real Madrid C.F."
+      }
+    ],
+    "notes": "A seven-node chronology across two Juventus spells is corroborated by both primary sources; Real Madrid's own legends page independently corroborates his 2006–2009 spell there. Captained Italy to the 2006 World Cup and won the 2006 Ballon d'Or that same year while at Real Madrid, the most recent defender to receive the award.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "lilian-thuram",
+    "name": "Lilian Thuram",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Monaco",
+        "years": "1991–1996"
+      },
+      {
+        "name": "Parma",
+        "years": "1996–2001"
+      },
+      {
+        "name": "Juventus",
+        "years": "2001–2006"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2006–2008"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Lilian_Thuram",
+        "title": "Lilian Thuram - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2438/Lilian_Thuram.html",
+        "title": "Lilian Thuram (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.france24.com/en/20080801-french-football-icon-thuram-retires-football-france",
+        "title": "French football icon Thuram retires | France 24"
+      }
+    ],
+    "notes": "A clean four-club chronology is corroborated by both primary sources; France 24's contemporary report independently corroborates the August 2008 retirement after a heart condition was discovered during a medical for a proposed transfer to Paris Saint-Germain. Held the France national-team appearance record (142 caps) for over a decade after retiring.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "patrick-kluivert",
+    "name": "Patrick Kluivert",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "1994–1997"
+      },
+      {
+        "name": "AC Milan",
+        "years": "1997–1998"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1998–2004"
+      },
+      {
+        "name": "Newcastle United",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Valencia",
+        "years": "2005–2006"
+      },
+      {
+        "name": "PSV Eindhoven",
+        "years": "2006–2007"
+      },
+      {
+        "name": "Lille",
+        "years": "2007–2008"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Patrick_Kluivert",
+        "title": "Patrick Kluivert - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4633/Patrick_Kluivert.html",
+        "title": "Patrick Kluivert (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.fcbarcelona.com/en/news/1141559/legenday-goals-patrick-kluivert",
+        "title": "Legendary goals: Patrick Kluivert | FC Barcelona"
+      }
+    ],
+    "notes": "A seven-node chronology is corroborated by both primary sources; FC Barcelona's own retrospective independently corroborates his 1998–2004 spell there. Scored the winning goal in the 1995 European Cup final for Ajax aged 18, then a Bosman-rule move took him to AC Milan.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "claudio-caniggia",
+    "name": "Claudio Caniggia",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "1985–1988"
+      },
+      {
+        "name": "Hellas Verona",
+        "years": "1988–1989"
+      },
+      {
+        "name": "Atalanta",
+        "years": "1989–1992"
+      },
+      {
+        "name": "Roma",
+        "years": "1992–1994"
+      },
+      {
+        "name": "Benfica",
+        "years": "1994–1995",
+        "note": "Season-long loan."
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "1995–1998"
+      },
+      {
+        "name": "Atalanta",
+        "years": "1999–2000",
+        "note": "Second playing spell; helped the club win Serie B promotion."
+      },
+      {
+        "name": "Dundee",
+        "years": "2000–2001"
+      },
+      {
+        "name": "Rangers",
+        "years": "2001–2003"
+      },
+      {
+        "name": "Qatar SC",
+        "years": "2003–2004",
+        "note": "Final professional club spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Claudio_Caniggia",
+        "title": "Claudio Caniggia - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13481/Claudio_Caniggia.html",
+        "title": "Claudio Caniggia (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.101greatgoals.com/blog/still-got-it-45-year-old-claudio-caniggia-scores-for-wembley-in-the-fa-cup-v-langford",
+        "title": "Still got it! 45-year-old Claudio Caniggia scores for Wembley in the FA Cup v Langford | 101 Great Goals"
+      }
+    ],
+    "notes": "A ten-node chronology across two Atalanta spells is corroborated by both primary sources; 101greatgoals.com's contemporary report independently corroborates the excluded Wembley FC appearance below. Consistent with this project's existing Sócrates/Garforth Town precedent, a single August 2012 appearance for English ninth-tier Wembley FC at age 45 is excluded from the played chronology: it was an ex-professionals publicity initiative organised with Terry Venables and David Seaman for a televised FA Cup documentary, not in-scope professional senior football.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "roberto-ayala",
+    "name": "Roberto Ayala",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Ferro Carril Oeste",
+        "years": "1991–1993"
+      },
+      {
+        "name": "River Plate",
+        "years": "1993–1995"
+      },
+      {
+        "name": "Napoli",
+        "years": "1995–1998"
+      },
+      {
+        "name": "AC Milan",
+        "years": "1998–2000"
+      },
+      {
+        "name": "Valencia",
+        "years": "2000–2007"
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "2007–2010"
+      },
+      {
+        "name": "Racing Club",
+        "years": "2010–2011"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Roberto_Ayala",
+        "title": "Roberto Ayala - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/305/Roberto_Ayala.html",
+        "title": "Roberto Ayala (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.valenciacf.com/en-extensive-interview-with-ayala-on-47th-birthday-2020-04-14",
+        "title": "Extensive interview with Ayala on 47th birthday | Valencia CF"
+      }
+    ],
+    "notes": "A seven-node chronology is corroborated by both primary sources; Valencia CF's own retrospective interview independently corroborates his seven-season, two-La-Liga-title spell there. Known as 'El Ratón' (The Mouse); captained Argentina a record number of times, including matches at the 2006 World Cup, and was an overage player on the gold medal-winning 2004 Athens Olympic squad.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "ariel-ortega",
+    "name": "Ariel Ortega",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder / Forward",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "1991–1996"
+      },
+      {
+        "name": "Valencia",
+        "years": "1997–1998"
+      },
+      {
+        "name": "Sampdoria",
+        "years": "1998–1999"
+      },
+      {
+        "name": "Parma",
+        "years": "1999–2000"
+      },
+      {
+        "name": "River Plate",
+        "years": "2000–2002",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2002–2003"
+      },
+      {
+        "name": "Newell's Old Boys",
+        "years": "2004–2006"
+      },
+      {
+        "name": "River Plate",
+        "years": "2006–2012",
+        "note": "Third playing spell, interrupted by three outgoing loans (Independiente Rivadavia 2008–2009, All Boys 2011, Defensores de Belgrano 2011–2012); the exact resumption date between each loan and this spell is not independently resolved beyond Wikipedia's infobox structure."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ariel_Ortega",
+        "title": "Ariel Ortega - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/339/Ariel_Ortega.html",
+        "title": "Ariel Ortega (Player) | National Football Teams"
+      },
+      {
+        "url": "https://espndeportes.espn.com/futbol/argentina/nota/_/id/11037559/ariel-ortega-burrito-river-plate-idolo-perfil-carrera",
+        "title": "Ariel Ortega, el ídolo que nació para jugar en River - ESPN"
+      }
+    ],
+    "notes": "An eight-node chronology across three River Plate spells is corroborated by both primary sources; ESPN's profile independently corroborates his enduring standing as a River Plate idol. The third River Plate spell's interleaving with three short outgoing loans is disclosed as a qualification rather than asserted with exact day-level precision, the same treatment this project already gives Riise's Monaco B order and Cafu's Juventude spell. Known as 'El Burrito' for his dribbling; a River Plate and Argentina attacking-midfield icon of the 1990s and 2000s.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "bebeto",
+    "name": "Bebeto",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Vitória",
+        "years": "1982"
+      },
+      {
+        "name": "Flamengo",
+        "years": "1983–1989"
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "1989–1992"
+      },
+      {
+        "name": "Deportivo La Coruña",
+        "years": "1992–1996"
+      },
+      {
+        "name": "Flamengo",
+        "years": "1996",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Sevilla",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Vitória",
+        "years": "1997",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "1997"
+      },
+      {
+        "name": "Botafogo",
+        "years": "1998–1999"
+      },
+      {
+        "name": "Toros Neza",
+        "years": "1999"
+      },
+      {
+        "name": "Kashima Antlers",
+        "years": "2000"
+      },
+      {
+        "name": "Vitória",
+        "years": "2000",
+        "note": "Third playing spell."
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "2001",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Al-Ittihad",
+        "years": "2002",
+        "note": "Final professional club spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Bebeto",
+        "title": "Bebeto - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13642/Bebeto.html",
+        "title": "Bebeto (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.fifa.com/en/articles/94-days-to-go-qatar-2022-romario-bebeto-brazil-1994-fifa-world-cup",
+        "title": "Old rivals rock the baby (94) | 100 great World Cup moments | FIFA.com"
+      }
+    ],
+    "notes": "A fourteen-node chronology across three Vitória and two Flamengo/Vasco da Gama spells is retained in full, matching this roster's existing Romário/Rivaldo/Roque Santa Cruz long-tail precedent; both primary sources corroborate it, and FIFA's own retrospective independently corroborates his and Romário's strike partnership at the 1994 World Cup. Originated football's iconic baby-cradling goal celebration in the 1994 quarter-final against the Netherlands, two days after his son's birth.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "dunga",
+    "name": "Dunga",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Internacional",
+        "years": "1980–1984"
+      },
+      {
+        "name": "Corinthians",
+        "years": "1984–1985"
+      },
+      {
+        "name": "Santos",
+        "years": "1985–1987"
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "1987"
+      },
+      {
+        "name": "Pisa",
+        "years": "1987–1988"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1988–1992"
+      },
+      {
+        "name": "Pescara",
+        "years": "1992–1993"
+      },
+      {
+        "name": "VfB Stuttgart",
+        "years": "1993–1995"
+      },
+      {
+        "name": "Júbilo Iwata",
+        "years": "1995–1998"
+      },
+      {
+        "name": "Internacional",
+        "years": "1999–2000",
+        "note": "Second playing spell; final professional club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Dunga",
+        "title": "Dunga - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13640/Dunga.html",
+        "title": "Dunga (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.si.com/soccer/brazil-1994-world-cup-winning-squad-where-are-they-now",
+        "title": "Brazil's 1994 World Cup Winning Squad: Where Are They Now? | Sports Illustrated"
+      }
+    ],
+    "notes": "A ten-node chronology across two Internacional spells is corroborated by both primary sources; Sports Illustrated's retrospective independently corroborates his captaincy of Brazil's 1994 World Cup-winning squad. Defensive midfielder known for tactical discipline; later managed Brazil across two spells, out of scope for this playing-career record.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "brasileirao"
+    ]
   }
 ]
