@@ -82,6 +82,8 @@ Read the data policy and matching source records before editing careers. Researc
 
 Update the inline roster, curated records, citations/audit and both-language notes together when applicable. Preserve uncertainty labels for exceptional loans or signings. Use authentic embedded crests and retain attribution URLs. Source-identifier tests establish consistency, not historical truth.
 
+Every roster change also touches the player count in prose, not just the footer's own literal `"N PLAYERS · M EUROPE / M SOUTH AMERICA"` string in `index.html`. README.md and DESIGN.md each restate the current total and split in ordinary sentences (e.g. "110 playable careers... 55 representing European..."); a plain grep for the footer's digit-formatted pattern won't find a spelled-out or differently-worded prose mention, which is exactly how these went stale for several batches in a row (README.md said "Eighty playable careers" and DESIGN.md said "Eighty curated players" through the 90/100/110-player growth, unnoticed until fixed on 2026-09-15). Grep both files for the count directly (`grep -n "playable\|curated players" README.md DESIGN.md`) as part of the batch's own verification, not just the footer string.
+
 ### Ranked roster and applied migrations
 
 - `node scripts/export-ranked-roster.mjs --check` compares the inline model with the checked-in `202609130002_ranked_roster.sql` export only. It does **not** query or establish parity with the hosted database. Running the exporter without `--check` overwrites that migration; do not use it as a blind production-sync fix.

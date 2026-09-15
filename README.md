@@ -1,6 +1,6 @@
 # derabona
 
-A football-career quiz: read the club-crest timeline and identify the player from ten names (five for ranked accounts). Plain HTML, CSS and JavaScript; one portable `index.html` supports guest play without a build or network connection. Optional Google accounts use Supabase for persistent, server-scored progress and public nickname leaderboards.
+A football-career quiz: read the club-crest timeline and identify the player from ten names, in both guest and ranked play (see [ADR 0012](docs/adr/0012-ranked-ten-options-v2-ruleset.md); ranked's original five-option results remain immutable under their own `v1` ruleset). Plain HTML, CSS and JavaScript; one portable `index.html` supports guest play without a build or network connection. Optional Google accounts use Supabase for persistent, server-scored progress and public nickname leaderboards.
 
 **Website:** <https://derabona.club/> · [Leaderboard](https://derabona.club/leaderboard.html) · [Español](https://derabona.club/?lang=es) · [English](https://derabona.club/?lang=en)
 
@@ -25,10 +25,10 @@ Download `index.html` and open it in a modern browser for offline guest play. Al
 
 ## Rules
 
-- Eighty playable careers: forty representing European national teams and forty representing South American national teams. [Research and audit](DATA_AUDIT.md) document the five expansions and their evidence.
+- 110 playable careers: 55 representing European national teams and 55 representing South American national teams — this number grows with each research batch; [research and audit](DATA_AUDIT.md) document every expansion and its evidence, and the footer of the app itself always shows the current total.
 - Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão or All Players from the competition badge. Selection changes the playable pool, not a strict rival filter. Finish the active round first; an account has only one active server round even across devices.
 - Ten shuffled choices, in both guest/practice play and ranked accounts: one correct player and nine distinct eligible rivals, excluding identical ordered club careers (see [ADR 0012](docs/adr/0012-ranked-ten-options-v2-ruleset.md); ranked's original five-option results remain immutable under their own `v1` ruleset). No difficulty selector: origin-first Hard is automatic.
-- Wrong answers draw from playable players plus **59 researched wrong-answer-only profiles**. Starting domestic football system takes precedence, then contemporary overlap with debuts at most eight years apart, then career similarity with bounded noise. This does not add playable rounds. See [ADR 0003](docs/adr/0003-researched-contemporary-rivals.md).
+- Wrong answers draw from playable players plus a bank of researched wrong-answer-only profiles (67 as of this writing, and growing — see `research/verified-distractors.json` for the current count). Starting domestic football system takes precedence, then contemporary overlap with debuts at most eight years apart, then career similarity with bounded noise. This does not add playable rounds. See [ADR 0003](docs/adr/0003-researched-contemporary-rivals.md).
 - Three attempts. Wrong choices are disabled. A correct answer or third error ends the round; only then does Next Player appear. Hints reveal country, then position, then each club's years in the career timeline — three hints, the same in guest/practice and ranked play (see [ADR 0010](docs/adr/0010-ranked-third-hint-parity.md)). Hints reduce points; there is no initials hint.
 - A correct answer earns up to 100 points, reduced by 20% per hint and by answer speed: full value inside a 2-second grace window, decaying to a 25% floor by 24 seconds — long enough to actually read a 10-option career, short enough that an outside lookup can't out-score a fast, honest guess (see [ADR 0009](docs/adr/0009-speed-decay-anti-lookup-tightening.md), retuned by [ADR 0011](docs/adr/0011-longer-decay-window-and-guest-clock-persistence.md)). A loss earns zero. Both guest and ranked elapsed time are now persisted per active round (guest: sessionStorage, keyed to the current player; ranked: the server's `started_at`) and include time away - reloading cannot reset either clock, closing a real exploit where a guest reload used to zero out the elapsed time mid-round. A minimal `#speed-meter` strip along the top of the career panel shows this curve live and freezes once the round resolves; clicking it explains the elapsed time and points.
 - Resolved players, right or wrong, are excluded across competitions. Guests maintain that ledger for the tab session until unranked Reset. Accounts retain a permanent first result per player/ruleset. Exhausted competitions show Completed rather than offering ranked repeats.
@@ -40,7 +40,7 @@ Download `index.html` and open it in a modern browser for offline guest play. Al
 
 English and Spanish share the same offline artifact. Selection order: explicit `?lang=en/es`, saved preference, then Spanish. Language changes do not reset gameplay. UI, hints, notes and accessibility labels are translated; proper names and source article titles remain unchanged.
 
-Keyboard-operable controls, visible focus, text plus color feedback, live announcements and reduced-motion support are part of the contract. At widths of 800px and below, careers use a numbered four-column grid without horizontal scrolling; desktop retains horizontal timeline navigation. [TESTING.md](TESTING.md) records actual browser coverage and historical limitations rather than promising every browser or viewport is verified.
+Keyboard-operable controls, visible focus, text plus color feedback, live announcements and reduced-motion support are part of the contract. At widths of 800px and below, careers use a numbered four-column grid that grows to as many rows as needed, with no horizontal scrolling ([ADR 0016](docs/adr/0016-career-grid-at-every-width.md)). Above 800px the grid caps at two rows instead, and a career longer than that scrolls sideways rather than growing a third row, so the answer options never drop below the fold ([ADR 0017](docs/adr/0017-desktop-two-row-career-cap.md)). [TESTING.md](TESTING.md) records actual browser coverage and historical limitations rather than promising every browser or viewport is verified.
 
 ## Career-data policy
 
@@ -51,7 +51,7 @@ Timelines include professional senior clubs, competitive senior reserve spells, 
 ## Files and delivery
 
 - `index.html` — complete offline guest artifact; inline account client uses optional remote services.
-- `leaderboard.html` — standalone online ranking destination: global/competition filters, personal placement, pagination, and Play navigation; no gameplay mutations or analytics.
+- `leaderboard.html` — standalone online ranking destination: global/competition filters, personal placement, pagination, Play navigation, and (since [ADR 0014](docs/adr/0014-leaderboard-competition-crests-and-account-dialog-parity.md)) the same account dialog and competition-crest picker as the main game, for component parity; it still never starts ranked rounds, mutates gameplay or runs analytics. The Google OAuth handshake itself still only completes on `index.html`.
 - `privacy.html` — public bilingual account/analytics privacy page; include it in the static website package.
 - `AGENTS.md` — shared agent guidance; `CLAUDE.md` imports it, not a second policy copy.
 - `DESIGN.md`, `TESTING.md`, `docs/adr/` — product contract, verification and decision history.
