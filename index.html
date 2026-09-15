@@ -131,7 +131,7 @@ const AuthCallback = (()=>{
    two rows and let longer careers extend sideways instead of downward:
    grid-auto-flow:column fills each column top-to-bottom before starting
    the next one, so cards read as chronological pairs - down within a
-   pair, then right to the next pair - rather than reflowing into a third
+   pair, then up-right to the next pair - rather than reflowing into a third
    row. Most careers (up to ~14 clubs on a typical desktop width) still
    need no scrolling at all; only exceptionally well-traveled players do. */
 @media(min-width:801px){
@@ -140,6 +140,7 @@ const AuthCallback = (()=>{
   .timeline-scroll::-webkit-scrollbar-thumb{background:#56733d;border-radius:8px}
   .timeline{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:150px;width:max-content;min-width:100%;justify-content:center;column-gap:28px;row-gap:22px;align-items:start}
   .club:nth-child(odd):not(:last-child):after{content:"↓";top:auto;right:auto;bottom:-20px;left:50%;transform:translateX(-50%);font-size:15px}
+  .club:nth-child(even):not(:last-child):after{content:"↗";top:-30px;right:-23px;bottom:auto;left:auto;transform:none;font-size:17px}
   .pitch:before{display:none}
 }
 @media(max-width:580px){

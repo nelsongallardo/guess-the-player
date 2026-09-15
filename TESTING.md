@@ -1,5 +1,12 @@
 # Verification report
 
+## Desktop two-row career connector correction — 15 September 2026
+
+- Reproduced the reported Diego Milito route on fetched upstream `120914e` at 1128px: cards were placed chronologically top-to-bottom in each column, but inherited horizontal arrows made each bottom card appear to point to the next column's bottom card, visually skipping Real Zaragoza and Inter Milan.
+- Added a desktop-only up-right connector for non-final even/bottom cards. The route now renders `Racing Club ↓ Genoa ↗ Real Zaragoza ↓ Genoa ↗ Inter Milan ↓ Racing Club`; the mobile four-column grid keeps its existing row-major right arrows.
+- TDD evidence: `tests/career-arrow-layout.test.mjs` failed against the unchanged implementation because the even-card override was absent, then passed after the CSS correction. The dedicated real-Chromium `career-arrow-checks.js` also failed against an unchanged `HEAD:index.html` artifact and passed against the served worktree at 1128×700 and 375×667. The fixed screenshot was inspected for chronology, clipping and overlap.
+- All **103 non-PostgreSQL Node tests passed**, plus ranked-roster export parity and source-identifier checks. The focused `mobile-language-checks.js`, `seo-checks.js` and `offline-checks.js` still stop at their all-image `decode()` assertion with `EncodingError`; the same failure reproduced against unchanged `HEAD:index.html`, so it is not introduced by this CSS-only fix. No assertions were removed or weakened. Native PostgreSQL, Deno, hosted site, OAuth and Supabase were not exercised for this frontend layout correction.
+
 ## Hosted migration deployment — 14 September 2026
 
 - Owner connected their own Supabase CLI session (`supabase login`, browser OAuth, no credentials passed through the agent session) and linked project `derabona` (ref `iaebecfxjwjzkapqdeha`). `supabase migration list` showed the live database at `202609130003` (schema + aliases), with `202609140001`/`202609140002` (speed decay, third hint) never yet deployed.
