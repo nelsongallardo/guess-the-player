@@ -112,36 +112,46 @@ const AuthCallback = (()=>{
 .club-years{font-size:10px;line-height:1.3;white-space:normal;overflow-wrap:anywhere}
 .club-tag{font-size:9px;line-height:1.25;letter-spacing:0;min-height:0;overflow-wrap:anywhere;margin-top:4px}
 .club-tag:empty{display:none}
-/* Mobile (ADR 0016): every club wraps into a plain four-column grid,
-   growing to as many rows as a career needs - the whole page already
-   scrolls vertically there, so extra rows cost nothing. */
+/* Clubs are grouped into pages of up to eight (renderCareer(), ADR 0018)
+   so every connector arrow always points at the very next chronological
+   card. Suppressing it at every fourth card (the end of a row, or of a
+   page) is correct either way: the reader's eye continues on its own,
+   the same convention this app already used before any of this paging
+   existed. nth-child counts siblings within each .timeline-page, so this
+   one rule is already correct per page regardless of width. */
+.club:nth-child(4n):after{content:none}
+.pitch:before{display:none}
+/* Mobile (ADR 0016): .timeline-page is display:contents, invisible to
+   layout, so every club still flows into one continuous four-column grid
+   that grows to as many rows as the career needs - the whole page already
+   scrolls vertically there, so extra rows cost nothing. Pixel-identical
+   to before pages existed in the DOM. */
 @media(max-width:800px){
   .timeline-scroll{overflow:visible;padding:20px 14px;scrollbar-width:none}
   .timeline-scroll::-webkit-scrollbar{display:none}
   .timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;max-width:640px;margin:0 auto;min-width:0;gap:18px 12px;align-items:start}
+  .timeline-page{display:contents}
   .club:not(:last-child):after{top:18px;right:-12px;font-size:13px}
-  .club:nth-child(4n):after{content:none}
   .crest-disc{width:56px;height:56px;border-radius:12px;margin-bottom:7px}
   .crest-disc img{width:42px;height:42px}
-  .pitch:before{display:none}
 }
-/* Desktop (ADR 0017): unlike mobile, the game panel is usually the whole
-   viewport, so an unbounded grid (ADR 0016's original desktop behaviour)
-   pushes the answer options below the fold on a long career. Cap it at
-   two rows and let longer careers extend sideways instead of downward:
-   grid-auto-flow:column fills each column top-to-bottom before starting
-   the next one, so cards read as chronological pairs - down within a
-   pair, then up-right to the next pair - rather than reflowing into a third
-   row. Most careers (up to ~14 clubs on a typical desktop width) still
-   need no scrolling at all; only exceptionally well-traveled players do. */
+/* Desktop (ADR 0018, replacing 0017's column-major attempt - its diagonal
+   connectors, even after correcting which one they pointed at, still read
+   as confusing compared to a plain row-major grid). Unlike mobile, the
+   game panel is usually the whole viewport, so letting a career grow past
+   two rows pushes the answer options below the fold - each page is its
+   own real two-row, four-column grid instead (same reading order as
+   mobile: left to right, then down), so a career longer than one page
+   just adds another page alongside it. .timeline lays pages out in a row;
+   .timeline-scroll's real horizontal scrollbar reaches whatever doesn't
+   fit at the current width. Most careers still need no scrolling at all -
+   only exceptionally well-traveled players do. */
 @media(min-width:801px){
   .timeline-scroll{overflow-x:auto;overflow-y:visible;padding:26px 24px 23px;scrollbar-width:thin;scrollbar-color:#56733d transparent;overscroll-behavior-x:contain}
   .timeline-scroll::-webkit-scrollbar{height:8px}
   .timeline-scroll::-webkit-scrollbar-thumb{background:#56733d;border-radius:8px}
-  .timeline{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:150px;width:max-content;min-width:100%;justify-content:center;column-gap:28px;row-gap:22px;align-items:start}
-  .club:nth-child(odd):not(:last-child):after{content:"↓";top:auto;right:auto;bottom:-20px;left:50%;transform:translateX(-50%);font-size:15px}
-  .club:nth-child(even):not(:last-child):after{content:"↗";top:-30px;right:-23px;bottom:auto;left:auto;transform:none;font-size:17px}
-  .pitch:before{display:none}
+  .timeline{display:flex;width:max-content;min-width:100%;justify-content:center;gap:44px;align-items:flex-start}
+  .timeline-page{display:grid;grid-template-columns:repeat(4,150px);grid-template-rows:repeat(2,auto);column-gap:28px;row-gap:22px;flex-shrink:0}
 }
 @media(max-width:580px){
   .masthead{padding:12px 0;gap:8px}.brand{gap:8px}.mark{width:30px;height:34px}.wordmark{font-size:20px}.masthead-right{gap:6px}
@@ -329,7 +339,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 <noscript><p>This game needs JavaScript. Enable it and reload. / Este juego necesita JavaScript. Actívalo y recarga la página.</p></noscript>
 <div id="game-loading-status" role="status" aria-live="polite" aria-atomic="true" hidden><span class="loading-brand" aria-hidden="true">derabona · FÚTBOL</span><div class="loading-heading"><span class="loading-spinner" aria-hidden="true"></span><span id="game-loading-text">Preparando el desafío…</span></div><div class="loading-skeleton" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
 <section id="round-panel" aria-label="Current round" aria-busy="false">
-<div class="pitch"><div class="pitch-skin" id="pitch-skin" aria-hidden="true"></div><button type="button" id="speed-meter" class="speed-meter" hidden aria-label="Round timer — click for details"><span class="speed-meter-track"><span class="speed-meter-fill" id="speed-meter-fill"></span></span></button><p id="speed-meter-note" role="status" hidden></p><div class="pitch-top"><div class="attempts"><span id="attempt-text">3 attempts left</span><div class="lives" id="lives" aria-hidden="true"></div></div></div><div id="timeline-scroll" class="timeline-scroll" tabindex="0" role="region" aria-label="Club career, in chronological order."><ol id="timeline" class="timeline"></ol></div><div class="file-label round-tag"><strong id="round-number">01 / 50</strong></div></div>
+<div class="pitch"><div class="pitch-skin" id="pitch-skin" aria-hidden="true"></div><button type="button" id="speed-meter" class="speed-meter" hidden aria-label="Round timer — click for details"><span class="speed-meter-track"><span class="speed-meter-fill" id="speed-meter-fill"></span></span></button><p id="speed-meter-note" role="status" hidden></p><div class="pitch-top"><div class="attempts"><span id="attempt-text">3 attempts left</span><div class="lives" id="lives" aria-hidden="true"></div></div></div><div id="timeline-scroll" class="timeline-scroll" tabindex="0" role="region" aria-label="Club career, in chronological order."><div id="timeline" class="timeline"></div></div><div class="file-label round-tag"><strong id="round-number">01 / 50</strong></div></div>
 <div class="progress-track"><progress id="progress" value="0" max="50" aria-label="Completed rounds"></progress><span id="progress-label">0 OF 50 COMPLETE</span></div>
 <div class="answer-heading"><h2 id="question" tabindex="-1">Who is this player?</h2><p id="answer-caption">Five names. Three chances.</p></div>
 <div id="options" class="options" role="group" aria-labelledby="question"></div>
@@ -17703,16 +17713,25 @@ function tagFor(club){
   if(/return/i.test(note))return t.return;
   return '';
 }
+// Clubs are grouped into pages of up to eight (a 4x2 block) so each page
+// can read row-major - left to right, then down - with no connector arrow
+// ever pointing somewhere other than the very next chronological club. See
+// ADR 0018: mobile makes .timeline-page invisible to layout (display:contents)
+// so this grouping is purely a DOM/testing convenience there; desktop lays
+// pages out side by side and lets .timeline-scroll's real scrollbar reach
+// whatever doesn't fit in the first page at the current width.
 function renderCareer(player){
   $('timeline').replaceChildren();
+  let page=null;
   player.clubs.forEach((club,index)=>{
-    const li=el('li',undefined,'club'),disc=el('div',undefined,'crest-disc'),img=el('img'),step=el('span',String(index+1),'club-step');
+    if(index%8===0){page=el('div',undefined,'timeline-page');$('timeline').append(page);}
+    const card=el('div',undefined,'club'),disc=el('div',undefined,'crest-disc'),img=el('img'),step=el('span',String(index+1),'club-step');
     step.setAttribute('aria-hidden','true');
     img.src=CREST_ASSETS[player.clubCrests[index]].dataUrl;img.alt=language==='es'?`Escudo de ${club.name}`:`${club.name} crest`;img.width=57;img.height=57;img.decoding='async';
     img.addEventListener('error',()=>{img.hidden=true;disc.append(el('span',club.name.split(' ').map(x=>x[0]).join(''),'option-letter'));},{once:true});
     disc.append(img);
-    li.append(step,disc,el('div',club.name,'club-name'),el('div',club.years.replace('present',copy().present),'club-years'),el('div',tagFor(club),'club-tag'));
-    $('timeline').append(li);
+    card.append(step,disc,el('div',club.name,'club-name'),el('div',club.years.replace('present',copy().present),'club-years'),el('div',tagFor(club),'club-tag'));
+    page.append(card);
   });
 }
 function renderSources(player){

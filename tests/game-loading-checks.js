@@ -32,7 +32,7 @@ async page => {
     ok(await p.locator('#account-notice').isHidden(),'No phantom completed notice during start');
     start.release();await p.locator('#timeline .crest-disc img').first().waitFor({state:'visible'});await loading('Confirmation wait shows loader and authoritative career');
     ok(await p.locator('.loading-skeleton').isHidden()&&await p.locator('.loading-brand').isHidden(),'Confirmation preview hides decorative loader content');
-    const geometry=await p.evaluate(()=>{const strip=document.querySelector('#game-loading-status').getBoundingClientRect(),row=document.querySelector('#timeline li').getBoundingClientRect();return {stripHeight:strip.height,rowTop:row.top,rowBottom:row.bottom,viewport:innerHeight};});
+    const geometry=await p.evaluate(()=>{const strip=document.querySelector('#game-loading-status').getBoundingClientRect(),row=document.querySelector('#timeline .club').getBoundingClientRect();return {stripHeight:strip.height,rowTop:row.top,rowBottom:row.bottom,viewport:innerHeight};});
     ok(geometry.stripHeight>=44&&geometry.stripHeight<=60,'Confirmation strip stays within 44–60px');
     ok(geometry.rowTop>=0&&geometry.rowBottom<=geometry.viewport,'First career row fully visible in short 667px viewport');
     ok(await p.locator('#hint').isDisabled()&&await p.locator('#options button:enabled').count()===0,'Preview remains locked until exact progress readback');
