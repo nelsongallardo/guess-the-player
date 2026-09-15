@@ -16060,15 +16060,44 @@ function render(celebrate=false,newCareer=false){
   // rather than the bar reading "0 of N" as if nothing had happened.
   const competitionTotal=CareerGame.playersFor(state.competition).length;
   const competitionSeen=CareerGame.playersFor(state.competition).filter(pl=>seen.has(pl.id)).length;
-  $('progress').max=competitionTotal;$('progress').value=competitionSeen;$('progress-label').textContent=t.progress(competitionSeen,competitionTotal);$('options').replaceChildren();
-  r.options.forEach((name,i)=>{
-    const wrong=r.guesses.includes(name)&&name!==p.name,correct=result!=='playing'&&name===p.name,b=el('button',undefined,'option');b.type='button';b.dataset.name=name;b.disabled=wrong||result!=='playing';
-    if(wrong)b.classList.add('wrong');if(correct)b.classList.add('correct');if(correct&&celebrate&&result==='won')b.classList.add('goal');if(result!=='playing'&&!wrong&&!correct)b.classList.add('muted');
+  $('progress').max=competitionTotal;$('progress').value=competitionSeen;$('progress-label').textContent=t.progress(competitionSeen,competitionTotal);
+  // Rebuilding all ten option buttons from scratch on every render() call -
+  // including a hint click, which never touches r.options or r.guesses at
+  // all - tore down and recreated the whole grid on every interaction, a
+  // visible flash unrelated to what actually changed. Only rebuild when the
+  // round's own option set changed (a genuinely new round); every other
+  // render just patches the existing buttons' disabled/class/label state.
+  {
+    const existingOptions=[...$('options').children];
+    if(existingOptions.length!==r.options.length||existingOptions.some((b,i)=>b.dataset.name!==r.options[i])){
+      $('options').replaceChildren();
+      r.options.forEach((name,i)=>{
+        const b=el('button',undefined,'option');b.type='button';b.dataset.name=name;
+        const letter=el('span',String.fromCharCode(65+i),'option-letter'),suffix=el('span',undefined,'option-state');
+        letter.setAttribute('aria-hidden','true');suffix.setAttribute('aria-hidden','true');
+        b.append(letter,el('span',name,'option-name'),suffix);
+        b.addEventListener('click',()=>{
+          if(RankedUI.isAccountMode())return;
+          const before=CareerGame.outcome(state),elapsedMs=Date.now()-roundClockStart;
+          if(!CareerGame.answer(state,name,elapsedMs))return;
+          tallyRound(before);Analytics.capture("answer_submitted",{correct:name===CareerGame.playerAt(state).name});
+          if(CareerGame.outcome(state)!=="playing")Analytics.capture("round_completed");
+          render(true);
+          const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');
+          target?.focus({preventScroll:true});
+        });
+        $('options').append(b);
+      });
+    }
+  }
+  [...$('options').children].forEach((b,i)=>{
+    const name=r.options[i],wrong=r.guesses.includes(name)&&name!==p.name,correct=result!=='playing'&&name===p.name;
+    b.disabled=wrong||result!=='playing';
+    b.classList.toggle('wrong',wrong);b.classList.toggle('correct',correct);
+    b.classList.toggle('goal',!!(correct&&celebrate&&result==='won'));
+    b.classList.toggle('muted',result!=='playing'&&!wrong&&!correct);
     b.setAttribute('aria-label',`${name}${wrong?', '+t.incorrect:correct?', '+t.correct:''}`);
-    const suffix=el('span',wrong?'×':correct?'✓':'↗','option-state'),letter=el('span',String.fromCharCode(65+i),'option-letter');suffix.setAttribute('aria-hidden','true');letter.setAttribute('aria-hidden','true');
-    b.append(letter,el('span',name,'option-name'),suffix);
-    b.addEventListener('click',()=>{if(RankedUI.isAccountMode())return;const elapsedMs=Date.now()-roundClockStart,before=result;if(!CareerGame.answer(state,name,elapsedMs))return;tallyRound(before);Analytics.capture("answer_submitted",{correct:name===p.name});if(CareerGame.outcome(state)!=="playing")Analytics.capture("round_completed");render(true);const target=CareerGame.outcome(state)!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)');target?.focus({preventScroll:true});});
-    $('options').append(b);
+    b.querySelector('.option-state').textContent=wrong?'×':correct?'✓':'↗';
   });
   const values=hintValues(p);$('hints').replaceChildren(...t.hints.map((label,i)=>el('li',i<r.hints?`${label}: ${values[i]}`:`${i+1}. ${label}`,i<r.hints?'revealed':'')));
   $('hint').disabled=r.hints>=3||result!=='playing';$('hint-label').textContent=r.hints>=3?t.allHints:t.hint;$('hint-count').textContent=`${Math.min(r.hints,3)} / 3`;
@@ -16222,17 +16251,38 @@ const RankedUI = (()=>{
     $('progress').max=counts.total;$('progress').value=counts.answered;$('progress-label').textContent=x.progress(counts.answered,counts.total);
     const left=r.status==='won'?Math.max(0,4-r.guesses.length):Math.max(0,3-r.guesses.length);
     $('attempt-text').textContent=r.status==='won'?x.found:x.attempts(left);$('lives').replaceChildren(...Array.from({length:3},(_,i)=>el('span',undefined,'life'+(i>=left?' used':''))));
-    $('options').replaceChildren();r.options.forEach((option,i)=>{const guessed=r.guesses.includes(option.id),correct=r.status!=='playing'&&option.label===p.name,wrong=guessed&&!correct,
-      // The server round trip (real network + function + DB latency, not
-      // something a client can shortcut without moving correctness
-      // verification client-side and breaking ranked's whole anti-cheat
-      // premise) used to leave every option looking identically disabled
-      // the instant one was tapped - correctness only arrives with the
-      // response, but WHICH option was tapped is already known locally.
-      // Highlight that one as "checking" immediately instead of looking
-      // like the tap did nothing; see ADR 0013.
-      awaiting=pending?.action==='answer'&&pending.optionId===option.id,
-      b=el('button',undefined,'option'+(wrong?' wrong':correct?' correct':awaiting?' awaiting':''));b.type='button';b.dataset.optionId=option.id;b.disabled=busy||!!pending||r.status!=='playing'||guessed;b.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',wrong?'×':correct?'✓':awaiting?'':'↗','option-state'));b.setAttribute('aria-label',option.label+(wrong?', '+x.incorrect:correct?', '+x.correct:awaiting?', '+x.checking:''));b.onclick=()=>mutate('answer',{optionId:option.id});$('options').append(b);});
+    // Same fix as guest's render(): only rebuild the option buttons when the
+    // round's own option set changed (a genuinely new round), not on every
+    // hint/answer response - those never change which options exist, only
+    // their disabled/class/label state, patched in place below instead.
+    {
+      const existingOptions=[...$('options').children];
+      if(existingOptions.length!==r.options.length||existingOptions.some((b,i)=>b.dataset.optionId!==r.options[i].id)){
+        $('options').replaceChildren();
+        r.options.forEach((option,i)=>{
+          const b=el('button',undefined,'option');b.type='button';b.dataset.optionId=option.id;
+          b.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',undefined,'option-state'));
+          b.onclick=()=>mutate('answer',{optionId:option.id});
+          $('options').append(b);
+        });
+      }
+    }
+    [...$('options').children].forEach((b,i)=>{
+      const option=r.options[i],guessed=r.guesses.includes(option.id),correct=r.status!=='playing'&&option.label===p.name,wrong=guessed&&!correct,
+        // The server round trip (real network + function + DB latency, not
+        // something a client can shortcut without moving correctness
+        // verification client-side and breaking ranked's whole anti-cheat
+        // premise) used to leave every option looking identically disabled
+        // the instant one was tapped - correctness only arrives with the
+        // response, but WHICH option was tapped is already known locally.
+        // Highlight that one as "checking" immediately instead of looking
+        // like the tap did nothing; see ADR 0013.
+        awaiting=pending?.action==='answer'&&pending.optionId===option.id;
+      b.className='option'+(wrong?' wrong':correct?' correct':awaiting?' awaiting':'');
+      b.disabled=busy||!!pending||r.status!=='playing'||guessed;
+      b.setAttribute('aria-label',option.label+(wrong?', '+x.incorrect:correct?', '+x.correct:awaiting?', '+x.checking:''));
+      b.querySelector('.option-state').textContent=wrong?'×':correct?'✓':awaiting?'':'↗';
+    });
     const clues=[language==='es'?(COUNTRIES_ES[r.clueCountry]||r.clueCountry):r.clueCountry,language==='es'?(POSITIONS_ES[r.cluePosition]||r.cluePosition):r.cluePosition,x.yearsRevealed];
     $('hints').replaceChildren(...x.hints.map((label,i)=>el('li',i<r.hints?label+': '+(clues[i]||'—'):`${i+1}. ${label}`,i<r.hints?'revealed':'')));
     $('hint').disabled=busy||!!pending||r.hints>=3||r.status!=='playing';$('hint-label').textContent=r.hints>=3?x.allHints:x.hint;$('hint-count').textContent=`${r.hints} / 3`;
@@ -16267,7 +16317,13 @@ const RankedUI = (()=>{
     // docs/adr/0013-single-round-trip-ranked-mutations.md.
     try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data);pending=null;
     }catch(error){if(!current(ticket,owner))return;mode='unavailable';notice='unavailable';if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','INVALID_NICKNAME','NICKNAME_TAKEN','IDEMPOTENCY_CONFLICT','STALE_VERSION','ROUND_NOT_PLAYING','ROUND_COMPLETE','COMPETITION_COMPLETE','NO_PLAYERS','NO_UNSEEN_PLAYERS'].includes(error.code))pending=null;}
-    finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,true);if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}}}
+    // newCareer was `true` here unconditionally for every action - hint and
+    // answer responses stay on the exact same round/player, so that forced
+    // renderRanked()'s "is this actually a new career?" check
+    // (newCareer||timeline.dataset.rankedPlayer!==p.id) to always take the
+    // true branch and rebuild the whole crest timeline from scratch on every
+    // hint click and every answer, not just when a round genuinely starts.
+    finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,payload.action==='start');if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}}}
   }
   function freshGuest(){userId=null;pendingUserId=null;epoch++;cloud=null;pending=null;busy=false;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();$('public-nickname').value='';applyLanguage();render(false,true);}
   function authChanged(event,session){
