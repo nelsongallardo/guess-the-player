@@ -49,18 +49,11 @@ async page => {
     await page.setViewportSize({width,height:1080});
     const layout=await page.evaluate(()=>({width:innerWidth,pageWidth:document.documentElement.scrollWidth,timelineWidth:document.querySelector('#timeline-scroll').clientWidth,timelineContent:document.querySelector('#timeline-scroll').scrollWidth,buttons:[...document.querySelectorAll('#options button')].map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})),first:document.querySelector('#timeline li').getBoundingClientRect().left}));
     ok(layout.pageWidth<=width,`No page overflow at ${width}px`);ok(layout.buttons.every(b=>b.h>=44&&b.w>=44),`Touch targets at ${width}px`);
-    if(width<=800)ok(layout.timelineContent<=layout.timelineWidth,'Mobile career fully fits without horizontal scroll');
-    else ok(layout.timelineContent>layout.timelineWidth,'Desktop long timeline scrolls independently');
+    ok(layout.timelineContent<=layout.timelineWidth,`Career fully fits without horizontal scroll at ${width}px`);
     ok(layout.first>=0,'Debut crest visible, not clipped');layouts.push(layout);
     if(width===375)await page.screenshot({path:'test-results/mobile.png',fullPage:true});
     if(width===1440)await page.screenshot({path:'test-results/desktop.png',fullPage:true});
   }
-  await page.emulateMedia({reducedMotion:'reduce'});
-  await page.locator('#career-forward').click();await page.waitForFunction(()=>document.querySelector('#timeline-scroll').scrollLeft>0);
-  await page.locator('#career-back').click();await page.waitForFunction(()=>document.querySelector('#timeline-scroll').scrollLeft<=1); // Match the UI's 1px boundary tolerance for fractional scroll steps.
-  await page.locator('#timeline-scroll').focus();await page.keyboard.press('ArrowRight');await page.waitForFunction(()=>document.querySelector('#timeline-scroll').scrollLeft>0);
-  await page.evaluate(()=>{document.querySelector('#timeline-scroll').scrollLeft=0;});
-  await page.emulateMedia({reducedMotion:'no-preference'});
   checks.push('keyboard modal, malformed save recovery, 320/375/768/1440px layout, 44px touch targets');
   let wins=0,streak=0,best=0;
   for(let i=0;i<70;i++){

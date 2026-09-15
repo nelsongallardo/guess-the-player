@@ -31,7 +31,6 @@ async page => {
         return checked;
       },{locale});
       ok(rows.length===70&&new Set(rows).size===70,'Every player checked');cases.push({locale,width,players:rows.length});
-      ok(!await page.locator('#career-navigation').isVisible(),'No mobile scroll controls');
     }
   }
   await page.goto(url+'?lang=es');await page.setViewportSize({width:375,height:667});
