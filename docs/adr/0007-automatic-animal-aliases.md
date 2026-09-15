@@ -1,6 +1,6 @@
 # ADR 0007 — Automatic animal aliases and leaderboard participation
 
-- Status: Accepted.
+- Status: Accepted. Amended by [ADR 0019](0019-suggest-google-name-as-nickname.md) — the account-independent-of-Google-identity default still holds, but the optional nickname field now suggests the player's own Google name as an editable starting point rather than promising it is "never published."
 - Date: 2026-09-13.
 - Supersedes the manual nickname enrollment requirement in ADR 0006. Scoring, first-result eligibility, membership filtering and account/analytics separation are unchanged.
 
