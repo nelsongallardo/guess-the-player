@@ -18,8 +18,15 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   // play when signed in) is the one contextual nav action back to the game.
   assert.match(html,/<a class="cta" id="account-link" href="index\.html\?account=1">/);
   assert.doesNotMatch(html,/<iframe\b|http-equiv="refresh"/i);
+  // The full 90-player roster/crest-data/game-model blocks (over 1MB) stay
+  // out - that's the actual "heavy game artifact" this guards against.
+  // ADR 0014 added the six competition crests and a duplicate account
+  // dialog (~80KB combined) for full component parity with the main game's
+  // own picker/account UI - a real, bounded, deliberate size increase, not
+  // this guardrail being defeated.
   assert.doesNotMatch(html,/id="(?:roster-data|crest-data|game-model)"/);
-  assert.ok(Buffer.byteLength(html)<100_000,'Standalone board must not duplicate the heavy game artifact');
+  assert.ok(Buffer.byteLength(html)<130_000,'Standalone board must not duplicate the heavy game artifact');
+  assert.match(html,/<dialog id="account-dialog"/,'ADR 0014: same account-dialog component as the main game, not a link away from it');
   const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].filter(m=>m[1].trim()&&!m[0].includes('application/ld+json'));
   assert.ok(scripts.length>0);
   for(const script of scripts)new vm.Script(script[1]);

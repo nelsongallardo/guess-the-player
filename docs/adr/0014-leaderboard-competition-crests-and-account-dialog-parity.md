@@ -1,0 +1,28 @@
+# 14. Leaderboard page gets real competition crests and a full account dialog
+
+Status: Accepted — implemented 2026-09-15. Amends [ADR 0008](0008-standalone-leaderboard-page.md), specifically its "Account controls remain on the game" decision.
+
+## Context
+
+`leaderboard.html`'s own competition picker (added earlier the same day, matching the main game's badge+dialog pattern) used a generic trophy icon for every option instead of real crests, since the page never embedded any crest data. Its masthead account button linked to `index.html?account=1` rather than opening anything locally - clicking it left the leaderboard page entirely.
+
+The owner asked for true component parity: the same competition picker (with real crests) and the same account button (showing points, not navigating away) on both pages. ADR 0008 had explicitly decided "account controls remain on the game" to avoid duplicating Google's OAuth sign-in flow across two pages, and the standalone page's own size assertion (`Buffer.byteLength(html)<100_000`) existed specifically to keep it a genuinely lightweight, read-only destination. Both constraints were deliberate, not oversights - so this change consciously overrides them, with the owner's explicit sign-off after being shown the tradeoff (more code to maintain in two places; a real technical limit on how far the account button can go).
+
+## Decision
+
+**Competition picker crests**: `leaderboard.html` now embeds the same `COMPETITION_LOGOS` object as `index.html` (the six competition crests, ~62KB total as base64 SVG data URIs) and derives its own `BRAND_MARK_ICON` by cloning its own header `.mark` SVG (mirroring `index.html`'s `cloneMark`). `renderCompetitionOptions()` and the trigger button (`#change-board-competition`) now show real crests/the brand mark exactly like `index.html`'s own picker, including the trigger swapping from a trophy icon to the selected competition's crest.
+
+**Account dialog**: `#account-dialog` is now a full, near-identical copy of `index.html`'s own dialog (same IDs, same CSS, same layout from the earlier redesign) - pitch/status copy, primary actions, an alias section (nickname change with its anchored info tooltip), a danger zone (account deletion), and a close button. Sign out, nickname enrollment and account deletion are all plain authenticated HTTP calls (`accountRequest()`, mirroring `index.html`'s `Accounts.request()`) using the session already available via the page's existing Supabase client - nothing about *those* actions required OAuth. The masthead account button now shows the point total (fetched lazily via `{action:'progress'}` the first time the dialog opens for a signed-in identity) and opens the dialog in place, the same component and interaction as `index.html`'s `#account-open`.
+
+**What could not move**: `board-url-privacy`'s own comment states plainly that this page "never consumes authentication callbacks" - `code`/`state`/token fragments are stripped from the URL before any script can read them, and the OAuth provider's configured redirect URI targets `index.html` specifically (a Supabase/Google dashboard setting, not something a code change can safely alter without live-testing a real OAuth round trip, which this environment cannot do). So "Continuar con Google" stays an `<a href="index.html?account=1">` inside the local dialog - clicking it is the one action that still leaves the page, and only that one. Every other account action working in place was verified directly, not assumed.
+
+Also omitted deliberately: `index.html`'s `#account-ranked` ("Volver a clasificación") button has no meaningful action on a read-only leaderboard page (there's no ranked round to return to), so it isn't part of this page's copy of the dialog - literal 1:1 markup wasn't the goal, behavioral parity was.
+
+`tests/leaderboard-page.test.mjs`'s size guardrail moves from 100KB to 130KB, with a comment distinguishing what it still protects against (the actual heavy artifact - the 90-player roster/crest-data/game-model blocks, well over 1MB, still explicitly asserted absent) from this deliberate, bounded ~80KB addition. A new assertion confirms `#account-dialog` exists, documenting the ADR 0008 reversal rather than leaving it implicit.
+
+## Consequences
+
+- `leaderboard.html` grew from ~31KB to ~110KB. Still nowhere near "the heavy game artifact" the original guardrail existed to catch (no roster, no player crests, no game model).
+- Real-browser verification (ad hoc, this session - not yet added to `tests/leaderboard-checks.js`) confirmed: the picker's crests render and the trigger swaps icons on selection; the account dialog opens in place with no navigation; a mocked signed-in identity correctly shows points, changes nickname, signs out, and deletes the account, all via authenticated requests with no page errors. A real bug was caught this way and fixed before shipping: `#account-delete`'s own `hidden` attribute was never toggled (only its wrapper `#danger-section`'s was), so the button stayed permanently hidden regardless of sign-in state.
+- Two independent Supabase client bootstraps now exist (one per page) sharing the same `derabona.auth.v1` storage key and public config - already true before this change for read-only identity checks, now also true for mutations. `tests/leaderboard-page.test.mjs`'s existing "shares public backend and auth storage configuration" test still guards that they can't silently drift apart.
+- No formal `tests/leaderboard-checks.js` browser-suite coverage was added for the new account dialog's interactive flows in this change - only ad hoc verification. A follow-up should add real coverage there, mirroring `tests/accounts-checks.js`'s mock pattern.

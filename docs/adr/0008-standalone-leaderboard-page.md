@@ -1,7 +1,7 @@
 # ADR 0008 — Standalone leaderboard destination
 
 - Date: 2026-09-13
-- Status: Accepted
+- Status: Accepted — "Account controls remain on the game" and the page's lightweight-size intent are amended by [ADR 0014](0014-leaderboard-competition-crests-and-account-dialog-parity.md): the page now embeds competition crests and a near-full copy of the account dialog for component parity, with only the Google OAuth handshake itself still requiring a trip to `index.html`.
 
 ## Context
 
