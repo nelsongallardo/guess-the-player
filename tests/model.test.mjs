@@ -334,10 +334,8 @@ test('Spanish copy, all 110 career notes and every country/position are translat
   }
   assert.ok(COPY.en.rules.includes('youth teams, national teams and coaching jobs are excluded'));
   assert.ok(COPY.es.rules.includes('se excluyen juveniles, selecciones y etapas como entrenador'));
-  // The rules dialog copy is out of scope for the roster expansion (a
-  // concurrent scoring/FAQ change owns that text) and still states an
-  // earlier pre-expansion count; only the footer reflects the current 110/55/55 roster.
-  for(const lang of ['en','es']){assert.ok(COPY[lang].footer.includes('110 '));assert.ok(COPY[lang].footer.includes('55 '));assert.ok(COPY[lang].rules.includes('70 '));}
+  // The rules dialog and footer both describe the current 110-player roster.
+  for(const lang of ['en','es']){assert.ok(COPY[lang].footer.includes('110 '));assert.ok(COPY[lang].footer.includes('55 '));assert.ok(COPY[lang].rules.includes('110 '));}
   assert.equal(COPY.es.question,'¿Quién es este jugador?');
   assert.equal(COPY.es.attempts(1),'Queda 1 intento');
   assert.equal(COPY.es.hints.join('|'),'País|Posición|Años');

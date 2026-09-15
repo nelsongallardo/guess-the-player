@@ -4,17 +4,18 @@ Start `python3 -m http.server 4173 --bind 127.0.0.1` at repo root first.
 import argparse
 import datetime
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
 
 root = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
-SUITES = ['browser-checks.js', 'career-arrow-checks.js', 'offline-checks.js', 'mobile-language-checks.js', 'difficulty-checks.js', 'expansion-checks.js', 'brand-checks.js', 'origin-checks.js', 'saved-rivals-checks.js', 'seo-checks.js', 'analytics-checks.js', 'guest-session-checks.js', 'accounts-checks.js', 'leaderboard-checks.js', 'game-loading-checks.js', 'nickname-suggestion-checks.js']
+SUITES = ['browser-checks.js', 'career-arrow-checks.js', 'guest-ranked-disclosure-checks.js', 'offline-checks.js', 'mobile-language-checks.js', 'difficulty-checks.js', 'expansion-checks.js', 'brand-checks.js', 'origin-checks.js', 'saved-rivals-checks.js', 'seo-checks.js', 'analytics-checks.js', 'guest-session-checks.js', 'accounts-checks.js', 'leaderboard-checks.js', 'game-loading-checks.js', 'nickname-suggestion-checks.js']
 parser.add_argument('--offline-only', action='store_true')
 parser.add_argument('--suite', action='append', choices=SUITES, help='Run a named suite; repeat for multiple focused checks')
 args = parser.parse_args()
-session = root.name
+session = os.environ.get('PLAYWRIGHT_SESSION', root.name)
 browsers = subprocess.run(['playwright-cli', 'list'], cwd=root, capture_output=True, text=True, check=True)
 if f'- {session}:' not in browsers.stdout:
     subprocess.run(['playwright-cli', f'-s={session}', 'open', 'http://127.0.0.1:4173/index.html'], cwd=root, check=True)
