@@ -47,9 +47,10 @@ async page => {
   const layouts=[];
   for(const width of [320,375,768,1440]){
     await page.setViewportSize({width,height:1080});
-    const layout=await page.evaluate(()=>({width:innerWidth,pageWidth:document.documentElement.scrollWidth,timelineWidth:document.querySelector('#timeline-scroll').clientWidth,timelineContent:document.querySelector('#timeline-scroll').scrollWidth,buttons:[...document.querySelectorAll('#options button')].map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})),first:document.querySelector('#timeline li').getBoundingClientRect().left}));
+    const layout=await page.evaluate(()=>({width:innerWidth,pageWidth:document.documentElement.scrollWidth,timelineWidth:document.querySelector('#timeline-scroll').clientWidth,timelineContent:document.querySelector('#timeline-scroll').scrollWidth,buttons:[...document.querySelectorAll('#options button')].map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})),first:document.querySelector('#timeline li').getBoundingClientRect().left,rows:new Set([...document.querySelectorAll('#timeline .club')].map(c=>Math.round(c.getBoundingClientRect().top))).size}));
     ok(layout.pageWidth<=width,`No page overflow at ${width}px`);ok(layout.buttons.every(b=>b.h>=44&&b.w>=44),`Touch targets at ${width}px`);
-    ok(layout.timelineContent<=layout.timelineWidth,`Career fully fits without horizontal scroll at ${width}px`);
+    if(width<=800)ok(layout.timelineContent<=layout.timelineWidth,`Mobile career fully fits without horizontal scroll at ${width}px`);
+    else{ok(layout.rows<=2,`Desktop career never grows past two rows at ${width}px (got ${layout.rows})`);ok(layout.timelineContent>layout.timelineWidth,`Desktop longest career needs horizontal scroll instead of a third row at ${width}px`);}
     ok(layout.first>=0,'Debut crest visible, not clipped');layouts.push(layout);
     if(width===375)await page.screenshot({path:'test-results/mobile.png',fullPage:true});
     if(width===1440)await page.screenshot({path:'test-results/desktop.png',fullPage:true});
