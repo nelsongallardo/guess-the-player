@@ -31,7 +31,7 @@ The competition picker and the masthead badge show each competition's real, curr
 ## Link preview (Spanish)
 
 - Editable source: [social card SVG](assets/derabona-social-es-v1.svg). Hosted export: [1200 × 630 PNG](assets/derabona-social-es-v1.png). Reuses the existing logo, paper/ink/celeste palette and local fonts.
-- Headline: **Adiviná al jugador por su carrera.** Supporting copy: **Cinco nombres. Tres chances.**
+- Headline: **Adiviná al jugador por su carrera.** Supporting copy: **De memoria. De rabona.** (the brand slogan, not a feature count that would go stale as option counts change - see [ADR 0012](docs/adr/0012-ranked-ten-options-v2-ruleset.md) for the last count this line went stale against).
 - Static Open Graph and Twitter metadata stays in Spanish (`es_AR`) even when the game UI switches language. The image must be a public absolute HTTPS PNG URL, not the embedded SVG favicon.
 - Pages publishes the game, this preview PNG and the crawl assets (`robots.txt`, `sitemap.xml`, `favicon.svg`). The SVG remains editable repo source; gameplay stays fully self-contained/offline. For re-export, render the SVG inside a margin-free HTML wrapper at 1200 × 630 and device scale 1 in Chrome, then capture a PNG.
 - Platforms cache previews. Version the image filename when changing its design; metadata/image availability does not prove each platform has refreshed its cached card.
