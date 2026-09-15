@@ -6089,5 +6089,486 @@
       "champions-league",
       "brasileirao"
     ]
+  },
+  {
+    "id": "michael-ballack",
+    "name": "Michael Ballack",
+    "continent": "Europe",
+    "country": "Germany",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Chemnitzer FC",
+        "years": "1995–1997"
+      },
+      {
+        "name": "1. FC Kaiserslautern",
+        "years": "1997–1999"
+      },
+      {
+        "name": "Bayer Leverkusen",
+        "years": "1999–2002"
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2002–2006"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2006–2010"
+      },
+      {
+        "name": "Bayer Leverkusen",
+        "years": "2010–2012",
+        "note": "Second playing spell; final professional club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Michael_Ballack",
+        "title": "Michael Ballack - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2585/Michael_Ballack.html",
+        "title": "Michael Ballack (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.bayer04.de/en-us/news/bayer04/legends-michael-ballack-the-capitano",
+        "title": "Legends: Michael Ballack, the Capitano | Bayer 04 Leverkusen"
+      }
+    ],
+    "notes": "A six-node chronology across two Bayer Leverkusen spells is corroborated by both primary sources; Bayer 04's own retrospective independently corroborates his development there before the Bayern Munich and Chelsea years and his 2010 return. Captained Germany at the 2002 World Cup final (a defeat to Brazil) and led the national team for most of the 2000s.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "bastian-schweinsteiger",
+    "name": "Bastian Schweinsteiger",
+    "continent": "Europe",
+    "country": "Germany",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Bayern Munich",
+        "years": "2002–2015"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2015–2017"
+      },
+      {
+        "name": "Chicago Fire",
+        "years": "2017–2019"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Bastian_Schweinsteiger",
+        "title": "Bastian Schweinsteiger - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/7817/Bastian_Schweinsteiger.html",
+        "title": "Bastian Schweinsteiger (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.chicagofirefc.com/news/chicago-fire-defender-bastian-schweinsteiger-retires-professional-soccer",
+        "title": "Chicago Fire Defender Bastian Schweinsteiger Retires from Professional Soccer | Chicago Fire FC"
+      }
+    ],
+    "notes": "A clean three-club chronology is corroborated by both primary sources; Chicago Fire's own retirement announcement independently corroborates the October 2019 farewell after an 18-year career. Won the 2014 FIFA World Cup with Germany, playing the full final despite a bloodied face from a heavy challenge.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "marco-van-basten",
+    "name": "Marco van Basten",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "1981–1987"
+      },
+      {
+        "name": "AC Milan",
+        "years": "1987–1995"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Marco_van_Basten",
+        "title": "Marco van Basten - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14119/Marco_Van_Basten.html",
+        "title": "Marco van Basten (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.themoscowtimes.com/archive/striker-van-basten-retires-cites-chronic-ankle-injury",
+        "title": "Striker Van Basten Retires, Cites Chronic Ankle Injury"
+      }
+    ],
+    "notes": "A clean two-club chronology is corroborated by both primary sources; a contemporary 1995 news report independently corroborates the chronic ankle injury that forced his retirement at age 30, after more than two years largely out of action. Won the Ballon d'Or three times (1988, 1989, 1992) and scored an iconic volley in the UEFA Euro 1988 final.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "gianluca-vialli",
+    "name": "Gianluca Vialli",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Cremonese",
+        "years": "1980–1984"
+      },
+      {
+        "name": "Sampdoria",
+        "years": "1984–1992"
+      },
+      {
+        "name": "Juventus",
+        "years": "1992–1996",
+        "note": "Moved for a then British transfer-record fee (Juventus paying, not receiving)."
+      },
+      {
+        "name": "Chelsea",
+        "years": "1996–1999",
+        "note": "Became Chelsea's player-manager in 1998 while his playing appearances wound down; the coaching role itself is out of scope for this playing-career record."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gianluca_Vialli",
+        "title": "Gianluca Vialli - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/15049/Gianluca_Vialli.html",
+        "title": "Gianluca Vialli (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.skysports.com/football/news/11095/12771998/gianluca-vialli-former-italy-and-chelsea-striker-dies-aged-58-after-battle-with-pancreatic-cancer",
+        "title": "Gianluca Vialli: Former Italy and Chelsea striker dies aged 58 after battle with pancreatic cancer | Sky Sports"
+      }
+    ],
+    "notes": "A four-club chronology is corroborated by both primary sources; Sky Sports' obituary independently corroborates his death on 5 January 2023, aged 58, after a long battle with pancreatic cancer first diagnosed in 2017. Moved to Juventus for a then British transfer-record fee in 1992 and later became Chelsea's player-manager in 1998.",
+    "status": "deceased",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "rui-costa",
+    "name": "Rui Costa",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Benfica",
+        "years": "1990–1994",
+        "note": "Wikipedia and national-football-teams.com both record a 1990–91 loan to Fafe during this spell, disclosed here rather than added as a separate node."
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1994–2001"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2001–2006"
+      },
+      {
+        "name": "Benfica",
+        "years": "2006–2008",
+        "note": "Second playing spell; retirement led directly into a Benfica boardroom career, and eventually the club presidency."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rui_Costa",
+        "title": "Rui Costa - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5298/Rui_Costa.html",
+        "title": "Rui Costa (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.slbenfica.pt/en-us/instituicao/clube/historia/presidentes/rui-costa",
+        "title": "Presidents of SL Benfica: Rui Costa - SL Benfica"
+      }
+    ],
+    "notes": "A four-club chronology is corroborated by both primary sources; Benfica's own presidents page independently corroborates his 2006 return and subsequent administrative career there. Part of Portugal's 'Golden Generation' alongside Figo; announced his retirement in January 2008.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "jorge-valdano",
+    "name": "Jorge Valdano",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Newell's Old Boys",
+        "years": "1973–1975"
+      },
+      {
+        "name": "Deportivo Alavés",
+        "years": "1975–1979"
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "1979–1984"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1984–1987",
+        "note": "Real Madrid's own retrospective and national-football-teams.com's appearance record both place his final season as 1986–87 (last match 4 March 1987), ending his career after a hepatitis diagnosis; Wikipedia's prose separately describes a 1988 retirement announcement, not adopted here."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Jorge_Valdano",
+        "title": "Jorge Valdano - Wikipedia"
+      },
+      {
+        "url": "https://national-football-teams.com/player/19295/Jorge_Valdano.html",
+        "title": "Jorge Valdano (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.realmadrid.com/en-US/the-club/history/football-legends/jorge-alberto-valdano-castellano",
+        "title": "Jorge Alberto Valdano Castellano - History and honours | Official website Real Madrid C.F."
+      }
+    ],
+    "notes": "A four-club chronology is corroborated by both primary sources; Real Madrid's own legends page independently corroborates his 1984–1987 spell there, including the hepatitis diagnosis that ended his career. World Cup winner with Argentina in 1986 alongside Maradona; later a prominent football writer and broadcaster.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "la-liga",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "ramon-diaz",
+    "name": "Ramón Díaz",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "River Plate",
+        "years": "1978–1982"
+      },
+      {
+        "name": "Napoli",
+        "years": "1982–1983"
+      },
+      {
+        "name": "Avellino",
+        "years": "1983–1986"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1986–1988"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1988–1989",
+        "note": "national-football-teams.com and worldfootball.net both record this as a sequential permanent move; Wikipedia's infobox instead shows it as a loan overlapping a longer 1986–1989 Fiorentina spell. The sequential chronology here follows the two matching season-by-season sources."
+      },
+      {
+        "name": "Monaco",
+        "years": "1989–1991"
+      },
+      {
+        "name": "River Plate",
+        "years": "1991–1993",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Yokohama Marinos",
+        "years": "1993–1995",
+        "note": "Final professional club; source-era club name, now Yokohama F. Marinos."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ram%C3%B3n_D%C3%ADaz",
+        "title": "Ramón Díaz - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/19296/Ramon_Diaz.html",
+        "title": "Ramón Díaz (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.worldfootball.net/person/pe22693/ramon-diaz",
+        "title": "Ramón Díaz - Career as a player | worldfootball.net"
+      }
+    ],
+    "notes": "An eight-node chronology across two River Plate spells is corroborated by national-football-teams.com and worldfootball.net's matching season-by-season tables; Wikipedia's infobox is largely consistent but treats the Inter Milan season as a Fiorentina loan rather than a sequential move, a disclosed qualification rather than a hidden assumption. Prolific River Plate and Argentina striker of the late 1970s and early 1980s; later a title-winning manager across Argentina, Mexico, Italy, Paraguay and the UAE, out of scope for this playing-career record.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "argentine-primera",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "careca",
+    "name": "Careca",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Guarani",
+        "years": "1978–1982"
+      },
+      {
+        "name": "São Paulo",
+        "years": "1983–1987"
+      },
+      {
+        "name": "Napoli",
+        "years": "1987–1993"
+      },
+      {
+        "name": "Kashiwa Reysol",
+        "years": "1993–1996",
+        "note": "Wikipedia and national-football-teams.com both document brief further 1997–1999 single-season spells at Santos, at Campinas FC (a club Careca co-founded after retiring from Kashiwa Reysol) and at EC São José (RS); these are disclosed but not displayed as separate nodes here, since authentic period crest artwork could not be confirmed for the last two, both amateur-tier clubs."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Careca",
+        "title": "Careca - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13645/Careca_1.html",
+        "title": "Careca (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.espn.com.br/futebol/artigo/_/id/6811550/careca-compara-seu-trio-com-maradona-no-napoli-a-messi-suarez-e-neymar-no-barcelona",
+        "title": "Careca compara seu trio com Maradona no Napoli a Messi, Suárez e Neymar no Barcelona - ESPN"
+      }
+    ],
+    "notes": "A four-club chronology is corroborated by both primary sources; ESPN Brasil's independent report corroborates his celebrated Napoli strike partnership with Diego Maradona (the 'MaGiCa' trio with Bruno Giordano), scoring 95 goals in 221 appearances there between 1987 and 1993. The brief, well-documented 1997–1999 retirement-tour spells noted above are an explicit, disclosed exclusion from the displayed chronology, not an assumption that they did not happen.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "brasileirao",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "toninho-cerezo",
+    "name": "Toninho Cerezo",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Atlético Mineiro",
+        "years": "1972–1983"
+      },
+      {
+        "name": "Roma",
+        "years": "1983–1986"
+      },
+      {
+        "name": "Sampdoria",
+        "years": "1986–1992"
+      },
+      {
+        "name": "São Paulo",
+        "years": "1992–1993"
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "1994",
+        "note": "Wikipedia and national-football-teams.com agree the confidently dated chronology ends here; both also describe further brief 1995–1997 spells (a second São Paulo stint, Paulista FC and América Mineiro) before a final return to Atlético Mineiro, but disagree on the exact seasons and order, so that tail is disclosed here rather than displayed, matching this project's existing disclosed-qualification treatment of Ariel Ortega's interleaved loans."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Toninho_Cerezo",
+        "title": "Toninho Cerezo - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/17938/Toninho_Cerezo.html",
+        "title": "Toninho Cerezo (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.asroma.com/en/club/history/hall-of-fame/15238/toninho-cerezo",
+        "title": "Toninho Cerezo - AS Roma Hall of Fame"
+      }
+    ],
+    "notes": "A five-club chronology is corroborated by both primary sources; AS Roma's own Hall of Fame page independently corroborates his three-season Roma spell (1983–1986, two Coppa Italia titles) after a club-record fee brought him from Atlético Mineiro. Brazil's starting defensive midfielder at the 1978 and 1982 World Cups.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "brasileirao",
+      "champions-league"
+    ]
+  },
+  {
+    "id": "djalma-santos",
+    "name": "Djalma Santos",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Portuguesa",
+        "years": "1948–1959",
+        "note": "Associação Portuguesa de Desportos, the São Paulo club; distinct from this roster's existing Uruguayan/Argentine 'Nacional' and 'River Plate' naming conflicts, no other roster club shares this name."
+      },
+      {
+        "name": "Palmeiras",
+        "years": "1959–1968"
+      },
+      {
+        "name": "Atlético Paranaense",
+        "years": "1969–1970"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Djalma_Santos",
+        "title": "Djalma Santos - Wikipedia"
+      },
+      {
+        "url": "http://www.independent.co.uk/news/obituaries/djalma-santos-footballer-who-won-the-world-cup-with-brazil-8782678.html",
+        "title": "Djalma Santos: Footballer who won the World Cup with Brazil | The Independent"
+      },
+      {
+        "url": "https://www.sbs.com.au/news/article/brazils-twice-world-cup-winner-djalma-santos-dies-at-84/dw8uxuij4",
+        "title": "Brazil's twice World Cup winner Djalma Santos dies at 84 | SBS News"
+      }
+    ],
+    "notes": "A three-club, 964-appearance chronology is corroborated by Wikipedia's senior career table; The Independent's obituary independently corroborates his 1948 Portuguesa debut, and SBS News' independent report corroborates his 23 July 2013 death, aged 84. Started at right-back in Brazil's 1958 and 1962 World Cup-winning finals; one of only three players, alongside Franz Beckenbauer and Philipp Lahm, named to three FIFA World Cup All-Star teams (1954, 1958, 1962).",
+    "status": "deceased",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "brasileirao"
+    ]
   }
 ]

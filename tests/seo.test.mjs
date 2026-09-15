@@ -66,7 +66,7 @@ test('All original crest keys remain embedded PNGs, within the transfer budget',
   const ctx = vm.createContext({});
   vm.runInContext(html.match(/<script id="crest-data">([\s\S]*?)<\/script>/)[1]+';this.crests=CREST_ASSETS;', ctx);
   const crests=Object.values(ctx.crests);
-  assert.equal(crests.length, 220);
+  assert.equal(crests.length, 229);
   let total=0;
   for (const [url, value] of Object.entries(ctx.crests)) {
     const png=Buffer.from(value.dataUrl.split(',')[1],'base64');
@@ -76,5 +76,5 @@ test('All original crest keys remain embedded PNGs, within the transfer budget',
     if (value.sourcePage) assert.match(value.sourcePage,/^https?:\/\//);
     total+=png.length;
   }
-  assert.ok(total<1_200_000, `Embedded badges: ${total} bytes`);
+  assert.ok(total<1_260_000, `Embedded badges: ${total} bytes`);
 });

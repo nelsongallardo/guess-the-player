@@ -1169,6 +1169,106 @@ A ten-node chronology across two Internacional spells is corroborated by both pr
 
 Reviewed source links: [304], [305], [306].
 
+### Michael Ballack
+
+**Germany · Europe · Midfielder.** Chemnitzer FC (1995–1997) → 1. FC Kaiserslautern (1997–1999) → Bayer Leverkusen (1999–2002) → Bayern Munich (2002–2006) → Chelsea (2006–2010) → Bayer Leverkusen (2010–2012).[307][308][309]
+
+A six-node chronology across two Bayer Leverkusen spells is corroborated by both primary sources; Bayer 04's own retrospective independently corroborates his development there before the Bayern Munich and Chelsea years and his 2010 return. Captained Germany at the 2002 World Cup final (a defeat to Brazil) and led the national team for most of the 2000s.[307][308][309]
+
+- **Bayer Leverkusen (2010–2012):** Second playing spell; final professional club.
+
+Reviewed source links: [307], [308], [309].
+
+### Bastian Schweinsteiger
+
+**Germany · Europe · Midfielder.** Bayern Munich (2002–2015) → Manchester United (2015–2017) → Chicago Fire (2017–2019).[310][311][312]
+
+A clean three-club chronology is corroborated by both primary sources; Chicago Fire's own retirement announcement independently corroborates the October 2019 farewell after an 18-year career. Won the 2014 FIFA World Cup with Germany, playing the full final despite a bloodied face from a heavy challenge.[310][311][312]
+
+Reviewed source links: [310], [311], [312].
+
+### Marco van Basten
+
+**Netherlands · Europe · Forward.** Ajax (1981–1987) → AC Milan (1987–1995).[313][314][315]
+
+A clean two-club chronology is corroborated by both primary sources; a contemporary 1995 news report independently corroborates the chronic ankle injury that forced his retirement at age 30, after more than two years largely out of action. Won the Ballon d'Or three times (1988, 1989, 1992) and scored an iconic volley in the UEFA Euro 1988 final.[313][314][315]
+
+Reviewed source links: [313], [314], [315].
+
+### Gianluca Vialli
+
+**Italy · Europe · Forward.** Cremonese (1980–1984) → Sampdoria (1984–1992) → Juventus (1992–1996) → Chelsea (1996–1999).[316][317][318]
+
+A four-club chronology is corroborated by both primary sources; Sky Sports' obituary independently corroborates his death on 5 January 2023, aged 58, after a long battle with pancreatic cancer first diagnosed in 2017. Moved to Juventus for a then British transfer-record fee in 1992 and later became Chelsea's player-manager in 1998.[316][317][318]
+
+- **Juventus (1992–1996):** Moved for a then British transfer-record fee (Juventus paying, not receiving).
+- **Chelsea (1996–1999):** Became Chelsea's player-manager in 1998 while his playing appearances wound down; the coaching role itself is out of scope for this playing-career record.
+
+Reviewed source links: [316], [317], [318].
+
+### Rui Costa
+
+**Portugal · Europe · Midfielder.** Benfica (1990–1994) → Fiorentina (1994–2001) → AC Milan (2001–2006) → Benfica (2006–2008).[319][320][321]
+
+A four-club chronology is corroborated by both primary sources; Benfica's own presidents page independently corroborates his 2006 return and subsequent administrative career there. Part of Portugal's 'Golden Generation' alongside Figo; announced his retirement in January 2008.[319][320][321]
+
+- **Benfica (1990–1994):** Wikipedia and national-football-teams.com both record a 1990–91 loan to Fafe during this spell, disclosed here rather than added as a separate node.
+- **Benfica (2006–2008):** Second playing spell; retirement led directly into a Benfica boardroom career, and eventually the club presidency.
+
+Reviewed source links: [319], [320], [321].
+
+### Jorge Valdano
+
+**Argentina · South America · Forward.** Newell's Old Boys (1973–1975) → Deportivo Alavés (1975–1979) → Real Zaragoza (1979–1984) → Real Madrid (1984–1987).[322][323][324]
+
+A four-club chronology is corroborated by both primary sources; Real Madrid's own legends page independently corroborates his 1984–1987 spell there, including the hepatitis diagnosis that ended his career. World Cup winner with Argentina in 1986 alongside Maradona; later a prominent football writer and broadcaster.[322][323][324]
+
+- **Real Madrid (1984–1987):** Real Madrid's own retrospective and national-football-teams.com's appearance record both place his final season as 1986–87 (last match 4 March 1987), ending his career after a hepatitis diagnosis; Wikipedia's prose separately describes a 1988 retirement announcement, not adopted here.
+
+Reviewed source links: [322], [323], [324].
+
+### Ramón Díaz
+
+**Argentina · South America · Forward.** River Plate (1978–1982) → Napoli (1982–1983) → Avellino (1983–1986) → Fiorentina (1986–1988) → Inter Milan (1988–1989) → Monaco (1989–1991) → River Plate (1991–1993) → Yokohama Marinos (1993–1995).[325][326][327]
+
+An eight-node chronology across two River Plate spells is corroborated by national-football-teams.com and worldfootball.net's matching season-by-season tables; Wikipedia's infobox is largely consistent but treats the Inter Milan season as a Fiorentina loan rather than a sequential move, a disclosed qualification rather than a hidden assumption. Prolific River Plate and Argentina striker of the late 1970s and early 1980s; later a title-winning manager across Argentina, Mexico, Italy, Paraguay and the UAE, out of scope for this playing-career record.[325][326][327]
+
+- **Inter Milan (1988–1989):** national-football-teams.com and worldfootball.net both record this as a sequential permanent move; Wikipedia's infobox instead shows it as a loan overlapping a longer 1986–1989 Fiorentina spell. The sequential chronology here follows the two matching season-by-season sources.
+- **River Plate (1991–1993):** Second playing spell.
+- **Yokohama Marinos (1993–1995):** Final professional club; source-era club name, now Yokohama F. Marinos.
+
+Reviewed source links: [325], [326], [327].
+
+### Careca
+
+**Brazil · South America · Forward.** Guarani (1978–1982) → São Paulo (1983–1987) → Napoli (1987–1993) → Kashiwa Reysol (1993–1996).[328][329][330]
+
+A four-club chronology is corroborated by both primary sources; ESPN Brasil's independent report corroborates his celebrated Napoli strike partnership with Diego Maradona (the 'MaGiCa' trio with Bruno Giordano), scoring 95 goals in 221 appearances there between 1987 and 1993. The brief, well-documented 1997–1999 retirement-tour spells noted above are an explicit, disclosed exclusion from the displayed chronology, not an assumption that they did not happen.[328][329][330]
+
+- **Kashiwa Reysol (1993–1996):** Wikipedia and national-football-teams.com both document brief further 1997–1999 single-season spells at Santos, at Campinas FC (a club Careca co-founded after retiring from Kashiwa Reysol) and at EC São José (RS); these are disclosed but not displayed as separate nodes here, since authentic period crest artwork could not be confirmed for the last two, both amateur-tier clubs.
+
+Reviewed source links: [328], [329], [330].
+
+### Toninho Cerezo
+
+**Brazil · South America · Midfielder.** Atlético Mineiro (1972–1983) → Roma (1983–1986) → Sampdoria (1986–1992) → São Paulo (1992–1993) → Cruzeiro (1994).[331][332][333]
+
+A five-club chronology is corroborated by both primary sources; AS Roma's own Hall of Fame page independently corroborates his three-season Roma spell (1983–1986, two Coppa Italia titles) after a club-record fee brought him from Atlético Mineiro. Brazil's starting defensive midfielder at the 1978 and 1982 World Cups.[331][332][333]
+
+- **Cruzeiro (1994):** Wikipedia and national-football-teams.com agree the confidently dated chronology ends here; both also describe further brief 1995–1997 spells (a second São Paulo stint, Paulista FC and América Mineiro) before a final return to Atlético Mineiro, but disagree on the exact seasons and order, so that tail is disclosed here rather than displayed, matching this project's existing disclosed-qualification treatment of Ariel Ortega's interleaved loans.
+
+Reviewed source links: [331], [332], [333].
+
+### Djalma Santos
+
+**Brazil · South America · Defender.** Portuguesa (1948–1959) → Palmeiras (1959–1968) → Atlético Paranaense (1969–1970).[334][335][336]
+
+A three-club, 964-appearance chronology is corroborated by Wikipedia's senior career table; The Independent's obituary independently corroborates his 1948 Portuguesa debut, and SBS News' independent report corroborates his 23 July 2013 death, aged 84. Started at right-back in Brazil's 1958 and 1962 World Cup-winning finals; one of only three players, alongside Franz Beckenbauer and Philipp Lahm, named to three FIFA World Cup All-Star teams (1954, 1958, 1962).[334][335][336]
+
+- **Portuguesa (1948–1959):** Associação Portuguesa de Desportos, the São Paulo club; distinct from this roster's existing Uruguayan/Argentine 'Nacional' and 'River Plate' naming conflicts, no other roster club shares this name.
+
+Reviewed source links: [334], [335], [336].
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -1476,3 +1576,33 @@ Sources:
 [304] https://en.wikipedia.org/wiki/Dunga
 [305] https://www.national-football-teams.com/player/13640/Dunga.html
 [306] https://www.si.com/soccer/brazil-1994-world-cup-winning-squad-where-are-they-now
+[307] https://en.wikipedia.org/wiki/Michael_Ballack
+[308] https://www.national-football-teams.com/player/2585/Michael_Ballack.html
+[309] https://www.bayer04.de/en-us/news/bayer04/legends-michael-ballack-the-capitano
+[310] https://en.wikipedia.org/wiki/Bastian_Schweinsteiger
+[311] https://www.national-football-teams.com/player/7817/Bastian_Schweinsteiger.html
+[312] https://www.chicagofirefc.com/news/chicago-fire-defender-bastian-schweinsteiger-retires-professional-soccer
+[313] https://en.wikipedia.org/wiki/Marco_van_Basten
+[314] https://www.national-football-teams.com/player/14119/Marco_Van_Basten.html
+[315] https://www.themoscowtimes.com/archive/striker-van-basten-retires-cites-chronic-ankle-injury
+[316] https://en.wikipedia.org/wiki/Gianluca_Vialli
+[317] https://www.national-football-teams.com/player/15049/Gianluca_Vialli.html
+[318] https://www.skysports.com/football/news/11095/12771998/gianluca-vialli-former-italy-and-chelsea-striker-dies-aged-58-after-battle-with-pancreatic-cancer
+[319] https://en.wikipedia.org/wiki/Rui_Costa
+[320] https://www.national-football-teams.com/player/5298/Rui_Costa.html
+[321] https://www.slbenfica.pt/en-us/instituicao/clube/historia/presidentes/rui-costa
+[322] https://en.wikipedia.org/wiki/Jorge_Valdano
+[323] https://national-football-teams.com/player/19295/Jorge_Valdano.html
+[324] https://www.realmadrid.com/en-US/the-club/history/football-legends/jorge-alberto-valdano-castellano
+[325] https://en.wikipedia.org/wiki/Ram%C3%B3n_D%C3%ADaz
+[326] https://www.national-football-teams.com/player/19296/Ramon_Diaz.html
+[327] https://www.worldfootball.net/person/pe22693/ramon-diaz
+[328] https://en.wikipedia.org/wiki/Careca
+[329] https://www.national-football-teams.com/player/13645/Careca_1.html
+[330] https://www.espn.com.br/futebol/artigo/_/id/6811550/careca-compara-seu-trio-com-maradona-no-napoli-a-messi-suarez-e-neymar-no-barcelona
+[331] https://en.wikipedia.org/wiki/Toninho_Cerezo
+[332] https://www.national-football-teams.com/player/17938/Toninho_Cerezo.html
+[333] https://www.asroma.com/en/club/history/hall-of-fame/15238/toninho-cerezo
+[334] https://en.wikipedia.org/wiki/Djalma_Santos
+[335] http://www.independent.co.uk/news/obituaries/djalma-santos-footballer-who-won-the-world-cup-with-brazil-8782678.html
+[336] https://www.sbs.com.au/news/article/brazils-twice-world-cup-winner-djalma-santos-dies-at-84/dw8uxuij4

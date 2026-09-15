@@ -1,36 +1,18 @@
 [
   {
-    "id": "rui-costa",
-    "name": "Rui Costa",
-    "country": "Portugal",
-    "position": "Midfielder",
-    "start": 1990,
-    "end": 2008,
-    "clubs": ["Benfica", "Fiorentina", "AC Milan", "Benfica"],
-    "system": "portugal",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Rui_Costa",
-        "excerpt": "Rui Costa ... senior career: Benfica 1990-1994 (with a 1990-91 loan to Fafe), Fiorentina 1994-2001, AC Milan 2001-2006, Benfica 2006-2008 (second spell). Portugal national team 1993-2004, 94 caps, 26 goals. Described as a classic number 10, an attacking midfielder and part of Portugal's Golden Generation alongside Figo."
-      },
-      {
-        "url": "https://www.national-football-teams.com/player/5298/Rui_Costa.html",
-        "excerpt": "Rui Costa, Attacking Midfielder (AM), other position Centre Midfielder (CM), born 29-03-1972 in Lisboa, Portugal. 1.80m. FIFA Matches 94, FIFA Goals 26. Club seasons 1990/91 AD Fafe, 1991/92-1993/94 Benfica Lisboa, 1994/95-2000/01 AC Fiorentina, 2001/02-2005/06 AC Milan, 2006/07-2007/08 Benfica Lisboa."
-      }
-    ],
-    "notes": "Wrong-answer-only profile researched to close a Figo-era Portugal contemporary gap: Figo (Sporting CP 1989-2009) had only one existing same-system, same-era rival (Simão). Rui Costa's senior debut and full chronology are corroborated by both sources; the 1990-91 Fafe loan and second Benfica spell are documented but the simplified club list omits the loan step, matching this bank's lighter evidentiary standard for wrong-answer-only profiles.",
-    "verifiedAt": "2026-09-14",
-    "evidenceFile": "research/DISTRACTOR_FIGO_ERA_SOURCES.md"
-  },
-  {
     "id": "fernando-couto",
     "name": "Fernando Couto",
     "country": "Portugal",
     "position": "Defender",
     "start": 1988,
     "end": 2008,
-    "clubs": ["Porto", "Parma", "Barcelona", "Lazio", "Parma"],
+    "clubs": [
+      "Porto",
+      "Parma",
+      "Barcelona",
+      "Lazio",
+      "Parma"
+    ],
     "system": "portugal",
     "region": "europe",
     "sources": [
@@ -54,7 +36,16 @@
     "position": "Midfielder",
     "start": 1989,
     "end": 2002,
-    "clubs": ["Benfica", "Sporting CP", "Juventus", "Borussia Dortmund", "Inter Milan", "Parma", "Panathinaikos", "Espanyol"],
+    "clubs": [
+      "Benfica",
+      "Sporting CP",
+      "Juventus",
+      "Borussia Dortmund",
+      "Inter Milan",
+      "Parma",
+      "Panathinaikos",
+      "Espanyol"
+    ],
     "system": "portugal",
     "region": "europe",
     "sources": [

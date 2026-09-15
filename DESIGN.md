@@ -76,7 +76,7 @@ A football-career guessing game with offline guest play in one portable `index.h
 - Embed fetched crest bytes as data URLs for reliable offline rendering. Keep original public image URLs for provenance. Crest trademarks remain their owners'; no club affiliation implied. Do not pretend a fallback is an authentic crest.
 
 ## Verification matrix
-1. Data: exactly 100 unique player IDs/names; continent count 50/50; sources for every entry; all ordered club names mapped to valid crest bytes; no national-team nodes; every pool has four or more distinct incorrect names excluding the answer; every player carries at least one recognized competition tag.
+1. Data: exactly 110 unique player IDs/names; continent count 55/55; sources for every entry; all ordered club names mapped to valid crest bytes; no national-team nodes; every pool has four or more distinct incorrect names excluding the answer; every player carries at least one recognized competition tag.
 2. Options: exactly ten unique buttons (guest/practice Hard) with one correct answer across every player and many shuffles, both unscoped and within each competition; ranked now also deals ten, under the new `v2` ruleset (ADR 0012).
 3. Correct first/second/third try: score increments once, streak increments once, next appears, controls lock.
 4. Wrong choices: disable/red/attempt decrements, repeated selection no-op, third error ends round, correct answer revealed, streak resets.

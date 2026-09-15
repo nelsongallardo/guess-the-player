@@ -18,7 +18,7 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   // play when signed in) is the one contextual nav action back to the game.
   assert.match(html,/<a class="cta" id="account-link" href="index\.html\?account=1">/);
   assert.doesNotMatch(html,/<iframe\b|http-equiv="refresh"/i);
-  // The full 100-player roster/crest-data/game-model blocks (over 1MB) stay
+  // The full 110-player roster/crest-data/game-model blocks (over 1MB) stay
   // out - that's the actual "heavy game artifact" this guards against.
   // ADR 0014 added the six competition crests and a duplicate account
   // dialog (~80KB combined) for full component parity with the main game's

@@ -86,10 +86,17 @@ test('Maradona gets four researched Argentine contemporaries, not 1990s debutant
     for(const peer of peers)assert.ok(wrong.includes(peer),`${peer} missing: ${wrong.join(', ')}`);
     assert.ok(wrong.every(n=>g.originFor(g.candidates.find(q=>q.name===n)).system==='argentina'),wrong.join(', '));
   }
+  // Jorge Valdano and Ramón Díaz were promoted from this exact-tier bank
+  // entry to the playable roster in the eighth expansion; their same
+  // Maradona-era contemporary role is preserved via a direct addition to
+  // his incorrectOptions rather than the bank. Daniel Bertoni and Osvaldo
+  // Ardiles remain wrong-answer-only bank profiles.
+  const promoted=new Set(['Jorge Valdano','Ramón Díaz']);
   for(const n of peers){
     const q=candidates.find(q=>q.name===n);assert.ok(q,n);
     assert.ok(q.sources.length>=2,n+' needs sources');
-    assert.ok(!players.some(p=>p.id===q.id),'Distractor bank must not silently expand playable decks');
+    assert.equal(players.some(p=>p.id===q.id),promoted.has(n),
+      promoted.has(n)?n+' should be playable':'Distractor bank must not silently expand playable decks');
   }
 });
 

@@ -28,32 +28,6 @@
     "notes": "Pelé-era peer. Professional senior start is Botafogo in 1948; the earlier Flexeiras amateur team is excluded. Wikipedia gives 1948–1964; the Guardian explicitly dates his Botafogo debut to March 1948, and Globo corroborates his final match in the 1964 Carioca. No amateur or post-playing roles included."
   },
   {
-    "id": "djalma-santos",
-    "name": "Djalma Santos",
-    "country": "Brazil",
-    "position": "Defender",
-    "start": 1948,
-    "end": 1970,
-    "clubs": [
-      "Portuguesa",
-      "Palmeiras",
-      "Atlético Paranaense"
-    ],
-    "system": "brazil",
-    "region": "south-america",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Djalma_Santos",
-        "excerpt": "| Senior career\\* |\n| Years | **Team** | **Apps** | **(Gls)** |\n| 1948–1959 | [Portuguesa](https://en.wikipedia.org/wiki/Associa%C3%A7%C3%A3o_Portuguesa_de_Desportos \"Associação Portuguesa de Desportos\") | 434 | (11) |\n| 1959–1968 | [Palmeiras](https://en.wikipedia.org/wiki/Sociedade_Esportiva_Palmeiras \"Sociedade Esportiva Palmeiras\") | 498 | (10) |\n| 1969–1970 | [Atlético Paranaense](https://en.wikipedia.org/wiki/Clube_Atl%C3%A9tico_Paranaense \"Clube Atlético Paranaense\") | 32 | (2) |\n| Total |  | **964** | **(23)** |"
-      },
-      {
-        "url": "http://www.independent.co.uk/news/obituaries/djalma-santos-footballer-who-won-the-world-cup-with-brazil-8782678.html",
-        "excerpt": "Born into a poor Sao Paulo family, Santos played for junior teams as a centre-half before joining one of his major home-town clubs, Portuguesa, as a 19-year-old in 1948."
-      }
-    ],
-    "notes": "Pelé-era peer. Wikipedia senior table gives Portuguesa 1948–1959, Palmeiras 1959–1968 and Atlético Paranaense 1969–1970. Independent obituary corroborates joining Portuguesa in 1948 and identifies him as a right-back; final year is supported by the Wikipedia senior table, not independently re-established by the partially retrieved obituary. Later coaching is excluded. Portuguesa means the São Paulo club."
-  },
-  {
     "id": "zito",
     "name": "Zito",
     "country": "Brazil",
