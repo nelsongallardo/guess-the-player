@@ -8,7 +8,8 @@
 - `node --test tests/*.test.mjs` with the isolated native PostgreSQL runtime: **142 passed, 0 failed**.
 - Deno Edge validation: **7 passed, 0 failed** after both function entrypoints passed `deno check`.
 - Focused browser release matrix passed for HTTP and offline file play: **160 rounds**, **1,600 bilingual mobile player/layout cases**, legacy 30/40/50/60-player saves, session-backed migration, difficulty normalization, saved rivals, SEO/no-JS, guest-session boundaries, read-only leaderboard behavior and nickname suggestions.
-- Supabase hosted application and public-site readback remain separate release steps and must not be inferred from these local results.
+- Hosted Supabase deployment completed on 16 September 2026 after authenticated CLI preflight and two fail-closed transactional retries exposed the actual 80-player predecessor state. The still-unapplied `202609160001_ninth_roster_expansion.sql` was corrected through PRs #6 and #7 to upsert the complete reviewed 120-state candidates, players and memberships before rebuilding rivals; the full **143-test** Node/native-PostgreSQL suite and both PR validation runs passed before the final push.
+- Production migration history now matches every local version through `202609160002`. Exact hosted readback reports **160 players, 193 candidates, 30,717 rivals and 537 memberships**, with zero players missing the `all` membership, zero players without rivals and zero orphan rival references. Existing immutable gameplay state was preserved at **100 results, 103 rounds and 345 receipts**. A final `supabase db push --linked --dry-run` reported the remote database up to date.
 
 ## Ninth roster expansion and the frozen-export CI gate — 16 September 2026
 
