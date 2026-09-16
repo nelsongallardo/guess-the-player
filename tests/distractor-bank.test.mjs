@@ -13,7 +13,7 @@ const bank=JSON.parse(fs.readFileSync(new URL('../research/verified-distractors.
 test('researched wrong-answer bank is embedded exactly, sourced and separate from playable careers',()=>{
   const embedded=JSON.parse(html.match(/const DISTRACTOR_PROFILES = ([\s\S]*?);\n  \/\/ END DISTRACTOR BANK/)[1]);
   assert.deepEqual(embedded,bank);
-  assert.ok(bank.length>=40,'Research must address more than the Maradona example');
+  assert.ok(bank.length>=31,'Promotions must retain the reviewed bank-only coverage cohort');
   assert.equal(g.candidates.length,players.length+bank.length);
   for(const key of ['id','name']) assert.equal(new Set(g.candidates.map(p=>p[key])).size,g.candidates.length,key);
   const roles=new Set(['Defender','Midfielder','Forward','Goalkeeper']);
@@ -57,7 +57,7 @@ test('every target has four same-system contemporaries; tight era tiers cannot b
 });
 
 test('bank answers remain valid after guesses, hints, save reload and Next',()=>{
-  const s=g.create('hard','la-liga'),p=players.find(p=>p.id==='diego-maradona');
+  const s=g.create('hard','all'),p=players.find(p=>p.id==='fernando-couto');
   s.deck=[p.id,...s.deck.filter(id=>id!==p.id)];
   s.rounds=[{options:g.optionsFor(p),guesses:[],hints:0,difficulty:'hard'}];
   // With 9 distractors now offered, pick specifically a bank-sourced wrong

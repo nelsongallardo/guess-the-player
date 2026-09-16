@@ -45,3 +45,23 @@ research/*
 !research/DISTRACTOR_FIGO_ERA_SOURCES.md
 !research/distractor-roster-batch7-gaps.json
 !research/DISTRACTOR_ROSTER_BATCH7_GAPS_SOURCES.md
+!research/distractor-batch9-support.json
+!research/DISTRACTOR_BATCH9_SUPPORT_SOURCES.md
+!research/distractor-batch9-sweden-support.json
+!research/DISTRACTOR_BATCH9_SWEDEN_SUPPORT_SOURCES.md
+!research/distractor-batch9-chile-support.json
+!research/DISTRACTOR_BATCH9_CHILE_SUPPORT_SOURCES.md
+!research/distractor-batch9-uruguay-peru-support.json
+!research/DISTRACTOR_BATCH9_URUGUAY_PERU_SUPPORT_SOURCES.md
+!research/distractor-batch9-peru-late-support.json
+!research/DISTRACTOR_BATCH9_PERU_LATE_SUPPORT_SOURCES.md
+
+# Reviewed batch-9 selection, playable records and reproducible integration tools.
+!research/player-addition-batch9/
+research/player-addition-batch9/*
+!research/player-addition-batch9/task-notes.md
+!research/player-addition-batch9/candidate-shortlist.json
+!research/player-addition-batch9/records.json
+!research/player-addition-batch9/crest-assets.json
+!research/player-addition-batch9/integrate.py
+!research/player-addition-batch9/update-source-ledgers.py

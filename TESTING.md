@@ -1,5 +1,15 @@
 # Verification report
 
+## 160-player roster expansion — 16 September 2026
+
+- Integrated the reviewed 50-player research batch with the concurrently published 120-player upstream roster, preserving the ten overlapping upstream career representations and adding the remaining forty records for a final 80 Europe / 80 South America split.
+- Final generated model: **160 playable players, 33 bank-only profiles, 193 candidates, 30,717 ranked rival rows and 537 memberships**. `node scripts/export-ranked-roster-forward.mjs --check`, the source ledger check and the complete distractor coverage audit pass.
+- The new forward-only migration is `202609160002_expand_ranked_roster_120_to_160.sql`; the historical migration chain is unchanged. Native PostgreSQL fresh replay and exact 120-player upgrade coverage pass while preserving prior results, receipts and active rounds.
+- `node --test tests/*.test.mjs` with the isolated native PostgreSQL runtime: **142 passed, 0 failed**.
+- Deno Edge validation: **7 passed, 0 failed** after both function entrypoints passed `deno check`.
+- Focused browser release matrix passed for HTTP and offline file play: **160 rounds**, **1,600 bilingual mobile player/layout cases**, legacy 30/40/50/60-player saves, session-backed migration, difficulty normalization, saved rivals, SEO/no-JS, guest-session boundaries, read-only leaderboard behavior and nickname suggestions.
+- Supabase hosted application and public-site readback remain separate release steps and must not be inferred from these local results.
+
 ## Ninth roster expansion and the frozen-export CI gate — 16 September 2026
 
 - Added a tenth player batch (five Europe, five South America; all ten promoted from the wrong-answer-only bank), taking the roster to 120 (60/60) - the first to follow the newly-formalized `derabona-player-addition` skill's migration policy: a new additive-only forward migration (`202609160001_ninth_roster_expansion.sql`) instead of regenerating the frozen `202609130002_ranked_roster.sql` export. Continued interrupted work from a prior rate-limited session; recovered research (sources, chronologies, both bank-promotion cases) was independently re-verified before completing the integration.

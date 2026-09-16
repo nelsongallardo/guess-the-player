@@ -15,7 +15,7 @@ const root = new URL('../',import.meta.url);
 const pgBin = process.env.PG_BIN || (fs.existsSync('/opt/homebrew/opt/postgresql@17/bin/postgres') ? '/opt/homebrew/opt/postgresql@17/bin' : '');
 const bin = cmd => cmd === 'psql' && process.env.PG_CLIENT ? process.env.PG_CLIENT : pgBin ? path.join(pgBin,cmd) : cmd;
 let dir, running = false;
-let legacy, legacySnapshot;
+let legacy, legacySnapshot, rosterUpgrade, rosterUpgradeSnapshot;
 const aliasPattern = /^(Otter|Badger|Panda|Koala|Heron|Robin|Finch|Lynx|Seal|Dolphin|Turtle|Falcon|Penguin|Gecko|Wombat|Alpaca)-[0-9a-f]{8}$/;
 const quote = value => "'"+String(value).replaceAll("'","''")+"'";
 const args = () => ['-X','-qAt','-v','ON_ERROR_STOP=1','-h',dir,'-p','55439','-U','postgres','-d','postgres'];
@@ -56,7 +56,18 @@ before(() => {
   for(const uid of [legacy.anonymous,legacy.custom]) { const r=start(uid).round;answer(uid,r,correct(r)); }
   sql(`update ranked_private.accounts set enrolled=false where user_id=${quote(legacy.custom)}`);
   legacySnapshot=Object.fromEntries(['rounds','results','receipts'].map(t=>[t,json(`select json_agg(x order by user_id) from ranked_private.${t} x`)]));
-  for(const f of migrations.filter(f=>f>='202609130003')) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:16*1024*1024});
+  const rosterMigration='202609160002_expand_ranked_roster_120_to_160.sql';
+  for(const f of migrations.filter(f=>f>='202609130003'&&f<rosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:16*1024*1024});
+  // Exercise the exact prior 120-player state with both an immutable result
+  // and an unresolved active v2 round before applying the forward roster sync.
+  rosterUpgrade={result:user(),active:user()};
+  const completed=start(rosterUpgrade.result).round;
+  answer(rosterUpgrade.result,completed,correct(completed));
+  sql(`update ranked_private.accounts set enrolled=false where user_id=${quote(rosterUpgrade.result)}`);
+  start(rosterUpgrade.active);
+  const upgradeUsers=Object.values(rosterUpgrade).map(quote).join(',');
+  rosterUpgradeSnapshot=Object.fromEntries(['rounds','results','receipts'].map(t=>[t,json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${t} x where user_id in (${upgradeUsers})`)]));
+  for(const f of migrations.filter(f=>f>=rosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:32*1024*1024});
   console.log('Real PostgreSQL isolated cluster; Supabase auth schema/roles SIMULATED; no cloud services used.');
 });
 after(() => {
@@ -72,14 +83,25 @@ test('additive migration backfills legacy results, preserves custom names and im
   assert.equal(anonymous.profile.enrolled,true);
   assert.deepEqual(rpc(legacy.custom,{action:'progress'}).profile,{nickname:'Existing Custom',enrolled:true});
   assert.equal(rpc(legacy.empty,{action:'progress'}).profile.enrolled,true);
-  for(const t of ['rounds','results','receipts']) assert.deepEqual(json(`select json_agg(x order by user_id) from ranked_private.${t} x`),legacySnapshot[t]);
+  const legacyUsers=Object.values(legacy).map(quote).join(',');
+  for(const t of ['rounds','results','receipts']) assert.deepEqual(json(`select json_agg(x order by user_id) from ranked_private.${t} x where user_id in (${legacyUsers})`),legacySnapshot[t]);
+  const upgradeUsers=Object.values(rosterUpgrade).map(quote).join(',');
+  for(const t of ['rounds','results','receipts']) {
+    assert.deepEqual(
+      json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${t} x where user_id in (${upgradeUsers})`),
+      rosterUpgradeSnapshot[t],
+      `${t} changed while upgrading the 120-player state`,
+    );
+  }
   // The legacy rows above are byte-for-byte preserved (still ruleset='v1',
   // still 5 options each) - but ADR 0012's ten-option v2 ruleset filters the
   // active leaderboard/progress to ruleset='v2' only, by design: it's a
   // deliberate reset, not a bug, so these untouched v1-only results now
   // correctly fall off the (now v2) board rather than still counting.
   const board=rpc(legacy.anonymous,{action:'leaderboard'});
-  assert.equal(board.total,0);assert.equal(board.own,null);noIdentity(board);
+  // The exact-prior-state fixture contributes one preserved v2 result to the
+  // global board; the legacy v1-only account itself must still have no entry.
+  assert.equal(board.total,1);assert.equal(board.own,null);noIdentity(board);
   assert.equal(rpc(legacy.empty,{action:'leaderboard'}).own,null);
 });
 
@@ -127,14 +149,8 @@ test('forced case-insensitive alias collisions retry safely across concurrent ac
   } finally { sql(original);sql('drop sequence ranked_private.alias_test_sequence'); }
 });
 
-test('database (after all applied migrations) and canonical membership/matching scores equal the current guest model',()=>{
-  // Not export-ranked-roster.mjs --check: that compares the inline model
-  // against ONLY the frozen 202609130002_ranked_roster.sql export, which is
-  // expected to diverge after any legitimate forward-only roster expansion
-  // (derabona-player-addition skill, step 8 - "frozen export trap"). This
-  // test instead verifies the database state produced by replaying every
-  // migration in supabase/migrations/ (frozen export plus every forward
-  // migration since) against the CURRENT inline model - the real contract.
+test('roster exporter is current and canonical membership/matching scores equal guest model',()=>{
+  execFileSync(process.execPath,[new URL('scripts/export-ranked-roster-forward.mjs',root).pathname,'--check']);
   const html=fs.readFileSync(new URL('index.html',root),'utf8');
   const block=id=>html.match(new RegExp(`<script id="${id}">([\\s\\S]*?)<\\/script>`))[1];
   const ctx=vm.createContext({});vm.runInContext(block('roster-data')+block('game-model'),ctx);

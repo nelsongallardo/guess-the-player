@@ -1,0 +1,42 @@
+[
+  {
+    "id": "luis-advincula",
+    "name": "Luis Advíncula",
+    "country": "Peru",
+    "position": "Defender",
+    "start": 2009,
+    "end": 2026,
+    "clubs": [
+      "Juan Aurich",
+      "Sporting Cristal",
+      "TSG Hoffenheim",
+      "Ponte Preta",
+      "Sporting Cristal",
+      "Vitória Setúbal",
+      "Bursaspor",
+      "Newell's Old Boys",
+      "Tigres UANL",
+      "Lobos BUAP",
+      "Rayo Vallecano",
+      "Boca Juniors",
+      "Alianza Lima"
+    ],
+    "system": "peru",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Luis_Adv%C3%ADncula",
+        "excerpt": "Senior career*\nYears\tTeam\tApps\t(Gls)\n2009–2010\tJuan Aurich\t31\t(1)\n2010–2012\tSporting Cristal\t91\t(8)\n2012–2013\tTavriya Simferopol\t0\t(0)\n2012\t→ Sporting Cristal (loan)\t9\t(0)\n2013–2015\tTSG Hoffenheim\t2\t(0)\n2013\t→ Ponte Preta (loan)\t4\t(0)\n2014\t→ Sporting Cristal (loan)\t10\t(2)\n2014−2015\t→ Vitória Setúbal (loan)\t26\t(0)\n2015–2016\tBursaspor\t12\t(0)\n2016\t→ Newell's Old Boys (loan)\t29\t(1)\n2017–2019\tTigres UANL\t9\t(0)\n2017–2018\t→ Lobos BUAP (loan)\t19\t(2)\n2018–2019\t→ Rayo Vallecano (loan)\t28\t(1)\n2019–2021\tRayo Vallecano\t72\t(2)\n2021–2025\tBoca Juniors\t123\t(2)\n2026–\tAlianza Lima\t0\t(0)"
+      },
+      {
+        "url": "https://www.infobae.com/peru/deportes/2026/01/14/el-mono-navarro-montoya-senalo-que-luis-advincula-va-a-jerarquizar-el-futbol-peruano-con-su-llegada-a-alianza-lima/",
+        "excerpt": "Precisamente en el reciente juego contra el ‘tatengue’, que culminó 2-1 en Uruguay, se dio el debut de Advíncula como lateral derecho.\n\nEl ‘Rayo’ inició su carrera profesional en Juan Aurich (2009–2010) y se consolidó en Sporting Cristal (2010–2012), donde ganó el Torneo Descentralizado en 2012 y 2014."
+      },
+      {
+        "url": "https://www.fotmob.com/players/190522/luis-advincula",
+        "excerpt": "Luis Advíncula is a 36-year-old football player who plays as a right back for Alianza Lima, born on March 2, 1990, who is right-footed. Follow Luis Advíncula on FotMob for live match updates, detailed statistics, career history, transfer news, FotMob ratings, and comprehensive performance analytics.\n\nIn the 2026 Liga 1 season, Luis Advíncula has recorded 0 goals, 1 assist, 1,812 minutes, an average FotMob rating of 6.936190476190476, 7 yellow cards."
+      }
+    ],
+    "notes": "Juan Aurich is the first displayed senior club and the independently reported site of his 2009 professional debut, so the profile belongs to the Peru system; 2009 is within eight years of both Jefferson Farfán's 2001 start and Juan Manuel Vargas's 2002 start. Sporting Cristal's 2010–2012 entry remains one continuous displayed playing spell: the brief Tavriya Simferopol registration produced zero appearances and is excluded, while his immediate 2012 loan back did not create a different played-for-club node. Ponte Preta, the separate 2014 Sporting Cristal return, Vitória Setúbal, Newell's Old Boys and Lobos BUAP were loans. No parent-club return is inserted after Ponte Preta, the 2014 Sporting Cristal/Vitória sequence, Newell's or Lobos because no intervening return to play is evidenced. Rayo Vallecano's 2018 loan and uninterrupted permanent spell are merged into one node. Alianza Lima is retained through the 2026 research snapshot because independent current-season evidence records senior Liga 1 minutes. Youth football and the unused Tavriya registration are excluded. This is a bank-only support profile, not a playable target."
+  }
+]
