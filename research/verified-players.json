@@ -6570,5 +6570,559 @@
     "competitions": [
       "brasileirao"
     ]
+  },
+  {
+    "id": "robin-van-persie",
+    "name": "Robin van Persie",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Feyenoord",
+        "years": "2002–2004",
+        "note": "Wikipedia’s infobox season label starts in 2001, but an independent Feyenoord.nl report and elfvoetbal.nl both date the actual first-team debut to 3 February 2002, versus Roda JC; that corrected debut year is used here."
+      },
+      {
+        "name": "Arsenal",
+        "years": "2004–2012"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2012–2015"
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2015–2018"
+      },
+      {
+        "name": "Feyenoord",
+        "years": "2018–2019",
+        "note": "Second playing spell, following an actual return in January 2018; retired at the club before moving into coaching there."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Robin_van_Persie#Club_career",
+        "title": "Robin van Persie - Wikipedia"
+      },
+      {
+        "url": "https://www.feyenoord.com/en/news/van-persie-head-coach-feyenoord-with-immediate-effect-230225",
+        "title": "Van Persie: head coach Feyenoord with immediate effect - Feyenoord"
+      },
+      {
+        "url": "https://www.elfvoetbal.nl/Binnenland/2879/vijftien-jaar-geleden-van-persie-maakt-debuut-voor-feyenoord",
+        "title": "Vijftien jaar geleden: Van Persie maakt debuut voor Feyenoord - Elf Voetbal"
+      }
+    ],
+    "notes": "Excelsior is youth-only and omitted; reserve-team mentions do not establish an adult-pyramid senior spell. The 2018 Feyenoord return is a genuine playing spell, not a coaching appointment; later Heerenveen and Feyenoord coaching roles are out of scope.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "roberto-mancini",
+    "name": "Roberto Mancini",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Forward / Midfielder",
+    "clubs": [
+      {
+        "name": "Bologna",
+        "years": "1980–1982"
+      },
+      {
+        "name": "Sampdoria",
+        "years": "1982–1997"
+      },
+      {
+        "name": "Lazio",
+        "years": "1997–2001"
+      },
+      {
+        "name": "Leicester City",
+        "years": "2001",
+        "note": "Single-season loan; four competitive appearances, no goals."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Roberto_Mancini",
+        "title": "Roberto Mancini - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14131/Roberto_Mancini.html",
+        "title": "Roberto Mancini (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Playing career only; his much longer managerial career (including Manchester City and Italy) is out of scope. The single Leicester City loan appearance is a genuine competitive senior spell, not excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "emmanuel-petit",
+    "name": "Emmanuel Petit",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Monaco B",
+        "years": "1987–1989",
+        "note": "Third-tier adult reserve side; overlaps the first-team debut, not a claim of a permanent demotion."
+      },
+      {
+        "name": "Monaco",
+        "years": "1988–1997"
+      },
+      {
+        "name": "Arsenal",
+        "years": "1997–2000"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2000–2001"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2001–2004"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Emmanuel_Petit",
+        "title": "Emmanuel Petit - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/old/player/13956/Emmanuel_Petit.html",
+        "title": "Emmanuel Petit (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Retirement was announced 20 January 2005 after failing to recover from knee surgery, following release by Chelsea; that announcement date is not treated as an additional playing year, so the career ends with the final 2003/04 Chelsea season. A reported Bolton Wanderers approach after leaving Chelsea was a rejected offer, not a playing spell.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "fernando-couto",
+    "name": "Fernando Couto",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Porto",
+        "years": "1987–1994",
+        "note": "Wikipedia and national-football-teams.com both record a loan/spell interlude at Famalicão (1988–89) and Académica de Coimbra (1989–90) between an initial 1987/88 Porto season and a second Porto spell from 1990; the two Porto spells are combined into one node here, following this roster’s existing simplified-loan precedent (e.g. Rui Costa’s Fafe loan)."
+      },
+      {
+        "name": "Parma",
+        "years": "1994–1996"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1996–1998"
+      },
+      {
+        "name": "Lazio",
+        "years": "1998–2005"
+      },
+      {
+        "name": "Parma",
+        "years": "2005–2008",
+        "note": "Second playing spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fernando_Couto",
+        "title": "Fernando Couto - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5289/Fernando_Couto.html",
+        "title": "Fernando Couto (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Euro 2000-winning Portugal captain; won league and cup doubles in Portugal, Italy and Spain across this chronology.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "paulo-sousa",
+    "name": "Paulo Sousa",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Benfica",
+        "years": "1989–1993"
+      },
+      {
+        "name": "Sporting CP",
+        "years": "1993–1994"
+      },
+      {
+        "name": "Juventus",
+        "years": "1994–1996"
+      },
+      {
+        "name": "Borussia Dortmund",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1998–2000",
+        "note": "Wikipedia’s prose dates a 1997 gap season before this spell; national-football-teams.com’s season table instead shows an overlapping 1997/98 transition straight from Dortmund with no gap season. The overall eight-club chronology is corroborated by both; this specific one-year boundary is disclosed as unresolved rather than asserted."
+      },
+      {
+        "name": "Parma",
+        "years": "2000",
+        "note": "Loan spell during the Inter Milan era."
+      },
+      {
+        "name": "Panathinaikos",
+        "years": "2000–2001"
+      },
+      {
+        "name": "Espanyol",
+        "years": "2002"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paulo_Sousa",
+        "title": "Paulo Sousa - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14056/Paulo_Sousa.html",
+        "title": "Paulo Sousa (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Part of Portugal’s \"Golden Generation\" alongside Figo and Rui Costa; won the Champions League with Juventus (1996) and Borussia Dortmund (1997) in consecutive seasons. Later became a coach.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "diego-ribas",
+    "name": "Diego Ribas",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Santos",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Porto",
+        "years": "2004–2006"
+      },
+      {
+        "name": "Werder Bremen",
+        "years": "2006–2009"
+      },
+      {
+        "name": "Juventus",
+        "years": "2009–2010"
+      },
+      {
+        "name": "VfL Wolfsburg",
+        "years": "2010–2011",
+        "note": "First spell before an outgoing loan to Atlético Madrid."
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2011–2012",
+        "note": "Loan spell."
+      },
+      {
+        "name": "VfL Wolfsburg",
+        "years": "2012–2014",
+        "note": "Returned to Wolfsburg following the end of the Atlético Madrid loan."
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2014",
+        "note": "Permanent transfer back on 31 January 2014, for the rest of the 2013–14 season."
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2014–2016"
+      },
+      {
+        "name": "Flamengo",
+        "years": "2016–2022"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Diego_(footballer,_born_1985)",
+        "title": "Diego (footballer, born 1985) - Wikipedia"
+      },
+      {
+        "url": "https://ge.globo.com/futebol/times/flamengo/noticia/2022/11/05/com-12-titulos-pelo-flamengo-diego-anuncia-que-se-aposentara-do-futebol-no-fim-de-2022.ghtml",
+        "title": "Com 12 títulos pelo Flamengo, Diego anuncia que se aposentará do futebol - ge.globo"
+      }
+    ],
+    "notes": "Diego Ribas da Cunha, born 28 February 1985, not Diego Maradona, Diego Ribas born 1980 or another Diego. 2009 Bundesliga Footballer of the Year at Werder Bremen. Retired at Flamengo in November 2022 after twenty professional seasons; Wikipedia and Globo differ by one day on the exact final-match date, so the endpoint is deliberately year-only.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "lucas-moura",
+    "name": "Lucas Moura",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "São Paulo",
+        "years": "2010–2012"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2013–2018"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "2018–2023"
+      },
+      {
+        "name": "São Paulo",
+        "years": "2023–present",
+        "note": "Second playing spell, an actual return rather than a loan; still an active player as of the 2026 Brazilian Série A season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Lucas_Moura",
+        "title": "Lucas Moura - Wikipedia"
+      },
+      {
+        "url": "https://soccerbase.com/players/player.sd?player_id=58808",
+        "title": "Lucas Moura - Player Profile - Soccerbase"
+      }
+    ],
+    "notes": "Scored a second-half hat-trick to complete a stunning comeback against Ajax in the 2019 Champions League semi-final second leg, sending Tottenham to the final. Endpoint 2026 is the latest independently observed professional playing year (Soccerbase lists 2026 Série A matches), not a retirement date or predicted contract end.",
+    "status": "active",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "daniel-bertoni",
+    "name": "Daniel Bertoni",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Quilmes",
+        "years": "1971–1972",
+        "note": "Senior debut 13 November 1971 for Quilmes, per a retrieved Spanish-language club history; national-football-teams.com’s season table independently lists his 1971 and 1972 Quilmes rows, both in the Argentine second division."
+      },
+      {
+        "name": "Independiente",
+        "years": "1973–1977"
+      },
+      {
+        "name": "Sevilla",
+        "years": "1978–1980"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1980–1984"
+      },
+      {
+        "name": "Napoli",
+        "years": "1984–1986"
+      },
+      {
+        "name": "Udinese",
+        "years": "1986–1987",
+        "note": "Retired at Udinese in 1987; a zero-appearance 1987/88 Avellino registration is not treated as an additional senior playing spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://www.national-football-teams.com/player/18224/Daniel_Bertoni.html",
+        "title": "Daniel Bertoni (Player) | National Football Teams"
+      },
+      {
+        "url": "https://zonales.com/medio-siglo-debut-ricardo-bertoni-quilmes-socio-bochini-maradona-partido-dificil/",
+        "title": "Medio siglo del debut de Bertoni en Quilmes - Zonales"
+      }
+    ],
+    "notes": "Scored Argentina’s third goal in the 1978 World Cup final win over the Netherlands. First senior system: Argentina, Quilmes; some biographies date the debut to 1972, so the exact 1971 first-match date is qualified, not independently proven beyond the retrieved local report.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "argentine-primera",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "cristian-rodriguez",
+    "name": "Cristian Rodríguez",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Midfielder / Forward",
+    "clubs": [
+      {
+        "name": "Peñarol",
+        "years": "2002–2005"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2005–2008"
+      },
+      {
+        "name": "Benfica",
+        "years": "2007–2008",
+        "note": "Loan spell, overlapping the end of the Paris Saint-Germain registration."
+      },
+      {
+        "name": "Porto",
+        "years": "2008–2012"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2012–2015"
+      },
+      {
+        "name": "Parma",
+        "years": "2015",
+        "note": "Loan spell."
+      },
+      {
+        "name": "Grêmio",
+        "years": "2015",
+        "note": "Loan spell; a Uruguayan news report corroborates two actual competitive matches and 88 minutes played, despite the domestic league table showing zero Brazilian league appearances."
+      },
+      {
+        "name": "Independiente",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Peñarol",
+        "years": "2017–2021",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Plaza Colonia",
+        "years": "2021–2022"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Cristian_Rodr%C3%ADguez",
+        "title": "Cristian Rodríguez - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/8178/Cristian_Rodriguez.html",
+        "title": "Cristian Rodríguez (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.montevideo.com.uy/Deportes/Cebolla-Rodriguez-rescindio-en-Gremio-uc270455",
+        "title": "\"Cebolla\" Rodríguez rescindió en Grêmio - Montevideo Portal"
+      }
+    ],
+    "notes": "Nicknamed \"Cebolla\"; a 2010 World Cup semi-finalist with Uruguay. First senior system: Uruguay, Peñarol in 2002. The Grêmio loan is retained despite zero domestic league appearances because an independent Uruguayan news report documents two actual matches played; no invented Paris Saint-Germain or Atlético Madrid playing returns are added.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "daniel-fonseca",
+    "name": "Daniel Fonseca",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Nacional",
+        "years": "1988–1990"
+      },
+      {
+        "name": "Cagliari",
+        "years": "1990–1992"
+      },
+      {
+        "name": "Napoli",
+        "years": "1992–1994"
+      },
+      {
+        "name": "Roma",
+        "years": "1994–1997"
+      },
+      {
+        "name": "Juventus",
+        "years": "1997–2001"
+      },
+      {
+        "name": "River Plate",
+        "years": "2001–2002",
+        "note": "Documented registration with zero recorded appearances; retained rather than silently dropped."
+      },
+      {
+        "name": "Nacional",
+        "years": "2002",
+        "note": "Second playing spell, a brief return."
+      },
+      {
+        "name": "Como",
+        "years": "2002–2003"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Daniel_Fonseca",
+        "title": "Daniel Fonseca - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/12628/Daniel_Fonseca.html",
+        "title": "Daniel Fonseca (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Uruguay-era contemporary of Enzo Francescoli, debuting exactly at the eight-year overlap boundary. The 2001–2002 River Plate (Argentina) spell with zero recorded appearances is retained as documented rather than silently dropped.",
+    "status": "retired",
+    "verifiedAt": "2026-09-15",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ]
   }
 ]

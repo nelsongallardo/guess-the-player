@@ -1,65 +1,35 @@
 [
   {
-    "id": "fernando-couto",
-    "name": "Fernando Couto",
+    "id": "paulo-futre",
+    "name": "Paulo Futre",
     "country": "Portugal",
-    "position": "Defender",
-    "start": 1988,
-    "end": 2008,
+    "position": "Forward",
+    "start": 1983,
+    "end": 1998,
     "clubs": [
-      "Porto",
-      "Parma",
-      "Barcelona",
-      "Lazio",
-      "Parma"
-    ],
-    "system": "portugal",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Fernando_Couto",
-        "excerpt": "Fernando Couto ... senior career: FC Porto 1988, Famalicao 1988-89, Academica de Coimbra 1989-90, FC Porto 1990-1994 (second spell), Parma 1994-1996, Barcelona 1996-1998, Lazio 1998-2005, Parma 2005-2008 (second spell). Portugal national team 1990-2004, 110 caps, 8 goals. Centre back who won league and cup doubles in Portugal, Italy and Spain."
-      },
-      {
-        "url": "https://www.national-football-teams.com/player/5289/Fernando_Couto.html",
-        "excerpt": "Fernando Couto, Centre Back (CB), born 02-08-1969 in Espinho, Portugal. 1.83m. FIFA Matches 110, FIFA Goals 8. Club seasons include FC Porto (1987/88, 1990/91-1993/94), Famalicao and Academica in between, AC Parma (1994/95-1995/96, 2005/06-2007/08), FC Barcelona (1996/97-1997/98) and Lazio Roma (1998/99-2004/05)."
-      }
-    ],
-    "notes": "Wrong-answer-only profile researched to close the same Figo-era Portugal contemporary gap. Both sources agree on Porto as the first senior system club (with Famalicao/Academica/Porto's second spell simplified out of the bank's plain club list) and the later Parma/Barcelona/Lazio/Parma chronology.",
-    "verifiedAt": "2026-09-14",
-    "evidenceFile": "research/DISTRACTOR_FIGO_ERA_SOURCES.md"
-  },
-  {
-    "id": "paulo-sousa",
-    "name": "Paulo Sousa",
-    "country": "Portugal",
-    "position": "Midfielder",
-    "start": 1989,
-    "end": 2002,
-    "clubs": [
-      "Benfica",
       "Sporting CP",
-      "Juventus",
-      "Borussia Dortmund",
-      "Inter Milan",
-      "Parma",
-      "Panathinaikos",
-      "Espanyol"
+      "Porto",
+      "Atlético Madrid",
+      "Benfica",
+      "Marseille",
+      "Reggiana",
+      "AC Milan",
+      "West Ham United",
+      "Atlético Madrid",
+      "Yokohama Flügels"
     ],
     "system": "portugal",
     "region": "europe",
     "sources": [
       {
-        "url": "https://en.wikipedia.org/wiki/Paulo_Sousa",
-        "excerpt": "Paulo Sousa ... senior career: Benfica 1989-1993, Sporting CP 1993-1994, Juventus 1994-1996, Borussia Dortmund 1996-1997, Inter Milan 1998-2000, Parma 2000 (loan), Panathinaikos 2000-2001, Espanyol 2002. Portugal national team 1991-2002, 51 caps. Defensive midfielder, later became a coach."
+        "url": "https://en.wikipedia.org/wiki/Paulo_Futre",
+        "excerpt": "years1 = 1983-1984 | clubs1 = Sporting CP | years2 = 1984-1987 | clubs2 = Porto | years3 = 1987-1993 | clubs3 = Atlético Madrid | years4 = 1993 | clubs4 = Benfica | years5 = 1993 | clubs5 = Marseille | years6 = 1993-1995 | clubs6 = Reggiana | years7 = 1995-1996 | clubs7 = AC Milan | years8 = 1996-1997 | clubs8 = West Ham United | years9 = 1997-1998 | clubs9 = Atlético Madrid | years10 = 1998 | clubs10 = Yokohama Flügels"
       },
       {
-        "url": "https://www.national-football-teams.com/player/14056/Paulo_Sousa.html",
-        "excerpt": "Paulo Sousa, Centre Midfielder (CM), other position Defensive Midfielder (DM), born 30-08-1970 in Viseu, Portugal. 1.77m. FIFA Matches 51. Club seasons: Benfica Lisboa (1989/90-1992/93), Sporting CP Lisboa (1993/94), Juventus Torino (1994/95-1995/96), Borussia Dortmund (1996/97-1997/98), Inter Milano (1997/98-1999/00), AC Parma (1999/00), Panathinaikos AO (2000/01-2001/02), Espanyol Barcelona (2001/02)."
+        "url": "https://www.national-football-teams.com/player/14185/Paulo_Futre.html",
+        "excerpt": "Club Appearances of Paulo Futre: 1998 Yokohama Flügels 13(3); 1997/98 Atlético Madrid 10(0); 1996/97 West Ham United 9(0); 1995/96 AC Milan 1(0); 1994/95 AC Reggiana 12(4); 1993/94 Olympique Marseille 8(2); 1992/93 Benfica Lisboa 11(3); 1987/88-1992/93 Atlético Madrid (six seasons); 1984/85-1986/87 FC Porto (three seasons); 1982/83-1983/84 Sporting CP Lisboa (two seasons)."
       }
     ],
-    "notes": "Wrong-answer-only profile researched to close the same Figo-era Portugal contemporary gap. The eight-club chronology, including the brief Parma loan during his Inter Milan spell, is corroborated by both sources.",
-    "verifiedAt": "2026-09-14",
-    "evidenceFile": "research/DISTRACTOR_FIGO_ERA_SOURCES.md"
+    "notes": "Portugal 1980s-debut peer for Figo, Rui Costa, Fernando Couto and Paulo Sousa, closing the contemporary gap reopened when Couto and Sousa were promoted to the playable roster in the ninth expansion. Won the 1987 European Cup with Porto before an extensive Spanish, French, Italian, English and Japanese career; a Portuguese international from age 17."
   }
 ]

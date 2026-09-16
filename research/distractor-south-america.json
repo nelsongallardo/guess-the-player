@@ -270,43 +270,6 @@
     "notes": "First senior system: Chile, Universidad de Chile in 1999; earlier Colo-Colo and Universidad de Chile youth football is excluded. NFT’s 2015/16 final season and Wikipedia’s 2015–2016 Audax spell support a 2016 endpoint. Use the existing broad Midfielder role."
   },
   {
-    "id": "cristian-rodriguez",
-    "name": "Cristian Rodríguez",
-    "country": "Uruguay",
-    "position": "Midfielder / Forward",
-    "start": 2002,
-    "end": 2022,
-    "clubs": [
-      "Peñarol",
-      "Paris Saint-Germain",
-      "Benfica",
-      "Porto",
-      "Atlético Madrid",
-      "Parma",
-      "Grêmio",
-      "Independiente",
-      "Peñarol",
-      "Plaza Colonia"
-    ],
-    "system": "uruguay",
-    "region": "south-america",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Cristian_Rodr%C3%ADguez",
-        "excerpt": "Cristian Rodríguez Rodríguez with Peñarol in 2018 Personal information Full name Cristian Gabriel Rodríguez Barrotti[1] Date of birth 30 September 1985 (age 40)[1] Place of birth Juan Lacaze, Uruguay Height 1.78 m (5 ft 10 in)[2] Position Winger Youth career Peñarol Senior career* Years Team Apps (Gls) 2002–2005 Peñarol 55 (5) 2005–2008 Paris Saint-Germain 36 (1) 2007–2008 → Benfica (loan) 24 (6) 2008–2012 Porto 70 (12) 2012–2015 Atlético Madrid 59 (2) 2015 → Parma (loan) 5 (0) 2015 → Grêmio (loan) 0 (0) 2015–2016 Independiente 26 (3) 2017–2021 Peñarol 98 (31) 2021–2022 Plaza Colonia 37 (4) Total 410 (64) International career 2003–2005 Uruguay U20 13 (5) 2003–2018 Uruguay 110 (11) * Club domestic league appearances and goals"
-      },
-      {
-        "url": "https://www.national-football-teams.com/player/8178/Cristian_Rodriguez.html",
-        "excerpt": "Club Appearances of Cristian Rodríguez Season Club M G R Cha Cup Season Club M G R Cha Cup 391 60 2022 Plaza Colonia 22 0 14 (I) 2021 Plaza Colonia 27 4 3 (I) 2020 CA Peñarol 16 1 3 (I) 2019 CA Peñarol 23 5 2 (I) 2018 CA Peñarol 19 9 1 (I) 2017 CA Peñarol 27 15 1 (I) 2016/17 Independiente Avellaneda 9 0 6 (I) 2016 Independiente Avellaneda 9 0 6 (I) 2015 Independiente Avellaneda 5 1 5 (I) 2014/15 Parma FC 5 0 20 (I) 2014/15 Atlético Madrid 6 0 3 (I) 2013/14 Atlético Madrid 20 1 1 (I) 2012/13 Atlético Madrid 33 1 3 (I) 2011/12 FC Porto 10 1 1 (I) 2010/11 FC Porto 13 1 1 (I) 2009/10 FC Porto 18 4 3 (I) 2008/09 FC Porto 29 6 1 (I) 2007/08 Benfica Lisboa 24 6 4 (I) 2006/07 Paris Saint-Germain 25 1 15 (I) 2005/06 Paris Saint-Germain 11 0 9 (I) 2004 CA Peñarol 13 2 3 (I) 2003 CA Peñarol 21 2 1 (I) 2002 CA Peñarol 6 0 1 (I) 391 60"
-      },
-      {
-        "url": "https://www.montevideo.com.uy/Deportes/Cebolla-Rodriguez-rescindio-en-Gremio-uc270455",
-        "excerpt": "Rodríguez llegó a Porto Alegre el 10 de marzo de 2015, jugó dos partidos y sumó -entre ellos- 88 minutos con la camiseta tricolor. Felipe Scolari, entrenador de la institución, dijo: Son situaciones que ocurren en el fútbol. Él venía jugando pero ha sufrido algunas lesiones. Claro que frustra, a mí, al deportista y a la directiva."
-      }
-    ],
-    "notes": "First senior system: Uruguay, Peñarol in 2002. Retain Grêmio despite zero Brazilian national-league appearances: Montevideo Portal reports two actual matches and 88 minutes in 2015. Preserve the Benfica, Parma and Grêmio loans without invented PSG or Atlético playing returns; retain the genuine later Peñarol return. End 2022 denotes final senior playing season at Plaza Colonia, not a later retirement-announcement date."
-  },
-  {
     "id": "vicente-sanchez",
     "name": "Vicente Sánchez",
     "country": "Uruguay",

@@ -1269,6 +1269,119 @@ A three-club, 964-appearance chronology is corroborated by Wikipedia's senior ca
 
 Reviewed source links: [334], [335], [336].
 
+### Robin van Persie
+
+**Netherlands · Europe · Forward.** Feyenoord (2002–2004) → Arsenal (2004–2012) → Manchester United (2012–2015) → Fenerbahçe (2015–2018) → Feyenoord (2018–2019).[337][338][339]
+
+A five-node chronology across two Feyenoord spells is corroborated by both primary sources; Feyenoord's own club announcement independently corroborates his January 2018 playing return and later 2023 appointment as head coach there. Wikipedia's infobox season label starts his first Feyenoord spell in 2001, but an independent elfvoetbal.nl retrospective dates the actual first-team debut to 3 February 2002 against Roda JC; the corrected 2002 debut year is used here. Won the 2012–13 Premier League Golden Boot and title with Manchester United after joining from Arsenal.[337][338][339]
+
+- **Feyenoord (2002–2004):** First-team debut corrected to 3 February 2002 per elfvoetbal.nl, not Wikipedia's 2001 infobox label; Excelsior youth football and unused reserve-team mentions are excluded as non-senior.
+- **Feyenoord (2018–2019):** Second playing spell, a genuine return rather than a coaching appointment; retired at the club before later becoming its head coach, a distinct administrative role out of scope here.
+
+Reviewed source links: [337], [338], [339].
+
+### Roberto Mancini
+
+**Italy · Europe · Forward / Midfielder.** Bologna (1980–1982) → Sampdoria (1982–1997) → Lazio (1997–2001) → Leicester City (2001).[340][341]
+
+A four-club chronology is corroborated by both primary sources, with national-football-teams.com's season-by-season table independently confirming the brief, four-appearance Leicester City loan that closed his playing career. Long-serving Sampdoria captain who won the 1990–91 Serie A title and the 1989–90 European Cup Winners' Cup there before later becoming one of European football's most decorated managers, out of scope for this playing-career record.[340][341]
+
+- **Leicester City (2001):** Single-season loan; four competitive appearances, no goals, a genuine senior spell rather than an unused registration.
+
+Reviewed source links: [340], [341].
+
+### Emmanuel Petit
+
+**France · Europe · Midfielder.** Monaco B (1987–1989) → Monaco (1988–1997) → Arsenal (1997–2000) → Barcelona (2000–2001) → Chelsea (2001–2004).[342][343]
+
+A five-node chronology, including a third-tier Monaco B reserve debut overlapping the first-team breakthrough, is corroborated by both primary sources. World Cup winner with France in 1998 and European champion in 2000, scoring in the World Cup final itself.[342][343]
+
+- **Monaco B (1987–1989):** Third-tier adult reserve side; overlaps the first-team debut and is not a claim of a permanent demotion.
+- **Chelsea (2001–2004):** Final professional club; retirement was announced 20 January 2005 after failing to recover from knee surgery following release by Chelsea, not treated as an additional playing year beyond the 2003–04 season. A reported Bolton Wanderers approach afterward was a rejected offer, not a playing spell.
+
+Reviewed source links: [342], [343].
+
+### Fernando Couto
+
+**Portugal · Europe · Defender.** Porto (1987–1994) → Parma (1994–1996) → Barcelona (1996–1998) → Lazio (1998–2005) → Parma (2005–2008).[344][345]
+
+A five-node chronology across two Parma spells is corroborated by both primary sources. Euro 2000-winning Portugal captain who won league and cup doubles in Portugal, Italy and Spain across this chronology.[344][345]
+
+- **Porto (1987–1994):** Wikipedia and national-football-teams.com both record a loan/spell interlude at Famalicão (1988–89) and Académica de Coimbra (1989–90) between an initial 1987/88 Porto season and a second Porto spell from 1990; the two Porto spells are combined into one node here, following this roster's existing simplified-loan precedent (e.g. Rui Costa's Fafe loan).
+- **Parma (2005–2008):** Second playing spell; final professional club.
+
+Reviewed source links: [344], [345].
+
+### Paulo Sousa
+
+**Portugal · Europe · Midfielder.** Benfica (1989–1993) → Sporting CP (1993–1994) → Juventus (1994–1996) → Borussia Dortmund (1996–1997) → Inter Milan (1998–2000) → Parma (2000) → Panathinaikos (2000–2001) → Espanyol (2002).[346][347]
+
+An eight-club chronology is corroborated by both primary sources, though they disagree on one internal boundary. Part of Portugal's "Golden Generation" alongside Figo and Rui Costa; won the Champions League with Juventus (1996) and Borussia Dortmund (1997) in consecutive seasons before later becoming a coach.[346][347]
+
+- **Inter Milan (1998–2000):** Wikipedia's prose dates a 1997 gap season before this spell; national-football-teams.com's season table instead shows an overlapping 1997/98 transition straight from Dortmund with no gap season. The overall eight-club chronology is corroborated by both; this specific one-year boundary is disclosed as unresolved rather than asserted.
+- **Parma (2000):** Loan spell during the Inter Milan era.
+
+Reviewed source links: [346], [347].
+
+### Diego Ribas
+
+**Brazil · South America · Midfielder.** Santos (2002–2004) → Porto (2004–2006) → Werder Bremen (2006–2009) → Juventus (2009–2010) → VfL Wolfsburg (2010–2011) → Atlético Madrid (2011–2012) → VfL Wolfsburg (2012–2014) → Atlético Madrid (2014) → Fenerbahçe (2014–2016) → Flamengo (2016–2022).[348][349]
+
+A ten-node chronology across two Wolfsburg spells and two Atlético Madrid spells is corroborated by both primary sources; ge.globo's own report independently corroborates his November 2022 retirement announcement at Flamengo after twenty professional seasons. 2009 Bundesliga Footballer of the Year at Werder Bremen; full name Diego Ribas da Cunha, born 28 February 1985, distinct from Diego Maradona or any other "Diego" on this roster.[348][349]
+
+- **VfL Wolfsburg (2010–2011):** First spell before an outgoing loan to Atlético Madrid.
+- **Atlético Madrid (2011–2012):** Loan spell.
+- **VfL Wolfsburg (2012–2014):** Returned to Wolfsburg following the end of the Atlético Madrid loan.
+- **Atlético Madrid (2014):** Permanent transfer back on 31 January 2014, for the rest of the 2013–14 season, not a further loan.
+- **Flamengo (2016–2022):** Final professional club; Wikipedia and ge.globo differ by one day on the exact final-match date, so the endpoint is deliberately year-only.
+
+Reviewed source links: [348], [349].
+
+### Lucas Moura
+
+**Brazil · South America · Forward.** São Paulo (2010–2012) → Paris Saint-Germain (2013–2018) → Tottenham Hotspur (2018–2023) → São Paulo (2023–present).[350][351]
+
+A four-node chronology across two São Paulo spells is corroborated by both primary sources, with Soccerbase's season-by-season appearance record independently confirming ongoing 2026 Série A matches for the current São Paulo spell. Scored a second-half hat-trick to complete a stunning comeback against Ajax in the 2019 Champions League semi-final second leg, sending Tottenham to the final.[350][351]
+
+- **São Paulo (2023–present):** Second playing spell, an actual return rather than a loan; still an active player as of the 2026 Brazilian Série A season. Endpoint 2026 is the latest independently observed professional playing year, not a retirement date or predicted contract end.
+
+Reviewed source links: [350], [351].
+
+### Daniel Bertoni
+
+**Argentina · South America · Forward.** Quilmes (1971–1972) → Independiente (1973–1977) → Sevilla (1978–1980) → Fiorentina (1980–1984) → Napoli (1984–1986) → Udinese (1986–1987).[352][353]
+
+A six-club chronology is corroborated by both primary sources; a retrieved Spanish-language Quilmes club history independently corroborates his senior debut on 13 November 1971, and national-football-teams.com's season table separately lists his 1971 and 1972 Quilmes rows in the Argentine second division. Scored Argentina's third goal in the 1978 World Cup final win over the Netherlands.[352][353]
+
+- **Quilmes (1971–1972):** Some biographies date the debut to 1972 instead; the 1971 first-match date is qualified as reported by the retrieved local source, not independently proven beyond it.
+- **Udinese (1986–1987):** Retired at Udinese in 1987; a zero-appearance 1987/88 Avellino registration is not treated as an additional senior playing spell.
+
+Reviewed source links: [352], [353].
+
+### Cristian Rodríguez
+
+**Uruguay · South America · Midfielder / Forward.** Peñarol (2002–2005) → Paris Saint-Germain (2005–2008) → Benfica (2007–2008) → Porto (2008–2012) → Atlético Madrid (2012–2015) → Parma (2015) → Grêmio (2015) → Independiente (2015–2016) → Peñarol (2017–2021) → Plaza Colonia (2021–2022).[354][355][356]
+
+A ten-node chronology across two Peñarol spells is corroborated by both primary sources; an independent Montevideo Portal news report separately corroborates two actual competitive Grêmio matches and 88 minutes played, despite the domestic league table showing zero Brazilian league appearances for that loan. Nicknamed "Cebolla"; a 2010 World Cup semi-finalist with Uruguay.[354][355][356]
+
+- **Benfica (2007–2008):** Loan spell, overlapping the end of the Paris Saint-Germain registration.
+- **Parma (2015):** Loan spell.
+- **Grêmio (2015):** Loan spell, retained despite a zero-appearance domestic league table because the independent Uruguayan report documents two actual matches played; no invented Paris Saint-Germain or Atlético Madrid playing returns are added elsewhere in this chronology.
+- **Peñarol (2017–2021):** Second playing spell.
+
+Reviewed source links: [354], [355], [356].
+
+### Daniel Fonseca
+
+**Uruguay · South America · Forward.** Nacional (1988–1990) → Cagliari (1990–1992) → Napoli (1992–1994) → Roma (1994–1997) → Juventus (1997–2001) → River Plate (2001–2002) → Nacional (2002) → Como (2002–2003).[357][358]
+
+An eight-node chronology across two Nacional spells is corroborated by both primary sources. Uruguay-era contemporary of Enzo Francescoli, debuting exactly at the eight-year overlap boundary used elsewhere on this roster.[357][358]
+
+- **River Plate (2001–2002):** Documented registration with zero recorded appearances; retained as reported rather than silently dropped.
+- **Nacional (2002):** Second playing spell, a brief return.
+
+Reviewed source links: [357], [358].
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -1606,3 +1719,25 @@ Sources:
 [334] https://en.wikipedia.org/wiki/Djalma_Santos
 [335] http://www.independent.co.uk/news/obituaries/djalma-santos-footballer-who-won-the-world-cup-with-brazil-8782678.html
 [336] https://www.sbs.com.au/news/article/brazils-twice-world-cup-winner-djalma-santos-dies-at-84/dw8uxuij4
+[337] https://en.wikipedia.org/wiki/Robin_van_Persie#Club_career
+[338] https://www.feyenoord.com/en/news/van-persie-head-coach-feyenoord-with-immediate-effect-230225
+[339] https://www.elfvoetbal.nl/Binnenland/2879/vijftien-jaar-geleden-van-persie-maakt-debuut-voor-feyenoord
+[340] https://en.wikipedia.org/wiki/Roberto_Mancini
+[341] https://www.national-football-teams.com/player/14131/Roberto_Mancini.html
+[342] https://en.wikipedia.org/wiki/Emmanuel_Petit
+[343] https://www.national-football-teams.com/old/player/13956/Emmanuel_Petit.html
+[344] https://en.wikipedia.org/wiki/Fernando_Couto
+[345] https://www.national-football-teams.com/player/5289/Fernando_Couto.html
+[346] https://en.wikipedia.org/wiki/Paulo_Sousa
+[347] https://www.national-football-teams.com/player/14056/Paulo_Sousa.html
+[348] https://en.wikipedia.org/wiki/Diego_(footballer,_born_1985)
+[349] https://ge.globo.com/futebol/times/flamengo/noticia/2022/11/05/com-12-titulos-pelo-flamengo-diego-anuncia-que-se-aposentara-do-futebol-no-fim-de-2022.ghtml
+[350] https://en.wikipedia.org/wiki/Lucas_Moura
+[351] https://soccerbase.com/players/player.sd?player_id=58808
+[352] https://www.national-football-teams.com/player/18224/Daniel_Bertoni.html
+[353] https://zonales.com/medio-siglo-debut-ricardo-bertoni-quilmes-socio-bochini-maradona-partido-dificil
+[354] https://en.wikipedia.org/wiki/Cristian_Rodr%C3%ADguez
+[355] https://www.national-football-teams.com/player/8178/Cristian_Rodriguez.html
+[356] https://www.montevideo.com.uy/Deportes/Cebolla-Rodriguez-rescindio-en-Gremio-uc270455
+[357] https://en.wikipedia.org/wiki/Daniel_Fonseca
+[358] https://www.national-football-teams.com/player/12628/Daniel_Fonseca.html

@@ -129,40 +129,5 @@
       }
     ],
     "notes": "Neymar-era Brazil-start peer. Start 2009 follows actual Vasco senior appearances and independent professional-career wording, not Inter ownership/registration from 2008 in the infobox. Actual playing returns to Inter after Espanyol and Barcelona after Bayern are retained. Continuous loan-to-permanent Aston Villa and final Vasco stays are each one node; no unused Villa ownership return between Al-Duhail and Vasco. End 2026 is latest observed professional playing year, NOT retirement: retrieved Wikipedia lists him as a free agent after leaving Vasco in February 2026. Snapshot 2026-09-12; future play remains possible. beIN’s adjacent age/Inter-signing wording is not used to override Wikipedia’s chronology."
-  },
-  {
-    "id": "lucas-moura",
-    "name": "Lucas Moura",
-    "country": "Brazil",
-    "position": "Forward",
-    "start": 2010,
-    "end": 2026,
-    "clubs": [
-      "São Paulo",
-      "Paris Saint-Germain",
-      "Tottenham Hotspur",
-      "São Paulo"
-    ],
-    "system": "brazil",
-    "region": "south-america",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Lucas_Moura",
-        "excerpt": "| Senior career\\* |\n| Years | **Team** | **Apps** | **(Gls)** |\n| 2010–2012 | [São Paulo](https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC \"São Paulo FC\") | 103 | (28) |\n| 2013–2018 | [Paris Saint-Germain](https://en.wikipedia.org/wiki/Paris_Saint-Germain_FC \"Paris Saint-Germain FC\") | 153 | (34) |\n| 2018–2023 | [Tottenham Hotspur](https://en.wikipedia.org/wiki/Tottenham_Hotspur_F.C. \"Tottenham Hotspur F.C.\") | 152 | (20) |\n| 2023– | [São Paulo](https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC \"São Paulo FC\") | 88 | (21) |"
-      },
-      {
-        "url": "https://en.wikipedia.org/wiki/Lucas_Moura",
-        "excerpt": "Moura made his debut with the São Paulo first-team in 2010, scoring four goals and providing four assists in 25 appearances."
-      },
-      {
-        "url": "https://soccerbase.com/players/player.sd?player_id=58808",
-        "excerpt": "Sao Paulo | 01 Jan, 10 | 09 Jan, 13 | 71 (2)"
-      },
-      {
-        "url": "https://soccerbase.com/players/player.sd?player_id=58808",
-        "excerpt": "Brazilian Serie A | Th 29Jan 2026 | Sao Paulo | 2 - 1 | Flamengo |"
-      }
-    ],
-    "notes": "Neymar-era Brazil-start peer. São Paulo first-team debut in 2010, followed by PSG, Tottenham and actual São Paulo return in 2023. Juventus-SP/Corinthians/São Paulo youth and Tottenham closed U21 football excluded. End 2026 is latest observed professional playing year, NOT retirement or predicted contract end: Wikipedia reports a current São Paulo spell and 2026 appearances; Soccerbase independently lists 2026 matches. Snapshot 2026-09-12, not live verification of every subsequent match."
   }
 ]

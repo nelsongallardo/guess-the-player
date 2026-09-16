@@ -1,39 +1,5 @@
 [
   {
-    "id": "daniel-bertoni",
-    "name": "Daniel Bertoni",
-    "country": "Argentina",
-    "position": "Forward",
-    "start": 1971,
-    "end": 1987,
-    "clubs": [
-      "Quilmes",
-      "Independiente",
-      "Sevilla",
-      "Fiorentina",
-      "Napoli",
-      "Udinese"
-    ],
-    "sources": [
-      {
-        "url": "https://www.national-football-teams.com/player/18224/Daniel_Bertoni.html",
-        "excerpt": "National Team Appearances of Daniel Bertoni FIFA Non FIFA Season Country M S G M S G 1982 Argentina 5 0 2 0 0 0 1981 Argentina 2 0 0 0 0 0 1979 Argentina 1 0 0 - - - 1978 Argentina 7 4 2 - - - 1977 Argentina 7 0 7 - - - 1976 Argentina 4 0 1 - - - 1974 Argentina 1 0 0 - - - 27 4 12 0 0 0 Club Appearances of Daniel Bertoni Season Club M G R Cha Cup 1987/88 US Avellino 0 0 15 ( I ) 1986/87 Udinese Calcio 20 1 16 ( I ) 1985/86 SSC Napoli 26 3 3 ( I ) 1984/85 SSC Napoli 27 11 8 ( I ) 1983/84 AC Fiorentina 26 10 3 ( I ) 1982/83 AC Fiorentina 16 4 5 ( I ) 1981/82 AC Fiorentina 30 9 2 ( I ) 1980/81 AC Fiorentina 25 4 5 ( I ) 1979/80 Sevilla FC 32 16 8 ( I ) 1978/79 Sevilla FC 25 8 11 ( I ) 1977 Independiente Avellaneda 33 22 2 ( I ) 1976 Independiente Avellaneda 42 21 10 ( I ) 1975 Independiente Avellaneda 33 11 13 ( I ) 1974 Independiente Avellaneda 35 17 7 ( I ) 1973 Independiente Avellaneda 35 8 4 ( I ) 1972 Quilmes AC 31 12 - ( II ) 1971 Quilmes AC - - - ( II ) 436 157"
-      },
-      {
-        "url": "https://www.national-football-teams.com/player/18224/Daniel_Bertoni.html",
-        "excerpt": "Position Right Winger ( RW ) Other positions: Centre Forward (CF) , Left Winger (LW)"
-      },
-      {
-        "url": "https://zonales.com/medio-siglo-debut-ricardo-bertoni-quilmes-socio-bochini-maradona-partido-dificil/",
-        "excerpt": "Comenzó las inferiores en Quilmes y se dio el gusto de ser campeón con la Quinta y con la Octava, dos de los tres títulos juveniles del Cervecero en su largo recorrido. Con el equipo del Sur del Conurbano debutó en 1971. Su aparición fue el 13 de noviembre, en una derrota por 3 a 1 contra San Telmo en la Isla Maciel; el chiquilín convirtió de penal el único gol de su equipo."
-      },
-      {
-        "url": "https://zonales.com/medio-siglo-debut-ricardo-bertoni-quilmes-socio-bochini-maradona-partido-dificil/",
-        "excerpt": "Previo a su retiro en 1987, cuando jugaba para Udinese, Bertoni se dio el lujo de ser parte del Napoli que revolucionó el Calcio."
-      }
-    ]
-  },
-  {
     "id": "osvaldo-ardiles",
     "name": "Osvaldo Ardiles",
     "country": "Argentina",

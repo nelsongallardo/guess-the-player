@@ -9,6 +9,13 @@ now real playable roster names — directly to Zico's `incorrectOptions` in `ind
 eight further researched profiles below close the remaining Netherlands, Italy and Uruguay
 gaps. Retrieved 14 September 2026.
 
+The ninth expansion promoted Roberto Mancini and Daniel Fonseca themselves out of this same
+file's bank into the playable roster, reopening part of the gap this ledger exists to close.
+Paolo Montero (added below) closes Fonseca's reopened Uruguay-system gap; Roberto Mancini's own
+Italy-system gap (Bologna, 1980) is closed without new research since Gianluca Vialli — already
+promoted in the eighth expansion, also a 1980 Italy debut — is a direct, already-playable
+contemporary, added straight to Mancini's `incorrectOptions`.
+
 ## Marco van Basten
 
 **Netherlands · Forward.** Ajax (1981–1987) → AC Milan (1987–1995).
@@ -80,3 +87,12 @@ Notes: Closes part of Enzo Francescoli's Uruguay-system contemporary gap (debut 
 - https://www.national-football-teams.com/player/15731/Ruben_Paz.html — "Rubén Paz, Left Midfielder, born 08-08-1959 in Artigas, Uruguay. 1.74m. FIFA Matches 45, FIFA Goals 8."
 
 Notes: Closes part of Enzo Francescoli's Uruguay-system contemporary gap (debut 1977, overlapping 1977–1998). Wikipedia's earlier 1975–1977 "Peñarol de Artigas" entry carries no appearance total and is a distinct, minor Artigas-department club rather than the major Montevideo institution of the same generic name; it is treated as a lower-tier/uncertain start and excluded from this profile's first club in the same spirit as this project's established youth/unresolved-debut exclusions, with Peñarol (Montevideo) — which does carry a documented appearance total — used as the first senior club instead. The long, return-heavy lower-division tail is retained in full as documented, matching this project's existing precedent (Rivaldo, Romário, Roque Santa Cruz).
+
+## Paolo Montero
+
+**Uruguay · Defender.** Peñarol (1990–1992) → Atalanta (1992–1996) → Juventus (1996–2005) → San Lorenzo (2005–2006) → Peñarol (2006–2007, second spell).
+
+- https://en.wikipedia.org/wiki/Paolo_Montero — "years1 = 1990–1992 | clubs1 = Peñarol ... years2 = 1992–1996 | clubs2 = Atalanta ... years3 = 1996–2005 | clubs3 = Juventus ... years4 = 2005–2006 | clubs4 = San Lorenzo ... years5 = 2006–2007 | clubs5 = Peñarol."
+- https://www.national-football-teams.com/player/8175/Paolo_Montero.html — "Club Appearances of Paolo Montero: 2006/07 CA Peñarol 21(1); 2005/06 San Lorenzo Almagro 14(1); nine Juventus Torino seasons 1996/97–2004/05; four Atalanta Bergamo seasons 1992/93–1995/96; three CA Peñarol seasons 1990–1992. Born 03-09-1971 in Montevideo, Uruguay."
+
+Notes: Retrieved 15 September 2026. Closes Daniel Fonseca's Uruguay-system contemporary gap, reopened when Fonseca himself was promoted to the playable roster in the ninth expansion (debut 1990 vs Fonseca's 1988, two years apart, overlapping 1990–2003). Long-serving Juventus centre-back and later club captain, notorious for Serie A's all-time red-card record; retired at Peñarol in a second spell.

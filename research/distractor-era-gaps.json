@@ -38,50 +38,5 @@
       }
     ],
     "notes": "Wrong-answer-only professional senior profile. Wikipedia's senior infobox also lists Torsby IF 2000–2003 (24 appearances), but professional status of that earlier local spell was not established; it is not silently treated as youth. The project's professional timeline begins at IFK Göteborg in 2005, explicitly corroborated by the independent retirement report. Retrieved Wikipedia route: IFK Göteborg 2005–2007, Groningen 2007–2009, Hamburger SV 2009–2013 with PSV loan 2010–2011 and actual Hamburg playing return 2011–2013, Panathinaikos 2013–2017, Al Ain 2017–2019, Krasnodar 2019–2021, IFK Göteborg 2021–2023. End is playing retirement in September 2023, not international retirement in 2021 or later assistant coaching. Sweden is the senior national team; striker maps to Forward."
-  },
-  {
-    "id": "diego-ribas",
-    "name": "Diego Ribas",
-    "country": "Brazil",
-    "position": "Midfielder",
-    "start": 2002,
-    "end": 2022,
-    "clubs": [
-      "Santos",
-      "Porto",
-      "Werder Bremen",
-      "Juventus",
-      "VfL Wolfsburg",
-      "Atlético Madrid",
-      "VfL Wolfsburg",
-      "Atlético Madrid",
-      "Fenerbahçe",
-      "Flamengo"
-    ],
-    "system": "brazil",
-    "region": "south-america",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Diego_(footballer,_born_1985)",
-        "excerpt": "Position Attacking midfielder Youth career 1996–2001 Santos Senior career* Years Team Apps ( Gls ) 2002–2004 Santos 86 (24) 2004–2006 Porto 48 (4) 2006–2009 Werder Bremen 84 (38) 2009–2010 Juventus 33 (5) 2010–2014 VfL Wolfsburg 77 (19) 2011–2012 → Atlético Madrid (loan) 30 (3) 2014 Atlético Madrid 13 (1) 2014–2016 Fenerbahçe 53 (5) 2016–2022 Flamengo 204 (37) Total 627 (136) International career 2001 Brazil U17 3 (0) 2004–2008 Brazil U23 15 (7) 2003–2017 Brazil 34 (4)"
-      },
-      {
-        "url": "https://en.wikipedia.org/wiki/Diego_(footballer,_born_1985)",
-        "excerpt": "Diego returned to VfL Wolfsburg following the end of his loan spell in Madrid."
-      },
-      {
-        "url": "https://en.wikipedia.org/wiki/Diego_(footballer,_born_1985)",
-        "excerpt": "On 31 January 2014, Diego moved back from Wolfsburg to Atlético Madrid. He signed a contract for the rest of the 2013–14 season . [ 50 ]"
-      },
-      {
-        "url": "https://ge.globo.com/futebol/times/flamengo/noticia/2022/11/05/com-12-titulos-pelo-flamengo-diego-anuncia-que-se-aposentara-do-futebol-no-fim-de-2022.ghtml",
-        "excerpt": "O meia comeÃ§ou a carreira no Santos, com apenas 16 anos, em 2002, e conquistou dois Brasileiros antes de ir para o Porto, de Portugal. Na Europa ainda passou por clubes como Werder Bremen, Juventus, Wolfsburg, AtlÃ©tico de Madrid e FenerbahÃ§e, antes de retornar ao Brasil para defender o Flamengo."
-      },
-      {
-        "url": "https://ge.globo.com/futebol/times/flamengo/noticia/2022/11/05/com-12-titulos-pelo-flamengo-diego-anuncia-que-se-aposentara-do-futebol-no-fim-de-2022.ghtml",
-        "excerpt": "Diego, de 37 anos, anunciou na manhÃ£ deste sÃ¡bado que vai se aposentar do futebol ao tÃ©rmino do Campeonato Brasileiro de 2022 com o Flamengo, no prÃ³ximo dia 13 de novembro, depois de 20 anos de carreira profissional."
-      }
-    ],
-    "notes": "Wrong-answer-only profile for Diego Ribas da Cunha, born 28 February 1985, not Diego Maradona, Diego Ribas born 1980 or another Diego. Santos professional first-team debut in 2002 follows youth development; Flamengo playing career ends in 2022. Ordered career retains the actual Wolfsburg return after Atlético Madrid loan 2011–2012, then the separate Atlético return in January 2014. Reserve-team training punishment at Wolfsburg is not established competitive reserve play and adds no club node. Wikipedia dates retirement 12 November 2022 while Globo preview expected final game 13 November; endpoint is deliberately year-only. Brazil is the senior national team; attacking midfielder maps to Midfielder. Globo excerpts preserve the extraction encoding as retrieved."
   }
 ]
