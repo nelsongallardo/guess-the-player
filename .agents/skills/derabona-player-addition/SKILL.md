@@ -71,6 +71,17 @@ Record the exporter JSON counts and compare the inline roster with `research/ver
 
 Completion criterion: exporter parity passes before edits, or any baseline failure is reproduced and documented before proceeding.
 
+### 1A. Choose the verification lane before doing work
+
+Classify the requested change from the intended diff, not from the size of the roster:
+
+- **Data-only lane:** player/bank records, notes/translations, crest mappings/bytes, origin mappings, counts, evidence ledgers, generated rival data and a forward roster migration. The executable CSS, storage/auth/analytics code, scoring, option rules and UI control flow remain unchanged.
+- **Behavior lane:** any executable gameplay/UI/storage/auth/analytics change, new rendering path, schema/ruleset change, or change to save interpretation. Follow the full browser and compatibility matrix from `AGENTS.md`.
+
+For the data-only lane, capture hashes or extracted diffs of the executable script blocks outside generated roster/crest/locale data. If those blocks changed unexpectedly, stop and reclassify as behavior work. Write the selected lane and its verification commands into the task notes before research starts; do not let a data batch silently accumulate unrelated functionality.
+
+Completion criterion: the task notes name the lane, protected executable regions and exact final gates.
+
 ### 2. Discover and shortlist candidates fail-closed
 
 When the user has not supplied a final list—or asks who should be added—load `references/player-discovery.md` and copy `templates/candidate-shortlist.json` into the task's reviewed research area. Do not edit the template in place.
@@ -79,7 +90,7 @@ When the user has not supplied a final list—or asks who should be added—load
 2. Use `web_search` across the reference's public source families to generate leads, then use `web_extract` or the browser to confirm that at least two independent domains are retrievable. These are discovery leads, not final career evidence.
 3. Build a deduplicated longlist of at least three times the target count after removing existing playable players and accidental duplicates. Keep an existing bank-only profile only when it is explicitly marked as a promotion candidate.
 4. Apply every hard gate before scoring. Reject identical ordered club careers because the game cannot disambiguate them. Score recognizability, career distinctiveness, roster balance, evidence availability, crest workload and rival coverage from 0–3 using the reference anchors; calculate the visible total without hidden weights.
-5. Select a batch as a balanced portfolio rather than taking the highest totals blindly. Re-check contemporary rival coverage after promotions and the final group are known.
+5. Select a batch as a balanced portfolio rather than taking the highest totals blindly. Before full career or crest research, simulate removal of every promoted bank profile and compute the final per-system/per-era contemporary gaps. Add the required peer-bank profiles to the research plan immediately instead of discovering coverage failure after integration or export.
 6. Persist selected, reserve and rejected candidates. Every rejection needs a concrete gate or score reason, and every reserve needs a named next action.
 7. Run `node .agents/skills/derabona-player-addition/scripts/validate-shortlist.mjs path/to/candidate-shortlist.json`; do not present or implement a shortlist that fails validation.
 
@@ -92,6 +103,8 @@ Completion criterion: the shortlist records the baseline, constraints, discovery
 ### 3. Research one player at a time
 
 Use `web_search`, `web_extract` and, when necessary, the browser to retrieve actual source text. Save each completed profile immediately instead of holding a whole batch in conversational context.
+
+Research independent playable records and already-identified peer-bank gaps in parallel, but keep each worker's batch small enough to finish and persist. Do not serialize all crest work behind career research when the exact new club-key inventory is already known.
 
 For each player:
 
@@ -109,6 +122,8 @@ Completion criterion: the record, bilingual notes and evidence ledger agree on t
 ### 4. Add crests and club identity
 
 For each new displayed club:
+
+First build the exact set difference between displayed club keys and the existing verified crest map. Reuse an existing verified exact-club or documented parent/reserve mapping without repeating historical research. Use ordinary source/identity/decode validation for stable same-club identities. Reserve deep archival and period-identity research for ambiguous cases: mergers, phoenix/successor clubs, renamed legal identities, conflicting lettering, suspicious CDN results or absent trustworthy assets. Exact-season badge proof is not a default requirement when the product contract uses a current/source-era club mark rather than season-specific artwork.
 
 1. Reuse an existing crest alias only when it is the same club.
 2. Map reserve teams to the parent crest only when that representation is accurate and documented.
@@ -192,20 +207,24 @@ Completion criterion: the pre-edit frozen-export result is recorded, the post-ed
 
 ### 9. Verify the complete change
 
-Run the focused data and model gates first:
+During implementation, run only the focused gate for the layer just changed; do not repeatedly run overlapping suites. For a data-only roster batch, the normal final sequence is:
 
 ```text
 terminal(command="python3 tests/source-check.py", timeout=120)
 terminal(command="node research/audit-distractor-coverage.mjs", timeout=120)
-terminal(command="node --test tests/model.test.mjs", timeout=300)
-terminal(command="node --test tests/ranked-backend.test.mjs", timeout=300)
+terminal(command="node --test tests/model.test.mjs tests/player-addition-*.test.mjs tests/ranked-roster-*.test.mjs", timeout=600)
+terminal(command="node --test tests/*.test.mjs", timeout=600)
 ```
 
-Then run the repository's current full Node/PostgreSQL, Deno and browser commands from `AGENTS.md`/`TESTING.md`. For browser evidence, exercise every new player in English and Spanish over HTTP and actual network-disabled `file:` play. Include denied storage, longest career at mobile width, competition filters, a legacy-save finish/replay and the real reload path for untouched versus engaged options.
+Run the full Node/native-PostgreSQL suite **once** after focused gates are green and the diff is stable. That full run supersedes overlapping focused Node reruns; after it, rerun only a test directly affected by a subsequent fix. Start independent diff review in parallel with this final suite so review latency does not extend the critical path.
+
+For a proven data-only lane, browser/offline/storage-denied/responsive playthroughs are not a default release gate. Rely on the model, source, embedded-asset, save-fixture, migration and static-copy tests plus CI's Deno checks. Run browser compatibility only when executable behavior/rendering changed, a new asset transformation/rendering path was introduced, static checks cannot prove the changed surface, or the owner explicitly requests it. State the skipped browser scope plainly; do not call a focused data run a full browser regression.
+
+Avoid redundant CI waits. When branch-push and pull-request workflows run the same commit with the same validation job, use the required PR check as the gate and do not treat the duplicate run as additional evidence. Do not make a second code/docs commit solely to replace a pre-deployment placeholder: record local evidence in the release PR, then put hosted migration/deployment readback in the PR comment and final handoff unless repository policy or the owner specifically requires a follow-up documentation commit.
 
 Inspect generated JSON and screenshots before documenting results. Source consistency is not proof that a career fact is historically correct.
 
-Completion criterion: every required check has an actual result, all failures are classified against a fresh unchanged baseline and no assertion is weakened to obtain green output.
+Completion criterion: every gate required by the selected lane has one actual result, the final full suite is not duplicated without cause, all failures are classified against a fresh unchanged baseline and no assertion is weakened to obtain green output.
 
 ### 10. Review and publish only when authorized
 
@@ -225,6 +244,8 @@ Completion criterion: the handoff distinguishes researched names, local code, pu
 
 - **Current count drift:** update every present-tense count but never rewrite historical test fixtures or old verification records.
 - **Promotion gaps:** removing a bank profile can weaken several existing targets, not only the promoted player.
+- **Late coverage discovery:** project promotion impact before researching careers or crests; do not wait for the ranked exporter to identify missing peer systems.
+- **Verification multiplication:** focused tests aid iteration, but once the complete Node/PostgreSQL suite passes they are not separate release gates. Do not add browser matrices to a proven data-only diff by habit.
 - **Ownership-only clubs:** a parent club between loans is not automatically a playing node.
 - **Reserve ordering:** infobox order can differ from first competitive appearance; explain overlaps.
 - **Competition tags:** they are broad club-membership organization, not season-by-season appearance claims.
