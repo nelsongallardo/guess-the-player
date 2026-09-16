@@ -91,6 +91,18 @@ test('skill defines checkable phases and fail-closed gates', () => {
   assert.match(skill, /current roster count/i);
 });
 
+test('skill keeps data-only roster releases on a proportional fast path', () => {
+  const skill = readSkill();
+  assert.match(skill, /Data-only lane/);
+  assert.match(skill, /simulate removal of every promoted bank profile/i);
+  assert.match(skill, /exact set difference between displayed club keys/i);
+  assert.match(skill, /deep archival.*ambiguous cases/i);
+  assert.match(skill, /full Node\/native-PostgreSQL suite \*\*once\*\*/);
+  assert.match(skill, /browser\/offline\/storage-denied\/responsive playthroughs are not a default release gate/i);
+  assert.match(skill, /duplicate run as additional evidence/i);
+  assert.match(skill, /second code\/docs commit solely to replace a pre-deployment placeholder/i);
+});
+
 test('skill can discover and rank new player candidates before research', () => {
   const skill = readSkill();
   assert.ok(fs.existsSync(discoveryReferencePath), 'player-discovery reference must exist');
