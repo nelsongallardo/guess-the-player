@@ -19,6 +19,11 @@ BATCHES = [
     ('distractor-zico-era.json', 0, 'DISTRACTOR_ZICO_ERA_SOURCES.md'),
     ('distractor-figo-era.json', 1, 'DISTRACTOR_FIGO_ERA_SOURCES.md'),
     ('distractor-roster-batch7-gaps.json', 5, 'DISTRACTOR_ROSTER_BATCH7_GAPS_SOURCES.md'),
+    ('distractor-batch9-support.json', 1, 'DISTRACTOR_BATCH9_SUPPORT_SOURCES.md'),
+    ('distractor-batch9-sweden-support.json', 3, 'DISTRACTOR_BATCH9_SWEDEN_SUPPORT_SOURCES.md'),
+    ('distractor-batch9-chile-support.json', 4, 'DISTRACTOR_BATCH9_CHILE_SUPPORT_SOURCES.md'),
+    ('distractor-batch9-uruguay-peru-support.json', 5, 'DISTRACTOR_BATCH9_URUGUAY_PERU_SUPPORT_SOURCES.md'),
+    ('distractor-batch9-peru-late-support.json', 1, 'DISTRACTOR_BATCH9_PERU_LATE_SUPPORT_SOURCES.md'),
 ]
 bank = []
 for filename, expected, ledger_name in BATCHES:
@@ -53,5 +58,9 @@ for filename, expected, ledger_name in BATCHES:
 for key in ('id', 'name'):
     assert len({p[key] for p in bank}) == len(bank), f'Duplicate {key}'
 assert len(bank) == sum(n for _, n, _ in BATCHES)
+# Inputs remain evidence records when a profile is promoted. Never emit a
+# wrong-answer-only profile whose ID now belongs to the playable roster.
+playable_ids = {p['id'] for p in json.loads((ROOT / 'research/verified-players.json').read_text())}
+bank = [p for p in bank if p['id'] not in playable_ids]
 (ROOT / 'research/verified-distractors.json').write_text(json.dumps(bank, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'assembled': len(bank), 'batches': len(BATCHES)}))

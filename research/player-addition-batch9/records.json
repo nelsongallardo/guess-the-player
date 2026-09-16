@@ -1,0 +1,3388 @@
+[
+  {
+    "id": "ricardo-quaresma",
+    "name": "Ricardo Quaresma",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Sporting CP B",
+        "years": "2000–2001",
+        "note": "Adult third-tier reserve side; the season establishes the start, but the exact debut date and first-team overlap are not established."
+      },
+      {
+        "name": "Sporting CP",
+        "years": "2001–2003"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2003–2004"
+      },
+      {
+        "name": "Porto",
+        "years": "2004–2008"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2008–2009"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2009",
+        "note": "Loan; four league appearances."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2009–2010",
+        "note": "Actual playing return after the Chelsea loan; 11 league appearances in 2009/10."
+      },
+      {
+        "name": "Beşiktaş",
+        "years": "2010–2012"
+      },
+      {
+        "name": "Al Ahli",
+        "years": "2013"
+      },
+      {
+        "name": "Porto",
+        "years": "2014–2015",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Beşiktaş",
+        "years": "2015–2019",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Kasımpaşa",
+        "years": "2019–2020"
+      },
+      {
+        "name": "Vitória Guimarães",
+        "years": "2020–2022"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ricardo_Quaresma",
+        "title": "Ricardo Quaresma - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/old/player/5275/Ricardo_Quaresma.html",
+        "title": "Ricardo Quaresma (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Includes Sporting CP B in Portugal’s adult third tier. The 2000/01 reserve season establishes the start, but not a precise calendar debut; the sources differ on 15 versus 16 reserve league appearances. The post-Chelsea Inter spell and later Porto and Beşiktaş spells are genuine playing returns.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "Incluye al Sporting CP B en la tercera categoría adulta de Portugal. La temporada 2000/01 del filial establece el inicio, pero no un debut exacto; las fuentes difieren entre 15 y 16 apariciones ligueras con el filial. La etapa en el Inter posterior al Chelsea y los regresos posteriores al Porto y al Beşiktaş fueron etapas reales como jugador.",
+    "esClubNotes": {
+      "0": "Filial adulto de tercera categoría; la temporada establece el inicio, pero no están establecidos la fecha exacta del debut ni el solapamiento con el primer equipo.",
+      "5": "Cesión; cuatro apariciones ligueras.",
+      "6": "Regreso real como jugador tras la cesión al Chelsea; 11 apariciones ligueras en 2009/10.",
+      "9": "Segunda etapa como jugador.",
+      "10": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "simao",
+    "name": "Simão",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Sporting CP",
+        "years": "1997–1999",
+        "note": "NFT also records two first-team appearances in the 1996/97 season; the evidence does not establish a 1996 calendar debut."
+      },
+      {
+        "name": "Barcelona",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Benfica",
+        "years": "2001–2007"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2007–2010"
+      },
+      {
+        "name": "Beşiktaş",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Espanyol",
+        "years": "2012–2014"
+      },
+      {
+        "name": "NorthEast United",
+        "years": "2015"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sim%C3%A3o_Sabrosa",
+        "title": "Simão Sabrosa - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/old/player/5274/Simao_Sabrosa.html",
+        "title": "Simão Sabrosa (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ordered senior spells end with the final recorded playing year, 2015, at NorthEast United. The first Sporting season is 1996/97 in NFT, while the career table identifies the spell from 1997; no exact 1996 debut is asserted.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "Las etapas sénior ordenadas terminan con el último año de juego registrado, 2015, en NorthEast United. NFT sitúa la primera temporada del Sporting en 1996/97, mientras que la tabla de carrera inicia la etapa en 1997; no se afirma un debut exacto en 1996.",
+    "esClubNotes": {
+      "0": "NFT también registra dos apariciones con el primer equipo en la temporada 1996/97; la evidencia no establece un debut en el año calendario 1996."
+    }
+  },
+  {
+    "id": "tiago-mendes",
+    "name": "Tiago Mendes",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Braga B",
+        "years": "1999–2001",
+        "note": "Adult third-tier reserve side; overlaps the first team in 1999/00. Exact first-appearance order is not established."
+      },
+      {
+        "name": "Braga",
+        "years": "1999–2002",
+        "note": "Overlaps Braga B in 1999/00."
+      },
+      {
+        "name": "Benfica",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Lyon",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Juventus",
+        "years": "2007–2010",
+        "note": "Playing spell ends when the Atlético loan begins; later Juventus ownership is not a playing return."
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2010–2017",
+        "note": "Loan in 2010–2011, then permanent without an interruption in playing service."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Tiago_Mendes",
+        "title": "Tiago Mendes - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/old/player/5300/Tiago_Mendes.html",
+        "title": "Tiago Mendes (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Includes Braga B in Portugal’s adult third tier. The reserve and first-team rows overlap in 1999/00, and the excerpts do not establish their exact first-appearance order; reserve totals differ (12 versus 13). Atlético’s loan-to-permanent period is one continuous node, and no unused Juventus return is inserted.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "Incluye al Braga B en la tercera categoría adulta de Portugal. Los registros del filial y del primer equipo se solapan en 1999/00, y los extractos no establecen el orden exacto de las primeras apariciones; los totales del filial difieren (12 frente a 13). El período de cesión y posterior traspaso permanente al Atlético forma un único nodo continuo, y no se añade un regreso al Juventus sin partidos.",
+    "esClubNotes": {
+      "0": "Filial adulto de tercera categoría; se solapa con el primer equipo en 1999/00. No está establecido el orden exacto de las primeras apariciones.",
+      "1": "Se solapa con el Braga B en 1999/00.",
+      "5": "La etapa como jugador termina al comenzar la cesión al Atlético; la titularidad posterior del Juventus no constituye un regreso como jugador.",
+      "6": "Cesión en 2010–2011 y luego traspaso permanente, sin interrupción en la actividad como jugador."
+    }
+  },
+  {
+    "id": "nani",
+    "name": "Nani",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Sporting CP",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2007–2014",
+        "note": "Playing spell ends when the Sporting loan begins; no later Manchester United playing return is inserted."
+      },
+      {
+        "name": "Sporting CP",
+        "years": "2014–2015",
+        "note": "Loan; second playing spell."
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Valencia",
+        "years": "2016–2017",
+        "note": "Playing spell ends when the Lazio loan begins; no later Valencia playing return is inserted."
+      },
+      {
+        "name": "Lazio",
+        "years": "2017–2018",
+        "note": "Loan."
+      },
+      {
+        "name": "Sporting CP",
+        "years": "2018–2019",
+        "note": "Third playing spell."
+      },
+      {
+        "name": "Orlando City",
+        "years": "2019–2021"
+      },
+      {
+        "name": "Venezia",
+        "years": "2022"
+      },
+      {
+        "name": "Melbourne Victory",
+        "years": "2022–2023"
+      },
+      {
+        "name": "Adana Demirspor",
+        "years": "2023–2024"
+      },
+      {
+        "name": "Estrela da Amadora",
+        "years": "2024"
+      },
+      {
+        "name": "Aktobe",
+        "years": "2026–present",
+        "note": "Professional comeback after retiring in December 2024; 13 league appearances were recorded by 25 June 2026."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Nani_(footballer)",
+        "title": "Nani (footballer) - Wikipedia"
+      },
+      {
+        "url": "https://theportugalnews.com/news/2024-12-10/nani-retires-from-football/94147",
+        "title": "Nani retires from football | The Portugal News"
+      },
+      {
+        "url": "https://www.bbc.com/sport/football/articles/cgk80xn55lzo",
+        "title": "Nani: Former Portugal winger comes out of retirement to join Kazakh side FC Aktobe - BBC Sport"
+      }
+    ],
+    "notes": "Senior career starts at Sporting in 2005; Real Massamá and earlier Sporting service were youth football. The 2024 retirement was superseded by the documented 2026 Aktobe comeback and subsequent league appearances. Sporting’s loan and later permanent return are separate playing spells; ownership-only returns to Manchester United or Valencia are excluded. Portugal News misnames Melbourne Victory as Melbourne City, so the career table’s club identity is followed.",
+    "status": "active",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "La carrera sénior comienza en el Sporting en 2005; Real Massamá y la etapa anterior en el Sporting fueron fútbol juvenil. El retiro de 2024 quedó superado por el regreso documentado con el Aktobe en 2026 y sus posteriores apariciones ligueras. La cesión al Sporting y el regreso permanente posterior son etapas distintas como jugador; se excluyen regresos meramente contractuales al Manchester United o al Valencia. The Portugal News confunde Melbourne Victory con Melbourne City, por lo que se sigue la identidad del club indicada en la tabla de carrera.",
+    "esClubNotes": {
+      "1": "La etapa como jugador termina al comenzar la cesión al Sporting; no se añade un regreso posterior como jugador al Manchester United.",
+      "2": "Cesión; segunda etapa como jugador.",
+      "4": "La etapa como jugador termina al comenzar la cesión al Lazio; no se añade un regreso posterior como jugador al Valencia.",
+      "5": "Cesión.",
+      "6": "Tercera etapa como jugador.",
+      "12": "Regreso profesional tras retirarse en diciembre de 2024; se habían registrado 13 apariciones ligueras hasta el 25 de junio de 2026."
+    }
+  },
+  {
+    "id": "fernando-couto",
+    "name": "Fernando Couto",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Porto",
+        "years": "1988"
+      },
+      {
+        "name": "Famalicão",
+        "years": "1988–1989",
+        "note": "Loan."
+      },
+      {
+        "name": "Académica",
+        "years": "1989–1990",
+        "note": "Loan."
+      },
+      {
+        "name": "Porto",
+        "years": "1990–1994",
+        "note": "Second playing spell after the two loans."
+      },
+      {
+        "name": "Parma",
+        "years": "1994–1996"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1996–1998"
+      },
+      {
+        "name": "Lazio",
+        "years": "1998–2005"
+      },
+      {
+        "name": "Parma",
+        "years": "2005–2008",
+        "note": "Second playing spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fernando_Couto",
+        "title": "Fernando Couto - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5289/Fernando_Couto.html",
+        "title": "Fernando Couto (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The playable promotion restores the two documented early loans that the lighter bank profile intentionally collapsed: Porto, Famalicão, Académica and an actual Porto return. The later Parma return is also retained. Coaching is excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "La promoción jugable restaura las dos cesiones tempranas documentadas que el perfil más ligero del banco había condensado: Porto, Famalicão, Académica y un regreso real al Porto. También se conserva el regreso posterior al Parma. Se excluye su carrera como entrenador.",
+    "esClubNotes": {
+      "1": "Cesión.",
+      "2": "Cesión.",
+      "3": "Segunda etapa como jugador tras las dos cesiones.",
+      "7": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "paulo-sousa",
+    "name": "Paulo Sousa",
+    "continent": "Europe",
+    "country": "Portugal",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Benfica",
+        "years": "1989–1993"
+      },
+      {
+        "name": "Sporting CP",
+        "years": "1993–1994"
+      },
+      {
+        "name": "Juventus",
+        "years": "1994–1996"
+      },
+      {
+        "name": "Borussia Dortmund",
+        "years": "1996–1998"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1998–2000",
+        "note": "Playing spell ends with the Parma loan; no later Inter playing return is inserted."
+      },
+      {
+        "name": "Parma",
+        "years": "2000",
+        "note": "Loan."
+      },
+      {
+        "name": "Panathinaikos",
+        "years": "2000–2002"
+      },
+      {
+        "name": "Espanyol",
+        "years": "2002"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paulo_Sousa",
+        "title": "Paulo Sousa - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14056/Paulo_Sousa.html",
+        "title": "Paulo Sousa (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The eight-club professional chronology is corroborated by both sources. Parma was a brief loan during Inter ownership; because he did not play for Inter afterward, no ownership-only return node is added. Panathinaikos spans the 2000/01 and 2001/02 seasons before the 2002 Espanyol endpoint.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "La cronología profesional de ocho clubes está corroborada por ambas fuentes. El Parma fue una cesión breve durante la titularidad contractual del Inter; como no volvió a jugar para el Inter, no se añade un nodo de regreso basado solo en el contrato. Panathinaikos abarca las temporadas 2000/01 y 2001/02 antes del cierre en Espanyol en 2002.",
+    "esClubNotes": {
+      "4": "La etapa como jugador termina con la cesión al Parma; no se añade un regreso posterior al Inter sin partidos.",
+      "5": "Cesión."
+    }
+  },
+  {
+    "id": "nicolas-anelka",
+    "name": "Nicolas Anelka",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Paris Saint-Germain B",
+        "years": "1995–1997",
+        "note": "Adult French fourth-tier reserve side; overlaps the first team. B-first ordering follows the bank, but exact debut order is not established."
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "1995–1997",
+        "note": "Overlaps the reserve side."
+      },
+      {
+        "name": "Arsenal",
+        "years": "1997–1999"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1999–2000"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2000–2002",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Liverpool",
+        "years": "2002",
+        "note": "Loan; he then moved directly to Manchester City, so no unused PSG return is shown."
+      },
+      {
+        "name": "Manchester City",
+        "years": "2002–2005"
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2005–2006"
+      },
+      {
+        "name": "Bolton Wanderers",
+        "years": "2006–2008"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2008–2011"
+      },
+      {
+        "name": "Shanghai Shenhua",
+        "years": "2012"
+      },
+      {
+        "name": "Juventus",
+        "years": "2013",
+        "note": "Loan; no later Shanghai playing return is shown."
+      },
+      {
+        "name": "West Bromwich Albion",
+        "years": "2013–2014"
+      },
+      {
+        "name": "Mumbai City",
+        "years": "2014–2015",
+        "note": "Actual playing appearances; not merely his coaching role."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Nicolas_Anelka",
+        "title": "Nicolas Anelka - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/old/player/2423/Nicolas_Anelka.html",
+        "title": "Nicolas Anelka (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Includes Paris Saint-Germain B in the adult French fourth tier. Reserve and first-team service overlap, and the excerpts do not establish exact debut order. The 2000 PSG spell is a genuine return. Ownership-only PSG and Shanghai registrations after loans are not added; Mumbai City is retained for actual play.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "Incluye al Paris Saint-Germain B en la cuarta categoría adulta de Francia. Las etapas del filial y del primer equipo se solapan, y los extractos no establecen el orden exacto de los debuts. La etapa del PSG desde 2000 es un regreso real. No se añaden registros meramente contractuales del PSG ni del Shanghai posteriores a las cesiones; Mumbai City se conserva por actividad real como jugador.",
+    "esClubNotes": {
+      "0": "Filial adulto de cuarta categoría francesa; se solapa con el primer equipo. El orden que sitúa al filial primero sigue al banco, pero no está establecido el orden exacto de los debuts.",
+      "1": "Se solapa con el filial.",
+      "4": "Segunda etapa como jugador.",
+      "5": "Cesión; después pasó directamente al Manchester City, por lo que no se muestra un regreso al PSG sin partidos.",
+      "11": "Cesión; no se muestra un regreso posterior al Shanghai sin partidos.",
+      "13": "Apariciones reales como jugador; no solo su función de entrenador."
+    }
+  },
+  {
+    "id": "emmanuel-petit",
+    "name": "Emmanuel Petit",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Monaco B",
+        "years": "1987/88–1988/89",
+        "note": "Adult French third-tier reserve side; 1987 is season notation, not a verified calendar debut. Overlaps the first team in 1988/89."
+      },
+      {
+        "name": "Monaco",
+        "years": "1988–1997",
+        "note": "Overlaps Monaco B in 1988/89."
+      },
+      {
+        "name": "Arsenal",
+        "years": "1997–2000"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2000–2001"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2001–2004"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Emmanuel_Petit",
+        "title": "Emmanuel Petit - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/old/player/13956/Emmanuel_Petit.html",
+        "title": "Emmanuel Petit (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Includes Monaco B in the adult French third tier from 1987/88; the year is season notation rather than an exact calendar debut. His final playing season ended in 2004, while retirement was announced in January 2005. Bolton was a rejected offer and is excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "Incluye al Monaco B en la tercera categoría adulta de Francia desde 1987/88; el año expresa una temporada, no un debut exacto en el calendario. Su última temporada como jugador terminó en 2004, aunque anunció el retiro en enero de 2005. La oferta rechazada del Bolton queda excluida.",
+    "esClubNotes": {
+      "0": "Filial adulto de tercera categoría francesa; 1987 es una referencia de temporada, no un debut comprobado en ese año calendario. Se solapa con el primer equipo en 1988/89.",
+      "1": "Se solapa con el Monaco B en 1988/89."
+    }
+  },
+  {
+    "id": "sylvain-wiltord",
+    "name": "Sylvain Wiltord",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Rennes B",
+        "years": "1991/92–1992/93",
+        "note": "Adult French third-tier reserve side; 1991 is season notation, not a verified calendar debut. Overlaps the first team in 1992/93."
+      },
+      {
+        "name": "Rennes",
+        "years": "1992–1997",
+        "note": "Initial service is continuous through the 1996/97 loan-back; Deportivo registered zero appearances and is not added."
+      },
+      {
+        "name": "Bordeaux",
+        "years": "1997–2000"
+      },
+      {
+        "name": "Arsenal",
+        "years": "2000–2004"
+      },
+      {
+        "name": "Lyon",
+        "years": "2004–2007"
+      },
+      {
+        "name": "Rennes",
+        "years": "2007–2009",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Marseille",
+        "years": "2009"
+      },
+      {
+        "name": "Metz",
+        "years": "2010"
+      },
+      {
+        "name": "Nantes",
+        "years": "2011–2012",
+        "note": "Professional comeback; retired on 11 June 2012."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sylvain_Wiltord",
+        "title": "Sylvain Wiltord - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/old/player/2421/Sylvain_Wiltord.html",
+        "title": "Sylvain Wiltord (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Includes Rennes B in the adult French third tier from 1991/92. First-team appearances begin in 1992/93. Deportivo La Coruña is excluded because the record shows zero appearances and the evidence describes a Rennes loan-back followed directly by Bordeaux. The 2007 Rennes return and 2011 Nantes comeback are genuine playing spells.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Incluye al Rennes B en la tercera categoría adulta de Francia desde 1991/92. Las apariciones con el primer equipo comienzan en 1992/93. Se excluye al Deportivo La Coruña porque el registro muestra cero apariciones y la evidencia describe una cesión de regreso al Rennes seguida directamente por el Bordeaux. El regreso al Rennes en 2007 y la vuelta con el Nantes en 2011 fueron etapas reales como jugador.",
+    "esClubNotes": {
+      "0": "Filial adulto de tercera categoría francesa; 1991 es una referencia de temporada, no un debut comprobado en ese año calendario. Se solapa con el primer equipo en 1992/93.",
+      "1": "La etapa inicial es continua durante la cesión de regreso de 1996/97; el Deportivo registró cero apariciones y no se añade.",
+      "5": "Segunda etapa como jugador.",
+      "8": "Regreso al fútbol profesional; se retiró el 11 de junio de 2012."
+    }
+  },
+  {
+    "id": "rafael-van-der-vaart",
+    "name": "Rafael van der Vaart",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "2000–2005",
+        "note": "NFT records one appearance in the 1999/00 season, supporting the 2000 start without establishing an exact debut date."
+      },
+      {
+        "name": "Hamburger SV",
+        "years": "2005–2008"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2008–2010"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "2010–2012"
+      },
+      {
+        "name": "Hamburger SV",
+        "years": "2012–2015",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Real Betis",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Midtjylland",
+        "years": "2016–2018"
+      },
+      {
+        "name": "Esbjerg",
+        "years": "2018",
+        "note": "Three appearances in the 2018/19 season; endpoint follows his explicit 2018 retirement."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rafael_van_der_Vaart",
+        "title": "Rafael van der Vaart - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/old/player/4654/Rafael_Van_Der_Vaart.html",
+        "title": "Rafael van der Vaart (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The 2012 Hamburger SV return is a genuine playing spell. Ajax’s 1999/00 season row supports a 2000 start but not a precise debut date. Esbjerg is listed in the 2018/19 season, while the endpoint follows the explicit 2018 retirement. His 2019 testimonial is excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "El regreso al Hamburger SV en 2012 fue una etapa real como jugador. El registro del Ajax en la temporada 1999/00 respalda un inicio en 2000, pero no una fecha exacta de debut. Esbjerg figura en la temporada 2018/19, mientras que el final sigue el retiro explícito de 2018. Se excluye su partido homenaje de 2019.",
+    "esClubNotes": {
+      "0": "NFT registra una aparición en la temporada 1999/00, lo que respalda el inicio en 2000 sin establecer una fecha exacta de debut.",
+      "4": "Segunda etapa como jugador.",
+      "7": "Tres apariciones en la temporada 2018/19; el final sigue su retiro explícito de 2018."
+    }
+  },
+  {
+    "id": "robin-van-persie",
+    "name": "Robin van Persie",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Feyenoord",
+        "years": "2002–2004",
+        "note": "First-team debut: 3 February 2002; the infobox’s 2001 label denotes the 2001/02 season, not a 2001 appearance."
+      },
+      {
+        "name": "Arsenal",
+        "years": "2004–2012"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2012–2015"
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2015–2018"
+      },
+      {
+        "name": "Feyenoord",
+        "years": "2018–2019",
+        "note": "Second playing spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Robin_van_Persie#Club_career",
+        "title": "Robin van Persie - Wikipedia"
+      },
+      {
+        "url": "https://www.feyenoord.com/en/news/van-persie-head-coach-feyenoord-with-immediate-effect-230225",
+        "title": "Van Persie head coach Feyenoord with immediate effect | Feyenoord.com"
+      },
+      {
+        "url": "https://www.elfvoetbal.nl/Binnenland/2879/vijftien-jaar-geleden-van-persie-maakt-debuut-voor-feyenoord",
+        "title": "Vijftien jaar geleden: Van Persie maakt debuut voor Feyenoord | ELF Voetbal"
+      }
+    ],
+    "notes": "Career starts with the documented Feyenoord first-team debut on 3 February 2002, not the infobox’s season-start year 2001. The January 2018 Feyenoord return is a genuine playing spell. Excelsior was youth-only; reserve references do not establish an adult-pyramid senior spell. Later coaching posts are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "La carrera comienza con el debut documentado en el primer equipo del Feyenoord el 3 de febrero de 2002, no con el año 2001 usado por la tabla para el inicio de la temporada. El regreso al Feyenoord en enero de 2018 fue una etapa real como jugador. Excelsior fue solo formación juvenil; las referencias al filial no establecen una etapa sénior en la pirámide adulta. Se excluyen los cargos posteriores como entrenador.",
+    "esClubNotes": {
+      "0": "Debut con el primer equipo: 3 de febrero de 2002; la etiqueta 2001 de la tabla indica la temporada 2001/02, no una aparición en 2001.",
+      "4": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "aron-winter",
+    "name": "Aron Winter",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "1986–1992",
+        "note": "First-team debut: 6 April 1986."
+      },
+      {
+        "name": "Lazio",
+        "years": "1992–1996"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1996–1999"
+      },
+      {
+        "name": "Ajax",
+        "years": "1999–2001",
+        "note": "Second playing spell; league appearances end in 2000/01 even though registration continued to 2003."
+      },
+      {
+        "name": "Sparta Rotterdam",
+        "years": "2001–2002",
+        "note": "Loan; 32 league appearances. No extra Ajax node is inserted for the unused post-loan registration."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Aron_Winter",
+        "title": "Aron Winter - Wikipedia"
+      },
+      {
+        "url": "https://national-football-teams.com/old/player/14067/Aron_Winter.html",
+        "title": "Aron Winter (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ajax debut was 6 April 1986. The 1999 Ajax return and 2001–2002 Sparta loan are retained. The 2003 endpoint in the summary reflects retirement or contract end, not appearances: the season record ends with Sparta in 2001/02, and no unused Ajax return node is inserted. Youth and managerial clubs are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league"
+    ],
+    "esNotes": "El debut con el Ajax fue el 6 de abril de 1986. Se conservan el regreso al Ajax en 1999 y la cesión al Sparta en 2001–2002. El final de 2003 en el resumen refleja el retiro o el fin del contrato, no apariciones: el registro de temporadas termina con el Sparta en 2001/02 y no se añade un nodo de regreso al Ajax sin partidos. Se excluyen clubes juveniles y cargos de entrenador.",
+    "esClubNotes": {
+      "0": "Debut con el primer equipo: 6 de abril de 1986.",
+      "3": "Segunda etapa como jugador; las apariciones ligueras terminan en 2000/01 aunque la inscripción continuó hasta 2003.",
+      "4": "Cesión; 32 apariciones ligueras. No se añade un nodo extra del Ajax por la inscripción posterior sin partidos."
+    }
+  },
+  {
+    "id": "ronald-de-boer",
+    "name": "Ronald de Boer",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "1988–1991",
+        "note": "NFT labels the debut season 1987/88; the evidence does not establish a 1987 calendar appearance."
+      },
+      {
+        "name": "Twente",
+        "years": "1991–1993"
+      },
+      {
+        "name": "Ajax",
+        "years": "1993–1999",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Barcelona",
+        "years": "1999–2000"
+      },
+      {
+        "name": "Rangers",
+        "years": "2000–2004"
+      },
+      {
+        "name": "Al-Rayyan",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Al-Shamal",
+        "years": "2005–2008"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ronald_de_Boer",
+        "title": "Ronald de Boer - Wikipedia"
+      },
+      {
+        "url": "https://national-football-teams.com/old/player/4645/Ronald_De_Boer.html",
+        "title": "Ronald de Boer (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The 1993 Ajax return and both Qatar clubs through 2008 are retained. Wikipedia starts the senior career in 1988, while NFT labels the season 1987/88; no 1987 calendar debut is asserted. His winger and forward work is normalized to the playable schema’s broad Midfielder role. Youth football and later coaching are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "Se conservan el regreso al Ajax en 1993 y ambos clubes de Catar hasta 2008. Wikipedia inicia la carrera sénior en 1988, mientras que NFT etiqueta la temporada como 1987/88; no se afirma un debut en el año calendario 1987. Su actividad como extremo y delantero se normaliza al rol amplio de Midfielder del esquema jugable. Se excluyen el fútbol juvenil y los cargos posteriores como entrenador.",
+    "esClubNotes": {
+      "0": "NFT etiqueta la temporada de debut como 1987/88; la evidencia no establece una aparición en el año calendario 1987.",
+      "2": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "marc-overmars",
+    "name": "Marc Overmars",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Go Ahead Eagles",
+        "years": "1991",
+        "note": "First-team breakthrough is explicitly dated to 1991 within the 1990/91 season."
+      },
+      {
+        "name": "Willem II",
+        "years": "1991–1992"
+      },
+      {
+        "name": "Ajax",
+        "years": "1992–1997"
+      },
+      {
+        "name": "Arsenal",
+        "years": "1997–2000"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2000–2004"
+      },
+      {
+        "name": "Go Ahead Eagles",
+        "years": "2008–2009",
+        "note": "Professional comeback after a four-year playing hiatus; no clubs are implied for 2004–2008."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Marc_Overmars",
+        "title": "Marc Overmars - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4632/Marc_Overmars.html",
+        "title": "Marc Overmars (Player) | National Football Teams"
+      },
+      {
+        "url": "https://thesefootballtimes.co/2020/07/22/go-ahead-make-my-day-when-marc-overmars-returned-home-after-1545-days-out-of-the-game/",
+        "title": "Go ahead, make my day: when Marc Overmars returned home after 1,545 days out of the game | These Football Times"
+      }
+    ],
+    "notes": "The genuine 2008–2009 professional Go Ahead Eagles comeback is retained after a four-year hiatus. These Football Times explicitly dates his first-team breakthrough to 1991; the 1990–1991 infobox range is season shorthand, not evidence of a 1990 match. Youth clubs are excluded. Winger is normalized to the broad Forward role.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "Se conserva el regreso profesional real al Go Ahead Eagles en 2008–2009 tras cuatro años sin jugar. These Football Times fecha explícitamente su irrupción en el primer equipo en 1991; el rango 1990–1991 de la tabla es una referencia de temporada, no evidencia de un partido en 1990. Se excluyen los clubes juveniles. La posición de extremo se normaliza al rol amplio de Forward.",
+    "esClubNotes": {
+      "0": "La irrupción en el primer equipo está fechada explícitamente en 1991, dentro de la temporada 1990/91.",
+      "5": "Regreso profesional tras cuatro años sin jugar; no se implican clubes entre 2004 y 2008."
+    }
+  },
+  {
+    "id": "dirk-kuyt",
+    "name": "Dirk Kuyt",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Utrecht",
+        "years": "1998–2003"
+      },
+      {
+        "name": "Feyenoord",
+        "years": "2003–2006"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2006–2012"
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2012–2015"
+      },
+      {
+        "name": "Feyenoord",
+        "years": "2015–2017",
+        "note": "Second playing spell; retired from professional football in May 2017."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Dirk_Kuyt",
+        "title": "Dirk Kuyt - Wikipedia"
+      },
+      {
+        "url": "https://national-football-teams.com/player/4635/Dirk_Kuijt.html",
+        "title": "Dirk Kuijt (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The professional route starts at Utrecht in 1998 and retains the 2015 Feyenoord return. Six adult amateur Quick Boys appearances in early 1998 are acknowledged but excluded under the repository’s professional-career scope. His brief 2018 post-retirement amateur comeback at Quick Boys and all coaching work are also excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "La trayectoria profesional comienza en Utrecht en 1998 y conserva el regreso al Feyenoord en 2015. Se reconocen seis apariciones adultas como amateur con Quick Boys a comienzos de 1998, pero se excluyen según el alcance de carrera profesional del repositorio. También se excluyen su breve regreso amateur con Quick Boys en 2018, después del retiro, y todos los cargos de entrenador.",
+    "esClubNotes": {
+      "4": "Segunda etapa como jugador; se retiró del fútbol profesional en mayo de 2017."
+    }
+  },
+  {
+    "id": "nigel-de-jong",
+    "name": "Nigel de Jong",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "2002–2006",
+        "note": "First-team debut: 19 October 2002."
+      },
+      {
+        "name": "Hamburger SV",
+        "years": "2006–2009"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2009–2012"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2012–2016"
+      },
+      {
+        "name": "LA Galaxy",
+        "years": "2016"
+      },
+      {
+        "name": "Galatasaray",
+        "years": "2016–2017",
+        "note": "NFT records no league appearances in 2017/18; the playing span ends with the 2016/17 season."
+      },
+      {
+        "name": "Mainz 05",
+        "years": "2018"
+      },
+      {
+        "name": "Al Ahli",
+        "years": "2018–2019",
+        "note": "The Doha, Qatar club."
+      },
+      {
+        "name": "Al-Shahania",
+        "years": "2019–2021",
+        "note": "NFT spells the club Al-Shahaniya SC and confirms 2020/21 second-division appearances."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Nigel_de_Jong",
+        "title": "Nigel de Jong - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4638/Nigel_De_Jong.html",
+        "title": "Nigel de Jong (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ajax first-team debut was 19 October 2002. The full professional tail through Mainz 05, Al Ahli of Doha and Al-Shahania is retained; NFT confirms Al-Shahania appearances in the 2020/21 second division. The endpoint is the final playing spell in 2021, not later media or KNVB employment. Ajax youth and closed-reserve football are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "El debut con el primer equipo del Ajax fue el 19 de octubre de 2002. Se conserva toda la parte final de la carrera profesional, pasando por Mainz 05, Al Ahli de Doha y Al-Shahania; NFT confirma apariciones del Al-Shahania en la segunda división 2020/21. El final corresponde a la última etapa como jugador en 2021, no a trabajos posteriores en medios o en la KNVB. Se excluyen el fútbol juvenil y el filial cerrado del Ajax.",
+    "esClubNotes": {
+      "0": "Debut con el primer equipo: 19 de octubre de 2002.",
+      "5": "NFT no registra apariciones ligueras en 2017/18; la etapa como jugador termina con la temporada 2016/17.",
+      "7": "El club de Doha, Catar.",
+      "8": "NFT escribe el nombre como Al-Shahaniya SC y confirma apariciones en la segunda división 2020/21."
+    }
+  },
+  {
+    "id": "henrik-larsson",
+    "name": "Henrik Larsson",
+    "continent": "Europe",
+    "country": "Sweden",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Högaborgs BK",
+        "years": "1989–1991",
+        "note": "Semi-professional senior spell; the 1989 start is independently present in the season record."
+      },
+      {
+        "name": "Helsingborgs IF",
+        "years": "1992–1993"
+      },
+      {
+        "name": "Feyenoord",
+        "years": "1993–1997"
+      },
+      {
+        "name": "Celtic",
+        "years": "1997–2004"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2004–2006"
+      },
+      {
+        "name": "Helsingborgs IF",
+        "years": "2006",
+        "note": "Second playing spell before the Manchester United loan."
+      },
+      {
+        "name": "Manchester United",
+        "years": "2007",
+        "note": "Loan; seven league appearances."
+      },
+      {
+        "name": "Helsingborgs IF",
+        "years": "2007–2009",
+        "note": "Actual playing return after the loan; retired at the end of the 2009 season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Henrik_Larsson",
+        "title": "Henrik Larsson - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6370/Henrik_Larsson.html",
+        "title": "Henrik Larsson (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The 1989 start is senior, semi-professional Högaborg play, not the 1977 youth start. The Manchester United loan is bracketed by actual Helsingborg playing spells. The professional endpoint is 2009; the 2012 Råå appearance, recreational Högaborg appearances in 2013, veterans football and friendlies are excluded as post-retirement non-professional play.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "El inicio en 1989 corresponde a fútbol sénior semiprofesional con el Högaborg, no al comienzo juvenil de 1977. La cesión al Manchester United queda entre etapas reales como jugador del Helsingborg. El final profesional es 2009; se excluyen la aparición con Råå en 2012, las apariciones recreativas con Högaborg en 2013, el fútbol de veteranos y los amistosos como actividad no profesional posterior al retiro.",
+    "esClubNotes": {
+      "0": "Etapa sénior semiprofesional; el inicio en 1989 figura de forma independiente en el registro de temporadas.",
+      "5": "Segunda etapa como jugador antes de la cesión al Manchester United.",
+      "6": "Cesión; siete apariciones ligueras.",
+      "7": "Regreso real como jugador tras la cesión; se retiró al final de la temporada 2009."
+    }
+  },
+  {
+    "id": "kim-kallstrom",
+    "name": "Kim Källström",
+    "continent": "Europe",
+    "country": "Sweden",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "BK Häcken",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Djurgårdens IF",
+        "years": "2002–2003"
+      },
+      {
+        "name": "Rennes",
+        "years": "2004–2006"
+      },
+      {
+        "name": "Lyon",
+        "years": "2006–2012"
+      },
+      {
+        "name": "Spartak Moscow",
+        "years": "2012–2014"
+      },
+      {
+        "name": "Arsenal",
+        "years": "2014",
+        "note": "Loan; three league appearances."
+      },
+      {
+        "name": "Spartak Moscow",
+        "years": "2014–2015",
+        "note": "Actual playing return after the Arsenal loan."
+      },
+      {
+        "name": "Grasshoppers",
+        "years": "2015–2017"
+      },
+      {
+        "name": "Djurgårdens IF",
+        "years": "2017",
+        "note": "Second playing spell; final professional club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Kim_K%C3%A4llstr%C3%B6m",
+        "title": "Kim Källström - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/6411/Kim_Kaellstroem.html",
+        "title": "Kim Källström (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The complete nine-node route, including the 2014 Arsenal loan and subsequent Spartak playing return, is corroborated by both sources. BK Häcken in 1999 is the first senior season; Sandvikens and Partille were youth clubs. He returned to Djurgårdens IF in 2017 and retired that year.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "La ruta completa de nueve etapas, incluida la cesión al Arsenal en 2014 y el posterior regreso como jugador al Spartak, está corroborada por ambas fuentes. BK Häcken en 1999 es la primera temporada sénior; Sandvikens y Partille fueron clubes juveniles. Regresó a Djurgårdens IF en 2017 y se retiró ese año.",
+    "esClubNotes": {
+      "5": "Cesión; tres apariciones en liga.",
+      "6": "Regreso efectivo como jugador después de la cesión al Arsenal.",
+      "8": "Segunda etapa como jugador; último club profesional."
+    }
+  },
+  {
+    "id": "marcus-berg",
+    "name": "Marcus Berg",
+    "continent": "Europe",
+    "country": "Sweden",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "IFK Göteborg",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Groningen",
+        "years": "2007–2009"
+      },
+      {
+        "name": "Hamburger SV",
+        "years": "2009–2010"
+      },
+      {
+        "name": "PSV",
+        "years": "2010–2011",
+        "note": "Loan."
+      },
+      {
+        "name": "Hamburger SV",
+        "years": "2011–2013",
+        "note": "Actual playing return after the PSV loan."
+      },
+      {
+        "name": "Panathinaikos",
+        "years": "2013–2017"
+      },
+      {
+        "name": "Al Ain",
+        "years": "2017–2019"
+      },
+      {
+        "name": "Krasnodar",
+        "years": "2019–2021"
+      },
+      {
+        "name": "IFK Göteborg",
+        "years": "2021–2023",
+        "note": "Second playing spell; retired in September 2023."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Marcus_Berg",
+        "title": "Marcus Berg - Wikipedia"
+      },
+      {
+        "url": "https://anews.com.tr/sport/2023/09/25/former-sweden-striker-marcus-berg-ends-career",
+        "title": "Former Sweden striker Marcus Berg ends career - ANews"
+      }
+    ],
+    "notes": "The displayed professional chronology begins with promotion to IFK Göteborg's first team in 2005, independently corroborated by the retirement report. Wikipedia also lists 24 appearances for local club Torsby IF in 2000–2003, but the existing evidence does not establish that earlier spell as professional; it is disclosed rather than silently classified as youth. The PSV loan was followed by an actual Hamburger SV playing return. Berg returned to IFK Göteborg in 2021 and retired in September 2023.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league"
+    ],
+    "esNotes": "La cronología profesional mostrada comienza con su ascenso al primer equipo del IFK Göteborg en 2005, corroborado de forma independiente por la nota sobre su retiro. Wikipedia también registra 24 apariciones con el club local Torsby IF entre 2000 y 2003, pero la evidencia existente no establece que esa etapa anterior fuera profesional; se declara la salvedad en vez de clasificarla silenciosamente como juvenil. A la cesión al PSV le siguió un regreso efectivo como jugador al Hamburger SV. Berg volvió al IFK Göteborg en 2021 y se retiró en septiembre de 2023.",
+    "esClubNotes": {
+      "3": "Cesión.",
+      "4": "Regreso efectivo como jugador después de la cesión al PSV.",
+      "8": "Segunda etapa como jugador; se retiró en septiembre de 2023."
+    }
+  },
+  {
+    "id": "ole-gunnar-solskjaer",
+    "name": "Ole Gunnar Solskjær",
+    "continent": "Europe",
+    "country": "Norway",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Clausenengen",
+        "years": "1990–1994",
+        "note": "Adult lower-league play; Wikipedia extends club membership to 1995, but the retrieved season record places his final playing season here in 1994."
+      },
+      {
+        "name": "Molde",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Manchester United",
+        "years": "1996–2007",
+        "note": "Closed-reserve appearances are excluded; endpoint is professional retirement."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ole_Gunnar_Solskj%C3%A6r",
+        "title": "Ole Gunnar Solskjær - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4916/Ole_Gunnar_Solskjar.html",
+        "title": "Ole Gunnar Solskjær (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Clausenengen is documented adult lower-league football from 1990, not his 1980 youth start. Its last evidenced playing season is 1994 before Molde in 1995, although Wikipedia extends the club-membership span to 1995. Manchester United closed-reserve football and every coaching appointment are outside scope. The professional playing endpoint is his 2007 retirement.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Clausenengen está documentado como fútbol adulto de divisiones inferiores desde 1990, no como su inicio juvenil de 1980. Su última temporada de juego acreditada allí es 1994, antes de Molde en 1995, aunque Wikipedia prolonga la pertenencia al club hasta 1995. El fútbol de reservas cerradas del Manchester United y todos los cargos de entrenador quedan fuera del alcance. El final de su carrera profesional como jugador es su retiro en 2007.",
+    "esClubNotes": {
+      "0": "Fútbol adulto de divisiones inferiores; Wikipedia prolonga la pertenencia al club hasta 1995, pero el registro de temporadas recuperado sitúa aquí su última temporada de juego en 1994.",
+      "2": "Se excluyen las apariciones en reservas cerradas; el final corresponde al retiro profesional."
+    }
+  },
+  {
+    "id": "steffen-iversen",
+    "name": "Steffen Iversen",
+    "continent": "Europe",
+    "country": "Norway",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Rosenborg II",
+        "years": "1994",
+        "note": "Reserve debut in the adult Norwegian third tier; exact match date is not established."
+      },
+      {
+        "name": "Rosenborg",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "1996–2003"
+      },
+      {
+        "name": "Wolverhampton Wanderers",
+        "years": "2003–2004"
+      },
+      {
+        "name": "Vålerenga",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Rosenborg",
+        "years": "2006–2010",
+        "note": "Second first-team spell."
+      },
+      {
+        "name": "Crystal Palace",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Rosenborg",
+        "years": "2012",
+        "note": "Third first-team spell; retired in November 2012."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Steffen_Iversen",
+        "title": "Steffen Iversen - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4923/Steffen_Iversen.html",
+        "title": "Steffen Iversen (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Rosenborg II precedes the first team because the evidence reports a reserve debut and a third-tier Rosenborg BK 2 row in 1994; no exact reserve match date is claimed. All three first-team Rosenborg spells are retained. Iversen retired professionally in November 2012. Later lower-division player-manager football with Herd, Haugar and Trygg/Lade is excluded from this professional timeline.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Rosenborg II precede al primer equipo porque la evidencia registra un debut con las reservas y una fila de Rosenborg BK 2 en la tercera división en 1994; no se afirma una fecha exacta para ese partido. Se conservan las tres etapas con el primer equipo de Rosenborg. Iversen se retiró profesionalmente en noviembre de 2012. Su posterior fútbol de divisiones inferiores como jugador-entrenador con Herd, Haugar y Trygg/Lade queda excluido de esta cronología profesional.",
+    "esClubNotes": {
+      "0": "Debut con las reservas en la tercera división adulta noruega; no se ha establecido la fecha exacta del partido.",
+      "5": "Segunda etapa con el primer equipo.",
+      "7": "Tercera etapa con el primer equipo; se retiró en noviembre de 2012."
+    }
+  },
+  {
+    "id": "eirik-bakke",
+    "name": "Eirik Bakke",
+    "continent": "Europe",
+    "country": "Norway",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Sogndal",
+        "years": "1993–1999"
+      },
+      {
+        "name": "Leeds United",
+        "years": "1999–2005"
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2005–2006",
+        "note": "Loan."
+      },
+      {
+        "name": "Leeds United",
+        "years": "2006",
+        "note": "Actual playing return after the Aston Villa loan."
+      },
+      {
+        "name": "Brann",
+        "years": "2006",
+        "note": "First-team debut in September 2006."
+      },
+      {
+        "name": "Brann II",
+        "years": "2007",
+        "note": "Adult-pyramid reserve play while returning to fitness; exact match dates and interleaving are not established."
+      },
+      {
+        "name": "Brann",
+        "years": "2007–2010",
+        "note": "First-team playing resumed after the reserve spell."
+      },
+      {
+        "name": "Sogndal",
+        "years": "2011–2012",
+        "note": "Second playing spell; retired in November 2012."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Eirik_Bakke",
+        "title": "Eirik Bakke - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/4954/Eirik_Bakke.html",
+        "title": "Eirik Bakke (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Sogndal in 1993 is the documented senior start. Leeds appearances in 2005–06 and 2006–07 establish an actual playing return after the Aston Villa loan. Wikipedia reports Brann second-team play early in 2007 while Bakke recovered fitness after his September 2006 first-team debut; this adult-pyramid reserve phase is retained, but exact match dates and its interleaving with first-team play are not asserted, and national-football-teams.com omits the reserve row. He returned to Sogndal in 2011 and retired in November 2012.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Sogndal en 1993 es el inicio sénior documentado. Las apariciones con Leeds en 2005–06 y 2006–07 establecen un regreso efectivo como jugador después de la cesión al Aston Villa. Wikipedia informa que jugó con el segundo equipo de Brann a comienzos de 2007 mientras recuperaba la forma tras su debut con el primer equipo en septiembre de 2006; se conserva esta etapa de reservas en la pirámide adulta, pero no se afirman fechas exactas ni su intercalación con el primer equipo, y national-football-teams.com omite esa fila. Regresó a Sogndal en 2011 y se retiró en noviembre de 2012.",
+    "esClubNotes": {
+      "2": "Cesión.",
+      "3": "Regreso efectivo como jugador después de la cesión al Aston Villa.",
+      "4": "Debut con el primer equipo en septiembre de 2006.",
+      "5": "Fútbol de reservas en la pirámide adulta mientras recuperaba la forma; no se han establecido las fechas exactas ni la intercalación.",
+      "6": "Retomó el juego con el primer equipo después de la etapa en las reservas.",
+      "7": "Segunda etapa como jugador; se retiró en noviembre de 2012."
+    }
+  },
+  {
+    "id": "lukas-podolski",
+    "name": "Lukas Podolski",
+    "continent": "Europe",
+    "country": "Germany",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "1. FC Köln",
+        "years": "2003–2006"
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2006–2009"
+      },
+      {
+        "name": "1. FC Köln",
+        "years": "2009–2012",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Arsenal",
+        "years": "2012–2015"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2015",
+        "note": "Loan."
+      },
+      {
+        "name": "Galatasaray",
+        "years": "2015–2017"
+      },
+      {
+        "name": "Vissel Kobe",
+        "years": "2017–2020"
+      },
+      {
+        "name": "Antalyaspor",
+        "years": "2020–2021"
+      },
+      {
+        "name": "Górnik Zabrze",
+        "years": "2021–2026",
+        "note": "Final professional club; retired in May 2026."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Lukas_Podolski",
+        "title": "Lukas Podolski - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/7818/Lukas_Podolski.html",
+        "title": "Lukas Podolski (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The bank evidence records a nine-node professional route beginning with 1. FC Köln in 2003, including a genuine Köln return and the 2015 Inter Milan loan. It records Górnik Zabrze as his final club through 2026 and retirement in May 2026. Youth football and post-playing ownership are outside scope.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "La evidencia del banco registra una ruta profesional de nueve etapas que comienza con 1. FC Köln en 2003 e incluye un regreso real a Köln y la cesión al Inter Milan en 2015. Registra a Górnik Zabrze como su último club hasta 2026 y su retiro en mayo de 2026. El fútbol juvenil y la actividad como propietario posterior a su carrera quedan fuera del alcance.",
+    "esClubNotes": {
+      "2": "Segunda etapa como jugador.",
+      "4": "Cesión.",
+      "8": "Último club profesional; se retiró en mayo de 2026."
+    }
+  },
+  {
+    "id": "roberto-mancini",
+    "name": "Roberto Mancini",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Bologna",
+        "years": "1980–1982"
+      },
+      {
+        "name": "Sampdoria",
+        "years": "1982–1997"
+      },
+      {
+        "name": "Lazio",
+        "years": "1997–2001"
+      },
+      {
+        "name": "Leicester City",
+        "years": "2001",
+        "note": "Loan; four competitive senior appearances."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Roberto_Mancini",
+        "title": "Roberto Mancini - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14131/Roberto_Mancini.html",
+        "title": "Roberto Mancini (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The playing career comprises Bologna, a fifteen-year Sampdoria spell, Lazio and a brief 2001 Leicester City loan. The Leicester spell is retained because the evidence records four competitive senior appearances, not an unused registration. Mancini is normalized to the existing broad Forward role; his much longer managerial career is excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "La carrera como jugador comprende Bologna, una etapa de quince años en Sampdoria, Lazio y una breve cesión al Leicester City en 2001. La etapa en Leicester se conserva porque la evidencia registra cuatro apariciones competitivas sénior, no una inscripción sin uso. Mancini se normaliza al rol amplio existente de delantero; su carrera mucho más extensa como entrenador queda excluida.",
+    "esClubNotes": {
+      "3": "Cesión; cuatro apariciones competitivas sénior."
+    }
+  },
+  {
+    "id": "patrik-berger",
+    "name": "Patrik Berger",
+    "continent": "Europe",
+    "country": "Czech Republic",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Slavia Prague",
+        "years": "1991–1995"
+      },
+      {
+        "name": "Borussia Dortmund",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Liverpool",
+        "years": "1996–2003"
+      },
+      {
+        "name": "Portsmouth",
+        "years": "2003–2005"
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2005–2006"
+      },
+      {
+        "name": "Stoke City",
+        "years": "2006–2007",
+        "note": "Loan."
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2007–2008",
+        "note": "Actual playing return after the Stoke City loan."
+      },
+      {
+        "name": "Sparta Prague",
+        "years": "2008–2010",
+        "note": "Final professional club; retired in January 2010."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Patrik_Berger",
+        "title": "Patrik Berger - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/10363/Patrik_Berger.html",
+        "title": "Patrik Berger (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Slavia Prague in 1991 is the professional senior start; Sparta Prague in 1989–91 was youth football. The Aston Villa playing return after the Stoke City loan is retained. Berger retired in January 2010 after failing to recover from a ligament injury. His subsequent football with sixth-tier Dolní Chabry was explicitly amateur and is excluded. Czech club geography maps the Czechoslovak-era opening spell to the Czech system.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Slavia Prague en 1991 es el inicio profesional sénior; Sparta Prague entre 1989 y 1991 fue fútbol juvenil. Se conserva el regreso como jugador al Aston Villa después de la cesión al Stoke City. Berger se retiró en enero de 2010 al no recuperarse de una lesión de ligamentos. Su fútbol posterior con Dolní Chabry, de sexta división, fue explícitamente amateur y queda excluido. La geografía del club checo asigna la etapa inicial de la era checoslovaca al sistema checo.",
+    "esClubNotes": {
+      "5": "Cesión.",
+      "6": "Regreso efectivo como jugador después de la cesión al Stoke City.",
+      "7": "Último club profesional; se retiró en enero de 2010."
+    }
+  },
+  {
+    "id": "daniel-bertoni",
+    "name": "Daniel Bertoni",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Quilmes",
+        "years": "1971–1972",
+        "note": "The 1971 opening year follows a local report of a November debut plus an unquantified 1971 database row; some career tables begin in 1972."
+      },
+      {
+        "name": "Independiente",
+        "years": "1973–1977"
+      },
+      {
+        "name": "Sevilla",
+        "years": "1978–1980"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1980–1984"
+      },
+      {
+        "name": "Napoli",
+        "years": "1984–1986"
+      },
+      {
+        "name": "Udinese",
+        "years": "1986–1987",
+        "note": "Final playing club; a 1987–88 Avellino row with zero appearances is excluded."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://www.national-football-teams.com/player/18224/Daniel_Bertoni.html",
+        "title": "Daniel Bertoni (Player) | National Football Teams"
+      },
+      {
+        "url": "https://zonales.com/medio-siglo-debut-ricardo-bertoni-quilmes-socio-bochini-maradona-partido-dificil/",
+        "title": "A 50 años del debut de Ricardo Bertoni en Quilmes - Zonales"
+      }
+    ],
+    "notes": "The six-club route is supported by the season-by-season appearance record. The 1971 start follows the retrieved local report describing a November Quilmes debut and an unquantified 1971 database row; some biographies and tables begin in 1972, so no stronger precision is claimed. The local report places retirement at Udinese in 1987. A 1987–88 Avellino database row has zero appearances and is excluded as an unused registration.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "argentine-primera",
+      "la-liga",
+      "champions-league"
+    ],
+    "esNotes": "La ruta de seis clubes está respaldada por el registro de apariciones temporada por temporada. El inicio en 1971 sigue la nota local recuperada que describe un debut con Quilmes en noviembre y una fila de base de datos de 1971 sin total de apariciones; algunas biografías y tablas comienzan en 1972, por lo que no se afirma una precisión mayor. La nota local sitúa el retiro en Udinese en 1987. Una fila de Avellino de 1987–88 tiene cero apariciones y se excluye como inscripción sin uso.",
+    "esClubNotes": {
+      "0": "El año inicial 1971 sigue una nota local sobre un debut en noviembre y una fila de base de datos de 1971 sin total; algunas tablas de carrera comienzan en 1972.",
+      "5": "Último club como jugador; se excluye una fila de Avellino 1987–88 con cero apariciones."
+    }
+  },
+  {
+    "id": "osvaldo-ardiles",
+    "name": "Osvaldo Ardiles",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Instituto",
+        "years": "1971–1973",
+        "note": "Qualified start: a Córdoba biography reports a 1971 debut, while the national-league database begins in 1973 and another database reports 1972."
+      },
+      {
+        "name": "Belgrano",
+        "years": "1974"
+      },
+      {
+        "name": "Huracán",
+        "years": "1975–1978"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "1978–1982"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "1982–1983",
+        "note": "Loan."
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "1983–1985",
+        "note": "Actual playing return after the Paris Saint-Germain loan."
+      },
+      {
+        "name": "St George Budapest",
+        "years": "1985",
+        "note": "Loan; the Australian club is also recorded as St. George Saints."
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "1985–1988",
+        "note": "Actual playing return after the St George loan."
+      },
+      {
+        "name": "Blackburn Rovers",
+        "years": "1988",
+        "note": "Five competitive appearances in 1987–88."
+      },
+      {
+        "name": "Queens Park Rangers",
+        "years": "1988–1989"
+      },
+      {
+        "name": "Fort Lauderdale Strikers",
+        "years": "1989"
+      },
+      {
+        "name": "Swindon Town",
+        "years": "1989",
+        "note": "Two appearances; last match 26 August 1989, after which Ardiles said he stopped playing except for charity."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://www.national-football-teams.com/player/18616.html",
+        "title": "Osvaldo Ardiles (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.codigocba.com/post/historias-de-idolos-del-futbol-cordobes-osvaldo-ardiles",
+        "title": "Historias de ídolos del fútbol cordobés: Osvaldo Ardiles - CodigoCBA"
+      },
+      {
+        "url": "https://www.swindonadvertiser.co.uk/sport/12921921.in-depth-with-ossie-ardiles/",
+        "title": "IN DEPTH WITH... Ossie Ardiles | Swindon Advertiser"
+      },
+      {
+        "url": "https://townenders.com/profile.php?person_code=ARDILESO",
+        "title": "Ossie Ardiles profile | TownEnders.com"
+      }
+    ],
+    "notes": "The reported 1971 Instituto debut is a qualified era bound: the Córdoba biography supplies it, national-football-teams.com's national-league record starts in 1973, and another database reports 1972. PSG and St George were loan departures followed by evidenced Tottenham playing returns. St George Budapest is the Australian club also named St. George Saints. Blackburn's five 1987–88 appearances are retained despite a conflicting March 1986 label in the Swindon archive. No ownership-only Tottenham return is inserted after Blackburn. Ardiles's own account and the Swindon archive place his last competitive match on 26 August 1989; later managerial clubs and charity matches are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "argentine-primera",
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "El debut informado con Instituto en 1971 es un límite cronológico calificado: la biografía cordobesa lo aporta, el registro de liga nacional de national-football-teams.com comienza en 1973 y otra base de datos informa 1972. PSG y St George fueron cesiones seguidas por regresos acreditados como jugador al Tottenham. St George Budapest es el club australiano también llamado St. George Saints. Se conservan las cinco apariciones de Blackburn en 1987–88 pese a una etiqueta conflictiva de marzo de 1986 en el archivo de Swindon. No se inserta un regreso al Tottenham solo por propiedad después de Blackburn. El propio relato de Ardiles y el archivo de Swindon sitúan su último partido competitivo el 26 de agosto de 1989; se excluyen clubes posteriores como entrenador y partidos benéficos.",
+    "esClubNotes": {
+      "0": "Inicio calificado: una biografía cordobesa informa un debut en 1971, mientras la base de datos de liga nacional comienza en 1973 y otra base informa 1972.",
+      "4": "Cesión.",
+      "5": "Regreso efectivo como jugador después de la cesión al Paris Saint-Germain.",
+      "6": "Cesión; el club australiano también aparece como St. George Saints.",
+      "7": "Regreso efectivo como jugador después de la cesión a St George.",
+      "8": "Cinco apariciones competitivas en 1987–88.",
+      "11": "Dos apariciones; último partido el 26 de agosto de 1989, tras el cual Ardiles dijo que dejó de jugar salvo encuentros benéficos."
+    }
+  },
+  {
+    "id": "diego-ribas",
+    "name": "Diego Ribas",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Santos",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Porto",
+        "years": "2004–2006"
+      },
+      {
+        "name": "Werder Bremen",
+        "years": "2006–2009"
+      },
+      {
+        "name": "Juventus",
+        "years": "2009–2010"
+      },
+      {
+        "name": "VfL Wolfsburg",
+        "years": "2010–2011"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2011–2012",
+        "note": "Loan."
+      },
+      {
+        "name": "VfL Wolfsburg",
+        "years": "2012–2014",
+        "note": "Actual playing return after the first Atlético Madrid spell."
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2014",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2014–2016"
+      },
+      {
+        "name": "Flamengo",
+        "years": "2016–2022",
+        "note": "Final professional club; retirement at the end of the 2022 Brasileirão."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Diego_(footballer,_born_1985)",
+        "title": "Diego (footballer, born 1985) - Wikipedia"
+      },
+      {
+        "url": "https://ge.globo.com/futebol/times/flamengo/noticia/2022/11/05/com-12-titulos-pelo-flamengo-diego-anuncia-que-se-aposentara-do-futebol-no-fim-de-2022.ghtml",
+        "title": "Diego Ribas, do Flamengo, anuncia que vai se aposentar do futebol ao fim do Brasileirão | ge"
+      }
+    ],
+    "notes": "This is Diego Ribas da Cunha, born in 1985. His professional first-team career began at Santos in 2002 and ended at Flamengo in 2022. The chronology retains both the evidenced Wolfsburg playing return after the 2011–12 Atlético Madrid loan and the separate Atlético return in January 2014. Wolfsburg reserve-team training imposed as discipline is not established competitive reserve play and creates no node. Sources differ by one day on the planned/final retirement date in November 2022, so the endpoint remains year-only.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "brasileirao",
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "Este registro corresponde a Diego Ribas da Cunha, nacido en 1985. Su carrera profesional con primeros equipos comenzó en Santos en 2002 y terminó en Flamengo en 2022. La cronología conserva tanto el regreso acreditado como jugador al Wolfsburg después de la cesión al Atlético Madrid en 2011–12 como el regreso separado al Atlético en enero de 2014. Los entrenamientos con las reservas del Wolfsburg impuestos como sanción no están establecidos como fútbol competitivo de reservas y no crean una etapa. Las fuentes difieren por un día sobre la fecha prevista/final del retiro en noviembre de 2022, por lo que el final se mantiene solo por año.",
+    "esClubNotes": {
+      "5": "Cesión.",
+      "6": "Regreso efectivo como jugador después de la primera etapa en el Atlético Madrid.",
+      "7": "Segunda etapa como jugador.",
+      "9": "Último club profesional; retiro al final del Brasileirão 2022."
+    }
+  },
+  {
+    "id": "lucas-moura",
+    "name": "Lucas Moura",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "São Paulo",
+        "years": "2010–2012"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2013–2018"
+      },
+      {
+        "name": "Tottenham Hotspur",
+        "years": "2018–2023"
+      },
+      {
+        "name": "São Paulo",
+        "years": "2023–present",
+        "note": "Second playing spell; active in the 2026 season at the research snapshot."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Lucas_Moura",
+        "title": "Lucas Moura - Wikipedia"
+      },
+      {
+        "url": "https://soccerbase.com/players/player.sd?player_id=58808",
+        "title": "Lucas Moura | Football Stats | São Paulo | Soccer Base"
+      }
+    ],
+    "notes": "São Paulo first-team play begins in 2010, followed by Paris Saint-Germain and Tottenham Hotspur, then an actual São Paulo return in 2023. Juventus-SP, Corinthians and São Paulo youth football and Tottenham closed U21 football are excluded. The endpoint is open: both sources record professional appearances in 2026, so “present” means active at the 16 September 2026 research snapshot, not a projected contract end.",
+    "status": "active",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "brasileirao",
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Su etapa con el primer equipo de São Paulo comienza en 2010, seguida por Paris Saint-Germain y Tottenham Hotspur, y luego por un regreso efectivo a São Paulo en 2023. Se excluyen el fútbol juvenil de Juventus-SP, Corinthians y São Paulo y el equipo U21 cerrado del Tottenham. El final permanece abierto: ambas fuentes registran apariciones profesionales en 2026, por lo que «presente» significa activo en la instantánea de investigación del 16 de septiembre de 2026, no un fin de contrato proyectado.",
+    "esClubNotes": {
+      "3": "Segunda etapa como jugador; activo en la temporada 2026 según la instantánea de investigación."
+    }
+  },
+  {
+    "id": "nilton-santos",
+    "name": "Nílton Santos",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Botafogo",
+        "years": "1948–1964",
+        "note": "Only professional senior club; debut in March 1948 and final match in the 1964 Campeonato Carioca."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/N%C3%ADlton_Santos",
+        "title": "Nílton Santos - Wikipedia"
+      },
+      {
+        "url": "https://www.theguardian.com/football/2013/nov/28/nilton-santos",
+        "title": "Nilton Santos obituary | The Guardian"
+      },
+      {
+        "url": "https://ge.globo.com/futebol/times/botafogo/noticia/2025/05/16/jairzinho-e-ex-companheiros-de-botafogo-relembram-ultimo-jogo-de-nilton-santos.ghtml",
+        "title": "Jairzinho e ex-companheiros de Botafogo relembram último jogo de Nilton Santos | ge"
+      }
+    ],
+    "notes": "Botafogo was Nílton Santos’s only professional senior club. Wikipedia gives the 1948–1964 span, The Guardian dates his Botafogo debut to March 1948, and ge corroborates his final match in the 1964 Campeonato Carioca. Flexeiras was an earlier local amateur team and is excluded, as are all post-playing roles. Santos died in 2013.",
+    "status": "deceased",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "brasileirao"
+    ],
+    "esNotes": "Botafogo fue el único club profesional sénior de Nílton Santos. Wikipedia da el período 1948–1964, The Guardian fecha su debut con Botafogo en marzo de 1948 y ge corrobora su último partido en el Campeonato Carioca de 1964. Flexeiras fue un equipo amateur local anterior y queda excluido, al igual que todos los cargos posteriores a su carrera. Santos falleció en 2013.",
+    "esClubNotes": {
+      "0": "Único club profesional sénior; debut en marzo de 1948 y último partido en el Campeonato Carioca de 1964."
+    }
+  },
+  {
+    "id": "pepe",
+    "name": "Pepe (José Macia)",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Santos",
+        "years": "1954–1969",
+        "note": "Only professional senior club; first-team debut 23 May 1954 and final playing appearance 19 March 1969."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Pepe_(footballer,_born_1935)",
+        "title": "Pepe (footballer, born 1935) - Wikipedia"
+      },
+      {
+        "url": "https://www.santosfc.com.br/pepe-uma-unica-camisa-um-legado-atemporal/",
+        "title": "Pepe: uma única camisa, um legado atemporal - Santos Futebol Clube"
+      }
+    ],
+    "notes": "This is José Macia, the Brazilian forward born in 1935, not the modern Portuguese defender. His entire professional senior route is Santos. The club history dates his first-team debut to 23 May 1954 and his final playing appearance to 19 March 1969; the farewell lap on 3 May 1969 was not another match. Youth football from 1951 and coaching from 1969 onward are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "brasileirao"
+    ],
+    "esNotes": "Este registro corresponde a José Macia, el delantero brasileño nacido en 1935, no al defensor portugués moderno. Toda su ruta profesional sénior transcurrió en Santos. La historia del club fecha su debut con el primer equipo el 23 de mayo de 1954 y su última aparición como jugador el 19 de marzo de 1969; la vuelta de despedida del 3 de mayo de 1969 no fue otro partido. Se excluyen el fútbol juvenil desde 1951 y los cargos de entrenador desde 1969.",
+    "esClubNotes": {
+      "0": "Único club profesional sénior; debut con el primer equipo el 23 de mayo de 1954 y última aparición como jugador el 19 de marzo de 1969."
+    }
+  },
+  {
+    "id": "philippe-coutinho",
+    "name": "Philippe Coutinho",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Vasco da Gama",
+        "years": "2009–2010",
+        "note": "First professional playing spell, on loan after Inter Milan acquired his registration."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2010–2012"
+      },
+      {
+        "name": "Espanyol",
+        "years": "2012",
+        "note": "Loan."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2012–2013",
+        "note": "Actual playing return after the Espanyol loan."
+      },
+      {
+        "name": "Liverpool",
+        "years": "2013–2018"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2018–2019"
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2019–2020",
+        "note": "Loan."
+      },
+      {
+        "name": "Barcelona",
+        "years": "2020–2022",
+        "note": "Actual playing return after the Bayern Munich loan."
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2022–2023",
+        "note": "Loan-to-permanent service is one continuous node; later ownership during loans creates no return node."
+      },
+      {
+        "name": "Al-Duhail",
+        "years": "2023–2024",
+        "note": "Loan."
+      },
+      {
+        "name": "Vasco da Gama",
+        "years": "2024–2026",
+        "note": "Loan-to-permanent return; left in February 2026 and was a free agent at the research snapshot."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Philippe_Coutinho",
+        "title": "Philippe Coutinho - Wikipedia"
+      },
+      {
+        "url": "https://www.beinsports.com/en-us/soccer/articles-video/coutinho-returns-to-vasco-da-gama-2024-07-10",
+        "title": "Coutinho Returns to Vasco da Gama | beIN SPORTS"
+      },
+      {
+        "url": "https://soccerbase.com/players/player.sd?player_id=56220",
+        "title": "Philippe Coutinho | Football Stats | Soccer Base"
+      }
+    ],
+    "notes": "The playing chronology begins with actual Vasco da Gama senior appearances in 2009, not Inter Milan ownership from 2008. Actual returns to Inter after the Espanyol loan and Barcelona after the Bayern Munich loan are retained. Aston Villa loan-to-permanent service and the final Vasco loan-to-permanent service are each one continuous node; Aston Villa ownership during the Al-Duhail and Vasco loans creates no unplayed return. Coutinho left Vasco in February 2026 and was a free agent, not reported retired, at the 16 September 2026 snapshot; his status therefore remains active while the last club endpoint is closed.",
+    "status": "active",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "brasileirao",
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "La cronología como jugador comienza con apariciones sénior reales en Vasco da Gama en 2009, no con la propiedad del pase por Inter Milan desde 2008. Se conservan los regresos efectivos al Inter después de la cesión al Espanyol y al Barcelona después de la cesión al Bayern Munich. La etapa de cesión a compra definitiva en Aston Villa y la última etapa de cesión a compra definitiva en Vasco son cada una un solo nodo continuo; la propiedad de Aston Villa durante las cesiones a Al-Duhail y Vasco no crea un regreso sin jugar. Coutinho dejó Vasco en febrero de 2026 y era agente libre, sin retiro informado, en la instantánea del 16 de septiembre de 2026; por eso su estado sigue activo aunque la última etapa de club esté cerrada.",
+    "esClubNotes": {
+      "0": "Primera etapa profesional como jugador, cedido después de que Inter Milan adquiriera su pase.",
+      "2": "Cesión.",
+      "3": "Regreso efectivo como jugador después de la cesión al Espanyol.",
+      "6": "Cesión.",
+      "7": "Regreso efectivo como jugador después de la cesión al Bayern Munich.",
+      "8": "La cesión seguida de compra definitiva forma una sola etapa continua; la propiedad posterior durante otras cesiones no crea un nodo de regreso.",
+      "9": "Cesión.",
+      "10": "Regreso de cesión a compra definitiva; dejó el club en febrero de 2026 y era agente libre en la instantánea de investigación."
+    }
+  },
+  {
+    "id": "zito",
+    "name": "Zito",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Taubaté",
+        "years": "1950–1952",
+        "note": "No exact debut day is asserted."
+      },
+      {
+        "name": "Santos",
+        "years": "1952–1967",
+        "note": "Final match 7 November 1967; later director and youth-coordinator work is excluded."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Zito_(footballer,_born_1932)",
+        "title": "Zito (footballer, born 1932) - Wikipedia"
+      },
+      {
+        "url": "https://www.santosfc.com.br/zito-nosso-idolo-eterno-e-capitao-ganha-estatua-em-frente-a-vila-belmiro/",
+        "title": "Zito, nosso ídolo eterno e capitão, ganha estátua em frente a Vila Belmiro - Santos Futebol Clube"
+      }
+    ],
+    "notes": "Wikipedia’s senior career table gives Taubaté from 1950 to 1952 and Santos from 1952 to 1967; its prose separates earlier amateur football in Roseira from the Taubaté spell. Santos independently corroborates that he began at Taubaté and arrived at Vila Belmiro in 1952. The exact Taubaté debut day is not established. His last match was in 1967; later director and youth-coordinator work is excluded. Zito died in 2015.",
+    "status": "deceased",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "brasileirao"
+    ],
+    "esNotes": "La tabla de carrera sénior de Wikipedia registra Taubaté de 1950 a 1952 y Santos de 1952 a 1967; su texto separa el fútbol amateur anterior en Roseira de la etapa en Taubaté. Santos corrobora de forma independiente que comenzó en Taubaté y llegó a Vila Belmiro en 1952. No se ha establecido el día exacto del debut en Taubaté. Su último partido fue en 1967; se excluyen sus cargos posteriores como directivo y coordinador juvenil. Zito falleció en 2015.",
+    "esClubNotes": {
+      "0": "No se afirma un día exacto de debut.",
+      "1": "Último partido el 7 de noviembre de 1967; se excluyen los cargos posteriores como directivo y coordinador juvenil."
+    }
+  },
+  {
+    "id": "ivan-zamorano",
+    "name": "Iván Zamorano",
+    "continent": "South America",
+    "country": "Chile",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Cobresal",
+        "years": "1985",
+        "note": "First senior appearances before the Cobreandino loan."
+      },
+      {
+        "name": "Cobreandino",
+        "years": "1986",
+        "note": "Loan; historical name of Trasandino."
+      },
+      {
+        "name": "Cobresal",
+        "years": "1987–1988",
+        "note": "Actual playing return after the Cobreandino loan."
+      },
+      {
+        "name": "St. Gallen",
+        "years": "1988–1990"
+      },
+      {
+        "name": "Sevilla",
+        "years": "1990–1992"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1992–1996"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1996–2001"
+      },
+      {
+        "name": "América",
+        "years": "2001–2003"
+      },
+      {
+        "name": "Colo-Colo",
+        "years": "2003",
+        "note": "Final professional club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Iv%C3%A1n_Zamorano",
+        "title": "Iván Zamorano - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13677/Ivan_Zamorano.html",
+        "title": "Iván Zamorano (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Cobresal is the first senior club: the sources record appearances there in 1985 before the 1986 Cobreandino loan. Cobreandino is the historical name of Trasandino. The actual Cobresal playing return is retained before the move to St. Gallen. The remaining route through Sevilla, Real Madrid, Inter Milan, América and final club Colo-Colo is corroborated by both sources. Youth football, coaching and ownership-only parent-club intervals are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "la-liga",
+      "champions-league"
+    ],
+    "esNotes": "Cobresal es el primer club sénior: las fuentes registran apariciones allí en 1985 antes de la cesión a Cobreandino en 1986. Cobreandino es el nombre histórico de Trasandino. Se conserva el regreso efectivo como jugador a Cobresal antes del traspaso a St. Gallen. La ruta restante por Sevilla, Real Madrid, Inter Milan, América y el último club Colo-Colo está corroborada por ambas fuentes. Se excluyen el fútbol juvenil, los cargos de entrenador y los intervalos en el club propietario sin jugar.",
+    "esClubNotes": {
+      "0": "Primeras apariciones sénior antes de la cesión a Cobreandino.",
+      "1": "Cesión; nombre histórico de Trasandino.",
+      "2": "Regreso efectivo como jugador después de la cesión a Cobreandino.",
+      "8": "Último club profesional."
+    }
+  },
+  {
+    "id": "david-pizarro",
+    "name": "David Pizarro",
+    "continent": "South America",
+    "country": "Chile",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Santiago Wanderers",
+        "years": "1997–1998"
+      },
+      {
+        "name": "Udinese",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Universidad de Chile",
+        "years": "2001",
+        "note": "Loan; six documented league appearances."
+      },
+      {
+        "name": "Udinese",
+        "years": "2001–2005",
+        "note": "Playing return after the Universidad de Chile loan."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2005–2006"
+      },
+      {
+        "name": "Roma",
+        "years": "2006–2012"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2012",
+        "note": "Loan; followed directly by Fiorentina, with no Roma playing return."
+      },
+      {
+        "name": "Fiorentina",
+        "years": "2012–2015"
+      },
+      {
+        "name": "Santiago Wanderers",
+        "years": "2015–2016",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Universidad de Chile",
+        "years": "2017–2018",
+        "note": "Second playing spell."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/David_Pizarro",
+        "title": "David Pizarro - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1440/David_Pizarro.html",
+        "title": "David Pizarro (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Santiago Wanderers in 1997 is the first senior club; Caupolicán was youth-only. The 2001 Universidad de Chile loan and subsequent Udinese return are retained. After the Manchester City loan, both career sources proceed directly to Fiorentina, so no ownership-only Roma return is inserted. The final 2018 Universidad de Chile season is the playing endpoint.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Santiago Wanderers en 1997 es el primer club sénior; Caupolicán fue solo fútbol juvenil. Se conservan el préstamo a Universidad de Chile en 2001 y el posterior regreso a Udinese. Tras el préstamo al Manchester City, ambas fuentes de la carrera pasan directamente a Fiorentina, por lo que no se agrega un regreso a Roma basado solo en la propiedad del pase. La temporada final de 2018 en Universidad de Chile es el cierre de su carrera como jugador.",
+    "esClubNotes": {
+      "2": "Préstamo; seis apariciones de liga documentadas.",
+      "3": "Regreso como jugador después del préstamo a Universidad de Chile.",
+      "6": "Préstamo; pasó directamente a Fiorentina, sin un regreso a Roma como jugador.",
+      "8": "Segunda etapa como jugador.",
+      "9": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "rodrigo-tello",
+    "name": "Rodrigo Tello",
+    "continent": "South America",
+    "country": "Chile",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Universidad de Chile",
+        "years": "1999–2000"
+      },
+      {
+        "name": "Sporting CP",
+        "years": "2001–2007"
+      },
+      {
+        "name": "Beşiktaş",
+        "years": "2007–2010"
+      },
+      {
+        "name": "Eskişehirspor",
+        "years": "2010–2014"
+      },
+      {
+        "name": "Elazığspor",
+        "years": "2014"
+      },
+      {
+        "name": "Şanlıurfaspor",
+        "years": "2014–2015"
+      },
+      {
+        "name": "Audax Italiano",
+        "years": "2015–2016"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rodrigo_Tello",
+        "title": "Rodrigo Tello - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/8302/Rodrigo_Tello.html",
+        "title": "Rodrigo Tello (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Universidad de Chile in 1999 is the first senior club; the earlier Colo-Colo and Universidad de Chile periods were youth football. The two independent career tables agree on the ordered route. The 2015/16 Audax Italiano season establishes the 2016 playing endpoint.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league"
+    ],
+    "esNotes": "Universidad de Chile en 1999 es el primer club sénior; los períodos anteriores en Colo-Colo y Universidad de Chile correspondieron al fútbol juvenil. Las dos tablas independientes de la carrera coinciden en el recorrido ordenado. La temporada 2015/16 en Audax Italiano establece 2016 como cierre de su carrera como jugador.",
+    "esClubNotes": {}
+  },
+  {
+    "id": "cristian-rodriguez",
+    "name": "Cristian Rodríguez",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Midfielder / Forward",
+    "clubs": [
+      {
+        "name": "Peñarol",
+        "years": "2002–2005"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Benfica",
+        "years": "2007–2008",
+        "note": "Loan from Paris Saint-Germain."
+      },
+      {
+        "name": "Porto",
+        "years": "2008–2012"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2012–2015"
+      },
+      {
+        "name": "Parma",
+        "years": "2015",
+        "note": "Loan; five documented league appearances."
+      },
+      {
+        "name": "Grêmio",
+        "years": "2015",
+        "note": "Loan; no national-league appearances, but two matches and 88 minutes are independently reported."
+      },
+      {
+        "name": "Independiente",
+        "years": "2015–2017"
+      },
+      {
+        "name": "Peñarol",
+        "years": "2017–2021",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Plaza Colonia",
+        "years": "2021–2022"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Cristian_Rodr%C3%ADguez",
+        "title": "Cristian Rodríguez - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/8178/Cristian_Rodriguez.html",
+        "title": "Cristian Rodríguez (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.montevideo.com.uy/Deportes/Cebolla-Rodriguez-rescindio-en-Gremio-uc270455",
+        "title": "Cebolla Rodríguez rescindió en Grêmio | Montevideo Portal"
+      }
+    ],
+    "notes": "Peñarol in 2002 is the first senior club. Benfica, Parma and Grêmio are retained as loans without inserting unplayed parent-club returns. Grêmio remains in scope despite zero Brazilian national-league appearances because Montevideo Portal documents two actual matches and 88 minutes. The later Peñarol spell is a genuine playing return; Plaza Colonia in 2022 is the final senior season.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "argentine-primera",
+      "brasileirao"
+    ],
+    "esNotes": "Peñarol en 2002 es el primer club sénior. Benfica, Parma y Grêmio se conservan como préstamos sin insertar regresos no jugados a los clubes dueños del pase. Grêmio permanece dentro del alcance pese a no registrar apariciones en la liga nacional brasileña, porque Montevideo Portal documenta dos partidos reales y 88 minutos. La etapa posterior en Peñarol es un regreso real como jugador; Plaza Colonia en 2022 es la última temporada sénior.",
+    "esClubNotes": {
+      "2": "Préstamo desde Paris Saint-Germain.",
+      "5": "Préstamo; cinco apariciones de liga documentadas.",
+      "6": "Préstamo; sin apariciones en la liga nacional, pero se informan de forma independiente dos partidos y 88 minutos.",
+      "8": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "vicente-sanchez",
+    "name": "Vicente Sánchez",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Midfielder / Forward",
+    "clubs": [
+      {
+        "name": "Sud América",
+        "years": "1999",
+        "note": "NFT records 17 second-division appearances; Wikipedia labels the senior spell 2000."
+      },
+      {
+        "name": "Tacuarembó",
+        "years": "2000"
+      },
+      {
+        "name": "Nacional",
+        "years": "2001"
+      },
+      {
+        "name": "Toluca",
+        "years": "2001–2007"
+      },
+      {
+        "name": "Schalke 04",
+        "years": "2008–2010"
+      },
+      {
+        "name": "América",
+        "years": "2010–2012"
+      },
+      {
+        "name": "Nacional",
+        "years": "2012–2013",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Colorado Rapids",
+        "years": "2013–2015"
+      },
+      {
+        "name": "Defensor Sporting",
+        "years": "2016"
+      },
+      {
+        "name": "Houston Dynamo",
+        "years": "2017"
+      },
+      {
+        "name": "Rio Grande Valley FC",
+        "years": "2021",
+        "note": "Professional player-coach comeback after retirement following the 2017 season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Vicente_S%C3%A1nchez",
+        "title": "Vicente Sánchez - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/7030/Vicente_Sanchez.html",
+        "title": "Vicente Sánchez (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.uslchampionship.com/news_article/show/1155925",
+        "title": "RGVFC Signs Veteran Forward Vicente Sánchez | USL Championship"
+      }
+    ],
+    "notes": "Sud América is the first senior club. The 1999 start follows NFT’s 17 documented second-division appearances rather than Wikipedia’s 2000 year label; the discrepancy is preserved rather than hidden. The 2012 Nacional spell is a genuine return. Rio Grande Valley FC is retained as a documented 2021 professional comeback in a player-coach role after retirement following Houston in 2017; the USL article’s inconsistent aside about Nacional is not used to reorder the career.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league"
+    ],
+    "esNotes": "Sud América es el primer club sénior. El inicio en 1999 sigue las 17 apariciones documentadas por NFT en segunda división, en lugar de la etiqueta de 2000 de Wikipedia; la discrepancia se conserva de forma explícita. La etapa de 2012 en Nacional es un regreso real. Rio Grande Valley FC se conserva como un regreso profesional documentado en 2021, en función de jugador-entrenador, después del retiro tras Houston en 2017; no se usa el comentario inconsistente del artículo de la USL sobre Nacional para reordenar la carrera.",
+    "esClubNotes": {
+      "0": "NFT registra 17 apariciones en segunda división; Wikipedia etiqueta la etapa sénior como 2000.",
+      "6": "Segunda etapa como jugador.",
+      "10": "Regreso profesional como jugador-entrenador tras el retiro posterior a la temporada 2017."
+    }
+  },
+  {
+    "id": "edinson-cavani",
+    "name": "Edinson Cavani",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Danubio",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Palermo",
+        "years": "2007–2010"
+      },
+      {
+        "name": "Napoli",
+        "years": "2010–2013",
+        "note": "Continuous loan-to-permanent playing period, represented as one node."
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2013–2020"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2020–2022"
+      },
+      {
+        "name": "Valencia",
+        "years": "2022–2023"
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "2023–2026",
+        "note": "Departure confirmed in 2026; no retirement was announced."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Edinson_Cavani",
+        "title": "Edinson Cavani - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/25130/Edinson_Cavani.html",
+        "title": "Edinson Cavani (Player) | National Football Teams"
+      },
+      {
+        "url": "https://batimes.com.ar/news/sports/uruguay-veteran-edison-cavani-departs-boca-juniors.phtml",
+        "title": "Uruguay veteran Edinson Cavani departs Boca Juniors | Buenos Aires Times"
+      }
+    ],
+    "notes": "Danubio is the first senior club: Wikipedia starts the spell in 2005 and NFT records the 2005/06 playing season. Napoli’s loan-to-permanent service is continuous and therefore one node. Boca Juniors in 2026 is the latest evidenced playing/departure endpoint. Contemporary reporting explicitly says Cavani did not announce retirement, so no retirement or future club is invented.",
+    "status": "active",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga",
+      "argentine-primera"
+    ],
+    "esNotes": "Danubio es el primer club sénior: Wikipedia inicia la etapa en 2005 y NFT registra la temporada jugada 2005/06. El período en Napoli, de préstamo a pase permanente, fue continuo y por eso aparece como un solo nodo. Boca Juniors en 2026 es el último cierre de juego/salida respaldado por evidencia. La información contemporánea dice expresamente que Cavani no anunció su retiro, por lo que no se inventa ni un retiro ni un club futuro.",
+    "esClubNotes": {
+      "2": "Período continuo como jugador, de préstamo a pase permanente, representado en un solo nodo.",
+      "6": "Salida confirmada en 2026; no anunció su retiro."
+    }
+  },
+  {
+    "id": "maxi-pereira",
+    "name": "Maxi Pereira",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Defensor Sporting",
+        "years": "2002–2007"
+      },
+      {
+        "name": "Benfica",
+        "years": "2007–2015"
+      },
+      {
+        "name": "Porto",
+        "years": "2015–2019"
+      },
+      {
+        "name": "Peñarol",
+        "years": "2020–2021",
+        "note": "NFT assigns three appearances to the 2020 competition season; Wikipedia labels the spell 2021."
+      },
+      {
+        "name": "River Plate (Montevideo)",
+        "years": "2022–2023",
+        "note": "The Uruguayan club, not River Plate of Argentina."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Maxi_Pereira",
+        "title": "Maxi Pereira - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13540/Maxi_Pereira.html",
+        "title": "Maxi Pereira (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Defensor Sporting in 2002 is the first senior club; Bella Vista was youth football. The post-Porto gap is retained without inventing an intervening club. Peñarol’s boundary is expressed as 2020–2021 because NFT places three appearances in the 2020 competition season while Wikipedia uses calendar-year 2021. River Plate is explicitly the Montevideo club. The last documented senior season is 2023.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league"
+    ],
+    "esNotes": "Defensor Sporting en 2002 es el primer club sénior; Bella Vista fue fútbol juvenil. Se conserva la pausa posterior a Porto sin inventar un club intermedio. El límite de Peñarol se expresa como 2020–2021 porque NFT ubica tres apariciones en la temporada competitiva 2020, mientras Wikipedia usa el año calendario 2021. River Plate es explícitamente el club de Montevideo. La última temporada sénior documentada es 2023.",
+    "esClubNotes": {
+      "3": "NFT asigna tres apariciones a la temporada competitiva 2020; Wikipedia etiqueta la etapa como 2021.",
+      "4": "El club uruguayo, no River Plate de Argentina."
+    }
+  },
+  {
+    "id": "ruben-sosa",
+    "name": "Rubén Sosa",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Danubio",
+        "years": "1982–1985"
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "1985–1988"
+      },
+      {
+        "name": "Lazio",
+        "years": "1988–1992"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1992–1995"
+      },
+      {
+        "name": "Borussia Dortmund",
+        "years": "1995–1996"
+      },
+      {
+        "name": "CD Logroñés",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Nacional",
+        "years": "1997–2001"
+      },
+      {
+        "name": "Shanghai Shenhua",
+        "years": "2002"
+      },
+      {
+        "name": "Nacional",
+        "years": "2003–2004",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Racing Club de Montevideo",
+        "years": "2006",
+        "note": "Documented senior comeback after a one-year gap."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Rub%C3%A9n_Sosa",
+        "title": "Rubén Sosa - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14469/Ruben_Sosa.html",
+        "title": "Rubén Sosa (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The complete bank chronology is retained, including Borussia Dortmund, CD Logroñés, Shanghai Shenhua, the Nacional return and the 2006 Racing Club de Montevideo comeback. The source excerpt is abbreviated in its prose summary but the bank’s reviewed ordered route supplies the full late-career sequence. The 2006 Racing spell is the final senior endpoint.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "Se conserva la cronología completa del banco, incluidos Borussia Dortmund, CD Logroñés, Shanghai Shenhua, el regreso a Nacional y la vuelta en 2006 con Racing Club de Montevideo. El extracto de la fuente está abreviado en su resumen narrativo, pero el recorrido ordenado y revisado del banco aporta la secuencia completa del final de la carrera. La etapa de 2006 en Racing es el último punto de su carrera sénior.",
+    "esClubNotes": {
+      "8": "Segunda etapa como jugador.",
+      "9": "Regreso sénior documentado después de un año de pausa."
+    }
+  },
+  {
+    "id": "daniel-fonseca",
+    "name": "Daniel Fonseca",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Nacional",
+        "years": "1988–1990"
+      },
+      {
+        "name": "Cagliari",
+        "years": "1990–1992"
+      },
+      {
+        "name": "Napoli",
+        "years": "1992–1994"
+      },
+      {
+        "name": "Roma",
+        "years": "1994–1997"
+      },
+      {
+        "name": "Juventus",
+        "years": "1997–2001"
+      },
+      {
+        "name": "River Plate",
+        "years": "2001–2002",
+        "note": "Documented membership in Argentina; the bank evidence records zero appearances, so competitive play is not asserted."
+      },
+      {
+        "name": "Nacional",
+        "years": "2002",
+        "note": "Second club spell; follows the River Plate membership."
+      },
+      {
+        "name": "Como",
+        "years": "2002–2003"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Daniel_Fonseca",
+        "title": "Daniel Fonseca - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/12628/Daniel_Fonseca.html",
+        "title": "Daniel Fonseca (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The reviewed bank route is preserved through Como in 2003. River Plate is the Argentine club and remains in the exact bank sequence, but the bank notes that it has zero recorded appearances; it is therefore qualified as documented membership rather than claimed competitive play. The 2002 Nacional node is a return. Como in 2002/03 is the last documented senior spell.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ],
+    "esNotes": "El recorrido revisado del banco se conserva hasta Como en 2003. River Plate es el club argentino y permanece en la secuencia exacta del banco, pero el banco señala que registra cero apariciones; por eso se califica como pertenencia documentada y no como juego competitivo afirmado. El nodo de Nacional en 2002 es un regreso. Como en 2002/03 es la última etapa sénior documentada.",
+    "esClubNotes": {
+      "5": "Pertenencia documentada en Argentina; la evidencia del banco registra cero apariciones, por lo que no se afirma juego competitivo.",
+      "6": "Segunda etapa en el club; sigue a la pertenencia a River Plate."
+    }
+  },
+  {
+    "id": "carlos-aguilera",
+    "name": "Carlos Aguilera",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "River Plate Montevideo",
+        "years": "1980–1982",
+        "note": "Club Atlético River Plate of Montevideo, distinct from River Plate of Argentina."
+      },
+      {
+        "name": "Nacional",
+        "years": "1983–1984"
+      },
+      {
+        "name": "Independiente Medellín",
+        "years": "1985"
+      },
+      {
+        "name": "Racing Club",
+        "years": "1986–1987",
+        "note": "Racing Club de Avellaneda, Argentina."
+      },
+      {
+        "name": "Tecos UAG",
+        "years": "1987–1988"
+      },
+      {
+        "name": "Genoa",
+        "years": "1989–1992"
+      },
+      {
+        "name": "Torino",
+        "years": "1992–1994"
+      },
+      {
+        "name": "Peñarol",
+        "years": "1994–1999"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Carlos_Aguilera_(Uruguayan_footballer)",
+        "title": "Carlos Aguilera (Uruguayan footballer) - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/14466/Carlos_Aguilera.html",
+        "title": "Carlos Aguilera (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The opening club is River Plate Montevideo, not Argentina’s River Plate. Racing Club is the Avellaneda club. The bank’s ordered senior route is preserved from the 1980 River Plate start through Peñarol in 1999; the one-year gap between Tecos UAG and Genoa is left as evidenced rather than filled with an invented club.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ],
+    "esNotes": "El club inicial es River Plate Montevideo, no River Plate de Argentina. Racing Club es el club de Avellaneda. Se conserva el recorrido sénior ordenado del banco desde el inicio en River Plate en 1980 hasta Peñarol en 1999; el año de pausa entre Tecos UAG y Genoa se deja tal como está respaldado, sin inventar un club.",
+    "esClubNotes": {
+      "0": "Club Atlético River Plate de Montevideo, distinto de River Plate de Argentina.",
+      "3": "Racing Club de Avellaneda, en Argentina."
+    }
+  },
+  {
+    "id": "justo-villar",
+    "name": "Justo Villar",
+    "continent": "South America",
+    "country": "Paraguay",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Sol de América",
+        "years": "1996–2000"
+      },
+      {
+        "name": "Club Libertad",
+        "years": "2001–2004"
+      },
+      {
+        "name": "Newell's Old Boys",
+        "years": "2004–2008"
+      },
+      {
+        "name": "Real Valladolid",
+        "years": "2008–2011"
+      },
+      {
+        "name": "Estudiantes de La Plata",
+        "years": "2011–2013",
+        "note": "The seasonal appearance record continues through 2012/13 before his 2013 move to Club Nacional."
+      },
+      {
+        "name": "Club Nacional",
+        "years": "2013"
+      },
+      {
+        "name": "Colo-Colo",
+        "years": "2013–2017"
+      },
+      {
+        "name": "Club Nacional",
+        "years": "2017–2018",
+        "note": "Second spell; no first-team minutes. While recovering from injury, he played 45 minutes for the reserve side on 17 May 2018."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Justo_Villar",
+        "title": "Justo Villar - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5152/Justo_Villar.html",
+        "title": "Justo Villar (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.abc.com.py/deportes/futbol/justo-villar-anuncia-su-retiro-1726257.html",
+        "title": "Justo Villar anuncia su retiro - Fútbol - ABC Color"
+      },
+      {
+        "url": "https://www.ultimahora.com/justo-villar-anuncio-su-retiro-como-arquero-profesional-n1702089",
+        "title": "Justo Villar anunció su retiro como arquero profesional - Última Hora"
+      }
+    ],
+    "notes": "The ordered club route preserves the reviewed wrong-answer-bank sequence. Villar began senior first-team football with Sol de América in 1996; the career table and seasonal appearance record corroborate the route through Paraguay, Argentina, Spain and Chile. His last official first-team club match was for Colo-Colo on 4 March 2017. The final Club Nacional node is retained as a documented second spell, but it does not assert first-team play: injury recovery limited him to 45 minutes for the reserve side. He announced his retirement from professional football on 30 July 2018.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "la-liga",
+      "argentine-primera"
+    ],
+    "esNotes": "El recorrido ordenado de clubes conserva la secuencia revisada del banco de respuestas incorrectas. Villar inició su carrera sénior en el primer equipo de Sol de América en 1996; la tabla de carrera y el registro de apariciones por temporada corroboran el recorrido por Paraguay, Argentina, España y Chile. Su último partido oficial con un primer equipo fue con Colo-Colo el 4 de marzo de 2017. La última etapa en Club Nacional se conserva como un segundo ciclo documentado, pero no afirma que haya jugado en Primera: la recuperación de una lesión lo limitó a 45 minutos con la Reserva. Anunció su retiro del fútbol profesional el 30 de julio de 2018.",
+    "esClubNotes": {
+      "4": "El registro de apariciones por temporada continúa hasta 2012/13, antes de su llegada a Club Nacional en 2013.",
+      "7": "Segunda etapa; no disputó minutos en Primera. Mientras se recuperaba de una lesión, jugó 45 minutos con la Reserva el 17 de mayo de 2018."
+    }
+  },
+  {
+    "id": "rene-higuita",
+    "name": "René Higuita",
+    "continent": "South America",
+    "country": "Colombia",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Millonarios",
+        "years": "1985"
+      },
+      {
+        "name": "Atlético Nacional",
+        "years": "1986–1991"
+      },
+      {
+        "name": "Real Valladolid",
+        "years": "1991–1992"
+      },
+      {
+        "name": "Atlético Nacional",
+        "years": "1993–1997",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Veracruz",
+        "years": "1997–1998"
+      },
+      {
+        "name": "Independiente Medellín",
+        "years": "1999–2000"
+      },
+      {
+        "name": "Real Cartagena",
+        "years": "2000–2001"
+      },
+      {
+        "name": "Atlético Junior",
+        "years": "2001–2002"
+      },
+      {
+        "name": "Deportivo Pereira",
+        "years": "2002–2003"
+      },
+      {
+        "name": "Deportivo Pereira",
+        "years": "2008–2010",
+        "note": "Professional comeback after a multi-year hiatus."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ren%C3%A9_Higuita",
+        "title": "René Higuita - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13686/Rene_Higuita.html",
+        "title": "René Higuita (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The two Deportivo Pereira periods are separate playing spells divided by a multi-year hiatus; the lighter bank profile collapsed them into one candidate feature. The playable chronology restores the 2008 professional comeback.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "la-liga"
+    ],
+    "esNotes": "Los dos períodos en Deportivo Pereira son etapas separadas por una pausa de varios años; el perfil más ligero del banco los condensaba en una sola característica. La cronología jugable restaura el regreso profesional de 2008.",
+    "esClubNotes": {
+      "3": "Segunda etapa como jugador.",
+      "9": "Regreso profesional tras una pausa de varios años."
+    }
+  },
+  {
+    "id": "faustino-asprilla",
+    "name": "Faustino Asprilla",
+    "continent": "South America",
+    "country": "Colombia",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Cúcuta Deportivo",
+        "years": "1988–1989"
+      },
+      {
+        "name": "Atlético Nacional",
+        "years": "1989–1992"
+      },
+      {
+        "name": "Parma",
+        "years": "1992–1996"
+      },
+      {
+        "name": "Newcastle United",
+        "years": "1996–1998"
+      },
+      {
+        "name": "Parma",
+        "years": "1998–1999",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Palmeiras",
+        "years": "1999–2000"
+      },
+      {
+        "name": "Fluminense",
+        "years": "2000–2001"
+      },
+      {
+        "name": "Atlante",
+        "years": "2001–2002"
+      },
+      {
+        "name": "Atlético Nacional",
+        "years": "2002",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Universidad de Chile",
+        "years": "2003"
+      },
+      {
+        "name": "Estudiantes de La Plata",
+        "years": "2003–2004"
+      },
+      {
+        "name": "Cortuluá",
+        "years": "2004"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Faustino_Asprilla",
+        "title": "Faustino Asprilla - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/12577/Faustino_Asprilla.html",
+        "title": "Faustino Asprilla (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Cúcuta Deportivo in 1988 is the first senior club. The reviewed route preserves the genuine Parma and Atlético Nacional returns and the full late-career sequence through Cortuluá in 2004. No youth, national-team or post-career activity is included.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera",
+      "brasileirao"
+    ],
+    "esNotes": "Cúcuta Deportivo en 1988 es el primer club sénior. El recorrido revisado conserva los regresos reales a Parma y Atlético Nacional y toda la secuencia del final de la carrera hasta Cortuluá en 2004. No se incluye fútbol juvenil, selecciones nacionales ni actividad posterior a la carrera.",
+    "esClubNotes": {
+      "4": "Segunda etapa como jugador.",
+      "8": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "leonel-alvarez",
+    "name": "Leonel Álvarez",
+    "continent": "South America",
+    "country": "Colombia",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Independiente Medellín",
+        "years": "1983–1986"
+      },
+      {
+        "name": "Atlético Nacional",
+        "years": "1987–1989"
+      },
+      {
+        "name": "América de Cali",
+        "years": "1990"
+      },
+      {
+        "name": "Real Valladolid",
+        "years": "1990–1992"
+      },
+      {
+        "name": "América de Cali",
+        "years": "1992–1995",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Dallas Burn",
+        "years": "1996"
+      },
+      {
+        "name": "Veracruz",
+        "years": "1997"
+      },
+      {
+        "name": "Dallas Burn",
+        "years": "1998–1999",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "New England Revolution",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Deportivo Pereira",
+        "years": "2002"
+      },
+      {
+        "name": "Deportes Quindío",
+        "years": "2003–2004"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Leonel_%C3%81lvarez_(footballer,_born_1965)",
+        "title": "Leonel Álvarez (footballer, born 1965) - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13684/Leonel_Alvarez.html",
+        "title": "Leonel Álvarez (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The playable chronology restores the separate América de Cali and Dallas Burn spells that the lighter bank profile collapsed. The source excerpt places the first América spell before Real Valladolid and the second after it.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "la-liga"
+    ],
+    "esNotes": "La cronología jugable restaura las etapas separadas en América de Cali y Dallas Burn que el perfil más ligero del banco había condensado. El extracto de la fuente sitúa la primera etapa en América antes del Real Valladolid y la segunda después.",
+    "esClubNotes": {
+      "4": "Segunda etapa como jugador.",
+      "7": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "nolberto-solano",
+    "name": "Nolberto Solano",
+    "continent": "South America",
+    "country": "Peru",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Sporting Cristal",
+        "years": "1992",
+        "note": "First-division debut on 12 April 1992; omitted from the two broader career tables."
+      },
+      {
+        "name": "Deportivo Municipal",
+        "years": "1993",
+        "note": "Loan."
+      },
+      {
+        "name": "Sporting Cristal",
+        "years": "1994–1997",
+        "note": "Playing return after the Deportivo Municipal loan."
+      },
+      {
+        "name": "Boca Juniors",
+        "years": "1997–1998"
+      },
+      {
+        "name": "Newcastle United",
+        "years": "1998–2004"
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Newcastle United",
+        "years": "2005–2007",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "West Ham United",
+        "years": "2007–2008"
+      },
+      {
+        "name": "AEL Larissa",
+        "years": "2008–2009"
+      },
+      {
+        "name": "Universitario",
+        "years": "2009"
+      },
+      {
+        "name": "Leicester City",
+        "years": "2010"
+      },
+      {
+        "name": "Hull City",
+        "years": "2010–2011"
+      },
+      {
+        "name": "Hartlepool United",
+        "years": "2011–2012"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Nolberto_Solano",
+        "title": "Nolberto Solano - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5193/Nolberto_Solano.html",
+        "title": "Nolberto Solano (Player) | National Football Teams"
+      },
+      {
+        "url": "https://dechalaca.com/informes/curiosidades/cuando-nol-era-nino-rata",
+        "title": "Cuando Ñol era Niño Rata | DeChalaca"
+      }
+    ],
+    "notes": "A contemporary DeChalaca retrospective dates Solano’s first-division debut for Sporting Cristal to 12 April 1992, overriding Wikipedia’s 1993 table start and NFT’s omission of the first Cristal spell. The Deportivo Municipal loan, subsequent Cristal return and later Newcastle return are retained. Hartlepool United in 2011/12 is the final playing season; later management is excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "argentine-primera"
+    ],
+    "esNotes": "Una retrospectiva contemporánea de DeChalaca fecha el debut de Solano en primera división con Sporting Cristal el 12 de abril de 1992, corrigiendo el inicio en 1993 de la tabla de Wikipedia y la omisión de la primera etapa en Cristal por parte de NFT. Se conservan el préstamo a Deportivo Municipal, el posterior regreso a Cristal y el regreso posterior a Newcastle. Hartlepool United en 2011/12 es la última temporada como jugador; se excluye la carrera posterior como entrenador.",
+    "esClubNotes": {
+      "0": "Debut en primera división el 12 de abril de 1992; omitido en las dos tablas generales de la carrera.",
+      "1": "Préstamo.",
+      "2": "Regreso como jugador después del préstamo a Deportivo Municipal.",
+      "6": "Segunda etapa como jugador."
+    }
+  },
+  {
+    "id": "jefferson-farfan",
+    "name": "Jefferson Farfán",
+    "continent": "South America",
+    "country": "Peru",
+    "position": "Midfielder / Forward",
+    "clubs": [
+      {
+        "name": "Alianza Lima",
+        "years": "2001–2004"
+      },
+      {
+        "name": "PSV",
+        "years": "2004–2008"
+      },
+      {
+        "name": "Schalke 04",
+        "years": "2008–2015"
+      },
+      {
+        "name": "Al-Jazira",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Lokomotiv Moscow",
+        "years": "2017–2020"
+      },
+      {
+        "name": "Alianza Lima",
+        "years": "2021–2022",
+        "note": "Second playing spell and final senior seasons."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Jefferson_Farf%C3%A1n",
+        "title": "Jefferson Farfán - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5169/Jefferson_Farfan.html",
+        "title": "Jefferson Farfán (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Alianza Lima in 2001 is the first senior club; Deportivo Municipal was youth football. The ordered route is corroborated by both career tables. The 2021–2022 Alianza Lima return is genuine and provides the final documented senior playing endpoint. Winger/forward is retained in the existing broad Midfielder / Forward vocabulary.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league"
+    ],
+    "esNotes": "Alianza Lima en 2001 es el primer club sénior; Deportivo Municipal fue fútbol juvenil. Ambas tablas de la carrera corroboran el recorrido ordenado. El regreso a Alianza Lima en 2021–2022 es real y aporta el último cierre documentado de su carrera sénior. La función de extremo/delantero se conserva en el vocabulario amplio existente Midfielder / Forward.",
+    "esClubNotes": {
+      "5": "Segunda etapa como jugador y últimas temporadas sénior."
+    }
+  },
+  {
+    "id": "juan-manuel-vargas",
+    "name": "Juan Manuel Vargas",
+    "continent": "South America",
+    "country": "Peru",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Universitario",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Colón",
+        "years": "2005–2006"
+      },
+      {
+        "name": "Catania",
+        "years": "2006–2008"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "2008–2012"
+      },
+      {
+        "name": "Genoa",
+        "years": "2012–2013",
+        "note": "Loan from Fiorentina."
+      },
+      {
+        "name": "Fiorentina",
+        "years": "2013–2015",
+        "note": "Playing return after the Genoa loan."
+      },
+      {
+        "name": "Real Betis",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Universitario",
+        "years": "2017–2018",
+        "note": "Second playing spell and final senior seasons."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Juan_Manuel_Vargas",
+        "title": "Juan Manuel Vargas - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/9087/Juan_Vargas.html",
+        "title": "Juan Manuel Vargas (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Universitario in 2002 is the first senior club; Unión Minas was youth football. The Genoa loan and the actual 2013–2015 Fiorentina playing return are visible in the season-by-season evidence and retained separately. The 2017–2018 Universitario return is the final senior spell. Left-back/winger is represented by the established broad Defender role.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "argentine-primera"
+    ],
+    "esNotes": "Universitario en 2002 es el primer club sénior; Unión Minas fue fútbol juvenil. El préstamo a Genoa y el regreso real a Fiorentina como jugador entre 2013 y 2015 aparecen en la evidencia temporada por temporada y se conservan por separado. El regreso a Universitario en 2017–2018 es la última etapa sénior. La función de lateral izquierdo/extremo se representa con el rol amplio y establecido Defender.",
+    "esClubNotes": {
+      "4": "Préstamo desde Fiorentina.",
+      "5": "Regreso como jugador después del préstamo a Genoa.",
+      "7": "Segunda etapa como jugador y últimas temporadas sénior."
+    }
+  }
+]

@@ -2,7 +2,7 @@
 
 ## Result and limits
 
-**Current roster: 120 players.** The original 30-player re-audit is followed below by nine batches of ten independently researched additions. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all players; see `research/data-policy.md` for the tagging method. The fourth batch (14 September 2026) is five Europe/five South America, continuing the 35/35 continent split and adding this roster's first Germany, Colombia and Paraguay national-team players. The fifth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 40/40: five further Portugal, Germany, Italy, Spain and England national-team Europeans, plus three further Argentina-origin and two further Brazil-origin South Americans. The sixth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 45/45: two further Netherlands, two further France and one further Italy national-team European, plus two further Argentina-origin, two further Brazil-origin and one further Uruguay-origin South American, closing gaps in the Argentine Primera División and Brasileirão competition tags. The seventh batch (15 September 2026) is another five Europe/five South America, taking the continent split to 50/50, all within already-represented countries. The eighth batch (also 15 September 2026) is another five Europe/five South America, taking the continent split to 55/55, again all within already-represented countries; see `research/data-policy.md`'s eighth-expansion entry for the Franco Baresi/Paolo Maldini identical-career substitution and the seventeen `incorrectOptions` gap-closing edits that promoting ten profiles at once required. The ninth batch (16 September 2026) is another five Europe/five South America — Robin van Persie, Roberto Mancini, Emmanuel Petit, Fernando Couto and Paulo Sousa for Europe; Diego Ribas, Lucas Moura, Daniel Bertoni, Cristian Rodríguez and Daniel Fonseca for South America — taking the continent split to 60/60, all ten promoted from the wrong-answer-only distractor bank, again within already-represented countries; see `research/data-policy.md`'s ninth-expansion entry for the two further researched wrong-answer-only profiles (Paulo Futre, Paolo Montero) this promotion required.
+**Current roster: 160 players.** The original 30-player re-audit is followed below by nine ten-player batches and this source-backed forty-player extension, all independently researched. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all players; see `research/data-policy.md` for the tagging method. The fourth batch (14 September 2026) is five Europe/five South America, continuing the 35/35 continent split and adding this roster's first Germany, Colombia and Paraguay national-team players. The fifth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 40/40: five further Portugal, Germany, Italy, Spain and England national-team Europeans, plus three further Argentina-origin and two further Brazil-origin South Americans. The sixth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 45/45: two further Netherlands, two further France and one further Italy national-team European, plus two further Argentina-origin, two further Brazil-origin and one further Uruguay-origin South American, closing gaps in the Argentine Primera División and Brasileirão competition tags. The seventh batch (15 September 2026) is another five Europe/five South America, taking the continent split to 50/50, all within already-represented countries. The eighth batch (also 15 September 2026) is another five Europe/five South America, taking the continent split to 55/55, again all within already-represented countries; see `research/data-policy.md`'s eighth-expansion entry for the Franco Baresi/Paolo Maldini identical-career substitution and the seventeen `incorrectOptions` gap-closing edits that promoting ten profiles at once required. The ninth batch (16 September 2026) is another five Europe/five South America — Robin van Persie, Roberto Mancini, Emmanuel Petit, Fernando Couto and Paulo Sousa for Europe; Diego Ribas, Lucas Moura, Daniel Bertoni, Cristian Rodríguez and Daniel Fonseca for South America — taking the continent split to 60/60, all ten promoted from the wrong-answer-only distractor bank, again within already-represented countries; see `research/data-policy.md`'s ninth-expansion entry for the two further researched wrong-answer-only profiles (Paulo Futre, Paolo Montero) this promotion required.
 
 The original **30 unique players** were rechecked against freshly retrieved external career records, with at least two distinct source URLs per player and independent corroboration. This is a historical-data audit, not a claim that passing software tests proves the facts. The original requested scope remains **professional senior clubs**, including reserve sides competing in the adult league pyramid; youth teams, closed reserve leagues, amateur post-retirement football and coaching jobs are excluded.
 
@@ -1351,6 +1351,248 @@ Corroborated: An eight-node chronology across two Nacional spells is corroborate
 
 Reviewed sources: [350], [351].
 
+<!-- BEGIN PLAYER ADDITION BATCH 9 -->
+### Ricardo Quaresma
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [352], [353].
+
+### Simão
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [354], [355].
+
+### Tiago Mendes
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [356], [357].
+
+### Nani
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [358], [359], [360].
+
+### Nicolas Anelka
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [361], [362].
+
+### Sylvain Wiltord
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [363], [364].
+
+### Rafael van der Vaart
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [365], [366].
+
+### Aron Winter
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [367], [368].
+
+### Ronald de Boer
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [369], [370].
+
+### Marc Overmars
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [371], [372], [373].
+
+### Dirk Kuyt
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [374], [375].
+
+### Nigel de Jong
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [376], [377].
+
+### Henrik Larsson
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [378], [379].
+
+### Kim Källström
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [380], [381].
+
+### Marcus Berg
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [382], [383].
+
+### Ole Gunnar Solskjær
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [384], [385].
+
+### Steffen Iversen
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [386], [387].
+
+### Eirik Bakke
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [388], [389].
+
+### Lukas Podolski
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [390], [391].
+
+### Patrik Berger
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [392], [393].
+
+### Osvaldo Ardiles
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [394], [395], [396], [397].
+
+### Nílton Santos
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [398], [399], [400].
+
+### Pepe (José Macia)
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [401], [402].
+
+### Philippe Coutinho
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [403], [404], [405].
+
+### Zito
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [406], [407].
+
+### Iván Zamorano
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [408], [409].
+
+### David Pizarro
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [410], [411].
+
+### Rodrigo Tello
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [412], [413].
+
+### Vicente Sánchez
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [414], [415], [416].
+
+### Edinson Cavani
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [417], [418], [419].
+
+### Maxi Pereira
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [420], [421].
+
+### Rubén Sosa
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [422], [423].
+
+### Carlos Aguilera
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [424], [425].
+
+### Justo Villar
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [426], [427], [428], [429].
+
+### René Higuita
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [430], [431].
+
+### Faustino Asprilla
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [432], [433].
+
+### Leonel Álvarez
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [434], [435].
+
+### Nolberto Solano
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [436], [437], [438].
+
+### Jefferson Farfán
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [439], [440].
+
+### Juan Manuel Vargas
+
+**Research status:** verified for batch 9 on 2026-09-16. The ordered senior route, returns, loans/reserve scope and bilingual caveats are recorded in `research/player-addition-batch9/records.json`. Two independently owned public domains were retained.
+
+Reviewed sources: [441], [442].
+<!-- END PLAYER ADDITION BATCH 9 -->
+
 Sources:
 [1] https://argentina.as.com/argentina/2021/12/02/futbol/1638473602_945874.html
 [4] https://en.wikipedia.org/wiki/Javier_Zanetti
@@ -1459,7 +1701,7 @@ Sources:
 [107] https://nl.wikipedia.org/wiki/Beloften_Eredivisie_(voetbal)
 [108] https://www.fcgroningen.nl/nieuws/zinderende-ontknoping-nadert-voor-jong-fc-groningen
 [109] https://www.nytimes.com/athletic/6093149/2025/01/27/neymar-leave-al-hilal-contract-terminate
-[110] https://www.transfermarkt.us/tomas-rosicky/debuets/spieler/132 — Tomas Rosicky - Debuts | Transfermarkt
+[110] https://www.transfermarkt.us/tomas-rosicky/debuets/spieler/132
 [111] https://en.wikipedia.org/wiki/Fabricio_Coloccini
 [112] https://www.national-football-teams.com/player/8170/Fabricio_Coloccini.html
 [113] https://es.wikipedia.org/wiki/Fabricio_Coloccini
@@ -1494,7 +1736,7 @@ Sources:
 [142] https://www.sheridan-dictates.com/database-keane-robbie.php
 [143] https://en.wikipedia.org/wiki/Wesley_Sneijder
 [144] https://www.national-football-teams.com/player/4656/Wesley_Sneijder.html
-[145] https://www.transfermarkt.com/rcd-mallorca_fc-barcelona/index/spielbericht/2424035 — Mallorca–Barcelona, 18 August 1998 — match sheet
+[145] https://www.transfermarkt.com/rcd-mallorca_fc-barcelona/index/spielbericht/2424035
 [146] https://en.wikipedia.org/wiki/Javier_Saviola
 [147] https://www.national-football-teams.com/player/290/Javier_Saviola.html
 [148] https://barcaacademy.fcbarcelona.com/en/card/2691103/javier-saviola-assistant-coach-for-the-u19as
@@ -1701,3 +1943,94 @@ Sources:
 [349] https://www.montevideo.com.uy/Deportes/Cebolla-Rodriguez-rescindio-en-Gremio-uc270455
 [350] https://en.wikipedia.org/wiki/Daniel_Fonseca
 [351] https://www.national-football-teams.com/player/12628/Daniel_Fonseca.html
+[352] https://en.wikipedia.org/wiki/Ricardo_Quaresma
+[353] https://www.national-football-teams.com/old/player/5275/Ricardo_Quaresma.html
+[354] https://en.wikipedia.org/wiki/Sim%C3%A3o_Sabrosa
+[355] https://www.national-football-teams.com/old/player/5274/Simao_Sabrosa.html
+[356] https://en.wikipedia.org/wiki/Tiago_Mendes
+[357] https://www.national-football-teams.com/old/player/5300/Tiago_Mendes.html
+[358] https://en.wikipedia.org/wiki/Nani_(footballer)
+[359] https://theportugalnews.com/news/2024-12-10/nani-retires-from-football/94147
+[360] https://www.bbc.com/sport/football/articles/cgk80xn55lzo
+[361] https://en.wikipedia.org/wiki/Nicolas_Anelka
+[362] https://www.national-football-teams.com/old/player/2423/Nicolas_Anelka.html
+[363] https://en.wikipedia.org/wiki/Sylvain_Wiltord
+[364] https://www.national-football-teams.com/old/player/2421/Sylvain_Wiltord.html
+[365] https://en.wikipedia.org/wiki/Rafael_van_der_Vaart
+[366] https://www.national-football-teams.com/old/player/4654/Rafael_Van_Der_Vaart.html
+[367] https://en.wikipedia.org/wiki/Aron_Winter
+[368] https://national-football-teams.com/old/player/14067/Aron_Winter.html
+[369] https://en.wikipedia.org/wiki/Ronald_de_Boer
+[370] https://national-football-teams.com/old/player/4645/Ronald_De_Boer.html
+[371] https://en.wikipedia.org/wiki/Marc_Overmars
+[372] https://www.national-football-teams.com/player/4632/Marc_Overmars.html
+[373] https://thesefootballtimes.co/2020/07/22/go-ahead-make-my-day-when-marc-overmars-returned-home-after-1545-days-out-of-the-game
+[374] https://en.wikipedia.org/wiki/Dirk_Kuyt
+[375] https://national-football-teams.com/player/4635/Dirk_Kuijt.html
+[376] https://en.wikipedia.org/wiki/Nigel_de_Jong
+[377] https://www.national-football-teams.com/player/4638/Nigel_De_Jong.html
+[378] https://en.wikipedia.org/wiki/Henrik_Larsson
+[379] https://www.national-football-teams.com/player/6370/Henrik_Larsson.html
+[380] https://en.wikipedia.org/wiki/Kim_K%C3%A4llstr%C3%B6m
+[381] https://www.national-football-teams.com/player/6411/Kim_Kaellstroem.html
+[382] https://en.wikipedia.org/wiki/Marcus_Berg
+[383] https://anews.com.tr/sport/2023/09/25/former-sweden-striker-marcus-berg-ends-career
+[384] https://en.wikipedia.org/wiki/Ole_Gunnar_Solskj%C3%A6r
+[385] https://www.national-football-teams.com/player/4916/Ole_Gunnar_Solskjar.html
+[386] https://en.wikipedia.org/wiki/Steffen_Iversen
+[387] https://www.national-football-teams.com/player/4923/Steffen_Iversen.html
+[388] https://en.wikipedia.org/wiki/Eirik_Bakke
+[389] https://www.national-football-teams.com/player/4954/Eirik_Bakke.html
+[390] https://en.wikipedia.org/wiki/Lukas_Podolski
+[391] https://www.national-football-teams.com/player/7818/Lukas_Podolski.html
+[392] https://en.wikipedia.org/wiki/Patrik_Berger
+[393] https://www.national-football-teams.com/player/10363/Patrik_Berger.html
+[394] https://www.national-football-teams.com/player/18616.html
+[395] https://www.codigocba.com/post/historias-de-idolos-del-futbol-cordobes-osvaldo-ardiles
+[396] https://www.swindonadvertiser.co.uk/sport/12921921.in-depth-with-ossie-ardiles
+[397] https://townenders.com/profile.php?person_code=ARDILESO
+[398] https://en.wikipedia.org/wiki/N%C3%ADlton_Santos
+[399] https://www.theguardian.com/football/2013/nov/28/nilton-santos
+[400] https://ge.globo.com/futebol/times/botafogo/noticia/2025/05/16/jairzinho-e-ex-companheiros-de-botafogo-relembram-ultimo-jogo-de-nilton-santos.ghtml
+[401] https://en.wikipedia.org/wiki/Pepe_(footballer,_born_1935)
+[402] https://www.santosfc.com.br/pepe-uma-unica-camisa-um-legado-atemporal
+[403] https://en.wikipedia.org/wiki/Philippe_Coutinho
+[404] https://www.beinsports.com/en-us/soccer/articles-video/coutinho-returns-to-vasco-da-gama-2024-07-10
+[405] https://soccerbase.com/players/player.sd?player_id=56220
+[406] https://en.wikipedia.org/wiki/Zito_(footballer,_born_1932)
+[407] https://www.santosfc.com.br/zito-nosso-idolo-eterno-e-capitao-ganha-estatua-em-frente-a-vila-belmiro
+[408] https://en.wikipedia.org/wiki/Iv%C3%A1n_Zamorano
+[409] https://www.national-football-teams.com/player/13677/Ivan_Zamorano.html
+[410] https://en.wikipedia.org/wiki/David_Pizarro
+[411] https://www.national-football-teams.com/player/1440/David_Pizarro.html
+[412] https://en.wikipedia.org/wiki/Rodrigo_Tello
+[413] https://www.national-football-teams.com/player/8302/Rodrigo_Tello.html
+[414] https://en.wikipedia.org/wiki/Vicente_S%C3%A1nchez
+[415] https://www.national-football-teams.com/player/7030/Vicente_Sanchez.html
+[416] https://www.uslchampionship.com/news_article/show/1155925
+[417] https://en.wikipedia.org/wiki/Edinson_Cavani
+[418] https://www.national-football-teams.com/player/25130/Edinson_Cavani.html
+[419] https://batimes.com.ar/news/sports/uruguay-veteran-edison-cavani-departs-boca-juniors.phtml
+[420] https://en.wikipedia.org/wiki/Maxi_Pereira
+[421] https://www.national-football-teams.com/player/13540/Maxi_Pereira.html
+[422] https://en.wikipedia.org/wiki/Rub%C3%A9n_Sosa
+[423] https://www.national-football-teams.com/player/14469/Ruben_Sosa.html
+[424] https://en.wikipedia.org/wiki/Carlos_Aguilera_(Uruguayan_footballer)
+[425] https://www.national-football-teams.com/player/14466/Carlos_Aguilera.html
+[426] https://en.wikipedia.org/wiki/Justo_Villar
+[427] https://www.national-football-teams.com/player/5152/Justo_Villar.html
+[428] https://www.abc.com.py/deportes/futbol/justo-villar-anuncia-su-retiro-1726257.html
+[429] https://www.ultimahora.com/justo-villar-anuncio-su-retiro-como-arquero-profesional-n1702089
+[430] https://en.wikipedia.org/wiki/Ren%C3%A9_Higuita
+[431] https://www.national-football-teams.com/player/13686/Rene_Higuita.html
+[432] https://en.wikipedia.org/wiki/Faustino_Asprilla
+[433] https://www.national-football-teams.com/player/12577/Faustino_Asprilla.html
+[434] https://en.wikipedia.org/wiki/Leonel_%C3%81lvarez_(footballer,_born_1965)
+[435] https://www.national-football-teams.com/player/13684/Leonel_Alvarez.html
+[436] https://en.wikipedia.org/wiki/Nolberto_Solano
+[437] https://www.national-football-teams.com/player/5193/Nolberto_Solano.html
+[438] https://dechalaca.com/informes/curiosidades/cuando-nol-era-nino-rata
+[439] https://en.wikipedia.org/wiki/Jefferson_Farf%C3%A1n
+[440] https://www.national-football-teams.com/player/5169/Jefferson_Farfan.html
+[441] https://en.wikipedia.org/wiki/Juan_Manuel_Vargas
+[442] https://www.national-football-teams.com/player/9087/Juan_Vargas.html

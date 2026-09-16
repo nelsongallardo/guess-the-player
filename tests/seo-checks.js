@@ -43,7 +43,7 @@ async page => {
       assert(await p.locator('#options button').count()===10,'Game ready');
       assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No mobile horizontal overflow');
       if(kind==='offline')assert((await p.locator('#site-icon').getAttribute('href')).startsWith('data:image/svg+xml,'),'Offline icon remains embedded');
-      await p.evaluate(()=>Promise.all([...document.images].map(i=>i.decode())));
+      await p.evaluate(async()=>{await new Promise(requestAnimationFrame);await Promise.all([...document.querySelectorAll('#timeline img')].map(i=>i.decode()));});
       const correct=await p.evaluate(()=>CareerGame.playerAt(state).name);
       await p.getByRole('button',{name:correct,exact:true}).click();
       const saved=await p.evaluate(()=>JSON.stringify(state));

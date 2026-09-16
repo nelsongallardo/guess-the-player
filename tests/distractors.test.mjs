@@ -86,12 +86,9 @@ test('Maradona gets four researched Argentine contemporaries, not 1990s debutant
     for(const peer of peers)assert.ok(wrong.includes(peer),`${peer} missing: ${wrong.join(', ')}`);
     assert.ok(wrong.every(n=>g.originFor(g.candidates.find(q=>q.name===n)).system==='argentina'),wrong.join(', '));
   }
-  // Jorge Valdano and Ramón Díaz were promoted from this exact-tier bank
-  // entry to the playable roster in the eighth expansion, and Daniel Bertoni
-  // himself in the ninth; each promoted name's same Maradona-era contemporary
-  // role is preserved via a direct addition to his incorrectOptions rather
-  // than the bank. Osvaldo Ardiles remains a wrong-answer-only bank profile.
-  const promoted=new Set(['Jorge Valdano','Ramón Díaz','Daniel Bertoni']);
+  // All four exact-tier profiles are now playable after the eighth and ninth
+  // expansions; their Maradona-era contemporary role remains unchanged.
+  const promoted=new Set(peers);
   for(const n of peers){
     const q=candidates.find(q=>q.name===n);assert.ok(q,n);
     assert.ok(q.sources.length>=2,n+' needs sources');

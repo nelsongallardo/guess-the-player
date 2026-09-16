@@ -1382,6 +1382,248 @@ An eight-node chronology across two Nacional spells is corroborated by both prim
 
 Reviewed source links: [357], [358].
 
+<!-- BEGIN PLAYER ADDITION BATCH 9 -->
+### Ricardo Quaresma
+
+Includes Sporting CP B in Portugal’s adult third tier. The 2000/01 reserve season establishes the start, but not a precise calendar debut; the sources differ on 15 versus 16 reserve league appearances. The post-Chelsea Inter spell and later Porto and Beşiktaş spells are genuine playing returns.
+
+Reviewed source links: [359], [360].
+
+### Simão
+
+Ordered senior spells end with the final recorded playing year, 2015, at NorthEast United. The first Sporting season is 1996/97 in NFT, while the career table identifies the spell from 1997; no exact 1996 debut is asserted.
+
+Reviewed source links: [361], [362].
+
+### Tiago Mendes
+
+Includes Braga B in Portugal’s adult third tier. The reserve and first-team rows overlap in 1999/00, and the excerpts do not establish their exact first-appearance order; reserve totals differ (12 versus 13). Atlético’s loan-to-permanent period is one continuous node, and no unused Juventus return is inserted.
+
+Reviewed source links: [363], [364].
+
+### Nani
+
+Senior career starts at Sporting in 2005; Real Massamá and earlier Sporting service were youth football. The 2024 retirement was superseded by the documented 2026 Aktobe comeback and subsequent league appearances. Sporting’s loan and later permanent return are separate playing spells; ownership-only returns to Manchester United or Valencia are excluded. Portugal News misnames Melbourne Victory as Melbourne City, so the career table’s club identity is followed.
+
+Reviewed source links: [365], [366], [367].
+
+### Nicolas Anelka
+
+Includes Paris Saint-Germain B in the adult French fourth tier. Reserve and first-team service overlap, and the excerpts do not establish exact debut order. The 2000 PSG spell is a genuine return. Ownership-only PSG and Shanghai registrations after loans are not added; Mumbai City is retained for actual play.
+
+Reviewed source links: [368], [369].
+
+### Sylvain Wiltord
+
+Includes Rennes B in the adult French third tier from 1991/92. First-team appearances begin in 1992/93. Deportivo La Coruña is excluded because the record shows zero appearances and the evidence describes a Rennes loan-back followed directly by Bordeaux. The 2007 Rennes return and 2011 Nantes comeback are genuine playing spells.
+
+Reviewed source links: [370], [371].
+
+### Rafael van der Vaart
+
+The 2012 Hamburger SV return is a genuine playing spell. Ajax’s 1999/00 season row supports a 2000 start but not a precise debut date. Esbjerg is listed in the 2018/19 season, while the endpoint follows the explicit 2018 retirement. His 2019 testimonial is excluded.
+
+Reviewed source links: [372], [373].
+
+### Aron Winter
+
+Ajax debut was 6 April 1986. The 1999 Ajax return and 2001–2002 Sparta loan are retained. The 2003 endpoint in the summary reflects retirement or contract end, not appearances: the season record ends with Sparta in 2001/02, and no unused Ajax return node is inserted. Youth and managerial clubs are excluded.
+
+Reviewed source links: [374], [375].
+
+### Ronald de Boer
+
+The 1993 Ajax return and both Qatar clubs through 2008 are retained. Wikipedia starts the senior career in 1988, while NFT labels the season 1987/88; no 1987 calendar debut is asserted. His winger and forward work is normalized to the playable schema’s broad Midfielder role. Youth football and later coaching are excluded.
+
+Reviewed source links: [376], [377].
+
+### Marc Overmars
+
+The genuine 2008–2009 professional Go Ahead Eagles comeback is retained after a four-year hiatus. These Football Times explicitly dates his first-team breakthrough to 1991; the 1990–1991 infobox range is season shorthand, not evidence of a 1990 match. Youth clubs are excluded. Winger is normalized to the broad Forward role.
+
+Reviewed source links: [378], [379], [380].
+
+### Dirk Kuyt
+
+The professional route starts at Utrecht in 1998 and retains the 2015 Feyenoord return. Six adult amateur Quick Boys appearances in early 1998 are acknowledged but excluded under the repository’s professional-career scope. His brief 2018 post-retirement amateur comeback at Quick Boys and all coaching work are also excluded.
+
+Reviewed source links: [381], [382].
+
+### Nigel de Jong
+
+Ajax first-team debut was 19 October 2002. The full professional tail through Mainz 05, Al Ahli of Doha and Al-Shahania is retained; NFT confirms Al-Shahania appearances in the 2020/21 second division. The endpoint is the final playing spell in 2021, not later media or KNVB employment. Ajax youth and closed-reserve football are excluded.
+
+Reviewed source links: [383], [384].
+
+### Henrik Larsson
+
+The 1989 start is senior, semi-professional Högaborg play, not the 1977 youth start. The Manchester United loan is bracketed by actual Helsingborg playing spells. The professional endpoint is 2009; the 2012 Råå appearance, recreational Högaborg appearances in 2013, veterans football and friendlies are excluded as post-retirement non-professional play.
+
+Reviewed source links: [385], [386].
+
+### Kim Källström
+
+The complete nine-node route, including the 2014 Arsenal loan and subsequent Spartak playing return, is corroborated by both sources. BK Häcken in 1999 is the first senior season; Sandvikens and Partille were youth clubs. He returned to Djurgårdens IF in 2017 and retired that year.
+
+Reviewed source links: [387], [388].
+
+### Marcus Berg
+
+The displayed professional chronology begins with promotion to IFK Göteborg's first team in 2005, independently corroborated by the retirement report. Wikipedia also lists 24 appearances for local club Torsby IF in 2000–2003, but the existing evidence does not establish that earlier spell as professional; it is disclosed rather than silently classified as youth. The PSV loan was followed by an actual Hamburger SV playing return. Berg returned to IFK Göteborg in 2021 and retired in September 2023.
+
+Reviewed source links: [389], [390].
+
+### Ole Gunnar Solskjær
+
+Clausenengen is documented adult lower-league football from 1990, not his 1980 youth start. Its last evidenced playing season is 1994 before Molde in 1995, although Wikipedia extends the club-membership span to 1995. Manchester United closed-reserve football and every coaching appointment are outside scope. The professional playing endpoint is his 2007 retirement.
+
+Reviewed source links: [391], [392].
+
+### Steffen Iversen
+
+Rosenborg II precedes the first team because the evidence reports a reserve debut and a third-tier Rosenborg BK 2 row in 1994; no exact reserve match date is claimed. All three first-team Rosenborg spells are retained. Iversen retired professionally in November 2012. Later lower-division player-manager football with Herd, Haugar and Trygg/Lade is excluded from this professional timeline.
+
+Reviewed source links: [393], [394].
+
+### Eirik Bakke
+
+Sogndal in 1993 is the documented senior start. Leeds appearances in 2005–06 and 2006–07 establish an actual playing return after the Aston Villa loan. Wikipedia reports Brann second-team play early in 2007 while Bakke recovered fitness after his September 2006 first-team debut; this adult-pyramid reserve phase is retained, but exact match dates and its interleaving with first-team play are not asserted, and national-football-teams.com omits the reserve row. He returned to Sogndal in 2011 and retired in November 2012.
+
+Reviewed source links: [395], [396].
+
+### Lukas Podolski
+
+The bank evidence records a nine-node professional route beginning with 1. FC Köln in 2003, including a genuine Köln return and the 2015 Inter Milan loan. It records Górnik Zabrze as his final club through 2026 and retirement in May 2026. Youth football and post-playing ownership are outside scope.
+
+Reviewed source links: [397], [398].
+
+### Patrik Berger
+
+Slavia Prague in 1991 is the professional senior start; Sparta Prague in 1989–91 was youth football. The Aston Villa playing return after the Stoke City loan is retained. Berger retired in January 2010 after failing to recover from a ligament injury. His subsequent football with sixth-tier Dolní Chabry was explicitly amateur and is excluded. Czech club geography maps the Czechoslovak-era opening spell to the Czech system.
+
+Reviewed source links: [399], [400].
+
+### Osvaldo Ardiles
+
+The reported 1971 Instituto debut is a qualified era bound: the Córdoba biography supplies it, national-football-teams.com's national-league record starts in 1973, and another database reports 1972. PSG and St George were loan departures followed by evidenced Tottenham playing returns. St George Budapest is the Australian club also named St. George Saints. Blackburn's five 1987–88 appearances are retained despite a conflicting March 1986 label in the Swindon archive. No ownership-only Tottenham return is inserted after Blackburn. Ardiles's own account and the Swindon archive place his last competitive match on 26 August 1989; later managerial clubs and charity matches are excluded.
+
+Reviewed source links: [401], [402], [403], [404].
+
+### Nílton Santos
+
+Botafogo was Nílton Santos’s only professional senior club. Wikipedia gives the 1948–1964 span, The Guardian dates his Botafogo debut to March 1948, and ge corroborates his final match in the 1964 Campeonato Carioca. Flexeiras was an earlier local amateur team and is excluded, as are all post-playing roles. Santos died in 2013.
+
+Reviewed source links: [405], [406], [407].
+
+### Pepe (José Macia)
+
+This is José Macia, the Brazilian forward born in 1935, not the modern Portuguese defender. His entire professional senior route is Santos. The club history dates his first-team debut to 23 May 1954 and his final playing appearance to 19 March 1969; the farewell lap on 3 May 1969 was not another match. Youth football from 1951 and coaching from 1969 onward are excluded.
+
+Reviewed source links: [408], [409].
+
+### Philippe Coutinho
+
+The playing chronology begins with actual Vasco da Gama senior appearances in 2009, not Inter Milan ownership from 2008. Actual returns to Inter after the Espanyol loan and Barcelona after the Bayern Munich loan are retained. Aston Villa loan-to-permanent service and the final Vasco loan-to-permanent service are each one continuous node; Aston Villa ownership during the Al-Duhail and Vasco loans creates no unplayed return. Coutinho left Vasco in February 2026 and was a free agent, not reported retired, at the 16 September 2026 snapshot; his status therefore remains active while the last club endpoint is closed.
+
+Reviewed source links: [410], [411], [412].
+
+### Zito
+
+Wikipedia’s senior career table gives Taubaté from 1950 to 1952 and Santos from 1952 to 1967; its prose separates earlier amateur football in Roseira from the Taubaté spell. Santos independently corroborates that he began at Taubaté and arrived at Vila Belmiro in 1952. The exact Taubaté debut day is not established. His last match was in 1967; later director and youth-coordinator work is excluded. Zito died in 2015.
+
+Reviewed source links: [413], [414].
+
+### Iván Zamorano
+
+Cobresal is the first senior club: the sources record appearances there in 1985 before the 1986 Cobreandino loan. Cobreandino is the historical name of Trasandino. The actual Cobresal playing return is retained before the move to St. Gallen. The remaining route through Sevilla, Real Madrid, Inter Milan, América and final club Colo-Colo is corroborated by both sources. Youth football, coaching and ownership-only parent-club intervals are excluded.
+
+Reviewed source links: [415], [416].
+
+### David Pizarro
+
+Santiago Wanderers in 1997 is the first senior club; Caupolicán was youth-only. The 2001 Universidad de Chile loan and subsequent Udinese return are retained. After the Manchester City loan, both career sources proceed directly to Fiorentina, so no ownership-only Roma return is inserted. The final 2018 Universidad de Chile season is the playing endpoint.
+
+Reviewed source links: [417], [418].
+
+### Rodrigo Tello
+
+Universidad de Chile in 1999 is the first senior club; the earlier Colo-Colo and Universidad de Chile periods were youth football. The two independent career tables agree on the ordered route. The 2015/16 Audax Italiano season establishes the 2016 playing endpoint.
+
+Reviewed source links: [419], [420].
+
+### Vicente Sánchez
+
+Sud América is the first senior club. The 1999 start follows NFT’s 17 documented second-division appearances rather than Wikipedia’s 2000 year label; the discrepancy is preserved rather than hidden. The 2012 Nacional spell is a genuine return. Rio Grande Valley FC is retained as a documented 2021 professional comeback in a player-coach role after retirement following Houston in 2017; the USL article’s inconsistent aside about Nacional is not used to reorder the career.
+
+Reviewed source links: [421], [422], [423].
+
+### Edinson Cavani
+
+Danubio is the first senior club: Wikipedia starts the spell in 2005 and NFT records the 2005/06 playing season. Napoli’s loan-to-permanent service is continuous and therefore one node. Boca Juniors in 2026 is the latest evidenced playing/departure endpoint. Contemporary reporting explicitly says Cavani did not announce retirement, so no retirement or future club is invented.
+
+Reviewed source links: [424], [425], [426].
+
+### Maxi Pereira
+
+Defensor Sporting in 2002 is the first senior club; Bella Vista was youth football. The post-Porto gap is retained without inventing an intervening club. Peñarol’s boundary is expressed as 2020–2021 because NFT places three appearances in the 2020 competition season while Wikipedia uses calendar-year 2021. River Plate is explicitly the Montevideo club. The last documented senior season is 2023.
+
+Reviewed source links: [427], [428].
+
+### Rubén Sosa
+
+The complete bank chronology is retained, including Borussia Dortmund, CD Logroñés, Shanghai Shenhua, the Nacional return and the 2006 Racing Club de Montevideo comeback. The source excerpt is abbreviated in its prose summary but the bank’s reviewed ordered route supplies the full late-career sequence. The 2006 Racing spell is the final senior endpoint.
+
+Reviewed source links: [429], [430].
+
+### Carlos Aguilera
+
+The opening club is River Plate Montevideo, not Argentina’s River Plate. Racing Club is the Avellaneda club. The bank’s ordered senior route is preserved from the 1980 River Plate start through Peñarol in 1999; the one-year gap between Tecos UAG and Genoa is left as evidenced rather than filled with an invented club.
+
+Reviewed source links: [431], [432].
+
+### Justo Villar
+
+The ordered club route preserves the reviewed wrong-answer-bank sequence. Villar began senior first-team football with Sol de América in 1996; the career table and seasonal appearance record corroborate the route through Paraguay, Argentina, Spain and Chile. His last official first-team club match was for Colo-Colo on 4 March 2017. The final Club Nacional node is retained as a documented second spell, but it does not assert first-team play: injury recovery limited him to 45 minutes for the reserve side. He announced his retirement from professional football on 30 July 2018.
+
+Reviewed source links: [433], [434], [435], [436].
+
+### René Higuita
+
+The two Deportivo Pereira periods are separate playing spells divided by a multi-year hiatus; the lighter bank profile collapsed them into one candidate feature. The playable chronology restores the 2008 professional comeback.
+
+Reviewed source links: [437], [438].
+
+### Faustino Asprilla
+
+Cúcuta Deportivo in 1988 is the first senior club. The reviewed route preserves the genuine Parma and Atlético Nacional returns and the full late-career sequence through Cortuluá in 2004. No youth, national-team or post-career activity is included.
+
+Reviewed source links: [439], [440].
+
+### Leonel Álvarez
+
+The playable chronology restores the separate América de Cali and Dallas Burn spells that the lighter bank profile collapsed. The source excerpt places the first América spell before Real Valladolid and the second after it.
+
+Reviewed source links: [441], [442].
+
+### Nolberto Solano
+
+A contemporary DeChalaca retrospective dates Solano’s first-division debut for Sporting Cristal to 12 April 1992, overriding Wikipedia’s 1993 table start and NFT’s omission of the first Cristal spell. The Deportivo Municipal loan, subsequent Cristal return and later Newcastle return are retained. Hartlepool United in 2011/12 is the final playing season; later management is excluded.
+
+Reviewed source links: [443], [444], [445].
+
+### Jefferson Farfán
+
+Alianza Lima in 2001 is the first senior club; Deportivo Municipal was youth football. The ordered route is corroborated by both career tables. The 2021–2022 Alianza Lima return is genuine and provides the final documented senior playing endpoint. Winger/forward is retained in the existing broad Midfielder / Forward vocabulary.
+
+Reviewed source links: [446], [447].
+
+### Juan Manuel Vargas
+
+Universitario in 2002 is the first senior club; Unión Minas was youth football. The Genoa loan and the actual 2013–2015 Fiorentina playing return are visible in the season-by-season evidence and retained separately. The 2017–2018 Universitario return is the final senior spell. Left-back/winger is represented by the established broad Defender role.
+
+Reviewed source links: [448], [449].
+<!-- END PLAYER ADDITION BATCH 9 -->
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -1529,7 +1771,7 @@ Sources:
 [144] https://www.sheridan-dictates.com/database-keane-robbie.php
 [145] https://en.wikipedia.org/wiki/Wesley_Sneijder
 [146] https://www.national-football-teams.com/player/4656/Wesley_Sneijder.html
-[147] https://www.transfermarkt.com/rcd-mallorca_fc-barcelona/index/spielbericht/2424035 — Mallorca–Barcelona, 18 August 1998 — match sheet
+[147] https://www.transfermarkt.com/rcd-mallorca_fc-barcelona/index/spielbericht/2424035
 [148] https://en.wikipedia.org/wiki/Javier_Saviola
 [149] https://www.national-football-teams.com/player/290/Javier_Saviola.html
 [150] https://barcaacademy.fcbarcelona.com/en/card/2691103/javier-saviola-assistant-coach-for-the-u19as
@@ -1741,3 +1983,94 @@ Sources:
 [356] https://www.montevideo.com.uy/Deportes/Cebolla-Rodriguez-rescindio-en-Gremio-uc270455
 [357] https://en.wikipedia.org/wiki/Daniel_Fonseca
 [358] https://www.national-football-teams.com/player/12628/Daniel_Fonseca.html
+[359] https://en.wikipedia.org/wiki/Ricardo_Quaresma
+[360] https://www.national-football-teams.com/old/player/5275/Ricardo_Quaresma.html
+[361] https://en.wikipedia.org/wiki/Sim%C3%A3o_Sabrosa
+[362] https://www.national-football-teams.com/old/player/5274/Simao_Sabrosa.html
+[363] https://en.wikipedia.org/wiki/Tiago_Mendes
+[364] https://www.national-football-teams.com/old/player/5300/Tiago_Mendes.html
+[365] https://en.wikipedia.org/wiki/Nani_(footballer)
+[366] https://theportugalnews.com/news/2024-12-10/nani-retires-from-football/94147
+[367] https://www.bbc.com/sport/football/articles/cgk80xn55lzo
+[368] https://en.wikipedia.org/wiki/Nicolas_Anelka
+[369] https://www.national-football-teams.com/old/player/2423/Nicolas_Anelka.html
+[370] https://en.wikipedia.org/wiki/Sylvain_Wiltord
+[371] https://www.national-football-teams.com/old/player/2421/Sylvain_Wiltord.html
+[372] https://en.wikipedia.org/wiki/Rafael_van_der_Vaart
+[373] https://www.national-football-teams.com/old/player/4654/Rafael_Van_Der_Vaart.html
+[374] https://en.wikipedia.org/wiki/Aron_Winter
+[375] https://national-football-teams.com/old/player/14067/Aron_Winter.html
+[376] https://en.wikipedia.org/wiki/Ronald_de_Boer
+[377] https://national-football-teams.com/old/player/4645/Ronald_De_Boer.html
+[378] https://en.wikipedia.org/wiki/Marc_Overmars
+[379] https://www.national-football-teams.com/player/4632/Marc_Overmars.html
+[380] https://thesefootballtimes.co/2020/07/22/go-ahead-make-my-day-when-marc-overmars-returned-home-after-1545-days-out-of-the-game
+[381] https://en.wikipedia.org/wiki/Dirk_Kuyt
+[382] https://national-football-teams.com/player/4635/Dirk_Kuijt.html
+[383] https://en.wikipedia.org/wiki/Nigel_de_Jong
+[384] https://www.national-football-teams.com/player/4638/Nigel_De_Jong.html
+[385] https://en.wikipedia.org/wiki/Henrik_Larsson
+[386] https://www.national-football-teams.com/player/6370/Henrik_Larsson.html
+[387] https://en.wikipedia.org/wiki/Kim_K%C3%A4llstr%C3%B6m
+[388] https://www.national-football-teams.com/player/6411/Kim_Kaellstroem.html
+[389] https://en.wikipedia.org/wiki/Marcus_Berg
+[390] https://anews.com.tr/sport/2023/09/25/former-sweden-striker-marcus-berg-ends-career
+[391] https://en.wikipedia.org/wiki/Ole_Gunnar_Solskj%C3%A6r
+[392] https://www.national-football-teams.com/player/4916/Ole_Gunnar_Solskjar.html
+[393] https://en.wikipedia.org/wiki/Steffen_Iversen
+[394] https://www.national-football-teams.com/player/4923/Steffen_Iversen.html
+[395] https://en.wikipedia.org/wiki/Eirik_Bakke
+[396] https://www.national-football-teams.com/player/4954/Eirik_Bakke.html
+[397] https://en.wikipedia.org/wiki/Lukas_Podolski
+[398] https://www.national-football-teams.com/player/7818/Lukas_Podolski.html
+[399] https://en.wikipedia.org/wiki/Patrik_Berger
+[400] https://www.national-football-teams.com/player/10363/Patrik_Berger.html
+[401] https://www.national-football-teams.com/player/18616.html
+[402] https://www.codigocba.com/post/historias-de-idolos-del-futbol-cordobes-osvaldo-ardiles
+[403] https://www.swindonadvertiser.co.uk/sport/12921921.in-depth-with-ossie-ardiles
+[404] https://townenders.com/profile.php?person_code=ARDILESO
+[405] https://en.wikipedia.org/wiki/N%C3%ADlton_Santos
+[406] https://www.theguardian.com/football/2013/nov/28/nilton-santos
+[407] https://ge.globo.com/futebol/times/botafogo/noticia/2025/05/16/jairzinho-e-ex-companheiros-de-botafogo-relembram-ultimo-jogo-de-nilton-santos.ghtml
+[408] https://en.wikipedia.org/wiki/Pepe_(footballer,_born_1935)
+[409] https://www.santosfc.com.br/pepe-uma-unica-camisa-um-legado-atemporal
+[410] https://en.wikipedia.org/wiki/Philippe_Coutinho
+[411] https://www.beinsports.com/en-us/soccer/articles-video/coutinho-returns-to-vasco-da-gama-2024-07-10
+[412] https://soccerbase.com/players/player.sd?player_id=56220
+[413] https://en.wikipedia.org/wiki/Zito_(footballer,_born_1932)
+[414] https://www.santosfc.com.br/zito-nosso-idolo-eterno-e-capitao-ganha-estatua-em-frente-a-vila-belmiro
+[415] https://en.wikipedia.org/wiki/Iv%C3%A1n_Zamorano
+[416] https://www.national-football-teams.com/player/13677/Ivan_Zamorano.html
+[417] https://en.wikipedia.org/wiki/David_Pizarro
+[418] https://www.national-football-teams.com/player/1440/David_Pizarro.html
+[419] https://en.wikipedia.org/wiki/Rodrigo_Tello
+[420] https://www.national-football-teams.com/player/8302/Rodrigo_Tello.html
+[421] https://en.wikipedia.org/wiki/Vicente_S%C3%A1nchez
+[422] https://www.national-football-teams.com/player/7030/Vicente_Sanchez.html
+[423] https://www.uslchampionship.com/news_article/show/1155925
+[424] https://en.wikipedia.org/wiki/Edinson_Cavani
+[425] https://www.national-football-teams.com/player/25130/Edinson_Cavani.html
+[426] https://batimes.com.ar/news/sports/uruguay-veteran-edison-cavani-departs-boca-juniors.phtml
+[427] https://en.wikipedia.org/wiki/Maxi_Pereira
+[428] https://www.national-football-teams.com/player/13540/Maxi_Pereira.html
+[429] https://en.wikipedia.org/wiki/Rub%C3%A9n_Sosa
+[430] https://www.national-football-teams.com/player/14469/Ruben_Sosa.html
+[431] https://en.wikipedia.org/wiki/Carlos_Aguilera_(Uruguayan_footballer)
+[432] https://www.national-football-teams.com/player/14466/Carlos_Aguilera.html
+[433] https://en.wikipedia.org/wiki/Justo_Villar
+[434] https://www.national-football-teams.com/player/5152/Justo_Villar.html
+[435] https://www.abc.com.py/deportes/futbol/justo-villar-anuncia-su-retiro-1726257.html
+[436] https://www.ultimahora.com/justo-villar-anuncio-su-retiro-como-arquero-profesional-n1702089
+[437] https://en.wikipedia.org/wiki/Ren%C3%A9_Higuita
+[438] https://www.national-football-teams.com/player/13686/Rene_Higuita.html
+[439] https://en.wikipedia.org/wiki/Faustino_Asprilla
+[440] https://www.national-football-teams.com/player/12577/Faustino_Asprilla.html
+[441] https://en.wikipedia.org/wiki/Leonel_%C3%81lvarez_(footballer,_born_1965)
+[442] https://www.national-football-teams.com/player/13684/Leonel_Alvarez.html
+[443] https://en.wikipedia.org/wiki/Nolberto_Solano
+[444] https://www.national-football-teams.com/player/5193/Nolberto_Solano.html
+[445] https://dechalaca.com/informes/curiosidades/cuando-nol-era-nino-rata
+[446] https://en.wikipedia.org/wiki/Jefferson_Farf%C3%A1n
+[447] https://www.national-football-teams.com/player/5169/Jefferson_Farfan.html
+[448] https://en.wikipedia.org/wiki/Juan_Manuel_Vargas
+[449] https://www.national-football-teams.com/player/9087/Juan_Vargas.html

@@ -1,0 +1,173 @@
+[
+  {
+    "id": "alvaro-recoba",
+    "name": "Álvaro Recoba",
+    "country": "Uruguay",
+    "position": "Midfielder / Forward",
+    "start": 1994,
+    "end": 2015,
+    "clubs": [
+      "Danubio",
+      "Nacional",
+      "Inter Milan",
+      "Venezia",
+      "Inter Milan",
+      "Torino",
+      "Panionios",
+      "Danubio",
+      "Nacional"
+    ],
+    "system": "uruguay",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/%C3%81lvaro_Recoba",
+        "excerpt": "Senior career*\nYears\tTeam\tApps\t(Gls)\n1994–1995\tDanubio\t34\t(11)\n1996–1997\tNacional\t33\t(17)\n1997–2008\tInter Milan\t175\t(53)\n1999\t→ Venezia (loan)\t19\t(11)\n2007–2008\t→ Torino (loan)\t22\t(1)\n2008–2010\tPanionios\t21\t(5)\n2010–2011\tDanubio\t31\t(11)\n2011–2015\tNacional\t82\t(17)"
+      },
+      {
+        "url": "https://ftp.auf.org.uy/alvaro-recoba/",
+        "excerpt": "Trayectoria\nNacional (URU)\n\n2011 - 2015\n\nDanubio (URU)\n\n2010 - 2011\n\nPanionios (GRC)\n\n2008 - 2009\n\nTorino (ITA)\n\n2007 - 2008\n\nInter de Milan (ITA)\n\n2000 - 2007\n\nVenezia (ITA)\n\n1999 - 1999\n\nInter de Milan (ITA)\n\n1997 - 1998\n\nNacional (URU)\n\n1996 - 1997\n\nDanubio (URU)\n\n1994 - 1995"
+      }
+    ],
+    "notes": "The Venezia and Torino spells were loans. Inter Milan is repeated after Venezia because Recoba genuinely returned and played for Inter; no post-Torino Inter node is inserted because the Torino loan ran through the end of his Inter period. His later Danubio and Nacional spells are genuine playing returns. Youth and managerial work are excluded. This is a bank-only support profile, not a playable target."
+  },
+  {
+    "id": "roberto-palacios",
+    "name": "Roberto Palacios",
+    "country": "Peru",
+    "position": "Midfielder",
+    "start": 1991,
+    "end": 2011,
+    "clubs": [
+      "Sporting Cristal",
+      "Puebla",
+      "Cruzeiro",
+      "Tecos UAG",
+      "Sporting Cristal",
+      "Tecos UAG",
+      "Morelia",
+      "Atlas",
+      "Morelia",
+      "Deportivo Cali",
+      "LDU Quito",
+      "Al-Nassr",
+      "Sporting Cristal"
+    ],
+    "system": "peru",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Roberto_Palacios",
+        "excerpt": "Senior career*\nYears\tTeam\tApps\t(Gls)\n1991–1997\tSporting Cristal\t208\t(62)\n1997\tPuebla\t13\t(0)\n1997–1998\tCruzeiro\t6\t(2)\n1998–2001\tTecos UAG\t104\t(16)\n2001–2002\tSporting Cristal\t37\t(7)\n2002\tTecos UAG\t16\t(5)\n2003\tMorelia\t22\t(3)\n2003\tAtlas\t15\t(1)\n2004\tMorelia\t17\t(0)\n2004\tDeportivo Cali\t16\t(4)\n2004–2007\tLDU Quito\t82\t(22)\n2007\tAl-Nassr\t1\t(0)\n2007–2012\tSporting Cristal\t144\t(16)"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/5199/Roberto_Palacios.html",
+        "excerpt": "Position\nAttacking Midfielder (AM)\nOther positions:\nAge\n53\nDay of Birth\n1972-12-28\nPlace of Birth\nLima (Peru)\nHeight\n1.69m"
+      }
+    ],
+    "notes": "The route preserves three Sporting Cristal periods, two Tecos periods and two Morelia periods as genuine returns. The one-appearance Al-Nassr spell is retained. Although the summary table labels his last Cristal membership through 2012, the biography says he retired at the end of the 2011 club season and National Football Teams records no 2012 club appearances, so the playing-career endpoint is 2011; his 2012 Peru farewell is not a club spell. This is a bank-only support profile, not a playable target."
+  },
+  {
+    "id": "flavio-maestri",
+    "name": "Flavio Maestri",
+    "country": "Peru",
+    "position": "Forward",
+    "start": 1990,
+    "end": 2009,
+    "clubs": [
+      "Sporting Cristal",
+      "Hércules",
+      "Universidad de Chile",
+      "Sporting Cristal",
+      "San Luis",
+      "Sporting Cristal",
+      "Vitória",
+      "Alianza Lima",
+      "Shanghai Jiucheng",
+      "Alianza Lima",
+      "Sport Boys",
+      "Sporting Cristal"
+    ],
+    "system": "peru",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Flavio_Maestri",
+        "excerpt": "Senior career*\nYears\tTeam\tApps\t(Gls)\n1989–1996\tSporting Cristal\t153\t(91)\n1996–1997\tHércules Alicante\t20\t(2)\n1998–2001\tUniversidad de Chile\t91\t(27)\n2002–2004\tSporting Cristal\t9\t(4)\n2003\t→ San Luis (loan)\t8\t(1)\n2004\t→ Vitória (loan)\t6\t(2)\n2004–2007\tAlianza Lima\t73\t(24)\n2005\t→ Shanghai The 9 (loan)\t18\t(2)\n2008\t→ Sport Boys (loan)\t10\t(3)\n2009\tSporting Cristal\t9\t(2)"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/8164/Flavio_Maestri.html",
+        "excerpt": "Position\nCentre Forward (CF)\nOther positions:\nAge\n53\nDay of Birth\n1973-01-21\nPlace of Birth\nLima (Peru)\nHeight\n1.87m"
+      }
+    ],
+    "notes": "National Football Teams records first-team league appearances in 1990, so the start follows the first evidenced playing year rather than Wikipedia's 1989 membership label. San Luis, Vitória and Shanghai Jiucheng were loans. Sporting Cristal is repeated after San Luis because he returned and played before the Vitória loan; Alianza Lima is repeated after Shanghai because he returned and played in 2006–07. Contemporary narrative says Alianza did not renew at the end of 2007 and that he then signed for Sport Boys, so Sport Boys is treated as a new spell rather than an ownership-only loan despite the summary table's loan arrow. Youth and coaching are excluded. This is a bank-only support profile, not a playable target."
+  },
+  {
+    "id": "paolo-guerrero",
+    "name": "Paolo Guerrero",
+    "country": "Peru",
+    "position": "Forward",
+    "start": 2002,
+    "end": 2026,
+    "clubs": [
+      "Bayern Munich II",
+      "Bayern Munich",
+      "Hamburger SV",
+      "Corinthians",
+      "Flamengo",
+      "Internacional",
+      "Avaí",
+      "Racing Club",
+      "LDU Quito",
+      "Universidad César Vallejo",
+      "Alianza Lima"
+    ],
+    "system": "germany",
+    "region": "europe",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Paolo_Guerrero",
+        "excerpt": "Senior career*\nYears\tTeam\tApps\t(Gls)\n2002–2006\tBayern Munich II\t66\t(45)\n2004–2006\tBayern Munich\t27\t(10)\n2006–2012\tHamburger SV\t134\t(37)\n2012–2015\tCorinthians\t102\t(38)\n2015–2018\tFlamengo\t85\t(34)\n2018–2021\tInternacional\t51\t(20)\n2022–2023\tAvaí\t10\t(0)\n2023\tRacing Club\t15\t(1)\n2023–2024\tLDU Quito\t13\t(5)\n2024\tUniversidad César Vallejo\t6\t(3)\n2024–\tAlianza Lima\t51\t(23)"
+      },
+      {
+        "url": "https://www.espn.com/soccer/player/bio/_/id/40270/paolo-guerrero",
+        "excerpt": "Career History\nAlianza Lima\n3 SEASONS\nCésar Vallejo\n1 SEASON\nPeru\n13 SEASONS\nRacing Club\n1 SEASON\nLiga de Quito\n1 SEASON\nAvaí\n1 SEASON\nInternacional\n3 SEASONS\nFlamengo\n4 SEASONS\nCorinthians\n4 SEASONS\nHamburg SV\n6 SEASONS\nBayern Munich\n3 SEASONS"
+      },
+      {
+        "url": "https://fotmob.com/fi/players/33101/jose-paolo-guerrero",
+        "excerpt": "Paolo Guerrero is a 42-year-old football player who plays as a striker for Alianza Lima, born on 1 January 1984, who is right-footed. Follow Paolo Guerrero on FotMob for live match updates, detailed statistics, career history, transfer news, FotMob ratings, and comprehensive performance analytics.\n\nIn the 2026 Liga 1 season, Paolo Guerrero has recorded 4 goals, 0 assists, 1,244 minutes, an average FotMob rating of 6.848947368421053, 4 yellow cards."
+      }
+    ],
+    "notes": "Bayern Munich II is included because it competed in the adult German league pyramid; the overlapping first-team Bayern spell follows by first senior appearance. Alianza Lima's 1992–2002 period was youth football and is excluded, while his 2024 return is senior play. The endpoint is the 2026 research snapshot because FotMob records 2026 Liga 1 appearances and he remains active for Alianza Lima. No loans or ownership-only returns are inserted. This is a bank-only support profile, not a playable target."
+  },
+  {
+    "id": "carlos-lobaton",
+    "name": "Carlos Lobatón",
+    "country": "Peru",
+    "position": "Midfielder",
+    "start": 1998,
+    "end": 2019,
+    "clubs": [
+      "Sport Agustino",
+      "Sport Boys",
+      "Estudiantes de Medicina",
+      "Universitario de Deportes",
+      "Unión Huaral",
+      "Cienciano",
+      "Sporting Cristal"
+    ],
+    "system": "peru",
+    "region": "south-america",
+    "sources": [
+      {
+        "url": "https://es.wikipedia.org/wiki/Carlos_Lobat%C3%B3n",
+        "excerpt": "Lobatón realizó las divisiones inferiores en el Sporting Cristal en donde incluso llegó a ser entrenado por el propio Alberto Gallardo, estuvo en las menores del cuadro rimense entre 1996 y 1999. En 1998 hace su debut jugando en la segunda profesional en Sport Agustino; su debut profesional fue en abril del año 2000 en el Sport Boys, permaneció en el cuadro chalaco hasta el 2001, fue parte del equipo chalaco que consiguió clasificar a la Copa Libertadores 2001, llegando a alternar algunos partidos.\n\nEl año 2002 jugó el Torneo Apertura por el Estudiantes de Medicina y el Clausura por Universitario de Deportes, culminando ambos torneos en la penúltima ubicación con sus respectivos clubes.[7] Lobatón comenzó su ascenso futbolístico jugando por el Unión Huaral en el Apertura 2003 equipo con el que tuvo mayor participación y culminó en séptima ubicación."
+      },
+      {
+        "url": "https://www.national-football-teams.com/app.php/player/13103/Carlos_Lobaton.html",
+        "excerpt": "2019\t\nSporting Cristal Lima\n\t26\t4\t1 (I)\t\t\n\t2018\t\nSporting Cristal Lima\n\t30\t3\t1 (I)\t\t\n\t2017\t\nSporting Cristal Lima\n\t26\t2\t8 (I)\t\t\n\t2016\t\nSporting Cristal Lima\n\t23\t8\t1 (I)\t\t\n\t2015\t\nSporting Cristal Lima\n\t22\t12\t2 (I)"
+      }
+    ],
+    "notes": "Sport Agustino is included because the Spanish biography explicitly places his 1998 debut in Peru's professional second division, an adult-pyramid competition; overlapping Sporting Cristal youth membership is excluded. The later route follows the 2000–2019 senior appearance record. His formal retirement was announced on 3 January 2020, but his last playing season was 2019, so the playing endpoint is 2019. Post-playing Sporting Cristal management is excluded. This is a bank-only support profile, not a playable target."
+  }
+]
