@@ -4,6 +4,9 @@ import fs from 'node:fs';
 
 const path = new URL('../.agents/skills/derabona-player-addition/SKILL.md', import.meta.url);
 const referencePath = new URL('../.agents/skills/derabona-player-addition/references/player-record.md', import.meta.url);
+const discoveryReferencePath = new URL('../.agents/skills/derabona-player-addition/references/player-discovery.md', import.meta.url);
+const shortlistTemplatePath = new URL('../.agents/skills/derabona-player-addition/templates/candidate-shortlist.json', import.meta.url);
+const shortlistValidatorPath = new URL('../.agents/skills/derabona-player-addition/scripts/validate-shortlist.mjs', import.meta.url);
 const exporterPath = new URL('../scripts/export-ranked-roster.mjs', import.meta.url);
 const optimizerPath = new URL('../research/optimize-crests.py', import.meta.url);
 const embedDistractorsPath = new URL('../research/embed-distractors.py', import.meta.url);
@@ -20,6 +23,7 @@ test('project-local player-addition skill has valid, focused metadata', () => {
   assert.ok(description);
   assert.ok(description.length <= 60, `description is ${description.length} characters`);
   assert.ok(description.endsWith('.'));
+  assert.match(description, /^Discover and add /);
   assert.match(frontmatter[1], /^platforms: \[linux, macos, windows\]$/m);
   assert.doesNotMatch(skill, /\/Users\/|\/home\//);
 });
@@ -27,6 +31,7 @@ test('project-local player-addition skill has valid, focused metadata', () => {
 test('repository exposes one canonical skill to major agent harnesses', () => {
   const readme = fs.readFileSync(new URL('../README.md', import.meta.url), 'utf8');
   assert.match(readme, /\.agents\/skills\/derabona-player-addition\/SKILL\.md/);
+  assert.match(readme, /discovering, researching and integrating/);
   assert.match(readme, /hermes skills trust/);
   const canonical = fs.realpathSync(new URL('../.agents/skills/derabona-player-addition', import.meta.url));
   for (const harness of ['.claude', '.codex', '.gemini']) {
@@ -84,6 +89,82 @@ test('skill defines checkable phases and fail-closed gates', () => {
   assert.match(skill, /promotion/i);
   assert.match(skill, /literal excerpts/i);
   assert.match(skill, /current roster count/i);
+});
+
+test('skill can discover and rank new player candidates before research', () => {
+  const skill = readSkill();
+  assert.ok(fs.existsSync(discoveryReferencePath), 'player-discovery reference must exist');
+  assert.ok(fs.existsSync(shortlistTemplatePath), 'candidate-shortlist template must exist');
+  const discovery = fs.readFileSync(discoveryReferencePath, 'utf8');
+  const template = JSON.parse(fs.readFileSync(shortlistTemplatePath, 'utf8'));
+  assert.equal(fs.existsSync(shortlistValidatorPath), true, 'shortlist validator must exist');
+
+  assert.match(skill, /references\/player-discovery\.md/);
+  assert.match(skill, /templates\/candidate-shortlist\.json/);
+  assert.match(skill, /web_search/);
+  assert.match(skill, /web_extract/);
+  assert.match(skill, /at least three times the target count/i);
+  assert.match(skill, /selected, reserve and rejected/i);
+  assert.match(discovery, /targetCount.*greater than zero/i);
+  assert.match(discovery, /fewer than `targetCount`.*do not lower/i);
+
+  for (const section of [
+    '## Baseline Gap Audit',
+    '## Candidate Source Families',
+    '## Hard Gates',
+    '## Candidate Scorecard',
+    '## Selection Rules',
+    '## Shortlist Validation',
+    '## Required Output',
+  ]) assert.ok(discovery.includes(section), `discovery reference missing ${section}`);
+  for (const dimension of [
+    'recognizability',
+    'careerDistinctiveness',
+    'rosterBalance',
+    'evidenceAvailability',
+    'crestWorkload',
+    'rivalCoverage',
+  ]) assert.ok(discovery.includes(dimension), `discovery reference missing score ${dimension}`);
+
+  assert.deepEqual(Object.keys(template).sort(), ['baseline', 'candidates', 'constraints', 'mode', 'results', 'summary', 'targetCount']);
+  assert.equal(template.mode, 'discovery');
+  assert.deepEqual(Object.keys(template.results).sort(), ['rejected', 'reserve', 'selected']);
+  assert.deepEqual(Object.keys(template.summary).sort(), [
+    'expectedBankOnlyProfiles', 'expectedNewCrestKeys', 'expectedPlayableRecords', 'unresolvedDecisions',
+  ]);
+  assert.deepEqual(Object.keys(template.baseline.longlistCounts).sort(), ['afterDeduplication', 'beforeDeduplication', 'discovered']);
+  assert.equal(template.baseline.rankedCompetitionCount, 0);
+  assert.deepEqual(template.summary.expectedNewCrestKeys, []);
+  assert.equal(template.candidates.length, 1);
+  const candidate = template.candidates[0];
+  assert.equal(candidate.existingStatus, 'new');
+  assert.equal(candidate.hardGates.promotionHandled, null, 'new candidates must mark promotion as not applicable');
+  assert.equal(candidate.existingMatch.dataset, null);
+  assert.equal(candidate.hardGates.bankStatusResolved, false);
+  assert.equal(candidate.discoveredFrom.length, 1);
+  assert.deepEqual(Object.keys(candidate.discoveredFrom[0]).sort(), ['query', 'retrievedAt', 'sourceFamily', 'url']);
+  for (const key of ['name', 'proposedId', 'existingMatch', 'evidenceLeads', 'scores', 'hardGates', 'decision', 'rationale', 'rejectionReason']) {
+    assert.ok(Object.hasOwn(candidate, key), `shortlist candidate missing ${key}`);
+  }
+  assert.deepEqual(Object.keys(candidate.scores).sort(), [
+    'careerDistinctiveness', 'crestWorkload', 'evidenceAvailability',
+    'recognizability', 'rivalCoverage', 'rosterBalance',
+  ]);
+  assert.deepEqual(Object.keys(candidate.hardGates).sort(), [
+    'bankStatusResolved', 'constraintsFit', 'distinctCareer', 'identityResolved',
+    'notAlreadyPlayable', 'promotionHandled', 'rivalPlan', 'seniorScopePlausible',
+    'twoDomainsLikely',
+  ]);
+  assert.equal(candidate.totalScore, 0);
+  assert.match(discovery, /totalScore.*exact sum/i);
+  assert.match(discovery, /distinct organizational domains/i);
+  assert.match(discovery, /decision.*selected.*reserve.*reject/i);
+  assert.match(discovery, /existingStatus.*new.*bank-promotion.*already-playable/i);
+  assert.doesNotMatch(discovery, /existingStatus.*duplicate/i);
+  assert.match(discovery, /bankStatusResolved/);
+  assert.match(discovery, /results.*partition.*every candidate/i);
+  assert.match(skill, /scripts\/validate-shortlist\.mjs/);
+  assert.match(discovery, /node \.agents\/skills\/derabona-player-addition\/scripts\/validate-shortlist\.mjs/);
 });
 
 test('skill handles the frozen ranked export without an impossible post-edit gate', () => {

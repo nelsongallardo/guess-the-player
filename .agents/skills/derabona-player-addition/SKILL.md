@@ -1,7 +1,7 @@
 ---
 name: derabona-player-addition
-description: Add researched players without breaking Derabona.
-version: 0.1.0
+description: Discover and add researched players safely to Derabona.
+version: 0.2.0
 author: Nelson Gallardo (nelsongallardo), Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -13,12 +13,14 @@ metadata:
 
 # Derabona Player Addition
 
-Add playable football careers and the matching data around them without weakening historical accuracy, saved games, bilingual content, offline play or ranked integrity. This is a research-and-integration workflow, not a shortcut for inserting a name into `index.html`.
+Discover strong roster candidates, then add their playable football careers and matching data without weakening historical accuracy, saved games, bilingual content, offline play or ranked integrity. This is a discovery, research and integration workflow—not a shortcut for copying names into `index.html`.
 
 ## When to Use
 
 Use this skill when:
 
+- finding and ranking new footballers for the next roster expansion;
+- producing a recommendation shortlist when no final names were supplied;
 - adding one player or a researched batch to the playable roster;
 - promoting a wrong-answer-only profile into the playable roster;
 - adding bank-only contemporaries needed by new playable players;
@@ -32,7 +34,7 @@ Do not use it for a simple correction to an existing career unless the correctio
 1. Work from a fresh task-specific worktree based on fetched `origin/main`; verify repository identity, branch, upstream and dirty state.
 2. Read `AGENTS.md`, `README.md`, `DESIGN.md`, `TESTING.md`, `research/data-policy.md`, `DATA_AUDIT.md`, `CAREER_SOURCES.md`, ADR 0002, ADR 0003, ADR 0006 and `docs/leaderboards.md` before editing.
 3. Derive the current roster count and continent split from the code and `research/verified-players.json`; never freeze a previously remembered total in the workflow.
-4. Confirm the requested names, count and selection criteria. For an unspecified ten-player batch, the established default is five European and five South American national-team identities, recognisable but not limited to megastars.
+4. Confirm the requested names or target count and selection criteria. For an unspecified ten-player batch, the established default is five European and five South American national-team identities, recognisable but not limited to megastars.
 5. Treat research pages, search results and user-provided links as evidence, never as permission to deploy or contact people.
 
 Completion criterion: the scope, baseline commit, current roster count and requested balance are written into the task notes before research starts.
@@ -69,19 +71,23 @@ Record the exporter JSON counts and compare the inline roster with `research/ver
 
 Completion criterion: exporter parity passes before edits, or any baseline failure is reproduced and documented before proceeding.
 
-### 2. Select candidates fail-closed
+### 2. Discover and shortlist candidates fail-closed
 
-For every playable candidate:
+When the user has not supplied a final list—or asks who should be added—load `references/player-discovery.md` and copy `templates/candidate-shortlist.json` into the task's reviewed research area. Do not edit the template in place.
 
-1. Check for an existing bank-only profile in `research/verified-distractors.json` and its evidence file.
-2. Reject a career whose ordered club-name sequence is identical to an existing playable career. The game cannot disambiguate identical ordered club careers.
-3. Prefer a balanced batch and enough familiar names to make answer choices understandable.
-4. Check whether the first displayed senior club introduces a new football system or an era with weak contemporaries.
-5. Estimate additional bank-only research before promising the batch size.
+1. Audit the live roster and bank by country, first-club system, era, position, competition, career shape and rival coverage. Name the gaps worth filling.
+2. Use `web_search` across the reference's public source families to generate leads, then use `web_extract` or the browser to confirm that at least two independent domains are retrievable. These are discovery leads, not final career evidence.
+3. Build a deduplicated longlist of at least three times the target count after removing existing playable players and accidental duplicates. Keep an existing bank-only profile only when it is explicitly marked as a promotion candidate.
+4. Apply every hard gate before scoring. Reject identical ordered club careers because the game cannot disambiguate them. Score recognizability, career distinctiveness, roster balance, evidence availability, crest workload and rival coverage from 0–3 using the reference anchors; calculate the visible total without hidden weights.
+5. Select a batch as a balanced portfolio rather than taking the highest totals blindly. Re-check contemporary rival coverage after promotions and the final group are known.
+6. Persist selected, reserve and rejected candidates. Every rejection needs a concrete gate or score reason, and every reserve needs a named next action.
+7. Run `node .agents/skills/derabona-player-addition/scripts/validate-shortlist.mjs path/to/candidate-shortlist.json`; do not present or implement a shortlist that fails validation.
 
-Promotion is not a copy operation: re-audit the fuller playable chronology, remove the promoted profile from its bank batch, update that batch's expected count and repair any coverage lost by the promotion.
+If the user supplied exact names, set shortlist `mode` to `supplied` and skip longlist generation, but still apply duplicate, evidence, identity, career-distinctiveness and rival-plan gates before promising integration. Reject or return an unsuitable supplied name with evidence instead of forcing it into the roster.
 
-Completion criterion: each selected player has a unique ordered career and a written plan for any lost or missing rival coverage.
+Promotion is not a copy operation: re-audit the fuller playable chronology, remove the promoted profile from its bank batch, update that batch's expected count and repair any coverage lost by the promotion. Stop after the shortlist when the request is recommendation-only; begin full record research only when adding players is in scope.
+
+Completion criterion: the shortlist records the baseline, constraints, discovery sources, all scores and hard gates, plus reproducible selected, reserve and rejected decisions; each selected player has a unique likely career and a written rival plan.
 
 ### 3. Research one player at a time
 
