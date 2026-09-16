@@ -1,0 +1,507 @@
+[
+  {
+    "id": "alex",
+    "name": "Alex",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Coritiba",
+        "years": "1995–1997"
+      },
+      {
+        "name": "Palmeiras",
+        "years": "1997–2000"
+      },
+      {
+        "name": "Flamengo",
+        "years": "2000",
+        "note": "Loan."
+      },
+      {
+        "name": "Palmeiras",
+        "years": "2000–2001",
+        "note": "Actual playing return during Parma ownership; the 2000 and 2001 rows include competitive cup/continental appearances despite zero league appearances in those rows."
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "2001",
+        "note": "Loan."
+      },
+      {
+        "name": "Palmeiras",
+        "years": "2002",
+        "note": "Loan; third playing spell."
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "2002–2004",
+        "note": "Second playing spell; the earlier loan and this later spell are separated by the 2002 Palmeiras loan."
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2004–2012"
+      },
+      {
+        "name": "Coritiba",
+        "years": "2013–2014",
+        "note": "Second playing spell; final match on 7 December 2014."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Alex_(footballer,_born_1977)",
+        "title": "Alex (footballer, born 1977)"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1024/-.html",
+        "title": "Alex (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Parma is excluded: both sources record zero league appearances, and the narrative says he played only friendlies there. The displayed chronology follows actual competitive play, including real Palmeiras and Cruzeiro returns during Parma ownership rather than an ownership-only Parma node. Youth football and later coaching are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "brasileirao"
+    ],
+    "esNotes": "Se excluye al Parma: ambas fuentes registran cero apariciones ligueras y la narración indica que allí solo disputó amistosos. La cronología mostrada sigue la actividad competitiva real, incluidos los regresos efectivos al Palmeiras y al Cruzeiro durante la titularidad contractual del Parma, en lugar de un nodo del Parma basado solo en el contrato. Se excluyen el fútbol juvenil y su posterior carrera como entrenador.",
+    "esClubNotes": {
+      "2": "Cesión.",
+      "3": "Regreso real como jugador durante la titularidad contractual del Parma; los registros de 2000 y 2001 incluyen apariciones competitivas de copa o continentales pese a mostrar cero apariciones ligueras.",
+      "4": "Cesión.",
+      "5": "Cesión; tercera etapa como jugador.",
+      "6": "Segunda etapa como jugador; la cesión anterior y esta etapa posterior están separadas por la cesión al Palmeiras de 2002.",
+      "8": "Segunda etapa como jugador; último partido el 7 de diciembre de 2014."
+    }
+  },
+  {
+    "id": "adriano",
+    "name": "Adriano",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Flamengo",
+        "years": "2000–2001"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2001–2002"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "2002",
+        "note": "Loan."
+      },
+      {
+        "name": "Parma",
+        "years": "2002–2004"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2004–2007",
+        "note": "Actual playing return from Parma."
+      },
+      {
+        "name": "São Paulo",
+        "years": "2008",
+        "note": "Loan from Inter Milan."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2008–2009",
+        "note": "Actual playing return after the São Paulo loan."
+      },
+      {
+        "name": "Flamengo",
+        "years": "2009–2010",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Roma",
+        "years": "2010–2011"
+      },
+      {
+        "name": "Corinthians",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Atlético Paranaense",
+        "years": "2014",
+        "note": "One league and three Copa Libertadores appearances; included despite the one-match league total."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Adriano_(footballer,_born_February_1982)",
+        "title": "Adriano (footballer, born February 1982)"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/989/Adriano.html",
+        "title": "Adriano (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.npsl.com/7250/",
+        "title": "WHAT IS THE REST OF THE WORLD SAYING ABOUT #ADRIANO2NPSL?"
+      }
+    ],
+    "notes": "The unused 2012 Flamengo registration is excluded because it produced no established competitive appearance. Miami United is also excluded: it was an NPSL move outside this professional-career scope; the career table records zero league appearances and only one other match, while the NPSL source confirms the club and competition. Inter is shown as two genuine returns around the São Paulo loan. Atlético Paranaense is retained because he made four competitive appearances in all competitions.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "brasileirao"
+    ],
+    "esNotes": "Se excluye la inscripción sin uso en el Flamengo de 2012 porque no produjo ninguna aparición competitiva establecida. También se excluye al Miami United: fue un paso por la NPSL fuera del alcance de esta carrera profesional; la tabla registra cero apariciones ligueras y solo otro partido, mientras que la fuente de la NPSL confirma el club y la competición. El Inter aparece en dos etapas reales alrededor de la cesión al São Paulo. Se conserva al Atlético Paranaense porque disputó cuatro partidos competitivos entre todas las competiciones.",
+    "esClubNotes": {
+      "2": "Cesión.",
+      "4": "Regreso real como jugador desde el Parma.",
+      "5": "Cesión del Inter Milan.",
+      "6": "Regreso real como jugador tras la cesión al São Paulo.",
+      "7": "Segunda etapa como jugador.",
+      "10": "Una aparición liguera y tres en la Copa Libertadores; se incluye pese al total de un solo partido de liga."
+    }
+  },
+  {
+    "id": "lucio",
+    "name": "Lúcio",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Guará",
+        "years": "1997",
+        "note": "One Copa do Brasil appearance; included despite zero league appearances."
+      },
+      {
+        "name": "Internacional",
+        "years": "1998–2000",
+        "note": "The sources place his professional Internacional playing start in 1998; a bare 1997 membership row is not treated as a verified 1997 appearance."
+      },
+      {
+        "name": "Bayer Leverkusen",
+        "years": "2001–2004"
+      },
+      {
+        "name": "Bayer Leverkusen II",
+        "years": "2003",
+        "note": "One competitive Regionalliga Nord appearance; overlaps the first team and is ordered after the established first-team debut."
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2004–2009"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2009–2012"
+      },
+      {
+        "name": "Juventus",
+        "years": "2012",
+        "note": "Four competitive appearances in all competitions, including one in Serie A."
+      },
+      {
+        "name": "São Paulo",
+        "years": "2013"
+      },
+      {
+        "name": "Palmeiras",
+        "years": "2014"
+      },
+      {
+        "name": "FC Goa",
+        "years": "2015–2016"
+      },
+      {
+        "name": "Brasiliense",
+        "years": "2018–2020",
+        "note": "Professional comeback after the Gama spell; 2018–2019 competitive appearances, with retirement announced in January 2020."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/L%C3%BAcio",
+        "title": "Lúcio"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/994/Lucio_1.html",
+        "title": "Lúcio (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.newindianexpress.com/sport/football/2018/Feb/12/2002-fifa-world-cup-winner-lucio-ready-to-play-on-into-40s-1772238.html",
+        "title": "2002 FIFA World Cup winner Lucio ready to play on into 40s"
+      }
+    ],
+    "notes": "Guará is retained because the zero-league infobox row masks a documented Copa do Brasil appearance. Bayer Leverkusen II is an adult-pyramid competitive reserve appearance. The 2018 Gama row is excluded as a semi-professional Brasiliense-league comeback; later Série D/Copa do Brasil play for Brasiliense is retained. The 2020 endpoint marks his retirement announcement after his last recorded competitive season in 2019.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "brasileirao"
+    ],
+    "esNotes": "Se conserva al Guará porque la fila de cero partidos de liga oculta una aparición documentada en la Copa do Brasil. El Bayer Leverkusen II corresponde a una aparición competitiva de un filial en la pirámide adulta. Se excluye la etapa de 2018 en Gama por ser un regreso en la liga semiprofesional Brasiliense; se conserva la actividad posterior con Brasiliense en la Série D y la Copa do Brasil. El final en 2020 marca el anuncio de su retiro tras su última temporada competitiva registrada en 2019.",
+    "esClubNotes": {
+      "0": "Una aparición en la Copa do Brasil; se incluye pese a las cero apariciones ligueras.",
+      "1": "Las fuentes sitúan en 1998 el inicio de su actividad profesional con Internacional; una fila de pertenencia de 1997 sin partidos no se trata como una aparición verificada en 1997.",
+      "3": "Una aparición competitiva en la Regionalliga Nord; se solapa con el primer equipo y se ordena después del debut ya establecido con este.",
+      "6": "Cuatro apariciones competitivas entre todas las competiciones, incluida una en la Serie A.",
+      "10": "Regreso profesional después de la etapa en Gama; apariciones competitivas en 2018–2019 y retiro anunciado en enero de 2020."
+    }
+  },
+  {
+    "id": "maicon",
+    "name": "Maicon",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Cruzeiro",
+        "years": "2000–2004",
+        "note": "The 2000 row has zero league appearances but two other competitive appearances; the narrative first-team debut is in 2001."
+      },
+      {
+        "name": "Monaco",
+        "years": "2004–2006"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2006–2012"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2012–2013"
+      },
+      {
+        "name": "Roma",
+        "years": "2013–2016"
+      },
+      {
+        "name": "Avaí",
+        "years": "2017"
+      },
+      {
+        "name": "Criciúma",
+        "years": "2019",
+        "note": "Professional comeback after announcing retirement in December 2017."
+      },
+      {
+        "name": "Villa Nova",
+        "years": "2020"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Maicon_(footballer,_born_1981)",
+        "title": "Maicon (footballer, born 1981)"
+      },
+      {
+        "url": "https://national-football-teams.com/player/8182/Maicon.html",
+        "title": "Maicon (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.trepenne.com/2021/06/14/comunicato-ufficiale-maicon-al-tre-penne/",
+        "title": "Comunicato ufficiale: Maicon al Tre Penne"
+      }
+    ],
+    "notes": "The 2000 Cruzeiro start is retained because the detailed table records two competitive non-league appearances despite zero league appearances. His 2019 Criciúma return is a genuine professional comeback. The later Sona spell in Italy’s Serie D and Tre Penne’s two-match UEFA publicity contract are excluded as post-retirement amateur/semi-professional football outside this professional scope; Tre Penne’s own announcement says the contract was only for the two Conference League ties. Botafogo training without a signed contract is also excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "brasileirao"
+    ],
+    "esNotes": "Se conserva el inicio con Cruzeiro en 2000 porque la tabla detallada registra dos apariciones competitivas no ligueras pese a las cero apariciones de liga. Su regreso con Criciúma en 2019 fue un retorno profesional real. Se excluyen la etapa posterior con Sona en la Serie D italiana y el contrato publicitario de dos partidos del Tre Penne en la UEFA por ser fútbol amateur o semiprofesional posterior al retiro y quedar fuera de este alcance profesional; el propio anuncio del Tre Penne dice que el contrato era solo para las dos eliminatorias de la Conference League. También se excluye el entrenamiento con Botafogo sin contrato firmado.",
+    "esClubNotes": {
+      "0": "La fila de 2000 muestra cero apariciones ligueras, pero dos apariciones competitivas de otro tipo; la narración sitúa el debut con el primer equipo en 2001.",
+      "6": "Regreso profesional tras anunciar su retiro en diciembre de 2017."
+    }
+  },
+  {
+    "id": "gilberto-silva",
+    "name": "Gilberto Silva",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "América Mineiro",
+        "years": "1997–2000",
+        "note": "Professional registration is dated to 1997, but positive senior appearances are established only in 1998: Wikipedia's prose says his senior debut was in 1998, while National Football Teams shows no appearance total for 1997 and 20 league appearances in 1998."
+      },
+      {
+        "name": "Atlético Mineiro",
+        "years": "2000–2002"
+      },
+      {
+        "name": "Arsenal",
+        "years": "2002–2008"
+      },
+      {
+        "name": "Panathinaikos",
+        "years": "2008–2011"
+      },
+      {
+        "name": "Grêmio",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Atlético Mineiro",
+        "years": "2013",
+        "note": "Second playing spell; the detailed records show competitive appearances in 2013, not a separate 2014 playing row."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gilberto_Silva",
+        "title": "Gilberto Silva"
+      },
+      {
+        "url": "https://national-football-teams.com/player/1014/Gilberto_Silva.html",
+        "title": "Gilberto Silva (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The 1997–2000 América Mineiro span follows the senior-career membership table, but the debut year is genuinely conflicted: Wikipedia's infobox begins the senior spell in 1997 while its prose says he made his senior debut in 1998; National Football Teams likewise shows no positive appearance total for 1997 and 20 league appearances in 1998. The evidence therefore does not claim a positive 1997 senior appearance. Atlético Mineiro is shown twice because the 2013 return produced competitive appearances. No 2014 club row is asserted: the detailed season records end in 2013, and later ambassador and technical-director roles are not playing spells.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "brasileirao"
+    ],
+    "esNotes": "El tramo 1997–2000 en América Mineiro sigue la tabla de pertenencia de la carrera sénior, pero el año del debut presenta un conflicto real: el infobox de Wikipedia inicia la etapa sénior en 1997, mientras que su texto dice que debutó con el primer equipo en 1998; National Football Teams tampoco muestra un total positivo de apariciones en 1997 y registra 20 partidos de liga en 1998. Por lo tanto, la evidencia no afirma una aparición sénior positiva en 1997. Atlético Mineiro aparece dos veces porque el regreso de 2013 produjo apariciones competitivas. No se afirma una fila de club en 2014: los registros detallados por temporada terminan en 2013, y los cargos posteriores de embajador y director técnico no fueron etapas como jugador.",
+    "esClubNotes": {
+      "0": "La inscripción profesional está fechada en 1997, pero las apariciones sénior positivas solo quedan acreditadas en 1998: el texto de Wikipedia sitúa el debut con el primer equipo en 1998, mientras que National Football Teams no muestra un total de apariciones en 1997 y registra 20 partidos de liga en 1998.",
+      "5": "Segunda etapa como jugador; los registros detallados muestran apariciones competitivas en 2013, no una fila separada de actividad en 2014."
+    }
+  },
+  {
+    "id": "ramires",
+    "name": "Ramires",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Joinville",
+        "years": "2006–2007"
+      },
+      {
+        "name": "Cruzeiro",
+        "years": "2007–2009",
+        "note": "Initial loan followed by a permanent move in January 2008, merged as one uninterrupted playing spell."
+      },
+      {
+        "name": "Benfica",
+        "years": "2009–2010"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2010–2016"
+      },
+      {
+        "name": "Jiangsu Suning",
+        "years": "2016–2019",
+        "note": "Last competitive appearance was in 2017; zero league appearances in 2018 and release in May 2019, so the endpoint marks departure rather than continuous play."
+      },
+      {
+        "name": "Palmeiras",
+        "years": "2019–2020"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ramires",
+        "title": "Ramires"
+      },
+      {
+        "url": "https://national-football-teams.com/player/31568/Ramires.html",
+        "title": "Ramires (Player) | National Football Teams"
+      },
+      {
+        "url": "https://www.chelseafc.com/en/news/article/ramires-announces-retirement",
+        "title": "Ramires announces retirement"
+      }
+    ],
+    "notes": "Royal Sport Club and the 2005–2006 Joinville period are youth rows. Cruzeiro’s loan-to-permanent period is one continuous node. Jiangsu remains a single stint through his 2019 release, but its note discloses that the last appearance was in 2017 and the 2018 league row was zero. He left Palmeiras in November 2020 and formally announced retirement in 2022; the announcement is not used to extend the playing years.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "brasileirao"
+    ],
+    "esNotes": "Royal Sport Club y el período 2005–2006 en Joinville son filas juveniles. La cesión al Cruzeiro seguida del traspaso permanente forma un único nodo continuo. Jiangsu se mantiene como una sola etapa hasta su salida en 2019, pero la nota aclara que la última aparición fue en 2017 y que la fila liguera de 2018 fue de cero partidos. Dejó Palmeiras en noviembre de 2020 y anunció formalmente su retiro en 2022; el anuncio no se usa para prolongar los años como jugador.",
+    "esClubNotes": {
+      "1": "Cesión inicial seguida de un traspaso permanente en enero de 2008, reunidos en una sola etapa ininterrumpida como jugador.",
+      "4": "La última aparición competitiva fue en 2017; tuvo cero apariciones ligueras en 2018 y fue liberado en mayo de 2019, por lo que el final marca la salida y no una actividad continua."
+    }
+  },
+  {
+    "id": "julio-cesar",
+    "name": "Júlio César",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Flamengo",
+        "years": "1997–2005",
+        "note": "Senior debut on 17 May 1997; the 1997 and 1999 league rows are zero, but the 1997 cup appearance establishes senior competitive play."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2005–2012"
+      },
+      {
+        "name": "Queens Park Rangers",
+        "years": "2012–2014",
+        "note": "The 2013/14 league total was zero, but he made one cup appearance before the Toronto loan."
+      },
+      {
+        "name": "Toronto FC",
+        "years": "2014",
+        "note": "Loan; he moved on to Benfica without a later QPR playing return."
+      },
+      {
+        "name": "Benfica",
+        "years": "2014–2017"
+      },
+      {
+        "name": "Flamengo",
+        "years": "2018",
+        "note": "Professional comeback and second playing spell; one Série A and one other competitive appearance before retirement."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar_(football_goalkeeper,_born_1979)",
+        "title": "Júlio César (football goalkeeper, born 1979)"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/1011/Julio_Cesar_1.html",
+        "title": "Júlio César (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Chievo is excluded: he was registered there in 2005 solely because non-EU rules prevented an immediate Inter registration, and both detailed tables show zero appearances in every competition. QPR is retained through 2014 because he made a cup appearance despite zero league appearances in 2013/14. The Toronto loan is followed directly by Benfica, so no ownership-only QPR return is inserted. The 2018 Flamengo comeback is genuine competitive senior play.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "brasileirao"
+    ],
+    "esNotes": "Se excluye al Chievo: fue inscrito allí en 2005 únicamente porque las reglas sobre extracomunitarios impedían una inscripción inmediata con el Inter, y ambas tablas detalladas muestran cero apariciones en todas las competiciones. Se conserva al QPR hasta 2014 porque disputó un partido de copa pese a las cero apariciones ligueras de 2013/14. A la cesión al Toronto le siguió directamente el Benfica, por lo que no se añade un regreso al QPR basado solo en la titularidad contractual. El regreso al Flamengo en 2018 fue actividad competitiva sénior real.",
+    "esClubNotes": {
+      "0": "Debut sénior el 17 de mayo de 1997; las filas ligueras de 1997 y 1999 muestran cero, pero la aparición de copa de 1997 establece actividad competitiva sénior.",
+      "2": "El total liguero de 2013/14 fue cero, pero disputó un partido de copa antes de la cesión al Toronto.",
+      "3": "Cesión; pasó después al Benfica sin un regreso posterior como jugador al QPR.",
+      "5": "Regreso profesional y segunda etapa como jugador; una aparición en la Série A y otra competitiva antes del retiro."
+    }
+  }
+]

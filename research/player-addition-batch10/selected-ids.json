@@ -1,0 +1,78 @@
+{
+  "targetCount": 50,
+  "continents": {
+    "Europe": [
+      "johan-elmander",
+      "vegard-heggem",
+      "heidar-helguson",
+      "hermann-hreidarsson",
+      "gretar-steinsson",
+      "johannes-karl-gudjonsson",
+      "karel-poborsky",
+      "jan-koller",
+      "vladimir-smicer",
+      "paulo-futre",
+      "joao-pinto",
+      "tomas-brolin",
+      "martin-dahlin",
+      "sebastian-larsson",
+      "gheorghe-hagi",
+      "davor-suker",
+      "jari-litmanen",
+      "andriy-shevchenko",
+      "clarence-seedorf",
+      "predrag-mijatovic",
+      "peter-schmeichel",
+      "hakan-sukur",
+      "ivan-rakitic",
+      "christian-vieri",
+      "ruud-van-nistelrooy"
+    ],
+    "South America": [
+      "jorge-soto",
+      "fabian-estay",
+      "freddy-rincon",
+      "denis-caniza",
+      "nelson-cuevas",
+      "paulo-da-silva",
+      "ruben-paz",
+      "paolo-montero",
+      "patricio-yanez",
+      "ivo-basay",
+      "mark-gonzalez",
+      "matias-fernandez",
+      "alvaro-recoba",
+      "roberto-palacios",
+      "flavio-maestri",
+      "paolo-guerrero",
+      "carlos-lobaton",
+      "luis-advincula",
+      "alex",
+      "adriano",
+      "lucio",
+      "maicon",
+      "gilberto-silva",
+      "ramires",
+      "julio-cesar"
+    ]
+  },
+  "rejectedPromotions": [
+    {
+      "id": "franco-baresi",
+      "reason": "His ordered playable route would be AC Milan only, identical to Paolo Maldini's visible club-name signature."
+    }
+  ],
+  "reserves": [
+    "roy-makaay",
+    "edgar-davids",
+    "sami-hyypia",
+    "jens-lehmann",
+    "alexander-frei",
+    "goran-pandev",
+    "robert-prosinecki",
+    "dries-mertens",
+    "vincent-kompany",
+    "joao-moutinho",
+    "antonio-cassano"
+  ]
+}

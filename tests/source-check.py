@@ -17,7 +17,7 @@ players=json.loads((root/'research/verified-players.json').read_text())
 for p in players:
     assert f'### {p["name"]}\n' in body
     assert len({s['url'] for s in p['sources']})>=2
-    assert all(s['url'].rstrip('/') in ledger.values() for s in p['sources'])
+    assert all(s['url'] in ledger.values() or s['url'].rstrip('/') in ledger.values() for s in p['sources'])
 audit=(root/'DATA_AUDIT.md').read_text()
 audit_body,audit_block=audit.split('\nSources:\n')
 audit_ledger={s['id']:s['url'] for s in json.loads((root/'research/reaudit-citations.json').read_text())['sources']}

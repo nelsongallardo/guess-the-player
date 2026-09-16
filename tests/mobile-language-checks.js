@@ -30,7 +30,7 @@ async page => {
         }
         return checked;
       },{locale});
-      ok(rows.length===160&&new Set(rows).size===160,'Every player checked');cases.push({locale,width,players:rows.length});
+      ok(rows.length===210&&new Set(rows).size===210,'Every player checked');cases.push({locale,width,players:rows.length});
     }
   }
   await page.goto(url+'?lang=es');await page.setViewportSize({width:375,height:667});

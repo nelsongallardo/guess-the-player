@@ -1,0 +1,30 @@
+[
+  {
+    "id": "nelson-cuevas",
+    "name": "Nelson Cuevas",
+    "chronologyDecision": "Split River Plate into 1998–2003 and an actual 2003–2004 playing return around the 2003 Shanghai loan; record Pachuca in 2005–2006 as a loan from Club América.",
+    "exclusions": [
+      "Sport Colombia (1997) and Tembetary (1997–1998) remain excluded because National Football Teams records zero league appearances and the second source does not establish positive competitive appearances."
+    ],
+    "unresolvedCaveats": [],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Nelson_Cuevas",
+        "title": "Nelson Cuevas",
+        "domain": "en.wikipedia.org",
+        "excerpts": [
+          "- **Senior career***\n- Years: Team Apps ( Gls)\n- 1997: Sport Colombia\n- 1997–1998: Tembetary\n- 1998–2004: River Plate 74 (10)\n- 2003: → Shanghai COSCO Sanlin (loan) 24 (6)\n- 2005–2006: Pachuca 47 (16)",
+          "Born in Asunción, Paraguay, Cuevas started his career at Tembetary, a lower division club from Paraguay, before moving to River Plate of Argentina in 1998. He will forever be remembered by River fans for his memorable goals against Racing and Boca, the first resulting in River's championship win. In the 2004–05 season, he was transferred to Club América of Mexico, who loaned him out to Pachuca, where he was champion in the year 2006. He then returned to Club América."
+        ]
+      },
+      {
+        "url": "https://national-football-teams.com/old/player/5133/Nelson_Cuevas.html",
+        "title": "Nelson Cuevas | National Football Teams",
+        "domain": "national-football-teams.com",
+        "excerpts": [
+          "2005/06\t\tPachuca CF\t33\t15\t2 (I)\t\t-\n\t2004/05\t\tPachuca CF\t14\t1\t5 (I)\t-\t-\n\t2004/05\t\tRiver Plate Buenos Aires\t17\t5\t4 (I)\t-\t-\n\t2003/04\t\tRiver Plate Buenos Aires\t6\t0\t2 (I)\t\t-\n\t2003\t\tShanghai International\t24\t6\t2 (I)\t-\t-\n\t2002/03\t\tRiver Plate Buenos Aires\t13\t1\t1 (I)\t\t-"
+        ]
+      }
+    ]
+  }
+]

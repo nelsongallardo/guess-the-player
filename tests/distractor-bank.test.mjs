@@ -57,7 +57,7 @@ test('every target has four same-system contemporaries; tight era tiers cannot b
 });
 
 test('bank answers remain valid after guesses, hints, save reload and Next',()=>{
-  const s=g.create('hard','all'),p=players.find(p=>p.id==='fernando-couto');
+  const s=g.create('hard','all'),p=players.find(p=>p.id==='gheorghe-hagi');
   s.deck=[p.id,...s.deck.filter(id=>id!==p.id)];
   s.rounds=[{options:g.optionsFor(p),guesses:[],hints:0,difficulty:'hard'}];
   // With 9 distractors now offered, pick specifically a bank-sourced wrong

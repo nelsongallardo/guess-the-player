@@ -1,6 +1,6 @@
 async page => {
   const ok=(value,message)=>{if(!value)throw new Error(message);};
-  const saves=[__LEGACY_SAVE__,__LEGACY_SAVE_40__,__LEGACY_SAVE_50__,__LEGACY_SAVE_60__],results=[];
+  const saves=[__LEGACY_SAVE__,__LEGACY_SAVE_40__,__LEGACY_SAVE_50__,__LEGACY_SAVE_60__,__LEGACY_SAVE_160__],results=[];
   let currentTotal;
   for(const legacy of saves){
     const total=legacy.deck.length;

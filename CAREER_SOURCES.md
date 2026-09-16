@@ -1624,6 +1624,308 @@ Universitario in 2002 is the first senior club; Unión Minas was youth football.
 Reviewed source links: [448], [449].
 <!-- END PLAYER ADDITION BATCH 9 -->
 
+<!-- BEGIN PLAYER ADDITION BATCH 10 -->
+### Johan Elmander
+
+Holmalund has senior playing rows in both sources from 1997. Djurgården and NAC were successive loans; no unplayed Feyenoord return is inserted. Norwich was a loan, followed directly by Brøndby rather than an ownership-only Galatasaray node. Elmander replaces Anders Svensson: Svensson has a Hestrafors youth/senior conflict (Wikipedia youth through 1992 versus two senior appearances in NFT in 1992).
+
+Reviewed source links: [450], [451].
+
+### Vegard Heggem
+
+Both sources list adult senior Rennebu (1991) and Orkdal (1992–94) before Rosenborg. These developmental lower-league senior spells are retained; Wikipedia calls the 1995 Rosenborg match his professional debut. Endpoint is 2003 contract departure/retirement, not last appearance (2000); injuries prevented play in his final two seasons. Replaces Tore André Flo, whose Stryn classification conflicts between Wikipedia youth and NFT senior 1990–92 rows.
+
+Reviewed source links: [452], [453].
+
+### Heiðar Helguson
+
+Dalvík first-team debut in 1993 follows eight years of youth development; references to reserves at age 13 do not establish adult-pyramid competitive play and are not promoted to a senior node. NFT coverage starts in 1997 and does not independently establish the earliest Dalvík years. Continuous 2008 loan-to-permanent QPR spell merged; actual QPR return after the Watford loan retained. Endpoint 2013 Cardiff; 2015 Skautafélag Reykjavíkur lower-league retirement appearance excluded. Wikipedia first Þróttur year differs between table (1995) and prose transfer (1994); neither changes the opening club/year.
+
+Reviewed source links: [454], [455].
+
+### Hermann Hreiðarsson
+
+ÍBV senior first-team start 1993. Wikipedia records four ÍBV league appearances in 2013 while also managing, so this is a playing return, not coaching-only. NFT ends at Coventry in 2012 and does not independently cover that comeback. Exclude Fylkir 2014: Wikipedia career statistics show zero appearances across league and cups, not evidence of senior play. End is last documented playing stint 2013, not later managerial employment.
+
+Reviewed source links: [456], [457].
+
+### Grétar Steinsson
+
+KS senior 1997–98 precedes ÍA youth 1998–99; ÍA is not the opening senior club. NFT confirms KS in 1998 but does not independently supply the 1997 start. Wikipedia infobox says AZ 2006 while the same article prose and NFT show playing in 2005/06; ordered route unaffected, no exact transition date encoded. Kayserispor final senior stint 2012–13.
+
+Reviewed source links: [458], [459].
+
+### Jóhannes Karl Guðjónsson
+
+This is Jóhannes Karl (Joey), not Eiður Smári Guðjohnsen, which would duplicate the existing playable Eiður Guðjohnsen. KA is the first senior club in 1997 despite ÍA youth membership. No unplayed Genk/Betis ownership-only returns inserted between loans. HK 2016–17 has 13 documented league appearances in the second tier; retained as actual player-manager senior football, not solely coaching. National team Iceland.
+
+Reviewed source links: [460], [461].
+
+### Karel Poborský
+
+Senior first-team start follows Wikipedia 1991, independently corroborated by 1991/92 appearances; NFT also has an unquantified 1990/91 row, which is not treated as proof of an earlier playing debut. Returned to České Budějovice in 2005 and retired May 2007. Winger normalized to broad Midfielder. Czech geography maps the Czechoslovak opening club to czechia.
+
+Reviewed source links: [462], [463].
+
+### Jan Koller
+
+First professional senior spell is Sparta 1994, following Wikipedia senior/youth split. NFT has unquantified 1992/93 and 1993/94 ZVVZ Milevsko rows while Wikipedia puts Milevsko in youth; those rows do not establish professional play and are excluded, with this boundary explicitly qualified. Career ends at injury retirement in 2011. NFT later Monaco C and Smetanova Lhota amateur/recreational rows are outside the professional-career scope. Cannes is a documented playing spell, retained despite third-tier level.
+
+Reviewed source links: [464], [465].
+
+### Vladimír Šmicer
+
+Slavia senior career starts 1992 after Slavia youth membership. The 2007–09 return is playing, not youth or coaching. Liverpool official history independently corroborates role and 1999–2005 Liverpool stint; it does not independently establish every non-Liverpool date. Czech club geography maps to czechia.
+
+Reviewed source links: [466], [467].
+
+### Jorge Soto
+
+First senior system: Peru, Deportivo Municipal. Exclude the unused 2000 Flamengo loan: Wikipedia gives zero league appearances, NFT omits it, and Globo explicitly reports that he never played a match. This is not a cup-only spell. Retain the two actual Sporting Cristal returns after Lanús and San Luis; coaching is excluded.
+
+Reviewed source links: [468], [469], [470].
+
+### Fabián Estay
+
+First senior system: Chile, Universidad Católica. Start-year qualification: NFT records one senior league appearance in 1985, whereas Wikipedia labels 1985–1987 youth and starts its senior infobox in 1987. Use the positive senior-appearance row for the matching-era lower bound, not a claimed exact debut day; the source disagreement remains explicit. Both sources corroborate the club route, including second-tier Acapulco and the actual Toluca return, ending with Palestino in 2006.
+
+Reviewed source links: [471], [472].
+
+### Freddy Rincón
+
+First senior system: Colombia, Atletico Buenaventura. A same-system contemporary for Carlos Valderrama, whose Colombian debut (1980) is 6 years earlier and whose 1980-2002 career overlaps Rincon's 1986-2004 span.
+
+Reviewed source links: [473], [474].
+
+### Denis Caniza
+
+First senior system: Paraguay, Olimpia - the same club as Roque Santa Cruz's first senior club, corroborating the system. Overlaps Santa Cruz's 1997-2026 career.
+
+Reviewed source links: [475], [476].
+
+### Nelson Cuevas
+
+The displayed route begins at River Plate in 1998, the first club for which the retrieved evidence establishes positive senior competitive appearances. Sport Colombia and Tembetary are excluded because the National Football Teams table records zero league appearances and the other retrieved source does not establish positive competitive appearances. River is split around the 2003 Shanghai COSCO Sanlin loan because National Football Teams records positive River appearances both before and after Shanghai, establishing an actual 2003–2004 playing return rather than an ownership-only node. Pachuca is shown as a 2005–2006 loan from Club América.
+
+Reviewed source links: [477], [478].
+
+### Paulo da Silva
+
+First senior system: Paraguay, Atlantida. Overlaps Roque Santa Cruz's 1997-2026 career (debut difference of 2 years). His late-career 'Independiente' (2023) is the Paraguayan club, distinguished here from Argentina's Independiente and Colombia's Independiente Medellin/Santa Fe. The saved Wikipedia extract states that he retired after the final match of the 2024 season.
+
+Reviewed source links: [479], [480].
+
+### Paulo Futre
+
+Portugal 1980s-debut peer for Figo, Rui Costa, Fernando Couto and Paulo Sousa, closing the contemporary gap reopened when Couto and Sousa were promoted to the playable roster in the ninth expansion. Won the 1987 European Cup with Porto before an extensive Spanish, French, Italian, English and Japanese career; a Portuguese international from age 17.
+
+Reviewed source links: [481], [482].
+
+### Rubén Paz
+
+Uruguay-start peer for Enzo Francescoli, closing the remainder of his contemporary gap. Wikipedia's earlier 1975-1977 'Peñarol de Artigas' entry carries no appearance total and is a distinct, minor Artigas-department club, not the major Montevideo institution of the same generic name; it is excluded as an unresolved/lower-tier start in the same spirit as this project's established youth exclusions, with Peñarol (Montevideo) used as the first senior club instead. The long, return-heavy lower-division tail is retained in full as documented, matching this project's existing precedent (Rivaldo, Romário, Roque Santa Cruz).
+
+Reviewed source links: [483], [484].
+
+### Paolo Montero
+
+Uruguay-start peer for Daniel Fonseca (debut 1990 vs Fonseca's 1988, two years apart, overlapping 1990-2003), closing his contemporary gap reopened when Fonseca was promoted to the playable roster in the ninth expansion. A long-serving Juventus centre-back, later club captain; retired at Peñarol in a second spell.
+
+Reviewed source links: [485], [486].
+
+### João Pinto
+
+The Atlético Madrid spell was with adult-pyramid reserve Atlético Madrileño and is retained. The three Boavista periods are genuine returns. Youth teams, national teams and post-playing work are excluded.
+
+Reviewed source links: [487], [488].
+
+### Tomas Brolin
+
+Näsvikens was adult fourth-division football from age 14 and is retained; the earlier 1976–83 period there was youth football. FC Zürich and the second Parma spell were loans. No ownership-only Leeds return is inserted between the loans because the sources show no further Leeds first-team appearance. Hudiksvalls ABK is excluded as a one-off lower-division cameo after Brolin had announced his retirement, consistent with the policy exclusion for post-retirement amateur appearances. Youth, national-team and post-playing work are excluded.
+
+Reviewed source links: [489], [490].
+
+### Martin Dahlin
+
+Wikipedia classifies Lunds BK only as youth and starts the senior infobox at Malmö in 1987, but two independent career databases place Dahlin with Lunds BK in 1985–86; National Football Teams records 30 appearances in Sweden’s third tier, so the adult-pyramid spell is retained with a disclosed classification conflict. The 1996–97 Mönchengladbach period was a loan return from Roma. Hamburger SV was a loan from Blackburn; no unplayed Blackburn return is inserted after it. Retirement followed in 1999. Youth, national-team and agency work are excluded.
+
+Reviewed source links: [491], [492], [493].
+
+### Sebastian Larsson
+
+The 2004 start follows Larsson’s first-team League Cup debut, not his earlier IFK Eskilstuna and Arsenal youth years. His Birmingham loan became permanent without a break, so it is one continuous club node. Arsenal reserve football and the isolated Sunderland U23 row were in closed reserve competitions and are excluded. AIK is the final professional spell through retirement in 2022. Coaching and national-team records are excluded.
+
+Reviewed source links: [494], [495], [496].
+
+### Patricio Yáñez
+
+First senior system: Chile, San Luis in 1977; the earlier Alto Florida and San Luis youth entries are excluded. Retain the Real Zaragoza loan, but do not add an ownership-only Real Valladolid return because the sourced route proceeds to Real Betis. Wikipedia labels the Zaragoza loan 1985–86 while NFT places Zaragoza in 1986/87 after Valladolid's 1985/86 row; the route is secure but the season-label difference is disclosed. The 1995 endpoint follows the documented Colo-Colo stint even though NFT's last listed league season is 1994. Post-retirement media work is excluded.
+
+Reviewed source links: [497], [498].
+
+### Ivo Basay
+
+First senior system: Chile, Magallanes in 1983; Magallanes youth football is excluded. Retain the 1984 Curicó Unido loan and the evidenced 1985 Magallanes playing return before Everton. The full documented route then runs through Stade Reims, Necaxa, Boca Juniors and Colo-Colo, ending in 1999. Management and commentary work are excluded.
+
+Reviewed source links: [499], [500].
+
+### Mark González
+
+Country follows the senior national team represented (Chile), not South African birthplace. First senior system: Chile, Universidad Católica in 2002; SG Borken and Universidad Católica youth football are excluded. Order actual play as Albacete → Real Sociedad loan → Liverpool: Liverpool owned his registration during the 2006 Real Sociedad loan, but he did not make his Liverpool competitive debut until the subsequent return, so no ownership-only Liverpool node is inserted before the loan. Merge Universidad Católica's continuous 2014 loan-to-permanent period into one return node. Retain second-tier Magallanes through 2019. Post-retirement media, legends matches and coaching study are excluded.
+
+Reviewed source links: [501], [502].
+
+### Matías Fernández
+
+Country follows the senior national team represented (Chile), not Argentine birthplace. First senior system: Chile, Colo-Colo in 2004; Unión La Calera and Colo-Colo youth football are excluded. Retain the 2016–2017 AC Milan loan. Do not insert an ownership-only Fiorentina return after the loan because both career tables proceed directly to Necaxa with no evidenced post-loan Fiorentina appearance. Retain the genuine 2020 Colo-Colo playing return and final Deportes La Serena seasons through 2022; the 2023 retirement announcement does not extend the playing endpoint. Post-retirement coaching study is excluded.
+
+Reviewed source links: [503], [504].
+
+### Álvaro Recoba
+
+The Venezia and Torino spells were loans. Inter Milan is repeated after Venezia because Recoba genuinely returned and played for Inter; no post-Torino Inter node is inserted because the Torino loan ran through the end of his Inter period. His later Danubio and Nacional spells are genuine playing returns. Youth and managerial work are excluded.
+
+Reviewed source links: [505], [506].
+
+### Roberto Palacios
+
+The route preserves three Sporting Cristal periods, two Tecos periods and two Morelia periods as genuine returns. The one-appearance Al-Nassr spell is retained. Although the summary table labels his last Cristal membership through 2012, the biography says he retired at the end of the 2011 club season and National Football Teams records no 2012 club appearances, so the playing-career endpoint is 2011; his 2012 Peru farewell is not a club spell.
+
+Reviewed source links: [507], [508].
+
+### Flavio Maestri
+
+National Football Teams records first-team league appearances in 1990, so the start follows the first evidenced playing year rather than Wikipedia's 1989 membership label. San Luis, Vitória and Shanghai Jiucheng were loans. Sporting Cristal is repeated after San Luis because he returned and played before the Vitória loan; Alianza Lima is repeated after Shanghai because he returned and played in 2006–07. Contemporary narrative says Alianza did not renew at the end of 2007 and that he then signed for Sport Boys, so Sport Boys is treated as a new spell rather than an ownership-only loan despite the summary table's loan arrow. Youth and coaching are excluded.
+
+Reviewed source links: [509], [510].
+
+### Paolo Guerrero
+
+Bayern Munich II is included because it competed in the adult German league pyramid; the overlapping first-team Bayern spell follows by first senior appearance. Alianza Lima's 1992–2002 period was youth football and is excluded, while his 2024 return is senior play. The endpoint is the 2026 research snapshot because FotMob records 2026 Liga 1 appearances and he remains active for Alianza Lima. No loans or ownership-only returns are inserted.
+
+Reviewed source links: [511], [512], [513].
+
+### Carlos Lobatón
+
+Sport Agustino is included because the Spanish biography explicitly places his 1998 debut in Peru's professional second division, an adult-pyramid competition; overlapping Sporting Cristal youth membership is excluded. The later route follows the 2000–2019 senior appearance record. His formal retirement was announced on 3 January 2020, but his last playing season was 2019, so the playing endpoint is 2019. Post-playing Sporting Cristal management is excluded.
+
+Reviewed source links: [514], [515].
+
+### Luis Advíncula
+
+Juan Aurich is the first displayed senior club and the independently reported site of his 2009 professional debut, so the profile belongs to the Peru system; 2009 is within eight years of both Jefferson Farfán's 2001 start and Juan Manuel Vargas's 2002 start. Sporting Cristal's 2010–2012 entry remains one continuous displayed playing spell: the brief Tavriya Simferopol registration produced zero appearances and is excluded, while his immediate 2012 loan back did not create a different played-for-club node. Ponte Preta, the separate 2014 Sporting Cristal return, Vitória Setúbal, Newell's Old Boys and Lobos BUAP were loans. No parent-club return is inserted after Ponte Preta, the 2014 Sporting Cristal/Vitória sequence, Newell's or Lobos because no intervening return to play is evidenced. Rayo Vallecano's 2018 loan and uninterrupted permanent spell are merged into one node. Alianza Lima is retained through the 2026 research snapshot because independent current-season evidence records senior Liga 1 minutes. Youth football and the unused Tavriya registration are excluded.
+
+Reviewed source links: [516], [517], [518].
+
+### Alex
+
+Parma is excluded: both sources record zero league appearances, and the narrative says he played only friendlies there. The displayed chronology follows actual competitive play, including real Palmeiras and Cruzeiro returns during Parma ownership rather than an ownership-only Parma node. Youth football and later coaching are excluded.
+
+Reviewed source links: [519], [520].
+
+### Adriano
+
+The unused 2012 Flamengo registration is excluded because it produced no established competitive appearance. Miami United is also excluded: it was an NPSL move outside this professional-career scope; the career table records zero league appearances and only one other match, while the NPSL source confirms the club and competition. Inter is shown as two genuine returns around the São Paulo loan. Atlético Paranaense is retained because he made four competitive appearances in all competitions.
+
+Reviewed source links: [521], [522], [523].
+
+### Lúcio
+
+Guará is retained because the zero-league infobox row masks a documented Copa do Brasil appearance. Bayer Leverkusen II is an adult-pyramid competitive reserve appearance. The 2018 Gama row is excluded as a semi-professional Brasiliense-league comeback; later Série D/Copa do Brasil play for Brasiliense is retained. The 2020 endpoint marks his retirement announcement after his last recorded competitive season in 2019.
+
+Reviewed source links: [524], [525], [526].
+
+### Maicon
+
+The 2000 Cruzeiro start is retained because the detailed table records two competitive non-league appearances despite zero league appearances. His 2019 Criciúma return is a genuine professional comeback. The later Sona spell in Italy’s Serie D and Tre Penne’s two-match UEFA publicity contract are excluded as post-retirement amateur/semi-professional football outside this professional scope; Tre Penne’s own announcement says the contract was only for the two Conference League ties. Botafogo training without a signed contract is also excluded.
+
+Reviewed source links: [527], [528], [529].
+
+### Gilberto Silva
+
+The 1997–2000 América Mineiro span follows the senior-career membership table, but the debut year is genuinely conflicted: Wikipedia's infobox begins the senior spell in 1997 while its prose says he made his senior debut in 1998; National Football Teams likewise shows no positive appearance total for 1997 and 20 league appearances in 1998. The evidence therefore does not claim a positive 1997 senior appearance. Atlético Mineiro is shown twice because the 2013 return produced competitive appearances. No 2014 club row is asserted: the detailed season records end in 2013, and later ambassador and technical-director roles are not playing spells.
+
+Reviewed source links: [530], [531].
+
+### Ramires
+
+Royal Sport Club and the 2005–2006 Joinville period are youth rows. Cruzeiro’s loan-to-permanent period is one continuous node. Jiangsu remains a single stint through his 2019 release, but its note discloses that the last appearance was in 2017 and the 2018 league row was zero. He left Palmeiras in November 2020 and formally announced retirement in 2022; the announcement is not used to extend the playing years.
+
+Reviewed source links: [532], [533], [534].
+
+### Júlio César
+
+Chievo is excluded: he was registered there in 2005 solely because non-EU rules prevented an immediate Inter registration, and both detailed tables show zero appearances in every competition. QPR is retained through 2014 because he made a cup appearance despite zero league appearances in 2013/14. The Toronto loan is followed directly by Benfica, so no ownership-only QPR return is inserted. The 2018 Flamengo comeback is genuine competitive senior play.
+
+Reviewed source links: [535], [536].
+
+### Gheorghe Hagi
+
+FC Constanța and Sportul Studențesc are senior first-team rows: the source separates Hagi's youth years from 18 senior FC Constanța appearances in 1982/83 and lists four Sportul seasons through 1986/87. The displayed 1983–1987 Sportul range uses that final season's endpoint. He joined Steaua for the European Super Cup on an initial one-match loan and was then retained. His playing career ended with Galatasaray in 2001; later coaching work and the testimonial are excluded.
+
+Reviewed source links: [537], [538], [539].
+
+### Davor Šuker
+
+Šuker began senior first-division play with Osijek in 1984 at age 16 and retired after the 2002/03 season with 1860 Munich. His national-team history spans Yugoslavia and Croatia; the country hint follows the Croatia team for which he made 68 appearances. Youth and administrative roles are excluded.
+
+Reviewed source links: [540], [541].
+
+### Jari Litmanen
+
+The in-scope senior route runs from his 1987 Reipas debut through his second HJK spell and last professional match in 2011. Ajax (2002–2004), Lahti (2008–2010), and HJK (2011) are genuine returns; there are no loan spells in the route. Fulham is excluded because he played only for the reserves and made no competitive first-team appearance. Ajax reserve appearances are not displayed as a separate club spell from his continuous Ajax tenure. His one-off 2025 Tallinna Kalev Juunior appearance in Estonia’s fourth tier is excluded as post-retirement football.
+
+Reviewed source links: [542], [543], [544], [545].
+
+### Andriy Shevchenko
+
+Dynamo Kyiv-2 is retained because it competed in the adult Ukrainian pyramid and Shevchenko made 51 league appearances there; it overlaps his first-team Dynamo period. The 2008/09 Milan spell was a playing loan return, followed by a genuine return to Dynamo Kyiv. Youth football, politics and management are excluded.
+
+Reviewed source links: [546], [547].
+
+### Clarence Seedorf
+
+The route follows six professional first-team clubs from his 1992 Ajax debut through Botafogo. Botafogo is retained as a substantive professional spell with 58 league appearances, not a ceremonial tail. Later managerial and advisory roles are excluded.
+
+Reviewed source links: [548], [549].
+
+### Predrag Mijatović
+
+Budućnost Titograd is displayed under the source-era name. The legacy country label reflects the senior national side represented across the Yugoslavia/Serbia and Montenegro succession; ESPN independently labels his nationality Yugoslavia. Youth football and later football-administration roles are excluded.
+
+Reviewed source links: [550], [551].
+
+### Peter Schmeichel
+
+The displayed route begins with 46 senior appearances for lower-division Gladsaxe-Hero from 1981; its earlier youth rows are excluded. The career then runs continuously through Manchester City in 2003. The Premier League profile independently identifies Schmeichel as a Manchester United goalkeeper.
+
+Reviewed source links: [552], [553].
+
+### Hakan Şükür
+
+All three Galatasaray periods are retained as genuine playing spells. The 1995 Torino row was a loan from Galatasaray; the second return follows Torino, and the third follows the Inter/Parma/Blackburn sequence. He made his professional debut for Sakaryaspor shortly after turning 17 and retired after the final Galatasaray spell in 2008. The Sakaryaspor youth row and later political and other non-playing roles are excluded.
+
+Reviewed source links: [554], [555], [556].
+
+### Ivan Rakitić
+
+Nordstern Basel is now retained: although the league column is 0, the season table records one competitive Swiss Cup qualifier appearance, so calling it a zero-appearance registration was incorrect. FC Basel U21 is retained as an adult-pyramid reserve side because the FC Basel archive records positive 1. Liga appearances in both 2004/05 and 2005/06; the source-era U21 name replaces the unsupported FC Basel II label. The route then runs through overlapping FC Basel first-team play, Schalke 04, Sevilla, Barcelona, a genuine Sevilla return, Al-Shabab and Hajduk Split. Hajduk officially confirmed that he ended his playing career on 7 July 2025 after 39 official appearances for the club.
+
+Reviewed source links: [557], [558], [559], [560], [561].
+
+### Christian Vieri
+
+Sampdoria's July–August 2006 registration is excluded because the senior-career table records 0 appearances; UEFA independently confirms the signing, while RSSSF's appearance ledger moves from Monaco directly to the 2006–2007 Atalanta spell. All three Atalanta playing spells and the short Monaco spell are retained separately. Youth football in Australia and Italy is excluded; the displayed professional route ends with Atalanta in 2009.
+
+Reviewed source links: [562], [563], [564].
+
+### Ruud van Nistelrooy
+
+The route starts with senior Eerste Divisie play for Den Bosch in 1993; Nooit Gedacht and RKSV Margriet are youth-only and excluded. The 2000 Manchester United transfer was postponed and then cancelled, so no unplayed United node is inserted before his actual 2001 move. He retired after Málaga in May 2012.
+
+Reviewed source links: [565], [566].
+<!-- END PLAYER ADDITION BATCH 10 -->
+
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -2074,3 +2376,120 @@ Sources:
 [447] https://www.national-football-teams.com/player/5169/Jefferson_Farfan.html
 [448] https://en.wikipedia.org/wiki/Juan_Manuel_Vargas
 [449] https://www.national-football-teams.com/player/9087/Juan_Vargas.html
+[450] https://en.wikipedia.org/wiki/Johan_Elmander
+[451] https://www.national-football-teams.com/player/6376/Johan_Elmander.html
+[452] https://en.wikipedia.org/wiki/Vegard_Heggem
+[453] https://www.national-football-teams.com/player/28825/Vegard_Heggem.html
+[454] https://en.wikipedia.org/wiki/Hei%C3%B0ar_Helguson
+[455] https://www.national-football-teams.com/player/3057/Hei_Ar_Helguson.html
+[456] https://en.wikipedia.org/wiki/Hermann_Hrei%C3%B0arsson
+[457] https://www.national-football-teams.com/player/3065/Hermann_Hrei_Arsson.html
+[458] https://en.wikipedia.org/wiki/Gr%C3%A9tar_Steinsson
+[459] https://www.national-football-teams.com/player/10977/Gretar_Rafn_Steinsson.html
+[460] https://en.wikipedia.org/wiki/Joey_Gu%C3%B0j%C3%B3nsson
+[461] https://www.national-football-teams.com/player/3086/Johannes_Karl_Gu_Jonsson.html
+[462] https://en.wikipedia.org/wiki/Karel_Poborsk%C3%BD
+[463] https://www.national-football-teams.com/player/1860/Karel_Poborsky.html
+[464] https://en.wikipedia.org/wiki/Jan_Koller
+[465] https://www.national-football-teams.com/player/1824/Jan_Koller.html
+[466] https://en.wikipedia.org/wiki/Vladim%C3%ADr_%C5%A0micer
+[467] https://www.liverpoolfc.com/info/vladimir-smicer
+[468] https://en.wikipedia.org/wiki/Jorge_Soto_(footballer)
+[469] https://www.national-football-teams.com/player/5184/Jorge_Soto.html
+[470] https://ge.globo.com/futebol/times/flamengo/noticia/2025/11/29/antes-de-guerrero-e-trauco-peruano-jorge-soto-teve-passagem-sem-sucesso-pelo-flamengo.ghtml
+[471] https://en.wikipedia.org/wiki/Fabi%C3%A1n_Estay
+[472] https://www.national-football-teams.com/player/13044/Fabian_Estay.html
+[473] https://en.wikipedia.org/wiki/Freddy_Rinc%C3%B3n
+[474] https://www.national-football-teams.com/player/10141/Freddy_Rincon.html
+[475] https://en.wikipedia.org/wiki/Denis_Caniza
+[476] https://www.national-football-teams.com/player/5147/Denis_Caniza.html
+[477] https://en.wikipedia.org/wiki/Nelson_Cuevas
+[478] https://national-football-teams.com/old/player/5133/Nelson_Cuevas.html
+[479] https://en.wikipedia.org/wiki/Paulo_da_Silva
+[480] https://www.national-football-teams.com/player/5149/Paulo_Da_Silva.html
+[481] https://en.wikipedia.org/wiki/Paulo_Futre
+[482] https://www.national-football-teams.com/player/14185/Paulo_Futre.html
+[483] https://en.wikipedia.org/wiki/Rub%C3%A9n_Paz
+[484] https://www.national-football-teams.com/player/15731/Ruben_Paz.html
+[485] https://en.wikipedia.org/wiki/Paolo_Montero
+[486] https://www.national-football-teams.com/player/8175/Paolo_Montero.html
+[487] https://en.wikipedia.org/wiki/Jo%C3%A3o_Pinto
+[488] https://www.uefa.com/news-media/news/01cf-0f84e0a36cad-6337c48973cc-1000--retirement-beckons-for-joao-pinto/
+[489] https://en.wikipedia.org/wiki/Tomas_Brolin
+[490] https://www.getfootballnewsgermany.com/2025/what-happened-to-tomas-brolin-fourth-in-the-1994-ballon-dor/
+[491] https://en.wikipedia.org/wiki/Martin_Dahlin
+[492] https://www.national-football-teams.com/player/14009/Martin_Dahlin.html
+[493] https://www.footballdatabase.eu/en/player/details/14016-martin-dahlin
+[494] https://en.wikipedia.org/wiki/Sebastian_Larsson
+[495] https://arsenal.com/historic/players/sebastian-larsson
+[496] https://www.safc.com/news/team-news/2022/november/seb-larrson-retired
+[497] https://en.wikipedia.org/wiki/Patricio_Ya%C3%B1ez
+[498] https://national-football-teams.com/old/player/17621/Patricio_Yanez.html
+[499] https://en.wikipedia.org/wiki/Ivo_Basay
+[500] https://national-football-teams.com/old/player/14738/Ivo_Basay.html
+[501] https://en.wikipedia.org/wiki/Mark_Gonz%C3%A1lez
+[502] https://national-football-teams.com/old/player/1441/Mark_Gonzalez.html
+[503] https://en.wikipedia.org/wiki/Mat%C3%ADas_Fern%C3%A1ndez_(footballer,_born_1986)
+[504] https://national-football-teams.com/old/player/12422/Matias_Fernandez.html
+[505] https://en.wikipedia.org/wiki/%C3%81lvaro_Recoba
+[506] https://ftp.auf.org.uy/alvaro-recoba/
+[507] https://en.wikipedia.org/wiki/Roberto_Palacios
+[508] https://www.national-football-teams.com/player/5199/Roberto_Palacios.html
+[509] https://en.wikipedia.org/wiki/Flavio_Maestri
+[510] https://www.national-football-teams.com/player/8164/Flavio_Maestri.html
+[511] https://en.wikipedia.org/wiki/Paolo_Guerrero
+[512] https://www.espn.com/soccer/player/bio/_/id/40270/paolo-guerrero
+[513] https://fotmob.com/fi/players/33101/jose-paolo-guerrero
+[514] https://es.wikipedia.org/wiki/Carlos_Lobat%C3%B3n
+[515] https://www.national-football-teams.com/app.php/player/13103/Carlos_Lobaton.html
+[516] https://en.wikipedia.org/wiki/Luis_Adv%C3%ADncula
+[517] https://www.infobae.com/peru/deportes/2026/01/14/el-mono-navarro-montoya-senalo-que-luis-advincula-va-a-jerarquizar-el-futbol-peruano-con-su-llegada-a-alianza-lima/
+[518] https://www.fotmob.com/players/190522/luis-advincula
+[519] https://en.wikipedia.org/wiki/Alex_(footballer,_born_1977)
+[520] https://www.national-football-teams.com/player/1024/-.html
+[521] https://en.wikipedia.org/wiki/Adriano_(footballer,_born_February_1982)
+[522] https://www.national-football-teams.com/player/989/Adriano.html
+[523] https://www.npsl.com/7250/
+[524] https://en.wikipedia.org/wiki/L%C3%BAcio
+[525] https://www.national-football-teams.com/player/994/Lucio_1.html
+[526] https://www.newindianexpress.com/sport/football/2018/Feb/12/2002-fifa-world-cup-winner-lucio-ready-to-play-on-into-40s-1772238.html
+[527] https://en.wikipedia.org/wiki/Maicon_(footballer,_born_1981)
+[528] https://national-football-teams.com/player/8182/Maicon.html
+[529] https://www.trepenne.com/2021/06/14/comunicato-ufficiale-maicon-al-tre-penne/
+[530] https://en.wikipedia.org/wiki/Gilberto_Silva
+[531] https://national-football-teams.com/player/1014/Gilberto_Silva.html
+[532] https://en.wikipedia.org/wiki/Ramires
+[533] https://national-football-teams.com/player/31568/Ramires.html
+[534] https://www.chelseafc.com/en/news/article/ramires-announces-retirement
+[535] https://en.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar_(football_goalkeeper,_born_1979)
+[536] https://www.national-football-teams.com/player/1011/Julio_Cesar_1.html
+[537] https://en.wikipedia.org/wiki/Gheorghe_Hagi
+[538] https://www.romaniansoccer.ro/players/858/clasamente
+[539] https://www.laliga.com/en-GB/news/what-became-of-gica-hagi
+[540] https://en.wikipedia.org/wiki/Davor_%C5%A0uker
+[541] https://www.national-football-teams.com/player/13706/Davor_Suker.html
+[542] https://www.uefa.com/news-media/news/01ed-0f88182bfb4e-952782628a75-1000--litmanen-belongs-in-the-loftiest-company/
+[543] https://eerikkila.fi/en/jari-litmanen-career/
+[544] https://www.nytimes.com/athletic/7037490/2026/02/17/jari-litmanen-liverpool/
+[545] https://en.wikipedia.org/wiki/Jari_Litmanen
+[546] https://en.wikipedia.org/wiki/Andriy_Shevchenko
+[547] https://national-football-teams.com/player/6926/Andriy_Shevchenko.html
+[548] https://en.wikipedia.org/wiki/Clarence_Seedorf
+[549] https://www.uefa.com/news-media/news/0254-0d7cf3e37912-f305bae6c633-1000--clarence-seedorf/
+[550] https://en.wikipedia.org/wiki/Predrag_Mijatovi%C4%87
+[551] https://www.espn.com/soccer/player/_/id/79763/predrag-mijatovic
+[552] https://en.wikipedia.org/wiki/Peter_Schmeichel
+[553] https://www.premierleague.com/en/players/3952/peter-schmeichel/overview
+[554] https://en.wikipedia.org/wiki/Hakan_%C5%9E%C3%BCk%C3%BCr
+[555] https://www.uefa.com/uefaeuro/history/news/0254-0d7babefed49-c1897fe1337b-1000--hakan-sukur-still-towering-in-turkey/
+[556] https://www.uefa.com/uefachampionsleague/news/025a-0eaadda797fc-4e39d3d6db99-1000--hakan-back-at-galatasaray/
+[557] https://www.fcb-archiv.ch/saison/kader?command=detail&id=1611&saison=2005%2F06
+[558] https://en.wikipedia.org/wiki/Ivan_Rakiti%C4%87
+[559] https://www.uefa.com/uefaeuropaleague/news/0280-17bdcdb21a6d-e9c9922dd3cd-1000--ivan-rakitic-on-sevilla-the-man-united-quarter-final-and-the/
+[560] https://hajduk.hr/eng/article/ivan-rakitic-is-a-new-hajduk-player-/7759
+[561] https://hajduk.hr/eng/article/ivan-rakitic--the-end-of-a-brilliant-football-career/7828
+[562] https://en.wikipedia.org/wiki/Christian_Vieri
+[563] https://www.rsssf.org/players/vieridata.html
+[564] https://www.uefa.com/news-media/news/01b7-0e6d5fd49311-4ed2f0fcb906-1000--sampdoria-swoop-to-sign-vieri/
+[565] https://en.wikipedia.org/wiki/Ruud_van_Nistelrooy
+[566] https://national-football-teams.com/player/4636/Ruud_Van_Nistelrooy.html
