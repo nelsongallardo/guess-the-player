@@ -27,9 +27,16 @@ test('the pending 120-player migration declares every candidate foreign-key prer
   const sets = recordsets(fs.readFileSync(ninthMigration, 'utf8'));
   const insertedCandidates = new Set(sets.find(rows => rows[0]?.label)?.map(row => row.id));
   const players = sets.find(rows => rows[0]?.country);
+  const memberships = sets.find(rows => rows[0]?.competition);
   const rivals = sets.find(rows => rows[0]?.candidate_id);
+  const insertedPlayers = new Set(players.map(row => row.id));
   assert.equal(insertedCandidates.size, 179, 'reviewed 120-player candidate set');
+  assert.equal(insertedPlayers.size, 120, 'reviewed 120-player roster');
+  assert.equal(memberships.length, 412, 'reviewed 120-player memberships');
   for (const id of [...players.map(row => row.id), ...rivals.map(row => row.candidate_id)]) {
     assert.ok(insertedCandidates.has(id), `missing candidate prerequisite: ${id}`);
+  }
+  for (const id of [...memberships.map(row => row.player_id), ...rivals.map(row => row.player_id)]) {
+    assert.ok(insertedPlayers.has(id), `missing player prerequisite: ${id}`);
   }
 });
