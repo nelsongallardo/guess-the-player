@@ -1,0 +1,104 @@
+{
+  "mode": "discovery",
+  "targetCount": 0,
+  "constraints": {
+    "continents": [],
+    "countries": [],
+    "competitions": [],
+    "eras": [],
+    "positions": [],
+    "recognizability": "recognisable to regular football followers",
+    "notes": ""
+  },
+  "baseline": {
+    "commit": "",
+    "generatedAt": "YYYY-MM-DDTHH:MM:SSZ",
+    "playableCount": 0,
+    "bankOnlyCount": 0,
+    "rankedCompetitionCount": 0,
+    "gaps": [],
+    "longlistCounts": {
+      "discovered": 0,
+      "beforeDeduplication": 0,
+      "afterDeduplication": 0
+    }
+  },
+  "summary": {
+    "expectedPlayableRecords": 0,
+    "expectedBankOnlyProfiles": 0,
+    "expectedNewCrestKeys": [],
+    "unresolvedDecisions": []
+  },
+  "results": {
+    "selected": [],
+    "reserve": [],
+    "rejected": []
+  },
+  "candidates": [
+    {
+      "name": "",
+      "proposedId": "",
+      "existingStatus": "new",
+      "existingMatch": {
+        "dataset": null,
+        "id": null,
+        "name": null,
+        "evidenceFile": null
+      },
+      "discoveredFrom": [
+        {
+          "sourceFamily": "",
+          "query": "",
+          "url": "",
+          "retrievedAt": "YYYY-MM-DDTHH:MM:SSZ"
+        }
+      ],
+      "country": "",
+      "position": "",
+      "firstSeniorSystem": "",
+      "careerStart": null,
+      "careerEnd": null,
+      "likelyCompetitions": [],
+      "orderedClubOutline": [],
+      "evidenceLeads": [
+        {
+          "url": "",
+          "domain": "",
+          "reason": ""
+        },
+        {
+          "url": "",
+          "domain": "",
+          "reason": ""
+        }
+      ],
+      "hardGates": {
+        "notAlreadyPlayable": false,
+        "bankStatusResolved": false,
+        "promotionHandled": null,
+        "distinctCareer": false,
+        "seniorScopePlausible": false,
+        "twoDomainsLikely": false,
+        "identityResolved": false,
+        "rivalPlan": false,
+        "constraintsFit": false
+      },
+      "scores": {
+        "recognizability": 0,
+        "careerDistinctiveness": 0,
+        "rosterBalance": 0,
+        "evidenceAvailability": 0,
+        "crestWorkload": 0,
+        "rivalCoverage": 0
+      },
+      "totalScore": 0,
+      "gapServed": [],
+      "crestImpact": "",
+      "rivalPlan": "",
+      "decision": "reserve",
+      "rationale": "",
+      "rejectionReason": "",
+      "nextAction": ""
+    }
+  ]
+}
