@@ -127,8 +127,14 @@ test('forced case-insensitive alias collisions retry safely across concurrent ac
   } finally { sql(original);sql('drop sequence ranked_private.alias_test_sequence'); }
 });
 
-test('roster exporter is current and canonical membership/matching scores equal guest model',()=>{
-  execFileSync(process.execPath,[new URL('scripts/export-ranked-roster.mjs',root).pathname,'--check']);
+test('database (after all applied migrations) and canonical membership/matching scores equal the current guest model',()=>{
+  // Not export-ranked-roster.mjs --check: that compares the inline model
+  // against ONLY the frozen 202609130002_ranked_roster.sql export, which is
+  // expected to diverge after any legitimate forward-only roster expansion
+  // (derabona-player-addition skill, step 8 - "frozen export trap"). This
+  // test instead verifies the database state produced by replaying every
+  // migration in supabase/migrations/ (frozen export plus every forward
+  // migration since) against the CURRENT inline model - the real contract.
   const html=fs.readFileSync(new URL('index.html',root),'utf8');
   const block=id=>html.match(new RegExp(`<script id="${id}">([\\s\\S]*?)<\\/script>`))[1];
   const ctx=vm.createContext({});vm.runInContext(block('roster-data')+block('game-model'),ctx);
