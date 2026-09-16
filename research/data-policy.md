@@ -54,9 +54,9 @@ python3 research/embed-distractors.py
 node research/audit-distractor-coverage.mjs
 ```
 
-The current bank has 59 profiles; every playable target has four same-system contemporaries under the explicit eight-year debut/overlapping-career heuristic. The assembler normalizes the controlled system/region/role vocabulary but preserves literal source URLs; Santos’s Pepe is displayed as `Pepe (José Macia)` to distinguish him from the modern Portuguese defender.
+The current bank has 33 profiles; every playable target has four same-system contemporaries under the explicit eight-year debut/overlapping-career heuristic. The assembler normalizes the controlled system/region/role vocabulary but preserves literal source URLs; Santos’s Pepe is displayed as `Pepe (José Macia)` to distinguish him from the modern Portuguese defender.
 
-`verified-distractors.json` stores additional researched candidate names and matching features, mirrored exactly in the HTML model. These are not playable timeline records and do not expand the 60-player deck. Wikipedia senior career evidence plus independent sources support first-club system, senior era, club route and broad role; regional `DISTRACTOR_*_SOURCES.md` ledgers and `CONTEMPORARY_DISTRACTOR_SOURCES.md` retain excerpts and caveats. Do not add youth/coaching rows or extend careers to unused contracts. Current endpoints are dated snapshots, not live facts. All bank roles use the existing broad model vocabulary. Raw article dumps are not published. See [ADR 0003](../docs/adr/0003-researched-contemporary-rivals.md).
+`verified-distractors.json` stores additional researched candidate names and matching features, mirrored exactly in the HTML model. These are not playable timeline records and do not expand the 160-player roster. Wikipedia senior career evidence plus independent sources support first-club system, senior era, club route and broad role; regional `DISTRACTOR_*_SOURCES.md` ledgers and `CONTEMPORARY_DISTRACTOR_SOURCES.md` retain excerpts and caveats. Do not add youth/coaching rows or extend careers to unused contracts. Current endpoints are dated snapshots, not live facts. All bank roles use the existing broad model vocabulary. Raw article dumps are not published. See [ADR 0003](../docs/adr/0003-researched-contemporary-rivals.md).
 
 ## Crests and source preservation
 
