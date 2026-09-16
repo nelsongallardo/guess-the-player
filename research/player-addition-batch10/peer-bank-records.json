@@ -1,31 +1,5 @@
 [
   {
-    "id": "franco-baresi",
-    "name": "Franco Baresi",
-    "country": "Italy",
-    "position": "Defender",
-    "start": 1977,
-    "end": 1997,
-    "clubs": [
-      "AC Milan"
-    ],
-    "system": "italy",
-    "region": "europe",
-    "sources": [
-      {
-        "url": "https://en.wikipedia.org/wiki/Franco_Baresi",
-        "excerpt": "AC Milan (1977-1997) - 532 appearances, 16 goals. Baresi spent his entire 20-year career with Serie A club AC Milan."
-      },
-      {
-        "url": "https://www.national-football-teams.com/player/14117/Franco_Baresi.html",
-        "excerpt": "Franco Baresi, Sweeper (SW), born 08-05-1960 in Travagliato, Italy. FIFA Matches 81, FIFA Goals 1."
-      }
-    ],
-    "notes": "Italy-start peer for Roberto Baggio, closing the remainder of his contemporary gap. Genuine one-club career, no reserve or loan ambiguity.",
-    "verifiedAt": "2026-09-12",
-    "evidenceFile": "research/DISTRACTOR_ROSTER_BATCH7_GAPS_SOURCES.md"
-  },
-  {
     "id": "miodrag-belodedici",
     "name": "Miodrag Belodedici",
     "country": "Romania",

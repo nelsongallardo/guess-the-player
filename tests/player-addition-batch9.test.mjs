@@ -34,26 +34,22 @@ test('batch 9 adds exactly fifty reviewed players with a 25/25 continental split
   assert.deepEqual(new Set(records.map(record => record.id)), selected);
   assert.equal(records.filter(record => record.continent === 'Europe').length, 25);
   assert.equal(records.filter(record => record.continent === 'South America').length, 25);
-  assert.equal(model.players.length, 160);
-  assert.equal(verifiedPlayers.length, 160);
+  assert.equal(model.players.length, 210);
+  assert.equal(verifiedPlayers.length, 210);
   assert.deepEqual(new Set(model.players.map(player => player.id)), new Set(verifiedPlayers.map(player => player.id)));
   for (const id of selected) assert.ok(model.players.some(player => player.id === id), id);
 });
 
-test('promotions leave thirty-three bank-only profiles with reviewed regional coverage support', () => {
-  assert.equal(verifiedDistractors.length, 33);
-  assert.equal(model.bank.length, 33);
+test('batch 9 promotions remain playable after subsequent bank promotions', () => {
+  assert.deepEqual(plain(model.bank.map(profile => profile.id)), verifiedDistractors.map(profile => profile.id));
+  assert.equal(verifiedDistractors[0].id, 'franco-baresi');
   for (const id of selected) {
     assert.ok(!verifiedDistractors.some(profile => profile.id === id), id);
     assert.ok(!model.bank.some(profile => profile.id === id), id);
   }
   const names = [...model.players, ...model.bank].map(profile => profile.name);
-  assert.equal(names.length, 193);
-  assert.equal(new Set(names).size, 193);
-  assert.ok(model.bank.some(profile => profile.id === 'joao-pinto'));
-  for (const id of ['tomas-brolin','martin-dahlin','sebastian-larsson','patricio-yanez','ivo-basay','mark-gonzalez','matias-fernandez','alvaro-recoba','roberto-palacios','flavio-maestri','paolo-guerrero','carlos-lobaton','luis-advincula']) {
-    assert.ok(model.bank.some(profile => profile.id === id), id);
-  }
+  assert.equal(names.length, model.players.length + verifiedDistractors.length);
+  assert.equal(new Set(names).size, names.length);
 });
 
 test('all fifty promoted routes have ordered embedded crests and aligned Spanish notes', () => {
@@ -80,7 +76,7 @@ test('all fifty promoted routes have ordered embedded crests and aligned Spanish
 
 test('all newly playable first clubs have an explicit domestic origin-system mapping', () => {
   for (const record of records) {
-    assert.ok(model.game.originFor({clubs: [{name: record.clubs[0].name}]}), `${record.id}: ${record.clubs[0].name}`);
+    assert.ok(model.game.originFor({id: record.id, clubs: [{name: record.clubs[0].name}]}), `${record.id}: ${record.clubs[0].name}`);
   }
 });
 

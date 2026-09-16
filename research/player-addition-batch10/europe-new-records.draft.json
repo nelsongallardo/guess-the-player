@@ -1,0 +1,762 @@
+[
+  {
+    "id": "gheorghe-hagi",
+    "name": "Gheorghe Hagi",
+    "continent": "Europe",
+    "country": "Romania",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "FC Constanța",
+        "years": "1982–1983",
+        "note": "First senior club; displayed under its source-era name in the Farul Constanța lineage."
+      },
+      {
+        "name": "Sportul Studențesc",
+        "years": "1983–1987"
+      },
+      {
+        "name": "Steaua București",
+        "years": "1987–1990",
+        "note": "Joined for the European Super Cup on an initial one-match loan, then retained."
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1990–1992"
+      },
+      {
+        "name": "Brescia",
+        "years": "1992–1994"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1994–1996"
+      },
+      {
+        "name": "Galatasaray",
+        "years": "1996–2001"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gheorghe_Hagi",
+        "title": "Gheorghe Hagi"
+      },
+      {
+        "url": "https://www.romaniansoccer.ro/players/858/clasamente",
+        "title": "Gheorghe HAGI"
+      },
+      {
+        "url": "https://www.laliga.com/en-GB/news/what-became-of-gica-hagi",
+        "title": "What became of... Gica Hagi | LALIGA"
+      }
+    ],
+    "notes": "FC Constanța and Sportul Studențesc are senior first-team rows: the source separates Hagi's youth years from 18 senior FC Constanța appearances in 1982/83 and lists four Sportul seasons through 1986/87. The displayed 1983–1987 Sportul range uses that final season's endpoint. He joined Steaua for the European Super Cup on an initial one-match loan and was then retained. His playing career ended with Galatasaray in 2001; later coaching work and the testimonial are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "FC Constanța y Sportul Studențesc son etapas sénior del primer equipo: la fuente separa los años juveniles de Hagi de sus 18 apariciones sénior con el FC Constanța en 1982/83 y enumera cuatro temporadas con el Sportul hasta 1986/87. El período mostrado del Sportul, 1983–1987, usa el final de esa última temporada. Llegó al Steaua para la Supercopa de Europa mediante una cesión inicial de un partido y después fue retenido. Su carrera como jugador terminó con el Galatasaray en 2001; se excluyen su posterior trabajo como entrenador y el partido homenaje.",
+    "esClubNotes": {
+      "0": "Primer club sénior; se muestra con el nombre de época de la fuente dentro del linaje del Farul Constanța.",
+      "2": "Llegó para la Supercopa de Europa mediante una cesión inicial de un partido y después fue retenido."
+    }
+  },
+  {
+    "id": "davor-suker",
+    "name": "Davor Šuker",
+    "continent": "Europe",
+    "country": "Croatia",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Osijek",
+        "years": "1984–1989"
+      },
+      {
+        "name": "Dinamo Zagreb",
+        "years": "1989–1991"
+      },
+      {
+        "name": "Sevilla",
+        "years": "1991–1996"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1996–1999"
+      },
+      {
+        "name": "Arsenal",
+        "years": "1999–2000"
+      },
+      {
+        "name": "West Ham United",
+        "years": "2000–2001"
+      },
+      {
+        "name": "1860 Munich",
+        "years": "2001–2003"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Davor_%C5%A0uker",
+        "title": "Davor Šuker - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13706/Davor_Suker.html",
+        "title": "Davor Šuker (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Šuker began senior first-division play with Osijek in 1984 at age 16 and retired after the 2002/03 season with 1860 Munich. His national-team history spans Yugoslavia and Croatia; the country hint follows the Croatia team for which he made 68 appearances. Youth and administrative roles are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "Šuker comenzó a jugar en la primera división sénior con el Osijek en 1984, a los 16 años, y se retiró después de la temporada 2002/03 con el 1860 Munich. Su trayectoria internacional abarca Yugoslavia y Croacia; la pista de país sigue a la selección croata, con la que disputó 68 partidos. Se excluyen el fútbol juvenil y los cargos administrativos.",
+    "esClubNotes": {}
+  },
+  {
+    "id": "jari-litmanen",
+    "name": "Jari Litmanen",
+    "continent": "Europe",
+    "country": "Finland",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Reipas",
+        "years": "1987–1990"
+      },
+      {
+        "name": "HJK",
+        "years": "1991"
+      },
+      {
+        "name": "MyPa",
+        "years": "1992"
+      },
+      {
+        "name": "Ajax",
+        "years": "1992–1999"
+      },
+      {
+        "name": "Barcelona",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Liverpool",
+        "years": "2001–2002"
+      },
+      {
+        "name": "Ajax",
+        "years": "2002–2004",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Lahti",
+        "years": "2004"
+      },
+      {
+        "name": "Hansa Rostock",
+        "years": "2005"
+      },
+      {
+        "name": "Malmö FF",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Lahti",
+        "years": "2008–2010",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "HJK",
+        "years": "2011",
+        "note": "Second playing spell; final professional season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://www.uefa.com/news-media/news/01ed-0f88182bfb4e-952782628a75-1000--litmanen-belongs-in-the-loftiest-company/",
+        "title": "Litmanen belongs in the loftiest company | UEFA.com"
+      },
+      {
+        "url": "https://eerikkila.fi/en/jari-litmanen-career/",
+        "title": "Jari Litmanen career - Eerikkilä"
+      },
+      {
+        "url": "https://www.nytimes.com/athletic/7037490/2026/02/17/jari-litmanen-liverpool/",
+        "title": "Jari Litmanen interview: Battling long Covid, winning over Van Gaal, and his lifelong Liverpool love - The Athletic"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Jari_Litmanen",
+        "title": "Jari Litmanen"
+      }
+    ],
+    "notes": "The in-scope senior route runs from his 1987 Reipas debut through his second HJK spell and last professional match in 2011. Ajax (2002–2004), Lahti (2008–2010), and HJK (2011) are genuine returns; there are no loan spells in the route. Fulham is excluded because he played only for the reserves and made no competitive first-team appearance. Ajax reserve appearances are not displayed as a separate club spell from his continuous Ajax tenure. His one-off 2025 Tallinna Kalev Juunior appearance in Estonia’s fourth tier is excluded as post-retirement football.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "La ruta sénior incluida va desde su debut con el Reipas en 1987 hasta su segunda etapa en el HJK y su último partido profesional en 2011. Ajax (2002–2004), Lahti (2008–2010) y HJK (2011) son regresos reales; no hay cesiones en la ruta. Se excluye al Fulham porque solo jugó con el equipo de reservas y no disputó ningún partido competitivo con el primer equipo. Las apariciones con las reservas del Ajax no se muestran como una etapa separada de su período continuo en el club. Su aparición única de 2025 con el Tallinna Kalev Juunior en la cuarta división estonia se excluye por ser posterior al retiro.",
+    "esClubNotes": {
+      "6": "Segunda etapa como jugador.",
+      "10": "Segunda etapa como jugador.",
+      "11": "Segunda etapa como jugador; última temporada profesional."
+    }
+  },
+  {
+    "id": "andriy-shevchenko",
+    "name": "Andriy Shevchenko",
+    "continent": "Europe",
+    "country": "Ukraine",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Dynamo Kyiv-2",
+        "years": "1993–1996",
+        "note": "Adult-pyramid reserve side; overlaps his first-team period."
+      },
+      {
+        "name": "Dynamo Kyiv",
+        "years": "1993–1999",
+        "note": "First-team spell overlapping Dynamo Kyiv-2."
+      },
+      {
+        "name": "AC Milan",
+        "years": "1999–2006"
+      },
+      {
+        "name": "Chelsea",
+        "years": "2006–2009"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2008–2009",
+        "note": "Loan return from Chelsea."
+      },
+      {
+        "name": "Dynamo Kyiv",
+        "years": "2009–2012",
+        "note": "Second playing spell; final club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Andriy_Shevchenko",
+        "title": "Andriy Shevchenko"
+      },
+      {
+        "url": "https://national-football-teams.com/player/6926/Andriy_Shevchenko.html",
+        "title": "Andriy Shevchenko (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Dynamo Kyiv-2 is retained because it competed in the adult Ukrainian pyramid and Shevchenko made 51 league appearances there; it overlaps his first-team Dynamo period. The 2008/09 Milan spell was a playing loan return, followed by a genuine return to Dynamo Kyiv. Youth football, politics and management are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Se conserva al Dynamo Kyiv-2 porque competía en la pirámide adulta ucraniana y Shevchenko disputó allí 51 partidos de liga; esta etapa se solapa con su período en el primer equipo del Dynamo. La etapa 2008/09 en el Milan fue un regreso como jugador cedido, seguido de un regreso real al Dynamo Kyiv. Se excluyen el fútbol juvenil, la política y la dirección técnica.",
+    "esClubNotes": {
+      "0": "Filial de la pirámide adulta; se solapa con su período en el primer equipo.",
+      "1": "Etapa en el primer equipo solapada con el Dynamo Kyiv-2.",
+      "4": "Regreso cedido desde el Chelsea.",
+      "5": "Segunda etapa como jugador; último club."
+    }
+  },
+  {
+    "id": "clarence-seedorf",
+    "name": "Clarence Seedorf",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Ajax",
+        "years": "1992–1995"
+      },
+      {
+        "name": "Sampdoria",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1996–2000"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2000–2002"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2002–2012"
+      },
+      {
+        "name": "Botafogo",
+        "years": "2012–2014",
+        "note": "Final professional playing spell in Brazil; not a ceremonial appearance."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Clarence_Seedorf",
+        "title": "Clarence Seedorf"
+      },
+      {
+        "url": "https://www.uefa.com/news-media/news/0254-0d7cf3e37912-f305bae6c633-1000--clarence-seedorf/",
+        "title": "Clarence Seedorf | UEFA.com"
+      }
+    ],
+    "notes": "The route follows six professional first-team clubs from his 1992 Ajax debut through Botafogo. Botafogo is retained as a substantive professional spell with 58 league appearances, not a ceremonial tail. Later managerial and advisory roles are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ],
+    "esNotes": "La ruta comprende seis primeros equipos profesionales desde su debut con el Ajax en 1992 hasta el Botafogo. Se conserva al Botafogo como una etapa profesional sustantiva con 58 apariciones ligueras, no como un cierre ceremonial. Se excluyen sus posteriores cargos de entrenador y asesor.",
+    "esClubNotes": {
+      "5": "Última etapa profesional como jugador en Brasil; no fue una aparición ceremonial."
+    }
+  },
+  {
+    "id": "predrag-mijatovic",
+    "name": "Predrag Mijatović",
+    "continent": "Europe",
+    "country": "Yugoslavia / Serbia and Montenegro",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Budućnost Titograd",
+        "years": "1987–1989",
+        "note": "Source-era club name retained."
+      },
+      {
+        "name": "Partizan",
+        "years": "1990–1993"
+      },
+      {
+        "name": "Valencia",
+        "years": "1993–1996"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "1996–1999"
+      },
+      {
+        "name": "Fiorentina",
+        "years": "1999–2002"
+      },
+      {
+        "name": "Levante",
+        "years": "2002–2003"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Predrag_Mijatovi%C4%87",
+        "title": "Predrag Mijatović"
+      },
+      {
+        "url": "https://www.espn.com/soccer/player/_/id/79763/predrag-mijatovic",
+        "title": "Predrag Mijatovic - ESPN"
+      }
+    ],
+    "notes": "Budućnost Titograd is displayed under the source-era name. The legacy country label reflects the senior national side represented across the Yugoslavia/Serbia and Montenegro succession; ESPN independently labels his nationality Yugoslavia. Youth football and later football-administration roles are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "Budućnost Titograd se muestra con el nombre de época de la fuente. La etiqueta histórica de país refleja la selección sénior representada a través de la sucesión Yugoslavia/Serbia y Montenegro; ESPN identifica de forma independiente su nacionalidad como Yugoslavia. Se excluyen el fútbol juvenil y sus posteriores cargos directivos.",
+    "esClubNotes": {
+      "0": "Se conserva el nombre del club correspondiente a la época de la fuente."
+    }
+  },
+  {
+    "id": "peter-schmeichel",
+    "name": "Peter Schmeichel",
+    "continent": "Europe",
+    "country": "Denmark",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Gladsaxe-Hero",
+        "years": "1981–1984",
+        "note": "Competitive senior lower-division football; earlier Hero/Gladsaxe-Hero years were youth."
+      },
+      {
+        "name": "Hvidovre",
+        "years": "1984–1987"
+      },
+      {
+        "name": "Brøndby",
+        "years": "1987–1991"
+      },
+      {
+        "name": "Manchester United",
+        "years": "1991–1999"
+      },
+      {
+        "name": "Sporting CP",
+        "years": "1999–2001"
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2001–2002"
+      },
+      {
+        "name": "Manchester City",
+        "years": "2002–2003"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Peter_Schmeichel",
+        "title": "Peter Schmeichel"
+      },
+      {
+        "url": "https://www.premierleague.com/en/players/3952/peter-schmeichel/overview",
+        "title": "Peter Schmeichel Manchester United Goalkeeper, Profile & Stats | Premier League"
+      }
+    ],
+    "notes": "The displayed route begins with 46 senior appearances for lower-division Gladsaxe-Hero from 1981; its earlier youth rows are excluded. The career then runs continuously through Manchester City in 2003. The Premier League profile independently identifies Schmeichel as a Manchester United goalkeeper.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "La ruta mostrada comienza con 46 apariciones sénior en el Gladsaxe-Hero de categorías inferiores desde 1981; se excluyen sus filas juveniles anteriores. La carrera continúa después sin interrupción hasta el Manchester City en 2003. El perfil de la Premier League identifica de forma independiente a Schmeichel como portero del Manchester United.",
+    "esClubNotes": {
+      "0": "Fútbol sénior competitivo de categorías inferiores; los años anteriores en Hero/Gladsaxe-Hero fueron juveniles."
+    }
+  },
+  {
+    "id": "hakan-sukur",
+    "name": "Hakan Şükür",
+    "continent": "Europe",
+    "country": "Turkey",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Sakaryaspor",
+        "years": "1987–1990"
+      },
+      {
+        "name": "Bursaspor",
+        "years": "1990–1992"
+      },
+      {
+        "name": "Galatasaray",
+        "years": "1992–1995"
+      },
+      {
+        "name": "Torino",
+        "years": "1995",
+        "note": "Loan spell from Galatasaray."
+      },
+      {
+        "name": "Galatasaray",
+        "years": "1995–2000",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2000–2002"
+      },
+      {
+        "name": "Parma",
+        "years": "2002"
+      },
+      {
+        "name": "Blackburn Rovers",
+        "years": "2002–2003"
+      },
+      {
+        "name": "Galatasaray",
+        "years": "2003–2008",
+        "note": "Third playing spell; final club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Hakan_%C5%9E%C3%BCk%C3%BCr",
+        "title": "Hakan Şükür"
+      },
+      {
+        "url": "https://www.uefa.com/uefaeuro/history/news/0254-0d7babefed49-c1897fe1337b-1000--hakan-sukur-still-towering-in-turkey/",
+        "title": "Hakan Şükür still towering in Turkey | UEFA.com"
+      },
+      {
+        "url": "https://www.uefa.com/uefachampionsleague/news/025a-0eaadda797fc-4e39d3d6db99-1000--hakan-back-at-galatasaray/",
+        "title": "Hakan back at Galatasaray | UEFA.com"
+      }
+    ],
+    "notes": "All three Galatasaray periods are retained as genuine playing spells. The 1995 Torino row was a loan from Galatasaray; the second return follows Torino, and the third follows the Inter/Parma/Blackburn sequence. He made his professional debut for Sakaryaspor shortly after turning 17 and retired after the final Galatasaray spell in 2008. The Sakaryaspor youth row and later political and other non-playing roles are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ],
+    "esNotes": "Se conservan las tres etapas en el Galatasaray como períodos reales de juego. La etapa de 1995 en el Torino fue una cesión desde el Galatasaray; el segundo regreso llegó después del Torino y el tercero tras la secuencia Inter/Parma/Blackburn. Debutó como profesional con el Sakaryaspor poco después de cumplir 17 años y se retiró tras la última etapa en el Galatasaray en 2008. Se excluyen la etapa juvenil del Sakaryaspor y sus posteriores funciones políticas y otras ajenas a su actividad como jugador.",
+    "esClubNotes": {
+      "3": "Cesión desde el Galatasaray.",
+      "4": "Segunda etapa como jugador.",
+      "8": "Tercera etapa como jugador; último club."
+    }
+  },
+  {
+    "id": "ivan-rakitic",
+    "name": "Ivan Rakitić",
+    "continent": "Europe",
+    "country": "Croatia",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Nordstern Basel",
+        "years": "2004",
+        "note": "Competitive senior Swiss Cup qualifier: 0 league appearances, but 1 cup appearance; therefore not a zero-appearance registration."
+      },
+      {
+        "name": "FC Basel U21",
+        "years": "2004–2006",
+        "note": "Adult-pyramid reserve side in the Swiss 1. Liga; overlaps the FC Basel first team from 2005."
+      },
+      {
+        "name": "FC Basel",
+        "years": "2005–2007",
+        "note": "First-team spell overlapping FC Basel U21."
+      },
+      {
+        "name": "Schalke 04",
+        "years": "2007–2011"
+      },
+      {
+        "name": "Sevilla",
+        "years": "2011–2014"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2014–2020"
+      },
+      {
+        "name": "Sevilla",
+        "years": "2020–2024",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Al-Shabab",
+        "years": "2024"
+      },
+      {
+        "name": "Hajduk Split",
+        "years": "2024–2025",
+        "note": "Final professional club before his confirmed retirement on 7 July 2025."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://www.fcb-archiv.ch/saison/kader?command=detail&id=1611&saison=2005%2F06",
+        "title": "Ivan Rakitic | FC Basel Archiv"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Ivan_Rakiti%C4%87",
+        "title": "Ivan Rakitić"
+      },
+      {
+        "url": "https://www.uefa.com/uefaeuropaleague/news/0280-17bdcdb21a6d-e9c9922dd3cd-1000--ivan-rakitic-on-sevilla-the-man-united-quarter-final-and-the/",
+        "title": "Ivan Rakitić on Sevilla, the Man United quarter-final and the possibility of another UEFA Europa League success | UEFA.com"
+      },
+      {
+        "url": "https://hajduk.hr/eng/article/ivan-rakitic-is-a-new-hajduk-player-/7759",
+        "title": "Ivan Rakitić is a new Hajduk player!"
+      },
+      {
+        "url": "https://hajduk.hr/eng/article/ivan-rakitic--the-end-of-a-brilliant-football-career/7828",
+        "title": "Ivan Rakitic - the end of a brilliant football career"
+      }
+    ],
+    "notes": "Nordstern Basel is now retained: although the league column is 0, the season table records one competitive Swiss Cup qualifier appearance, so calling it a zero-appearance registration was incorrect. FC Basel U21 is retained as an adult-pyramid reserve side because the FC Basel archive records positive 1. Liga appearances in both 2004/05 and 2005/06; the source-era U21 name replaces the unsupported FC Basel II label. The route then runs through overlapping FC Basel first-team play, Schalke 04, Sevilla, Barcelona, a genuine Sevilla return, Al-Shabab and Hajduk Split. Hajduk officially confirmed that he ended his playing career on 7 July 2025 after 39 official appearances for the club.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "Ahora se incluye al Nordstern Basel: aunque la columna de liga marca 0, la tabla de la temporada registra una aparición competitiva en la fase clasificatoria de la Copa Suiza, por lo que era incorrecto describirlo como una inscripción sin apariciones. Se conserva al FC Basel U21 como filial de la pirámide adulta porque el archivo del FC Basel registra apariciones positivas en la 1. Liga tanto en 2004/05 como en 2005/06; el nombre de época U21 sustituye a la etiqueta FC Basel II no respaldada. La ruta continúa por el primer equipo del FC Basel —con solapamiento—, Schalke 04, Sevilla, Barcelona, un regreso real al Sevilla, Al-Shabab y Hajduk Split. El Hajduk confirmó oficialmente que puso fin a su carrera como jugador el 7 de julio de 2025 tras 39 apariciones oficiales con el club.",
+    "esClubNotes": {
+      "0": "Partido sénior competitivo en la fase clasificatoria de la Copa Suiza: 0 apariciones ligueras, pero 1 en copa; por tanto, no fue una inscripción sin apariciones.",
+      "1": "Filial de la pirámide adulta en la 1. Liga suiza; se solapa con el primer equipo del FC Basel desde 2005.",
+      "2": "Etapa en el primer equipo solapada con el FC Basel U21.",
+      "6": "Segunda etapa como jugador.",
+      "8": "Último club profesional antes de su retiro confirmado el 7 de julio de 2025."
+    }
+  },
+  {
+    "id": "christian-vieri",
+    "name": "Christian Vieri",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Torino",
+        "years": "1991–1992"
+      },
+      {
+        "name": "Pisa",
+        "years": "1992–1993"
+      },
+      {
+        "name": "Ravenna",
+        "years": "1993–1994"
+      },
+      {
+        "name": "Venezia",
+        "years": "1994–1995"
+      },
+      {
+        "name": "Atalanta",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Juventus",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "1997–1998"
+      },
+      {
+        "name": "Lazio",
+        "years": "1998–1999"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "1999–2005"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2005–2006"
+      },
+      {
+        "name": "Monaco",
+        "years": "2006"
+      },
+      {
+        "name": "Atalanta",
+        "years": "2006–2007",
+        "note": "Second playing spell, after the zero-appearance Sampdoria registration."
+      },
+      {
+        "name": "Fiorentina",
+        "years": "2007–2008"
+      },
+      {
+        "name": "Atalanta",
+        "years": "2008–2009",
+        "note": "Third playing spell; final professional club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Christian_Vieri",
+        "title": "Christian Vieri - Wikipedia"
+      },
+      {
+        "url": "https://www.rsssf.org/players/vieridata.html",
+        "title": "Christian Vieri - Goals in Serie A"
+      },
+      {
+        "url": "https://www.uefa.com/news-media/news/01b7-0e6d5fd49311-4ed2f0fcb906-1000--sampdoria-swoop-to-sign-vieri/",
+        "title": "Sampdoria swoop to sign Vieri | UEFA.com"
+      }
+    ],
+    "notes": "Sampdoria's July–August 2006 registration is excluded because the senior-career table records 0 appearances; UEFA independently confirms the signing, while RSSSF's appearance ledger moves from Monaco directly to the 2006–2007 Atalanta spell. All three Atalanta playing spells and the short Monaco spell are retained separately. Youth football in Australia and Italy is excluded; the displayed professional route ends with Atalanta in 2009.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ],
+    "esNotes": "Se excluye la inscripción de julio–agosto de 2006 en la Sampdoria porque la tabla de carrera absoluta registra 0 apariciones; la UEFA confirma de forma independiente el fichaje, mientras que el registro de apariciones de la RSSSF pasa directamente del Monaco a la etapa 2006–2007 en el Atalanta. Las tres etapas como jugador del Atalanta y la breve etapa en el Monaco se conservan por separado. Se excluye el fútbol juvenil en Australia e Italia; la ruta profesional mostrada termina con el Atalanta en 2009.",
+    "esClubNotes": {
+      "11": "Segunda etapa como jugador, después de la inscripción en la Sampdoria sin apariciones.",
+      "13": "Tercera etapa como jugador; último club profesional."
+    }
+  },
+  {
+    "id": "ruud-van-nistelrooy",
+    "name": "Ruud van Nistelrooy",
+    "continent": "Europe",
+    "country": "Netherlands",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Den Bosch",
+        "years": "1993–1997"
+      },
+      {
+        "name": "Heerenveen",
+        "years": "1997–1998"
+      },
+      {
+        "name": "PSV Eindhoven",
+        "years": "1998–2001"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2001–2006"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2006–2010"
+      },
+      {
+        "name": "Hamburger SV",
+        "years": "2010–2011"
+      },
+      {
+        "name": "Málaga",
+        "years": "2011–2012",
+        "note": "Final professional club; retired in May 2012."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ruud_van_Nistelrooy",
+        "title": "Ruud van Nistelrooy"
+      },
+      {
+        "url": "https://national-football-teams.com/player/4636/Ruud_Van_Nistelrooy.html",
+        "title": "Ruud van Nistelrooy (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The route starts with senior Eerste Divisie play for Den Bosch in 1993; Nooit Gedacht and RKSV Margriet are youth-only and excluded. The 2000 Manchester United transfer was postponed and then cancelled, so no unplayed United node is inserted before his actual 2001 move. He retired after Málaga in May 2012.",
+    "status": "retired",
+    "verifiedAt": "2026-09-16",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ],
+    "esNotes": "La ruta comienza con actividad sénior en la Eerste Divisie para el Den Bosch en 1993; Nooit Gedacht y RKSV Margriet fueron exclusivamente juveniles y se excluyen. El traspaso al Manchester United de 2000 fue aplazado y luego cancelado, por lo que no se inserta un nodo sin partidos antes de su llegada efectiva en 2001. Se retiró después del Málaga en mayo de 2012.",
+    "esClubNotes": {
+      "6": "Último club profesional; se retiró en mayo de 2012."
+    }
+  }
+]

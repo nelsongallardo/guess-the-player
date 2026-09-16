@@ -1,5 +1,12 @@
 # Verification report
 
+## 210-player roster expansion — 16 September 2026
+
+- Added fifty reviewed playable careers for a final **210-player roster: 105 Europe / 105 South America**. Thirty-two profiles were promoted from the researched wrong-answer bank, eighteen careers were researched as new playable entries, and thirty-six source-backed peers were added to restore sparse origin-system coverage. The final model has **37 bank-only profiles and 247 total answer candidates**.
+- Added forward-only migration `202609160003_expand_ranked_roster_160_to_210.sql`. The frozen historical migrations remain unchanged. Fresh replay and exact 160-player upgrade tests preserve existing candidates, players, memberships, results, receipts and an active hinted round while producing **51,657 rival rows and 693 memberships**.
+- Local native-PostgreSQL/Node verification passed **154 tests with 0 failures**. The source ledger check passed for **210 player sections / 566 source URLs**, the generated migration parity check passed, and the crest transform tests passed. The owner explicitly waived browser/offline compatibility reruns because this release is a data expansion; Deno entrypoint checks remain a CI release gate.
+- Hosted deployment evidence is recorded after the migration and Pages release are applied and read back.
+
 ## 160-player roster expansion — 16 September 2026
 
 - Integrated the reviewed 50-player research batch with the concurrently published 120-player upstream roster, preserving the ten overlapping upstream career representations and adding the remaining forty records for a final 80 Europe / 80 South America split.

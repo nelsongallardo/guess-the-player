@@ -15,7 +15,8 @@ const root = new URL('../',import.meta.url);
 const pgBin = process.env.PG_BIN || (fs.existsSync('/opt/homebrew/opt/postgresql@17/bin/postgres') ? '/opt/homebrew/opt/postgresql@17/bin' : '');
 const bin = cmd => cmd === 'psql' && process.env.PG_CLIENT ? process.env.PG_CLIENT : pgBin ? path.join(pgBin,cmd) : cmd;
 let dir, running = false;
-let legacy, legacySnapshot, rosterUpgrade, rosterUpgradeSnapshot;
+let legacy, legacySnapshot, rosterUpgrade, rosterUpgradeSnapshot, roster210Upgrade, roster210UpgradeSnapshot;
+let roster210ReferenceSnapshot, roster210ActiveProjection;
 const aliasPattern = /^(Otter|Badger|Panda|Koala|Heron|Robin|Finch|Lynx|Seal|Dolphin|Turtle|Falcon|Penguin|Gecko|Wombat|Alpaca)-[0-9a-f]{8}$/;
 const quote = value => "'"+String(value).replaceAll("'","''")+"'";
 const args = () => ['-X','-qAt','-v','ON_ERROR_STOP=1','-h',dir,'-p','55439','-U','postgres','-d','postgres'];
@@ -57,9 +58,10 @@ before(() => {
   sql(`update ranked_private.accounts set enrolled=false where user_id=${quote(legacy.custom)}`);
   legacySnapshot=Object.fromEntries(['rounds','results','receipts'].map(t=>[t,json(`select json_agg(x order by user_id) from ranked_private.${t} x`)]));
   const rosterMigration='202609160002_expand_ranked_roster_120_to_160.sql';
+  const finalRosterMigration='202609160003_expand_ranked_roster_160_to_210.sql';
   for(const f of migrations.filter(f=>f>='202609130003'&&f<rosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:16*1024*1024});
   // Exercise the exact prior 120-player state with both an immutable result
-  // and an unresolved active v2 round before applying the forward roster sync.
+  // and an unresolved active v2 round before applying the 120→160 sync.
   rosterUpgrade={result:user(),active:user()};
   const completed=start(rosterUpgrade.result).round;
   answer(rosterUpgrade.result,completed,correct(completed));
@@ -67,7 +69,23 @@ before(() => {
   start(rosterUpgrade.active);
   const upgradeUsers=Object.values(rosterUpgrade).map(quote).join(',');
   rosterUpgradeSnapshot=Object.fromEntries(['rounds','results','receipts'].map(t=>[t,json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${t} x where user_id in (${upgradeUsers})`)]));
-  for(const f of migrations.filter(f=>f>=rosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:32*1024*1024});
+  for(const f of migrations.filter(f=>f>=rosterMigration&&f<finalRosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:32*1024*1024});
+  // Repeat the preservation fixture at the exact deployed 160-player state.
+  roster210Upgrade={result:user(),active:user()};
+  const completed160=start(roster210Upgrade.result).round;
+  answer(roster210Upgrade.result,completed160,correct(completed160));
+  sql(`update ranked_private.accounts set enrolled=false where user_id=${quote(roster210Upgrade.result)}`);
+  const active160=start(roster210Upgrade.active).round;
+  hint(roster210Upgrade.active,active160);
+  const upgrade210Users=Object.values(roster210Upgrade).map(quote).join(',');
+  roster210UpgradeSnapshot=Object.fromEntries(['rounds','results','receipts'].map(t=>[t,json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${t} x where user_id in (${upgrade210Users})`)]));
+  roster210ReferenceSnapshot=Object.fromEntries([
+    ['candidates',json("select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]'::jsonb) from ranked_private.candidates x")],
+    ['players',json("select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]'::jsonb) from ranked_private.players x")],
+    ['memberships',json("select coalesce(jsonb_agg(to_jsonb(x) order by player_id,competition),'[]'::jsonb) from ranked_private.memberships x")],
+  ]);
+  roster210ActiveProjection=rpc(roster210Upgrade.active,{action:'progress'}).round;
+  for(const f of migrations.filter(f=>f>=finalRosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:48*1024*1024});
   console.log('Real PostgreSQL isolated cluster; Supabase auth schema/roles SIMULATED; no cloud services used.');
 });
 after(() => {
@@ -93,15 +111,45 @@ test('additive migration backfills legacy results, preserves custom names and im
       `${t} changed while upgrading the 120-player state`,
     );
   }
+  const upgrade210Users=Object.values(roster210Upgrade).map(quote).join(',');
+  for(const t of ['rounds','results','receipts']) {
+    assert.deepEqual(
+      json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${t} x where user_id in (${upgrade210Users})`),
+      roster210UpgradeSnapshot[t],
+      `${t} changed while upgrading the 160-player state`,
+    );
+  }
+  const priorCandidateIds=roster210ReferenceSnapshot.candidates.map(row=>quote(row.id)).join(',');
+  const priorPlayerIds=roster210ReferenceSnapshot.players.map(row=>quote(row.id)).join(',');
+  assert.deepEqual(
+    json(`select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]'::jsonb) from ranked_private.candidates x where id in (${priorCandidateIds})`),
+    roster210ReferenceSnapshot.candidates,
+    'existing candidate labels changed while upgrading the 160-player state',
+  );
+  assert.deepEqual(
+    json(`select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]'::jsonb) from ranked_private.players x where id in (${priorPlayerIds})`),
+    roster210ReferenceSnapshot.players,
+    'existing player reference data changed while upgrading the 160-player state',
+  );
+  assert.deepEqual(
+    json(`select coalesce(jsonb_agg(to_jsonb(x) order by player_id,competition),'[]'::jsonb) from ranked_private.memberships x where player_id in (${priorPlayerIds})`),
+    roster210ReferenceSnapshot.memberships,
+    'existing competition memberships changed while upgrading the 160-player state',
+  );
+  assert.deepEqual(
+    rpc(roster210Upgrade.active,{action:'progress'}).round,
+    roster210ActiveProjection,
+    'active hinted round projection changed while upgrading the 160-player state',
+  );
   // The legacy rows above are byte-for-byte preserved (still ruleset='v1',
   // still 5 options each) - but ADR 0012's ten-option v2 ruleset filters the
   // active leaderboard/progress to ruleset='v2' only, by design: it's a
   // deliberate reset, not a bug, so these untouched v1-only results now
   // correctly fall off the (now v2) board rather than still counting.
   const board=rpc(legacy.anonymous,{action:'leaderboard'});
-  // The exact-prior-state fixture contributes one preserved v2 result to the
-  // global board; the legacy v1-only account itself must still have no entry.
-  assert.equal(board.total,1);assert.equal(board.own,null);noIdentity(board);
+  // The 120→160 and exact-160 fixtures each contribute one preserved v2
+  // result; the legacy v1-only account itself must still have no entry.
+  assert.equal(board.total,2);assert.equal(board.own,null);noIdentity(board);
   assert.equal(rpc(legacy.empty,{action:'leaderboard'}).own,null);
 });
 
@@ -150,7 +198,7 @@ test('forced case-insensitive alias collisions retry safely across concurrent ac
 });
 
 test('roster exporter is current and canonical membership/matching scores equal guest model',()=>{
-  execFileSync(process.execPath,[new URL('scripts/export-ranked-roster-forward.mjs',root).pathname,'--check']);
+  execFileSync(process.execPath,[new URL('scripts/export-ranked-roster-210-forward.mjs',root).pathname,'--check']);
   const html=fs.readFileSync(new URL('index.html',root),'utf8');
   const block=id=>html.match(new RegExp(`<script id="${id}">([\\s\\S]*?)<\\/script>`))[1];
   const ctx=vm.createContext({});vm.runInContext(block('roster-data')+block('game-model'),ctx);
@@ -311,6 +359,30 @@ test('leaderboards require a verified result per board; enrollment/active rounds
     }
   } finally {
     sql(`delete from auth.users where id in (${quote(a)},${quote(b)})`);
+  }
+});
+
+test('all-only players deal globally but never enter league boards or counts',()=>{
+  const uid=user();
+  let removed=[];
+  try {
+    assert.deepEqual(
+      json("select coalesce(jsonb_agg(competition order by competition),'[]'::jsonb) from ranked_private.memberships where player_id='carlos-lobaton'"),
+      ['all'],
+    );
+    removed=json("with removed as (delete from ranked_private.memberships where competition='all' and player_id<>'carlos-lobaton' returning player_id,competition) select coalesce(jsonb_agg(to_jsonb(removed)),'[]'::jsonb) from removed");
+    const r=start(uid,'all').round;
+    assert.equal(r.playerId,'carlos-lobaton');
+    const won=answer(uid,r,correct(r));
+    assert.equal(won.progress.competitionCounts.all.answered,1);
+    for(const competition of ['champions-league','premier-league','la-liga','argentine-primera','brasileirao']) {
+      assert.equal(won.progress.competitionCounts[competition]?.answered ?? 0,0);
+      assert.equal(rpc(uid,{action:'leaderboard',competition,limit:100}).own,null);
+    }
+    assert.equal(rpc(uid,{action:'leaderboard',competition:'all',limit:100}).own.answered,1);
+  } finally {
+    if(removed.length) sql(`insert into ranked_private.memberships select * from jsonb_to_recordset(${quote(JSON.stringify(removed))}::jsonb) as x(player_id text,competition text) on conflict do nothing`);
+    sql(`delete from auth.users where id=${quote(uid)}`);
   }
 });
 

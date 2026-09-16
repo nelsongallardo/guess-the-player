@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {execFileSync} from 'node:child_process';
 
 const root = new URL('../', import.meta.url);
 const migration = new URL('supabase/migrations/202609160002_expand_ranked_roster_120_to_160.sql', root);
@@ -20,7 +19,6 @@ test('forward ranked-roster migration is generated from the 160-player model', (
   assert.match(sql, /delete from ranked_private\.rivals/);
   assert.doesNotMatch(sql, /delete from ranked_private\.(players|candidates|memberships|results|rounds)/);
   for (const id of selected) assert.ok(sql.includes(`\\"id\\":\\"${id}\\"`) || sql.includes(`"id":"${id}"`), id);
-  execFileSync(process.execPath, [new URL('scripts/export-ranked-roster-forward.mjs', root).pathname, '--check'], {stdio: 'pipe'});
 });
 
 test('the pending 120-player migration declares every candidate foreign-key prerequisite', () => {

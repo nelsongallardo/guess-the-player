@@ -1,0 +1,4219 @@
+{
+  "baseline": {
+    "commit": "431cd6ad4cb49503b4a7c84835622ff5b33816b6",
+    "playable": 160,
+    "europePlayable": 80,
+    "southAmericaPlayable": 80,
+    "bankOnly": 33
+  },
+  "target": {
+    "total": 50,
+    "Europe": 25,
+    "South America": 25
+  },
+  "candidates": [
+    {
+      "id": "paulo-futre",
+      "name": "Paulo Futre",
+      "continent": "Europe",
+      "country": "Portugal",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "portugal",
+      "approximateSeniorRoute": [
+        "Sporting CP",
+        "Porto",
+        "Atlético Madrid",
+        "Benfica",
+        "Marseille",
+        "Reggiana",
+        "AC Milan",
+        "West Ham United",
+        "Atlético Madrid",
+        "Yokohama Flügels"
+      ],
+      "start": 1983,
+      "end": 1998,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Paulo_Futre",
+        "https://www.national-football-teams.com/player/14185/Paulo_Futre.html"
+      ],
+      "scoreBreakdown": 17,
+      "decision": "selected",
+      "reason": "Bank outline is strong; full playable audit should verify loan/return boundaries and the short Reggiana/Milan/West Ham sequence."
+    },
+    {
+      "id": "joao-pinto",
+      "name": "João Pinto",
+      "continent": "Europe",
+      "country": "Portugal",
+      "role": "Midfielder / Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "portugal",
+      "approximateSeniorRoute": [
+        "Boavista",
+        "Atlético Madrileño",
+        "Boavista",
+        "Benfica",
+        "Sporting CP",
+        "Boavista",
+        "Braga"
+      ],
+      "start": 1988,
+      "end": 2008,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Jo%C3%A3o_Pinto",
+        "https://www.uefa.com/news-media/news/01cf-0f84e0a36cad-6337c48973cc-1000--retirement-beckons-for-joao-pinto/"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "selected",
+      "reason": "Atlético Madrileño was an adult-pyramid reserve spell; three Boavista periods are genuine returns."
+    },
+    {
+      "id": "karel-poborsky",
+      "name": "Karel Poborský",
+      "continent": "Europe",
+      "country": "Czech Republic",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "czechia",
+      "approximateSeniorRoute": [
+        "České Budějovice",
+        "Viktoria Žižkov",
+        "Slavia Prague",
+        "Manchester United",
+        "Benfica",
+        "Lazio",
+        "Sparta Prague",
+        "České Budějovice"
+      ],
+      "start": 1991,
+      "end": 2007,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Karel_Poborsk%C3%BD",
+        "https://www.national-football-teams.com/player/1860/Karel_Poborsky.html"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "selected",
+      "reason": "Use 1991 as the supported senior start; NFT has an unquantified 1990/91 row. České Budějovice is a real return."
+    },
+    {
+      "id": "jan-koller",
+      "name": "Jan Koller",
+      "continent": "Europe",
+      "country": "Czech Republic",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "czechia",
+      "approximateSeniorRoute": [
+        "Sparta Prague",
+        "Lokeren",
+        "Anderlecht",
+        "Borussia Dortmund",
+        "Monaco",
+        "1. FC Nürnberg",
+        "Krylia Sovetov Samara",
+        "Cannes"
+      ],
+      "start": 1994,
+      "end": 2011,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Jan_Koller",
+        "https://www.national-football-teams.com/player/1824/Jan_Koller.html"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "selected",
+      "reason": "Exclude Milevsko rows classified as youth/unquantified; retain Cannes third-tier senior play; 2011 endpoint is injury retirement."
+    },
+    {
+      "id": "vladimir-smicer",
+      "name": "Vladimír Šmicer",
+      "continent": "Europe",
+      "country": "Czech Republic",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "czechia",
+      "approximateSeniorRoute": [
+        "Slavia Prague",
+        "Lens",
+        "Liverpool",
+        "Bordeaux",
+        "Slavia Prague"
+      ],
+      "start": 1992,
+      "end": 2009,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Vladim%C3%ADr_%C5%A0micer",
+        "https://www.liverpoolfc.com/info/vladimir-smicer"
+      ],
+      "scoreBreakdown": 15,
+      "decision": "selected",
+      "reason": "Slavia starts in 1992 after youth membership; the 2007–09 Slavia spell is a playing return."
+    },
+    {
+      "id": "tomas-brolin",
+      "name": "Tomas Brolin",
+      "continent": "Europe",
+      "country": "Sweden",
+      "role": "Midfielder / Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "sweden",
+      "approximateSeniorRoute": [
+        "Näsvikens IK",
+        "GIF Sundsvall",
+        "IFK Norrköping",
+        "Parma",
+        "Leeds United",
+        "FC Zürich",
+        "Parma",
+        "Crystal Palace"
+      ],
+      "start": 1984,
+      "end": 1998,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Tomas_Brolin",
+        "https://www.getfootballnewsgermany.com/2025/what-happened-to-tomas-brolin-fourth-in-the-1994-ballon-dor/"
+      ],
+      "scoreBreakdown": 15,
+      "decision": "selected",
+      "reason": "Näsvikens adult fourth-tier start is in scope; Zürich and second Parma were loans; omit post-retirement Hudiksvalls cameo."
+    },
+    {
+      "id": "martin-dahlin",
+      "name": "Martin Dahlin",
+      "continent": "Europe",
+      "country": "Sweden",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "sweden",
+      "approximateSeniorRoute": [
+        "Lunds BK",
+        "Malmö FF",
+        "Borussia Mönchengladbach",
+        "Roma",
+        "Borussia Mönchengladbach",
+        "Blackburn Rovers",
+        "Hamburger SV"
+      ],
+      "start": 1985,
+      "end": 1999,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Martin_Dahlin",
+        "https://www.national-football-teams.com/player/14009/Martin_Dahlin.html"
+      ],
+      "scoreBreakdown": 14,
+      "decision": "selected",
+      "reason": "Retain Lunds BK adult-pyramid spell despite Wikipedia youth classification; Mönchengladbach return and Hamburg were loans; no ownership-only Blackburn return."
+    },
+    {
+      "id": "johan-elmander",
+      "name": "Johan Elmander",
+      "continent": "Europe",
+      "country": "Sweden",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "sweden",
+      "approximateSeniorRoute": [
+        "Holmalunds IF",
+        "Örgryte IS",
+        "Feyenoord",
+        "Djurgårdens IF",
+        "NAC Breda",
+        "Brøndby IF",
+        "Toulouse",
+        "Bolton Wanderers",
+        "Galatasaray",
+        "Norwich City",
+        "Brøndby IF",
+        "Örgryte IS"
+      ],
+      "start": 1997,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Johan_Elmander",
+        "https://www.national-football-teams.com/player/6376/Johan_Elmander.html"
+      ],
+      "scoreBreakdown": 15,
+      "decision": "selected",
+      "reason": "Djurgården/NAC were successive loans; omit unplayed Feyenoord and Galatasaray ownership returns; Brøndby and Örgryte returns are real."
+    },
+    {
+      "id": "sebastian-larsson",
+      "name": "Sebastian Larsson",
+      "continent": "Europe",
+      "country": "Sweden",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "sweden",
+      "approximateSeniorRoute": [
+        "Arsenal",
+        "Birmingham City",
+        "Sunderland",
+        "Hull City",
+        "AIK"
+      ],
+      "start": 2004,
+      "end": 2022,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Sebastian_Larsson",
+        "https://arsenal.com/historic/players/sebastian-larsson"
+      ],
+      "scoreBreakdown": 14,
+      "decision": "selected",
+      "reason": "Start at 2004 first-team cup debut; merge Birmingham loan-to-permanent; exclude closed-reserve Arsenal/Sunderland rows."
+    },
+    {
+      "id": "vegard-heggem",
+      "name": "Vegard Heggem",
+      "continent": "Europe",
+      "country": "Norway",
+      "role": "Defender",
+      "status": "bank promotion",
+      "firstSeniorSystem": "norway",
+      "approximateSeniorRoute": [
+        "Rennebu IL",
+        "Orkdal IL",
+        "Rosenborg",
+        "Liverpool"
+      ],
+      "start": 1991,
+      "end": 2003,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Vegard_Heggem",
+        "https://www.national-football-teams.com/player/28825/Vegard_Heggem.html"
+      ],
+      "scoreBreakdown": 13,
+      "decision": "selected",
+      "reason": "Retain lower-league Rennebu/Orkdal; 2003 is contract/retirement endpoint although last appearance was 2000."
+    },
+    {
+      "id": "heidar-helguson",
+      "name": "Heiðar Helguson",
+      "continent": "Europe",
+      "country": "Iceland",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "iceland",
+      "approximateSeniorRoute": [
+        "UMFS Dalvík",
+        "Þróttur Reykjavík",
+        "Lillestrøm",
+        "Watford",
+        "Fulham",
+        "Bolton Wanderers",
+        "Queens Park Rangers",
+        "Watford",
+        "Queens Park Rangers",
+        "Cardiff City"
+      ],
+      "start": 1993,
+      "end": 2013,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Hei%C3%B0ar_Helguson",
+        "https://www.national-football-teams.com/player/3057/Hei_Ar_Helguson.html"
+      ],
+      "scoreBreakdown": 14,
+      "decision": "selected",
+      "reason": "Merge QPR loan-to-permanent, retain later QPR return after Watford loan; exclude 2015 post-retirement lower-league appearances."
+    },
+    {
+      "id": "hermann-hreidarsson",
+      "name": "Hermann Hreiðarsson",
+      "continent": "Europe",
+      "country": "Iceland",
+      "role": "Defender",
+      "status": "bank promotion",
+      "firstSeniorSystem": "iceland",
+      "approximateSeniorRoute": [
+        "ÍBV",
+        "Crystal Palace",
+        "Brentford",
+        "Wimbledon",
+        "Ipswich Town",
+        "Charlton Athletic",
+        "Portsmouth",
+        "Coventry City",
+        "ÍBV"
+      ],
+      "start": 1993,
+      "end": 2013,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Hermann_Hrei%C3%B0arsson",
+        "https://www.national-football-teams.com/player/3065/Hermann_Hrei_Arsson.html"
+      ],
+      "scoreBreakdown": 14,
+      "decision": "selected",
+      "reason": "Retain four-appearance 2013 ÍBV player-manager comeback; omit 2014 Fylkir zero-appearance registration."
+    },
+    {
+      "id": "gretar-steinsson",
+      "name": "Grétar Steinsson",
+      "continent": "Europe",
+      "country": "Iceland",
+      "role": "Defender",
+      "status": "bank promotion",
+      "firstSeniorSystem": "iceland",
+      "approximateSeniorRoute": [
+        "KS Siglufjörður",
+        "ÍA",
+        "Young Boys",
+        "AZ",
+        "Bolton Wanderers",
+        "Kayserispor"
+      ],
+      "start": 1997,
+      "end": 2013,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Gr%C3%A9tar_Steinsson",
+        "https://www.national-football-teams.com/player/10977/Gretar_Rafn_Steinsson.html"
+      ],
+      "scoreBreakdown": 13,
+      "decision": "selected",
+      "reason": "KS is the opening senior club before ÍA youth; AZ begins in 2005/06 despite infobox shorthand 2006."
+    },
+    {
+      "id": "johannes-karl-gudjonsson",
+      "name": "Jóhannes Karl Guðjónsson",
+      "continent": "Europe",
+      "country": "Iceland",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "iceland",
+      "approximateSeniorRoute": [
+        "KA Akureyri",
+        "ÍA",
+        "Racing Genk",
+        "MVV",
+        "RKC Waalwijk",
+        "Real Betis",
+        "Aston Villa",
+        "Wolverhampton Wanderers",
+        "Leicester City",
+        "AZ",
+        "Burnley",
+        "Huddersfield Town",
+        "ÍA",
+        "Fram Reykjavík",
+        "Fylkir",
+        "HK Kópavogur"
+      ],
+      "start": 1997,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Joey_Gu%C3%B0j%C3%B3nsson",
+        "https://www.national-football-teams.com/player/3086/Johannes_Karl_Gu_Jonsson.html"
+      ],
+      "scoreBreakdown": 13,
+      "decision": "selected",
+      "reason": "Identity is Joey Guðjónsson, not Eiður; omit ownership-only Genk/Betis returns; HK player-manager spell had senior second-tier appearances."
+    },
+    {
+      "id": "gheorghe-hagi",
+      "name": "Gheorghe Hagi",
+      "continent": "Europe",
+      "country": "Romania",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "romania",
+      "approximateSeniorRoute": [
+        "FC Constanța",
+        "Sportul Studențesc",
+        "Steaua București",
+        "Real Madrid",
+        "Brescia",
+        "Barcelona",
+        "Galatasaray"
+      ],
+      "start": 1982,
+      "end": 2001,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Gheorghe_Hagi",
+        "https://www.national-football-teams.com/player/14039/Gheorghe_Hagi.html"
+      ],
+      "scoreBreakdown": 18,
+      "decision": "selected",
+      "reason": "Opening club is the historical FC Constanța/Farul lineage; preserve source-era display naming rather than silently modernizing it."
+    },
+    {
+      "id": "davor-suker",
+      "name": "Davor Šuker",
+      "continent": "Europe",
+      "country": "Croatia",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "croatia",
+      "approximateSeniorRoute": [
+        "Osijek",
+        "Dinamo Zagreb",
+        "Sevilla",
+        "Real Madrid",
+        "Arsenal",
+        "West Ham United",
+        "1860 Munich"
+      ],
+      "start": 1984,
+      "end": 2003,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Davor_%C5%A0uker",
+        "https://www.national-football-teams.com/player/13706/Davor_Suker.html"
+      ],
+      "scoreBreakdown": 18,
+      "decision": "selected",
+      "reason": "National-team identity spans Yugoslavia then Croatia; classify first club by Croatian system for matcher consistency while noting its Yugoslav-league context."
+    },
+    {
+      "id": "jari-litmanen",
+      "name": "Jari Litmanen",
+      "continent": "Europe",
+      "country": "Finland",
+      "role": "Midfielder / Forward",
+      "status": "new",
+      "firstSeniorSystem": "finland",
+      "approximateSeniorRoute": [
+        "Reipas",
+        "HJK",
+        "MyPa",
+        "Ajax",
+        "Barcelona",
+        "Liverpool",
+        "Ajax",
+        "Lahti",
+        "Hansa Rostock",
+        "Malmö FF",
+        "Lahti",
+        "HJK"
+      ],
+      "start": 1987,
+      "end": 2011,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Jari_Litmanen",
+        "https://www.uefa.com/news-media/news/01e1-0f88182bfb4e-952782628a75-1000--litmanen-belongs-in-the-loftiest-company/"
+      ],
+      "scoreBreakdown": 17,
+      "decision": "selected",
+      "reason": "Exclude Fulham (no first-team competitive appearance) and the 2025 Tallinna Kalev Juunior post-retirement/amateur return."
+    },
+    {
+      "id": "andriy-shevchenko",
+      "name": "Andriy Shevchenko",
+      "continent": "Europe",
+      "country": "Ukraine",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "ukraine",
+      "approximateSeniorRoute": [
+        "Dynamo Kyiv-2",
+        "Dynamo Kyiv",
+        "AC Milan",
+        "Chelsea",
+        "AC Milan",
+        "Dynamo Kyiv"
+      ],
+      "start": 1993,
+      "end": 2012,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Andriy_Shevchenko",
+        "https://national-football-teams.com/player/6926/Andriy_Shevchenko.html"
+      ],
+      "scoreBreakdown": 18,
+      "decision": "selected",
+      "reason": "Dynamo Kyiv-2 is adult-pyramid reserve football; AC Milan return was a loan; retain final Dynamo return."
+    },
+    {
+      "id": "clarence-seedorf",
+      "name": "Clarence Seedorf",
+      "continent": "Europe",
+      "country": "Netherlands",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "netherlands",
+      "approximateSeniorRoute": [
+        "Ajax",
+        "Sampdoria",
+        "Real Madrid",
+        "Inter Milan",
+        "AC Milan",
+        "Botafogo"
+      ],
+      "start": 1992,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Clarence_Seedorf",
+        "https://www.uefa.com/news-media/news/0254-0d7cf3e37912-f305bae6c633-1000--clarence-seedorf/"
+      ],
+      "scoreBreakdown": 18,
+      "decision": "selected",
+      "reason": "Straight senior chronology; Botafogo is in-scope professional play, not a ceremonial tail."
+    },
+    {
+      "id": "predrag-mijatovic",
+      "name": "Predrag Mijatović",
+      "continent": "Europe",
+      "country": "Yugoslavia / Serbia and Montenegro",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "montenegro",
+      "approximateSeniorRoute": [
+        "Budućnost Titograd",
+        "Partizan",
+        "Valencia",
+        "Real Madrid",
+        "Fiorentina",
+        "Levante"
+      ],
+      "start": 1987,
+      "end": 2003,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Predrag_Mijatovi%C4%87",
+        "https://www.espn.com/soccer/player/_/id/79763/predrag-mijatovic"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "selected",
+      "reason": "Preserve Budućnost Titograd source-era name; country label needs a deliberate legacy-national-team convention."
+    },
+    {
+      "id": "peter-schmeichel",
+      "name": "Peter Schmeichel",
+      "continent": "Europe",
+      "country": "Denmark",
+      "role": "Goalkeeper",
+      "status": "new",
+      "firstSeniorSystem": "denmark",
+      "approximateSeniorRoute": [
+        "Gladsaxe-Hero",
+        "Hvidovre",
+        "Brøndby",
+        "Manchester United",
+        "Sporting CP",
+        "Aston Villa",
+        "Manchester City"
+      ],
+      "start": 1981,
+      "end": 2003,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Peter_Schmeichel",
+        "https://www.premierleague.com/en/players/3952/peter-schmeichel/overview"
+      ],
+      "scoreBreakdown": 18,
+      "decision": "selected",
+      "reason": "Lower-division Gladsaxe-Hero is documented senior play; goalkeeper role requires adding the broad role consistently to locale mappings if absent."
+    },
+    {
+      "id": "hakan-sukur",
+      "name": "Hakan Şükür",
+      "continent": "Europe",
+      "country": "Turkey",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "turkey",
+      "approximateSeniorRoute": [
+        "Sakaryaspor",
+        "Bursaspor",
+        "Galatasaray",
+        "Torino",
+        "Galatasaray",
+        "Inter Milan",
+        "Parma",
+        "Blackburn Rovers",
+        "Galatasaray"
+      ],
+      "start": 1987,
+      "end": 2008,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Hakan_%C5%9E%C3%BCk%C3%BCr",
+        "https://national-football-teams.com/player/6784/Hakan_Suekuer.html"
+      ],
+      "scoreBreakdown": 17,
+      "decision": "selected",
+      "reason": "Three Galatasaray spells are genuine; short Torino/Inter/Parma/Blackburn stints should not be collapsed."
+    },
+    {
+      "id": "ivan-rakitic",
+      "name": "Ivan Rakitić",
+      "continent": "Europe",
+      "country": "Croatia",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "switzerland",
+      "approximateSeniorRoute": [
+        "FC Basel II",
+        "FC Basel",
+        "Schalke 04",
+        "Sevilla",
+        "Barcelona",
+        "Sevilla",
+        "Al-Shabab",
+        "Hajduk Split"
+      ],
+      "start": 2005,
+      "end": 2025,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Ivan_Rakiti%C4%87",
+        "https://national-football-teams.com/player/23188/Ivan_Rakitic.html"
+      ],
+      "scoreBreakdown": 17,
+      "decision": "selected",
+      "reason": "Exclude Nordstern Basel zero-appearance registration; Basel II and first team overlap; retired after Hajduk in 2025."
+    },
+    {
+      "id": "christian-vieri",
+      "name": "Christian Vieri",
+      "continent": "Europe",
+      "country": "Italy",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "italy",
+      "approximateSeniorRoute": [
+        "Torino",
+        "Pisa",
+        "Ravenna",
+        "Venezia",
+        "Atalanta",
+        "Juventus",
+        "Atlético Madrid",
+        "Lazio",
+        "Inter Milan",
+        "AC Milan",
+        "Monaco",
+        "Atalanta",
+        "Fiorentina",
+        "Atalanta"
+      ],
+      "start": 1991,
+      "end": 2009,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Christian_Vieri",
+        "https://www.national-football-teams.com/player/3359/Christian_Vieri.html"
+      ],
+      "scoreBreakdown": 18,
+      "decision": "selected",
+      "reason": "Exclude Sampdoria zero-appearance registration; preserve three Atalanta spells and the short Monaco spell."
+    },
+    {
+      "id": "ruud-van-nistelrooy",
+      "name": "Ruud van Nistelrooy",
+      "continent": "Europe",
+      "country": "Netherlands",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "netherlands",
+      "approximateSeniorRoute": [
+        "Den Bosch",
+        "Heerenveen",
+        "PSV Eindhoven",
+        "Manchester United",
+        "Real Madrid",
+        "Hamburger SV",
+        "Málaga"
+      ],
+      "start": 1993,
+      "end": 2012,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Ruud_van_Nistelrooy",
+        "https://www.national-football-teams.com/player/4636/Ruud_Van_Nistelrooy.html"
+      ],
+      "scoreBreakdown": 18,
+      "decision": "selected",
+      "reason": "Use Den Bosch 1993 senior start; spelling should be stable even though Dutch surname is van Nistelrooij."
+    },
+    {
+      "id": "roy-makaay",
+      "name": "Roy Makaay",
+      "continent": "Europe",
+      "country": "Netherlands",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "netherlands",
+      "approximateSeniorRoute": [
+        "Vitesse",
+        "Tenerife",
+        "Deportivo La Coruña",
+        "Bayern Munich",
+        "Feyenoord"
+      ],
+      "start": 1993,
+      "end": 2010,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Roy_Makaay",
+        "https://www.national-football-teams.com/player/4630/Roy_Makaay.html"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "reserve",
+      "reason": "No material chronology conflict; reserve only to keep the selected batch from over-clustering Dutch forwards."
+    },
+    {
+      "id": "edgar-davids",
+      "name": "Edgar Davids",
+      "continent": "Europe",
+      "country": "Netherlands",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "netherlands",
+      "approximateSeniorRoute": [
+        "Ajax",
+        "AC Milan",
+        "Juventus",
+        "Barcelona",
+        "Inter Milan",
+        "Tottenham Hotspur",
+        "Ajax",
+        "Crystal Palace",
+        "Barnet"
+      ],
+      "start": 1991,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Edgar_Davids",
+        "https://national-football-teams.com/player/4659/Edgar_Davids.html"
+      ],
+      "scoreBreakdown": 17,
+      "decision": "reserve",
+      "reason": "Barcelona was a loan; Barnet was genuine professional player-manager football after a hiatus."
+    },
+    {
+      "id": "sami-hyypia",
+      "name": "Sami Hyypiä",
+      "continent": "Europe",
+      "country": "Finland",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "finland",
+      "approximateSeniorRoute": [
+        "Kumu",
+        "MyPa",
+        "Willem II",
+        "Liverpool",
+        "Bayer Leverkusen"
+      ],
+      "start": 1989,
+      "end": 2011,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Sami_Hyypi%C3%A4",
+        "https://www.liverpoolfc.com/info/sami-hyypia"
+      ],
+      "scoreBreakdown": 15,
+      "decision": "reserve",
+      "reason": "Verify Kumu/MyPa spell boundary at season granularity; otherwise route is stable."
+    },
+    {
+      "id": "jens-lehmann",
+      "name": "Jens Lehmann",
+      "continent": "Europe",
+      "country": "Germany",
+      "role": "Goalkeeper",
+      "status": "new",
+      "firstSeniorSystem": "germany",
+      "approximateSeniorRoute": [
+        "Schalke 04",
+        "AC Milan",
+        "Borussia Dortmund",
+        "Arsenal",
+        "VfB Stuttgart",
+        "Arsenal"
+      ],
+      "start": 1987,
+      "end": 2011,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Jens_Lehmann",
+        "https://www.national-football-teams.com/player/2576/Jens_Lehmann.html"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "reserve",
+      "reason": "Retain 2011 Arsenal emergency comeback as actual first-team play; goalkeeper role/localization required."
+    },
+    {
+      "id": "alexander-frei",
+      "name": "Alexander Frei",
+      "continent": "Europe",
+      "country": "Switzerland",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "switzerland",
+      "approximateSeniorRoute": [
+        "Basel",
+        "Thun",
+        "Luzern",
+        "Servette",
+        "Rennes",
+        "Borussia Dortmund",
+        "Basel"
+      ],
+      "start": 1997,
+      "end": 2013,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Alexander_Frei",
+        "https://www.national-football-teams.com/player/6416/Alex_Frei.html"
+      ],
+      "scoreBreakdown": 14,
+      "decision": "reserve",
+      "reason": "No major chronology issue; reserve because the Swiss rival bank would already be expanded for Rakitić."
+    },
+    {
+      "id": "goran-pandev",
+      "name": "Goran Pandev",
+      "continent": "Europe",
+      "country": "North Macedonia",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "north macedonia",
+      "approximateSeniorRoute": [
+        "Belasica",
+        "Spezia",
+        "Ancona",
+        "Lazio",
+        "Inter Milan",
+        "Napoli",
+        "Galatasaray",
+        "Genoa",
+        "Parma"
+      ],
+      "start": 1999,
+      "end": 2022,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Goran_Pandev",
+        "https://national-football-teams.com/player/3992/Goran_Pandev.html"
+      ],
+      "scoreBreakdown": 15,
+      "decision": "reserve",
+      "reason": "Omit initial Inter ownership node before loans because he made no senior appearance; merge Napoli loan-to-permanent."
+    },
+    {
+      "id": "robert-prosinecki",
+      "name": "Robert Prosinečki",
+      "continent": "Europe",
+      "country": "Croatia",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "croatia",
+      "approximateSeniorRoute": [
+        "Dinamo Zagreb",
+        "Red Star Belgrade",
+        "Real Madrid",
+        "Real Oviedo",
+        "Barcelona",
+        "Sevilla",
+        "Croatia Zagreb",
+        "Hrvatski Dragovoljac",
+        "Standard Liège",
+        "Portsmouth",
+        "Olimpija Ljubljana",
+        "NK Zagreb"
+      ],
+      "start": 1986,
+      "end": 2004,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Robert_Prosine%C4%8Dki",
+        "https://www.national-football-teams.com/player/13710/Robert_Prosinecki.html"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "reserve",
+      "reason": "Real Oviedo was a loan; exclude 2005 Savski Marof unless full research establishes in-scope professional rather than post-retirement amateur play."
+    },
+    {
+      "id": "dries-mertens",
+      "name": "Dries Mertens",
+      "continent": "Europe",
+      "country": "Belgium",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "belgium",
+      "approximateSeniorRoute": [
+        "Eendracht Aalst",
+        "AGOVV",
+        "Utrecht",
+        "PSV Eindhoven",
+        "Napoli",
+        "Galatasaray"
+      ],
+      "start": 2005,
+      "end": 2025,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Dries_Mertens",
+        "https://static.rbfa.be/project/publiek/jrinteren/speler_PH_5218.htm"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "reserve",
+      "reason": "Verify the Gent ownership/loan paperwork without adding an unplayed Gent node; retired after Galatasaray in 2025."
+    },
+    {
+      "id": "vincent-kompany",
+      "name": "Vincent Kompany",
+      "continent": "Europe",
+      "country": "Belgium",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "belgium",
+      "approximateSeniorRoute": [
+        "Anderlecht",
+        "Hamburger SV",
+        "Manchester City",
+        "Anderlecht"
+      ],
+      "start": 2003,
+      "end": 2020,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Vincent_Kompany",
+        "https://national-football-teams.com/player/705/Vincent_Kompany.html"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "reserve",
+      "reason": "Final Anderlecht spell combined playing and management but included senior appearances and stays in scope."
+    },
+    {
+      "id": "joao-moutinho",
+      "name": "João Moutinho",
+      "continent": "Europe",
+      "country": "Portugal",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "portugal",
+      "approximateSeniorRoute": [
+        "Sporting CP B",
+        "Sporting CP",
+        "Porto",
+        "Monaco",
+        "Wolverhampton Wanderers",
+        "Braga"
+      ],
+      "start": 2003,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Jo%C3%A3o_Moutinho",
+        "https://www.uefa.com/uefaeuropaleague/clubs/players/70098--joao-moutinho/"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "reserve",
+      "reason": "Active snapshot: endpoint is 2026, not a retirement claim; Sporting B adult-pyramid opening overlaps the first team."
+    },
+    {
+      "id": "antonio-cassano",
+      "name": "Antonio Cassano",
+      "continent": "Europe",
+      "country": "Italy",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "italy",
+      "approximateSeniorRoute": [
+        "Bari",
+        "Roma",
+        "Real Madrid",
+        "Sampdoria",
+        "AC Milan",
+        "Inter Milan",
+        "Parma",
+        "Sampdoria"
+      ],
+      "start": 1999,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Antonio_Cassano",
+        "https://national-football-teams.com/player/3354/Antonio_Cassano.html"
+      ],
+      "scoreBreakdown": 16,
+      "decision": "reserve",
+      "reason": "Merge Sampdoria loan-to-permanent; exclude Verona zero-appearance registration; endpoint is final Sampdoria playing period/2017 retirement."
+    },
+    {
+      "id": "franco-baresi",
+      "name": "Franco Baresi",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Franco_Baresi",
+        "https://www.national-football-teams.com/player/14117/Franco_Baresi.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "AC Milan is exactly the same ordered one-club signature as playable Paolo Maldini; bank profile remains wrong-answer-only."
+    },
+    {
+      "id": "paolo-guerrero",
+      "name": "Paolo Guerrero",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Paolo_Guerrero",
+        "https://www.espn.com/soccer/player/bio/_/id/40270/paolo-guerrero"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Senior national team is Peru, so a German first-club system does not make him a European-identity candidate."
+    },
+    {
+      "id": "dimitar-berbatov",
+      "name": "Dimitar Berbatov",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Dimitar_Berbatov",
+        "https://www.national-football-teams.com/player/721/Dimitar_Berbatov.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Repository policy records an unresolved Pirin youth/senior classification conflict; do not force a playable route."
+    },
+    {
+      "id": "anders-svensson",
+      "name": "Anders Svensson",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Anders_Svensson",
+        "https://www.national-football-teams.com/player/6383/Anders_Svensson.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Hestrafors is youth through 1992 in one source but has two senior appearances in another; unresolved opening node."
+    },
+    {
+      "id": "tore-andre-flo",
+      "name": "Tore André Flo",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Tore_Andr%C3%A9_Flo",
+        "https://www.national-football-teams.com/player/28822/Tore_Andre_Flo.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Stryn is classified as youth in one source and senior in another; unresolved first-club system/start."
+    },
+    {
+      "id": "ryan-giggs",
+      "name": "Ryan Giggs",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Ryan_Giggs",
+        "https://www.national-football-teams.com/player/18499/Ryan_Giggs.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Exact ID/name already exists in verified-players.json."
+    },
+    {
+      "id": "marco-van-basten",
+      "name": "Marco van Basten",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Marco_van_Basten",
+        "https://www.national-football-teams.com/player/14131/Marco_Van_Basten.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Exact ID/name already exists in verified-players.json."
+    },
+    {
+      "id": "roberto-baggio",
+      "name": "Roberto Baggio",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Roberto_Baggio",
+        "https://www.national-football-teams.com/player/14114/Roberto_Baggio.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Exact ID/name already exists in verified-players.json."
+    },
+    {
+      "id": "rui-costa",
+      "name": "Rui Costa",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Rui_Costa",
+        "https://www.national-football-teams.com/player/14165/Rui_Costa.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Exact ID/name already exists in verified-players.json."
+    },
+    {
+      "id": "robin-van-persie",
+      "name": "Robin van Persie",
+      "continent": "Europe",
+      "country": "",
+      "role": "",
+      "status": "new",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [],
+      "start": null,
+      "end": null,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Robin_van_Persie",
+        "https://www.national-football-teams.com/player/11549/Robin_Van_Persie.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Exact ID/name already exists in verified-players.json."
+    },
+    {
+      "id": "alvaro-recoba",
+      "name": "Álvaro Recoba",
+      "continent": "South America",
+      "country": "Uruguay",
+      "role": "Midfielder / Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "uruguay",
+      "approximateSeniorRoute": [
+        "Danubio",
+        "Nacional",
+        "Inter Milan",
+        "Venezia",
+        "Inter Milan",
+        "Torino",
+        "Panionios",
+        "Danubio",
+        "Nacional"
+      ],
+      "start": 1994,
+      "end": 2015,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/%C3%81lvaro_Recoba",
+        "https://ftp.auf.org.uy/alvaro-recoba/"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "The Venezia and Torino spells were loans."
+    },
+    {
+      "id": "matias-fernandez",
+      "name": "Matías Fernández",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "chile",
+      "approximateSeniorRoute": [
+        "Colo-Colo",
+        "Villarreal",
+        "Sporting CP",
+        "Fiorentina",
+        "AC Milan",
+        "Necaxa",
+        "Atlético Junior",
+        "Colo-Colo",
+        "Deportes La Serena"
+      ],
+      "start": 2004,
+      "end": 2022,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Mat%C3%ADas_Fern%C3%A1ndez_(footballer,_born_1986)",
+        "https://national-football-teams.com/old/player/12422/Matias_Fernandez.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Country follows the senior national team represented (Chile), not Argentine birthplace."
+    },
+    {
+      "id": "freddy-rincon",
+      "name": "Freddy Rincón",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Atlético Buenaventura",
+        "Independiente Santa Fe",
+        "América de Cali",
+        "Palmeiras",
+        "Napoli",
+        "Real Madrid",
+        "Palmeiras",
+        "Corinthians",
+        "Santos",
+        "Cruzeiro",
+        "Corinthians"
+      ],
+      "start": 1986,
+      "end": 2004,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Freddy_Rinc%C3%B3n",
+        "https://www.national-football-teams.com/player/10141/Freddy_Rincon.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "First senior system: Colombia, Atletico Buenaventura."
+    },
+    {
+      "id": "mark-gonzalez",
+      "name": "Mark González",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "chile",
+      "approximateSeniorRoute": [
+        "Universidad Católica",
+        "Albacete",
+        "Real Sociedad",
+        "Liverpool",
+        "Real Betis",
+        "CSKA Moscow",
+        "Universidad Católica",
+        "Sport Recife",
+        "Colo-Colo",
+        "Magallanes"
+      ],
+      "start": 2002,
+      "end": 2019,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Mark_Gonz%C3%A1lez",
+        "https://national-football-teams.com/old/player/1441/Mark_Gonzalez.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Country follows the senior national team represented (Chile), not South African birthplace."
+    },
+    {
+      "id": "paulo-da-silva",
+      "name": "Paulo da Silva",
+      "continent": "South America",
+      "country": "Paraguay",
+      "role": "Defender",
+      "status": "bank promotion",
+      "firstSeniorSystem": "paraguay",
+      "approximateSeniorRoute": [
+        "Atlántida",
+        "Presidente Hayes",
+        "Sport Colombia",
+        "Cerro Porteño",
+        "Perugia",
+        "Lanús",
+        "Venezia",
+        "Cosenza",
+        "Libertad",
+        "Toluca",
+        "Sunderland",
+        "Real Zaragoza",
+        "Pachuca",
+        "Toluca",
+        "Libertad",
+        "12 de Octubre",
+        "Independiente (Paraguay)",
+        "12 de Junio",
+        "Atlántida"
+      ],
+      "start": 1995,
+      "end": 2024,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Paulo_da_Silva",
+        "https://www.national-football-teams.com/player/5149/Paulo_Da_Silva.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "First senior system: Paraguay, Atlantida."
+    },
+    {
+      "id": "denis-caniza",
+      "name": "Denis Caniza",
+      "continent": "South America",
+      "country": "Paraguay",
+      "role": "Defender",
+      "status": "bank promotion",
+      "firstSeniorSystem": "paraguay",
+      "approximateSeniorRoute": [
+        "Olimpia",
+        "Lanús",
+        "Santos Laguna",
+        "Cruz Azul",
+        "Atlas",
+        "Olimpia",
+        "Nacional (Paraguay)",
+        "León",
+        "Nacional (Paraguay)",
+        "Irapuato",
+        "Nacional (Paraguay)",
+        "Sportivo Luqueño",
+        "Rubio Ñu"
+      ],
+      "start": 1994,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Denis_Caniza",
+        "https://www.national-football-teams.com/player/5147/Denis_Caniza.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "First senior system: Paraguay, Olimpia - the same club as Roque Santa Cruz's first senior club, corroborating the system."
+    },
+    {
+      "id": "nelson-cuevas",
+      "name": "Nelson Cuevas",
+      "continent": "South America",
+      "country": "Paraguay",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "paraguay",
+      "approximateSeniorRoute": [
+        "Sport Colombia",
+        "Tembetary",
+        "River Plate",
+        "Pachuca",
+        "Club América",
+        "Libertad",
+        "Santos",
+        "Universidad de Chile",
+        "Olimpia",
+        "Albacete",
+        "Puebla",
+        "Cerro Porteño",
+        "Sportivo Luqueño",
+        "Sportivo Carapeguá"
+      ],
+      "start": 1997,
+      "end": 2012,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Nelson_Cuevas",
+        "https://www.national-football-teams.com/player/5133/Nelson_Cuevas.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "First senior system: Paraguay, Sport Colombia (a Paraguayan club despite the name)."
+    },
+    {
+      "id": "roberto-palacios",
+      "name": "Roberto Palacios",
+      "continent": "South America",
+      "country": "Peru",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "peru",
+      "approximateSeniorRoute": [
+        "Sporting Cristal",
+        "Puebla",
+        "Cruzeiro",
+        "Tecos UAG",
+        "Sporting Cristal",
+        "Tecos UAG",
+        "Morelia",
+        "Atlas",
+        "Morelia",
+        "Deportivo Cali",
+        "LDU Quito",
+        "Al-Nassr",
+        "Sporting Cristal"
+      ],
+      "start": 1991,
+      "end": 2011,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Roberto_Palacios",
+        "https://www.national-football-teams.com/player/5199/Roberto_Palacios.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "The route preserves three Sporting Cristal periods, two Tecos periods and two Morelia periods as genuine returns."
+    },
+    {
+      "id": "fabian-estay",
+      "name": "Fabián Estay",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "chile",
+      "approximateSeniorRoute": [
+        "Universidad Católica",
+        "St. Gallen",
+        "Universidad de Chile",
+        "Olympiacos",
+        "Colo-Colo",
+        "Toluca",
+        "América",
+        "Atlante",
+        "Santos Laguna",
+        "Acapulco",
+        "Toluca",
+        "América de Cali",
+        "Palestino"
+      ],
+      "start": 1985,
+      "end": 2006,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Fabi%C3%A1n_Estay",
+        "https://www.national-football-teams.com/player/13044/Fabian_Estay.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "First senior system: Chile, Universidad Católica."
+    },
+    {
+      "id": "paolo-montero",
+      "name": "Paolo Montero",
+      "continent": "South America",
+      "country": "Uruguay",
+      "role": "Defender",
+      "status": "bank promotion",
+      "firstSeniorSystem": "uruguay",
+      "approximateSeniorRoute": [
+        "Peñarol",
+        "Atalanta",
+        "Juventus",
+        "San Lorenzo",
+        "Peñarol"
+      ],
+      "start": 1990,
+      "end": 2007,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Paolo_Montero",
+        "https://www.national-football-teams.com/player/8175/Paolo_Montero.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Uruguay-start peer for Daniel Fonseca (debut 1990 vs Fonseca's 1988, two years apart, overlapping 1990-2003), closing his contemporary gap reopened when Fonseca was promoted to the playable roster in the ninth expansion."
+    },
+    {
+      "id": "jorge-soto",
+      "name": "Jorge Soto",
+      "continent": "South America",
+      "country": "Peru",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "peru",
+      "approximateSeniorRoute": [
+        "Deportivo Municipal",
+        "Sporting Cristal",
+        "Lanús",
+        "Sporting Cristal",
+        "San Luis",
+        "Sporting Cristal",
+        "Alianza Lima",
+        "Melgar"
+      ],
+      "start": 1990,
+      "end": 2008,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Jorge_Soto_(footballer)",
+        "https://www.national-football-teams.com/player/5184/Jorge_Soto.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "First senior system: Peru, Deportivo Municipal."
+    },
+    {
+      "id": "flavio-maestri",
+      "name": "Flavio Maestri",
+      "continent": "South America",
+      "country": "Peru",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "peru",
+      "approximateSeniorRoute": [
+        "Sporting Cristal",
+        "Hércules",
+        "Universidad de Chile",
+        "Sporting Cristal",
+        "San Luis",
+        "Sporting Cristal",
+        "Vitória",
+        "Alianza Lima",
+        "Shanghai Jiucheng",
+        "Alianza Lima",
+        "Sport Boys",
+        "Sporting Cristal"
+      ],
+      "start": 1990,
+      "end": 2009,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Flavio_Maestri",
+        "https://www.national-football-teams.com/player/8164/Flavio_Maestri.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "National Football Teams records first-team league appearances in 1990, so the start follows the first evidenced playing year rather than Wikipedia's 1989 membership label."
+    },
+    {
+      "id": "carlos-lobaton",
+      "name": "Carlos Lobatón",
+      "continent": "South America",
+      "country": "Peru",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "peru",
+      "approximateSeniorRoute": [
+        "Sport Agustino",
+        "Sport Boys",
+        "Estudiantes de Medicina",
+        "Universitario de Deportes",
+        "Unión Huaral",
+        "Cienciano",
+        "Sporting Cristal"
+      ],
+      "start": 1998,
+      "end": 2019,
+      "evidenceLeads": [
+        "https://es.wikipedia.org/wiki/Carlos_Lobat%C3%B3n",
+        "https://www.national-football-teams.com/app.php/player/13103/Carlos_Lobaton.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Sport Agustino is included because the Spanish biography explicitly places his 1998 debut in Peru's professional second division, an adult-pyramid competition; overlapping Sporting Cristal youth membership is excluded."
+    },
+    {
+      "id": "luis-advincula",
+      "name": "Luis Advíncula",
+      "continent": "South America",
+      "country": "Peru",
+      "role": "Defender",
+      "status": "bank promotion",
+      "firstSeniorSystem": "peru",
+      "approximateSeniorRoute": [
+        "Juan Aurich",
+        "Sporting Cristal",
+        "TSG Hoffenheim",
+        "Ponte Preta",
+        "Sporting Cristal",
+        "Vitória Setúbal",
+        "Bursaspor",
+        "Newell's Old Boys",
+        "Tigres UANL",
+        "Lobos BUAP",
+        "Rayo Vallecano",
+        "Boca Juniors",
+        "Alianza Lima"
+      ],
+      "start": 2009,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Luis_Adv%C3%ADncula",
+        "https://www.infobae.com/peru/deportes/2026/01/14/el-mono-navarro-montoya-senalo-que-luis-advincula-va-a-jerarquizar-el-futbol-peruano-con-su-llegada-a-alianza-lima/"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Juan Aurich is the first displayed senior club and the independently reported site of his 2009 professional debut, so the profile belongs to the Peru system; 2009 is within eight years of both Jefferson Farfán's 2001 start and Juan Manuel Vargas's 2002 start."
+    },
+    {
+      "id": "ivo-basay",
+      "name": "Ivo Basay",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "chile",
+      "approximateSeniorRoute": [
+        "Magallanes",
+        "Curicó Unido",
+        "Magallanes",
+        "Everton",
+        "Stade Reims",
+        "Necaxa",
+        "Boca Juniors",
+        "Colo-Colo"
+      ],
+      "start": 1983,
+      "end": 1999,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Ivo_Basay",
+        "https://national-football-teams.com/old/player/14738/Ivo_Basay.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "First senior system: Chile, Magallanes in 1983; Magallanes youth football is excluded."
+    },
+    {
+      "id": "patricio-yanez",
+      "name": "Patricio Yáñez",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Forward",
+      "status": "bank promotion",
+      "firstSeniorSystem": "chile",
+      "approximateSeniorRoute": [
+        "San Luis",
+        "Real Valladolid",
+        "Real Zaragoza",
+        "Real Betis",
+        "Universidad de Chile",
+        "Colo-Colo"
+      ],
+      "start": 1977,
+      "end": 1995,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Patricio_Ya%C3%B1ez",
+        "https://national-football-teams.com/old/player/17621/Patricio_Yanez.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "First senior system: Chile, San Luis in 1977; the earlier Alto Florida and San Luis youth entries are excluded."
+    },
+    {
+      "id": "ruben-paz",
+      "name": "Rubén Paz",
+      "continent": "South America",
+      "country": "Uruguay",
+      "role": "Midfielder",
+      "status": "bank promotion",
+      "firstSeniorSystem": "uruguay",
+      "approximateSeniorRoute": [
+        "Peñarol",
+        "Internacional",
+        "Racing Club de France",
+        "Racing Club",
+        "Genoa",
+        "Racing Club",
+        "Rampla Juniors",
+        "Frontera Rivera",
+        "Godoy Cruz",
+        "Wanderers Artigas",
+        "Frontera Rivera",
+        "Nacional San José de Mayo",
+        "Tito Borjas",
+        "Pirata Juniors"
+      ],
+      "start": 1977,
+      "end": 2006,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Rub%C3%A9n_Paz",
+        "https://www.national-football-teams.com/player/15731/Ruben_Paz.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Uruguay-start peer for Enzo Francescoli, closing the remainder of his contemporary gap."
+    },
+    {
+      "id": "alex",
+      "name": "Alex de Souza",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "Coritiba",
+        "Palmeiras",
+        "Flamengo",
+        "Palmeiras",
+        "Cruzeiro",
+        "Palmeiras",
+        "Cruzeiro",
+        "Fenerbahçe",
+        "Coritiba"
+      ],
+      "start": 1995,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Alex_(footballer,_born_1977)",
+        "https://www.theplayerstribune.com/br/contributors/alex10"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Omit Parma as an unused ownership registration (0 senior appearances); preserve the interleaved Brazilian loans/returns."
+    },
+    {
+      "id": "adriano",
+      "name": "Adriano",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "Flamengo",
+        "Inter Milan",
+        "Fiorentina",
+        "Parma",
+        "Inter Milan",
+        "São Paulo",
+        "Flamengo",
+        "Roma",
+        "Corinthians",
+        "Atlético Paranaense"
+      ],
+      "start": 2000,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Adriano_(footballer,_born_February_1982)",
+        "https://www.inter.it/en/archivio_giocatore/G0726/leite-ribeiro-adriano"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Omit the zero-appearance 2012 Flamengo registration and 2016 Miami United unless competitive senior evidence is recovered; São Paulo was a loan during the second Inter spell."
+    },
+    {
+      "id": "lucio",
+      "name": "Lúcio",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "Guará",
+        "Internacional",
+        "Bayer Leverkusen",
+        "Bayer Leverkusen II",
+        "Bayern Munich",
+        "Inter Milan",
+        "Juventus",
+        "São Paulo",
+        "Palmeiras",
+        "FC Goa",
+        "Gama",
+        "Brasiliense"
+      ],
+      "start": 1997,
+      "end": 2020,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/L%C3%BAcio",
+        "https://www.national-football-teams.com/player/994/Lucio_1.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Guará and Gama show zero league apps but reported cup/state-level senior play; verify those match records before inclusion. Bayer II occurred after the first-team debut."
+    },
+    {
+      "id": "maicon",
+      "name": "Maicon",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "Cruzeiro",
+        "Monaco",
+        "Inter Milan",
+        "Manchester City",
+        "Roma",
+        "Avaí",
+        "Criciúma",
+        "Villa Nova",
+        "Sona",
+        "Tre Penne"
+      ],
+      "start": 2000,
+      "end": 2021,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Maicon_Douglas_Sisenando",
+        "https://national-football-teams.com/player/8182/Maicon.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Late Sona (Italian Serie D) and Tre Penne spells are in-scope adult senior football but need lower-division crest sourcing."
+    },
+    {
+      "id": "gilberto-silva",
+      "name": "Gilberto Silva",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "América Mineiro",
+        "Atlético Mineiro",
+        "Arsenal",
+        "Panathinaikos",
+        "Grêmio",
+        "Atlético Mineiro"
+      ],
+      "start": 1997,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Gilberto_Silva",
+        "https://www.national-football-teams.com/player/1014/Gilberto_Silva.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Infobox membership starts in 1997 while narrative places the senior debut in 1998; use 1997 membership with an explicit debut-year qualification or resolve to match project convention."
+    },
+    {
+      "id": "julio-baptista",
+      "name": "Júlio Baptista",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Midfielder / Forward",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "São Paulo",
+        "Sevilla",
+        "Real Madrid",
+        "Arsenal",
+        "Real Madrid",
+        "Roma",
+        "Málaga",
+        "Cruzeiro",
+        "Orlando City",
+        "CFR Cluj"
+      ],
+      "start": 2000,
+      "end": 2019,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/J%C3%BAlio_Baptista",
+        "https://www.national-football-teams.com/player/1030/Julio_Baptista.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Arsenal was a loan; include the actual Real Madrid return before Roma. Broad role should retain both midfield and forward usage."
+    },
+    {
+      "id": "fred-fluminense",
+      "name": "Fred",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "América Mineiro",
+        "Cruzeiro",
+        "Lyon",
+        "Fluminense",
+        "Atlético Mineiro",
+        "Cruzeiro",
+        "Fluminense"
+      ],
+      "start": 2003,
+      "end": 2022,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Fred_(footballer,_born_1983)",
+        "https://www.national-football-teams.com/player/9434/Fred.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "No ownership-only returns; the two Fluminense spells are genuine separated playing spells."
+    },
+    {
+      "id": "hulk",
+      "name": "Hulk",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "Vitória",
+        "Kawasaki Frontale",
+        "Consadole Sapporo",
+        "Tokyo Verdy",
+        "Kawasaki Frontale",
+        "Tokyo Verdy",
+        "Porto",
+        "Zenit Saint Petersburg",
+        "Shanghai Port",
+        "Atlético Mineiro",
+        "Fluminense"
+      ],
+      "start": 2004,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Hulk_(footballer)",
+        "https://national-football-teams.com/player/34580/Hulk.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Japan chronology interleaves loans and parent appearances; merge continuous loan-to-permanent Tokyo Verdy only if match-level chronology supports it. Current endpoint is a 2026 snapshot."
+    },
+    {
+      "id": "diego-godin",
+      "name": "Diego Godín",
+      "continent": "South America",
+      "country": "Uruguay",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "uruguay",
+      "approximateSeniorRoute": [
+        "Cerro",
+        "Nacional",
+        "Villarreal",
+        "Atlético Madrid",
+        "Inter Milan",
+        "Cagliari",
+        "Atlético Mineiro",
+        "Vélez Sarsfield"
+      ],
+      "start": 2003,
+      "end": 2023,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Diego_God%C3%ADn",
+        "https://www.national-football-teams.com/player/13538/Diego_Godin.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Exclude 2024 Porongos as post-retirement amateur football; professional playing endpoint is Vélez in 2023."
+    },
+    {
+      "id": "diego-lugano",
+      "name": "Diego Lugano",
+      "continent": "South America",
+      "country": "Uruguay",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "uruguay",
+      "approximateSeniorRoute": [
+        "Nacional",
+        "Plaza Colonia",
+        "São Paulo",
+        "Fenerbahçe",
+        "Paris Saint-Germain",
+        "Málaga",
+        "West Bromwich Albion",
+        "BK Häcken",
+        "Cerro Porteño",
+        "São Paulo"
+      ],
+      "start": 1999,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Diego_Lugano",
+        "https://www.national-football-teams.com/player/9773/Diego_Lugano.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "A Libertad hometown-club match is described before Nacional but is absent from the standard senior table; resolve whether it was official adult-pyramid play before finalizing the first node."
+    },
+    {
+      "id": "martin-caceres",
+      "name": "Martín Cáceres",
+      "continent": "South America",
+      "country": "Uruguay",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "uruguay",
+      "approximateSeniorRoute": [
+        "Defensor Sporting",
+        "Recreativo",
+        "Barcelona",
+        "Juventus",
+        "Sevilla",
+        "Juventus",
+        "Southampton",
+        "Hellas Verona",
+        "Lazio",
+        "Juventus",
+        "Fiorentina",
+        "Cagliari",
+        "Levante",
+        "LA Galaxy",
+        "Libertad",
+        "Juventud"
+      ],
+      "start": 2006,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Martin_Caceres",
+        "https://www.national-football-teams.com/player/23504/Martin_Caceres.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Omit Villarreal as an unused parent registration; preserve the actual loan routes and repeated Juventus spells. Current Juventud endpoint is a 2026 snapshot."
+    },
+    {
+      "id": "mario-yepes",
+      "name": "Mario Yepes",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Cortuluá",
+        "Deportivo Cali",
+        "River Plate",
+        "Nantes",
+        "Paris Saint-Germain",
+        "Chievo",
+        "AC Milan",
+        "Atalanta",
+        "San Lorenzo"
+      ],
+      "start": 1994,
+      "end": 2015,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Mario_Yepes",
+        "https://national-football-teams.com/player/1510/Mario_Yepes.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "One narrative sentence incorrectly says his career began in 1999; the senior table and club section support Cortuluá from 1994."
+    },
+    {
+      "id": "ivan-cordoba",
+      "name": "Iván Córdoba",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Deportivo Rionegro",
+        "Atlético Nacional",
+        "San Lorenzo",
+        "Inter Milan"
+      ],
+      "start": 1993,
+      "end": 2012,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Iv%C3%A1n_C%C3%B3rdoba",
+        "https://national-football-teams.com/player/1514/Ivan_Cordoba.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Straight chronology; verify whether the club display should use historical Deportivo Rionegro naming rather than current Leones identity for crest purposes."
+    },
+    {
+      "id": "juan-pablo-angel",
+      "name": "Juan Pablo Ángel",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Atlético Nacional",
+        "River Plate",
+        "Aston Villa",
+        "New York Red Bulls",
+        "LA Galaxy",
+        "Chivas USA",
+        "Atlético Nacional"
+      ],
+      "start": 1993,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Juan_Pablo_%C3%81ngel",
+        "https://www.mlssoccer.com/players/juan-pablo-angel"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Standard route; the River transfer occurred in January 1998 although infobox membership is commonly shown from 1997."
+    },
+    {
+      "id": "james-rodriguez",
+      "name": "James Rodríguez",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Envigado",
+        "Banfield",
+        "Porto",
+        "Monaco",
+        "Real Madrid",
+        "Bayern Munich",
+        "Everton",
+        "Al-Rayyan",
+        "Olympiacos",
+        "São Paulo",
+        "Rayo Vallecano",
+        "León",
+        "Minnesota United"
+      ],
+      "start": 2006,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/James_Rodr%C3%ADguez",
+        "https://national-football-teams.com/player/45187/James_Rodriguez.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Bayern was a loan inside Real Madrid ownership; do not insert a non-playing Real return after it. Minnesota endpoint is a 2026 snapshot."
+    },
+    {
+      "id": "radamel-falcao",
+      "name": "Radamel Falcao",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Lanceros Boyacá",
+        "River Plate",
+        "Porto",
+        "Atlético Madrid",
+        "Monaco",
+        "Manchester United",
+        "Chelsea",
+        "Monaco",
+        "Galatasaray",
+        "Rayo Vallecano",
+        "Millonarios"
+      ],
+      "start": 1999,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Radamel_Falcao",
+        "https://www.national-football-teams.com/player/20705/Radamel_Falcao.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Lanceros is verified professional second-tier senior play at age 13; preserve both Premier League loans and the actual Monaco return. Current Millonarios endpoint needs snapshot verification."
+    },
+    {
+      "id": "david-ospina",
+      "name": "David Ospina",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Goalkeeper",
+      "status": "new",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Atlético Nacional",
+        "Nice",
+        "Arsenal",
+        "Napoli",
+        "Al-Nassr",
+        "Atlético Nacional"
+      ],
+      "start": 2005,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/David_Ospina",
+        "https://www.national-football-teams.com/player/20700/David_Ospina.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Merge Napoli loan-to-permanent as one uninterrupted playing node. Omit Atlante until a competitive appearance is established (current table shows zero)."
+    },
+    {
+      "id": "carlos-bacca",
+      "name": "Carlos Bacca",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Atlético Junior",
+        "Barranquilla",
+        "Minervén",
+        "Barranquilla",
+        "Atlético Junior",
+        "Club Brugge",
+        "Sevilla",
+        "AC Milan",
+        "Villarreal",
+        "Granada",
+        "Atlético Junior"
+      ],
+      "start": 2007,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Carlos_Bacca",
+        "http://national-football-teams.com/player/39654.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "The table assigns ownership to Junior from 2007 while the narrative calls the 2009 Junior match his professional debut; retain played loan sequence, and omit zero-appearance Deportivo Cali until debut."
+    },
+    {
+      "id": "juan-cuadrado",
+      "name": "Juan Cuadrado",
+      "continent": "South America",
+      "country": "Colombia",
+      "role": "Midfielder / Defender",
+      "status": "new",
+      "firstSeniorSystem": "colombia",
+      "approximateSeniorRoute": [
+        "Independiente Medellín",
+        "Udinese",
+        "Lecce",
+        "Fiorentina",
+        "Chelsea",
+        "Juventus",
+        "Inter Milan",
+        "Atalanta",
+        "Pisa"
+      ],
+      "start": 2008,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Juan_Cuadrado",
+        "https://national-football-teams.com/player/31645/Juan_Cuadrado.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Merge the uninterrupted Juventus loan-to-permanent spell; Fiorentina ownership complexity should not create an Udinese return node. Pisa endpoint is a 2026 snapshot."
+    },
+    {
+      "id": "alexis-sanchez",
+      "name": "Alexis Sánchez",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Forward",
+      "status": "new",
+      "firstSeniorSystem": "chile",
+      "approximateSeniorRoute": [
+        "Cobreloa",
+        "Colo-Colo",
+        "River Plate",
+        "Udinese",
+        "Barcelona",
+        "Arsenal",
+        "Manchester United",
+        "Inter Milan",
+        "Marseille",
+        "Inter Milan",
+        "Udinese",
+        "Sevilla",
+        "CF Montréal"
+      ],
+      "start": 2005,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Alexis_Sanchez",
+        "https://www.national-football-teams.com/player/14652/Alexis_Sanchez.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Early Colo-Colo and River spells were Udinese loans; do not insert ownership-only Udinese returns. Sevilla/Montréal status is a 2026 snapshot requiring final match-level confirmation."
+    },
+    {
+      "id": "arturo-vidal",
+      "name": "Arturo Vidal",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "chile",
+      "approximateSeniorRoute": [
+        "Colo-Colo",
+        "Bayer Leverkusen",
+        "Juventus",
+        "Bayern Munich",
+        "Barcelona",
+        "Inter Milan",
+        "Flamengo",
+        "Athletico Paranaense",
+        "Colo-Colo"
+      ],
+      "start": 2005,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Arturo_Vidal",
+        "https://www.national-football-teams.com/player/12421/Arturo_Vidal.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Current second Colo-Colo spell is a 2026 snapshot; use Athletico Paranaense spelling consistently with existing crest aliases."
+    },
+    {
+      "id": "claudio-bravo",
+      "name": "Claudio Bravo",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Goalkeeper",
+      "status": "new",
+      "firstSeniorSystem": "chile",
+      "approximateSeniorRoute": [
+        "Colo-Colo",
+        "Real Sociedad",
+        "Barcelona",
+        "Manchester City",
+        "Real Betis"
+      ],
+      "start": 2002,
+      "end": 2024,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Claudio_Bravo_(footballer)",
+        "https://www.fcbarcelona.com/en/football/barca-legends/players/4503244/claudio-bravo"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Straight chronology ending at retirement in 2024; normalize Real Betis display to the roster’s existing naming convention if applicable."
+    },
+    {
+      "id": "carlos-gamarra",
+      "name": "Carlos Gamarra",
+      "continent": "South America",
+      "country": "Paraguay",
+      "role": "Defender",
+      "status": "new",
+      "firstSeniorSystem": "paraguay",
+      "approximateSeniorRoute": [
+        "Cerro Porteño",
+        "Independiente",
+        "Cerro Porteño",
+        "Internacional",
+        "Benfica",
+        "Corinthians",
+        "Atlético Madrid",
+        "Flamengo",
+        "AEK Athens",
+        "Inter Milan",
+        "Palmeiras",
+        "Olimpia"
+      ],
+      "start": 1991,
+      "end": 2007,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Carlos_Gamarra",
+        "https://national-football-teams.com/player/5138/Carlos_Gamarra.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "AEK Athens was a loan during the Flamengo membership; omit any ownership-only Flamengo return if no match followed."
+    },
+    {
+      "id": "jose-luis-chilavert",
+      "name": "José Luis Chilavert",
+      "continent": "South America",
+      "country": "Paraguay",
+      "role": "Goalkeeper",
+      "status": "new",
+      "firstSeniorSystem": "paraguay",
+      "approximateSeniorRoute": [
+        "Sportivo Luqueño",
+        "Guaraní",
+        "San Lorenzo",
+        "Real Zaragoza",
+        "Vélez Sarsfield",
+        "Strasbourg",
+        "Peñarol"
+      ],
+      "start": 1982,
+      "end": 2003,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Jos%C3%A9_Luis_Chilavert",
+        "https://iffhs.com/en/news/jose-luis-chilavert-paraguayvelez-sarsfield-1995-1997-1998-391"
+      ],
+      "scoreBreakdown": {},
+      "decision": "reserve",
+      "reason": "Omit the 2003–04 Vélez registration because the standard table records zero appearances; professional playing endpoint is Peñarol in 2003."
+    },
+    {
+      "id": "ramires",
+      "name": "Ramires",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Midfielder",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "Joinville",
+        "Cruzeiro",
+        "Benfica",
+        "Chelsea",
+        "Jiangsu Suning",
+        "Palmeiras"
+      ],
+      "start": 2006,
+      "end": 2020,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Ramires",
+        "https://national-football-teams.com/player/31568/Ramires.html",
+        "https://www.chelseafc.com/en/news/article/ramires-announces-retirement"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Royal Sport Club and the 2005–2006 Joinville period are youth rows. Cruzeiro’s loan-to-permanent period is one continuous node. Jiangsu remains a single stint through his 2019 release, but its note discloses that the last appearance was in 2017 and the 2018 league row was zero. He left Palmeiras in November 2020 and formally announced retirement in 2022; the announcement is not used to extend the playing years."
+    },
+    {
+      "id": "julio-cesar",
+      "name": "Júlio César",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Goalkeeper",
+      "status": "new",
+      "firstSeniorSystem": "brazil",
+      "approximateSeniorRoute": [
+        "Flamengo",
+        "Inter Milan",
+        "Queens Park Rangers",
+        "Toronto FC",
+        "Benfica",
+        "Flamengo"
+      ],
+      "start": 1997,
+      "end": 2018,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar_(football_goalkeeper,_born_1979)",
+        "https://www.national-football-teams.com/player/1011/Julio_Cesar_1.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "selected",
+      "reason": "Chievo is excluded: he was registered there in 2005 solely because non-EU rules prevented an immediate Inter registration, and both detailed tables show zero appearances in every competition. QPR is retained through 2014 because he made a cup appearance despite zero league appearances in 2013/14. The Toronto loan is followed directly by Benfica, so no ownership-only QPR return is inserted. The 2018 Flamengo comeback is genuine competitive senior play."
+    },
+    {
+      "id": "cristiano-ronaldo",
+      "name": "Cristiano Ronaldo",
+      "continent": "Europe",
+      "country": "Portugal",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Sporting CP",
+        "Sporting CP B",
+        "Manchester United",
+        "Real Madrid",
+        "Juventus",
+        "Manchester United",
+        "Al-Nassr"
+      ],
+      "start": 2002,
+      "end": 2023,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Cristiano_Ronaldo",
+        "https://www.spl.com.sa/en/players/20094/cristiano-ronaldo",
+        "https://en.wikipedia.org/wiki/Sporting_CP_B",
+        "https://www.uefa.com/uefachampionsleague/news/023c-0e976af10937-6aed2a57b183-1000--memories-of-ronaldo-s-debut-on-this-day-in-2002/"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "zinedine-zidane",
+      "name": "Zinedine Zidane",
+      "continent": "Europe",
+      "country": "France",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Cannes B",
+        "Cannes",
+        "Bordeaux",
+        "Juventus",
+        "Real Madrid"
+      ],
+      "start": 1987,
+      "end": 2006,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Zinedine_Zidane",
+        "https://www.national-football-teams.com/player/2456/Zinedine_Zidane.html",
+        "https://www.realmadrid.com/en-US/the-club/history/football-legends/zinedine-zidane",
+        "https://www.footballdatabase.eu/en/player/details/12-zinedine-zidane"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "dennis-bergkamp",
+      "name": "Dennis Bergkamp",
+      "continent": "Europe",
+      "country": "Netherlands",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Ajax",
+        "Inter Milan",
+        "Arsenal"
+      ],
+      "start": 1986,
+      "end": 2006,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Dennis_Bergkamp",
+        "https://www.national-football-teams.com/player/10390/Dennis_Bergkamp.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "david-beckham",
+      "name": "David Beckham",
+      "continent": "Europe",
+      "country": "England",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Manchester United",
+        "Preston North End",
+        "Manchester United",
+        "Real Madrid",
+        "LA Galaxy",
+        "AC Milan",
+        "LA Galaxy",
+        "AC Milan",
+        "LA Galaxy",
+        "Paris Saint-Germain"
+      ],
+      "start": 1992,
+      "end": 2013,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/David_Beckham",
+        "https://www.national-football-teams.com/player/2189.html",
+        "https://www.britannica.com/biography/David-Beckham"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "wayne-rooney",
+      "name": "Wayne Rooney",
+      "continent": "Europe",
+      "country": "England",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Everton",
+        "Manchester United",
+        "Everton",
+        "D.C. United",
+        "Derby County"
+      ],
+      "start": 2002,
+      "end": 2021,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Wayne_Rooney",
+        "https://www.national-football-teams.com/player/2145.html",
+        "https://www.theguardian.com/football/2021/jan/15/wayne-rooney-calls-time-on-playing-career-to-become-derby-manager",
+        "https://skysports.com/football/news/11688/12188712/wayne-rooney-from-derby-county-player-to-manager-in-a-tumultuous-12-months"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "steven-gerrard",
+      "name": "Steven Gerrard",
+      "continent": "Europe",
+      "country": "England",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Liverpool",
+        "LA Galaxy"
+      ],
+      "start": 1998,
+      "end": 2016,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Steven_Gerrard",
+        "https://www.national-football-teams.com/player/2181.html",
+        "https://www.smh.com.au/sport/soccer/former-liverpool-and-england-captain-steven-gerrard-retires-after-la-galaxy-20161124-gsx3y0.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "frank-lampard",
+      "name": "Frank Lampard",
+      "continent": "Europe",
+      "country": "England",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Swansea City",
+        "West Ham United",
+        "Chelsea",
+        "Manchester City",
+        "New York City FC"
+      ],
+      "start": 1995,
+      "end": 2016,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Frank_Lampard",
+        "https://www.national-football-teams.com/player/2178.html",
+        "https://inside.fifa.com/news/former-three-lions-midfielder-lampard-announces-retirement-2866027",
+        "https://www.irishexaminer.com/sport/soccer/arid-20305955.html",
+        "https://www.11v11.com/players/frank-lampard-556/season/1996/team/swansea-city/",
+        "https://walesonline.co.uk/sport/football/football-news/lampard-owes-rise-swans-spell-2433146"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "paul-scholes",
+      "name": "Paul Scholes",
+      "continent": "Europe",
+      "country": "England",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Manchester United",
+        "Manchester United"
+      ],
+      "start": 1994,
+      "end": 2013,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Paul_Scholes",
+        "https://www.national-football-teams.com/player/2185/Paul_Scholes.html",
+        "https://www.bbc.com/sport/football/45385162"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "francesco-totti",
+      "name": "Francesco Totti",
+      "continent": "Europe",
+      "country": "Italy",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Roma"
+      ],
+      "start": 1993,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Francesco_Totti",
+        "https://www.national-football-teams.com/player/3353.html",
+        "https://www.abc.net.au/news/2017-05-29/football-legend-francesco-tottis-emotional-roma-farewell/8567890"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "paolo-maldini",
+      "name": "Paolo Maldini",
+      "continent": "Europe",
+      "country": "Italy",
+      "role": "Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "AC Milan"
+      ],
+      "start": 1985,
+      "end": 2009,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Paolo_Maldini",
+        "https://www.national-football-teams.com/player/10722/Paolo_Maldini.html",
+        "https://www.acmilan.com/en/club/legends/players/paolo-maldini"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "gianluigi-buffon",
+      "name": "Gianluigi Buffon",
+      "continent": "Europe",
+      "country": "Italy",
+      "role": "Goalkeeper",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Parma",
+        "Juventus",
+        "Paris Saint-Germain",
+        "Juventus",
+        "Parma"
+      ],
+      "start": 1995,
+      "end": 2023,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Gianluigi_Buffon",
+        "https://www.national-football-teams.com/player/3381/Gianluigi_Buffon.html",
+        "https://www.bbc.com/sport/football/66378584"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "andres-iniesta",
+      "name": "Andrés Iniesta",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Barcelona B",
+        "Barcelona",
+        "Vissel Kobe",
+        "Emirates Club"
+      ],
+      "start": 2001,
+      "end": 2024,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Andrés_Iniesta",
+        "http://national-football-teams.com/player/14348/Andres_Iniesta.html",
+        "https://www.bbc.com/sport/football/articles/c1l47erqep4o",
+        "https://www.bdfutbol.com/en/j/j159.html",
+        "https://www.bdfutbol.com/en/p/j159.html?temp=2000-01"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "xavi",
+      "name": "Xavi",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Barcelona B",
+        "Barcelona",
+        "Al Sadd"
+      ],
+      "start": 1997,
+      "end": 2019,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Xavi_(footballer,_born_1980)",
+        "https://www.national-football-teams.com/player/6247/Xavi_Hernandez.html",
+        "https://www.fcbarcelona.com/en/news/1205752/xavi-hernandez-to-retire-at-end-of-season"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "zlatan-ibrahimovic",
+      "name": "Zlatan Ibrahimović",
+      "continent": "Europe",
+      "country": "Sweden",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Malmö FF",
+        "Ajax",
+        "Juventus",
+        "Inter Milan",
+        "Barcelona",
+        "AC Milan",
+        "Paris Saint-Germain",
+        "Manchester United",
+        "LA Galaxy",
+        "AC Milan"
+      ],
+      "start": 1999,
+      "end": 2023,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Zlatan_Ibrahimović",
+        "https://www.national-football-teams.com/player/6367.html",
+        "https://www.uefa.com/uefachampionsleague/news/0294-1c8717433b49-dd570329dcf6-1000--zlatan-ibrahimovic-on-retirement-and-his-new-role-at-milan"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "lionel-messi",
+      "name": "Lionel Messi",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Barcelona C",
+        "Barcelona B",
+        "Barcelona",
+        "Paris Saint-Germain",
+        "Inter Miami"
+      ],
+      "start": 2003,
+      "end": 2023,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Lionel_Messi",
+        "https://www.intermiamicf.com/news/inter-miami-cf-signs-leo-messi-to-contract-extension",
+        "https://espn.com/espn/print?id=45570212",
+        "https://www.national-football-teams.com/player/12066.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "neymar",
+      "name": "Neymar",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Santos",
+        "Barcelona",
+        "Paris Saint-Germain",
+        "Al-Hilal",
+        "Santos"
+      ],
+      "start": 2009,
+      "end": 2025,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Neymar_Jr.",
+        "https://www.santosfc.com.br/santos-fc-e-neymar-jr-renovam-contrato-ate-o-fim-de-2026/",
+        "http://www.national-football-teams.com/player/39625/Neymar.html",
+        "https://www.nytimes.com/athletic/6093149/2025/01/27/neymar-leave-al-hilal-contract-terminate/"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "luis-suarez",
+      "name": "Luis Suárez",
+      "continent": "South America",
+      "country": "Uruguay",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Nacional",
+        "Groningen",
+        "Ajax",
+        "Liverpool",
+        "Barcelona",
+        "Atlético Madrid",
+        "Nacional",
+        "Grêmio",
+        "Inter Miami"
+      ],
+      "start": 2005,
+      "end": 2024,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Luis_Suarez",
+        "https://www.intermiamicf.com/news/inter-miami-cf-signs-luis-suarez-to-a-new-contract",
+        "https://www.national-football-teams.com/player/20658.html",
+        "https://nl.wikipedia.org/wiki/Beloften_Eredivisie_(voetbal)",
+        "https://www.fcgroningen.nl/nieuws/zinderende-ontknoping-nadert-voor-jong-fc-groningen/"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "sergio-aguero",
+      "name": "Sergio Agüero",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Independiente",
+        "Atlético Madrid",
+        "Manchester City",
+        "Barcelona"
+      ],
+      "start": 2003,
+      "end": 2021,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Sergio_Aguero",
+        "https://www.bbc.com/sport/football/59660727",
+        "https://www.national-football-teams.com/player/15412.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "carlos-tevez",
+      "name": "Carlos Tevez",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Boca Juniors",
+        "Corinthians",
+        "West Ham United",
+        "Manchester United",
+        "Manchester City",
+        "Juventus",
+        "Boca Juniors",
+        "Shanghai Shenhua",
+        "Boca Juniors"
+      ],
+      "start": 2001,
+      "end": 2021,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Carlos_T%C3%A9vez",
+        "https://www.espn.com/soccer/story/_/id/37629044/ex-manchester-united-juventus-striker-hangs-boots-38",
+        "https://www.national-football-teams.com/player/285.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "ronaldo",
+      "name": "Ronaldo Nazário",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Cruzeiro",
+        "PSV Eindhoven",
+        "Barcelona",
+        "Inter Milan",
+        "Real Madrid",
+        "AC Milan",
+        "Corinthians"
+      ],
+      "start": 1993,
+      "end": 2011,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Ronaldo_(Brazilian_footballer)",
+        "https://newsapp.abc.net.au/news/2011-02-15/brazil-great-ronaldo-confirms-retirement/1942776",
+        "https://www.national-football-teams.com/player/990.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "ronaldinho",
+      "name": "Ronaldinho",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Midfielder / Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Grêmio",
+        "Paris Saint-Germain",
+        "Barcelona",
+        "AC Milan",
+        "Flamengo",
+        "Atlético Mineiro",
+        "Querétaro",
+        "Fluminense",
+        "Ravenna"
+      ],
+      "start": 1998,
+      "end": 2026,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Ronaldinho",
+        "https://www.ravennafc.it/en/2026/06/23/ronaldinho-signs-with-ravenna-fc-by-cipriani-as-a-decades-long-vision-comes-to-life/",
+        "https://www.espn.com/soccer/story/_/id/49166021/ronaldinho-46-signs-italian-serie-c-club-ravenna",
+        "https://www.national-football-teams.com/player/1025/Ronaldinho_Gaucho.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "kaka",
+      "name": "Kaká",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "São Paulo",
+        "AC Milan",
+        "Real Madrid",
+        "AC Milan",
+        "São Paulo",
+        "Orlando City"
+      ],
+      "start": 2001,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Kak%C3%A1",
+        "https://www.theguardian.com/football/2014/jul/01/brazil-star-kaka-orlando-city",
+        "https://socceroos.com.au/news/kaka-emotional-sao-paulo-return",
+        "https://apnews.com/fl-state-wire-02e520a05bb0478ea90cb3fe3ec6ac67",
+        "https://www.saopaulofc.net/obrigado-kaka/",
+        "http://www.national-football-teams.com/player/1013/Kaka.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "roberto-carlos",
+      "name": "Roberto Carlos",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "União São João",
+        "Atlético Mineiro",
+        "União São João",
+        "Palmeiras",
+        "Inter Milan",
+        "Real Madrid",
+        "Fenerbahçe",
+        "Corinthians",
+        "Anzhi Makhachkala",
+        "Delhi Dynamos"
+      ],
+      "start": 1991,
+      "end": 2015,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Roberto_Carlos",
+        "https://galodigital.com.br/enciclopedia/Roberto_Carlos_da_Silva",
+        "https://olympics.com/en/news/roberto-carlos-isl-indian-super-league-football",
+        "https://www.national-football-teams.com/player/1007.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "javier-zanetti",
+      "name": "Javier Zanetti",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Talleres de Remedios de Escalada",
+        "Banfield",
+        "Inter Milan"
+      ],
+      "start": 1992,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Javier_Zanetti",
+        "https://www.inter.it/it/notizie/2021-12-14-inter-podcast-javier-zanetti-hall-of-fame",
+        "https://www.national-football-teams.com/player/307.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "gabriel-batistuta",
+      "name": "Gabriel Batistuta",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Newell's Old Boys",
+        "River Plate",
+        "Boca Juniors",
+        "Fiorentina",
+        "Roma",
+        "Inter Milan",
+        "Al-Arabi"
+      ],
+      "start": 1988,
+      "end": 2005,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Gabriel_Batistuta",
+        "https://www.worldsoccer.com/world-soccer-latest/batistuta-announces-retirement-62328",
+        "https://www.national-football-teams.com/player/13480.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "hernan-crespo",
+      "name": "Hernán Crespo",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "River Plate",
+        "Parma",
+        "Lazio",
+        "Inter Milan",
+        "Chelsea",
+        "AC Milan",
+        "Chelsea",
+        "Inter Milan",
+        "Genoa",
+        "Parma"
+      ],
+      "start": 1993,
+      "end": 2012,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Hern%C3%A1n_Crespo",
+        "https://en.wikipedia.org/wiki/Hernan_Crespo",
+        "https://www.parmacalcio1913.com/en/parma-legends/hernan-crespo/",
+        "https://www.aljazeera.com/sports/2012/1/30/bidding-war-breaks-out-over-hernan-crespo",
+        "https://en.wikipedia.org/wiki/Premier_League_Soccer_(India)",
+        "https://www.national-football-teams.com/player/286.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "juan-sebastian-veron",
+      "name": "Juan Sebastián Verón",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Estudiantes",
+        "Boca Juniors",
+        "Sampdoria",
+        "Parma",
+        "Lazio",
+        "Manchester United",
+        "Chelsea",
+        "Inter Milan",
+        "Estudiantes",
+        "Estudiantes",
+        "Estudiantes"
+      ],
+      "start": 1994,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Juan_Sebasti%C3%A1n_Ver%C3%B3n",
+        "https://www.espn.com/soccer/story/_/id/37386811/veron-comes-retirement",
+        "https://www.theguardian.com/football/2016/dec/28/juan-sebastian-veron-estudiantes",
+        "https://argentina.as.com/argentina/2017/05/26/futbol/1495767644_921513.html",
+        "https://www.national-football-teams.com/player/319.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "juan-roman-riquelme",
+      "name": "Juan Román Riquelme",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Boca Juniors",
+        "Barcelona",
+        "Villarreal",
+        "Boca Juniors",
+        "Boca Juniors",
+        "Argentinos Juniors"
+      ],
+      "start": 1996,
+      "end": 2015,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Juan_Rom%C3%A1n_Riquelme",
+        "https://www.theguardian.com/football/2015/jan/26/juan-roman-riquelme-announces-retirement",
+        "https://www.national-football-teams.com/player/323.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "pele",
+      "name": "Pelé",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Santos",
+        "New York Cosmos"
+      ],
+      "start": 1956,
+      "end": 1977,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Pel%C3%A9",
+        "https://www.ussoccerhistory.org/national-soccer-hall-of-fame-biographies/national-soccer-hall-of-fame-player-biographies/pele/"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "fabricio-coloccini",
+      "name": "Fabricio Coloccini",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Boca Juniors",
+        "San Lorenzo",
+        "Deportivo Alavés",
+        "Atlético Madrid",
+        "Villarreal",
+        "AC Milan",
+        "Deportivo La Coruña",
+        "Newcastle United",
+        "San Lorenzo",
+        "Aldosivi"
+      ],
+      "start": 1999,
+      "end": 2021,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Fabricio_Coloccini",
+        "https://www.national-football-teams.com/player/8170/Fabricio_Coloccini.html",
+        "https://es.wikipedia.org/wiki/Fabricio_Coloccini",
+        "https://skysports.com/football/news/11678/12505702/fabricio-coloccini-former-newcastle-captain-retires-at-39",
+        "https://www.worldsoccer.com/world-soccer-latest/deportivo-sign-coloccini-61139"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "juan-pablo-sorin",
+      "name": "Juan Pablo Sorín",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Argentinos Juniors",
+        "Juventus",
+        "River Plate",
+        "Cruzeiro",
+        "Lazio",
+        "Barcelona",
+        "Paris Saint-Germain",
+        "Cruzeiro",
+        "Villarreal",
+        "Hamburger SV",
+        "Cruzeiro"
+      ],
+      "start": 1994,
+      "end": 2009,
+      "evidenceLeads": [
+        "https://www.national-football-teams.com/player/303/Juan_Pablo_Sorin.html",
+        "https://en.wikipedia.org/wiki/Juan_Pablo_Sor%C3%ADn?useskin=vector",
+        "https://www.correiobraziliense.com.br/app/noticia/superesportes/2009/03/02/interna_superesportes,84612/cabeca-dura-sorin-admite-a-ansiedade-atrapalhou-a-recuperacao-no-cruzeiro.shtml"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "pablo-aimar",
+      "name": "Pablo Aimar",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "River Plate",
+        "Valencia",
+        "Real Zaragoza",
+        "Benfica",
+        "Johor Darul Ta'zim",
+        "River Plate",
+        "Estudiantes de Río Cuarto"
+      ],
+      "start": 1996,
+      "end": 2018,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Pablo_Aimar",
+        "https://www.national-football-teams.com/player/322/Pablo_Aimar.html",
+        "https://www.ole.com.ar/copa-argentina/aimar-partido-despedida-estudiantes_0_ryVNQBHrG.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "esteban-cambiasso",
+      "name": "Esteban Cambiasso",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Real Madrid B",
+        "Independiente",
+        "River Plate",
+        "Real Madrid",
+        "Inter Milan",
+        "Leicester City",
+        "Olympiacos"
+      ],
+      "start": 1996,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Esteban_Cambiasso",
+        "https://www.national-football-teams.com/player/328/Esteban_Cambiasso.html",
+        "https://www.fotmob.com/players/30930/esteban-cambiasso"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "diego-milito",
+      "name": "Diego Milito",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Racing Club",
+        "Genoa",
+        "Real Zaragoza",
+        "Genoa",
+        "Inter Milan",
+        "Racing Club"
+      ],
+      "start": 1999,
+      "end": 2016,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Diego_Milito",
+        "https://www.national-football-teams.com/player/291/Diego_Milito.html",
+        "https://www.racingclub.com.ar/idolos/diego-milito",
+        "https://lastwordonsports.com/football/2021/04/14/returning-players-diego-milito/"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "gaizka-mendieta",
+      "name": "Gaizka Mendieta",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Castellón",
+        "Valencia B",
+        "Valencia",
+        "Lazio",
+        "Barcelona",
+        "Middlesbrough"
+      ],
+      "start": 1991,
+      "end": 2008,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Gaizka_Mendieta",
+        "https://www.national-football-teams.com/player/6248/Gaizka_Mendieta.html",
+        "https://www.fcbarcelona.com/en/football/barca-legends/players/1054288/mendieta"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "tomas-rosicky",
+      "name": "Tomáš Rosický",
+      "continent": "Europe",
+      "country": "Czech Republic",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Sparta Prague B",
+        "Sparta Prague",
+        "Borussia Dortmund",
+        "Arsenal",
+        "Sparta Prague"
+      ],
+      "start": 1998,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Rosick%C3%BD",
+        "https://www.national-football-teams.com/player/1847/Tomas_Rosicky.html",
+        "https://de.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Rosick%C3%BD",
+        "https://www.transfermarkt.us/tomas-rosicky/debuets/spieler/132"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "ivan-de-la-pena",
+      "name": "Iván de la Peña",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Barcelona B",
+        "Barcelona",
+        "Lazio",
+        "Marseille",
+        "Barcelona",
+        "Lazio",
+        "Espanyol"
+      ],
+      "start": 1993,
+      "end": 2011,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Iv%C3%A1n_de_la_Pe%C3%B1a",
+        "https://www.national-football-teams.com/player/9990/Ivan_De_La_Pena.html",
+        "https://www.bdfutbol.com/en/j/j1141.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "robbie-keane",
+      "name": "Robbie Keane",
+      "continent": "Europe",
+      "country": "Ireland",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Wolverhampton Wanderers",
+        "Coventry City",
+        "Inter Milan",
+        "Leeds United",
+        "Tottenham Hotspur",
+        "Liverpool",
+        "Tottenham Hotspur",
+        "Celtic",
+        "Tottenham Hotspur",
+        "West Ham United",
+        "LA Galaxy",
+        "Aston Villa",
+        "LA Galaxy",
+        "ATK"
+      ],
+      "start": 1997,
+      "end": 2018,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Robbie_Keane",
+        "https://national-football-teams.com/player/3273/Robbie_Keane.html",
+        "https://www.lagalaxy.com/news/la-galaxy-forward-robbie-keane-join-aston-villa-loan",
+        "https://www.lagalaxy.com/news/two-goal-performance-has-keane-feeling-confident-again",
+        "https://www.tottenhamhotspur.com/the-club/history/legends/robbie-keane",
+        "https://www.sheridan-dictates.com/database-keane-robbie.php"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "wesley-sneijder",
+      "name": "Wesley Sneijder",
+      "continent": "Europe",
+      "country": "Netherlands",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Ajax",
+        "Real Madrid",
+        "Inter Milan",
+        "Galatasaray",
+        "Nice",
+        "Al-Gharafa"
+      ],
+      "start": 2003,
+      "end": 2019,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Wesley_Sneijder",
+        "https://www.national-football-teams.com/player/4656/Wesley_Sneijder.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "javier-saviola",
+      "name": "Javier Saviola",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "River Plate",
+        "Barcelona",
+        "Monaco",
+        "Sevilla",
+        "Barcelona",
+        "Real Madrid",
+        "Benfica",
+        "Málaga",
+        "Olympiacos",
+        "Hellas Verona",
+        "River Plate"
+      ],
+      "start": 1998,
+      "end": 2016,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Javier_Saviola",
+        "https://www.national-football-teams.com/player/290/Javier_Saviola.html",
+        "https://barcaacademy.fcbarcelona.com/en/card/2691103/javier-saviola-assistant-coach-for-the-u19as",
+        "https://www.squawka.com/en/cult-corner/where-are-they-now-malaga-champions-league"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "andres-dalessandro",
+      "name": "Andrés D’Alessandro",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "River Plate",
+        "VfL Wolfsburg",
+        "Portsmouth",
+        "Real Zaragoza",
+        "San Lorenzo",
+        "Internacional",
+        "River Plate",
+        "Internacional",
+        "Nacional",
+        "Internacional"
+      ],
+      "start": 2000,
+      "end": 2022,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Andr%C3%A9s_D%27Alessandro",
+        "https://www.national-football-teams.com/player/338/Andres_D_Alessandro.html",
+        "https://m.internacional.com.br/noticias/masculino/eu-amo-esse-clube-d-ale-se-despede-do-futebol-com-festa-e-vitoria",
+        "https://espndeportes.espn.com/futbol/argentina/nota/_/id/6985060/a-20-anos-del-debut-de-dalessandro-en-la-primera-de-river",
+        "https://www.ole.com.ar/futbol-internacional/d-alessandro-despedida-inter-brasil_0_kN4GgsQko.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "maxi-rodriguez",
+      "name": "Maxi Rodríguez",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Newell's Old Boys",
+        "Espanyol",
+        "Atlético Madrid",
+        "Liverpool",
+        "Newell's Old Boys",
+        "Peñarol",
+        "Newell's Old Boys"
+      ],
+      "start": 1999,
+      "end": 2021,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Maxi_Rodr%C3%ADguez",
+        "https://www.national-football-teams.com/player/8346/Maxi_Rodriguez.html",
+        "https://www.ole.com.ar/futbol-primera/scocco-maxi-rodriguez-liga-venadense_0_741IhryVM.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "claudio-pizarro",
+      "name": "Claudio Pizarro",
+      "continent": "South America",
+      "country": "Peru",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Deportivo Pesquero",
+        "Alianza Lima",
+        "Werder Bremen",
+        "Bayern Munich",
+        "Chelsea",
+        "Werder Bremen",
+        "Bayern Munich",
+        "Werder Bremen",
+        "1. FC Köln",
+        "Werder Bremen"
+      ],
+      "start": 1996,
+      "end": 2020,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Claudio_Pizarro",
+        "https://www.national-football-teams.com/player/5170/Claudio_Pizarro.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "walter-samuel",
+      "name": "Walter Samuel",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Newell's Old Boys",
+        "Boca Juniors",
+        "Roma",
+        "Real Madrid",
+        "Inter Milan",
+        "Basel"
+      ],
+      "start": 1996,
+      "end": 2016,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Walter_Samuel",
+        "https://www.national-football-teams.com/player/297/Walter_Samuel.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "joe-cole",
+      "name": "Joe Cole",
+      "continent": "Europe",
+      "country": "England",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "West Ham United",
+        "Chelsea",
+        "Liverpool",
+        "Lille",
+        "Liverpool",
+        "West Ham United",
+        "Aston Villa",
+        "Coventry City",
+        "Tampa Bay Rowdies"
+      ],
+      "start": 1999,
+      "end": 2018,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Joe_Cole",
+        "https://www.national-football-teams.com/player/2179/Joe_Cole.html",
+        "https://liverpoolfc.com/news/first-team/127193-show-them-what-it-s-all-about",
+        "https://www.bbc.com/sport/football/35257601",
+        "https://www.rowdiessoccer.com/news/2018/11/13/joe-cole-announces-retirement-from-professional-football/",
+        "https://www.rowdiessoccer.com/news/2022/04/01/joe-cole-unretires-to-rejoin-rowdies/"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "freddie-ljungberg",
+      "name": "Freddie Ljungberg",
+      "continent": "Europe",
+      "country": "Sweden",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Halmstad",
+        "Arsenal",
+        "West Ham United",
+        "Seattle Sounders",
+        "Chicago Fire",
+        "Celtic",
+        "Shimizu S-Pulse",
+        "Mumbai City"
+      ],
+      "start": 1994,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Freddie_Ljungberg",
+        "https://national-football-teams.com/player/6396/Fredrik_Ljungberg.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "john-arne-riise",
+      "name": "John Arne Riise",
+      "continent": "Europe",
+      "country": "Norway",
+      "role": "Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Aalesund",
+        "Monaco B",
+        "Monaco",
+        "Liverpool",
+        "Roma",
+        "Fulham",
+        "APOEL",
+        "Delhi Dynamos",
+        "Aalesund",
+        "Chennaiyin"
+      ],
+      "start": 1997,
+      "end": 2016,
+      "evidenceLeads": [
+        "http://en.wikipedia.org/wiki/John_Arne_Riise",
+        "https://www.national-football-teams.com/player/4951/John_Arne_Riise.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "luis-garcia",
+      "name": "Luis García",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Barcelona B",
+        "Barcelona",
+        "Real Valladolid",
+        "Toledo",
+        "Tenerife",
+        "Real Valladolid",
+        "Atlético Madrid",
+        "Barcelona",
+        "Liverpool",
+        "Atlético Madrid",
+        "Racing Santander",
+        "Panathinaikos",
+        "Puebla",
+        "UNAM",
+        "ATK",
+        "Central Coast Mariners"
+      ],
+      "start": 1997,
+      "end": 2016,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Luis_Garc%C3%ADa_(footballer,_born_1978)",
+        "https://www.national-football-teams.com/player/10961/Luis_Garcia.html",
+        "https://www.transfermarkt.com/rcd-mallorca_fc-barcelona/index/spielbericht/2424035"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "eidur-gudjohnsen",
+      "name": "Eiður Guðjohnsen",
+      "continent": "Europe",
+      "country": "Iceland",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Valur",
+        "PSV Eindhoven",
+        "KR Reykjavík",
+        "Bolton Wanderers",
+        "Chelsea",
+        "Barcelona",
+        "Monaco",
+        "Tottenham Hotspur",
+        "Stoke City",
+        "Fulham",
+        "AEK Athens",
+        "Cercle Brugge",
+        "Club Brugge",
+        "Bolton Wanderers",
+        "Shijiazhuang Ever Bright",
+        "Molde"
+      ],
+      "start": 1994,
+      "end": 2016,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Ei%C3%B0ur_Gu%C3%B0johnsen",
+        "https://national-football-teams.com/player/3056/Ei_Ur_Smari_Gu_Johnsen.html",
+        "https://www.indiansuperleague.com/press-releases/injury-curtails-eidur-gudjohnsen-and-andre-bikey-s-fc-pune-city-campaign"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "fernando-torres",
+      "name": "Fernando Torres",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Atlético Madrid",
+        "Liverpool",
+        "Chelsea",
+        "AC Milan",
+        "Atlético Madrid",
+        "Sagan Tosu"
+      ],
+      "start": 2001,
+      "end": 2019,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Fernando_Torres",
+        "https://www.national-football-teams.com/player/6219/Fernando_Torres.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "xabi-alonso",
+      "name": "Xabi Alonso",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Real Sociedad B",
+        "Real Sociedad",
+        "SD Eibar",
+        "Liverpool",
+        "Real Madrid",
+        "Bayern Munich"
+      ],
+      "start": 1999,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Xabi_Alonso",
+        "https://www.national-football-teams.com/player/6255/Xabi_Alonso.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "thierry-henry",
+      "name": "Thierry Henry",
+      "continent": "Europe",
+      "country": "France",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Monaco B",
+        "Monaco",
+        "Juventus",
+        "Arsenal",
+        "Barcelona",
+        "New York Red Bulls",
+        "Arsenal",
+        "New York Red Bulls"
+      ],
+      "start": 1994,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Thierry_Henry",
+        "https://www.national-football-teams.com/player/2420/Thierry_Henry.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "iker-casillas",
+      "name": "Iker Casillas",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Goalkeeper",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Real Madrid C",
+        "Real Madrid B",
+        "Real Madrid",
+        "Porto"
+      ],
+      "start": 1998,
+      "end": 2020,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Iker_Casillas",
+        "https://www.national-football-teams.com/player/6241/Iker_Casillas.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "andrea-pirlo",
+      "name": "Andrea Pirlo",
+      "continent": "Europe",
+      "country": "Italy",
+      "role": "Midfielder",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Brescia",
+        "Inter Milan",
+        "Reggina",
+        "Brescia",
+        "AC Milan",
+        "Juventus",
+        "New York City FC"
+      ],
+      "start": 1995,
+      "end": 2017,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Andrea_Pirlo",
+        "https://www.national-football-teams.com/player/3384/Andrea_Pirlo.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "diego-maradona",
+      "name": "Diego Maradona",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Midfielder / Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Argentinos Juniors",
+        "Boca Juniors",
+        "Barcelona",
+        "Napoli",
+        "Sevilla",
+        "Newell's Old Boys",
+        "Boca Juniors"
+      ],
+      "start": 1976,
+      "end": 1997,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Diego_Maradona",
+        "https://www.national-football-teams.com/player/14124/Diego_Maradona.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "javier-mascherano",
+      "name": "Javier Mascherano",
+      "continent": "South America",
+      "country": "Argentina",
+      "role": "Midfielder / Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "River Plate",
+        "Corinthians",
+        "West Ham United",
+        "Liverpool",
+        "Barcelona",
+        "Hebei China Fortune",
+        "Estudiantes"
+      ],
+      "start": 2003,
+      "end": 2020,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Javier_Mascherano",
+        "https://www.national-football-teams.com/player/331/Javier_Mascherano.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "cafu",
+      "name": "Cafu",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Defender",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "São Paulo",
+        "Real Zaragoza",
+        "Juventude",
+        "Palmeiras",
+        "Roma",
+        "AC Milan"
+      ],
+      "start": 1989,
+      "end": 2008,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Cafu",
+        "https://www.national-football-teams.com/player/991/Cafu.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "marcelo-salas",
+      "name": "Marcelo Salas",
+      "continent": "South America",
+      "country": "Chile",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Universidad de Chile",
+        "River Plate",
+        "Lazio",
+        "Juventus",
+        "River Plate",
+        "Universidad de Chile"
+      ],
+      "start": 1993,
+      "end": 2008,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Marcelo_Salas",
+        "https://www.national-football-teams.com/player/1401/Marcelo_Salas.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "rivaldo",
+      "name": "Rivaldo",
+      "continent": "South America",
+      "country": "Brazil",
+      "role": "Midfielder / Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Santa Cruz",
+        "Mogi Mirim",
+        "Corinthians",
+        "Palmeiras",
+        "Deportivo La Coruña",
+        "Barcelona",
+        "AC Milan",
+        "Cruzeiro",
+        "Olympiacos",
+        "AEK Athens",
+        "Bunyodkor",
+        "São Paulo",
+        "Kabuscorp",
+        "São Caetano",
+        "Mogi Mirim"
+      ],
+      "start": 1988,
+      "end": 2015,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Rivaldo",
+        "https://www.national-football-teams.com/player/1023/Rivaldo_1.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "david-villa",
+      "name": "David Villa",
+      "continent": "Europe",
+      "country": "Spain",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Sporting Gijón B",
+        "Sporting Gijón",
+        "Real Zaragoza",
+        "Valencia",
+        "Barcelona",
+        "Atlético Madrid",
+        "New York City FC",
+        "Melbourne City",
+        "Vissel Kobe"
+      ],
+      "start": 2000,
+      "end": 2020,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/David_Villa",
+        "https://www.national-football-teams.com/player/9992/David_Villa.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    },
+    {
+      "id": "alessandro-del-piero",
+      "name": "Alessandro Del Piero",
+      "continent": "Europe",
+      "country": "Italy",
+      "role": "Forward",
+      "status": "existing playable",
+      "firstSeniorSystem": "",
+      "approximateSeniorRoute": [
+        "Padova",
+        "Juventus",
+        "Sydney FC",
+        "Delhi Dynamos"
+      ],
+      "start": 1991,
+      "end": 2014,
+      "evidenceLeads": [
+        "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
+        "https://www.national-football-teams.com/player/3362/Alessandro_Del_Piero.html"
+      ],
+      "scoreBreakdown": {},
+      "decision": "rejected",
+      "reason": "Exact playable-roster match retained in the discovery audit and rejected as a duplicate."
+    }
+  ]
+}
