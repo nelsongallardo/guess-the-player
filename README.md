@@ -65,7 +65,7 @@ Timelines include professional senior clubs, competitive senior reserve spells, 
 - `CAREER_SOURCES.md`, `DATA_AUDIT.md`, `research/` — curated records, policy and source ledgers. Raw retrievals stay ignored.
 - `tests/` — model, storage, browser, Edge handler and real PostgreSQL checks.
 
-GitHub Pages serves static files; it does **not** deploy Supabase migrations/functions or configure Google OAuth. `.github/workflows/pages.yml` validates every push, pull request and manual run with Node/native PostgreSQL tests, source/roster checks and Deno checks/tests. Only validated non-PR runs on `main` deploy. Its public package is `index.html`, `leaderboard.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. Research, tests and private backend code are not website assets. The repository is public at the owner's request.
+GitHub Pages serves static files; it does **not** deploy Supabase migrations/functions or configure Google OAuth. `.github/workflows/pages.yml` validates every push, pull request and manual run with Node/native PostgreSQL tests, source-identifier checks and Deno checks/tests. Only validated non-PR runs on `main` deploy. Its public package is `index.html`, `leaderboard.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. Research, tests and private backend code are not website assets. The repository is public at the owner's request.
 
 ## Test and edit
 
