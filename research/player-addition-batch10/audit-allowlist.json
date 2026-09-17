@@ -1,0 +1,19 @@
+{
+  "originMismatches": [
+    {
+      "id": "predrag-mijatovic",
+      "reviewed": "montenegro",
+      "runtime": "yugoslavia",
+      "reason": "Batch 10 research recorded Montenegro, while the deployed first-club mapping groups Budućnost Titograd under the historical Yugoslav football system. Preserve the deployed classification until that historical policy is reviewed explicitly."
+    }
+  ],
+  "careerSignatureCollisions": [
+    {
+      "ids": [
+        "gary-neville",
+        "ryan-giggs"
+      ],
+      "reason": "Both published careers contain only Manchester United. This deployed ambiguity predates the reusable audit and is retained explicitly rather than silently weakening the future-batch gate."
+    }
+  ]
+}

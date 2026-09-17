@@ -41,7 +41,7 @@ Completion criterion: the scope, baseline commit, current roster count and reque
 
 ## Data Contracts
 
-The complete player schema and evidence checklist live in `references/player-record.md`. Load that reference before writing a record.
+The complete player schema and evidence checklist live in `references/player-record.md`. Load that reference before writing a record. The deterministic audit/integration/migration commands and their required batch filenames live in `references/automation.md`; use those commands instead of asking an LLM to reproduce their transformations manually.
 
 Hard boundaries:
 
@@ -90,7 +90,7 @@ When the user has not supplied a final list—or asks who should be added—load
 2. Use `web_search` across the reference's public source families to generate leads, then use `web_extract` or the browser to confirm that at least two independent domains are retrievable. These are discovery leads, not final career evidence.
 3. Build a deduplicated longlist of at least three times the target count after removing existing playable players and accidental duplicates. Keep an existing bank-only profile only when it is explicitly marked as a promotion candidate.
 4. Apply every hard gate before scoring. Reject identical ordered club careers because the game cannot disambiguate them. Score recognizability, career distinctiveness, roster balance, evidence availability, crest workload and rival coverage from 0–3 using the reference anchors; calculate the visible total without hidden weights.
-5. Select a batch as a balanced portfolio rather than taking the highest totals blindly. Before full career or crest research, simulate removal of every promoted bank profile and compute the final per-system/per-era contemporary gaps. Add the required peer-bank profiles to the research plan immediately instead of discovering coverage failure after integration or export.
+5. Select a batch as a balanced portfolio rather than taking the highest totals blindly. Run `node scripts/roster-batch.mjs promotions --shortlist path/to/candidate-shortlist.json` before full career or crest research; add every reported coverage gap to the required peer-bank research plan instead of asking an LLM to simulate promotion impact or waiting for integration/export failure.
 6. Persist selected, reserve and rejected candidates. Every rejection needs a concrete gate or score reason, and every reserve needs a named next action.
 7. Run `node .agents/skills/derabona-player-addition/scripts/validate-shortlist.mjs path/to/candidate-shortlist.json`; do not present or implement a shortlist that fails validation.
 
@@ -119,6 +119,8 @@ Do not infer a missing club from a transfer list alone. Do not treat a season la
 
 Completion criterion: the record, bilingual notes and evidence ledger agree on the exact ordered clubs and qualifications.
 
+Once the reviewed batch files are complete, run `node scripts/roster-batch.mjs audit --batch-dir research/player-addition-batchN`. Fix its source-domain, ID, bilingual, origin, crest and projected-coverage failures before integration. This audit validates consistency, not the historical truth of the reviewed inputs.
+
 ### 4. Add crests and club identity
 
 For each new displayed club:
@@ -140,6 +142,14 @@ Completion criterion: every club key resolves offline, source attribution remain
 
 ### 5. Integrate all roster sources together
 
+Preview the reusable deterministic integration first:
+
+```text
+terminal(command="node scripts/roster-batch.mjs integrate --batch-dir research/player-addition-batchN", timeout=300)
+```
+
+After reviewing the projected counts and zero-gap result, rerun with `--write`. The command updates the coordinated HTML data blocks, `research/verified-players.json` and `research/verified-distractors.json`, regenerates playable `incorrectOptions`, removes promoted bank profiles, adds reviewed peers/crests/origins and is idempotent. Do not build another batch-specific integration script unless the reusable command cannot represent a reviewed data contract; extend it with tests instead.
+
 Update the smallest coordinated set required by the current implementation:
 
 - `index.html` roster data, crest data, English notes, Spanish notes/club notes, country/position maps and `ORIGIN_CLUBS`;
@@ -154,6 +164,8 @@ Classify `ORIGIN_CLUBS` by the domestic football system of the first displayed s
 Do not reconstruct the large HTML artifact from tool-rendered snippets. Use targeted patches or filesystem transformations so embedded data and numeric literals remain intact.
 
 Completion criterion: inline data, curated JSON, translations, documentation and current-count tests describe the same roster.
+
+The integration command deliberately leaves citation-ledger prose and current-count prose for reviewed edits. Publish the evidence sections and update `CAREER_SOURCES.md`, `DATA_AUDIT.md`, `research/game-ledger.json`, `research/reaudit-citations.json`, `README.md` and `DESIGN.md` after core integration; never use an unrestricted numeric replacement over historical records.
 
 ### 6. Rebuild contemporary rivals
 
@@ -192,9 +204,9 @@ Completion criterion: representative legacy saves load, finish and replay withou
 
 The `--check` command in step 1 is a **pre-edit baseline only**. It compares the inline model with the frozen, already-applied `supabase/migrations/202609130002_ranked_roster.sql`; it does not inspect the final state produced by later migrations. After a legitimate inline roster expansion it is expected to fail after the inline roster changes and is not a post-edit completion gate. Never run the exporter without `--check`, because its current implementation overwrites that historical migration.
 
-Build a reviewed batch-specific generator or diff script that extracts the current inline model and writes a **new forward migration**, never the frozen export. The migration must add the required players, candidates, memberships and rivals while preserving existing rows, results, active rounds and rulesets. Inspect the complete generated SQL and the prior database snapshot; do not assume the hosted database matches a repository file.
+Use `node scripts/roster-batch.mjs migration --output supabase/migrations/VERSION_slug.sql --write` to extract the current inline model and write a **new forward migration**, never the frozen export. Inspect the complete generated SQL and prior database snapshot, then lock parity with the same command using `--check`. The migration must add the required players, candidates, memberships and rivals while preserving existing rows, results, active rounds and rulesets. Do not assume the hosted database matches a repository file.
 
-`tests/ranked-backend.test.mjs` currently invokes the frozen-export check before its real database-vs-inline assertions. When the model first diverges from the frozen baseline, replace only that obsolete invocation as part of the roster batch. Keep and extend the database-vs-inline assertions for players, candidates, memberships and rivals so the test verifies the final state after all migrations. Also add a batch-specific upgrade-path fixture that starts from the exact prior roster and contains representative existing results and active rounds.
+`tests/ranked-backend.test.mjs` must keep its database-vs-inline assertions for players, candidates, memberships and rivals after every migration. Add a batch-specific upgrade-path fixture that starts from the exact prior roster and contains representative existing results and active rounds; do not restore the obsolete frozen-export invocation as a post-edit gate.
 
 Test both:
 
@@ -212,6 +224,9 @@ During implementation, run only the focused gate for the layer just changed; do 
 ```text
 terminal(command="python3 tests/source-check.py", timeout=120)
 terminal(command="node research/audit-distractor-coverage.mjs", timeout=120)
+terminal(command="node scripts/roster-batch.mjs audit --batch-dir research/player-addition-batchN", timeout=300)
+terminal(command="node scripts/roster-batch.mjs guard --base BASELINE_SHA", timeout=120)
+terminal(command="node scripts/roster-batch.mjs migration --output supabase/migrations/VERSION_slug.sql --check", timeout=300)
 terminal(command="node --test tests/model.test.mjs tests/player-addition-*.test.mjs tests/ranked-roster-*.test.mjs", timeout=600)
 terminal(command="node --test tests/*.test.mjs", timeout=600)
 ```

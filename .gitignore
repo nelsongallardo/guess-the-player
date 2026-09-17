@@ -85,6 +85,7 @@ research/player-addition-batch10/*
 !research/player-addition-batch10/crest_image.py
 !research/player-addition-batch10/origin-systems.json
 !research/player-addition-batch10/peer-bank-records.json
+!research/player-addition-batch10/audit-allowlist.json
 !research/player-addition-batch10/PEER_BANK_SOURCES.md
 !research/player-addition-batch10/assemble-records.py
 !research/player-addition-batch10/build-origin-systems.py

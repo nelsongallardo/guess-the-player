@@ -10,6 +10,8 @@ const shortlistValidatorPath = new URL('../.agents/skills/derabona-player-additi
 const exporterPath = new URL('../scripts/export-ranked-roster.mjs', import.meta.url);
 const optimizerPath = new URL('../research/optimize-crests.py', import.meta.url);
 const embedDistractorsPath = new URL('../research/embed-distractors.py', import.meta.url);
+const rosterBatchAutomationPath = new URL('../scripts/roster-batch.mjs', import.meta.url);
+const automationReferencePath = new URL('../.agents/skills/derabona-player-addition/references/automation.md', import.meta.url);
 
 const readSkill = () => fs.readFileSync(path, 'utf8');
 
@@ -94,13 +96,25 @@ test('skill defines checkable phases and fail-closed gates', () => {
 test('skill keeps data-only roster releases on a proportional fast path', () => {
   const skill = readSkill();
   assert.match(skill, /Data-only lane/);
-  assert.match(skill, /simulate removal of every promoted bank profile/i);
+  assert.match(skill, /roster-batch\.mjs promotions/);
   assert.match(skill, /exact set difference between displayed club keys/i);
   assert.match(skill, /deep archival.*ambiguous cases/i);
   assert.match(skill, /full Node\/native-PostgreSQL suite \*\*once\*\*/);
   assert.match(skill, /browser\/offline\/storage-denied\/responsive playthroughs are not a default release gate/i);
   assert.match(skill, /duplicate run as additional evidence/i);
   assert.match(skill, /second code\/docs commit solely to replace a pre-deployment placeholder/i);
+});
+
+test('skill delegates deterministic batch work to the reusable automation', () => {
+  const skill = readSkill();
+  assert.equal(fs.existsSync(rosterBatchAutomationPath), true, 'roster batch automation must exist');
+  assert.equal(fs.existsSync(automationReferencePath), true, 'automation reference must exist');
+  assert.match(skill, /scripts\/roster-batch\.mjs audit/);
+  assert.match(skill, /scripts\/roster-batch\.mjs integrate/);
+  assert.match(skill, /scripts\/roster-batch\.mjs guard/);
+  assert.match(skill, /scripts\/roster-batch\.mjs migration/);
+  assert.match(skill, /references\/automation\.md/);
+  assert.match(fs.readFileSync(automationReferencePath, 'utf8'), /does not decide historical truth/i);
 });
 
 test('skill can discover and rank new player candidates before research', () => {
