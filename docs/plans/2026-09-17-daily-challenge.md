@@ -116,7 +116,7 @@ Completion means win **or** exhaustion of all attempts. The first terminal trans
 - otherwise: `1`;
 - `best = max(best,current)`.
 
-Cross-tab writes re-read storage immediately before mutation, increment a local revision, and use a `storage` listener. Merge precedence is deterministic: terminal beats nonterminal; otherwise greater valid progress (guesses, then hints) wins; equal-progress forks use a stable state digest rather than wall-clock order. A tab adopts the dominant snapshot before another mutation. Because localStorage has no compare-and-swap, simultaneous writes converge through storage events: receipt of a dominant terminal snapshot rewrites it if a stale write briefly became last. Completion and streak application remain idempotent when two tabs race. Tests must prove eventual terminal convergence, not claim impossible atomicity.
+Cross-tab writes re-read storage immediately before mutation, increment a local revision, and use a `storage` listener. Merge precedence is a total deterministic order: terminal beats nonterminal; otherwise greater valid progress (guesses, then hints) wins; every equal-progress fork—including terminal-vs-terminal—uses the lexicographically greater stable state digest rather than wall-clock order. A tab adopts the dominant snapshot before another mutation. Because localStorage has no compare-and-swap, simultaneous writes converge through storage events: receipt of a dominant snapshot rewrites it if a stale write briefly became last. Completion history and streak stats are derived from the canonical unique terminal attempt per UTC date rather than incremented additively, so divergent terminal writes produce exactly one summary and one streak application without oscillation. Tests must deliver conflicting events in both orders, reload both tabs, and prove convergence; do not claim impossible atomicity.
 
 If localStorage is denied, use an in-memory attempt, label it `No se guardará en este navegador` / `Won’t be saved in this browser`, and never imply persistence or a durable streak.
 
@@ -146,7 +146,13 @@ Add a user-accessible `Borrar historial diario` / `Clear daily history` action b
 - Daily has a distinct persisted `startedAt`; never call guest clock persistence with daily state.
 - Keep guest clock values in their original variables/storage and daily clock values in the daily attempt. Mode switching swaps the rendered source, not the stored clocks.
 - Make career/round rendering consume an explicit active player/option resolver. Unlimited passes the existing `CareerGame`/`PLAYERS` resolver; daily passes its frozen payload resolver. No daily render, validation, hint, source, or option-label path may fall back to `CareerGame.playerAt`, `PLAYERS`, or `eligibleRivals`.
-- Daily starts only from the same qualifying post-consent user interactions as guest play. The consent overlay cannot consume daily score time.
+- Daily clock transitions are explicit:
+  - HTTP/canonical entry or mode switch with analytics consent already resolved starts `startedAt` when daily becomes the active playable view.
+  - With consent pending, activating daily keeps `startedAt:null`. Resolving consent while daily is still active starts it at resolution time.
+  - If a qualifying gameplay interaction somehow occurs behind the consent overlay, preserve that interaction instant as `pendingActivationAt` and use it when consent resolves; the overlay itself consumes no time.
+  - If the user leaves daily while `startedAt` is still null, later consent resolution must not start the inactive daily. Re-entering after consent starts it then.
+  - Actual offline `file:` play has no analytics prompt and starts on daily activation.
+  - A valid persisted `startedAt` always wins; reload, language, hints, guesses, consent changes, and mode switches never replace it.
 - Reload, language change, hint use, wrong guesses, mode switches, and same-date cross-tab reload preserve the original `startedAt`.
 - Completion freezes elapsed time/points in the terminal snapshot.
 
@@ -196,7 +202,7 @@ Implement in vertical slices:
 4. RED→GREEN: yesterday unresolved remains read-only while a fresh current attempt is created.
 5. RED→GREEN: win/loss completion updates streak exactly once; gaps reset; same-day duplicate completion is inert.
 6. RED→GREEN: 32-attempt/400-summary bounds.
-7. RED→GREEN: stale cross-tab snapshots cannot overwrite a terminal/newer snapshot.
+7. RED→GREEN: simultaneous divergent terminal snapshots from one revision converge under the total digest order in either event order, with one canonical history entry and one derived streak update; stale nonterminal snapshots cannot overwrite them.
 8. RED→GREEN: denied localStorage uses an explicitly nonpersistent memory fallback.
 9. Regression: legacy guest state, guest clock, account boundaries, and ranked mutations remain byte-for-byte behaviorally separate.
 
@@ -217,7 +223,7 @@ Implement in vertical slices:
 
 1. RED→GREEN: exact Spanish/English win/loss pluralized payloads contain no answer/clue.
 2. RED→GREEN: native share success, native cancellation, clipboard fallback, execCommand fallback, and accessible status behavior.
-3. RED→GREEN: an injected clock plus 30-second timer and `visibilitychange`/`focus`/`pageshow` checks detect UTC rollover exactly once, show an explicit new-daily action without replacing the displayed challenge, preserve focus, and clean up timers when leaving daily.
+3. RED→GREEN: an injected clock plus 30-second timer and `visibilitychange`/`focus`/`pageshow` checks detect UTC rollover exactly once—even on an otherwise idle visible page—show an explicit new-daily action without replacing the displayed challenge, preserve focus, and clean up timers when leaving daily.
 4. RED→GREEN: `storage` event adopts newer/terminal state and blocks stale overwrites.
 5. RED→GREEN: allowlist and once-only analytics transitions; prove rejected properties are stripped.
 6. RED→GREEN: bilingual privacy disclosure for browser-profile-scoped daily persistence and a confirmed daily-only clear action; retain existing public-contact invariants and prove the guest reset does not clear daily history.
