@@ -1,5 +1,12 @@
 # Verification report
 
+## Public privacy contact — 17 September 2026
+
+- Removed the owner's personal name and direct email address from both languages of `privacy.html`. The only published mail target is `contact@derabona.club`; the page discloses that ImprovMX forwards messages to a private inbox.
+- Added `tests/privacy-page.test.mjs` to require the approved public alias in both languages and reject personal-provider addresses, named operator labels and any additional `mailto:` target.
+- Local verification passed **174 tests with 0 failures** using the isolated native PostgreSQL runtime. `python3 tests/source-check.py` and `git diff --check` also passed. PR [#12](https://github.com/nelsongallardo/guess-the-player/pull/12) passed CI and merged as `471f6df`.
+- The post-merge GitHub Actions run `35213214630` passed validation and Pages deployment. The live `privacy.html` returned HTTP 200 and matched the merged file byte-for-byte. Public DNS resolved the two ImprovMX MX records and SPF include documented in [docs/contact.md]. The owner then confirmed a real message reached the private destination; the destination and test-message details are intentionally not recorded.
+
 ## 210-player roster expansion — 16 September 2026
 
 - Added fifty reviewed playable careers for a final **210-player roster: 105 Europe / 105 South America**. Thirty-two profiles were promoted from the researched wrong-answer bank, eighteen careers were researched as new playable entries, and thirty-six source-backed peers were added to restore sparse origin-system coverage. The final model has **37 bank-only profiles and 247 total answer candidates**.
