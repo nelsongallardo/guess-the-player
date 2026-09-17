@@ -93,3 +93,13 @@ research/player-addition-batch10/*
 !research/player-addition-batch10/build-crest-assets.py
 !research/player-addition-batch10/integrate.py
 !research/player-addition-batch10/update-source-ledgers.py
+
+!research/player-addition-batch11/
+research/player-addition-batch11/*
+!research/player-addition-batch11/records.json
+!research/player-addition-batch11/spanish-notes.json
+!research/player-addition-batch11/crest-assets.json
+!research/player-addition-batch11/origin-systems.json
+!research/player-addition-batch11/integrate.py
+!research/player-addition-batch11/update_docs.py
+!research/player-addition-batch11/finish_audit_doc.py

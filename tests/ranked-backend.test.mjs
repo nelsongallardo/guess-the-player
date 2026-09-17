@@ -17,6 +17,7 @@ const bin = cmd => cmd === 'psql' && process.env.PG_CLIENT ? process.env.PG_CLIE
 let dir, running = false;
 let legacy, legacySnapshot, rosterUpgrade, rosterUpgradeSnapshot, roster210Upgrade, roster210UpgradeSnapshot;
 let roster210ReferenceSnapshot, roster210ActiveProjection;
+let roster220Upgrade, roster220UpgradeSnapshot, roster220ReferenceSnapshot, roster220ActiveProjection;
 const aliasPattern = /^(Otter|Badger|Panda|Koala|Heron|Robin|Finch|Lynx|Seal|Dolphin|Turtle|Falcon|Penguin|Gecko|Wombat|Alpaca)-[0-9a-f]{8}$/;
 const quote = value => "'"+String(value).replaceAll("'","''")+"'";
 const args = () => ['-X','-qAt','-v','ON_ERROR_STOP=1','-h',dir,'-p','55439','-U','postgres','-d','postgres'];
@@ -85,7 +86,25 @@ before(() => {
     ['memberships',json("select coalesce(jsonb_agg(to_jsonb(x) order by player_id,competition),'[]'::jsonb) from ranked_private.memberships x")],
   ]);
   roster210ActiveProjection=rpc(roster210Upgrade.active,{action:'progress'}).round;
-  for(const f of migrations.filter(f=>f>=finalRosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:48*1024*1024});
+  const latestRosterMigration='202609170001_expand_ranked_roster_210_to_220.sql';
+  for(const f of migrations.filter(f=>f>=finalRosterMigration&&f<latestRosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:48*1024*1024});
+  // Repeat the preservation fixture again at the exact deployed 210-player
+  // state, immediately before applying the 210→220 batch-11 sync.
+  roster220Upgrade={result:user(),active:user()};
+  const completed210=start(roster220Upgrade.result).round;
+  answer(roster220Upgrade.result,completed210,correct(completed210));
+  sql(`update ranked_private.accounts set enrolled=false where user_id=${quote(roster220Upgrade.result)}`);
+  const active210=start(roster220Upgrade.active).round;
+  hint(roster220Upgrade.active,active210);
+  const upgrade220Users=Object.values(roster220Upgrade).map(quote).join(',');
+  roster220UpgradeSnapshot=Object.fromEntries(['rounds','results','receipts'].map(t=>[t,json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${t} x where user_id in (${upgrade220Users})`)]));
+  roster220ReferenceSnapshot=Object.fromEntries([
+    ['candidates',json("select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]'::jsonb) from ranked_private.candidates x")],
+    ['players',json("select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]'::jsonb) from ranked_private.players x")],
+    ['memberships',json("select coalesce(jsonb_agg(to_jsonb(x) order by player_id,competition),'[]'::jsonb) from ranked_private.memberships x")],
+  ]);
+  roster220ActiveProjection=rpc(roster220Upgrade.active,{action:'progress'}).round;
+  for(const f of migrations.filter(f=>f>=latestRosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:48*1024*1024});
   console.log('Real PostgreSQL isolated cluster; Supabase auth schema/roles SIMULATED; no cloud services used.');
 });
 after(() => {
@@ -141,15 +160,46 @@ test('additive migration backfills legacy results, preserves custom names and im
     roster210ActiveProjection,
     'active hinted round projection changed while upgrading the 160-player state',
   );
+  const upgrade220Users=Object.values(roster220Upgrade).map(quote).join(',');
+  for(const t of ['rounds','results','receipts']) {
+    assert.deepEqual(
+      json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${t} x where user_id in (${upgrade220Users})`),
+      roster220UpgradeSnapshot[t],
+      `${t} changed while upgrading the 210-player state`,
+    );
+  }
+  const priorCandidateIds220=roster220ReferenceSnapshot.candidates.map(row=>quote(row.id)).join(',');
+  const priorPlayerIds220=roster220ReferenceSnapshot.players.map(row=>quote(row.id)).join(',');
+  assert.deepEqual(
+    json(`select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]'::jsonb) from ranked_private.candidates x where id in (${priorCandidateIds220})`),
+    roster220ReferenceSnapshot.candidates,
+    'existing candidate labels changed while upgrading the 210-player state',
+  );
+  assert.deepEqual(
+    json(`select coalesce(jsonb_agg(to_jsonb(x) order by id),'[]'::jsonb) from ranked_private.players x where id in (${priorPlayerIds220})`),
+    roster220ReferenceSnapshot.players,
+    'existing player reference data changed while upgrading the 210-player state',
+  );
+  assert.deepEqual(
+    json(`select coalesce(jsonb_agg(to_jsonb(x) order by player_id,competition),'[]'::jsonb) from ranked_private.memberships x where player_id in (${priorPlayerIds220})`),
+    roster220ReferenceSnapshot.memberships,
+    'existing competition memberships changed while upgrading the 210-player state',
+  );
+  assert.deepEqual(
+    rpc(roster220Upgrade.active,{action:'progress'}).round,
+    roster220ActiveProjection,
+    'active hinted round projection changed while upgrading the 210-player state',
+  );
   // The legacy rows above are byte-for-byte preserved (still ruleset='v1',
   // still 5 options each) - but ADR 0012's ten-option v2 ruleset filters the
   // active leaderboard/progress to ruleset='v2' only, by design: it's a
   // deliberate reset, not a bug, so these untouched v1-only results now
   // correctly fall off the (now v2) board rather than still counting.
   const board=rpc(legacy.anonymous,{action:'leaderboard'});
-  // The 120→160 and exact-160 fixtures each contribute one preserved v2
-  // result; the legacy v1-only account itself must still have no entry.
-  assert.equal(board.total,2);assert.equal(board.own,null);noIdentity(board);
+  // The 120→160, exact-160 and exact-210 fixtures each contribute one
+  // preserved v2 result; the legacy v1-only account itself must still have
+  // no entry.
+  assert.equal(board.total,3);assert.equal(board.own,null);noIdentity(board);
   assert.equal(rpc(legacy.empty,{action:'leaderboard'}).own,null);
 });
 
@@ -198,7 +248,7 @@ test('forced case-insensitive alias collisions retry safely across concurrent ac
 });
 
 test('roster exporter is current and canonical membership/matching scores equal guest model',()=>{
-  execFileSync(process.execPath,[new URL('scripts/export-ranked-roster-210-forward.mjs',root).pathname,'--check']);
+  execFileSync(process.execPath,[new URL('scripts/export-ranked-roster-220-forward.mjs',root).pathname,'--check']);
   const html=fs.readFileSync(new URL('index.html',root),'utf8');
   const block=id=>html.match(new RegExp(`<script id="${id}">([\\s\\S]*?)<\\/script>`))[1];
   const ctx=vm.createContext({});vm.runInContext(block('roster-data')+block('game-model'),ctx);

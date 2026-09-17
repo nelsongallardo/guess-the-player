@@ -43,8 +43,11 @@ test('batch 10 adds exactly fifty reviewed players with a 25/25 continental spli
   assert.deepEqual(new Set(records.map(record => record.id)), selected);
   assert.equal(records.filter(record => record.continent === 'Europe').length, 25);
   assert.equal(records.filter(record => record.continent === 'South America').length, 25);
-  assert.equal(model.players.length, 210);
-  assert.equal(verifiedPlayers.length, 210);
+  // The roster only grows with later batches, so this stays a lower bound
+  // rather than an exact count frozen at batch 10's own point in time.
+  assert.ok(model.players.length >= 210);
+  assert.ok(verifiedPlayers.length >= 210);
+  for (const id of selected) assert.ok(model.players.some(player => player.id === id), id);
   assert.deepEqual(new Set(model.players.map(player => player.id)), new Set(verifiedPlayers.map(player => player.id)));
 });
 
@@ -95,8 +98,11 @@ test('promotions retain Franco Baresi plus the researched sparse-system peer ban
   assert.deepEqual(verifiedDistractors.map(profile => profile.id), ['franco-baresi', ...peerBank.map(profile => profile.id)]);
   assert.deepEqual(plain(model.bank.map(profile => profile.id)), verifiedDistractors.map(profile => profile.id));
   const names = [...model.players, ...model.bank].map(profile => profile.name);
-  assert.equal(names.length, 247);
-  assert.equal(new Set(names).size, 247);
+  // 247 was the exact combined total at batch 10's own point in time; later
+  // batches only add playable names (the bank shrinks or holds steady), so
+  // this stays a lower bound plus a permanent uniqueness check.
+  assert.ok(names.length >= 247);
+  assert.equal(new Set(names).size, names.length);
   for (const id of selected) assert.ok(!model.bank.some(profile => profile.id === id), id);
 });
 

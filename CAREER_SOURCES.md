@@ -1924,8 +1924,67 @@ Reviewed source links: [562], [563], [564].
 The route starts with senior Eerste Divisie play for Den Bosch in 1993; Nooit Gedacht and RKSV Margriet are youth-only and excluded. The 2000 Manchester United transfer was postponed and then cancelled, so no unplayed United node is inserted before his actual 2001 move. He retired after Málaga in May 2012.
 
 Reviewed source links: [565], [566].
-<!-- END PLAYER ADDITION BATCH 10 -->
+### Sol Campbell
 
+Ordered chronology and every club, including the brief Notts County registration and second Arsenal spell, are corroborated by an independent season-by-season appearance record. Youth football and any coaching/ambassadorial work are excluded.
+
+Reviewed source links: [567], [568].
+
+### Mesut Özil
+
+Reserve-team debut with Schalke 04 II precedes his first-team breakthrough, overlapping the same club; both are shown as distinct competitive entries. Ordered clubs and career endpoint are corroborated by an independent season-by-season appearance record.
+
+Reviewed source links: [569], [570].
+
+### Sergio Ramos
+
+Ordered clubs, including the Sevilla Atlético reserve spell and second Sevilla registration, are corroborated by an independent season-by-season appearance record. Current Monterrey status matches that same record.
+
+Reviewed source links: [571], [572].
+
+### Marcel Desailly
+
+Ordered clubs and career endpoint, including the two brief Qatari clubs that closed his career, are corroborated by an independent season-by-season appearance record. Any subsequent broadcasting, coaching or business activity is excluded.
+
+Reviewed source links: [573], [574].
+
+### Filippo Inzaghi
+
+Both Piacenza loan spells (AlbinoLeffe and Hellas Verona) overlap his continuous Piacenza registration rather than replacing it, matching the established Sporting CP/Sporting CP B overlap precedent for this roster. Ordered clubs and career endpoint are corroborated by an independent season-by-season appearance record.
+
+Reviewed source links: [575], [576].
+
+### Fernando Muslera
+
+Ordered clubs, including the brief Nacional loan and his 2025 move to Argentina, are corroborated by an independent season-by-season appearance record.
+
+Reviewed source links: [577], [578].
+
+### Arturo Vidal
+
+Ordered clubs, including both Brazilian clubs and his return to Colo-Colo, are corroborated by an independent season-by-season appearance record.
+
+Reviewed source links: [579], [580].
+
+### Gabriel Heinze
+
+The Sporting CP loan overlaps his continuous Real Valladolid registration rather than replacing it. Ordered clubs and career endpoint, including his return to Newell's Old Boys, are corroborated by an independent season-by-season appearance record.
+
+Reviewed source links: [581], [582].
+
+### Cláudio Taffarel
+
+Ordered clubs and career endpoint, including the Reggiana spell and his return to Parma, are corroborated by an independent season-by-season appearance record.
+
+Reviewed source links: [583], [584].
+
+### Aldair
+
+The displayed professional route ends with Genoa in 2003–04. Later low-profile appearances for Rio Branco (2005, Brazil) and SS Murata (2007–2009, San Marino's part-time regional championship) are excluded as post-prime veteran/exhibition-tier football rather than competitive top-flight play, consistent with this roster's amateur-post-retirement exclusion policy; both are corroborated as real but low-level by an independent season-by-season appearance record.
+
+Reviewed source links: [585], [586].
+
+<!-- END PLAYER ADDITION BATCH 11 -->
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -2493,3 +2552,23 @@ Sources:
 [564] https://www.uefa.com/news-media/news/01b7-0e6d5fd49311-4ed2f0fcb906-1000--sampdoria-swoop-to-sign-vieri/
 [565] https://en.wikipedia.org/wiki/Ruud_van_Nistelrooy
 [566] https://national-football-teams.com/player/4636/Ruud_Van_Nistelrooy.html
+[567] https://en.wikipedia.org/wiki/Sol_Campbell
+[568] https://www.national-football-teams.com/player/2153/Sol_Campbell.html
+[569] https://en.wikipedia.org/wiki/Mesut_%C3%96zil
+[570] https://www.national-football-teams.com/player/29724/Mesut_Ozil.html
+[571] https://en.wikipedia.org/wiki/Sergio_Ramos
+[572] https://www.national-football-teams.com/player/10958/Sergio_Ramos.html
+[573] https://en.wikipedia.org/wiki/Marcel_Desailly
+[574] https://www.national-football-teams.com/player/13954/Marcel_Desailly.html
+[575] https://en.wikipedia.org/wiki/Filippo_Inzaghi
+[576] https://www.national-football-teams.com/player/3352/Filippo_Inzaghi.html
+[577] https://en.wikipedia.org/wiki/Fernando_Muslera
+[578] https://www.national-football-teams.com/player/22931/Fernando_Muslera.html
+[579] https://en.wikipedia.org/wiki/Arturo_Vidal
+[580] https://www.national-football-teams.com/player/12421/Arturo_Vidal.html
+[581] https://en.wikipedia.org/wiki/Gabriel_Heinze
+[582] https://www.national-football-teams.com/player/304/Gabriel_Heinze.html
+[583] https://en.wikipedia.org/wiki/Taffarel
+[584] https://www.national-football-teams.com/player/13639/Claudio_Taffarel.html
+[585] https://en.wikipedia.org/wiki/Aldair
+[586] https://www.national-football-teams.com/player/13641/Aldair.html

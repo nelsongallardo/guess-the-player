@@ -34,8 +34,10 @@ test('batch 9 adds exactly fifty reviewed players with a 25/25 continental split
   assert.deepEqual(new Set(records.map(record => record.id)), selected);
   assert.equal(records.filter(record => record.continent === 'Europe').length, 25);
   assert.equal(records.filter(record => record.continent === 'South America').length, 25);
-  assert.equal(model.players.length, 210);
-  assert.equal(verifiedPlayers.length, 210);
+  // The roster only grows with later batches, so this stays a lower bound
+  // rather than an exact count frozen at batch 9's own point in time.
+  assert.ok(model.players.length >= 210);
+  assert.ok(verifiedPlayers.length >= 210);
   assert.deepEqual(new Set(model.players.map(player => player.id)), new Set(verifiedPlayers.map(player => player.id)));
   for (const id of selected) assert.ok(model.players.some(player => player.id === id), id);
 });

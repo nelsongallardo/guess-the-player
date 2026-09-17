@@ -2,7 +2,7 @@
 
 ## Result and limits
 
-**Current roster: 210 players.** The original 30-player re-audit is followed below by the documented expansion batches, including this source-backed fifty-player extension. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all players; see `research/data-policy.md` for the tagging method. The fourth batch (14 September 2026) is five Europe/five South America, continuing the 35/35 continent split and adding this roster's first Germany, Colombia and Paraguay national-team players. The fifth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 40/40: five further Portugal, Germany, Italy, Spain and England national-team Europeans, plus three further Argentina-origin and two further Brazil-origin South Americans. The sixth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 45/45: two further Netherlands, two further France and one further Italy national-team European, plus two further Argentina-origin, two further Brazil-origin and one further Uruguay-origin South American, closing gaps in the Argentine Primera División and Brasileirão competition tags. The seventh batch (15 September 2026) is another five Europe/five South America, taking the continent split to 50/50, all within already-represented countries. The eighth batch (also 15 September 2026) is another five Europe/five South America, taking the continent split to 55/55, again all within already-represented countries; see `research/data-policy.md`'s eighth-expansion entry for the Franco Baresi/Paolo Maldini identical-career substitution and the seventeen `incorrectOptions` gap-closing edits that promoting ten profiles at once required. The ninth batch (16 September 2026) is another five Europe/five South America — Robin van Persie, Roberto Mancini, Emmanuel Petit, Fernando Couto and Paulo Sousa for Europe; Diego Ribas, Lucas Moura, Daniel Bertoni, Cristian Rodríguez and Daniel Fonseca for South America — taking the continent split to 60/60, all ten promoted from the wrong-answer-only distractor bank, again within already-represented countries; see `research/data-policy.md`'s ninth-expansion entry for the two further researched wrong-answer-only profiles (Paulo Futre, Paolo Montero) this promotion required.
+**Current roster: 220 players.** The original 30-player re-audit is followed below by the documented expansion batches, including this source-backed fifty-player extension. The eleventh batch (17 September 2026) is another five Europe/five South America — Sol Campbell, Mesut Özil, Sergio Ramos, Marcel Desailly and Filippo Inzaghi for Europe; Fernando Muslera, Arturo Vidal, Gabriel Heinze, Cláudio Taffarel and Aldair for South America — taking the continent split to 110/110, all ten freshly researched (none promoted from the wrong-answer bank), within already-represented countries; see `research/player-addition-batch11/` for the reviewed records and integration script. The expansion retains explicit evidence limits rather than treating every reserve-membership record as a proven appearance. The third batch (12 September 2026) also introduces competition tags (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) applied by club membership across all players; see `research/data-policy.md` for the tagging method. The fourth batch (14 September 2026) is five Europe/five South America, continuing the 35/35 continent split and adding this roster's first Germany, Colombia and Paraguay national-team players. The fifth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 40/40: five further Portugal, Germany, Italy, Spain and England national-team Europeans, plus three further Argentina-origin and two further Brazil-origin South Americans. The sixth batch (also 14 September 2026) is another five Europe/five South America, taking the continent split to 45/45: two further Netherlands, two further France and one further Italy national-team European, plus two further Argentina-origin, two further Brazil-origin and one further Uruguay-origin South American, closing gaps in the Argentine Primera División and Brasileirão competition tags. The seventh batch (15 September 2026) is another five Europe/five South America, taking the continent split to 50/50, all within already-represented countries. The eighth batch (also 15 September 2026) is another five Europe/five South America, taking the continent split to 55/55, again all within already-represented countries; see `research/data-policy.md`'s eighth-expansion entry for the Franco Baresi/Paolo Maldini identical-career substitution and the seventeen `incorrectOptions` gap-closing edits that promoting ten profiles at once required. The ninth batch (16 September 2026) is another five Europe/five South America — Robin van Persie, Roberto Mancini, Emmanuel Petit, Fernando Couto and Paulo Sousa for Europe; Diego Ribas, Lucas Moura, Daniel Bertoni, Cristian Rodríguez and Daniel Fonseca for South America — taking the continent split to 60/60, all ten promoted from the wrong-answer-only distractor bank, again within already-represented countries; see `research/data-policy.md`'s ninth-expansion entry for the two further researched wrong-answer-only profiles (Paulo Futre, Paolo Montero) this promotion required.
 
 The original **30 unique players** were rechecked against freshly retrieved external career records, with at least two distinct source URLs per player and independent corroboration. This is a historical-data audit, not a claim that passing software tests proves the facts. The original requested scope remains **professional senior clubs**, including reserve sides competing in the adult league pyramid; youth teams, closed reserve leagues, amateur post-retirement football and coaching jobs are excluded.
 
@@ -1895,6 +1895,106 @@ Reviewed sources: [555], [556], [557].
 Reviewed sources: [558], [559].
 <!-- END PLAYER ADDITION BATCH 10 -->
 
+### Sol Campbell
+
+**England · Defender.** Tottenham Hotspur → Arsenal → Portsmouth → Notts County → Arsenal → Newcastle United.[560][561]
+
+Ordered clubs, including the brief Notts County registration and second Arsenal spell, are corroborated by an independent season-by-season appearance record.[560][561]
+
+Reviewed sources:
+- [560]
+- [561]
+
+### Mesut Özil
+
+**Germany · Midfielder.** Schalke 04 II → Schalke 04 → Werder Bremen → Real Madrid → Arsenal → Fenerbahçe → İstanbul Başakşehir.[562][563]
+
+The Schalke 04 II reserve debut overlaps his first-team breakthrough at the same club rather than replacing it. Ordered clubs and career endpoint are corroborated by an independent season-by-season appearance record.[562][563]
+
+Reviewed sources:
+- [562]
+- [563]
+
+### Sergio Ramos
+
+**Spain · Defender.** Sevilla Atlético → Sevilla → Real Madrid → Paris Saint-Germain → Sevilla → Monterrey.[564][565]
+
+Ordered clubs, including the Sevilla Atlético reserve spell and second Sevilla registration, are corroborated by an independent season-by-season appearance record. Current Monterrey status matches that same record.[564][565]
+
+Reviewed sources:
+- [564]
+- [565]
+
+### Marcel Desailly
+
+**France · Defender.** Nantes → Marseille → AC Milan → Chelsea → Al-Gharafa → Qatar SC.[566][567]
+
+Ordered clubs and career endpoint, including the two brief Qatari clubs that closed his career, are corroborated by an independent season-by-season appearance record.[566][567]
+
+Reviewed sources:
+- [566]
+- [567]
+
+### Filippo Inzaghi
+
+**Italy · Forward.** Piacenza → AlbinoLeffe → Hellas Verona → Parma → Atalanta → Juventus → AC Milan.[568][569]
+
+Both Piacenza loan spells (AlbinoLeffe and Hellas Verona) overlap his continuous Piacenza registration rather than replacing it, the same overlap pattern already established for Sporting CP/Sporting CP B. Ordered clubs and career endpoint are corroborated by an independent season-by-season appearance record.[568][569]
+
+Reviewed sources:
+- [568]
+- [569]
+
+### Fernando Muslera
+
+**Uruguay · Goalkeeper.** Montevideo Wanderers → Nacional → Lazio → Galatasaray → Estudiantes de La Plata.[570][571]
+
+Ordered clubs, including the brief Nacional loan and his 2025 move to Argentina, are corroborated by an independent season-by-season appearance record.[570][571]
+
+Reviewed sources:
+- [570]
+- [571]
+
+### Arturo Vidal
+
+**Chile · Midfielder.** Colo-Colo → Bayer Leverkusen → Juventus → Bayern Munich → Barcelona → Inter Milan → Flamengo → Athletico Paranaense → Colo-Colo.[572][573]
+
+Ordered clubs, including both Brazilian clubs and his return to Colo-Colo, are corroborated by an independent season-by-season appearance record.[572][573]
+
+Reviewed sources:
+- [572]
+- [573]
+
+### Gabriel Heinze
+
+**Argentina · Defender.** Newell's Old Boys → Real Valladolid → Sporting CP → Paris Saint-Germain → Manchester United → Real Madrid → Marseille → Roma → Newell's Old Boys.[574][575]
+
+The Sporting CP loan overlaps his continuous Real Valladolid registration rather than replacing it. Ordered clubs and career endpoint, including his return to Newell's Old Boys, are corroborated by an independent season-by-season appearance record.[574][575]
+
+Reviewed sources:
+- [574]
+- [575]
+
+### Cláudio Taffarel
+
+**Brazil · Goalkeeper.** Internacional → Parma → Reggiana → Atlético Mineiro → Galatasaray → Parma.[576][577]
+
+Ordered clubs and career endpoint, including the Reggiana spell and his return to Parma, are corroborated by an independent season-by-season appearance record.[576][577]
+
+Reviewed sources:
+- [576]
+- [577]
+
+### Aldair
+
+**Brazil · Defender.** Flamengo → Benfica → Roma → Genoa.[578][579]
+
+The displayed professional route ends with Genoa in 2003-04. Later low-profile appearances for Rio Branco (2005) and SS Murata (2007-2009, San Marino's part-time regional championship) are excluded as post-prime veteran/exhibition-tier football, not competitive top-flight play; an independent season-by-season appearance record confirms both are real but low-level.[578][579]
+
+Reviewed sources:
+- [578]
+- [579]
+
 Sources:
 [1] https://argentina.as.com/argentina/2021/12/02/futbol/1638473602_945874.html
 [4] https://en.wikipedia.org/wiki/Javier_Zanetti
@@ -2453,3 +2553,23 @@ Sources:
 [557] https://www.uefa.com/news-media/news/01b7-0e6d5fd49311-4ed2f0fcb906-1000--sampdoria-swoop-to-sign-vieri/
 [558] https://en.wikipedia.org/wiki/Ruud_van_Nistelrooy
 [559] https://national-football-teams.com/player/4636/Ruud_Van_Nistelrooy.html
+[560] https://en.wikipedia.org/wiki/Sol_Campbell
+[561] https://www.national-football-teams.com/player/2153/Sol_Campbell.html
+[562] https://en.wikipedia.org/wiki/Mesut_%C3%96zil
+[563] https://www.national-football-teams.com/player/29724/Mesut_Ozil.html
+[564] https://en.wikipedia.org/wiki/Sergio_Ramos
+[565] https://www.national-football-teams.com/player/10958/Sergio_Ramos.html
+[566] https://en.wikipedia.org/wiki/Marcel_Desailly
+[567] https://www.national-football-teams.com/player/13954/Marcel_Desailly.html
+[568] https://en.wikipedia.org/wiki/Filippo_Inzaghi
+[569] https://www.national-football-teams.com/player/3352/Filippo_Inzaghi.html
+[570] https://en.wikipedia.org/wiki/Fernando_Muslera
+[571] https://www.national-football-teams.com/player/22931/Fernando_Muslera.html
+[572] https://en.wikipedia.org/wiki/Arturo_Vidal
+[573] https://www.national-football-teams.com/player/12421/Arturo_Vidal.html
+[574] https://en.wikipedia.org/wiki/Gabriel_Heinze
+[575] https://www.national-football-teams.com/player/304/Gabriel_Heinze.html
+[576] https://en.wikipedia.org/wiki/Taffarel
+[577] https://www.national-football-teams.com/player/13639/Claudio_Taffarel.html
+[578] https://en.wikipedia.org/wiki/Aldair
+[579] https://www.national-football-teams.com/player/13641/Aldair.html

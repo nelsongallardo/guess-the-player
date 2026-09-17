@@ -35,11 +35,11 @@ test('desktop signed-out account control has a visible benefit-specific label',(
   assert.match(html,/@media\(max-width:580px\)\{[\s\S]*?\.account-open:not\(\.account-open-signed\) \.account-open-text/);
 });
 
-test('rules describe the current ten-option and 210-player game',()=>{
+test('rules describe the current ten-option and 220-player game',()=>{
   assert.match(ui,/Pick one of ten players\./);
-  assert.match(ui,/New games contain all 210 players/);
+  assert.match(ui,/New games contain all 220 players/);
   assert.match(ui,/Elegí uno de los diez jugadores\./);
-  assert.match(ui,/Las partidas nuevas incluyen los 210 jugadores/);
+  assert.match(ui,/Las partidas nuevas incluyen los 220 jugadores/);
   assert.doesNotMatch(ui,/one of five players|uno de los cinco jugadores|all 70 players|los 70 jugadores/);
   assert.doesNotMatch(html,/id="answer-caption">Five names|<span class="footer-brand">90 PLAYERS/);
 });

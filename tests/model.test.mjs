@@ -14,16 +14,16 @@ const clone = o => JSON.parse(JSON.stringify(o));
 const plain = o => JSON.parse(JSON.stringify(o));
 const wrong = s => g.roundAt(s).options.filter(n => n !== g.playerAt(s).name);
 
-test('exactly 210 explicit researched records: 105 Europe + 105 South America', () => {
-  assert.equal(players.length,210);
-  assert.equal(new Set(players.map(p=>p.name)).size,210);
-  assert.equal(new Set(players.map(p=>p.id)).size,210);
-  for (const continent of ['Europe','South America']) assert.equal(players.filter(p=>p.continent===continent).length,105);
+test('exactly 220 explicit researched records: 110 Europe + 110 South America', () => {
+  assert.equal(players.length,220);
+  assert.equal(new Set(players.map(p=>p.name)).size,220);
+  assert.equal(new Set(players.map(p=>p.id)).size,220);
+  for (const continent of ['Europe','South America']) assert.equal(players.filter(p=>p.continent===continent).length,110);
   const frozen=JSON.parse(fs.readFileSync(new URL('../research/verified-players.json', import.meta.url),'utf8'));
   assert.deepEqual(plain(players.map(({clubCrests,incorrectOptions,...p})=>p)),frozen);
   const nationalNames=new Set(players.map(p=>p.country));
   for(const p of players){
-    assert.ok(['2026-09-11','2026-09-12','2026-09-14','2026-09-15','2026-09-16'].includes(p.verifiedAt)); assert.ok(p.country && p.position && p.clubs.length);
+    assert.ok(['2026-09-11','2026-09-12','2026-09-14','2026-09-15','2026-09-16','2026-09-17'].includes(p.verifiedAt)); assert.ok(p.country && p.position && p.clubs.length);
     assert.ok(p.sources.length>=2); assert.equal(p.clubs.length,p.clubCrests.length);
     assert.ok(p.sources.every(s=>/^https?:\/\//.test(s.url)));
     assert.ok(p.clubs.every(c=>c.name && c.years && !nationalNames.has(c.name)));
@@ -57,7 +57,7 @@ test('every ordered public crest URL has a valid embedded PNG; no external depen
   assert.ok(!html.includes('__PLAYER_DATABASE__') && !html.includes('__CREST_ASSETS__'));
 });
 
-test('210,000 option samples always contain ten unique names and exactly one correct answer',()=>{
+test('220,000 option samples always contain ten unique names and exactly one correct answer',()=>{
   for(const p of players){
     const orders=new Set();
     for(let i=0;i<1000;i++){
@@ -73,9 +73,9 @@ test('210,000 option samples always contain ten unique names and exactly one cor
   }
 });
 
-test('all 210 rounds: first/second/third-attempt wins, losses, score, streak and recap',()=>{
+test('all 220 rounds: first/second/third-attempt wins, losses, score, streak and recap',()=>{
   const s=g.create(); let wins=0,streak=0,best=0;
-  for(let i=0;i<210;i++){
+  for(let i=0;i<220;i++){
     assert.equal(s.roundIndex,i); assert.equal(g.validate(s),true); assert.equal(g.outcome(s),'playing');
     assert.equal(g.next(s),false); const incorrect=wrong(s);
     const missCount=i%4;
@@ -86,7 +86,7 @@ test('all 210 rounds: first/second/third-attempt wins, losses, score, streak and
     assert.equal(g.answer(s,g.playerAt(s).name),false);assert.equal(g.hint(s),false);
     assert.equal(g.validate(s),true);assert.equal(g.next(s),true);
   }
-  assert.equal(s.finished,true);assert.equal(new Set(s.deck).size,210);assert.equal(g.validate(s),true);
+  assert.equal(s.finished,true);assert.equal(new Set(s.deck).size,220);assert.equal(g.validate(s),true);
   assert.equal(g.next(s),false);assert.equal(g.answer(s,'not an option'),false);assert.equal(g.hint(s),false);
   assert.equal(g.create().rounds.length,1);
 });
@@ -169,7 +169,7 @@ test('persistence accepts every legitimate state and rejects malformed or imposs
 
 test('shuffle does not mutate inputs and decks never repeat a player',()=>{
   const original=[1,2,3,4,5];g.shuffle(original);assert.deepEqual(original,[1,2,3,4,5]);
-  const starts=new Set();for(let i=0;i<200;i++){const s=g.create();assert.equal(new Set(s.deck).size,210);starts.add(s.deck[0]);assert.equal(g.validate(s),true);}
+  const starts=new Set();for(let i=0;i<200;i++){const s=g.create();assert.equal(new Set(s.deck).size,220);starts.add(s.deck[0]);assert.equal(g.validate(s),true);}
   assert.ok(starts.size>10);
 });
 
@@ -215,8 +215,8 @@ test('difficulty changes preserve progress and never reshuffle a started round',
   const invalid=clone(s);invalid.rounds[0].difficulty='bogus';assert.equal(g.validate(invalid),false);
   for(const level of ['easy','medium','hard']){
     const game=g.create(level);
-    for(let i=0;i<210;i++){assert.equal(g.roundAt(game).difficulty,level);g.answer(game,g.playerAt(game).name);g.next(game);assert.equal(g.validate(clone(game)),true);}
-    assert.equal(game.finished,true);assert.equal(g.stats(game).score,21000);
+    for(let i=0;i<220;i++){assert.equal(g.roundAt(game).difficulty,level);g.answer(game,g.playerAt(game).name);g.next(game);assert.equal(g.validate(clone(game)),true);}
+    assert.equal(game.finished,true);assert.equal(g.stats(game).score,22000);
   }
 });
 
@@ -228,7 +228,7 @@ test('published 30-player saves survive roster expansion and finish their origin
   // The in-progress round already carried 1 hint when saved, so its win is
   // scored at the reduced 80 (100 * 0.8 hint multiplier) instead of 100.
   assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,2980);
-  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,210);assert.equal(fresh.difficulty,'hard');
+  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,220);assert.equal(fresh.difficulty,'hard');
   assert.ok(fresh.deck.includes('fabricio-coloccini'));assert.ok(fresh.deck.includes('juan-pablo-sorin'));
 });
 
@@ -242,8 +242,8 @@ test('published 40-player saves preserve guesses, hints and order through expans
   // The in-progress round already carried 1 hint when saved, so its win is
   // scored at the reduced 80 (100 * 0.8 hint multiplier) instead of 100.
   assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,3980);
-  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,210);assert.equal(fresh.difficulty,'hard');
-  const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,170);
+  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,220);assert.equal(fresh.difficulty,'hard');
+  const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,180);
   assert.ok(additions.some(p=>p.id==='javier-saviola'));assert.ok(additions.some(p=>p.id==='claudio-pizarro'));
 });
 
@@ -256,12 +256,12 @@ test('published 50-player saves finish their original deck after the third expan
   for(let i=saved.roundIndex;i<saved.deck.length;i++){g.answer(saved,g.playerAt(saved).name);g.next(saved);assert.equal(g.validate(saved),true);}
   // Same reduced first-round score as the 40-player case (1 hint already used).
   assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,4980);
-  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,210);assert.equal(fresh.difficulty,'hard');
-  const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,160);
+  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,220);assert.equal(fresh.difficulty,'hard');
+  const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,170);
   assert.ok(additions.some(p=>p.id==='rivaldo'));assert.ok(additions.some(p=>p.id==='diego-maradona'));
 });
 
-test('published 160-player saves preserve their engaged round and finish before a 210-player replay',()=>{
+test('published 160-player saves preserve their engaged round and finish before a 220-player replay',()=>{
   const saved=JSON.parse(fs.readFileSync(new URL('./legacy-save-160.json',import.meta.url),'utf8'));
   const original=clone(saved);
   assert.equal(saved.deck.length,160);assert.equal(g.validate(saved),true);
@@ -269,8 +269,8 @@ test('published 160-player saves preserve their engaged round and finish before 
   assert.deepEqual(saved,original);
   for(let i=saved.roundIndex;i<saved.deck.length;i++){g.answer(saved,g.playerAt(saved).name);g.next(saved);assert.equal(g.validate(saved),true);}
   assert.equal(saved.finished,true);assert.equal(g.stats(saved).score,15980);
-  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,210);assert.equal(fresh.difficulty,'hard');
-  const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,50);
+  const fresh=g.create(saved.difficulty);assert.equal(fresh.deck.length,220);assert.equal(fresh.difficulty,'hard');
+  const additions=players.filter(p=>!original.deck.includes(p.id));assert.equal(additions.length,60);
   assert.ok(additions.some(p=>p.id==='gheorghe-hagi'));assert.ok(additions.some(p=>p.id==='alex'));
 });
 
@@ -284,9 +284,9 @@ test('create(difficulty, competitionId) restricts the deck to that competition, 
     assert.ok(s.deck.every(pid=>players.find(p=>p.id===pid).competitions.includes(id)));
     assert.equal(g.validate(s),true);
   }
-  const all=g.create('medium','all');assert.equal(all.competition,'all');assert.equal(all.deck.length,210);
-  const bogus=g.create('medium','not-a-real-competition');assert.equal(bogus.competition,'all');assert.equal(bogus.deck.length,210);
-  const omitted=g.create('medium');assert.equal(omitted.competition,'all');assert.equal(omitted.deck.length,210);
+  const all=g.create('medium','all');assert.equal(all.competition,'all');assert.equal(all.deck.length,220);
+  const bogus=g.create('medium','not-a-real-competition');assert.equal(bogus.competition,'all');assert.equal(bogus.deck.length,220);
+  const omitted=g.create('medium');assert.equal(omitted.competition,'all');assert.equal(omitted.deck.length,220);
 });
 
 test('legacy Easy helper scopes rivals by competition and falls back when the pool is too thin',()=>{
@@ -338,11 +338,11 @@ const localeContext=vm.createContext({});
 vm.runInContext(script('locale-data')+script('game-ui').split('function detectLanguage()')[0],localeContext);
 const localization=vm.runInContext('({COPY,COUNTRIES_ES,POSITIONS_ES,SPANISH_NOTES})',localeContext);
 
-test('Spanish copy, all 210 career notes and every country/position are translated',()=>{
+test('Spanish copy, all 220 career notes and every country/position are translated',()=>{
   const {COPY,COUNTRIES_ES,POSITIONS_ES,SPANISH_NOTES}=localization;
   assert.deepEqual(Object.keys(COPY.en).sort(),Object.keys(COPY.es).sort());
   for(const key of Object.keys(COPY.en))assert.equal(typeof COPY.en[key],typeof COPY.es[key],key);
-  assert.equal(Object.keys(SPANISH_NOTES).length,210);
+  assert.equal(Object.keys(SPANISH_NOTES).length,220);
   for(const p of players){
     assert.ok(COUNTRIES_ES[p.country]&&POSITIONS_ES[p.position],p.name);
     const note=SPANISH_NOTES[p.id];assert.ok(note.notes&&note.notes!==p.notes);
@@ -351,8 +351,8 @@ test('Spanish copy, all 210 career notes and every country/position are translat
   }
   assert.ok(COPY.en.rules.includes('youth teams, national teams and coaching jobs are excluded'));
   assert.ok(COPY.es.rules.includes('se excluyen juveniles, selecciones y etapas como entrenador'));
-  // The rules dialog and footer both describe the current 210-player roster.
-  for(const lang of ['en','es']){assert.ok(COPY[lang].footer.includes('210 '));assert.ok(COPY[lang].footer.includes('105 '));assert.ok(COPY[lang].rules.includes('210 '));}
+  // The rules dialog and footer both describe the current 220-player roster.
+  for(const lang of ['en','es']){assert.ok(COPY[lang].footer.includes('220 '));assert.ok(COPY[lang].footer.includes('110 '));assert.ok(COPY[lang].rules.includes('220 '));}
   assert.equal(COPY.es.question,'¿Quién es este jugador?');
   assert.equal(COPY.es.attempts(1),'Queda 1 intento');
   assert.equal(COPY.es.hints.join('|'),'País|Posición|Años');

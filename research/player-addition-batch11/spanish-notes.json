@@ -1,0 +1,42 @@
+{
+  "sol-campbell": {
+    "notes": "La cronología ordenada y cada club, incluida la breve etapa en el Notts County y la segunda etapa en el Arsenal, están corroboradas por un registro independiente de apariciones por temporada. Se excluyen el fútbol juvenil y cualquier trabajo posterior como entrenador o embajador.",
+    "clubNotes": ["", "", "", "Traspaso muy comentado que terminó tras un único partido oficial; se fue antes de volver a jugar con el club.", "Segunda etapa como jugador, justo antes de su paso al Newcastle.", ""]
+  },
+  "mesut-ozil": {
+    "notes": "Su debut en el filial Schalke 04 II antecede a su consagración en el primer equipo, dentro del mismo club; se muestran como entradas competitivas distintas. La cronología ordenada y el final de su carrera están corroborados por un registro independiente de apariciones por temporada.",
+    "clubNotes": ["Filial dentro de la pirámide alemana; su primera aparición competitiva en categoría absoluta.", "", "", "", "", "", "Último club antes de su retiro el 22 de marzo de 2023."]
+  },
+  "sergio-ramos": {
+    "notes": "La cronología ordenada, incluida su etapa en el filial Sevilla Atlético y su segunda etapa en el propio Sevilla, está corroborada por un registro independiente de apariciones por temporada. Su situación actual en el Monterrey coincide con ese mismo registro.",
+    "clubNotes": ["Filial; se solapa con el inicio de su etapa en el primer equipo del Sevilla.", "", "", "", "Segunda etapa como jugador.", "Club actual en la temporada 2025-26."]
+  },
+  "marcel-desailly": {
+    "notes": "La cronología ordenada y el final de su carrera, incluidos los dos breves clubes cataríes con los que la cerró, están corroborados por un registro independiente de apariciones por temporada. Se excluye cualquier actividad posterior como comentarista, entrenador o empresario.",
+    "clubNotes": ["", "", "", "", "", ""]
+  },
+  "filippo-inzaghi": {
+    "notes": "Ambas cesiones desde el Piacenza (AlbinoLeffe y Hellas Verona) se solapan con su vínculo continuo con el Piacenza en lugar de reemplazarlo, siguiendo el mismo criterio ya establecido para el caso Sporting CP/Sporting CP B en esta lista. La cronología ordenada y el final de su carrera están corroborados por un registro independiente de apariciones por temporada.",
+    "clubNotes": ["Su vínculo con el club se mantuvo durante dos cesiones, mostradas a continuación como entradas separadas y solapadas.", "Cesión del Piacenza.", "Cesión del Piacenza.", "", "", "", ""]
+  },
+  "fernando-muslera": {
+    "notes": "La cronología ordenada, incluida la breve cesión al Nacional y su llegada a Argentina en 2025, está corroborada por un registro independiente de apariciones por temporada.",
+    "clubNotes": ["", "Cesión.", "", "", "Fichó en junio de 2025; club actual en la temporada 2025-26."]
+  },
+  "arturo-vidal": {
+    "notes": "La cronología ordenada, incluidos ambos clubes brasileños y su regreso al Colo-Colo, está corroborada por un registro independiente de apariciones por temporada.",
+    "clubNotes": ["", "", "", "", "", "", "", "", "Segunda etapa como jugador; club actual."]
+  },
+  "gabriel-heinze": {
+    "notes": "La cesión al Sporting CP se solapa con su vínculo continuo con el Real Valladolid en lugar de reemplazarlo. La cronología ordenada y el final de su carrera, incluido su regreso a Newell's Old Boys, están corroborados por un registro independiente de apariciones por temporada.",
+    "clubNotes": ["", "Su vínculo con el club continuó durante una cesión al Sporting CP en 1998-99, mostrada a continuación como una entrada separada y solapada.", "Cesión del Real Valladolid.", "", "", "", "", "", "Segunda etapa como jugador; cerró su carrera."]
+  },
+  "claudio-taffarel": {
+    "notes": "La cronología ordenada y el final de su carrera, incluida su etapa en el Reggiana y su regreso al Parma, están corroborados por un registro independiente de apariciones por temporada.",
+    "clubNotes": ["", "", "", "", "", "Segunda etapa como jugador; cerró su carrera."]
+  },
+  "aldair": {
+    "notes": "La ruta profesional mostrada termina con el Genoa en 2003-04. Sus apariciones posteriores de bajo perfil con Rio Branco (2005, Brasil) y SS Murata (2007-2009, campeonato regional semiprofesional de San Marino) se excluyen por tratarse de fútbol veterano/de exhibición tras el final de su etapa de alto nivel, no de fútbol competitivo de primer nivel, siguiendo la política de esta lista de excluir apariciones amateur tras el retiro; un registro independiente de apariciones por temporada corrobora que ambas etapas fueron reales pero de bajo nivel.",
+    "clubNotes": ["", "", "", ""]
+  }
+}

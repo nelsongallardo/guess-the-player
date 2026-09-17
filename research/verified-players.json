@@ -13011,5 +13011,545 @@
       "premier-league",
       "la-liga"
     ]
+  },
+  {
+    "id": "sol-campbell",
+    "name": "Sol Campbell",
+    "continent": "Europe",
+    "country": "England",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Tottenham Hotspur",
+        "years": "1992–2001"
+      },
+      {
+        "name": "Arsenal",
+        "years": "2001–2006"
+      },
+      {
+        "name": "Portsmouth",
+        "years": "2006–2009"
+      },
+      {
+        "name": "Notts County",
+        "years": "2009",
+        "note": "Widely reported move that ended after a single competitive match; he left before playing for the club again."
+      },
+      {
+        "name": "Arsenal",
+        "years": "2010",
+        "note": "Second playing spell, immediately preceding his Newcastle move."
+      },
+      {
+        "name": "Newcastle United",
+        "years": "2010–2011"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sol_Campbell",
+        "title": "Sol Campbell - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/2153/Sol_Campbell.html",
+        "title": "Sol Campbell (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ordered chronology and every club, including the brief Notts County registration and second Arsenal spell, are corroborated by an independent season-by-season appearance record. Youth football and any coaching/ambassadorial work are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "mesut-ozil",
+    "name": "Mesut Özil",
+    "continent": "Europe",
+    "country": "Germany",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Schalke 04 II",
+        "years": "2005",
+        "note": "Reserve team in the German football pyramid; his first senior competitive appearance."
+      },
+      {
+        "name": "Schalke 04",
+        "years": "2006–2008"
+      },
+      {
+        "name": "Werder Bremen",
+        "years": "2008–2010"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2010–2013"
+      },
+      {
+        "name": "Arsenal",
+        "years": "2013–2021"
+      },
+      {
+        "name": "Fenerbahçe",
+        "years": "2021–2022"
+      },
+      {
+        "name": "İstanbul Başakşehir",
+        "years": "2022–2023",
+        "note": "Final club before his retirement on 22 March 2023."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Mesut_%C3%96zil",
+        "title": "Mesut Özil - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/29724/Mesut_Ozil.html",
+        "title": "Mesut Özil (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Reserve-team debut with Schalke 04 II precedes his first-team breakthrough, overlapping the same club; both are shown as distinct competitive entries. Ordered clubs and career endpoint are corroborated by an independent season-by-season appearance record.",
+    "status": "retired",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "sergio-ramos",
+    "name": "Sergio Ramos",
+    "continent": "Europe",
+    "country": "Spain",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Sevilla Atlético",
+        "years": "2003–2004",
+        "note": "Reserve team; overlaps the start of his first-team Sevilla registration."
+      },
+      {
+        "name": "Sevilla",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2005–2021"
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2021–2023"
+      },
+      {
+        "name": "Sevilla",
+        "years": "2023–2024",
+        "note": "Second playing spell."
+      },
+      {
+        "name": "Monterrey",
+        "years": "2025–present",
+        "note": "Current club as of the 2025–26 season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Sergio_Ramos",
+        "title": "Sergio Ramos - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/10958/Sergio_Ramos.html",
+        "title": "Sergio Ramos (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ordered clubs, including the Sevilla Atlético reserve spell and second Sevilla registration, are corroborated by an independent season-by-season appearance record. Current Monterrey status matches that same record.",
+    "status": "active",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "la-liga"
+    ]
+  },
+  {
+    "id": "marcel-desailly",
+    "name": "Marcel Desailly",
+    "continent": "Europe",
+    "country": "France",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Nantes",
+        "years": "1986–1992"
+      },
+      {
+        "name": "Marseille",
+        "years": "1992–1993"
+      },
+      {
+        "name": "AC Milan",
+        "years": "1993–1998"
+      },
+      {
+        "name": "Chelsea",
+        "years": "1998–2004"
+      },
+      {
+        "name": "Al-Gharafa",
+        "years": "2004–2005"
+      },
+      {
+        "name": "Qatar SC",
+        "years": "2005–2006"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Marcel_Desailly",
+        "title": "Marcel Desailly - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13954/Marcel_Desailly.html",
+        "title": "Marcel Desailly (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ordered clubs and career endpoint, including the two brief Qatari clubs that closed his career, are corroborated by an independent season-by-season appearance record. Any subsequent broadcasting, coaching or business activity is excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "premier-league"
+    ]
+  },
+  {
+    "id": "filippo-inzaghi",
+    "name": "Filippo Inzaghi",
+    "continent": "Europe",
+    "country": "Italy",
+    "position": "Forward",
+    "clubs": [
+      {
+        "name": "Piacenza",
+        "years": "1991–1995",
+        "note": "Registration spanned two loan spells away and back, shown as separate overlapping entries below."
+      },
+      {
+        "name": "AlbinoLeffe",
+        "years": "1992–1993",
+        "note": "Loan from Piacenza."
+      },
+      {
+        "name": "Hellas Verona",
+        "years": "1993–1994",
+        "note": "Loan from Piacenza."
+      },
+      {
+        "name": "Parma",
+        "years": "1995–1996"
+      },
+      {
+        "name": "Atalanta",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Juventus",
+        "years": "1997–2001"
+      },
+      {
+        "name": "AC Milan",
+        "years": "2001–2012"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Filippo_Inzaghi",
+        "title": "Filippo Inzaghi - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/3352/Filippo_Inzaghi.html",
+        "title": "Filippo Inzaghi (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Both Piacenza loan spells (AlbinoLeffe and Hellas Verona) overlap his continuous Piacenza registration rather than replacing it, matching the established Sporting CP/Sporting CP B overlap precedent for this roster. Ordered clubs and career endpoint are corroborated by an independent season-by-season appearance record.",
+    "status": "retired",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league"
+    ]
+  },
+  {
+    "id": "fernando-muslera",
+    "name": "Fernando Muslera",
+    "continent": "South America",
+    "country": "Uruguay",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Montevideo Wanderers",
+        "years": "2004–2007"
+      },
+      {
+        "name": "Nacional",
+        "years": "2007",
+        "note": "Loan spell."
+      },
+      {
+        "name": "Lazio",
+        "years": "2007–2011"
+      },
+      {
+        "name": "Galatasaray",
+        "years": "2011–2025"
+      },
+      {
+        "name": "Estudiantes de La Plata",
+        "years": "2025–present",
+        "note": "Signed June 2025; current club as of the 2025–26 season."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Fernando_Muslera",
+        "title": "Fernando Muslera - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/22931/Fernando_Muslera.html",
+        "title": "Fernando Muslera (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ordered clubs, including the brief Nacional loan and his 2025 move to Argentina, are corroborated by an independent season-by-season appearance record.",
+    "status": "active",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "arturo-vidal",
+    "name": "Arturo Vidal",
+    "continent": "South America",
+    "country": "Chile",
+    "position": "Midfielder",
+    "clubs": [
+      {
+        "name": "Colo-Colo",
+        "years": "2005–2007"
+      },
+      {
+        "name": "Bayer Leverkusen",
+        "years": "2007–2011"
+      },
+      {
+        "name": "Juventus",
+        "years": "2011–2015"
+      },
+      {
+        "name": "Bayern Munich",
+        "years": "2015–2018"
+      },
+      {
+        "name": "Barcelona",
+        "years": "2018–2020"
+      },
+      {
+        "name": "Inter Milan",
+        "years": "2020–2022"
+      },
+      {
+        "name": "Flamengo",
+        "years": "2022–2023"
+      },
+      {
+        "name": "Athletico Paranaense",
+        "years": "2023–2024"
+      },
+      {
+        "name": "Colo-Colo",
+        "years": "2024–present",
+        "note": "Second playing spell; current club."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Arturo_Vidal",
+        "title": "Arturo Vidal - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/12421/Arturo_Vidal.html",
+        "title": "Arturo Vidal (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ordered clubs, including both Brazilian clubs and his return to Colo-Colo, are corroborated by an independent season-by-season appearance record.",
+    "status": "active",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "la-liga",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "gabriel-heinze",
+    "name": "Gabriel Heinze",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Newell's Old Boys",
+        "years": "1996–1997"
+      },
+      {
+        "name": "Real Valladolid",
+        "years": "1997–2001",
+        "note": "Registration continued through a 1998–99 loan to Sporting CP, shown as a separate overlapping entry below."
+      },
+      {
+        "name": "Sporting CP",
+        "years": "1998–1999",
+        "note": "Loan from Real Valladolid."
+      },
+      {
+        "name": "Paris Saint-Germain",
+        "years": "2001–2004"
+      },
+      {
+        "name": "Manchester United",
+        "years": "2004–2007"
+      },
+      {
+        "name": "Real Madrid",
+        "years": "2007–2009"
+      },
+      {
+        "name": "Marseille",
+        "years": "2009–2011"
+      },
+      {
+        "name": "Roma",
+        "years": "2011–2012"
+      },
+      {
+        "name": "Newell's Old Boys",
+        "years": "2012–2014",
+        "note": "Second playing spell; closed his career."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Gabriel_Heinze",
+        "title": "Gabriel Heinze - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/304/Gabriel_Heinze.html",
+        "title": "Gabriel Heinze (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The Sporting CP loan overlaps his continuous Real Valladolid registration rather than replacing it. Ordered clubs and career endpoint, including his return to Newell's Old Boys, are corroborated by an independent season-by-season appearance record.",
+    "status": "retired",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "premier-league",
+      "la-liga",
+      "argentine-primera"
+    ]
+  },
+  {
+    "id": "claudio-taffarel",
+    "name": "Cláudio Taffarel",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Goalkeeper",
+    "clubs": [
+      {
+        "name": "Internacional",
+        "years": "1985–1990"
+      },
+      {
+        "name": "Parma",
+        "years": "1990–1993"
+      },
+      {
+        "name": "Reggiana",
+        "years": "1993–1994"
+      },
+      {
+        "name": "Atlético Mineiro",
+        "years": "1995–1998"
+      },
+      {
+        "name": "Galatasaray",
+        "years": "1998–2001"
+      },
+      {
+        "name": "Parma",
+        "years": "2001–2003",
+        "note": "Second playing spell; closed his career."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Taffarel",
+        "title": "Taffarel - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13639/Claudio_Taffarel.html",
+        "title": "Cláudio Taffarel (Player) | National Football Teams"
+      }
+    ],
+    "notes": "Ordered clubs and career endpoint, including the Reggiana spell and his return to Parma, are corroborated by an independent season-by-season appearance record.",
+    "status": "retired",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "brasileirao"
+    ]
+  },
+  {
+    "id": "aldair",
+    "name": "Aldair",
+    "continent": "South America",
+    "country": "Brazil",
+    "position": "Defender",
+    "clubs": [
+      {
+        "name": "Flamengo",
+        "years": "1985–1989"
+      },
+      {
+        "name": "Benfica",
+        "years": "1989–1990"
+      },
+      {
+        "name": "Roma",
+        "years": "1990–2003"
+      },
+      {
+        "name": "Genoa",
+        "years": "2003–2004"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Aldair",
+        "title": "Aldair - Wikipedia"
+      },
+      {
+        "url": "https://www.national-football-teams.com/player/13641/Aldair.html",
+        "title": "Aldair (Player) | National Football Teams"
+      }
+    ],
+    "notes": "The displayed professional route ends with Genoa in 2003–04. Later low-profile appearances for Rio Branco (2005, Brazil) and SS Murata (2007–2009, San Marino's part-time regional championship) are excluded as post-prime veteran/exhibition-tier football rather than competitive top-flight play, consistent with this roster's amateur-post-retirement exclusion policy; both are corroborated as real but low-level by an independent season-by-season appearance record.",
+    "status": "retired",
+    "verifiedAt": "2026-09-17",
+    "competitions": [
+      "champions-league",
+      "brasileirao"
+    ]
   }
 ]
