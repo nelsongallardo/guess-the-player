@@ -10,7 +10,37 @@
 
 ---
 
-## Product and UX contract
+## Core version (now)
+
+Ship the smallest complete visible Daily Rabona:
+
+1. A mobile-first bilingual segmented control selects Daily or the existing Unlimited game; `?daily=1` selects Daily on first render and visible URLs retain only `lang` plus `daily=1`.
+2. Daily remains independent from account identity. Account information may stay visible, but Daily uses only the frozen `DailyChallenge.today()` payload and local daily persistence; it never calls ranked mutations or resolves content through the mutable roster/game model.
+3. Reuse the career timeline, ten option cards, three guesses, and three hints. Preserve both modes exactly when switching, with one confirmation only for an engaged unresolved round and a timer warning when relevant.
+4. Show challenge number, current streak, 00:00 UTC reset, browser/device-local and non-ranked scope, plus an explicit temporary-progress message when localStorage is unavailable.
+5. Completion keeps the result visible and replaces Unlimited Next/Replay controls with spoiler-free Share and Keep playing actions. Native share falls back to clipboard and reports status accessibly.
+6. While Daily is visible, one 30-second interval plus focus/visibility checks detects UTC rollover. The displayed challenge is never replaced silently; the player explicitly loads the new one.
+7. Preserve keyboard access, visible focus, 44 px targets, reduced motion, `file:` play, safe text rendering, and 320 px layout.
+8. Focused controller/source tests cover entry, both languages, switching/state preservation, gameplay, spoiler-safe sharing, rollover, auth/ranked isolation, and URL allowlisting. Relevant existing daily/model/account/guest tests remain green.
+
+## Future iterations
+
+Prioritize only after observing real Daily usage and failures:
+
+1. **Reliability hardening:** exhaustive multi-tab conflict permutations and merge/convergence protocols beyond the simple current storage reconciliation.
+2. **Format evolution:** compatibility migration machinery for unreleased or future daily document/schedule formats; do not build migrations for intermediate formats that never shipped.
+3. **Product learning:** consent-first Daily analytics events and a concrete retention/share dashboard after event questions are agreed.
+4. **Privacy controls:** a dedicated clear-Daily-history UI and expanded privacy explanation, separate from guest Reset.
+5. **More play modes:** archive/rewind for previous challenges, with an explicit effect on streaks.
+6. **Online features:** opt-in cloud sync and Daily leaderboards, including server authority and abuse boundaries.
+7. **Scale:** compression or indexing for genuinely large long-running history after storage size is measured.
+8. **Compatibility:** an exhaustive browser/device matrix beyond focused current mobile, HTTP, and `file:` checks.
+
+The expanded design below is retained as a reference for those iterations. It is not the MVP acceptance gate where it specifies migration machinery, exhaustive multi-tab protocols, analytics, clear-history UI, archive, cloud features, long-history optimization, or exhaustive browser coverage.
+
+---
+
+## Expanded design reference
 
 ### Entry and navigation
 
@@ -257,18 +287,6 @@ Use an isolated worktree server/port and named headless session because no user 
 
 ---
 
-## Acceptance gate
+## MVP acceptance gate
 
-Implementation is ready for PR only when all are true:
-
-- the complete rendered payload plus answer+option schedule is pinned and stable across source changes;
-- the same UTC date produces the same challenge and exact ordered options;
-- daily and unlimited/ranked state, clocks, points, and backend mutations are isolated;
-- switching a started timed round is never silent;
-- reload, rollover, corruption, denied storage, stale tabs, and completion idempotency are tested;
-- daily direct entry remains daily after account boot; auth callback secrets are consumed/scrubbed before mode rendering and can never be resurrected by URL updates;
-- Spanish and English UI/share copy are complete and spoiler-free;
-- daily works in HTTP and actual offline `file:` contexts at desktop and mobile widths;
-- privacy/analytics/docs match the shipped behavior;
-- focused, full, browser, source, database, and diff checks pass;
-- independent spec and quality reviewers approve.
+Implementation is ready for review when the **Core version (now)** behaviors above work and the focused Daily, model, account, guest, generator, source, and diff checks pass. The frozen payload/schedule must remain unchanged. Future-iteration items are explicitly not blockers for this MVP.
