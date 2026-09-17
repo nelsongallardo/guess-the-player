@@ -61,6 +61,7 @@ Timelines include professional senior clubs, competitive senior reserve spells, 
 - `docs/analytics.md` — existing consent-first tracking contract, independent of accounts.
 - `supabase/` — schema/roster migrations, Edge Functions and local project configuration.
 - `scripts/export-ranked-roster.mjs` — exports the actual matching model for the frozen server ruleset; `--check` is read-only validation.
+- `scripts/roster-batch.mjs` — fail-closed audit, coordinated core integration, data-only executable guard and parameterized forward-migration generation for reviewed roster batches.
 - `BRAND.md`, `assets/derabona-*` — visual identity, editable logo/mark and social image. The game embeds its own mark/favicon.
 - `CAREER_SOURCES.md`, `DATA_AUDIT.md`, `research/` — curated records, policy and source ledgers. Raw retrievals stay ignored.
 - `tests/` — model, storage, browser, Edge handler and real PostgreSQL checks.
