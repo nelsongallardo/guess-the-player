@@ -2,7 +2,7 @@
 
 A football-career quiz: read the club-crest timeline and identify the player from ten names, in both guest and ranked play (see [ADR 0012](docs/adr/0012-ranked-ten-options-v2-ruleset.md); ranked's original five-option results remain immutable under their own `v1` ruleset). Plain HTML, CSS and JavaScript; one portable `index.html` supports guest play without a build or network connection. Optional Google accounts use Supabase for persistent, server-scored progress and public nickname leaderboards.
 
-**Website:** <https://derabona.club/> · [Leaderboard](https://derabona.club/leaderboard.html) · [Español](https://derabona.club/?lang=es) · [English](https://derabona.club/?lang=en)
+**Website:** <https://derabona.club/> · [Leaderboard](https://derabona.club/leaderboard.html) · [Privacy](https://derabona.club/privacy.html) · [Contact](mailto:contact@derabona.club) · [Español](https://derabona.club/?lang=es) · [English](https://derabona.club/?lang=en)
 
 This documents the implemented account contract, **not a claim that accounts have been deployed or hosted OAuth verified**. Public frontend configuration, Google/Supabase setup and hosted release checks are separate gates; see [accounts and leaderboards](docs/leaderboards.md) and [verification evidence](TESTING.md).
 
@@ -53,12 +53,13 @@ Timelines include professional senior clubs, competitive senior reserve spells, 
 
 - `index.html` — complete offline guest artifact; inline account client uses optional remote services.
 - `leaderboard.html` — standalone online ranking destination: global/competition filters, personal placement, pagination, Play navigation, and (since [ADR 0014](docs/adr/0014-leaderboard-competition-crests-and-account-dialog-parity.md)) the same account dialog and competition-crest picker as the main game, for component parity; it still never starts ranked rounds, mutates gameplay or runs analytics. The Google OAuth handshake itself still only completes on `index.html`.
-- `privacy.html` — public bilingual account/analytics privacy page; include it in the static website package.
+- `privacy.html` — public bilingual account/analytics privacy page with the project contact address; include it in the static website package.
 - `AGENTS.md` — shared agent guidance; `CLAUDE.md` imports it, not a second policy copy.
 - `.agents/skills/derabona-player-addition/SKILL.md` — canonical project-local, tested workflow for discovering, researching and integrating playable careers; its discovery phase includes a reusable shortlist template and validator. Codex and trusted Hermes sessions discover this cross-tool location. `.claude/skills/derabona-player-addition`, `.codex/skills/derabona-player-addition` and `.gemini/skills/derabona-player-addition` are symlinks to that one source for Claude Code, Codex compatibility and Gemini CLI—edit only the canonical file. Run `hermes skills trust` once from a trusted checkout before expecting Hermes to load project skills.
 - `DESIGN.md`, `TESTING.md`, `docs/adr/` — product contract, verification and decision history.
 - `docs/leaderboards.md` — server API, security boundaries, local tests and separate backend release gates.
 - `docs/analytics.md` — existing consent-first tracking contract, independent of accounts.
+- `docs/contact.md` — public contact-forwarding DNS contract and privacy-safe operational checks.
 - `supabase/` — schema/roster migrations, Edge Functions and local project configuration.
 - `scripts/export-ranked-roster.mjs` — exports the actual matching model for the frozen server ruleset; `--check` is read-only validation.
 - `scripts/roster-batch.mjs` — fail-closed audit, coordinated core integration, data-only executable guard and parameterized forward-migration generation for reviewed roster batches.
@@ -95,3 +96,5 @@ The runner uses a named headless non-persistent development session and ignored 
 Club crests/names remain their owners' trademarks/copyright. Public image-source URLs are retained for attribution. This is an unofficial educational/personal demo, not club/player endorsement or a blanket redistribution license. Source links open externally only when clicked.
 
 Optional **consent-first PostHog EU analytics** measures visits/gameplay only after Allow analytics. Declining does not affect guest or account play; permission can be withdrawn under Privacy and analytics. No recordings, autocapture or advertising. Google/Supabase account identity is functional account data, not analytics identity: no account IDs, nicknames, Google names/photos, emails or tokens go to PostHog. Offline/local play makes no analytics requests. See [analytics details](docs/analytics.md), [privacy page](privacy.html) and [dashboard](https://eu.posthog.com/project/273163/dashboard/949592).
+
+Privacy enquiries go to `contact@derabona.club`. ImprovMX forwards that public alias to a private inbox; the private destination and forwarding credentials must not be committed or copied into project documentation. See [contact operations](docs/contact.md).
