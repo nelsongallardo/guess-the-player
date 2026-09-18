@@ -24,9 +24,9 @@ function loadController(url='https://derabona.club/',{exposeScope=false}={}){
 function loadModeSwitch({signedIn=true}={}){
   const actions=[],nodes=new Map();
   const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:false,textContent:'',dataset:{},setAttribute(){},focus(){},classList:{remove(){}}});return nodes.get(id);};
-  const attempt={game:{rounds:[{status:'playing',guesses:[],hints:0}]}};
+  const attempt={game:{roundIndex:0,rounds:[{status:'playing',guesses:[],hints:0}]}};
   const persistence={persistent:true,today:()=>({date:'2026-09-17'}),read:()=>({attempts:{'2026-09-17':attempt},stats:{currentStreak:0}})};
-  const location=new URL('https://derabona.club/?daily=1'),history={replaceState(_a,_b,value){location.href=new URL(value,location.href).href;}};
+  const location=new URL('https://derabona.club/'),history={replaceState(_a,_b,value){location.href=new URL(value,location.href).href;}};
   let unlimitedRenders=0;
   const context=vm.createContext({
     URL,URLSearchParams,location,history,navigator:{},localStorage:{},setInterval:()=>1,clearInterval(){},Date,JSON,confirm:()=>true,language:'en',
@@ -40,24 +40,25 @@ function loadModeSwitch({signedIn=true}={}){
   return {ui:context.ui,actions,get unlimitedRenders(){return unlimitedRenders;}};
 }
 
-test('direct daily entry and auth scrubbing preserve only lang plus daily',()=>{
+test('Daily is the default and auth scrubbing preserves only language or explicit Unlimited',()=>{
   const auth=block('auth-callback');
   let replaced='';
   const context=vm.createContext({URL,URLSearchParams,location:{href:'https://derabona.club/?daily=1&lang=en&code=SECRET&state=PRIVATE&error_description=NOPE#access_token=TOKEN&refresh_token=REFRESH'},history:{replaceState(_a,_b,value){replaced=String(value);}}});
   vm.runInContext(auth+'\nglobalThis.callback=AuthCallback;',context);
-  assert.equal(replaced,'https://derabona.club/?lang=en&daily=1');
+  assert.equal(replaced,'https://derabona.club/?lang=en');
   assert.equal(context.callback.code,'SECRET','PKCE code remains captured in memory after the visible URL is scrubbed');
-  const {ui}=loadController('https://derabona.club/?daily=1&lang=en&code=x&state=y&account=1#access_token=z');
+  const {ui}=loadController('https://derabona.club/');
   assert.equal(ui.requestedMode(),'daily');
-  assert.equal(ui.sanitizeURL('daily','en'),'https://derabona.club/?lang=en&daily=1');
-  assert.equal(ui.sanitizeURL('unlimited','es'),'https://derabona.club/?lang=es');
+  assert.equal(ui.sanitizeURL('daily','en'),'https://derabona.club/?lang=en');
+  assert.equal(ui.sanitizeURL('unlimited','es'),'https://derabona.club/?lang=es&unlimited=1');
 });
 
-test('initial Daily and Unlimited entries sanitize arbitrary URL state without breaking file paths',()=>{
+test('initial entries canonicalize legacy Daily and retain explicit Unlimited without arbitrary URL state',()=>{
   const cases=[
-    ['https://derabona.club/?daily=1&lang=en&utm_source=x&account=1#private','https://derabona.club/?lang=en&daily=1'],
+    ['https://derabona.club/?daily=1&lang=en&utm_source=x&account=1#private','https://derabona.club/?lang=en'],
     ['https://derabona.club/play?lang=bogus&utm_source=x#private','https://derabona.club/play'],
-    ['file:///Users/test/derabona/index.html?daily=1&lang=es&junk=x#private','file:///Users/test/derabona/index.html?lang=es&daily=1']
+    ['https://derabona.club/?unlimited=1&lang=es&code=x&state=y#private','https://derabona.club/?lang=es&unlimited=1'],
+    ['file:///Users/test/derabona/index.html?daily=1&lang=es&junk=x#private','file:///Users/test/derabona/index.html?lang=es']
   ];
   for(const [url,expected] of cases){const {ui,location}=loadController(url);ui.updateURL(new URL(url).searchParams.get('lang'));assert.equal(location.href,expected);}
   assert.match(block('daily-ui'),/const init=\(\)=>\{\s*if\(initialized\)return;initialized=true;updateURL\(language\);/,'initial rendering sanitizes the visible URL');
@@ -71,6 +72,8 @@ test('visible bilingual copy covers mode, local status, rollover, and results',(
   }
   assert.equal(ui.copyFor('en').daily,'Daily Rabona');
   assert.equal(ui.copyFor('es').daily,'La Rabona del día');
+  assert.match(ui.copyFor('en').primary,/three (?:careers|players)/i);
+  assert.match(ui.copyFor('es').primary,/tres (?:carreras|jugadores)/i);
   assert.match(ui.copyFor('en').localRanked,/browser\/device-local.*non-ranked/i);
   assert.match(ui.copyFor('es').localRanked,/navegador\/dispositivo.*sin clasificación/i);
 });
@@ -85,17 +88,34 @@ test('denied Daily storage keeps local non-ranked scope plus bilingual temporary
   }
 });
 
-test('share payload is bilingual, spoiler-free, and URL-only after status',()=>{
+test('share payload aggregates all three players, is bilingual and spoiler-free',()=>{
   const {ui}=loadController();
   const forbidden=['Aron Winter','Ajax','Netherlands','Lazio','1986','Midfielder'];
-  for(const [language,result] of [['en','won'],['es','lost']]){
-    const text=ui.shareText({language,challengeNumber:42,result,guessCount:result==='won'?2:3,hints:1});
+  for(const language of ['en','es']){
+    const text=ui.shareText({language,challengeNumber:42,correctCount:2,totalGuesses:5,totalHints:4,totalPoints:164,currentStreak:7});
     assert.match(text,language==='en'?/Derabona Daily #42/:/Derabona diaria #42/);
-    assert.match(text,result==='won'?/✅ 2\/3/:/❌ 3\/3/);
-    assert.match(text,/🟩|⬛/);
-    assert.ok(text.endsWith('https://derabona.club/?daily=1'));
+    assert.match(text,/2\/3/);
+    assert.match(text,/5/);
+    assert.match(text,/4/);
+    assert.match(text,/164/);
+    assert.match(text,/7/);
+    assert.ok(text.endsWith('https://derabona.club/'));
     for(const clue of forbidden)assert.doesNotMatch(text,new RegExp(clue,'i'));
   }
+  assert.match(ui.shareText({language:'en',challengeNumber:42,correctCount:2,totalGuesses:5,totalHints:1,totalPoints:164,currentStreak:1}),/💡 1 hint\b.*🔥 1 day\b/s);
+  assert.match(ui.shareText({language:'es',challengeNumber:42,correctCount:2,totalGuesses:5,totalHints:1,totalPoints:164,currentStreak:1}),/💡 1 pista\b.*🔥 1 día\b/s);
+});
+
+test('Daily UI renders the current one of three and advances through the existing Next Player button',()=>{
+  const source=block('daily-ui'),game=block('game-ui');
+  assert.match(source,/a\.game\.roundIndex/);
+  assert.match(source,/descriptor\.payloads\[a\.game\.roundIndex\]/);
+  assert.match(source,/a\.options\[a\.game\.roundIndex\]/);
+  assert.match(source,/progress[^\n]+max\s*=\s*3/);
+  assert.match(source,/playerProgress|player progress/i);
+  assert.match(source,/const next=.*persistence\.next/);
+  assert.match(source,/daily-result-actions[^\n]+a\.game\.finished/);
+  assert.match(game,/if\(DailyUI\.isDaily\(\)\)\{DailyUI\.next\(\);return;\}/);
 });
 
 test('controller source isolates daily mutations, preserves unlimited state, and owns rollover cleanup',()=>{
@@ -133,7 +153,7 @@ test('daily controller defers ranked synchronization until the first signed-in U
   assert.match(game,/DailyUI\.render/);
   assert.match(game,/DailyUI\.init\(\)/);
   assert.match(game,/DailyUI\.isDaily\(\).*RankedUI\.update|RankedUI\.update\(\).*DailyUI\.isDaily\(\)/s);
-  assert.match(block('account-service'),/daily/);
+  assert.match(block('account-service'),/unlimited/);
 
   const signed=loadModeSwitch();
   signed.ui.init();

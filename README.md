@@ -10,6 +10,10 @@ This documents the implemented account contract, **not a claim that accounts hav
 
 Download `index.html` and open it in a modern browser for offline guest play. All playable careers, translations and crest images are embedded. Accounts/rankings require a configured backend and connectivity; local files are unranked only.
 
+The bare Play URL opens **Daily Rabona**. Each UTC challenge has the same three frozen players for everyone, played sequentially; each player keeps the normal three guesses, three hints, timer and points. The Daily completes, updates its device-local streak once, and enables its spoiler-free aggregate share only after player three. Choose **Unlimited** for the existing guest/ranked game; `?unlimited=1` preserves that explicit choice across reload and OAuth, while legacy `?daily=1` links canonicalize to the bare Daily URL (with a valid `lang` when present).
+
+Daily is local and non-ranked, uses only `localStorage['derabona.daily.v1']`, and never changes Unlimited guest or account progress. Its document is schema/schedule v2. The briefly shipped one-player v1 document is deliberately reset under that same key instead of attempting a speculative partial migration; frozen v1 payload and schedule literals remain unchanged and v2 deterministically groups three consecutive descriptors per UTC date.
+
 | Mode | Progress | Ranking and reset |
 | --- | --- | --- |
 | Guest | Per-tab `sessionStorage`, with in-memory fallback | Unranked; confirmed Reset clears this tab's gameplay |
