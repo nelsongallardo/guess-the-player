@@ -189,9 +189,10 @@ const DailyChallenge=(()=>{
     };
     const start=(date=currentDate())=>mutate((attempt,round)=>{if(round.startedAt!==null||round.status!=='playing')return false;round.startedAt=now();return true;},date);
     const hint=(date=currentDate())=>mutate((attempt,round)=>{if(round.status!=='playing'||round.hints>=3)return false;if(round.startedAt===null)round.startedAt=now();round.hints++;return true;},date);
-    const guess=(optionId,date=currentDate())=>mutate((attempt,round)=>{
+    const guess=(optionId,date=currentDate(),clockStartedAt=null)=>mutate((attempt,round)=>{
       if(round.status!=='playing'||!round.options.includes(optionId)||round.guesses.includes(optionId))return false;
-      const actionTime=now();if(round.startedAt===null)round.startedAt=actionTime;round.guesses.push(optionId);
+      const actionTime=now(),hasSessionClock=Number.isFinite(clockStartedAt)&&clockStartedAt<=actionTime;
+      if(hasSessionClock)round.startedAt=clockStartedAt;else if(round.startedAt===null)round.startedAt=actionTime;round.guesses.push(optionId);
       const answer=attempt.game.deck[attempt.game.roundIndex];
       if(optionId===answer){round.status='won';round.points=scoreFor(round.hints,round.startedAt,actionTime);round.completedAt=actionTime;}
       else if(round.guesses.length===3){round.status='lost';round.points=0;round.completedAt=actionTime;}
