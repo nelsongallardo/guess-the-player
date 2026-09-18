@@ -53,6 +53,24 @@ test('Unlimited does not start its session clock while Daily is selected',()=>{
   assert.match(source,/if\(roundClockWaitingForMode\)try\{sessionStorage\.removeItem\(CLOCK_KEY\)/);
 });
 
+test('Unlimited preserves the same tab but resets a new or restored browsing context',()=>{
+  const source=block('game-ui');
+  const expression=source.match(/const restoredRoundClockStart=(.*?);/)?.[1];
+  assert.ok(expression,'restoredRoundClockStart helper exists in game-ui');
+  const restoredRoundClockStart=vm.runInNewContext(`(${expression})`);
+  const saved={playerId:'messi',startedAt:1_234};
+  assert.equal(restoredRoundClockStart(saved,'messi','reload',true,false),1_234);
+  assert.equal(restoredRoundClockStart(saved,'messi','navigate',false,false),1_234);
+  assert.equal(restoredRoundClockStart(saved,'messi','navigate',true,false),null);
+  assert.equal(restoredRoundClockStart(saved,'messi','navigate',false,true),null);
+  assert.equal(restoredRoundClockStart(saved,'messi','back_forward',true,false),null);
+  assert.equal(restoredRoundClockStart(saved,'ronaldo','reload',true,false),null);
+  assert.match(source,/const CLOCK_TAB_KEY='touchline\.clock-tab\.v1'/,'Unlimited stores a browsing-context identity separately from its clock');
+  assert.match(source,/storedClockTab!==null&&storedClockTab!==clockTabId/,'same-tab identity survives full navigations without trusting cloned sessionStorage');
+  assert.match(source,/window\.name=clockTabId/,'the per-tab identity itself is not cloned into an opener-created tab');
+  assert.match(source,/addEventListener\('pageshow',event=>\{if\(event\.persisted\)resetRoundClock\(\);\}\)/,'a page-cache restore must start a fresh Unlimited clock');
+});
+
 test('elapsed-time readout is bilingual, freezes, and keeps scoring details on activation',()=>{
   const source=block('game-ui');
   assert.match(html,/elapsedTimeLabel:'Time played'/);

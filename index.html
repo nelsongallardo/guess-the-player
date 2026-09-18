@@ -75565,7 +75565,7 @@ const DailyUI=(()=>{
     const current=new URL(location.href),clean=current.origin==='null'?new URL(current.href):new URL(current.origin+current.pathname);
     clean.search='';clean.hash='';if(lang==='en'||lang==='es')clean.searchParams.set('lang',lang);if(nextMode==='unlimited')clean.searchParams.set('unlimited','1');return clean.href;
   };
-  const updateURL=lang=>{try{history.replaceState(null,'',sanitizeURL(mode,lang));}catch{}};
+  const updateURL=lang=>{try{history.replaceState(history.state??null,'',sanitizeURL(mode,lang));}catch{}};
   const shareText=({language='es',challengeNumber,correctCount,totalGuesses,totalHints,totalPoints,currentStreak})=>{
     const grid='🟩'.repeat(correctCount)+'⬛'.repeat(3-correctCount);
     if(language==='en')return `Derabona Daily #${challengeNumber} ⚽\n${grid} ${correctCount}/3 players · ${totalGuesses} guesses · 💡 ${totalHints} ${totalHints===1?'hint':'hints'}\n🏆 ${totalPoints} points · 🔥 ${currentStreak} ${currentStreak===1?'day':'days'}\nhttps://derabona.club/`;
@@ -80166,33 +80166,43 @@ catch {state=startGame('hard','all')||CareerGame.create();}
 state.difficulty='hard';
 if(!state.competition)state.competition='all';
 CareerGame.refreshUnstartedRivals(state);
-// Guest elapsed time is measured from this timestamp - and, unlike the
-// gameplay snapshot, it USED to be deliberately non-persisted: "resuming
-// doesn't charge time away" meant any reload reset it to now. That was a
-// real anti-cheat hole: refreshing mid-round (after looking the answer up
-// elsewhere, say) reset the clock to ~0, defeating ADR 0009's whole
-// premise. It's now persisted per active player (directly in
-// sessionStorage, not routed through GuestStorage: that helper's
-// getItem/setItem write through to sessionStorage fine, but its read side
-// only hydrates its in-memory cache from sessionStorage once, at
-// construction, for its own hardcoded legacy-migration key list - a key
-// outside that list, like this one, would read back null on every fresh
-// page load even though it was saved correctly), so elapsed time keeps
-// counting across a reload exactly the way ranked's server `started_at`
-// already does - a genuinely NEW round (a real resetRoundClock() call,
-// keyed to that round's own player) still starts a fresh clock; only a
-// plain refresh of the SAME round no longer does.
+// Guest elapsed time is persisted per active player directly in
+// sessionStorage. A refresh or ordinary same-tab navigation restores it to
+// prevent score-reset exploits. Browser-restored tab history and
+// opener-created tabs with cloned sessionStorage start a fresh clock
+// instead, so another browsing context can never revive an old elapsed
+// duration. `window.opener!==null` alone cannot distinguish these cases:
+// it stays truthy for the tab's entire lifetime, so it would keep
+// resetting ordinary later navigation in a tab that happened to be opened
+// from a link. Instead each tab claims a random identity in `window.name`
+// (not cloned into a new tab, unlike sessionStorage) the first time it
+// runs; a stored clock is only trusted when that identity still matches.
 const CLOCK_KEY='touchline.clock.v1';
+const CLOCK_TAB_KEY='touchline.clock-tab.v1';
+const restoredRoundClockStart=(saved,playerId,navigationType,restoredHistoryEntry,newBrowsingContext)=>navigationType!=='back_forward'&&!(navigationType==='navigate'&&(restoredHistoryEntry||newBrowsingContext))&&saved&&playerId&&saved.playerId===playerId&&Number.isFinite(saved.startedAt)?saved.startedAt:null;
+const clockHistoryState=history.state&&typeof history.state==='object'?history.state:{};
+let clockTabId;
+try{
+  clockTabId=window.name&&/^derabona-[0-9a-z]+$/.test(window.name)?window.name:`derabona-${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`;
+  window.name=clockTabId;
+}catch{clockTabId=null;}
 const loadRoundClock=()=>{
   try{
     const saved=JSON.parse(sessionStorage.getItem(CLOCK_KEY)||'null');
     const pid=CareerGame.playerAt(state)?.id;
-    if(saved&&pid&&saved.playerId===pid&&Number.isFinite(saved.startedAt))return saved.startedAt;
+    const navigationType=performance.getEntriesByType?.('navigation')?.[0]?.type||'navigate';
+    const storedClockTab=sessionStorage.getItem(CLOCK_TAB_KEY);
+    const newBrowsingContext=storedClockTab!==null&&storedClockTab!==clockTabId;
+    const restored=restoredRoundClockStart(saved,pid,navigationType,clockHistoryState.derabonaClockPage===true,newBrowsingContext);
+    if(restored!==null)return restored;
+    sessionStorage.removeItem(CLOCK_KEY);
   }catch{}
   return null;
 };
-const saveRoundClock=startedAt=>{try{sessionStorage.setItem(CLOCK_KEY,JSON.stringify({playerId:CareerGame.playerAt(state)?.id,startedAt}));}catch{}};
+try{history.replaceState({...clockHistoryState,derabonaClockPage:true},'',location.href);}catch{}
+const saveRoundClock=startedAt=>{try{sessionStorage.setItem(CLOCK_KEY,JSON.stringify({playerId:CareerGame.playerAt(state)?.id,startedAt}));if(clockTabId)sessionStorage.setItem(CLOCK_TAB_KEY,clockTabId);}catch{}};
 let roundClockStart=loadRoundClock();
+if(clockTabId)try{sessionStorage.setItem(CLOCK_TAB_KEY,clockTabId);}catch{}
 let roundClockWaitingForMode=roundClockStart===null&&DailyUI.requestedMode()==='daily';
 let roundClockWaitingForConsent=roundClockStart===null&&!roundClockWaitingForMode&&Analytics.shouldPauseGameClock();
 if(roundClockStart===null){roundClockStart=Date.now();if(!roundClockWaitingForMode&&!roundClockWaitingForConsent)saveRoundClock(roundClockStart);}
@@ -80202,6 +80212,7 @@ function startGuestClockForMode(){
   if(!roundClockWaitingForConsent)saveRoundClock(roundClockStart);
 }
 const resetRoundClock=()=>{roundClockWaitingForMode=DailyUI.requestedMode()==='daily';roundClockWaitingForConsent=!roundClockWaitingForMode&&Analytics.shouldPauseGameClock();roundClockStart=Date.now();if(roundClockWaitingForMode)try{sessionStorage.removeItem(CLOCK_KEY);}catch{}else if(!roundClockWaitingForConsent)saveRoundClock(roundClockStart);};
+window.addEventListener('pageshow',event=>{if(event.persisted)resetRoundClock();});
 window.addEventListener('derabona:analytics-consent-resolved',()=>{if(!roundClockWaitingForConsent)return;roundClockWaitingForConsent=false;roundClockStart=Date.now();saveRoundClock(roundClockStart);});
 // The consent banner normally receives the first interaction. If gameplay is
 // nevertheless activated behind it (keyboard automation, assistive tech or a
@@ -80811,7 +80822,7 @@ document.addEventListener('click',event=>{if(elapsedTimeOpen&&!$('elapsed-time')
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&elapsedTimeOpen){elapsedTimeOpen=false;renderElapsedTime();}});
 renderElapsedTime();setInterval(renderElapsedTime,250);
 // Account CTA is a local UI request, never an OAuth callback or automatic login.
-if(new URLSearchParams(location.search).get('account')==='1'){const u=new URL(location.href);u.searchParams.delete('account');history.replaceState(null,'',u);$('account-open').click();}
+if(new URLSearchParams(location.search).get('account')==='1'){const u=new URL(location.href);u.searchParams.delete('account');history.replaceState(history.state??null,'',u);$('account-open').click();}
 requestAnimationFrame(()=>{document.documentElement.classList.remove('game-loading');Analytics.start(analyticsContext);});
 </script>
 </body>
