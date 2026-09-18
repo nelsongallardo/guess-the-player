@@ -141,7 +141,7 @@ test('markup exposes accessible segmented controls, result actions, live share s
   assert.match(html,/id="daily-share-status"[^>]+aria-live="polite"/);
   assert.match(html,/\.mode-segmented button\{[^}]*min-height:44px/);
   assert.match(html,/\.page-nav a\{[^}]*min-height:44px/,'the visible leaderboard control keeps a 44px target');
-  assert.match(html,/\.speed-meter\{[^}]*height:44px/,'the visible timer control keeps a 44px target');
+  assert.match(html,/\.elapsed-time\{[^}]*min-height:44px/,'the visible elapsed-time control keeps a 44px target');
   assert.match(html,/@media\(prefers-reduced-motion:reduce\)/);
   assert.doesNotMatch(block('daily-ui'),/\.innerHTML\s*=/);
 });
