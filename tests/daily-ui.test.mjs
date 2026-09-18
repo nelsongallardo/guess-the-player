@@ -24,12 +24,12 @@ function loadController(url='https://derabona.club/',{exposeScope=false}={}){
 function loadModeSwitch({signedIn=true}={}){
   const actions=[],nodes=new Map();
   const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:false,textContent:'',dataset:{},setAttribute(){},focus(){},classList:{remove(){}}});return nodes.get(id);};
-  const attempt={game:{roundIndex:0,rounds:[{status:'playing',guesses:[],hints:0}]}};
+  const attempt={game:{roundIndex:0,rounds:[{status:'playing',startedAt:1,guesses:[],hints:0}]}};
   const persistence={persistent:true,today:()=>({date:'2026-09-17'}),read:()=>({attempts:{'2026-09-17':attempt},stats:{currentStreak:0}})};
   const location=new URL('https://derabona.club/'),history={replaceState(_a,_b,value){location.href=new URL(value,location.href).href;}};
   let unlimitedRenders=0;
   const context=vm.createContext({
-    URL,URLSearchParams,location,history,navigator:{},localStorage:{},setInterval:()=>1,clearInterval(){},Date,JSON,confirm:()=>true,language:'en',
+    URL,URLSearchParams,location,history,navigator:{},localStorage:{},sessionStorage:{getItem(){return null;},setItem(){}},setInterval:()=>1,clearInterval(){},Date,JSON,confirm(){throw new Error('mode switching must not confirm');},language:'en',
     Accounts:{session:signedIn?{user:{id:'A'}}:null},
     RankedUI:{isAccountMode:()=>signedIn,roundClock:()=>null,sync:async()=>{actions.push('progress','start');}},
     DailyChallenge:{createPersistence:()=>persistence},CareerGame:{roundAt:()=>({guesses:[],hints:0}),outcome:()=> 'playing'},state:{},
@@ -128,10 +128,23 @@ test('controller source isolates daily mutations, preserves unlimited state, and
   assert.match(source,/clearInterval/);
   assert.match(source,/visibilitychange/);
   assert.match(source,/addEventListener\('focus'/);
-  assert.match(source,/confirm\(/);
+  assert.doesNotMatch(source,/confirm\(/);
+  assert.doesNotMatch(source,/switchDaily|switchUnlimited|switchRanked/);
   assert.match(source,/render\(false,true\)/);
   assert.match(source,/else\{[^}]*globalThis\.render\(false,true\)/s,'returning to Unlimited invokes the main renderer rather than the Daily renderer');
   assert.match(source,/classList\.remove\([^)]*'game-loading'/,'daily render clears the initial loading shell without waiting for animation frames');
+});
+
+test('Daily elapsed time is tab-session scoped and separate from Unlimited',()=>{
+  const source=block('daily-ui');
+  assert.match(source,/const DAILY_CLOCK_KEY='derabona\.daily-clock\.v1'/);
+  assert.match(source,/sessionStorage\.getItem\(DAILY_CLOCK_KEY\)/);
+  assert.match(source,/sessionStorage\.setItem\(DAILY_CLOCK_KEY/);
+  assert.match(source,/persistence\.guess\(option\.id,displayedDate,dailyClockStart\)/);
+  assert.match(source,/startDailyClockFromInteraction=\(\)=>\{[^}]*dailyClockStart=Date\.now\(\)/,'consent-overlay time is excluded when play starts by interaction');
+  assert.match(source,/derabona:analytics-consent-resolved[^;]*;if\(dailyClockWaitingForConsent\)[^}]*dailyClockStart=Date\.now\(\)[^}]*\}if\(!isDaily\(\)\)return/s,'Daily resolves its pending clock even if consent finishes while Unlimited is open');
+  assert.match(source,/startGuestClockForMode\(\)/,'Unlimited starts its own clock only when that mode opens');
+  assert.doesNotMatch(source,/elapsedMs:Date\.now\(\)-r\.startedAt/,'the visible clock must not include time while the tab was closed');
 });
 
 test('markup exposes accessible segmented controls, result actions, live share status, and rollover action',()=>{

@@ -132,6 +132,22 @@ test('reload preserves all frozen round snapshots, progress, and each round cloc
   assert.deepEqual(attempt.options,plain(api.forDate('2026-09-17').payloads.map(payload=>payload.options)));
 });
 
+test('a fresh tab-session clock scores resumed Daily play without charging closed time',()=>{
+  const {api}=loadDaily(),storage=memoryStorage();
+  let time=Date.parse('2026-09-17T12:00:00Z');
+  const persistence=api.createPersistence(storage,{now:()=>time});
+  let attempt=persistence.today();
+  persistence.start();
+  time=Date.parse('2026-09-17T20:00:00Z');
+  const sessionStartedAt=time-1_000;
+  const answer=attempt.game.deck[attempt.game.roundIndex];
+  assert.equal(persistence.guess(answer,'2026-09-17',sessionStartedAt),true);
+  attempt=persistence.today();
+  assert.equal(attempt.game.rounds[0].points,100,'closed-tab time is excluded from the new session clock');
+  assert.equal(attempt.game.rounds[0].startedAt,sessionStartedAt,'the saved scoring clock aligns with the visible session clock');
+  assert.deepEqual(attempt.game.rounds[0].guesses,[answer],'Daily answers remain persisted');
+});
+
 test('v2 validation is descriptor-bound and rejects malformed or out-of-sequence attempts',()=>{
   const {api}=loadDaily(),storage=memoryStorage();
   const persistence=api.createPersistence(storage,{now:()=>Date.parse('2026-09-17T12:00:00Z')});

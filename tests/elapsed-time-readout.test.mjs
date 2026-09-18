@@ -45,6 +45,14 @@ test('elapsed-time rendering does not depend on animation frames',()=>{
   assert.doesNotMatch(source,/requestAnimationFrame\(tick\)/);
 });
 
+test('Unlimited does not start its session clock while Daily is selected',()=>{
+  const source=block('game-ui');
+  assert.match(source,/roundClockWaitingForMode=roundClockStart===null&&DailyUI\.requestedMode\(\)==='daily'/);
+  assert.match(source,/function startGuestClockForMode\(\)/);
+  assert.match(source,/resetRoundClock=\(\)=>\{roundClockWaitingForMode=DailyUI\.requestedMode\(\)==='daily'/,'a guest reset while Daily is active must remain deferred');
+  assert.match(source,/if\(roundClockWaitingForMode\)try\{sessionStorage\.removeItem\(CLOCK_KEY\)/);
+});
+
 test('elapsed-time readout is bilingual, freezes, and keeps scoring details on activation',()=>{
   const source=block('game-ui');
   assert.match(html,/elapsedTimeLabel:'Time played'/);

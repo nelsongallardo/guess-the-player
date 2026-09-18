@@ -75531,9 +75531,10 @@ const DailyChallenge=(()=>{
     };
     const start=(date=currentDate())=>mutate((attempt,round)=>{if(round.startedAt!==null||round.status!=='playing')return false;round.startedAt=now();return true;},date);
     const hint=(date=currentDate())=>mutate((attempt,round)=>{if(round.status!=='playing'||round.hints>=3)return false;if(round.startedAt===null)round.startedAt=now();round.hints++;return true;},date);
-    const guess=(optionId,date=currentDate())=>mutate((attempt,round)=>{
+    const guess=(optionId,date=currentDate(),clockStartedAt=null)=>mutate((attempt,round)=>{
       if(round.status!=='playing'||!round.options.includes(optionId)||round.guesses.includes(optionId))return false;
-      const actionTime=now();if(round.startedAt===null)round.startedAt=actionTime;round.guesses.push(optionId);
+      const actionTime=now(),hasSessionClock=Number.isFinite(clockStartedAt)&&clockStartedAt<=actionTime;
+      if(hasSessionClock)round.startedAt=clockStartedAt;else if(round.startedAt===null)round.startedAt=actionTime;round.guesses.push(optionId);
       const answer=attempt.game.deck[attempt.game.roundIndex];
       if(optionId===answer){round.status='won';round.points=scoreFor(round.hints,round.startedAt,actionTime);round.completedAt=actionTime;}
       else if(round.guesses.length===3){round.status='lost';round.points=0;round.completedAt=actionTime;}
@@ -75550,11 +75551,13 @@ const DailyChallenge=(()=>{
 'use strict';
 const DailyUI=(()=>{
   const TEXT={
-    en:{daily:'Daily Rabona',unlimited:'Unlimited',challenge:n=>`DAILY RABONA #${n}`,primary:'The same three careers for everyone today',playerProgress:n=>`Player ${n} / 3`,streak:n=>`Current streak ${n}`,reset:'Resets at 00:00 UTC',localRanked:'Browser/device-local · non-ranked points',temporary:'Progress is temporary because browser storage is unavailable',newDaily:'A new daily is ready',loadDaily:'Load it',share:'Share',keepPlaying:'Keep playing',won:'Player solved',lost:'Player missed',attempts:n=>`${n} ${n===1?'guess':'guesses'}`,hints:n=>`${n} ${n===1?'hint':'hints'}`,points:n=>`${n} local, non-ranked points`,copied:'Result copied',shared:'Result shared',shareFailed:'Could not share this result',switchDaily:'Switch modes? This Daily Rabona timer continues while Unlimited is open.',switchUnlimited:'Switch modes? Your Unlimited timer continues while Daily Rabona is open.',switchRanked:'Switch modes? Your Unlimited/ranked server timer continues while Daily Rabona is open.'},
-    es:{daily:'La Rabona del día',unlimited:'Ilimitado',challenge:n=>`RABONA DIARIA #${n}`,primary:'Las mismas tres carreras para todos hoy',playerProgress:n=>`Jugador ${n} / 3`,streak:n=>`Racha actual ${n}`,reset:'Se renueva a las 00:00 UTC',localRanked:'Local del navegador/dispositivo · puntos sin clasificación',temporary:'El progreso es temporal porque el almacenamiento del navegador no está disponible',newDaily:'Hay una nueva diaria',loadDaily:'Cargarla',share:'Compartir',keepPlaying:'Seguir jugando',won:'Jugador acertado',lost:'Jugador no acertado',attempts:n=>`${n} ${n===1?'intento':'intentos'}`,hints:n=>`${n} ${n===1?'pista':'pistas'}`,points:n=>`${n} puntos locales, sin clasificación`,copied:'Resultado copiado',shared:'Resultado compartido',shareFailed:'No se pudo compartir el resultado',switchDaily:'¿Cambiar de modo? El reloj de la Rabona diaria sigue corriendo mientras jugás Ilimitado.',switchUnlimited:'¿Cambiar de modo? El reloj de Ilimitado sigue corriendo mientras jugás la Rabona diaria.',switchRanked:'¿Cambiar de modo? El reloj del modo Ilimitado/clasificado sigue corriendo en el servidor mientras jugás la Rabona diaria.'}
+    en:{daily:'Daily Rabona',unlimited:'Unlimited',challenge:n=>`DAILY RABONA #${n}`,primary:'The same three careers for everyone today',playerProgress:n=>`Player ${n} / 3`,streak:n=>`Current streak ${n}`,reset:'Resets at 00:00 UTC',localRanked:'Browser/device-local · non-ranked points',temporary:'Progress is temporary because browser storage is unavailable',newDaily:'A new daily is ready',loadDaily:'Load it',share:'Share',keepPlaying:'Keep playing',won:'Player solved',lost:'Player missed',attempts:n=>`${n} ${n===1?'guess':'guesses'}`,hints:n=>`${n} ${n===1?'hint':'hints'}`,points:n=>`${n} local, non-ranked points`,copied:'Result copied',shared:'Result shared',shareFailed:'Could not share this result'},
+    es:{daily:'La Rabona del día',unlimited:'Ilimitado',challenge:n=>`RABONA DIARIA #${n}`,primary:'Las mismas tres carreras para todos hoy',playerProgress:n=>`Jugador ${n} / 3`,streak:n=>`Racha actual ${n}`,reset:'Se renueva a las 00:00 UTC',localRanked:'Local del navegador/dispositivo · puntos sin clasificación',temporary:'El progreso es temporal porque el almacenamiento del navegador no está disponible',newDaily:'Hay una nueva diaria',loadDaily:'Cargarla',share:'Compartir',keepPlaying:'Seguir jugando',won:'Jugador acertado',lost:'Jugador no acertado',attempts:n=>`${n} ${n===1?'intento':'intentos'}`,hints:n=>`${n} ${n===1?'pista':'pistas'}`,points:n=>`${n} puntos locales, sin clasificación`,copied:'Resultado copiado',shared:'Resultado compartido',shareFailed:'No se pudo compartir el resultado'}
   };
   let mode=new URLSearchParams(location.search).get('unlimited')==='1'?'unlimited':'daily';
   let persistence=null,displayedDate=null,rolloverTimer=null,rolloverReady=false,initialized=false,modeEpoch=0;
+  const DAILY_CLOCK_KEY='derabona.daily-clock.v1';
+  let dailyClockStart=null,dailyClockId=null,dailyClockWaitingForConsent=false;
   const requestedMode=()=>mode;
   const copyFor=lang=>TEXT[lang==='en'?'en':'es'];
   const scopeText=(persistent,lang)=>{const x=copyFor(lang);return persistent?x.localRanked:`${x.localRanked} · ${x.temporary}`;};
@@ -75571,7 +75574,16 @@ const DailyUI=(()=>{
   const isDaily=()=>mode==='daily';
   const currentModeEpoch=()=>modeEpoch;
   const attempt=()=>persistence?.read().attempts[displayedDate]||null;
-  const engagedDaily=()=>{const a=attempt(),r=a?.game.rounds[a.game.roundIndex];return r?.status==='playing'&&(r.startedAt!==null||r.guesses.length>0||r.hints>0);};
+  const currentDailyClockId=()=>{const a=attempt();return a?`${displayedDate}:${a.game.roundIndex}`:null;};
+  const saveDailyClock=()=>{try{sessionStorage.setItem(DAILY_CLOCK_KEY,JSON.stringify({id:dailyClockId,startedAt:dailyClockStart}));}catch{}};
+  const ensureDailyClock=()=>{
+    const id=currentDailyClockId();if(!id)return false;if(id===dailyClockId&&dailyClockStart!==null)return true;
+    dailyClockId=id;dailyClockStart=null;dailyClockWaitingForConsent=false;
+    try{const saved=JSON.parse(sessionStorage.getItem(DAILY_CLOCK_KEY)||'null');if(saved?.id===id&&Number.isFinite(saved.startedAt))dailyClockStart=saved.startedAt;}catch{}
+    if(dailyClockStart===null){dailyClockStart=Date.now();dailyClockWaitingForConsent=Analytics.shouldPauseGameClock();if(!dailyClockWaitingForConsent)saveDailyClock();}
+    return true;
+  };
+  const startDailyClockFromInteraction=()=>{if(!ensureDailyClock()||!dailyClockWaitingForConsent)return;dailyClockWaitingForConsent=false;dailyClockStart=Date.now();saveDailyClock();};
   const currentDate=()=>new Date().toISOString().slice(0,10);
   const checkRollover=()=>{if(!isDaily()||!displayedDate||currentDate()===displayedDate||rolloverReady)return;rolloverReady=true;const banner=document.getElementById('daily-rollover');if(banner)banner.hidden=false;};
   const stopRollover=()=>{if(rolloverTimer!==null){clearInterval(rolloverTimer);rolloverTimer=null;}};
@@ -75608,7 +75620,7 @@ const DailyUI=(()=>{
     document.getElementById('attempt-text').textContent=result==='won'?x.found:x.attempts(left);document.getElementById('lives').replaceChildren(...Array.from({length:3},(_,i)=>el('span',undefined,`life${i>=left?' used':''}`)));
     document.getElementById('progress').max=3;document.getElementById('progress').value=roundIndex+(result==='playing'?0:1);document.getElementById('progress-label').textContent=dailyText.playerProgress(roundIndex+1);document.getElementById('round-number').textContent=`#${a.challengeNumber} · ${roundIndex+1}/3`;
     const options=document.getElementById('options');if(options.children.length!==optionList.length||[...options.children].some((button,i)=>button.dataset.optionId!==optionList[i].id)){
-      options.replaceChildren();optionList.forEach((option,i)=>{const button=el('button',undefined,'option');button.type='button';button.dataset.optionId=option.id;button.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',undefined,'option-state'));button.onclick=()=>{if(!isDaily()||!persistence.guess(option.id,displayedDate))return;render(option.id===answerId);const latest=attempt();if(latest.completion)document.getElementById('question').focus({preventScroll:true});else if(latest.game.rounds[latest.game.roundIndex].status!=='playing')document.getElementById('next').focus({preventScroll:true});};options.append(button);});
+      options.replaceChildren();optionList.forEach((option,i)=>{const button=el('button',undefined,'option');button.type='button';button.dataset.optionId=option.id;button.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',undefined,'option-state'));button.onclick=()=>{startDailyClockFromInteraction();if(!isDaily()||!persistence.guess(option.id,displayedDate,dailyClockStart))return;render(option.id===answerId);const latest=attempt();if(latest.completion)document.getElementById('question').focus({preventScroll:true});else if(latest.game.rounds[latest.game.roundIndex].status!=='playing')document.getElementById('next').focus({preventScroll:true});};options.append(button);});
     }
     [...options.children].forEach((button,i)=>{const option=optionList[i],guessed=r.guesses.includes(option.id),correct=result!=='playing'&&option.id===answerId,wrong=guessed&&!correct;button.disabled=result!=='playing'||wrong;button.className='option'+(wrong?' wrong':correct?' correct':result!=='playing'?' muted':'')+(correct&&celebrate&&result==='won'?' goal':'');button.setAttribute('aria-label',`${option.label}${wrong?', '+x.incorrect:correct?', '+x.correct:''}`);button.querySelector('.option-state').textContent=wrong?'×':correct?'✓':'↗';});
     const values=[country(p),position(p),x.yearsRevealed];document.getElementById('hints').replaceChildren(...x.hints.map((label,i)=>el('li',i<r.hints?`${label}: ${values[i]}`:`${i+1}. ${label}`,i<r.hints?'revealed':'')));
@@ -75618,28 +75630,26 @@ const DailyUI=(()=>{
     const terminal=result!=='playing';document.getElementById('daily-result-actions').hidden=!a.game.finished;document.getElementById('daily-share-status').textContent='';document.getElementById('source-details').hidden=!terminal;if(terminal)renderSources(p);else document.getElementById('source-content').replaceChildren();
     renderStatus();return true;
   };
-  const unlimitedEngaged=()=>{if(typeof RankedUI!=='undefined'&&RankedUI.isAccountMode())return !!RankedUI.roundClock()?.playing;const r=CareerGame.roundAt(state);return CareerGame.outcome(state)==='playing'&&(r.guesses.length>0||r.hints>0);};
   const choose=next=>{
-    if(next===mode)return true;const x=copyFor(language),engaged=isDaily()?engagedDaily():unlimitedEngaged();
-    if(engaged&&!confirm(isDaily()?x.switchDaily:(typeof RankedUI!=='undefined'&&RankedUI.isAccountMode()?x.switchRanked:x.switchUnlimited)))return false;
+    if(next===mode)return true;
     mode=next;modeEpoch++;updateURL(language);rolloverReady=false;stopRollover();updateControls();
     if(isDaily()){persistence.today();displayedDate=currentDate();render(false,true);document.getElementById('question').focus({preventScroll:true});}
-    else{document.getElementById('daily-result-actions').hidden=true;document.getElementById('daily-share-status').textContent='';globalThis.render(false,true);document.getElementById('question').focus({preventScroll:true});if(Accounts.session)RankedUI.sync();}
+    else{if(typeof startGuestClockForMode==='function')startGuestClockForMode();document.getElementById('daily-result-actions').hidden=true;document.getElementById('daily-share-status').textContent='';globalThis.render(false,true);document.getElementById('question').focus({preventScroll:true});if(Accounts.session)RankedUI.sync();}
     return true;
   };
   const share=async()=>{
     const a=attempt();if(!a?.completion)return;const x=copyFor(language),text=shareText({language,challengeNumber:a.challengeNumber,...a.completion,currentStreak:persistence.read().stats.currentStreak}),status=document.getElementById('daily-share-status');
     try{if(typeof navigator.share==='function'){await navigator.share({title:language==='en'?'Derabona Daily':'Derabona diaria',text,url:'https://derabona.club/'});status.textContent=x.shared;}else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);status.textContent=x.copied;}else{const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();if(!document.execCommand('copy'))throw Error('copy');area.remove();status.textContent=x.copied;}}catch(error){if(error?.name!=='AbortError')status.textContent=x.shareFailed;}finally{document.getElementById('daily-share').focus({preventScroll:true});}
   };
-  const hint=()=>{if(!isDaily()||!persistence.hint(displayedDate))return false;render();if(document.getElementById('hint').disabled)document.getElementById('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});return true;};
+  const hint=()=>{startDailyClockFromInteraction();if(!isDaily()||!persistence.hint(displayedDate))return false;render();if(document.getElementById('hint').disabled)document.getElementById('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});return true;};
   const next=()=>{if(!isDaily()||!persistence.next(displayedDate))return false;render(false,true);document.getElementById('question').focus({preventScroll:true});return true;};
-  const clock=()=>{const a=isDaily()?attempt():null,r=a?.game.rounds[a.game.roundIndex];return r?.startedAt==null?null:{key:`daily:${displayedDate}:${a.game.roundIndex}`,elapsedMs:Date.now()-r.startedAt,playing:r.status==='playing',hints:r.hints,points:r.points};};
+  const clock=()=>{const a=isDaily()?attempt():null,r=a?.game.rounds[a.game.roundIndex];if(!r||!ensureDailyClock())return null;return {key:`daily:${displayedDate}:${a.game.roundIndex}`,elapsedMs:dailyClockWaitingForConsent?0:Date.now()-dailyClockStart,playing:r.status==='playing',hints:r.hints,points:r.points};};
   const init=()=>{
     if(initialized)return;initialized=true;updateURL(language);persistence=DailyChallenge.createPersistence(localStorage);const today=persistence.today();displayedDate=today?.date||currentDate();
     document.getElementById('daily-mode').onclick=()=>choose('daily');document.getElementById('unlimited-mode').onclick=()=>choose('unlimited');document.getElementById('daily-keep-playing').onclick=()=>choose('unlimited');document.getElementById('daily-share').onclick=share;
     document.getElementById('daily-load-new').onclick=()=>{displayedDate=currentDate();persistence.today();rolloverReady=false;render(false,true);document.getElementById('question').focus({preventScroll:true});};
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkRollover();});window.addEventListener('focus',checkRollover);window.addEventListener('storage',event=>{if(persistence.handleStorageEvent(event)&&isDaily())render();});
-    window.addEventListener('derabona:analytics-consent-resolved',()=>{const a=attempt(),r=a?.game.rounds[a.game.roundIndex];if(isDaily()&&r?.startedAt===null){persistence.start(displayedDate);render();}});
+    window.addEventListener('derabona:analytics-consent-resolved',()=>{if(isDaily())ensureDailyClock();if(dailyClockWaitingForConsent){dailyClockWaitingForConsent=false;dailyClockStart=Date.now();saveDailyClock();}if(!isDaily())return;const a=attempt(),r=a?.game.rounds[a.game.roundIndex];if(r?.startedAt===null)persistence.start(displayedDate);render();});
     updateControls();translate();if(isDaily())startRollover();
   };
   return Object.freeze({requestedMode,copyFor,sanitizeURL,updateURL,shareText,isDaily,modeEpoch:currentModeEpoch,init,translate,render,choose,hint,next,clock,checkRollover});
@@ -80183,9 +80193,15 @@ const loadRoundClock=()=>{
 };
 const saveRoundClock=startedAt=>{try{sessionStorage.setItem(CLOCK_KEY,JSON.stringify({playerId:CareerGame.playerAt(state)?.id,startedAt}));}catch{}};
 let roundClockStart=loadRoundClock();
-let roundClockWaitingForConsent=roundClockStart===null&&Analytics.shouldPauseGameClock();
-if(roundClockStart===null){roundClockStart=Date.now();if(!roundClockWaitingForConsent)saveRoundClock(roundClockStart);}
-const resetRoundClock=()=>{roundClockWaitingForConsent=Analytics.shouldPauseGameClock();roundClockStart=Date.now();if(!roundClockWaitingForConsent)saveRoundClock(roundClockStart);};
+let roundClockWaitingForMode=roundClockStart===null&&DailyUI.requestedMode()==='daily';
+let roundClockWaitingForConsent=roundClockStart===null&&!roundClockWaitingForMode&&Analytics.shouldPauseGameClock();
+if(roundClockStart===null){roundClockStart=Date.now();if(!roundClockWaitingForMode&&!roundClockWaitingForConsent)saveRoundClock(roundClockStart);}
+function startGuestClockForMode(){
+  if(!roundClockWaitingForMode)return;
+  roundClockWaitingForMode=false;roundClockStart=Date.now();roundClockWaitingForConsent=Analytics.shouldPauseGameClock();
+  if(!roundClockWaitingForConsent)saveRoundClock(roundClockStart);
+}
+const resetRoundClock=()=>{roundClockWaitingForMode=DailyUI.requestedMode()==='daily';roundClockWaitingForConsent=!roundClockWaitingForMode&&Analytics.shouldPauseGameClock();roundClockStart=Date.now();if(roundClockWaitingForMode)try{sessionStorage.removeItem(CLOCK_KEY);}catch{}else if(!roundClockWaitingForConsent)saveRoundClock(roundClockStart);};
 window.addEventListener('derabona:analytics-consent-resolved',()=>{if(!roundClockWaitingForConsent)return;roundClockWaitingForConsent=false;roundClockStart=Date.now();saveRoundClock(roundClockStart);});
 // The consent banner normally receives the first interaction. If gameplay is
 // nevertheless activated behind it (keyboard automation, assistive tech or a
@@ -80200,7 +80216,7 @@ const startGuestClockFromInteraction=()=>{if(!roundClockWaitingForConsent)return
 const guestClock=()=>{
   if(state.finished)return null;
   const r=CareerGame.roundAt(state);
-  return {key:`local:${r.playerId}`,elapsedMs:roundClockWaitingForConsent?0:Date.now()-roundClockStart,playing:CareerGame.outcome(state)==='playing',hints:r.hints,points:r.points};
+  return {key:`local:${r.playerId}`,elapsedMs:roundClockWaitingForMode||roundClockWaitingForConsent?0:Date.now()-roundClockStart,playing:CareerGame.outcome(state)==='playing',hints:r.hints,points:r.points};
 };
 const GUEST_RANKED_REMINDER_KEY='derabona.guest-ranked-reminder.v1';
 let guestRankedReminderSeen=false,guestRankedReminderOpen=false;
