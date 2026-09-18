@@ -8,6 +8,8 @@
 
 **Why no backend in v1:** The retention hypothesis is shared cadence plus sharing. Cloud sync, anti-cheat, archive, and daily leaderboards are separate products. The client and answer already ship in the portable source, so v1 must not imply server enforcement.
 
+> **Implemented v2 amendment:** Daily is now the bare-URL default; Unlimited is explicit as `?unlimited=1`, and legacy `?daily=1` canonicalizes to the bare URL. A UTC challenge groups three consecutive unchanged frozen v1 descriptors and plays them sequentially. Persistence keeps `derabona.daily.v1` but requires schemaVersion/scheduleVersion 2; the briefly shipped one-player v1 document is intentionally reset rather than speculatively migrated. Completion/history/streak and spoiler-free aggregate sharing occur once after player three.
+
 ---
 
 ## Core version (now)
