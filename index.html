@@ -80177,9 +80177,17 @@ CareerGame.refreshUnstartedRivals(state);
 // from a link. Instead each tab claims a random identity in `window.name`
 // (not cloned into a new tab, unlike sessionStorage) the first time it
 // runs; a stored clock is only trusted when that identity still matches.
+// None of these signals are fully reliable in the real world: browsers can
+// report a session/crash restore as an ordinary 'navigate' with no history
+// marker and no window.opener at all (observed live: a multi-day-old clock
+// survived opening a brand-new tab). A hard six-hour age ceiling below,
+// independent of any navigation-type heuristic, guards against exactly
+// that: a round can realistically take a few minutes, so anything
+// implausibly old is never trusted regardless of what the other signals
+// concluded.
 const CLOCK_KEY='touchline.clock.v1';
 const CLOCK_TAB_KEY='touchline.clock-tab.v1';
-const restoredRoundClockStart=(saved,playerId,navigationType,restoredHistoryEntry,newBrowsingContext)=>navigationType!=='back_forward'&&!(navigationType==='navigate'&&(restoredHistoryEntry||newBrowsingContext))&&saved&&playerId&&saved.playerId===playerId&&Number.isFinite(saved.startedAt)?saved.startedAt:null;
+const restoredRoundClockStart=(saved,playerId,navigationType,restoredHistoryEntry,newBrowsingContext,now=Date.now())=>navigationType!=='back_forward'&&!(navigationType==='navigate'&&(restoredHistoryEntry||newBrowsingContext))&&saved&&playerId&&saved.playerId===playerId&&Number.isFinite(saved.startedAt)&&now-saved.startedAt<=6*60*60*1000?saved.startedAt:null;
 const clockHistoryState=history.state&&typeof history.state==='object'?history.state:{};
 let clockTabId;
 try{
