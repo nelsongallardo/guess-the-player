@@ -88,14 +88,49 @@ test('visible bilingual copy covers mode, completion status, rollover, and resul
     const copy=ui.copyFor(language);
     for(const key of ['daily','unlimited','challenge','streak','reset','done','pending','temporary','newDaily','loadDaily','share','keepPlaying','won','lost'])assert.ok(copy[key],`${language}.${key}`);
   }
-  assert.equal(ui.copyFor('en').daily,'Daily Rabona');
-  assert.equal(ui.copyFor('es').daily,'La Rabona del día');
-  assert.equal(ui.copyFor('en').unlimited,'Play');
-  assert.equal(ui.copyFor('es').unlimited,'Jugar');
+  assert.equal(ui.copyFor('en').daily,'Daily challenge');
+  assert.equal(ui.copyFor('es').daily,'Desafío diario');
+  assert.equal(ui.copyFor('en').unlimited,'Unlimited play');
+  assert.equal(ui.copyFor('es').unlimited,'Juego sin límite');
   assert.match(ui.copyFor('en').primary,/three (?:careers|players)/i);
   assert.match(ui.copyFor('es').primary,/tres (?:carreras|jugadores)/i);
   assert.doesNotMatch(ui.copyFor('en').primary,/local|ranked/i);
   assert.doesNotMatch(ui.copyFor('es').primary,/clasificaci[oó]n|navegador/i);
+});
+
+test('each mode button carries a self-contained noun label plus concrete facts',()=>{
+  const {ui}=loadController();
+  for(const language of ['en','es']){
+    const copy=ui.copyFor(language);
+    for(const key of ['dailyFacts','unlimitedFacts']){
+      assert.ok(Array.isArray(copy[key])&&copy[key].length===2,`${language}.${key} is a two-line fact list`);
+      for(const fact of copy[key])assert.ok(fact&&!/·/.test(fact),`${language}.${key} lines carry no separator to dangle at a wrap`);
+    }
+  }
+  // The daily side states the fixed scope; the unlimited side states the open one.
+  assert.match(ui.copyFor('en').dailyFacts.join(' '),/3 players.*00:00 UTC/i);
+  assert.match(ui.copyFor('es').dailyFacts.join(' '),/3 jugadores.*00:00 UTC/i);
+  assert.match(ui.copyFor('en').unlimitedFacts.join(' '),/competition.*as many as you want/i);
+  assert.match(ui.copyFor('es').unlimitedFacts.join(' '),/competición.*los que quieras/i);
+  // Neither label may be a bare verb or a bare adjective: both must read cold.
+  for(const language of ['en','es']){
+    const copy=ui.copyFor(language);
+    for(const key of ['daily','unlimited'])assert.match(copy[key],/\S+\s+\S+/,`${language}.${key} is a multi-word noun phrase`);
+  }
+});
+
+test('"challenge" names the daily mode only, never a ranked round loader',()=>{
+  const source=html;
+  assert.doesNotMatch(source,/Preparando el desafío/,'the ranked loader must not compete with the daily challenge for the word desafío');
+  assert.doesNotMatch(source,/Preparing your challenge/,'the ranked loader must not compete with the daily challenge for the word challenge');
+  assert.match(source,/Preparando tu partida…/);
+  assert.match(source,/Preparing your game…/);
+});
+
+test('mode group and competition badge expose translated accessible names',()=>{
+  assert.doesNotMatch(html,/aria-label="Modo de juego \/ Game mode"/,'the mode group must not hardcode both languages at once');
+  assert.match(html,/id="mode-segmented"/,'the mode group is addressable so applyLanguage can translate its label');
+  assert.match(html,/id="competition-badge-label"/);
 });
 
 test('persistent Daily storage stays silent; denied storage surfaces a bilingual temporary warning',()=>{
@@ -170,6 +205,10 @@ test('markup exposes accessible segmented controls, result actions, live share s
   for(const id of ['daily-mode','unlimited-mode','daily-card','daily-share','daily-keep-playing','daily-share-status','daily-rollover','daily-load-new'])assert.match(html,new RegExp(`id="${id}"`));
   assert.match(html,/id="daily-mode"[^>]+aria-pressed=/);
   assert.match(html,/id="unlimited-mode"[^>]+aria-pressed=/);
+  // The completion badge sits on the title line, not beside the fact lines,
+  // so it annotates the mode rather than the countdown.
+  assert.match(html,/<span class="mode-head"><span id="daily-mode-label"[^>]*>[^<]*<\/span><span id="daily-mode-status"/);
+  assert.match(html,/id="daily-mode-status"[^>]*aria-hidden="true"/,'the badge is decorative; the button aria-label carries the real state');
   assert.match(html,/id="daily-share-status"[^>]+aria-live="polite"/);
   assert.match(html,/\.mode-segmented button\{[^}]*min-height:44px/);
   assert.match(html,/\.page-nav a\{[^}]*min-height:44px/,'the visible leaderboard control keeps a 44px target');
