@@ -279,7 +279,7 @@ test('roster exporter is current and canonical membership/matching scores equal 
 test('anon/authenticated cannot read or mutate private tables or spoof service RPC identity',()=>{
   const a=user(),b=user();start(a);
   for(const role of ['anon','authenticated']) {
-    for(const table of ['accounts','rounds','results','receipts','rate_limits','players','rivals']) {
+    for(const table of ['accounts','rounds','results','receipts','rate_limits','players','rivals','daily_schedule','daily_rounds','daily_results','daily_streaks']) {
       assert.throws(()=>sql(`set role ${role}; select * from ranked_private.${table}`),/permission denied/);
       assert.throws(()=>sql(`set role ${role}; delete from ranked_private.${table}`),/permission denied/);
     }
@@ -496,7 +496,167 @@ test('per-account rate budget persists rejected mutations and resets only with s
 test('auth user hard deletion cascades account, round, result, receipt, rate and leaderboard rows',()=>{
   const uid=user();rpc(uid,mutation('enroll',{nickname:'Delete This Account'}));
   const r=start(uid).round;answer(uid,r,correct(r));assert(rpc(uid,{action:'leaderboard'}).own);
+  dailyProgress(uid);
   sql(`delete from auth.users where id=${quote(uid)}`);
-  for(const table of ['accounts','rounds','results','receipts','rate_limits']) assert.equal(Number(sql(`select count(*) from ranked_private.${table} where user_id=${quote(uid)}`)),0);
+  for(const table of ['accounts','rounds','results','receipts','rate_limits','daily_rounds','daily_results','daily_streaks']) assert.equal(Number(sql(`select count(*) from ranked_private.${table} where user_id=${quote(uid)}`)),0);
   assert(!rpc(null,{action:'leaderboard',limit:100}).entries.some(e=>e.nickname==='Delete This Account'));
+});
+
+// --- Daily Rabona (server-authoritative for signed-in accounts) --- see
+// docs/adr/0021-daily-rabona-server-authoritative-for-accounts.md.
+const dailyProgress = uid => rpc(uid,{action:'dailyProgress'});
+const dailyHintRPC = (uid,roundIndex,expectedVersion) => rpc(uid,mutation('dailyHint',{roundIndex,expectedVersion}));
+const dailyAnswerRPC = (uid,roundIndex,expectedVersion,optionId) => rpc(uid,mutation('dailyAnswer',{roundIndex,expectedVersion,optionId}));
+const dailyRoundRow = (uid,roundIndex) => dailyProgress(uid).daily.rounds.find(r=>r.roundIndex===roundIndex);
+const dailyCorrectOption = (uid,roundIndex) => sql(`select correct_option from ranked_private.daily_rounds where user_id=${quote(uid)} and date=current_date and round_index=${roundIndex}`);
+const dailyWrongOptions = (uid,roundIndex) => { const round=dailyRoundRow(uid,roundIndex),correctId=dailyCorrectOption(uid,roundIndex); return round.options.filter(o=>o.id!==correctId).map(o=>o.id); };
+const dailySlotPlayer = roundIndex => sql(`select ds.player_id from ranked_private.daily_schedule ds where ds.slot_index=ranked_private.daily_slot_index(current_date,${roundIndex})`);
+
+test('daily_schedule seed is complete and every seeded reference resolves',()=>{
+  assert.equal(Number(sql('select count(*) from ranked_private.daily_schedule')),220);
+  assert.equal(Number(sql('select count(*) from ranked_private.daily_schedule where slot_index<0 or slot_index>219')),0);
+  assert.equal(Number(sql('select count(distinct slot_index) from ranked_private.daily_schedule')),220);
+  assert.equal(Number(sql(`select count(*) from ranked_private.daily_schedule ds where not exists(select 1 from ranked_private.players p where p.id=ds.player_id)`)),0);
+  assert.equal(Number(sql(`select count(*) from ranked_private.daily_schedule ds where exists(select 1 from unnest(ds.option_candidate_ids) oc where not exists(select 1 from ranked_private.candidates c where c.id=oc))`)),0);
+  assert.equal(Number(sql(`select count(*) from ranked_private.daily_schedule ds where not(ds.player_id=any(ds.option_candidate_ids))`)),0);
+  assert.equal(Number(sql('select count(*) from ranked_private.daily_schedule where cardinality(option_candidate_ids)<>10')),0);
+});
+
+test('dailyProgress lazily creates exactly three rows for today and is idempotent',()=>{
+  const uid=user();
+  assert.equal(Number(sql(`select count(*) from ranked_private.daily_rounds where user_id=${quote(uid)}`)),0);
+  const first=dailyProgress(uid);
+  assert.equal(first.daily.rounds.length,3);
+  assert.deepEqual(first.daily.rounds.map(r=>r.roundIndex),[0,1,2]);
+  assert.equal(first.daily.finished,false);
+  assert.equal(first.streak.current,0);assert.equal(first.streak.best,0);
+  for(const r of first.daily.rounds){assert.equal(r.status,'playing');assert.equal(r.version,0);assert.equal(r.hints,0);assert.equal(r.options.length,10);assert.equal(new Set(r.options.map(o=>o.id)).size,10);assert.equal(r.clueCountry,null);assert.equal(r.cluePosition,null);}
+  const second=dailyProgress(uid);
+  assert.deepEqual(second,first);
+  assert.equal(Number(sql(`select count(*) from ranked_private.daily_rounds where user_id=${quote(uid)}`)),3);
+});
+
+test('daily rounds never reveal the correct option field',()=>{
+  // playerId is legitimately part of the response (the client needs it to
+  // look up the frozen local career/hints payload for that slot) - only
+  // the server-only correct_option column must never leak.
+  const uid=user();const raw=JSON.stringify(dailyProgress(uid));
+  assert(!raw.includes('correct_option'));
+});
+
+test('daily rounds enforce sequential order, hint cap, invalid/duplicate options and version conflicts',()=>{
+  const uid=user();dailyProgress(uid);
+  assertError(()=>dailyAnswerRPC(uid,1,0,randomUUID()),'ROUND_LOCKED');
+  assertError(()=>dailyHintRPC(uid,2,0),'ROUND_LOCKED');
+  let r0=dailyRoundRow(uid,0);
+  for(let i=0;i<3;i++) r0=dailyHintRPC(uid,0,r0.version).daily.rounds.find(r=>r.roundIndex===0);
+  assert.equal(r0.hints,3);
+  assertError(()=>dailyHintRPC(uid,0,r0.version),'HINT_LIMIT');
+  assertError(()=>dailyAnswerRPC(uid,0,r0.version,randomUUID()),'INVALID_OPTION');
+  assertError(()=>dailyAnswerRPC(uid,0,999,r0.options[0].id),'VERSION_CONFLICT');
+  const afterWrong=dailyAnswerRPC(uid,0,r0.version,dailyWrongOptions(uid,0)[0]).daily.rounds.find(r=>r.roundIndex===0);
+  assertError(()=>dailyAnswerRPC(uid,0,afterWrong.version,afterWrong.guesses[0]),'ALREADY_GUESSED');
+});
+
+test('daily hint clues are gated exactly like ranked and years reveal at the third hint client-side',()=>{
+  const uid=user();dailyProgress(uid);
+  let r=dailyHintRPC(uid,0,0).daily.rounds.find(x=>x.roundIndex===0);
+  assert(r.clueCountry);assert.equal(r.cluePosition,null);
+  r=dailyHintRPC(uid,0,r.version).daily.rounds.find(x=>x.roundIndex===0);
+  assert(r.clueCountry);assert(r.cluePosition);
+});
+
+test('a correct daily answer scores via the shared points curve and a wrong-to-exhaustion round scores zero',()=>{
+  const uid=user();dailyProgress(uid);
+  const r=dailyRoundRow(uid,0);
+  const correctId=dailyCorrectOption(uid,0);
+  sql(`update ranked_private.daily_rounds set started_at=clock_timestamp()-interval '1999 milliseconds' where user_id=${quote(uid)} and date=current_date and round_index=0`);
+  const won=dailyAnswerRPC(uid,0,r.version,correctId).daily.rounds.find(x=>x.roundIndex===0);
+  assert.equal(won.status,'won');assert.equal(won.points,100);
+  assert.equal(Number(sql(`select points from ranked_private.daily_results where user_id=${quote(uid)} and date=current_date and round_index=0`)),100);
+  assert.equal(sql(`select correct from ranked_private.daily_results where user_id=${quote(uid)} and date=current_date and round_index=0`),'t');
+  let r1=dailyRoundRow(uid,1);
+  for(const w of dailyWrongOptions(uid,1).slice(0,3)) r1=dailyAnswerRPC(uid,1,r1.version,w).daily.rounds.find(x=>x.roundIndex===1);
+  assert.equal(r1.status,'lost');assert.equal(r1.points,0);
+  assert.equal(Number(sql(`select points from ranked_private.daily_results where user_id=${quote(uid)} and date=current_date and round_index=1`)),0);
+});
+
+test('the same player can score once via career and independently via Daily, with no PK/FK conflict',()=>{
+  const uid=user();
+  const dailyPlayerId=dailySlotPlayer(0);
+  // Manufacture a completed career (ranked) result for exactly the player
+  // today's daily round 0 will deal, simulating an account that already
+  // resolved that player through Unlimited before playing the daily -
+  // requirement 3 says this must never block or conflict with Daily.
+  rpc(uid,mutation('enroll',{nickname:'Daily Overlap'}));
+  const roundId=randomUUID(),optionId=randomUUID();
+  // ruleset='v2' requires exactly 10 options (rounds_options_check).
+  const tenOptions=JSON.stringify([{id:optionId,label:'x'},...Array.from({length:9},()=>({id:randomUUID(),label:'y'}))]);
+  sql(`insert into ranked_private.rounds(id,user_id,player_id,ruleset,competition,options,correct_option,guesses,status,points,finished_at) values(${quote(roundId)},${quote(uid)},${quote(dailyPlayerId)},'v2','all',${quote(tenOptions)}::jsonb,${quote(optionId)}::uuid,array[${quote(optionId)}]::uuid[],'won',80,clock_timestamp())`);
+  sql(`insert into ranked_private.results(user_id,player_id,ruleset,round_id,points,correct,finished_at) values(${quote(uid)},${quote(dailyPlayerId)},'v2',${quote(roundId)},80,true,clock_timestamp())`);
+  const r=dailyRoundRow(uid,0);
+  assert.equal(r.playerId,dailyPlayerId);
+  const correctId=dailyCorrectOption(uid,0);
+  const result=dailyAnswerRPC(uid,0,r.version,correctId);
+  assert.equal(result.daily.rounds.find(x=>x.roundIndex===0).status,'won');
+  assert.equal(Number(sql(`select count(*) from ranked_private.results where user_id=${quote(uid)} and player_id=${quote(dailyPlayerId)}`)),1);
+  assert.equal(Number(sql(`select count(*) from ranked_private.daily_results where user_id=${quote(uid)} and player_id=${quote(dailyPlayerId)}`)),1);
+  const board=rpc(uid,{action:'leaderboard',competition:'all',limit:100});
+  assert.equal(board.own.answered,2);
+  assert.equal(board.own.points,80+result.daily.rounds.find(x=>x.roundIndex===0).points);
+});
+
+test('completing all three daily rounds starts a streak; a gap resets it; best streak never decreases',()=>{
+  const uid=user();
+  // Every "day" in this test reuses the same real current_date (tests can't
+  // wait for a real day to pass), so each simulated day after the first
+  // must clear that date's rows first - otherwise dailyProgress's
+  // "on conflict do nothing" would find yesterday's already-terminal rows
+  // still sitting under today's date and dailyAnswer would see ROUND_FINISHED
+  // instead of a fresh round. Only the streak table (dated, not keyed to
+  // today) is backdated to simulate which calendar day was last completed.
+  const clearToday=()=>{sql(`delete from ranked_private.daily_rounds where user_id=${quote(uid)} and date=current_date`);sql(`delete from ranked_private.daily_results where user_id=${quote(uid)} and date=current_date`);};
+  const finishAllThree=()=>{
+    dailyProgress(uid);
+    for(let i=0;i<3;i++){let r=dailyRoundRow(uid,i);r=dailyAnswerRPC(uid,i,r.version,dailyCorrectOption(uid,i)).daily.rounds.find(x=>x.roundIndex===i);assert.equal(r.status,'won');}
+    return dailyProgress(uid);
+  };
+  const first=finishAllThree();
+  assert.equal(first.daily.finished,true);
+  assert.equal(first.streak.current,1);assert.equal(first.streak.best,1);
+  assert.equal(sql(`select last_completed_date::text from ranked_private.daily_streaks where user_id=${quote(uid)}`),sql('select current_date::text'));
+  // Simulate "yesterday" without waiting a real day, exactly like the
+  // existing guest-side UTC rollover tests do for the client document.
+  sql(`update ranked_private.daily_streaks set last_completed_date=current_date-1 where user_id=${quote(uid)}`);
+  clearToday();
+  const consecutive=finishAllThree();
+  assert.equal(consecutive.streak.current,2);assert.equal(consecutive.streak.best,2);
+  sql(`update ranked_private.daily_streaks set last_completed_date=current_date-5 where user_id=${quote(uid)}`);
+  clearToday();
+  const afterGap=finishAllThree();
+  assert.equal(afterGap.streak.current,1);assert.equal(afterGap.streak.best,2,'best streak is never lowered by a later gap');
+});
+
+test('daily streak leaderboard ranks by streak, includes lapsed personal bests, and is publicly readable',()=>{
+  const a=user(),b=user();
+  const finishAllThree=uid=>{dailyProgress(uid);for(let i=0;i<3;i++){let r=dailyRoundRow(uid,i);dailyAnswerRPC(uid,i,r.version,dailyCorrectOption(uid,i));}};
+  finishAllThree(a);finishAllThree(b);
+  const board=rpc(null,{action:'dailyStreakLeaderboard',limit:100});
+  noIdentity(board);
+  assert.equal(board.entries.filter(e=>e.currentStreak===1).length>=2,true);
+  assert.equal(rpc(a,{action:'dailyStreakLeaderboard',limit:100}).own.currentStreak,1);
+  // A lapsed streak (current 0, a real best) still appears - see ADR 0021.
+  sql(`update ranked_private.daily_streaks set current_streak=0 where user_id=${quote(a)}`);
+  const afterLapse=rpc(null,{action:'dailyStreakLeaderboard',limit:100});
+  assert(afterLapse.entries.some(e=>e.currentStreak===0&&e.bestStreak===1));
+});
+
+test('daily idempotency replays the cached response for a repeated key after completion',()=>{
+  const uid=user();dailyProgress(uid);
+  const r=dailyRoundRow(uid,0),key=randomUUID();
+  const body={action:'dailyAnswer',roundIndex:0,expectedVersion:r.version,optionId:dailyCorrectOption(uid,0),idempotencyKey:key};
+  const first=rpc(uid,body);
+  const replay=rpc(uid,body);
+  assert.deepEqual(replay,first);
+  assertError(()=>rpc(uid,{...body,optionId:randomUUID()}),'IDEMPOTENCY_CONFLICT');
 });

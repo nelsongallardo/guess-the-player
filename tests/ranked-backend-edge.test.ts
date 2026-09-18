@@ -35,6 +35,13 @@ Deno.test('public leaderboard only is anonymous; private identity/score/time inj
     const f=fixture();equal((await f.run(request({action:'progress',[field]:uid}))).status,400);equal(f.calls,[]);
   }
 });
+Deno.test('daily streak leaderboard is also anonymous-readable; every other daily action requires identity',async()=>{
+  const f=fixture();equal((await f.run(request({action:'dailyStreakLeaderboard'},null))).status,200);
+  equal(f.calls,[['rpc',null,{action:'dailyStreakLeaderboard'}]]);
+  for(const body of [{action:'dailyProgress'},{action:'dailyHint',idempotencyKey:key,roundIndex:0,expectedVersion:0},{action:'dailyAnswer',idempotencyKey:key,roundIndex:0,expectedVersion:0,optionId:key}]) {
+    const f=fixture();equal((await f.run(request(body,null))).status,401);equal(f.calls,[]);
+  }
+});
 Deno.test('origin/preflight/method limits and no-store responses',async()=>{
   const f=fixture();equal((await f.run(request({action:'progress'},'Bearer valid','https://evil.test'))).status,403);
   equal((await f.run(request({action:'progress'},'Bearer valid','https://derabona.club.evil.test'))).status,403);
@@ -55,6 +62,11 @@ Deno.test('malformed JSON, media types, arrays and streamed oversized bodies are
 Deno.test('strict request schemas, literal identifiers, pagination and nicknames',()=>{
   equal(validate({action:'start',idempotencyKey:key}),true);
   equal(validate({action:'answer',idempotencyKey:key,roundId:uid,optionId:key,expectedVersion:0}),true);
+  equal(validate({action:'dailyProgress'}),true);
+  equal(validate({action:'dailyHint',idempotencyKey:key,roundIndex:0,expectedVersion:0}),true);
+  equal(validate({action:'dailyAnswer',idempotencyKey:key,roundIndex:2,expectedVersion:3,optionId:key}),true);
+  equal(validate({action:'dailyStreakLeaderboard'}),true);
+  equal(validate({action:'dailyStreakLeaderboard',limit:50,offset:0}),true);
   for(const body of [
     {action:'reset'},{action:'start',idempotencyKey:key.replaceAll('-','')},
     {action:'start',idempotencyKey:key,competition:'unknown'},
@@ -64,10 +76,18 @@ Deno.test('strict request schemas, literal identifiers, pagination and nicknames
     {action:'leaderboard',limit:101},{action:'leaderboard',offset:-1},{action:'leaderboard',limit:1.5},
     {action:'enroll',idempotencyKey:key,nickname:'<script>'},
     {action:'enroll',idempotencyKey:key,nickname:' abc'},
+    {action:'dailyProgress',idempotencyKey:key},
+    {action:'dailyHint',idempotencyKey:key,roundIndex:3,expectedVersion:0},
+    {action:'dailyHint',idempotencyKey:key,roundIndex:-1,expectedVersion:0},
+    {action:'dailyHint',idempotencyKey:key,roundIndex:0,expectedVersion:0,roundId:uid},
+    {action:'dailyHint',idempotencyKey:key.replaceAll('-',''),roundIndex:0,expectedVersion:0},
+    {action:'dailyAnswer',idempotencyKey:key,roundIndex:0,expectedVersion:0,optionId:'fixed'},
+    {action:'dailyAnswer',idempotencyKey:key,roundIndex:0,optionId:key},
+    {action:'dailyStreakLeaderboard',limit:101},{action:'dailyStreakLeaderboard',offset:-1},
   ]) equal(validate(body),false);
 });
 Deno.test('RPC errors have bounded public codes, 429 retry headers and no internal details',async()=>{
-  for(const [code,status] of [['VERSION_CONFLICT',409],['RATE_LIMITED',429],['ROUND_NOT_FOUND',404],['secret db detail',500]] as const) {
+  for(const [code,status] of [['VERSION_CONFLICT',409],['RATE_LIMITED',429],['ROUND_NOT_FOUND',404],['ROUND_LOCKED',409],['secret db detail',500]] as const) {
     for(const rpc of [async()=>({data:null,error:{message:code}}),async()=>({data:{error:{code}},error:null})]) {
       const res=await fixture({rpc}).run(request({action:'progress'}));equal(res.status,status);
       const body=await res.json();equal(body.error.code,status===500?'INTERNAL_ERROR':code);

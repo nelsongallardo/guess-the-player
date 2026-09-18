@@ -50,6 +50,7 @@ function loadModeSwitch({signedIn=true}={}){
     URL,URLSearchParams,location,history,navigator:{},localStorage:{},sessionStorage:{getItem(){return null;},setItem(){}},setInterval:()=>1,clearInterval(){},Date,JSON,confirm(){throw new Error('mode switching must not confirm');},language:'en',
     Accounts:{session:signedIn?{user:{id:'A'}}:null},
     RankedUI:{isAccountMode:()=>signedIn,roundClock:()=>null,sync:async()=>{actions.push('progress','start');}},
+    DailyRankedUI:{sync(){},finished:()=>false},
     DailyChallenge:{createPersistence:()=>persistence},CareerGame:{roundAt:()=>({guesses:[],hints:0}),outcome:()=> 'playing'},state:{},
     document:{getElementById:node,addEventListener(){},documentElement:{classList:{remove(){}}}},window:{addEventListener(){}},
     render(){unlimitedRenders++;}

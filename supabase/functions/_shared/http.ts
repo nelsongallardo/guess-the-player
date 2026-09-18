@@ -11,11 +11,16 @@ const schemas: Record<string,string[]> = {
   hint: ['action','roundId','expectedVersion','idempotencyKey'],
   answer: ['action','roundId','expectedVersion','optionId','idempotencyKey'],
   enroll: ['action','nickname','idempotencyKey'], leaderboard: ['action','competition','limit','offset'],
+  dailyProgress: ['action'],
+  dailyHint: ['action','roundIndex','expectedVersion','idempotencyKey'],
+  dailyAnswer: ['action','roundIndex','expectedVersion','optionId','idempotencyKey'],
+  dailyStreakLeaderboard: ['action','limit','offset'],
 };
 export const statuses: Record<string,number> = {
   UNAUTHORIZED:401, INVALID_REQUEST:400, INVALID_COMPETITION:400, INVALID_NICKNAME:400,
   INVALID_OPTION:400, ROUND_NOT_FOUND:404, VERSION_CONFLICT:409, ROUND_FINISHED:409,
   IDEMPOTENCY_CONFLICT:409, HINT_LIMIT:409, ALREADY_GUESSED:409, NICKNAME_TAKEN:409, RATE_LIMITED:429,
+  ROUND_LOCKED:409,
 };
 export function allowedOrigin(origin: string): boolean {
   if (origin === 'https://derabona.club') return true;
@@ -30,9 +35,10 @@ export function validate(body: Record<string,unknown>): boolean {
   if (typeof action !== 'string' || !Object.hasOwn(schemas,action)) return false;
   if (Object.keys(body).some(k=>!schemas[action].includes(k))) return false;
   if ('competition' in body && (typeof body.competition !== 'string' || !competitions.has(body.competition))) return false;
-  if (['start','hint','answer','enroll'].includes(action) && !validUUID(body.idempotencyKey)) return false;
+  if (['start','hint','answer','enroll','dailyHint','dailyAnswer'].includes(action) && !validUUID(body.idempotencyKey)) return false;
   if (['hint','answer'].includes(action) && (!validUUID(body.roundId) || !Number.isInteger(body.expectedVersion) || Number(body.expectedVersion)<0 || Number(body.expectedVersion)>999999999)) return false;
-  if (action==='answer' && !validUUID(body.optionId)) return false;
+  if (['dailyHint','dailyAnswer'].includes(action) && (!Number.isInteger(body.roundIndex) || Number(body.roundIndex)<0 || Number(body.roundIndex)>2 || !Number.isInteger(body.expectedVersion) || Number(body.expectedVersion)<0 || Number(body.expectedVersion)>999999999)) return false;
+  if ((action==='answer' || action==='dailyAnswer') && !validUUID(body.optionId)) return false;
   if (action==='enroll' && (typeof body.nickname !== 'string' || !/^[\p{L}\p{N} _.-]{3,24}$/u.test(body.nickname) || body.nickname.trim()!==body.nickname)) return false;
   if ('limit' in body && (!Number.isInteger(body.limit) || Number(body.limit)<1 || Number(body.limit)>100)) return false;
   if ('offset' in body && (!Number.isInteger(body.offset) || Number(body.offset)<0 || Number(body.offset)>10000)) return false;
@@ -86,7 +92,7 @@ export function handler(deps: Dependencies, mode: 'ranked-game'|'account-delete'
       try { user=await deps.getUser(match[1]); } catch { return error('UNAUTHORIZED'); }
       if (!user || !validUUID(user.id) || user.is_anonymous) return error('UNAUTHORIZED');
     }
-    if (!user && (mode==='account-delete' || body.action!=='leaderboard')) return error('UNAUTHORIZED');
+    if (!user && (mode==='account-delete' || !['leaderboard','dailyStreakLeaderboard'].includes(body.action as string))) return error('UNAUTHORIZED');
     try {
       if (mode==='account-delete') {
         if (!await deps.deleteUser(user!.id)) return error('INTERNAL_ERROR');
