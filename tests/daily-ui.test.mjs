@@ -21,9 +21,27 @@ function loadController(url='https://derabona.club/',{exposeScope=false}={}){
   return {ui:context.ui,location,source};
 }
 
+function loadControllerWithCompletion(todayResult,url='https://derabona.club/'){
+  const location=new URL(url),history={replaceState(_a,_b,value){const next=new URL(value,location.href);location.href=next.href;}};
+  const context=vm.createContext({URL,URLSearchParams,location,history,navigator:{},document:{},window:{},localStorage:{},setInterval,clearInterval,Date,JSON,confirm:()=>true,
+    DailyChallenge:{createPersistence:()=>({today:()=>todayResult})}});
+  vm.runInContext(block('daily-ui')+'\nglobalThis.ui=DailyUI;',context);
+  return {ui:context.ui,location};
+}
+
+test('an already-completed daily defaults to Unlimited on load; an unfinished one stays on Daily',()=>{
+  const done=loadControllerWithCompletion({date:'2026-09-17',completion:{result:'complete'}});
+  assert.equal(done.ui.isDaily(),false);
+  assert.equal(done.ui.requestedMode(),'unlimited');
+  const fresh=loadControllerWithCompletion({date:'2026-09-17',completion:null});
+  assert.equal(fresh.ui.isDaily(),true);
+  const none=loadControllerWithCompletion(null);
+  assert.equal(none.ui.isDaily(),true);
+});
+
 function loadModeSwitch({signedIn=true}={}){
   const actions=[],nodes=new Map();
-  const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:false,textContent:'',dataset:{},setAttribute(){},focus(){},classList:{remove(){}}});return nodes.get(id);};
+  const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:false,textContent:'',dataset:{},setAttribute(){},focus(){},classList:{remove(){},toggle(){}}});return nodes.get(id);};
   const attempt={game:{roundIndex:0,rounds:[{status:'playing',startedAt:1,guesses:[],hints:0}]}};
   const persistence={persistent:true,today:()=>({date:'2026-09-17'}),read:()=>({attempts:{'2026-09-17':attempt},stats:{currentStreak:0}})};
   const location=new URL('https://derabona.club/'),history={replaceState(_a,_b,value){location.href=new URL(value,location.href).href;}};
@@ -64,27 +82,28 @@ test('initial entries canonicalize legacy Daily and retain explicit Unlimited wi
   assert.match(block('daily-ui'),/const init=\(\)=>\{\s*if\(initialized\)return;initialized=true;updateURL\(language\);/,'initial rendering sanitizes the visible URL');
 });
 
-test('visible bilingual copy covers mode, local status, rollover, and results',()=>{
+test('visible bilingual copy covers mode, completion status, rollover, and results',()=>{
   const {ui}=loadController();
   for(const language of ['en','es']){
     const copy=ui.copyFor(language);
-    for(const key of ['daily','unlimited','challenge','streak','reset','localRanked','temporary','newDaily','loadDaily','share','keepPlaying','won','lost'])assert.ok(copy[key],`${language}.${key}`);
+    for(const key of ['daily','unlimited','challenge','streak','reset','done','pending','temporary','newDaily','loadDaily','share','keepPlaying','won','lost'])assert.ok(copy[key],`${language}.${key}`);
   }
   assert.equal(ui.copyFor('en').daily,'Daily Rabona');
   assert.equal(ui.copyFor('es').daily,'La Rabona del día');
+  assert.equal(ui.copyFor('en').unlimited,'Play');
+  assert.equal(ui.copyFor('es').unlimited,'Jugar');
   assert.match(ui.copyFor('en').primary,/three (?:careers|players)/i);
   assert.match(ui.copyFor('es').primary,/tres (?:carreras|jugadores)/i);
-  assert.match(ui.copyFor('en').localRanked,/browser\/device-local.*non-ranked/i);
-  assert.match(ui.copyFor('es').localRanked,/navegador\/dispositivo.*sin clasificación/i);
+  assert.doesNotMatch(ui.copyFor('en').primary,/local|ranked/i);
+  assert.doesNotMatch(ui.copyFor('es').primary,/clasificaci[oó]n|navegador/i);
 });
 
-test('denied Daily storage keeps local non-ranked scope plus bilingual temporary warning',()=>{
+test('persistent Daily storage stays silent; denied storage surfaces a bilingual temporary warning',()=>{
   const {ui}=loadController('https://derabona.club/?daily=1',{exposeScope:true});
   for(const language of ['en','es']){
-    const copy=ui.copyFor(language),scope=ui.scopeText(false,language);
-    assert.match(scope,new RegExp(copy.localRanked.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
-    assert.match(scope,new RegExp(copy.temporary.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
-    assert.equal(ui.scopeText(true,language),copy.localRanked);
+    const copy=ui.copyFor(language);
+    assert.equal(ui.scopeText(true,language),'');
+    assert.equal(ui.scopeText(false,language),copy.temporary);
   }
 });
 
