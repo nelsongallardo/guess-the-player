@@ -58,17 +58,41 @@ test('Unlimited preserves the same tab but resets a new or restored browsing con
   const expression=source.match(/const restoredRoundClockStart=(.*?);/)?.[1];
   assert.ok(expression,'restoredRoundClockStart helper exists in game-ui');
   const restoredRoundClockStart=vm.runInNewContext(`(${expression})`);
-  const saved={playerId:'messi',startedAt:1_234};
-  assert.equal(restoredRoundClockStart(saved,'messi','reload',true,false),1_234);
-  assert.equal(restoredRoundClockStart(saved,'messi','navigate',false,false),1_234);
-  assert.equal(restoredRoundClockStart(saved,'messi','navigate',true,false),null);
-  assert.equal(restoredRoundClockStart(saved,'messi','navigate',false,true),null);
-  assert.equal(restoredRoundClockStart(saved,'messi','back_forward',true,false),null);
-  assert.equal(restoredRoundClockStart(saved,'ronaldo','reload',true,false),null);
+  const now=1_000_000_000_000;
+  const saved={playerId:'messi',startedAt:now-1_234};
+  assert.equal(restoredRoundClockStart(saved,'messi','reload',true,false,now),now-1_234);
+  assert.equal(restoredRoundClockStart(saved,'messi','navigate',false,false,now),now-1_234);
+  assert.equal(restoredRoundClockStart(saved,'messi','navigate',true,false,now),null);
+  assert.equal(restoredRoundClockStart(saved,'messi','navigate',false,true,now),null);
+  assert.equal(restoredRoundClockStart(saved,'messi','back_forward',true,false,now),null);
+  assert.equal(restoredRoundClockStart(saved,'ronaldo','reload',true,false,now),null);
   assert.match(source,/const CLOCK_TAB_KEY='touchline\.clock-tab\.v1'/,'Unlimited stores a browsing-context identity separately from its clock');
   assert.match(source,/storedClockTab!==null&&storedClockTab!==clockTabId/,'same-tab identity survives full navigations without trusting cloned sessionStorage');
   assert.match(source,/window\.name=clockTabId/,'the per-tab identity itself is not cloned into an opener-created tab');
   assert.match(source,/addEventListener\('pageshow',event=>\{if\(event\.persisted\)resetRoundClock\(\);\}\)/,'a page-cache restore must start a fresh Unlimited clock');
+});
+
+test('Unlimited never trusts a stale clock, even if navigation-type detection is fooled',()=>{
+  const source=block('game-ui');
+  const expression=source.match(/const restoredRoundClockStart=(.*?);/)?.[1];
+  assert.ok(expression,'restoredRoundClockStart helper exists in game-ui');
+  const restoredRoundClockStart=vm.runInNewContext(`(${expression})`);
+  const now=1_000_000_000_000;
+  // A browser session-restore/crash-recovery path can report navigationType
+  // 'navigate' with no restoredHistoryEntry/newBrowsingContext signal at all
+  // (observed in production: a days-old clock survived opening a fresh tab).
+  // A hard age ceiling must reject an implausibly old clock regardless of
+  // what the navigation-type heuristics conclude.
+  const freshSaved={playerId:'messi',startedAt:now-90_000};
+  assert.equal(restoredRoundClockStart(freshSaved,'messi','navigate',false,false,now),now-90_000,'a genuinely fresh clock is still trusted');
+  const staleSaved={playerId:'messi',startedAt:now-(3*24*60*60*1000)};
+  assert.equal(restoredRoundClockStart(staleSaved,'messi','navigate',false,false,now),null,'a multi-day-old clock must never be trusted even on ordinary navigate');
+  assert.equal(restoredRoundClockStart(staleSaved,'messi','reload',true,false,now),null,'a stale clock is rejected on reload too');
+  const boundarySaved={playerId:'messi',startedAt:now-(6*60*60*1000)-1_000};
+  assert.equal(restoredRoundClockStart(boundarySaved,'messi','navigate',false,false,now),null,'just past the age ceiling is rejected');
+  const withinBoundarySaved={playerId:'messi',startedAt:now-(6*60*60*1000)+1_000};
+  assert.equal(restoredRoundClockStart(withinBoundarySaved,'messi','navigate',false,false,now),withinBoundarySaved.startedAt,'just within the age ceiling is still trusted');
+  assert.match(source,/now-saved\.startedAt<=6\*60\*60\*1000/,'restoredRoundClockStart enforces a hard age ceiling independent of navigation-type heuristics');
 });
 
 test('elapsed-time readout is bilingual, freezes, and keeps scoring details on activation',()=>{
