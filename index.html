@@ -113,46 +113,59 @@ const AuthCallback = (()=>{
 .club-years{font-size:10px;line-height:1.3;white-space:normal;overflow-wrap:anywhere}
 .club-tag{font-size:9px;line-height:1.25;letter-spacing:0;min-height:0;overflow-wrap:anywhere;margin-top:4px}
 .club-tag:empty{display:none}
-/* Clubs are grouped into pages of up to eight (renderCareer(), ADR 0018)
-   so every connector arrow always points at the very next chronological
-   card. Suppressing it at every fourth card (the end of a row, or of a
-   page) is correct either way: the reader's eye continues on its own,
-   the same convention this app already used before any of this paging
-   existed. nth-child counts siblings within each .timeline-page, so this
-   one rule is already correct per page regardless of width. */
-.club:nth-child(4n):after{content:none}
+/* Connector suppression is NOT global: each grid suppresses on its own
+   column count (mobile 4n, desktop 6n), because a connector at a wrapped
+   row end would point off the right edge at a card that actually sits
+   below-left. A single global rule would also strike mid-row cards in
+   whichever grid has a different column count. */
 .pitch:before{display:none}
-/* Mobile (ADR 0016): .timeline-page is display:contents, invisible to
-   layout, so every club still flows into one continuous four-column grid
-   that grows to as many rows as the career needs - the whole page already
+/* Mobile (ADR 0016, page wrappers removed by ADR 0021): every club flows
+   into one continuous four-column grid that grows to as many rows as the
+   career needs - the whole page already
    scrolls vertically there, so extra rows cost nothing. Pixel-identical
    to before pages existed in the DOM. */
 @media(max-width:800px){
   .timeline-scroll{overflow:visible;padding:20px 14px;scrollbar-width:none}
   .timeline-scroll::-webkit-scrollbar{display:none}
   .timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;max-width:640px;margin:0 auto;min-width:0;gap:18px 12px;align-items:start}
-  .timeline-page{display:contents}
   .club:not(:last-child):after{top:18px;right:-12px;font-size:13px}
+  /* Every fourth card ends a wrapped row here, so its connector would point
+     off the right edge at the card that actually sits below-left. */
+  .club:nth-child(4n):after{content:none}
   .crest-disc{width:56px;height:56px;border-radius:12px;margin-bottom:7px}
   .crest-disc img{width:42px;height:42px}
 }
-/* Desktop (ADR 0018, replacing 0017's column-major attempt - its diagonal
-   connectors, even after correcting which one they pointed at, still read
-   as confusing compared to a plain row-major grid). Unlike mobile, the
-   game panel is usually the whole viewport, so letting a career grow past
-   two rows pushes the answer options below the fold - each page is its
-   own real two-row, four-column grid instead (same reading order as
-   mobile: left to right, then down), so a career longer than one page
-   just adds another page alongside it. .timeline lays pages out in a row;
-   .timeline-scroll's real horizontal scrollbar reaches whatever doesn't
-   fit at the current width. Most careers still need no scrolling at all -
-   only exceptionally well-traveled players do. */
+/* Desktop (ADR 0021, replacing 0018's eight-club pages): the same plain
+   wrapping grid mobile already uses, just six columns wide instead of
+   four. Visual order is therefore always chronological order - pages of
+   eight put card 9 to the RIGHT of card 4 (page 2's top row beside page
+   1's), so scanning straight across the top, which that layout invites,
+   silently skipped the middle of the career. Wrapping also keeps ADR
+   0016's promise that every club is visible without a horizontal scroll:
+   one uninterrupted row was tried first and pushed 72% of all careers
+   (including six-club ones) onto a scrollbar, versus 34% before. Six
+   columns keep all but the longest careers within two rows, so ADR 0017's
+   concern - the grid growing down into the answer options - stays
+   addressed for the overwhelming majority of rounds. */
 @media(min-width:801px){
-  .timeline-scroll{overflow-x:auto;overflow-y:visible;padding:26px 24px 23px;scrollbar-width:thin;scrollbar-color:#56733d transparent;overscroll-behavior-x:contain}
-  .timeline-scroll::-webkit-scrollbar{height:8px}
-  .timeline-scroll::-webkit-scrollbar-thumb{background:#56733d;border-radius:8px}
-  .timeline{display:flex;width:max-content;min-width:100%;justify-content:center;gap:44px;align-items:flex-start}
-  .timeline-page{display:grid;grid-template-columns:repeat(4,150px);grid-template-rows:repeat(2,auto);column-gap:28px;row-gap:22px;flex-shrink:0}
+  .timeline-scroll{overflow:visible;padding:26px 24px 23px;scrollbar-width:none}
+  .timeline-scroll::-webkit-scrollbar{display:none}
+  .timeline{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:100%;max-width:1000px;margin:0 auto;min-width:0;gap:22px 28px;align-items:start}
+  .club{width:auto;flex:initial}
+  /* Every sixth card ends a wrapped row here. */
+  .club:nth-child(6n):after{content:none}
+  /* A handful of exceptionally well-traveled careers (19 of 220 need three
+     rows, 1 needs four) would push the answer options far down the page.
+     Those compact themselves instead of scrolling or paging: same six
+     columns and same reading order, just a smaller card. .timeline-long is
+     set by renderCareer() from the club count, since CSS cannot count
+     children to size a container. */
+  .timeline-long{gap:14px 20px}
+  .timeline-long .crest-disc{width:56px;height:56px;border-radius:12px;margin-bottom:7px}
+  .timeline-long .crest-disc img{width:42px;height:42px}
+  .timeline-long .club{padding:7px 4px 6px}
+  .timeline-long .club-name{font-size:10px;min-height:24px}
+  .timeline-long .club:not(:last-child):after{top:18px;right:-14px;font-size:14px}
 }
 @media(max-width:580px){
   .masthead{padding:12px 0;gap:8px}.brand{gap:8px}.mark{width:30px;height:34px}.wordmark{font-size:20px}.masthead-right{gap:6px}
@@ -80382,25 +80395,24 @@ function tagFor(club){
   if(/return/i.test(note))return t.return;
   return '';
 }
-// Clubs are grouped into pages of up to eight (a 4x2 block) so each page
-// can read row-major - left to right, then down - with no connector arrow
-// ever pointing somewhere other than the very next chronological club. See
-// ADR 0018: mobile makes .timeline-page invisible to layout (display:contents)
-// so this grouping is purely a DOM/testing convenience there; desktop lays
-// pages out side by side and lets .timeline-scroll's real scrollbar reach
-// whatever doesn't fit in the first page at the current width.
+// One flat chronological list of clubs (ADR 0021). Grouping them into pages
+// of eight used to put card 9 visually to the RIGHT of card 4 on desktop, so
+// reading straight across the top row - which a left-to-right layout invites -
+// jumped from the 4th club to the last one and back. The list is flat so
+// :last-child and nth-child mean "the career", not "this page".
 function renderCareer(player){
   $('timeline').replaceChildren();
-  let page=null;
+  // Desktop wraps at six columns; past two rows a career compacts rather than
+  // scrolling, so the answer options stay as close to the fold as possible.
+  $('timeline').classList.toggle('timeline-long',player.clubs.length>12);
   player.clubs.forEach((club,index)=>{
-    if(index%8===0){page=el('div',undefined,'timeline-page');$('timeline').append(page);}
     const card=el('div',undefined,'club'),disc=el('div',undefined,'crest-disc'),img=el('img'),step=el('span',String(index+1),'club-step');
     step.setAttribute('aria-hidden','true');
     const crestKey=club.crestKey||player.clubCrests?.[index],crest=CREST_ASSETS[crestKey];img.src=crest?.dataUrl||'';img.alt=language==='es'?`Escudo de ${club.name}`:`${club.name} crest`;img.width=57;img.height=57;img.decoding='async';
     img.addEventListener('error',()=>{img.hidden=true;disc.append(el('span',club.name.split(' ').map(x=>x[0]).join(''),'option-letter'));},{once:true});
     disc.append(img);
     card.append(step,disc,el('div',club.name,'club-name'),el('div',club.years.replace('present',copy().present),'club-years'),el('div',tagFor(club),'club-tag'));
-    page.append(card);
+    $('timeline').append(card);
   });
 }
 function renderSources(player){
