@@ -80959,8 +80959,18 @@ const currentRoundClock=()=>DailyUI.isDaily()?DailyUI.clock():RankedUI.isAccount
 // The visible value has no endpoint, warning threshold or fractional seconds:
 // it communicates elapsed time without looking like time is running out.
 const formatElapsedTime=elapsedMs=>`${Math.floor(Math.max(0,elapsedMs)/60000)}:${String(Math.floor(Math.max(0,elapsedMs)/1000)%60).padStart(2,'0')}`;
+// A single display-level sanity ceiling shared by ALL three clock sources.
+// restoredRoundClockStart's six-hour check only ever guarded the guest
+// sessionStorage clock; RankedUI.roundClock() and DailyRankedUI.clock() both
+// derive elapsedMs straight from a server startedAt, which legitimately
+// survives closing the tab for days, so an abandoned round reopened later
+// rendered things like "2251:40". A real round takes minutes. This changes
+// nothing about scoring - the server still charges whatever it charges, and
+// the 25% floor is reached after 24 seconds regardless - it only refuses to
+// render a number that cannot be a genuine sitting.
+const displayableElapsedMs=elapsedMs=>Number.isFinite(elapsedMs)&&elapsedMs<=6*60*60*1000?Math.max(0,elapsedMs):null;
 const elapsedTimeFrame=(clock,state)=>{
-  if(!clock)return {key:null,frozen:null,shown:null};
+  if(!clock||displayableElapsedMs(clock.elapsedMs)===null)return {key:null,frozen:null,shown:null};
   const frozen=clock.playing||state.key!==clock.key?null:state.frozen,nextFrozen=clock.playing?null:frozen||clock;
   return {key:clock.key,frozen:nextFrozen,shown:nextFrozen||clock};
 };
@@ -80968,7 +80978,9 @@ let elapsedTimeOpen=false,elapsedTimeState={key:null,frozen:null};
 function renderElapsedTime(){
   const clock=currentRoundClock(),meter=$('elapsed-time'),note=$('elapsed-time-note');
   elapsedTimeState=elapsedTimeFrame(clock,elapsedTimeState);
-  if(!clock){meter.hidden=true;note.hidden=true;elapsedTimeOpen=false;return;}
+  // elapsedTimeState.shown is null for an implausibly old clock as well as for
+  // no clock at all: in both cases the readout hides rather than render nonsense.
+  if(!clock||!elapsedTimeState.shown){meter.hidden=true;note.hidden=true;elapsedTimeOpen=false;return;}
   meter.hidden=false;
   const shown=elapsedTimeState.shown,value=formatElapsedTime(shown.elapsedMs);
   $('elapsed-time-value').textContent=value;

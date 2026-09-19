@@ -30,7 +30,9 @@ test('a resolved round never reuses another round’s frozen elapsed time',()=>{
   const source=block('game-ui');
   const match=source.match(/const elapsedTimeFrame=([\s\S]*?\n});/);
   assert.ok(match,'elapsedTimeFrame helper is present');
-  const elapsedTimeFrame=vm.runInNewContext(`(${match[1]})`);
+  const guard=source.match(/const displayableElapsedMs=(.*?);/)?.[1];
+  assert.ok(guard,'displayableElapsedMs helper is present');
+  const elapsedTimeFrame=vm.runInNewContext(`const displayableElapsedMs=${guard};(${match[1]})`);
   let state={key:null,frozen:null};
   state=elapsedTimeFrame({key:'daily:2026-09-18:0',elapsedMs:5_000,playing:false,hints:0,points:92},state);
   assert.equal(state.shown.elapsedMs,5_000);
@@ -108,4 +110,37 @@ test('elapsed-time readout is bilingual, freezes, and keeps scoring details on a
   assert.match(source,/classList\.toggle\('is-frozen',!clock\.playing\)/);
   assert.match(source,/elapsedTimeOpen/);
   assert.match(source,/elapsedTimeWon/,'resolved timing still explains awarded points');
+});
+
+test('every clock source, including ranked, refuses an implausibly old elapsed time',()=>{
+  // The six-hour ceiling in restoredRoundClockStart only ever guarded the guest
+  // sessionStorage clock. RankedUI.roundClock() derives elapsedMs straight from
+  // the server's startedAt, and DailyRankedUI.clock() does the same, so an
+  // abandoned round reopened a day later rendered e.g. "2251:40" as if the
+  // player had sat there for 37 hours. Scoring stays server-authoritative and
+  // is unaffected; this is purely the readout refusing to show nonsense.
+  const source=block('game-ui');
+  const expression=source.match(/const displayableElapsedMs=(.*?);/)?.[1];
+  assert.ok(expression,'displayableElapsedMs helper exists in game-ui');
+  const displayableElapsedMs=vm.runInNewContext(`(${expression})`);
+  assert.equal(displayableElapsedMs(0),0);
+  assert.equal(displayableElapsedMs(5_000),5_000);
+  assert.equal(displayableElapsedMs(6*60*60*1000),6*60*60*1000,'exactly at the ceiling is still real');
+  assert.equal(displayableElapsedMs(6*60*60*1000+1),null,'past the ceiling is not displayable');
+  assert.equal(displayableElapsedMs(2251*60*1000),null,'the reported 2251-minute ranked clock');
+  assert.equal(displayableElapsedMs(-5),0,'a clock skewed into the future never goes negative');
+  assert.equal(displayableElapsedMs(NaN),null,'an unparseable server timestamp is not displayable');
+});
+
+test('the elapsed-time readout hides itself rather than showing a stale clock',()=>{
+  const source=block('game-ui');
+  const match=source.match(/const elapsedTimeFrame=([\s\S]*?\n});/);
+  assert.ok(match,'elapsedTimeFrame helper is present');
+  const guard=source.match(/const displayableElapsedMs=(.*?);/)?.[1];
+  assert.ok(guard,'displayableElapsedMs helper is present');
+  const elapsedTimeFrame=vm.runInNewContext(`const displayableElapsedMs=${guard};(${match[1]})`);
+  const stale=elapsedTimeFrame({key:'ranked:abc',elapsedMs:2251*60*1000,playing:true,hints:0,points:null},{key:null,frozen:null});
+  assert.equal(stale.shown,null,'a stale ranked clock yields nothing to show');
+  const fresh=elapsedTimeFrame({key:'ranked:abc',elapsedMs:12_000,playing:true,hints:0,points:null},{key:null,frozen:null});
+  assert.equal(fresh.shown.elapsedMs,12_000,'a plausible ranked clock still shows');
 });
