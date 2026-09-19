@@ -1,5 +1,7 @@
 async page => {
   const ok=(value,message)=>{if(!value)throw new Error(message);};
+  // ?unlimited=1 is required: Daily is now the default landing mode, and
+  // render() short-circuits into DailyUI before ever reaching this fixture.
   const load=async(url,id='diego-milito')=>{
     await page.goto(url);
     await page.evaluate(id=>{
@@ -16,19 +18,22 @@ async page => {
     return {name:card.querySelector('.club-name').textContent,arrow:getComputedStyle(card,'::after').content,x:box.x,y:box.y};
   }));
 
-  // Diego Milito: Racing Club, Genoa, Real Zaragoza, Genoa, Inter Milan, Racing Club (six stops, one page).
+  // Diego Milito: Racing Club, Genoa, Real Zaragoza, Genoa, Inter Milan, Racing Club (six stops).
   await page.setViewportSize({width:1128,height:700});
-  await load('http://127.0.0.1:4173/index.html?lang=es');
+  await load('http://127.0.0.1:4173/index.html?lang=es&unlimited=1');
   const desktop=await cards();
   ok(JSON.stringify(desktop.map(item=>item.name))===JSON.stringify(['Racing Club','Genoa','Real Zaragoza','Genoa','Inter Milan','Racing Club']),'Diego Milito chronology fixture');
-  ok(JSON.stringify(desktop.map(item=>item.arrow))===JSON.stringify(['"➜"','"➜"','"➜"','none','"➜"','none']),'Desktop uses the same row-major arrow sequence as mobile, not a diagonal zigzag');
-  // Row 1 (indices 0-3) all sit at the same y and increase in x left-to-right; row 2 starts back at a smaller x.
-  for(let i=0;i<3;i++)ok(desktop[i].y===desktop[i+1].y&&desktop[i].x<desktop[i+1].x,`Card ${i+1}→${i+2} is a plain left-to-right step within row 1`);
-  ok(desktop[3].y<desktop[4].y&&desktop[4].x<desktop[3].x,'Row 1 to row 2 wraps down and back to the left, like the mobile grid');
-  ok(desktop[4].y===desktop[5].y&&desktop[4].x<desktop[5].x,'Row 2 continues left-to-right too');
+  // ADR 0021: desktop wraps at six columns, so a six-club career is one row
+  // and every card except the last keeps its connector - including the 4th,
+  // which the old eight-club paged grid suppressed.
+  ok(JSON.stringify(desktop.map(item=>item.arrow))===JSON.stringify(['"➜"','"➜"','"➜"','"➜"','"➜"','none']),'Desktop connects every consecutive pair of a six-club career');
+  for(let i=0;i<desktop.length-1;i++)ok(desktop[i].y===desktop[i+1].y,`Card ${i+1} and ${i+2} share one row on desktop`);
+  for(let i=0;i<desktop.length-1;i++)ok(desktop[i].x<desktop[i+1].x,`Card ${i+1}→${i+2} steps strictly rightwards`);
 
-  // A career longer than one page (more than eight clubs) needs a second page and horizontal scroll,
-  // with no connector at the page boundary - same "no arrow at a row end" convention as everywhere else.
+  // The regression ADR 0021 fixes: with pages of eight, card 9 rendered to the
+  // RIGHT of card 4 (page 2's top row beside page 1's), so scanning the top row
+  // left-to-right skipped the middle of the career. Assert visual order now
+  // equals chronological order for a career longer than one old page.
   await page.setViewportSize({width:1440,height:1080});
   const longest=await page.evaluate(()=>{
     const p=[...PLAYERS].sort((a,b)=>b.clubs.length-a.clubs.length)[0];
@@ -38,21 +43,34 @@ async page => {
     render(false,true);
     return {id:p.id,clubs:p.clubs.length};
   });
-  ok(longest.clubs>8,`Longest-career fixture needs more than one page to exercise the boundary (got ${longest.clubs} clubs)`);
-  const paged=await page.evaluate(()=>{
-    const pages=[...document.querySelectorAll('#timeline .timeline-page')];
-    const strip=document.querySelector('#timeline-scroll');
-    return {pageCount:pages.length,scrollWidth:strip.scrollWidth,clientWidth:strip.clientWidth};
+  ok(longest.clubs>8,`Longest-career fixture must exceed the old eight-club page (got ${longest.clubs} clubs)`);
+  const long=await cards();
+  ok(long.length===longest.clubs,'Every club renders');
+  const visual=[...long.keys()].sort((a,b)=> long[a].y-long[b].y || long[a].x-long[b].x);
+  ok(JSON.stringify(visual)===JSON.stringify([...long.keys()]),'Reading the cards by position (top row, left to right) yields exactly chronological order');
+  const rowCount=new Set(long.map(item=>item.y)).size;
+  // Connectors are suppressed only at a real row end (every 6th card).
+  long.forEach((item,index)=>{
+    const last=index===long.length-1;
+    const rowEnd=(index+1)%6===0;
+    ok(item.arrow===(last||rowEnd?'none':'"➜"'),`Card ${index+1} connector matches its position (row end: ${rowEnd}, last: ${last})`);
   });
-  ok(paged.pageCount>=2,`More than eight clubs render as at least two pages (got ${paged.pageCount})`);
-  ok(paged.scrollWidth>paged.clientWidth,'Multiple pages need horizontal scroll at 1440px');
-  const eighthArrow=await page.evaluate(()=>getComputedStyle(document.querySelectorAll('#timeline .club')[7],'::after').content);
-  ok(eighthArrow==='none','No connector arrow at the page boundary (card 8), same convention as every other row end');
+  ok(await page.evaluate(()=>document.querySelectorAll('#timeline .timeline-page').length)===0,'No page wrappers remain in the DOM');
+  ok(await page.evaluate(()=>document.querySelector('#timeline').classList.contains('timeline-long')),'A career past two rows compacts instead of scrolling');
+  const strip=await page.evaluate(()=>{
+    const el=document.querySelector('#timeline-scroll');
+    return {scrollWidth:el.scrollWidth,clientWidth:el.clientWidth};
+  });
+  ok(strip.scrollWidth<=strip.clientWidth+1,'Even the longest career needs no horizontal scrolling (ADR 0016)');
+  ok(await page.evaluate(()=>[...document.querySelectorAll('#timeline .club-name')].every(n=>n.scrollWidth<=n.clientWidth+1)),'No club label is clipped at the compacted size');
 
-  // Mobile stays exactly as ADR 0016 left it: one continuous grid, same arrow sequence.
+  // Mobile stays exactly as ADR 0016 left it: one continuous wrapping grid,
+  // with the connector suppressed at each real row end.
   await page.setViewportSize({width:375,height:900});
-  await load('http://127.0.0.1:4173/index.html?lang=es');
+  await load('http://127.0.0.1:4173/index.html?lang=es&unlimited=1');
   const mobile=await cards();
-  ok(JSON.stringify(mobile.map(item=>item.arrow))===JSON.stringify(['"➜"','"➜"','"➜"','none','"➜"','none']),'Mobile keeps the same row-major arrow sequence through the 800px breakpoint');
-  return {passed:true,desktop:desktop.map(({name,arrow})=>({name,arrow})),pagedCareer:paged,mobile:mobile.map(({name,arrow})=>({name,arrow}))};
+  ok(JSON.stringify(mobile.map(item=>item.arrow))===JSON.stringify(['"➜"','"➜"','"➜"','none','"➜"','none']),'Mobile keeps row-major arrows with none at the wrapping row end');
+  ok(new Set(mobile.map(item=>item.y)).size===2,'Six clubs wrap onto two rows of four at 375px');
+  ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),'No horizontal page overflow at 375px');
+  return {passed:true,desktop:desktop.map(({name,arrow})=>({name,arrow})),longestCareer:{clubs:longest.clubs,rows:rowCount,scrolls:strip.scrollWidth>strip.clientWidth+1},mobile:mobile.map(({name,arrow})=>({name,arrow}))};
 }

@@ -4,7 +4,10 @@ async page => {
   page.on('pageerror',error=>errors.push(error.message));
   page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
   page.on('request',request=>{if(/^https?:/.test(request.url())&&!request.url().startsWith('http://127.0.0.1:4173/'))external.push(request.url());});
-  const clean=async()=>{await page.goto('http://127.0.0.1:4173/index.html?lang=en');await page.evaluate(()=>sessionStorage.clear());await page.reload();};
+  // ?unlimited=1 is required: Daily is the default landing mode, so without it
+  // render() short-circuits into DailyUI and none of these Unlimited fixtures
+  // are ever exercised.
+  const clean=async()=>{await page.goto('http://127.0.0.1:4173/index.html?lang=en&unlimited=1');await page.evaluate(()=>sessionStorage.clear());await page.reload();};
   const view=()=>page.evaluate(()=>({name:CareerGame.playerAt(state).name,id:CareerGame.playerAt(state).id,options:[...CareerGame.roundAt(state).options],guesses:[...CareerGame.roundAt(state).guesses],hints:CareerGame.roundAt(state).hints,result:CareerGame.outcome(state),stats:CareerGame.stats(state),index:state.roundIndex,finished:state.finished,valid:CareerGame.validate(state),hintValues:CareerGame.hintValues(CareerGame.playerAt(state)),crestUrls:CareerGame.playerAt(state).clubCrests}));
   const choose=async(name)=>{const s=await view();await page.locator('#options button').nth(s.options.indexOf(name)).click();};
   await clean();await page.setViewportSize({width:1440,height:1080});
@@ -50,10 +53,10 @@ async page => {
   const layouts=[];
   for(const width of [320,375,768,1440]){
     await page.setViewportSize({width,height:1080});
-    const layout=await page.evaluate(()=>({width:innerWidth,pageWidth:document.documentElement.scrollWidth,timelineWidth:document.querySelector('#timeline-scroll').clientWidth,timelineContent:document.querySelector('#timeline-scroll').scrollWidth,buttons:[...document.querySelectorAll('#options button')].map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})),first:document.querySelector('#timeline .club').getBoundingClientRect().left,rows:Math.max(...[...document.querySelectorAll('#timeline .timeline-page')].map(page=>new Set([...page.querySelectorAll('.club')].map(c=>Math.round(c.getBoundingClientRect().top))).size))}));
+    const layout=await page.evaluate(()=>({width:innerWidth,pageWidth:document.documentElement.scrollWidth,timelineWidth:document.querySelector('#timeline-scroll').clientWidth,timelineContent:document.querySelector('#timeline-scroll').scrollWidth,buttons:[...document.querySelectorAll('#options button')].map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})),first:document.querySelector('#timeline .club').getBoundingClientRect().left,rows:new Set([...document.querySelectorAll('#timeline .club')].map(c=>Math.round(c.getBoundingClientRect().top))).size}));
     ok(layout.pageWidth<=width,`No page overflow at ${width}px`);ok(layout.buttons.every(b=>b.h>=44&&b.w>=44),`Touch targets at ${width}px`);
     if(width<=800)ok(layout.timelineContent<=layout.timelineWidth,`Mobile career fully fits without horizontal scroll at ${width}px`);
-    else{ok(layout.rows<=2,`Desktop career never grows past two rows at ${width}px (got ${layout.rows})`);ok(layout.timelineContent>layout.timelineWidth,`Desktop longest career needs horizontal scroll instead of a third row at ${width}px`);}
+    else{ok(layout.rows<=4,`Desktop career wraps within four rows at ${width}px (got ${layout.rows})`);ok(layout.timelineContent<=layout.timelineWidth+1,`Desktop longest career wraps in reading order instead of scrolling sideways at ${width}px (ADR 0016)`);}
     ok(layout.first>=0,'Debut crest visible, not clipped');layouts.push(layout);
     if(width===375)await page.screenshot({path:'test-results/mobile.png',fullPage:true});
     if(width===1440)await page.screenshot({path:'test-results/desktop.png',fullPage:true});
