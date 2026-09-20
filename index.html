@@ -119,7 +119,7 @@ const AuthCallback = (()=>{
    below-left. A single global rule would also strike mid-row cards in
    whichever grid has a different column count. */
 .pitch:before{display:none}
-/* Mobile (ADR 0016, page wrappers removed by ADR 0021): every club flows
+/* Mobile (ADR 0016, page wrappers removed by ADR 0022): every club flows
    into one continuous four-column grid that grows to as many rows as the
    career needs - the whole page already
    scrolls vertically there, so extra rows cost nothing. Pixel-identical
@@ -135,7 +135,7 @@ const AuthCallback = (()=>{
   .crest-disc{width:56px;height:56px;border-radius:12px;margin-bottom:7px}
   .crest-disc img{width:42px;height:42px}
 }
-/* Desktop (ADR 0021, replacing 0018's eight-club pages): the same plain
+/* Desktop (ADR 0022, replacing 0018's eight-club pages): the same plain
    wrapping grid mobile already uses, just six columns wide instead of
    four. Visual order is therefore always chronological order - pages of
    eight put card 9 to the RIGHT of card 4 (page 2's top row beside page
@@ -80437,7 +80437,7 @@ function tagFor(club){
   if(/return/i.test(note))return t.return;
   return '';
 }
-// One flat chronological list of clubs (ADR 0021). Grouping them into pages
+// One flat chronological list of clubs (ADR 0022). Grouping them into pages
 // of eight used to put card 9 visually to the RIGHT of card 4 on desktop, so
 // reading straight across the top row - which a left-to-right layout invites -
 // jumped from the 4th club to the last one and back. The list is flat so

@@ -369,6 +369,52 @@ test('parallel starts/retries serialize; optimistic versions allow only one winn
   assert.equal(Number(sql(`select count(*) from ranked_private.results where user_id=${quote(uid)}`)),1);
 });
 
+test('an untouched round abandoned past the stale window is replaced, with a fresh clock',()=>{
+  // The clock starts when the server CREATES the round, and 'start' returns any
+  // existing playing round. So landing on the site signed in, closing the tab,
+  // and coming back hours later used to resurrect the same never-touched round
+  // with its original started_at - showing e.g. "73:25" and, worse, pinning the
+  // score to the 25% floor before the player had seen the puzzle at all.
+  const uid=user();
+  const first=start(uid).round;
+  sql(`update ranked_private.rounds set started_at=clock_timestamp()-interval '90 minutes' where id=${quote(first.id)}`);
+  const second=start(uid).round;
+  assert.notEqual(second.id,first.id,'a stale untouched round is not handed back');
+  assert.ok(Date.now()-Date.parse(second.startedAt)<60_000,'the replacement round carries a fresh clock');
+  assert.equal(Number(sql(`select count(*) from ranked_private.rounds where user_id=${quote(uid)} and status='playing'`)),1,'the one-open-round invariant still holds');
+  assert.equal(Number(sql(`select count(*) from ranked_private.results where user_id=${quote(uid)}`)),0,'abandoning records no result and cannot farm points');
+});
+
+test('an ENGAGED round is never replaced by the stale window, however old it is',()=>{
+  // This is the anti-lookup boundary: once a player has spent a hint or a guess,
+  // the clock is theirs and walking away must not buy them a fresh one.
+  for(const engage of ['hint','guess']){
+    const uid=user();
+    const r=start(uid).round;
+    if(engage==='hint')hint(uid,r); else answer(uid,r,wrongs(r)[0]);
+    sql(`update ranked_private.rounds set started_at=clock_timestamp()-interval '90 minutes' where id=${quote(r.id)}`);
+    const again=start(uid).round;
+    assert.equal(again.id,r.id,`a round engaged via ${engage} is preserved despite being stale`);
+    assert.ok(Date.now()-Date.parse(again.startedAt)>60*60_000,'its original clock is preserved, so the elapsed penalty stands');
+  }
+});
+
+test('a fresh untouched round inside the stale window is still resumed normally',()=>{
+  const uid=user();
+  const first=start(uid).round;
+  sql(`update ranked_private.rounds set started_at=clock_timestamp()-interval '3 minutes' where id=${quote(first.id)}`);
+  assert.equal(start(uid).round.id,first.id,'an ordinary short interruption resumes the same round');
+});
+
+test('abandoning a round does not consume the player, who can still be dealt it again',()=>{
+  const uid=user();
+  const first=start(uid).round;
+  const playerId=sql(`select player_id from ranked_private.rounds where id=${quote(first.id)}`);
+  sql(`update ranked_private.rounds set started_at=clock_timestamp()-interval '90 minutes' where id=${quote(first.id)}`);
+  start(uid);
+  assert.equal(Number(sql(`select count(*) from ranked_private.results where user_id=${quote(uid)} and player_id=${quote(playerId)}`)),0,'no result row was written for the abandoned player');
+});
+
 test('leaderboards require a verified result per board; enrollment/active rounds stay hidden and zero-point losses rank',()=>{
   const a=user(),b=user();
   const competitions=json('select json_agg(id order by id) from ranked_private.competitions');
