@@ -46,13 +46,16 @@ function oauthHeader(creds, method, url, bodyParams = {}) {
 }
 
 // X weighted count: URLs are 23, emoji 2. Good enough for our fixed formats.
-const URL_RE = /https?:\/\/\S+|\bwww\.\S+/gi;
+// Built fresh per call on purpose: a shared /g regex carries lastIndex between
+// .test() calls, so alternating checks silently return the wrong answer — and
+// here that means billing a $0.20 post as $0.015.
+const urlRe = () => /https?:\/\/\S+|\bwww\.\S+/gi;
 
-export function containsUrl(text) { return URL_RE.test(text); }
+export function containsUrl(text) { return urlRe().test(text); }
 
 export function weightedLength(text) {
-  const withoutUrls = text.replace(URL_RE, '');
-  const urlCount = (text.match(URL_RE) || []).length;
+  const withoutUrls = text.replace(urlRe(), '');
+  const urlCount = (text.match(urlRe()) || []).length;
   let n = 0;
   for (const ch of withoutUrls) n += ch.codePointAt(0) > 0xffff ? 2 : 1;
   return n + urlCount * 23;

@@ -1,65 +1,108 @@
 #!/usr/bin/env node
-// Daily puzzle post. Idempotent: re-running on the same day is a no-op.
-// A double post is worse than a missed one.
+// Daily post for the REAL Rabona Diaria — the same three careers every player
+// gets on the site today, recomputed from the game's frozen schedule.
+//
+// Idempotent: re-running on the same day is a no-op.
+//
+// LINK POLICY (this is a money decision, see README):
+//   X charges $0.015 per post, but $0.200 if the post contains a URL — 13x.
+//   A real https:// link every day costs 30 x $0.205 = $6.15/month in posts
+//   alone, which blows the entire $6 cap before a single reply is sent.
+//   So: a full link on LINK_DAYS only (default Sunday), and a bare-domain
+//   mention the rest of the week. X auto-links bare domains in the rendered
+//   post, so the route to the game survives either way.
+//
+//   NOTE: whether X's billing treats a bare "derabona.club" as a URL is NOT
+//   documented. We assume it does not, and assert the expected cost before
+//   posting; the first real invoice must be checked against spend.json.
 
 import os from 'node:os';
 import path from 'node:path';
-import { isPaused, postedToday, recordPost, today } from './lib/state.mjs';
-import { peekNext, commitNext } from './lib/queue.mjs';
-import { playerById, careerString, altText } from './lib/roster.mjs';
+import { isPaused, postedToday, recordPost, today, COST } from './lib/state.mjs';
+import { dailyFor, utcToday } from './lib/daily.mjs';
+import { careerString, altText } from './lib/roster.mjs';
 import { renderCard } from './render-card.mjs';
-import { createClient, weightedLength, containsUrl } from './lib/x-client.mjs';
+import { createClient, weightedLength, containsUrl, postCost } from './lib/x-client.mjs';
 
-export function composeText(player, edition) {
-  const header = `Carrera del día #${edition}`;
-  const ask = '¿Quién es? Sin Google 👀';
-  const full = `${header}\n\n${careerString(player)}\n\n${ask}`;
+export const SITE_URL = 'https://derabona.club/';
+export const SITE_BARE = 'derabona.club';
+
+// 0 = Sunday. Days on which we pay for a real link.
+export const LINK_DAYS = (process.env.DERABONA_LINK_DAYS || '0')
+  .split(',').map(n => Number(n.trim())).filter(Number.isFinite);
+
+export function wantsLink(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return LINK_DAYS.includes(new Date(Date.UTC(y, m - 1, d)).getUTCDay());
+}
+
+export function composeText(daily, withLink) {
+  const first = daily.rounds[0].player;
+  const header = `Rabona Diaria #${daily.challengeNumber}`;
+  const tail = withLink
+    ? `¿Las sacás las tres? 👇\n${SITE_URL}`
+    : `¿Las sacás las tres? Están en ${SITE_BARE} 👇`;
+
+  const full = `${header}\n\nLas mismas 3 carreras para todos. Esta es la primera:\n\n${careerString(first)}\n\n${tail}`;
   if (weightedLength(full) <= 280) return full;
-  // Long career: the card already shows every club, so drop the text list
-  // rather than truncating mid-club and inventing a career that never happened.
-  return `${header}\n\nMirá la carrera completa 👇\n\n${ask}`;
+  // Long career: the card shows every club. Drop the text list rather than
+  // truncating mid-club and implying a career that never happened.
+  return `${header}\n\nLas mismas 3 carreras para todos hoy.\nLa primera está en la imagen 👇\n\n${tail}`;
 }
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
-
   if (isPaused()) { console.log('[SILENT]'); return; }
+  if (postedToday('puzzle') && !dryRun) { console.log('[SILENT]'); return; }
 
-  const already = postedToday('puzzle');
-  if (already && !dryRun) {
-    console.log('[SILENT]');
-    return;
-  }
+  const date = utcToday();
+  const daily = dailyFor(date);
+  if (!daily) throw new Error(`no daily challenge defined for ${date}`);
 
-  const { queue, playerId, edition } = peekNext();
-  const player = playerById(playerId);
-  const text = composeText(player, edition);
+  const withLink = wantsLink(date);
+  const first = daily.rounds[0];
+  const text = composeText(daily, withLink);
 
-  if (containsUrl(text)) throw new Error('daily puzzle must never contain a URL');
   if (weightedLength(text) > 280) throw new Error(`text too long: ${weightedLength(text)}`);
+  if (text.includes(first.player.name)) throw new Error('post leaks the answer');
+
+  const expected = withLink ? COST.postWithUrl : COST.post;
+  if (postCost(text) !== expected) {
+    throw new Error(`cost mismatch: computed $${postCost(text)}, expected $${expected} (withLink=${withLink})`);
+  }
+  if (withLink !== containsUrl(text)) throw new Error('link policy and post content disagree');
 
   const out = path.join(os.tmpdir(), `derabona-card-${today()}.png`);
-  const { alt } = await renderCard({ playerId, edition, out });
+  const { alt } = await renderCard({
+    playerId: first.playerId,
+    edition: daily.challengeNumber,
+    label: 'Rabona Diaria',
+    out,
+  });
 
   const x = createClient({ dryRun });
   const mediaId = await x.uploadMedia(out, alt);
   const post = await x.createPost({ text, mediaIds: [mediaId], priority: 1 });
-
-  if (!post?.id) throw new Error('no tweet id returned — not advancing the queue');
+  if (!post?.id) throw new Error('no tweet id returned');
 
   if (!dryRun) {
-    commitNext(queue);
-    recordPost({ kind: 'puzzle', edition, playerId, tweetId: post.id, text });
-  }
-
-  if (dryRun) {
-    console.log('--- would post ---');
+    recordPost({
+      kind: 'puzzle',
+      challengeNumber: daily.challengeNumber,
+      playerId: first.playerId,
+      allPlayerIds: daily.rounds.map(r => r.playerId),
+      tweetId: post.id,
+      text,
+      withLink,
+    });
+    console.log('[SILENT]');
+  } else {
+    console.log(`--- would post (${withLink ? 'LINK day' : 'bare-domain day'}) ---`);
     console.log(text);
     console.log('--- alt ---');
     console.log(alt);
-    console.log(`--- player: ${player.name} (${playerId}), edition ${edition}, card ${out}`);
-  } else {
-    console.log('[SILENT]');
+    console.log(`--- #${daily.challengeNumber}: ${daily.rounds.map(r => r.player.name).join(' | ')}`);
+    console.log(`--- cost $${postCost(text).toFixed(3)}, card ${out}`);
   }
 }
 

@@ -55,7 +55,7 @@
 <script>
 // Sizing adapts to career length so a 14-club journeyman stays legible.
 function render(data) {
-  document.getElementById('edition').textContent = 'Carrera del día #' + data.edition;
+  document.getElementById('edition').textContent = (data.label || 'Carrera del día') + ' #' + data.edition;
   const n = data.clubs.length;
   const perRow = n <= 6 ? n : Math.ceil(n / 2);
   const disc = n <= 6 ? 128 : n <= 10 ? 104 : 84;

@@ -9,7 +9,7 @@ import { playerById, clubCrestDataUrl, altText } from './lib/roster.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const TEMPLATE = path.join(HERE, 'templates/card.html');
 
-export async function renderCard({ playerId, edition, out }) {
+export async function renderCard({ playerId, edition, out, label = 'Carrera del día' }) {
   const player = playerById(playerId);
   const clubs = player.clubs.map((c, i) => ({ name: c.name, crest: clubCrestDataUrl(player, i) }));
 
@@ -20,7 +20,7 @@ export async function renderCard({ playerId, edition, out }) {
       deviceScaleFactor: 2,
     });
     await page.goto('file://' + TEMPLATE);
-    await page.evaluate(d => render(d), { edition, clubs });
+    await page.evaluate(d => render(d), { edition, clubs, label });
     await page.waitForSelector('body[data-ready="1"]');
     await page.waitForFunction(() =>
       [...document.images].every(i => i.complete && i.naturalWidth > 0));

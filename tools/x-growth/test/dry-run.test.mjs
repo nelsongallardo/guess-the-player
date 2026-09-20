@@ -1,67 +1,65 @@
-// 14-day dry-run simulation: distinct players, incrementing editions,
-// no URLs, every post within the weighted limit, correct reveal cost.
+// 40-day simulation against the REAL daily schedule: char limits, correct
+// cost per link policy, no answer leaks, and a monthly budget that fits the cap.
 import assert from 'node:assert';
-import { composeText } from '../post-daily.mjs';
-import { composeReveal, colourLine } from '../post-reveal.mjs';
-import { buildQueue, computeTiers } from '../lib/queue.mjs';
-import { loadRoster, playerById } from '../lib/roster.mjs';
+import { composeText, wantsLink, LINK_DAYS } from '../post-daily.mjs';
+import { composeReveal } from '../post-reveal.mjs';
+import { dailyFor, EPOCH_DAY } from '../lib/daily.mjs';
 import { weightedLength, containsUrl, postCost } from '../lib/x-client.mjs';
-import { COST } from '../lib/state.mjs';
+import { COST, MONTHLY_CAP } from '../lib/state.mjs';
 
-const { players } = loadRoster();
-const q = buildQueue(1);
-const tiers = computeTiers(players);
+let worstPuzzle = 0, worstReveal = 0, fallbacks = 0, linkDays = 0, spend = 0;
 
-console.log(`roster: ${players.length} players, queue: ${q.order.length}\n`);
+for (let i = 0; i < 40; i++) {
+  const date = new Date((EPOCH_DAY + i) * 86400000).toISOString().slice(0, 10);
+  const daily = dailyFor(date);
+  const withLink = wantsLink(date);
+  const puzzle = composeText(daily, withLink);
+  const reveal = composeReveal(daily);
 
-const seen = new Set();
-let worstPuzzle = 0, worstReveal = 0;
+  // Link policy and actual content must agree, or we mis-bill.
+  assert.strictEqual(containsUrl(puzzle), withLink, `#${daily.challengeNumber} link policy mismatch`);
+  assert.strictEqual(postCost(puzzle), withLink ? COST.postWithUrl : COST.post, `#${daily.challengeNumber} puzzle cost`);
 
-for (let day = 0; day < 14; day++) {
-  const id = q.order[day];
-  const edition = day + 1;
-  const p = playerById(id);
+  // The reveal never carries a paid link.
+  assert.ok(!containsUrl(reveal), `#${daily.challengeNumber} reveal linkified`);
+  assert.strictEqual(postCost(reveal), COST.post, `#${daily.challengeNumber} reveal cost`);
 
-  assert.ok(!seen.has(id), `repeat within 14 days: ${id}`);
-  seen.add(id);
+  assert.ok(weightedLength(puzzle) <= 280, `#${daily.challengeNumber} puzzle ${weightedLength(puzzle)}`);
+  assert.ok(weightedLength(reveal) <= 280, `#${daily.challengeNumber} reveal ${weightedLength(reveal)}`);
 
-  const puzzle = composeText(p, edition);
-  const reveal = composeReveal(p);
+  // No answer leaks from the puzzle; every answer appears in the reveal.
+  for (const r of daily.rounds) {
+    assert.ok(!puzzle.includes(r.player.name), `#${daily.challengeNumber} leaks ${r.player.name}`);
+    assert.ok(reveal.includes(r.player.name), `#${daily.challengeNumber} reveal missing ${r.player.name}`);
+  }
+  // Every post must route to the game somehow.
+  assert.ok(/derabona\.club/.test(puzzle), `#${daily.challengeNumber} has no route to the game`);
 
-  assert.ok(!containsUrl(puzzle), `puzzle ${edition} contains a URL`);
-  assert.ok(!containsUrl(reveal), `reveal ${edition} contains a URL`);
-  assert.ok(weightedLength(puzzle) <= 280, `puzzle ${edition} is ${weightedLength(puzzle)}`);
-  assert.ok(weightedLength(reveal) <= 280, `reveal ${edition} is ${weightedLength(reveal)}`);
-  assert.strictEqual(postCost(reveal), COST.post, `reveal ${edition} would cost extra`);
-  assert.ok(!puzzle.includes(p.name), `puzzle ${edition} leaks the player name`);
-
+  if (withLink) linkDays++;
+  if (!puzzle.includes('→')) fallbacks++;
+  if (i < 30) spend += postCost(puzzle) + COST.media + postCost(reveal);
   worstPuzzle = Math.max(worstPuzzle, weightedLength(puzzle));
   worstReveal = Math.max(worstReveal, weightedLength(reveal));
 
-  if (day < 4) {
-    console.log(`=== día ${edition} — ${p.name} [${tiers[id]}] ===`);
+  if (i < 2 || (withLink && linkDays === 1)) {
+    console.log(`=== ${date} — Rabona Diaria #${daily.challengeNumber} ${withLink ? '[LINK DAY]' : '[bare domain]'} ===`);
     console.log(puzzle);
-    console.log('  ↳ ' + reveal.replace(/\n+/g, ' | '));
-    console.log();
+    console.log(`  ↳ ${reveal.replace(/\n+/g, ' | ')}`);
+    console.log(`  [puzzle ${weightedLength(puzzle)}ch $${postCost(puzzle)} · reveal ${weightedLength(reveal)}ch $${postCost(reveal)}]\n`);
   }
 }
 
-// no repeat across the full cycle
-assert.strictEqual(new Set(q.order).size, q.order.length, 'queue has duplicates');
+const replies = 5 * 30 * COST.post;
+const reads = 300 * COST.read;
+const total = spend + replies + reads;
 
-// weekly difficulty mix
-const week1 = q.order.slice(0, 7).map(id => tiers[id]);
-const counts = week1.reduce((m, t) => (m[t] = (m[t] || 0) + 1, m), {});
-
-console.log(`14 days simulated, all distinct.`);
-console.log(`full cycle: ${q.order.length} players, no repeats -> ${(q.order.length / 30).toFixed(1)} months before one repeats`);
-console.log(`week 1 mix: ${JSON.stringify(counts)}`);
+console.log(`40 days simulated. Link days: ${linkDays}/40 (policy: weekday ${LINK_DAYS.join(',')})`);
 console.log(`max weighted length — puzzle ${worstPuzzle}, reveal ${worstReveal} (limit 280)`);
-
-// longest career must still compose safely
-const longest = [...players].sort((a, b) => b.clubs.length - a.clubs.length)[0];
-const lt = composeText(longest, 999);
-console.log(`\nlongest career (${longest.clubs.length} clubs) -> ${weightedLength(lt)} chars, fallback used: ${!lt.includes('→')}`);
-assert.ok(weightedLength(lt) <= 280);
-console.log(`colour line: ${colourLine(longest)}`);
+console.log(`long-career fallback used on ${fallbacks}/40 days`);
+console.log(`\n30-day budget:`);
+console.log(`  posts+media+reveals  $${spend.toFixed(2)}`);
+console.log(`  replies (5/day)      $${replies.toFixed(2)}`);
+console.log(`  reads (1 scout/day)  $${reads.toFixed(2)}`);
+console.log(`  TOTAL                $${total.toFixed(2)}  (cap $${MONTHLY_CAP.toFixed(2)})`);
+assert.ok(total <= MONTHLY_CAP, `budget $${total.toFixed(2)} exceeds cap $${MONTHLY_CAP}`);
 console.log('\nALL ASSERTIONS PASSED');
