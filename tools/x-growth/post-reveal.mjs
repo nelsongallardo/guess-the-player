@@ -6,36 +6,44 @@
 import { isPaused, postedToday, recordPost, COST } from './lib/state.mjs';
 import { playerById } from './lib/roster.mjs';
 import { dailyFor } from './lib/daily.mjs';
-import { createClient, weightedLength, containsUrl, postCost } from './lib/x-client.mjs';
+import { createClient, weightedLength, containsUrl, postCost, POST_LIMIT } from './lib/x-client.mjs';
 
 // Colour derived ONLY from checked-in data — never world knowledge, never
 // goals/trophies/fees. The dataset's position/country fields are English and
 // must never be pasted into a Spanish post.
+//
+// Each line states a fact about the career that a player who just guessed
+// would not already have from the grid. No metaphors, no closers: if there
+// is nothing concrete to say, say nothing (composeReveal handles null).
 export function colourLine(player) {
   const names = player.clubs.map(c => c.name);
   const counts = names.reduce((m, n) => (m[n] = (m[n] || 0) + 1, m), {});
   const returned = Object.keys(counts).filter(n => counts[n] > 1);
 
-  if (returned.length) return `Dos etapas en ${returned[0]}, y no es un error del gráfico.`;
-  if (names.length >= 12) return `${names.length} clubes. Una carrera de mapa y valija.`;
-  if (names.length <= 3) return `Toda la carrera en ${names.length} clubes. Cada vez menos común.`;
+  if (returned.length) {
+    const club = returned[0];
+    return `Volvió a ${club}, por eso aparece dos veces.`;
+  }
+  if (names.length >= 12) return `${names.length} clubes en total.`;
+  if (names.length <= 3) return `Toda la carrera en ${names.length} clubes.`;
   return null;
 }
 
+// Terminology: the answers are JUGADORES. "Tres nuevas" would agree with
+// carreras and describe the clue as if it were the answer.
 export function composeReveal(daily) {
   const names = daily.rounds.map(r => r.player.name);
   const colour = colourLine(daily.rounds[0].player);
+  const head = `SPOILER. Rabona Diaria #${daily.challengeNumber}`;
+  const list = names.map((n, i) => `${i + 1}. ${n}`).join('\n');
 
-  const parts = [`⚠️ SPOILER — Rabona Diaria #${daily.challengeNumber}`];
-  parts.push(names.map((n, i) => `${i + 1}. ${n}`).join('\n'));
+  const parts = [head, list];
   if (colour) parts.push(colour);
-  parts.push('Mañana hay tres nuevas.');
+  parts.push('Mañana hay tres jugadores nuevos.');
 
   let text = parts.join('\n\n');
-  if (weightedLength(text) > 280) {
-    text = [`⚠️ SPOILER — Rabona Diaria #${daily.challengeNumber}`,
-      names.map((n, i) => `${i + 1}. ${n}`).join('\n'),
-      'Mañana hay tres nuevas.'].join('\n\n');
+  if (weightedLength(text) > POST_LIMIT) {
+    text = [head, list, 'Mañana hay tres jugadores nuevos.'].join('\n\n');
   }
   return text;
 }
@@ -58,7 +66,7 @@ async function main() {
   const text = composeReveal(daily);
   if (containsUrl(text)) throw new Error('reveal must not contain a linkified URL');
   if (postCost(text) !== COST.post) throw new Error(`reveal would cost $${postCost(text)}, expected $${COST.post}`);
-  if (weightedLength(text) > 280) throw new Error(`reveal too long: ${weightedLength(text)}`);
+  if (weightedLength(text) > POST_LIMIT) throw new Error(`reveal too long: ${weightedLength(text)} > ${POST_LIMIT}`);
 
   const x = createClient({ dryRun });
   const post = await x.createPost({ text, replyToId: puzzle.tweetId, priority: 2 });

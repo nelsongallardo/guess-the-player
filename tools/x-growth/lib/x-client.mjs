@@ -53,17 +53,45 @@ const urlRe = () => /https?:\/\/\S+|\bwww\.\S+/gi;
 
 export function containsUrl(text) { return urlRe().test(text); }
 
+// X's weighted count, per its published twitter-text rules.
+//
+// Learned the hard way 2026-09-20: X returns **403 "You are not permitted to
+// perform this action"** for an over-length post, NOT 400. That error reads
+// like a permissions failure and sent this debugging session chasing OAuth
+// scopes for half an hour. If a post 403s, check the length first.
+//
+// The ranges below are the CJK/Hangul/Hiragana blocks that count as 2. Every
+// other character counts as 1 — including emoji, which are 2 only because they
+// sit outside the BMP and are counted as surrogate pairs. An earlier version
+// counted only the surrogate pairs and undercounted the real total.
+const HEAVY = [
+  [0x1100, 0x115f], [0x2e80, 0x303e], [0x3041, 0x33ff], [0x3400, 0x4dbf],
+  [0x4e00, 0x9fff], [0xa000, 0xa4cf], [0xac00, 0xd7a3], [0xf900, 0xfaff],
+  [0xfe30, 0xfe4f], [0xff00, 0xff60], [0xffe0, 0xffe6],
+];
+
 export function weightedLength(text) {
   const withoutUrls = text.replace(urlRe(), '');
   const urlCount = (text.match(urlRe()) || []).length;
   let n = 0;
-  for (const ch of withoutUrls) n += ch.codePointAt(0) > 0xffff ? 2 : 1;
+  for (const ch of withoutUrls) {
+    const cp = ch.codePointAt(0);
+    // Outside the BMP (emoji, etc.) = surrogate pair = 2.
+    if (cp > 0xffff) { n += 2; continue; }
+    n += HEAVY.some(([lo, hi]) => cp >= lo && cp <= hi) ? 2 : 1;
+  }
   return n + urlCount * 23;
 }
 
 export function postCost(text) {
   return containsUrl(text) ? COST.postWithUrl : COST.post;
 }
+
+// X's nominal limit is 280, but our computed weight is not byte-identical to
+// theirs and a post measuring exactly 280 by our count was rejected live.
+// Rather than reverse-engineer twitter-text exactly, we keep a 10-char margin.
+// Measured 2026-09-20: 263 accepted, 280 rejected, in our real post shape.
+export const POST_LIMIT = 270;
 
 async function request(creds, { method, url, json, form, dryRun, label, cost, priority }) {
   if (cost) {
@@ -108,6 +136,15 @@ export function createClient({ dryRun = false } = {}) {
   return {
     dryRun,
 
+    // Upload goes to v1.1 (still works and returns a usable id), but alt text
+    // MUST use v2 /2/media/metadata with {id, metadata:{alt_text}}.
+    // Probed against the live API 2026-09-20:
+    //   v1.1 upload.json            -> 200
+    //   v1.1 metadata/create        -> 403  (deprecated 2025-03-31)
+    //   v2 /2/media/metadata        -> 200  <- the one that works
+    //   v2 with a media_id key      -> 400  (the field is "id", not "media_id")
+    // Alt text is a hard requirement here, not a nicety: the card is the puzzle,
+    // so a screen-reader user gets nothing without it.
     async uploadMedia(pngPath, altText) {
       const bytes = fs.readFileSync(pngPath);
       const form = new URLSearchParams({ media_data: bytes.toString('base64'), media_category: 'tweet_image' }).toString();
@@ -118,8 +155,8 @@ export function createClient({ dryRun = false } = {}) {
       const mediaId = out.media_id_string || out.data?.id;
       if (altText && !dryRun && mediaId) {
         await request(creds, {
-          method: 'POST', url: 'https://upload.twitter.com/1.1/media/metadata/create',
-          json: { media_id: mediaId, alt_text: { text: altText.slice(0, 1000) } },
+          method: 'POST', url: 'https://api.x.com/2/media/metadata',
+          json: { id: String(mediaId), metadata: { alt_text: { text: altText.slice(0, 1000) } } },
           dryRun, label: 'alt text', cost: 0, priority: 1,
         });
       }
@@ -127,7 +164,12 @@ export function createClient({ dryRun = false } = {}) {
     },
 
     async createPost({ text, mediaIds, replyToId, priority = 1 }) {
-      if (weightedLength(text) > 280) throw new Error(`post is ${weightedLength(text)} weighted chars, over 280`);
+      // Over-length posts return 403 "not permitted", which looks exactly like
+      // a permissions failure. Fail here with a useful message instead.
+      if (weightedLength(text) > POST_LIMIT) {
+        throw new Error(`post is ${weightedLength(text)} weighted chars, over the safe limit of ${POST_LIMIT} `
+          + `(X rejects over-length posts with a misleading 403)`);
+      }
       const cost = postCost(text);
       if (cost === COST.postWithUrl) {
         console.warn(`[warn] post contains a URL — charged $${COST.postWithUrl}, not $${COST.post}`);

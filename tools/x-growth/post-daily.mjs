@@ -22,7 +22,7 @@ import { isPaused, postedToday, recordPost, today, COST } from './lib/state.mjs'
 import { dailyFor, utcToday } from './lib/daily.mjs';
 import { careerString, altText } from './lib/roster.mjs';
 import { renderCard } from './render-card.mjs';
-import { createClient, weightedLength, containsUrl, postCost } from './lib/x-client.mjs';
+import { createClient, weightedLength, containsUrl, postCost, POST_LIMIT } from './lib/x-client.mjs';
 
 export const SITE_URL = 'https://derabona.club/';
 export const SITE_BARE = 'derabona.club';
@@ -36,18 +36,24 @@ export function wantsLink(dateStr) {
   return LINK_DAYS.includes(new Date(Date.UTC(y, m - 1, d)).getUTCDay());
 }
 
+// Terminology, taken from the game itself (index.html, commit 98c3a5a):
+//   "Los mismos tres jugadores para todos hoy"
+//   "Adiviná jugadores de fútbol por su carrera"
+// You guess a JUGADOR. The carrera is the clue, and it is singular. Never
+// count the puzzle in "carreras" — an earlier version said "3 carreras",
+// which describes the clue as though it were the answer.
 export function composeText(daily, withLink) {
   const first = daily.rounds[0].player;
   const header = `Rabona Diaria #${daily.challengeNumber}`;
   const tail = withLink
-    ? `¿Las sacás las tres? 👇\n${SITE_URL}`
-    : `¿Las sacás las tres? Están en ${SITE_BARE} 👇`;
+    ? `¿Quién es?\n${SITE_URL}`
+    : `¿Quién es? Los tres están en ${SITE_BARE}`;
 
-  const full = `${header}\n\nLas mismas 3 carreras para todos. Esta es la primera:\n\n${careerString(first)}\n\n${tail}`;
-  if (weightedLength(full) <= 280) return full;
+  const full = `${header}\n\nLos mismos tres jugadores para todos hoy. Este es el primero:\n\n${careerString(first)}\n\n${tail}`;
+  if (weightedLength(full) <= POST_LIMIT) return full;
   // Long career: the card shows every club. Drop the text list rather than
   // truncating mid-club and implying a career that never happened.
-  return `${header}\n\nLas mismas 3 carreras para todos hoy.\nLa primera está en la imagen 👇\n\n${tail}`;
+  return `${header}\n\nLos mismos tres jugadores para todos hoy. El primero está en la imagen.\n\n${tail}`;
 }
 
 async function main() {
@@ -63,7 +69,7 @@ async function main() {
   const first = daily.rounds[0];
   const text = composeText(daily, withLink);
 
-  if (weightedLength(text) > 280) throw new Error(`text too long: ${weightedLength(text)}`);
+  if (weightedLength(text) > POST_LIMIT) throw new Error(`text too long: ${weightedLength(text)} > ${POST_LIMIT}`);
   if (text.includes(first.player.name)) throw new Error('post leaks the answer');
 
   const expected = withLink ? COST.postWithUrl : COST.post;

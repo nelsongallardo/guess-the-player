@@ -4,7 +4,7 @@ import assert from 'node:assert';
 import { composeText, wantsLink, LINK_DAYS } from '../post-daily.mjs';
 import { composeReveal } from '../post-reveal.mjs';
 import { dailyFor, EPOCH_DAY } from '../lib/daily.mjs';
-import { weightedLength, containsUrl, postCost } from '../lib/x-client.mjs';
+import { weightedLength, containsUrl, postCost, POST_LIMIT } from '../lib/x-client.mjs';
 import { COST, MONTHLY_CAP } from '../lib/state.mjs';
 
 let worstPuzzle = 0, worstReveal = 0, fallbacks = 0, linkDays = 0, spend = 0;
@@ -24,8 +24,8 @@ for (let i = 0; i < 40; i++) {
   assert.ok(!containsUrl(reveal), `#${daily.challengeNumber} reveal linkified`);
   assert.strictEqual(postCost(reveal), COST.post, `#${daily.challengeNumber} reveal cost`);
 
-  assert.ok(weightedLength(puzzle) <= 280, `#${daily.challengeNumber} puzzle ${weightedLength(puzzle)}`);
-  assert.ok(weightedLength(reveal) <= 280, `#${daily.challengeNumber} reveal ${weightedLength(reveal)}`);
+  assert.ok(weightedLength(puzzle) <= POST_LIMIT, `#${daily.challengeNumber} puzzle ${weightedLength(puzzle)} > ${POST_LIMIT}`);
+  assert.ok(weightedLength(reveal) <= POST_LIMIT, `#${daily.challengeNumber} reveal ${weightedLength(reveal)} > ${POST_LIMIT}`);
 
   // No answer leaks from the puzzle; every answer appears in the reveal.
   for (const r of daily.rounds) {
@@ -54,7 +54,7 @@ const reads = 300 * COST.read;
 const total = spend + replies + reads;
 
 console.log(`40 days simulated. Link days: ${linkDays}/40 (policy: weekday ${LINK_DAYS.join(',')})`);
-console.log(`max weighted length — puzzle ${worstPuzzle}, reveal ${worstReveal} (limit 280)`);
+console.log(`max weighted length — puzzle ${worstPuzzle}, reveal ${worstReveal} (safe limit ${POST_LIMIT}, X nominal 280)`);
 console.log(`long-career fallback used on ${fallbacks}/40 days`);
 console.log(`\n30-day budget:`);
 console.log(`  posts+media+reveals  $${spend.toFixed(2)}`);
