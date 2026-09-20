@@ -1,7 +1,13 @@
 #!/usr/bin/env node
-// Reveal reply on the day's Rabona Diaria thread: the answers to all three
-// careers. Never posts an orphan reveal, never linkifies the site (the puzzle
-// post already carries the paid link; this one stays at the $0.015 rate).
+// Reveal reply on the day's Rabona Diaria thread.
+//
+// Reveals ONLY the player whose career the card showed. The daily has three
+// rounds, but the post shows one grid, so naming all three would spoil two
+// players nobody was given a clue for, and would read as though the single
+// grid somehow had three answers. The other two stay on the site.
+//
+// Never posts an orphan reveal, never linkifies the site (the puzzle post
+// already carries the paid link; this one stays at the $0.015 rate).
 
 import { isPaused, postedToday, recordPost, COST } from './lib/state.mjs';
 import { playerById } from './lib/roster.mjs';
@@ -29,22 +35,28 @@ export function colourLine(player) {
   return null;
 }
 
-// Terminology: the answers are JUGADORES. "Tres nuevas" would agree with
+// Terminology: the answer is a JUGADOR. "Tres nuevas" would agree with
 // carreras and describe the clue as if it were the answer.
-export function composeReveal(daily) {
-  const names = daily.rounds.map(r => r.player.name);
-  const colour = colourLine(daily.rounds[0].player);
-  const head = `SPOILER. Rabona Diaria #${daily.challengeNumber}`;
-  const list = names.map((n, i) => `${i + 1}. ${n}`).join('\n');
+//
+// `shownIndex` is which of the day's three rounds the card actually rendered.
+// post-daily always uses round 0, but it is recorded per-post rather than
+// assumed, so a future change to which round gets posted cannot silently
+// reveal the wrong player.
+export function composeReveal(daily, shownIndex = 0) {
+  const shown = daily.rounds[shownIndex];
+  if (!shown) throw new Error(`daily #${daily.challengeNumber} has no round ${shownIndex}`);
 
-  const parts = [head, list];
+  const head = `SPOILER. Rabona Diaria #${daily.challengeNumber}`;
+  const answer = `Era ${shown.player.name}.`;
+  const colour = colourLine(shown.player);
+  const tail = 'Los otros dos jugadores de hoy están en derabona.club';
+
+  const parts = [head, answer];
   if (colour) parts.push(colour);
-  parts.push('Mañana hay tres jugadores nuevos.');
+  parts.push(tail);
 
   let text = parts.join('\n\n');
-  if (weightedLength(text) > POST_LIMIT) {
-    text = [head, list, 'Mañana hay tres jugadores nuevos.'].join('\n\n');
-  }
+  if (weightedLength(text) > POST_LIMIT) text = [head, answer, tail].join('\n\n');
   return text;
 }
 
@@ -63,7 +75,7 @@ async function main() {
     throw new Error(`daily mismatch: recorded #${puzzle.challengeNumber}, recomputed #${daily?.challengeNumber}`);
   }
 
-  const text = composeReveal(daily);
+  const text = composeReveal(daily, puzzle.shownIndex ?? 0);
   if (containsUrl(text)) throw new Error('reveal must not contain a linkified URL');
   if (postCost(text) !== COST.post) throw new Error(`reveal would cost $${postCost(text)}, expected $${COST.post}`);
   if (weightedLength(text) > POST_LIMIT) throw new Error(`reveal too long: ${weightedLength(text)} > ${POST_LIMIT}`);

@@ -29,9 +29,23 @@ for (let i = 0; i < 20; i++) {
   // "tres nuevas" agrees with carreras, so it carries the same error.
   assert.ok(!/\btres nuevas\b/i.test(reveal),
     `#${daily.challengeNumber} reveal says "tres nuevas": ${reveal}`);
+
+  // The card shows ONE career, so the reveal must name exactly one player.
+  // Naming all three spoils two players the post gave no clue for.
+  const shown = daily.rounds[0].player.name;
+  assert.ok(reveal.includes(shown),
+    `#${daily.challengeNumber} reveal omits the shown player ${shown}: ${reveal}`);
+  for (const other of daily.rounds.slice(1)) {
+    assert.ok(!reveal.includes(other.player.name),
+      `#${daily.challengeNumber} reveal leaks unshown player ${other.player.name}: ${reveal}`);
+  }
+  // A numbered list implies the single grid had three answers.
+  assert.ok(!/^\s*[12]\.\s/m.test(reveal),
+    `#${daily.challengeNumber} reveal still lists answers: ${reveal}`);
 }
 check('no post counts the puzzle in "carreras"', true);
 check('no reveal says "tres nuevas"', true);
+check('reveal names only the player whose career was shown', true);
 
 const d = dailyFor('2026-09-19');   // Messi, short career, exercises the text path
 const p = composeText(d, false);

@@ -27,10 +27,18 @@ for (let i = 0; i < 40; i++) {
   assert.ok(weightedLength(puzzle) <= POST_LIMIT, `#${daily.challengeNumber} puzzle ${weightedLength(puzzle)} > ${POST_LIMIT}`);
   assert.ok(weightedLength(reveal) <= POST_LIMIT, `#${daily.challengeNumber} reveal ${weightedLength(reveal)} > ${POST_LIMIT}`);
 
-  // No answer leaks from the puzzle; every answer appears in the reveal.
+  // No answer leaks from the puzzle.
   for (const r of daily.rounds) {
     assert.ok(!puzzle.includes(r.player.name), `#${daily.challengeNumber} leaks ${r.player.name}`);
-    assert.ok(reveal.includes(r.player.name), `#${daily.challengeNumber} reveal missing ${r.player.name}`);
+  }
+  // The reveal names ONLY the player whose career the card showed. The other
+  // two of the day's three rounds had no clue in the post, so naming them
+  // would spoil them for nothing.
+  assert.ok(reveal.includes(daily.rounds[0].player.name),
+    `#${daily.challengeNumber} reveal missing the shown player`);
+  for (const r of daily.rounds.slice(1)) {
+    assert.ok(!reveal.includes(r.player.name),
+      `#${daily.challengeNumber} reveal leaks unshown ${r.player.name}`);
   }
   // Every post must route to the game somehow.
   assert.ok(/derabona\.club/.test(puzzle), `#${daily.challengeNumber} has no route to the game`);

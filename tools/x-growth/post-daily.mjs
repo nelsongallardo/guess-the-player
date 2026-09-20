@@ -96,6 +96,9 @@ async function main() {
       kind: 'puzzle',
       challengeNumber: daily.challengeNumber,
       playerId: first.playerId,
+      // Which of the day's three rounds the card rendered. The reveal reads
+      // this so it can never name a player the post gave no clue for.
+      shownIndex: 0,
       allPlayerIds: daily.rounds.map(r => r.playerId),
       tweetId: post.id,
       text,
