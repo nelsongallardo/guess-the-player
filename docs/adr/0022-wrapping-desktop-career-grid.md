@@ -1,4 +1,4 @@
-# 21. Wrap the desktop career grid at six columns instead of paging it
+# 22. Wrap the desktop career grid at six columns instead of paging it
 
 Status: Accepted — implemented 2026-09-18. Supersedes [ADR 0018](0018-row-major-paged-career-grid.md)'s eight-club pages and relaxes [ADR 0017](0017-desktop-two-row-career-cap.md)'s hard two-row cap.
 
