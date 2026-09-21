@@ -9,7 +9,7 @@
 // Never posts an orphan reveal, never linkifies the site (the puzzle post
 // already carries the paid link; this one stays at the $0.015 rate).
 
-import { isPaused, postedToday, recordPost, COST } from './lib/state.mjs';
+import { isPaused, loadPosts, mostRecentUnrevealed, recordPost, COST } from './lib/state.mjs';
 import { playerById } from './lib/roster.mjs';
 import { dailyFor } from './lib/daily.mjs';
 import { createClient, weightedLength, containsUrl, postCost, POST_LIMIT } from './lib/x-client.mjs';
@@ -63,13 +63,15 @@ export function composeReveal(daily, shownIndex = 0) {
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
   if (isPaused()) { console.log('[SILENT]'); return; }
-  if (postedToday('reveal') && !dryRun) { console.log('[SILENT]'); return; }
 
-  const puzzle = postedToday('puzzle');
-  if (!puzzle) { console.log('[SILENT]'); return; }   // nothing to reveal
+  // Idempotency is keyed on challengeNumber, not a UTC calendar date: the
+  // reveal runs at 01:00 London, which is already the NEXT UTC date, so a
+  // date-equality check (postedToday()) misses the puzzle it should reveal.
+  // This is exactly the bug found live on 2026-09-21 — the job ran, matched
+  // no puzzle for "today" in UTC terms, and silently no-opped.
+  const puzzle = mostRecentUnrevealed();
+  if (!puzzle) { console.log('[SILENT]'); return; }   // nothing to reveal, or already revealed
 
-  // Rebuild from the recorded challenge number, not from "today" — the reveal
-  // runs after UTC midnight, when utcToday() has already rolled over.
   const daily = dailyFor(puzzle.date);
   if (!daily || daily.challengeNumber !== puzzle.challengeNumber) {
     throw new Error(`daily mismatch: recorded #${puzzle.challengeNumber}, recomputed #${daily?.challengeNumber}`);
@@ -84,6 +86,8 @@ async function main() {
   const post = await x.createPost({ text, replyToId: puzzle.tweetId, priority: 2 });
 
   if (!dryRun) {
+    // Written with today's real (posting-time) date for audit purposes, but
+    // matching against a reveal is always done by challengeNumber, per above.
     recordPost({ kind: 'reveal', challengeNumber: daily.challengeNumber, tweetId: post.id, text, replyTo: puzzle.tweetId });
     console.log('[SILENT]');
   } else {

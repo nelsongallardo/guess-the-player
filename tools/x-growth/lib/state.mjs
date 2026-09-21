@@ -82,6 +82,21 @@ export function postedToday(kind) {
   return loadPosts().find(p => p.date === today() && p.kind === kind) || null;
 }
 
+// Same-day-in-LONDON lookup, for jobs that run after UTC midnight but still
+// belong to London's "today" — e.g. the 01:00 London reveal runs at UTC 00:00,
+// after today() has already rolled to the next UTC date. Looks back up to two
+// UTC dates to find the most recent unrevealed puzzle, so it survives the
+// rollover regardless of which side of midnight the cron actually fires on.
+export function mostRecentUnrevealed(posts = loadPosts()) {
+  const puzzles = posts.filter(p => p.kind === 'puzzle').sort((a, b) => b.date.localeCompare(a.date));
+  for (const puzzle of puzzles) {
+    const alreadyRevealed = posts.some(p => p.kind === 'reveal' && p.challengeNumber === puzzle.challengeNumber);
+    if (!alreadyRevealed) return puzzle;
+    return null; // most recent puzzle already has its reveal; do not walk further back
+  }
+  return null;
+}
+
 export function recordPost(entry) {
   const posts = loadPosts();
   posts.push({ date: today(), at: new Date().toISOString(), ...entry });
