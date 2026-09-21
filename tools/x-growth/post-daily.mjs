@@ -19,7 +19,7 @@
 import os from 'node:os';
 import path from 'node:path';
 import { isPaused, postedToday, recordPost, today, COST } from './lib/state.mjs';
-import { dailyFor, utcToday } from './lib/daily.mjs';
+import { dailyFor, utcToday, hoursUntilRollover } from './lib/daily.mjs';
 import { careerString, altText } from './lib/roster.mjs';
 import { renderCard } from './render-card.mjs';
 import { createClient, weightedLength, containsUrl, postCost, POST_LIMIT } from './lib/x-client.mjs';
@@ -64,6 +64,17 @@ async function main() {
   const date = utcToday();
   const daily = dailyFor(date);
   if (!daily) throw new Error(`no daily challenge defined for ${date}`);
+
+  // The daily rolls at 00:00 UTC. Posting a puzzle with under an hour left
+  // sends people to a challenge that is about to be replaced — by the time
+  // anyone sees the tweet the site is serving different players. Normal runs
+  // are at 16:00/17:00 UTC with 7-8h of runway; this only trips on a badly
+  // delayed run or a manual retry near midnight.
+  const hoursLeft = hoursUntilRollover(date);
+  if (hoursLeft < 1) {
+    throw new Error(`only ${hoursLeft.toFixed(1)}h until the daily rolls over — `
+      + `refusing to post a puzzle that is about to be replaced`);
+  }
 
   const withLink = wantsLink(date);
   const first = daily.rounds[0];

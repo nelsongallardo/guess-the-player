@@ -11,7 +11,7 @@
 
 import { isPaused, loadPosts, mostRecentUnrevealed, recordPost, COST } from './lib/state.mjs';
 import { playerById } from './lib/roster.mjs';
-import { dailyFor } from './lib/daily.mjs';
+import { dailyFor, dailyIsLive } from './lib/daily.mjs';
 import { createClient, weightedLength, containsUrl, postCost, POST_LIMIT } from './lib/x-client.mjs';
 
 // Colour derived ONLY from checked-in data — never world knowledge, never
@@ -42,14 +42,21 @@ export function colourLine(player) {
 // post-daily always uses round 0, but it is recorded per-post rather than
 // assumed, so a future change to which round gets posted cannot silently
 // reveal the wrong player.
-export function composeReveal(daily, shownIndex = 0) {
+// `isLive` is whether that day's daily is STILL the one the site is serving.
+// The daily rolls at 00:00 UTC, so "los otros dos jugadores de hoy están en
+// derabona.club" becomes a lie the instant the boundary passes: the site has
+// already swapped in three new players. When the daily has rolled, point at
+// the new one instead of a puzzle nobody can reach.
+export function composeReveal(daily, shownIndex = 0, isLive = true) {
   const shown = daily.rounds[shownIndex];
   if (!shown) throw new Error(`daily #${daily.challengeNumber} has no round ${shownIndex}`);
 
   const head = `SPOILER. Rabona Diaria #${daily.challengeNumber}`;
   const answer = `Era ${shown.player.name}.`;
   const colour = colourLine(shown.player);
-  const tail = 'Los otros dos jugadores de hoy están en derabona.club';
+  const tail = isLive
+    ? 'Los otros dos jugadores de hoy están en derabona.club'
+    : 'Hoy hay tres jugadores nuevos en derabona.club';
 
   const parts = [head, answer];
   if (colour) parts.push(colour);
@@ -77,7 +84,7 @@ async function main() {
     throw new Error(`daily mismatch: recorded #${puzzle.challengeNumber}, recomputed #${daily?.challengeNumber}`);
   }
 
-  const text = composeReveal(daily, puzzle.shownIndex ?? 0);
+  const text = composeReveal(daily, puzzle.shownIndex ?? 0, dailyIsLive(puzzle.date));
   if (containsUrl(text)) throw new Error('reveal must not contain a linkified URL');
   if (postCost(text) !== COST.post) throw new Error(`reveal would cost $${postCost(text)}, expected $${COST.post}`);
   if (weightedLength(text) > POST_LIMIT) throw new Error(`reveal too long: ${weightedLength(text)} > ${POST_LIMIT}`);

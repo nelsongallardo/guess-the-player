@@ -41,6 +41,21 @@ export function utcToday() {
   return new Date().toISOString().slice(0, 10);
 }
 
+// The daily rolls over at 00:00 UTC — the game's own currentDate() is
+// `new Date().toISOString().slice(0,10)`, and the UI says "Resets at 00:00 UTC".
+// Any copy claiming a given day's players are playable is FALSE once that
+// boundary passes: the site is already serving the next three.
+export function dailyIsLive(dateStr) {
+  return dateStr === utcToday();
+}
+
+// Whole hours left before the given day's daily is replaced. Negative once
+// it has already rolled over.
+export function hoursUntilRollover(dateStr = utcToday()) {
+  const end = Date.UTC(...dateStr.split('-').map(Number).map((n, i) => i === 1 ? n - 1 : n)) + 86400000;
+  return (end - Date.now()) / 3600000;
+}
+
 // Returns { date, challengeNumber, rounds: [{ playerId, player }] } or null
 // if the date precedes the epoch.
 export function dailyFor(dateStr = utcToday()) {

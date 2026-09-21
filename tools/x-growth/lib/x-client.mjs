@@ -211,6 +211,17 @@ export function createClient({ dryRun = false } = {}) {
       return out.data || [];
     },
 
+    // Deleting is free on X's pay-per-usage pricing (no charge listed for
+    // DELETE /2/tweets/:id), but it is destructive, so it is never called by
+    // any scheduled job — only by hand when a post has to be corrected.
+    async deletePost(id) {
+      const out = await request(creds, {
+        method: 'DELETE', url: `https://api.x.com/2/tweets/${id}`,
+        dryRun, label: `delete ${id}`, cost: 0, priority: 1,
+      });
+      return out.data?.deleted === true;
+    },
+
     async getPost(id) {
       const out = await request(creds, {
         method: 'GET', url: `https://api.x.com/2/tweets/${id}?tweet.fields=public_metrics`,
