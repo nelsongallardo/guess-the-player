@@ -1,5 +1,8 @@
 // 40-day simulation against the REAL daily schedule: char limits, correct
-// cost per link policy, no answer leaks, and a monthly budget that fits the cap.
+// link policy, no answer leaks, and a recurring worst-case calendar-month
+// budget. The approval flow caps replies at five/day, but the $6 plan funds at
+// most five approved replies in a 31-day month with five Sundays after accounting
+// for each approval's source-post read.
 import assert from 'node:assert';
 import { composeText, wantsLink, LINK_DAYS } from '../post-daily.mjs';
 import { composeReveal } from '../post-reveal.mjs';
@@ -7,7 +10,7 @@ import { dailyFor, EPOCH_DAY } from '../lib/daily.mjs';
 import { weightedLength, containsUrl, postCost, POST_LIMIT } from '../lib/x-client.mjs';
 import { COST, MONTHLY_CAP } from '../lib/state.mjs';
 
-let worstPuzzle = 0, worstReveal = 0, fallbacks = 0, linkDays = 0, spend = 0;
+let worstPuzzle = 0, worstReveal = 0, fallbacks = 0, linkDays = 0;
 
 for (let i = 0; i < 40; i++) {
   const date = new Date((EPOCH_DAY + i) * 86400000).toISOString().slice(0, 10);
@@ -45,7 +48,6 @@ for (let i = 0; i < 40; i++) {
 
   if (withLink) linkDays++;
   if (!puzzle.includes('→')) fallbacks++;
-  if (i < 30) spend += postCost(puzzle) + COST.media + postCost(reveal);
   worstPuzzle = Math.max(worstPuzzle, weightedLength(puzzle));
   worstReveal = Math.max(worstReveal, weightedLength(reveal));
 
@@ -57,17 +59,29 @@ for (let i = 0; i < 40; i++) {
   }
 }
 
-const replies = 5 * 30 * COST.post;
-const reads = 300 * COST.read;
-const total = spend + replies + reads;
+// Recurring worst case: a 31-day month can contain five configured link days.
+// Five account timelines/day × X's five-post minimum = 25 reads/day.
+const budgetDays = 31;
+const worstLinkDays = Math.ceil(budgetDays / 7);
+const approvedRepliesPerMonth = 5;
+const posts = worstLinkDays * COST.postWithUrl
+  + (budgetDays - worstLinkDays) * COST.post
+  + budgetDays * (COST.media + COST.post); // image + reveal
+const reads = 5 * 5 * budgetDays * COST.read;
+const replyCost = COST.read + COST.post; // source lookup + reply in approve.mjs
+const replies = approvedRepliesPerMonth * replyCost;
+const total = posts + replies + reads;
+const oneMoreReply = total + replyCost;
 
 console.log(`40 days simulated. Link days: ${linkDays}/40 (policy: weekday ${LINK_DAYS.join(',')})`);
 console.log(`max weighted length — puzzle ${worstPuzzle}, reveal ${worstReveal} (safe limit ${POST_LIMIT}, X nominal 280)`);
 console.log(`long-career fallback used on ${fallbacks}/40 days`);
-console.log(`\n30-day budget:`);
-console.log(`  posts+media+reveals  $${spend.toFixed(2)}`);
-console.log(`  replies (5/day)      $${replies.toFixed(2)}`);
-console.log(`  reads (1 scout/day)  $${reads.toFixed(2)}`);
-console.log(`  TOTAL                $${total.toFixed(2)}  (cap $${MONTHLY_CAP.toFixed(2)})`);
-assert.ok(total <= MONTHLY_CAP, `budget $${total.toFixed(2)} exceeds cap $${MONTHLY_CAP}`);
+console.log(`\nworst-case ${budgetDays}-day budget (${worstLinkDays} link days):`);
+console.log(`  posts+media+reveals  $${posts.toFixed(3)}`);
+console.log(`  approved replies (${approvedRepliesPerMonth}/month) $${replies.toFixed(3)}`);
+console.log(`  reads (5 accounts × 5 posts/day) $${reads.toFixed(3)}`);
+console.log(`  TOTAL                $${total.toFixed(3)}  (cap $${MONTHLY_CAP.toFixed(2)})`);
+assert.ok(total <= MONTHLY_CAP, `budget $${total.toFixed(3)} exceeds cap $${MONTHLY_CAP}`);
+assert.ok(oneMoreReply > MONTHLY_CAP,
+  `budget unexpectedly funds more than ${approvedRepliesPerMonth} replies in the worst month`);
 console.log('\nALL ASSERTIONS PASSED');

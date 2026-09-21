@@ -200,13 +200,20 @@ export function createClient({ dryRun = false } = {}) {
       return out.data?.id || null;
     },
 
+    // X enforces max_results minimum 5 on this endpoint, so asking for fewer is
+    // impossible — the floor below is the API's rule, not a local choice.
+    // Reserve against the unavoidable request size, not the caller's smaller
+    // `max`: the caller used to pass per=2 and request/iterate up to 5 posts while
+    // the ledger recorded 2, so the $6 cap and reserve floors read ~2.5x low.
+    // This is deliberately conservative when an inactive account returns <5.
     async getUserPosts(userId, max = 5) {
+      const effective = Math.max(5, max);
       const url = `https://api.x.com/2/users/${userId}/tweets`
-        + `?max_results=${Math.max(5, max)}&exclude=retweets,replies`
+        + `?max_results=${effective}&exclude=retweets,replies`
         + `&tweet.fields=created_at,text,public_metrics`;
       const out = await request(creds, {
         method: 'GET', url, dryRun, label: `timeline ${userId}`,
-        cost: COST.read * max, priority: 4,
+        cost: COST.read * effective, priority: 4,
       });
       return out.data || [];
     },

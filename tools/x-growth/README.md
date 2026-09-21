@@ -7,15 +7,16 @@ Plan and rationale: `projects/derabona/2026-09-20-x-follower-growth-automation.m
 
 ## Status
 
-**PAUSED.** `~/.hermes/state/derabona/PAUSE` exists, so every job exits immediately
-without posting, reading or spending. Credentials are not configured yet.
+**LIVE.** The four cron jobs are currently registered in the default Hermes profile;
+state lives under `~/.hermes/state/derabona/`. Use the `PAUSE` file kill switch below
+to stop X reads and writes immediately.
 
 ## What runs
 
 | Job | Schedule (London) | What it does |
 |---|---|---|
 | `derabona-daily-puzzle` | `0 17 * * *` | Posts `Carrera del día #N` with a career-card image |
-| `derabona-daily-reveal` | `0 1 * * *` | Self-replies with the answer on that thread |
+| `derabona-daily-reveal` | `0 22 * * *` | Self-replies with the answer on that thread |
 | `derabona-scout` | `30 13 * * *` | Drafts reply candidates, sends them to Telegram for approval |
 | `derabona-weekly-metrics` | `0 9 * * 1` | Follower count, streak, spend, gate progress |
 
@@ -25,7 +26,7 @@ Schedules are **London time**; the plan is written in Buenos Aires time.
 `0 17` London = 13:00 BA **only during BST**.
 
 **When BST ends on 25 October 2026, change the puzzle job to `0 16` and the reveal
-job to `0 0`**, or both posts drift an hour.
+job to `0 21`**, or both posts drift an hour.
 
 ## Going live
 
@@ -39,11 +40,11 @@ job to `0 0`**, or both posts drift an hour.
    chmod 600 ~/.hermes/secrets/derabona-x.json
    ```
    The client refuses to run if the file is not `0600`.
-3. Review the watchlist at `~/.hermes/state/derabona/watchlist.json`. It is seeded with
-   **17 handles, each verified live on 2026-09-20** (the account exists, follower count
-   is real). Fit is a judgement call — prune freely. Tiers: `1` = Paren la Mano cast
-   (origin story), `2` = nostalgia/retro/career-database accounts (best format fit),
-   `3` = mass-reach news feeds (high noise, the blocklist rejects most of their posts).
+3. Review the watchlist at `~/.hermes/state/derabona/watchlist.json`. It currently has
+   **20 handles**: the original 17 verified live on 2026-09-20 plus `@sudanalytics_`,
+   `@Promiedos`, and `@TigreDatos`. Fit is a judgement call — prune freely. The scout
+   reads five accounts per daily run, so 20 accounts exactly fill its 96-hour freshness
+   window. Adding more without increasing the run size or window makes posts age out.
 4. Dry run everything first:
    ```sh
    node post-daily.mjs  --dry-run
@@ -67,7 +68,11 @@ the entire cap, before a single reply. So:
 - The reveal never carries a paid link.
 
 `post-daily.mjs` asserts the computed cost matches the policy and refuses to post on
-mismatch. Verified 30-day budget: **$5.54** against the **$6.00** cap.
+mismatch. The recurring worst-case plan budgets a 31-day month with five Sunday
+links, five account timelines per day (X's five-post minimum), and up to five
+approved replies including each approval's source-post read: **$5.985** against the
+**$6.00** cap. Five replies/day remains a safety ceiling, not a funded daily target;
+reserve floors stop optional replies and reads before they can starve the daily puzzle.
 
 > Unverified: whether X bills a bare `derabona.club` as a URL is not documented.
 > We assume not. **Check the first real invoice against `spend.json`** — if bare
@@ -86,8 +91,15 @@ Spend priority, enforced by reserve floors — the daily post is the last thing 
 ## Reply approval
 
 The scout **filters in code before any model call** — the blocklist (deaths, injuries,
-politics, referee rows, misconduct) is a regex, not a judgement call. Surviving posts get
-one drafted reply each, sent to Telegram General (thread 2156).
+politics, referee rows, misconduct) is a regex, not a judgement call. The 96-hour age
+window matches the four-day watchlist cycle; topic keywords tag candidates but do not
+hard-reject ordinary football conversation. Surviving posts are drafted with an explicit
+Hermes model (`gpt-5.6-terra` via `openai-codex`, low reasoning by default) and sent to
+Telegram General (thread 2156) for approval. Override without editing code with
+`DERABONA_DRAFT_MODEL`, `DERABONA_DRAFT_PROVIDER`, and `DERABONA_DRAFT_REASONING`.
+An LLM transport/auth failure is distinct from the model answering `SKIP`: if every draft
+call fails, the scout exits nonzero so cron failure delivery can alert instead of reporting
+a silent successful run.
 
 Reply `1`, `1,3`, or `skip`. The hook at `~/.hermes/hooks/derabona-approvals/` only acts
 when `drafts.json` has a pending batch under 12 hours old — otherwise a stray number in
@@ -131,7 +143,9 @@ and must never be pasted into a Spanish post.
 node test/daily-parity.test.mjs  # our daily == the game's daily, 40 days
 node test/dry-run.test.mjs       # 40-day sim, char limits, link policy, budget vs cap
 node test/state.test.mjs         # atomic writes, kill switch, spend priorities, idempotency
-node test/scout-filter.test.mjs  # blocklist/allowlist, blocklist wins ties
+node test/scout-filter.test.mjs  # safety blocklist, age window, topic tagging
+node test/copy.test.mjs          # public copy and bot-tell rejection rules
+node test/draft-failure.test.mjs # empty Hermes output is an alertable failure
 node test/card-layout.test.mjs   # card never overflows, 6 to 19 clubs
 python3 test/hook-guard.test.py  # stray-number guard on the Telegram hook
 ```

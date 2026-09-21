@@ -74,8 +74,11 @@ console.log('\n=== aiTell filter rejects bot-sounding replies ===');
 const bad = [
   ['No es solo un golazo, sino una obra de arte.', 'not-X-but-Y'],
   ['Tremenda carrera — pasó por media Europa.', 'dash'],
+  ['¿Cuántos se acuerdan que pasó por Zaragoza antes del Inter?', 'opening-punctuation'],
   ['La realidad es que nadie se acuerda de esa etapa.', 'deep-sounding'],
   ['Mirá, ese equipo era otra cosa.', 'staged opener'],
+  ['Che, posta', 'staged opener'],
+  ['Che, posta, ese equipo era otra cosa.', 'staged opener'],
   ['Jugó en seis clubes. Así de simple.', 'closer'],
   ['Qué carrera tremenda!!', 'punctuation spam'],
   ['Hola! Buen dato sobre Riquelme.', 'greeting'],
@@ -87,7 +90,8 @@ for (const [text, want] of bad) {
 
 const good = [
   'Ese año en Genoa lo tenía jugando de enganche, no de nueve.',
-  '¿Cuántos se acuerdan que pasó por Zaragoza antes del Inter?',
+  'cuántos se acuerdan que pasó por Zaragoza antes del Inter?',
+  'che y a esta altura vuelve para jugar en serio o más para el cariño de la gente?',
   'Dos etapas en Racing y la gente igual se acuerda más de la segunda.',
 ];
 for (const text of good) {
