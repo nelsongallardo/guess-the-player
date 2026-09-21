@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<style>
+  @page { margin: 0 }
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  body {
+    width: 1200px; height: 675px; overflow: hidden;
+    background: #0d140f;
+    background-image: radial-gradient(ellipse at 80% 0%, #31472555, transparent 46%);
+    color: #e8efe6;
+    font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+    display: flex; flex-direction: column;
+    padding: 44px 52px;
+  }
+  .top { display: flex; align-items: baseline; justify-content: space-between; }
+  .wordmark { font-size: 30px; font-weight: 850; letter-spacing: -1.4px; }
+  .wordmark b { color: #cdf58a; font-weight: 850; }
+  .edition {
+    font: 15px ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 2.2px; color: #cdf58a; text-transform: uppercase;
+  }
+  .board { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .grid {
+    display: flex; flex-wrap: wrap; align-items: flex-start;
+    justify-content: center; gap: 30px 0;
+  }
+  .club { text-align: center; position: relative; }
+  .disc {
+    border-radius: 20px;
+    background: linear-gradient(145deg, #f7f8f1, #ccd5c2);
+    box-shadow: 0 6px 20px #0006;
+    display: grid; place-items: center; margin: 0 auto 13px;
+  }
+  .disc img { object-fit: contain; }
+  .name { font-weight: 650; line-height: 1.3; margin: 0 auto; overflow-wrap: anywhere; }
+  .arrow { color: #7d9268; align-self: flex-start; }
+  .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    font: 14px ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #8fa08c; letter-spacing: 1.4px; text-transform: uppercase;
+  }
+  .foot .ask { color: #e8efe6; font-size: 17px; letter-spacing: 0.4px; text-transform: none; font-family: Inter, sans-serif; font-weight: 600; }
+</style></head>
+<body>
+  <div class="top">
+    <div class="wordmark">dera<b>bona</b></div>
+    <div class="edition" id="edition"></div>
+  </div>
+  <div class="board"><div class="grid" id="grid"></div></div>
+  <div class="foot">
+    <span class="ask">¿Quién es? Sin Google 👀</span>
+    <span>derabona.club</span>
+  </div>
+
+<script>
+// Sizing adapts to career length so a 14-club journeyman stays legible.
+function render(data) {
+  document.getElementById('edition').textContent = (data.label || 'Carrera del día') + ' #' + data.edition;
+  const n = data.clubs.length;
+  const perRow = n <= 6 ? n : Math.ceil(n / 2);
+  const disc = n <= 6 ? 128 : n <= 10 ? 104 : 84;
+  const img  = Math.round(disc * 0.72);
+  const font = n <= 6 ? 17 : n <= 10 ? 14 : 12;
+  const gap  = n <= 6 ? 26 : n <= 10 ? 20 : 14;
+  const cell = disc + gap * 2;
+
+  const grid = document.getElementById('grid');
+  grid.style.maxWidth = (perRow * (cell + 34)) + 'px';
+  data.clubs.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'club';
+    d.style.width = cell + 'px';
+    d.innerHTML =
+      '<div class="disc" style="width:' + disc + 'px;height:' + disc + 'px">' +
+        '<img src="' + c.crest + '" style="width:' + img + 'px;height:' + img + 'px">' +
+      '</div>' +
+      '<div class="name" style="font-size:' + font + 'px;max-width:' + cell + 'px">' +
+        c.name.replace(/&/g, '&amp;').replace(/</g, '&lt;') +
+      '</div>';
+    grid.appendChild(d);
+
+    const endOfRow = (i + 1) % perRow === 0;
+    if (i < n - 1 && !endOfRow) {
+      const a = document.createElement('div');
+      a.className = 'arrow';
+      a.style.fontSize = Math.round(disc * 0.2) + 'px';
+      a.style.marginTop = Math.round(disc * 0.36) + 'px';
+      a.textContent = '➜';
+      grid.appendChild(a);
+    }
+  });
+  document.body.dataset.ready = '1';
+}
+</script>
+</body></html>
