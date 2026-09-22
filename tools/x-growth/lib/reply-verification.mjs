@@ -12,13 +12,13 @@ export async function submitPreparedReply(page, job, prepared, verify = verifyRe
     const fresh = [...new Set(links.filter(href => /^\/derabona_club\/status\/\d+$/.test(href) && !before.includes(href)))];
     if (fresh.length !== 1) fail('uncertain_submission');
     const url = await page.evaluate(({ href, source }) => new URL(href, source).toString(), { href: fresh[0], source: job.sourceUrl });
-    return await verify(page, job, url, {destinations:prepared.destinations});
+    return await verify(page, job, url);
   } catch (error) {
     throw Object.assign(new Error(`submission requires reconciliation: ${error.message}`), { code: 'uncertain_submission' });
   }
 }
 
-export async function verifyReplyPermalink(page, job, url, {destinations} = {}) {
+export async function verifyReplyPermalink(page, job, url) {
   const fail = () => { throw Object.assign(new Error('public reply verification failed'), { code: 'uncertain_submission' }); };
   const parsed = await page.evaluate(({ url, source }) => { const parsed = new URL(url); return { origin: parsed.origin, pathname: parsed.pathname, href: parsed.href, sourceOrigin: new URL(source).origin }; }, { url, source: job.sourceUrl });
   const match = parsed.pathname.match(/^\/derabona_club\/status\/(\d+)$/i);
@@ -39,6 +39,6 @@ export async function verifyReplyPermalink(page, job, url, {destinations} = {}) 
   if (parent?.href !== `/${job.sourceHandle}/status/${job.sourceId}`) fail();
   const parentArticle = page.locator('article').filter({has:page.locator(`a[href="${parent.href}"]`)});
   if (await parentArticle.count() !== 1) fail();
-  await assertSourceSnapshot(job, parentArticle, {destinations, code:'uncertain_submission'});
+  await assertSourceSnapshot(job, parentArticle, {code:'uncertain_submission'});
   return { id: match[1], url: parsed.href, authorHandle: 'derabona_club', text: job.replyText, parentId: job.sourceId };
 }

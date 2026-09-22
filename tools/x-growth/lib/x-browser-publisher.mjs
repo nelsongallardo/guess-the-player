@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { assertSourceSnapshot, sourceDestinations } from './source-snapshot.mjs';
+import { assertSourceSnapshot } from './source-snapshot.mjs';
 import { submitPreparedReply } from './reply-verification.mjs';
 import { isPaused } from './state.mjs';
 
@@ -7,7 +7,7 @@ const DEFAULT_PROFILE = '/Users/openclaw/.hermes/profiles/engineering/browser-pr
 const err = (code, message) => Object.assign(new Error(message), { code });
 
 // This function is also exercised verbatim in the dedicated live CLI session.
-export async function prepareReplyComposer(page, job, preparedSourceId = null, destinations) {
+export async function prepareReplyComposer(page, job, preparedSourceId = null) {
   const fail = (code) => { throw Object.assign(new Error(code), { code }); };
   const dialogs = page.locator('[role="dialog"]:not(:has([role="dialog"])):visible');
   if (await dialogs.count()) {
@@ -16,16 +16,14 @@ export async function prepareReplyComposer(page, job, preparedSourceId = null, d
     const article = page.locator('article').filter({ has: page.locator(`a[href="/${job.sourceHandle}/status/${job.sourceId}"]`) });
     await article.waitFor({ state: 'visible', timeout: 15000 });
     if (await article.count() !== 1) fail('source_unreadable');
-    await assertSourceSnapshot(job, article, {destinations});
+    await assertSourceSnapshot(job, article);
     await article.locator('[data-testid="reply"]').click();
   }
   await dialogs.locator('[contenteditable="true"]').first().waitFor({ state: 'visible', timeout: 10000 });
   if (await dialogs.count() !== 1) fail('composer_ambiguous');
   const composer = dialogs.locator('[data-testid="tweetTextarea_0"][contenteditable="true"]');
   if (await composer.count() !== 1) fail('composer_ambiguous');
-  const parentText = dialogs.locator('[data-testid="tweetText"]');
-  if (await parentText.count() !== 1 || !await dialogs.locator(`a[href="/${job.sourceHandle}"]`).count()) fail('composer_parent_mismatch');
-  await assertSourceSnapshot(job, dialogs, {destinations, code:'composer_parent_mismatch'});
+  await assertSourceSnapshot(job, dialogs, {code:'composer_parent_mismatch', composer:true});
   const submit = dialogs.locator('[data-testid="tweetButton"]');
   if (await submit.count() !== 1) fail('composer_ambiguous');
   const existing = await composer.innerText();
@@ -40,8 +38,7 @@ export async function prepareReplyComposer(page, job, preparedSourceId = null, d
 }
 
 export class XBrowserPublisher {
-  constructor({ profilePath = DEFAULT_PROFILE, playwright, launchOptions = { headless: true }, baseUrl = 'https://x.com', homeUrl, fixtureMode = false, resolveUrl } = {}) {
-    this.resolveUrl = resolveUrl;
+  constructor({ profilePath = DEFAULT_PROFILE, playwright, launchOptions = { headless: true }, baseUrl = 'https://x.com', homeUrl, fixtureMode = false } = {}) {
     this.profilePath = profilePath;
     this.playwright = playwright;
     this.launchOptions = launchOptions;
@@ -84,14 +81,12 @@ export class XBrowserPublisher {
     const handle = href?.split('/')[1];
     const textLocator = article.locator('[data-testid="tweetText"]').first();
     const text = await (await textLocator.count() ? textLocator : article).innerText();
-    this.destinations = await sourceDestinations(job, this.resolveUrl);
-    await assertSourceSnapshot(job, article, {destinations:this.destinations});
+    await assertSourceSnapshot(job, article);
     return { id, handle, text, canReply: await article.locator('[data-testid="reply"]').count() === 1 };
   }
 
   async prepareReply(job) {
-    const destinations = this.destinations || await sourceDestinations(job, this.resolveUrl);
-    const result = await prepareReplyComposer(this.page, job, this.preparedSourceId, destinations);
+    const result = await prepareReplyComposer(this.page, job, this.preparedSourceId);
     this.preparedSourceId = job.sourceId;
     return result;
   }
@@ -113,7 +108,7 @@ export class XBrowserPublisher {
     const { composer, submit } = await this.prepareReply(job);
     if (await composer.innerText() !== job.replyText) throw err('composer_mismatch', 'composer text changed');
     checkAuthority();
-    if (!this.fixtureMode) return submitPreparedReply(this.page, job, { composer, submit, destinations:this.destinations });
+    if (!this.fixtureMode) return submitPreparedReply(this.page, job, { composer, submit });
     await submit.click();
     const result = this.page.locator(`article[data-testid="reply-result"][data-parent="${job.sourceId}"]`).last();
     if (!await result.count()) throw err('uncertain_submission', 'reply result was not readable after submission');
