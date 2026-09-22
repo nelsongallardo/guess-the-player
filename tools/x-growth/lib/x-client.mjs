@@ -210,7 +210,7 @@ export function createClient({ dryRun = false } = {}) {
       const effective = Math.max(5, max);
       const url = `https://api.x.com/2/users/${userId}/tweets`
         + `?max_results=${effective}&exclude=retweets,replies`
-        + `&tweet.fields=created_at,text,public_metrics`;
+        + `&tweet.fields=created_at,text,public_metrics,entities`;
       const out = await request(creds, {
         method: 'GET', url, dryRun, label: `timeline ${userId}`,
         cost: COST.read * effective, priority: 4,

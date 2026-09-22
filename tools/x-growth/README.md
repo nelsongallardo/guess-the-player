@@ -7,9 +7,9 @@ Plan and rationale: `projects/derabona/2026-09-20-x-follower-growth-automation.m
 
 ## Status
 
-**LIVE.** The four cron jobs are currently registered in the default Hermes profile;
-state lives under `~/.hermes/state/derabona/`. Use the `PAUSE` file kill switch below
-to stop X reads and writes immediately.
+**LIVE, approval-first.** Original posts/reveals use the API. The engineering-profile pre-dispatch Telegram plugin queues explicitly approved replies for the browser worker. The worker runs every two minutes; automatic approval remains disabled. Runtime uses a verified release snapshot under the engineering profile, not this editable checkout.
+
+Use the `PAUSE` file kill switch below to stop X reads and writes immediately.
 
 ## What runs
 
@@ -40,7 +40,7 @@ job to `0 21`**, or both posts drift an hour.
    chmod 600 ~/.hermes/secrets/derabona-x.json
    ```
    The client refuses to run if the file is not `0600`.
-3. Review the watchlist at `~/.hermes/state/derabona/watchlist.json`. It currently has
+3. Review the watchlist at `~/.hermes/profiles/engineering/state/derabona/watchlist.json`. It currently has
    **20 handles**: the original 17 verified live on 2026-09-20 plus `@sudanalytics_`,
    `@Promiedos`, and `@TigreDatos`. Fit is a judgement call — prune freely. The scout
    reads five accounts per daily run, so 20 accounts exactly fill its 96-hour freshness
@@ -51,8 +51,8 @@ job to `0 21`**, or both posts drift an hour.
    node post-reveal.mjs --dry-run
    node scout.mjs       --dry-run
    ```
-5. Go live: `rm ~/.hermes/state/derabona/PAUSE`
-6. Halt instantly at any time: `touch ~/.hermes/state/derabona/PAUSE`
+5. Go live: `rm ~/.hermes/profiles/engineering/state/derabona/PAUSE`
+6. Halt instantly at any time: `touch ~/.hermes/profiles/engineering/state/derabona/PAUSE`
 
 ## Cost control and the link policy
 
@@ -95,25 +95,128 @@ politics, referee rows, misconduct) is a regex, not a judgement call. The 96-hou
 window matches the four-day watchlist cycle; topic keywords tag candidates but do not
 hard-reject ordinary football conversation. Surviving posts are drafted with an explicit
 Hermes model (`gpt-5.6-terra` via `openai-codex`, low reasoning by default) and sent to
-Telegram General (thread 2156) for approval. Override without editing code with
+Telegram topic for approval. Override without editing code with
 `DERABONA_DRAFT_MODEL`, `DERABONA_DRAFT_PROVIDER`, and `DERABONA_DRAFT_REASONING`.
 An LLM transport/auth failure is distinct from the model answering `SKIP`: if every draft
 call fails, the scout exits nonzero so cron failure delivery can alert instead of reporting
 a silent successful run.
 
-Reply `1`, `1,3`, or `skip`. The hook at `~/.hermes/hooks/derabona-approvals/` only acts
-when `drafts.json` has a pending batch under 12 hours old — otherwise a stray number in
-conversation would publish a live reply.
+The scout includes a batch-bound command: `derabona BATCH_ID 1` (or `1,3` / `skip`). Copy it from the message and change the selection. The engineering plugin accepts it only from the configured owner in the explicit Derabona chat/topic. Bare numbers do not trigger this browser integration. Approval expires after 12 hours.
 
 Caps enforced in `approve.mjs`, not just the scout: 5 replies/day, never two to the same
 account in a day, and anything ≥85% similar to a reply from the last 14 days is rejected.
+
+## Browser reply queue — approval-first integration active
+
+`DERABONA_REPLY_TRANSPORT=browser` makes an approved reply enter
+`reply-jobs.json`; it does not claim the reply was sent. The queue is atomic JSON state
+with source-post deduplication and an append-only event history. A single worker owns
+`reply-jobs.json.worker.lock` while a browser is open. If a submit cannot be verified,
+the job becomes `uncertain` and is never automatically retried.
+
+The engineering runner `derabona-replies.sh check` performs a read-only session preflight.
+`derabona-reply-worker` (`5b6b86fa43b2`) runs `derabona-replies.sh` every two minutes,
+script-only with explicit project-topic normal/failure delivery. Approval only queues the
+selected drafts; the worker publishes on its next tick. A service lock prevents parallel consumers. Automatic
+admission is disabled, and the service rejects non-approved queue entries.
+
+Runtime configuration: `~/.hermes/profiles/engineering/derabona-replies.json`.
+State and PAUSE: `~/.hermes/profiles/engineering/state/derabona/`.
+The old shared-state directory is retained as a migration backup, not live state.
+Engineering scout/daily/reveal/metrics wrappers all use the new state. The legacy
+other-profile approval hook was not modified; use the new scout's explicit command
+in the engineering bot's Derabona topic, not bare-number approvals in another bot.
+
+The local fixture tests exercise mock X only. Before any production enablement, follow
+the live validation gates in the vault plan: dedicated-profile login, read-only DOM
+inspection, composer-without-send, then one explicitly authorized controlled reply with
+parent/author/text/public-URL readback and restart duplicate check.
 
 ## Why the X API and not Buffer
 
 Buffer's `createPost` has no reply or thread field, so the reveal self-reply and every
 scout reply are impossible through it. Buffer stays the manual composer for ad-hoc posts.
 
-Browser-scripting `x.com` is prohibited by X's automation rules and is not used anywhere here.
+Browser-scripting `x.com` is prohibited by X's automation rules and carries account-policy risk. The browser adapter is now enabled only for explicit, topic-bound approvals; autonomous approval remains disabled.
+
+### Controlled browser verification — 22 September 2026
+
+One explicitly approved reply was published and read back at
+`https://x.com/derabona_club/status/2102309438061416573`.
+The public conversation verified the exact author/text and immediate parent
+`2102276714747359520`. Queue recovery found no job eligible for resend.
+
+The composer now waits for the innermost visible reply dialog, verifies its parent,
+requires one editable element and one scoped submit button, rejects unexpected existing
+text, and does not type again when the exact approved text is already present. Tests
+include delayed/nested dialogs with a competing inline editor.
+
+The controlled CLI run initially failed after submission because its sandbox did not
+provide Node's URL global. The job stayed uncertain; read-only permalink reconciliation
+verified the existing reply without resubmission. URL parsing now runs in the browser
+realm, with a no-URL-global regression. This was a controlled run with reconciliation,
+not an uninterrupted scheduled end-to-end pass.
+
+X displayed its graduated-access notice (limited discovery/search and DM access until
+normal account activity establishes trust). Do not automate account warming or evade
+that restriction. At this stage the controlled test's draft projection was reconciled
+explicitly. Subsequently the hook, durable reporting and queue worker were integrated:
+22 test files passed against the installed release, standalone authenticated preflight
+passed, the engineering gateway loaded the hook, and an empty real drain completed
+silently. No new live reply was posted during integration activation. The next genuine
+Telegram approval subsequently exposed the two defects documented below.
+
+### Approval consistency repair — 22 September 2026
+
+The first real Telegram approval was falsely blocked because an API `t.co` link
+rendered as an X broadcast card. The same approval also reached the conversational
+agent, which answered using unrelated old project context. No X reply was sent for
+that blocked job. These were integration defects, not incorrect user approval.
+
+- `plugins/derabona-approvals` uses Hermes's supported synchronous
+  `pre_gateway_dispatch` directive and returns `skip` before agent/session dispatch.
+  It enforces owner + chat + topic itself because this hook precedes Hermes auth.
+  The retired `agent:start` hook is a no-op and is archived during activation.
+- A Telegram message-ID receipt is consumed durably before approval mutations.
+  Redelivery cannot become fresh authority; a new message can reapprove an unchanged,
+  unexpired job blocked specifically by the known pre-submit `source_changed` check.
+  Published/uncertain jobs never retry. No blocked job is requeued during installation.
+- Approvals and skips never drain the queue. Selection is resolved in the named
+  batch, not via a global draft lookup. Existing queue payloads are immutable.
+- Source body and links are checked consistently in the detail view, reply dialog,
+  and public-parent verification. New scouts retain API URL entities. A legacy short
+  URL is resolved by one public HEAD redirect without following its destination;
+  a missing trailing link must match a rendered card exactly. The dialog's separate
+  decorative ellipsis is removed while preserving its full hidden URL characters.
+  No blanket URL stripping or arbitrary appended-URL exception is allowed.
+- Queue expiry is fixed to the original batch timestamp plus 12 hours, not enqueue
+  time. It is checked when claiming work and again at the browser submit boundary.
+  Uncertain and published-but-unprojected replies participate in duplicate protection.
+- Outcome deduplication includes the attempt number, so a newly approved attempt
+  reports its result even if it fails with the same error as the previous attempt.
+- Outcomes identify the batch and draft number. Receipts, draft/queue mutation and
+  worker execution share the service lock. Notifications do not authorize publication.
+
+Verification: run every focused test using the Hermes Python environment:
+`/path/to/hermes/venv/bin/python ops/test.py`. This includes actual installed Hermes
+message dispatch with fixture input, a real approval subprocess and durable queue,
+and real Chromium against mock X through one submit + verified parent + one history
+record + one report. Telegram/X transport fixtures are not a new public publication.
+`HERMES_HOME=/path/to/engineering node ops/verify-source.mjs JOB_ID` verifies the
+real authenticated source and dialog without typing or submitting.
+
+Release procedure: `python3 ops/install-release.py stage`; install dependencies and
+Chromium and run `ops/test.py` inside the returned release; then `activate RELEASE`.
+Activation verifies the manifest and complete installed suite, preserves state, and
+leaves ingress disabled. Pause the owning engineering worker before maintenance.
+Enable the plugin explicitly with `hermes --profile engineering plugins enable
+derabona-approvals`; restart only that gateway, and verify registration in
+`logs/agent.log`. Verify the installed runtime, exact topic delivery/failure routes
+and empty drain before resuming the worker and enabling approval ingress. A disabled
+maintenance drain exits silently with code zero; actual failures still fail. Never
+run two consumers or re-send the blocked job as an installation test. If activation
+fails, leave both gates disabled; the printed engineering backup contains the prior
+config/plugin/runtime for controlled restoration, not an automatic unsafe resume.
 
 ## Data — we post the game's REAL daily
 
@@ -147,7 +250,7 @@ node test/scout-filter.test.mjs  # safety blocklist, age window, topic tagging
 node test/copy.test.mjs          # public copy and bot-tell rejection rules
 node test/draft-failure.test.mjs # empty Hermes output is an alertable failure
 node test/card-layout.test.mjs   # card never overflows, 6 to 19 clubs
-python3 test/hook-guard.test.py  # stray-number guard on the Telegram hook
+python3 test/hook-guard.test.py  # portable bare-number guard; no live-profile imports
 ```
 
 ## Layout
@@ -168,5 +271,5 @@ approve.mjs        post an approved draft
 metrics.mjs        weekly numbers
 ```
 
-State lives in `~/.hermes/state/derabona/`; secrets in `~/.hermes/secrets/derabona-x.json`.
+Live state lives in `~/.hermes/profiles/engineering/state/derabona/`; the existing API credential location is unchanged.
 Neither is in this repo, and neither should ever be committed.

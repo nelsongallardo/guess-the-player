@@ -1,76 +1,18 @@
-"""Guard test: a bare number must do nothing unless a fresh pending batch exists."""
-import asyncio, json, os, sys, tempfile, time
+"""Portable guard: no dependency on any live/default-profile hook."""
+import importlib.util
+import os
 from pathlib import Path
-
-tmp = Path(tempfile.mkdtemp())
-os.environ["DERABONA_STATE"] = str(tmp)
-sys.path.insert(0, str(Path.home() / ".hermes/hooks/derabona-approvals"))
-
-import handler
-handler.STATE = tmp
-handler.DRAFTS = tmp / "drafts.json"
-
-spawned = []
-handler.subprocess.Popen = lambda cmd, **kw: spawned.append(cmd)
-handler._send = lambda text: None
-
-def write(batches):
-    handler.DRAFTS.write_text(json.dumps({"batches": batches}))
-
-def batch(age_s, status="pending"):
-    at = time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime(time.time() - age_s))
-    return {"id": "b1", "at": at, "drafts": [
-        {"id": "b1-1", "n": 1, "status": status, "handle": "x"},
-        {"id": "b1-2", "n": 2, "status": status, "handle": "y"},
-    ]}
-
-def run(msg):
-    spawned.clear()
-    asyncio.run(handler.handle("agent:start", {"platform": "telegram", "message": msg}))
-    return list(spawned)
-
-fails = 0
-def check(name, cond):
-    global fails
-    if not cond: fails += 1
-    print(f"{'PASS' if cond else 'FAIL'} {name}")
-
-# no drafts file at all
-check("bare '1' with no drafts file does nothing", run("1") == [])
-
-# stale batch
-write([batch(13 * 3600)])
-check("bare '1' with a 13h-old batch does nothing", run("1") == [])
-
-# already-decided batch
-write([batch(600, status="approved")])
-check("bare '1' with no pending drafts does nothing", run("1") == [])
-
-# fresh pending batch
-write([batch(600)])
-out = run("1")
-check("bare '1' with fresh pending batch spawns approve", len(out) == 1 and out[0][-1] == "b1-1")
-
-write([batch(600)])
-out = run("1,2")
-check("'1,2' approves both", len(out) == 1 and out[0][-2:] == ["b1-1", "b1-2"])
-
-write([batch(600)])
-check("out-of-range '7' does nothing", run("7") == [])
-
-write([batch(600)])
-out = run("skip")
-check("'skip' spawns skip", len(out) == 1 and out[0][-1] == "skip")
-
-write([batch(600)])
-check("ordinary chat text does nothing", run("hola, todo bien?") == [])
-check("number inside a sentence does nothing", run("dale, el 1 me gusta mas") == [])
-
-# non-telegram platform
-write([batch(600)])
-spawned.clear()
-asyncio.run(handler.handle("agent:start", {"platform": "cli", "message": "1"}))
-check("non-telegram platform ignored", spawned == [])
-
-print("\n" + ("ALL HOOK GUARD TESTS PASSED" if not fails else f"{fails} FAILED"))
-sys.exit(1 if fails else 0)
+import tempfile
+from types import SimpleNamespace
+from unittest.mock import patch
+with tempfile.TemporaryDirectory(prefix='derabona-hook-guard-') as root:
+    with patch.dict(os.environ,HERMES_HOME=root):
+        spec=importlib.util.spec_from_file_location('approval_guard',Path(__file__).resolve().parents[1]/'plugins/derabona-approvals/__init__.py')
+        assert spec and spec.loader
+        plugin=importlib.util.module_from_spec(spec);spec.loader.exec_module(plugin)
+    source=SimpleNamespace(platform=SimpleNamespace(value='telegram'))
+    with patch('subprocess.Popen') as spawn:
+        for text in ['1','1,2','skip','hola, todo bien?','dale, el 1 me gusta más']:
+            assert plugin.dispatch(event=SimpleNamespace(source=source,text=text),gateway=None) is None
+        spawn.assert_not_called()
+print('PASS bare numbers/skip and ordinary chat cannot authorize any job')

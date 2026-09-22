@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+delete process.env.DERABONA_TG_CHAT;delete process.env.DERABONA_TG_THREAD;process.env.TELEGRAM_BOT_TOKEN='fixture-token';
+let calls=0;let payload,options;
+globalThis.fetch=async(_url,opts)=>{calls++;options=opts;payload=JSON.parse(opts.body);return {json:async()=>({ok:true,result:{message_id:1}})};};
+const missing=await import('../lib/telegram.mjs?missing');
+await assert.rejects(()=>missing.sendTelegram('fixture'),/explicit.*route/i);assert.equal(calls,0);
+process.env.DERABONA_TG_CHAT='fixture-chat';process.env.DERABONA_TG_THREAD='123';
+const ready=await import('../lib/telegram.mjs?ready');
+await ready.sendTelegram('fixture');
+assert.equal(calls,1);assert.equal(payload.chat_id,'fixture-chat');assert.equal(payload.message_thread_id,123);
+assert.ok(options.signal instanceof AbortSignal);
+console.log('PASS Telegram requires explicit route and bounded delivery; no fallback topic');

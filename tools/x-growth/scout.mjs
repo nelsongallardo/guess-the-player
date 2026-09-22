@@ -3,7 +3,9 @@
 // queue them to Telegram for approval. The blocklist runs before any LLM call —
 // the model never gets the chance to be clever about an obituary.
 
-import { isPaused, readState, writeState, canSpend, today } from './lib/state.mjs';
+import { isPaused, readState, writeState, canSpend, today, STATE_DIR } from './lib/state.mjs';
+import path from 'node:path';
+import { acquireProcessLock } from './lib/process-lock.mjs';
 import { createClient } from './lib/x-client.mjs';
 import { sendTelegram } from './lib/telegram.mjs';
 import { draftReply, DraftCallError } from './lib/draft.mjs';
@@ -65,16 +67,16 @@ export function classify(post) {
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
-  if (isPaused()) { console.log('[SILENT]'); return; }
+  if (isPaused()) return;
 
   const wl = readState('watchlist.json', { accounts: [], cursor: 0 });
   if (!wl.accounts?.length) {
-    console.log('watchlist.json has no accounts yet — nothing to scout. [SILENT]');
+    console.error('watchlist.json has no accounts yet — nothing to scout.');
     return;
   }
 
   const gate = canSpend(0.05, 4);
-  if (!gate.ok) { console.log(`scout skipped: ${gate.reason} [SILENT]`); return; }
+  if (!gate.ok) { console.error(`scout skipped: ${gate.reason}`); return; }
 
   const x = createClient({ dryRun });
 
@@ -92,7 +94,7 @@ async function main() {
       const posts = await x.getUserPosts(acct.userId, per);
       for (const p of posts) {
         const verdict = classify(p);
-        if (!verdict.ok) { console.log(`  skip @${acct.handle} ${p.id}: ${verdict.reason}`); continue; }
+        if (!verdict.ok) { console.error(`  skip @${acct.handle} ${p.id}: ${verdict.reason}`); continue; }
         candidates.push({ acct, post: p, ...verdict });
       }
     } catch (e) {
@@ -129,6 +131,7 @@ async function main() {
       sourceId: c.post.id,
       sourceUrl: `https://x.com/${c.acct.handle}/status/${c.post.id}`,
       sourceText: c.post.text,
+      sourceLinks: c.post.entities?.urls || [],
       reply,
       tag: c.tag,
       topic: c.topic,
@@ -145,11 +148,22 @@ async function main() {
     throw new Error(`derabona scout: all ${callFailures} draft call(s) failed — LLM path is likely broken, see stderr above`);
   }
 
-  if (!batch.drafts.length) { console.log('[SILENT]'); return; }
+  if (!batch.drafts.length) return;
 
-  drafts.batches.push(batch);
-  drafts.batches = drafts.batches.slice(-30);
-  if (!dryRun) writeState('drafts.json', drafts);
+  if (!dryRun) {
+    let release;
+    for(let attempt=0;attempt<120 && !release;attempt++) {
+      release=acquireProcessLock(path.join(STATE_DIR,'reply-service.lock'));
+      if(!release) await new Promise(resolve=>setTimeout(resolve,500));
+    }
+    if(!release) throw new Error('reply service busy; could not save scout batch');
+    try {
+      if(isPaused()) return;
+      const current=readState('drafts.json',{batches:[]});
+      current.batches.push(batch);current.batches=current.batches.slice(-30);
+      writeState('drafts.json',current);
+    } finally {release();}
+  }
 
   const lines = [`derabona — ${batch.drafts.length} respuesta(s) para aprobar\n`];
   for (const d of batch.drafts) {
@@ -157,7 +171,7 @@ async function main() {
     lines.push(`   → "${d.reply}"`);
     lines.push(`   ${d.sourceUrl}\n`);
   }
-  lines.push('Respondé con el número (o "1,3"), o "skip".');
+  lines.push(`Para aprobar, copiá y cambiá el número (podés usar 1,3):\nderabona ${batch.id} 1\nPara descartar: derabona ${batch.id} skip\nLa aprobación va a una cola; confirmamos con el enlace sólo después de verificar la publicación.`);
   const msg = lines.join('\n');
 
   if (dryRun) { console.log('--- would send to Telegram ---\n' + msg); }

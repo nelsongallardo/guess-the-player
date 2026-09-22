@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'derabona-isolation-'));process.env.DERABONA_STATE=dir;
+const {writeState,readState}=await import('../lib/state.mjs');
+const {runService}=await import('../reply-service.mjs');
+const {ReplyQueue}=await import('../lib/reply-queue.mjs');
+const queue=new ReplyQueue({filePath:path.join(dir,'reply-jobs.json')});
+const at=new Date().toISOString();
+const draft=(id,n,sourceId)=>({id,n,handle:'club'+n,sourceId,sourceUrl:`https://x.com/club${n}/status/${sourceId}`,sourceText:'source '+n,reply:'reply '+n,status:'pending'});
+const batch={id:'2026-09-22-100',at,drafts:[draft('shared',1,'123'),draft('unselected',2,'456')]};
+const other={id:'2026-09-22-200',at,drafts:[draft('shared',1,'999')]};
+const notices=[];const notify=async text=>notices.push(text);let sends=0;
+const publisherFactory=()=>({close:async()=>{},publish:async()=>{sends++;throw Error('approval must not publish');}});
+try {
+ writeState('drafts.json',{batches:[batch,other]});
+ await runService({batchId:batch.id,picks:['1'],queue,notify,publisherFactory});
+ assert.equal(sends,0,'approval ingress only queues; a separate worker owns execution');
+ assert.deepEqual(queue.all().map(j=>[j.batchId,j.sourceId]),[[batch.id,'123']],'never resolve IDs in a different batch');
+ assert.equal(readState('drafts.json').batches[0].drafts[1].status,'pending');
+ assert.equal(readState('drafts.json').batches[1].drafts[0].status,'pending');
+ await runService({batchId:batch.id,picks:['1','1'],queue,notify,publisherFactory});
+ assert.equal(queue.all().length,1);assert.equal(sends,0);
+ await assert.rejects(()=>runService({batchId:batch.id,picks:['2','99'],queue,notify,publisherFactory}),/selection/);
+ assert.equal(readState('drafts.json').batches[0].drafts[1].status,'pending');
+ const original=queue.all()[0];
+ assert.throws(()=>queue.enqueue({...original,sourceText:'changed'},{mode:'approved'}),/different payload/);
+ fs.writeFileSync(path.join(dir,'PAUSE'),'');
+ await runService({batchId:batch.id,picks:['2'],queue,notify,publisherFactory});
+ assert.match(notices.at(-1),/pausad/i);assert.equal(queue.all().length,1);
+ console.log('PASS approval only queues exact batch/selection; no unrelated send, no replay, immutable snapshot, explicit PAUSE');
+} finally {fs.rmSync(dir,{recursive:true,force:true});}

@@ -1,0 +1,7 @@
+{
+  "name": "derabona-x-growth",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.22.0" },
+  "dependencies": { "playwright": "1.57.0" }
+}
