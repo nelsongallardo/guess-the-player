@@ -2,9 +2,11 @@
 // Posts an approved draft. Enforces the caps here too, not just in the scout —
 // approval is a human tap, and humans lose count.
 
-import { isPaused, readState, writeState, today, recordPost, loadPosts } from './lib/state.mjs';
+import { isPaused, readState, writeState, today, recordPost, loadPosts, STATE_DIR } from './lib/state.mjs';
 import { createClient } from './lib/x-client.mjs';
 import { sendTelegram } from './lib/telegram.mjs';
+import { ReplyQueue } from './lib/reply-queue.mjs';
+import path from 'node:path';
 
 const MAX_REPLIES_PER_DAY = 5;
 const SIMILARITY_DAYS = 14;
@@ -38,16 +40,17 @@ export function findDraft(drafts, ref) {
   return {};
 }
 
-export async function approve(ref, { dryRun = false } = {}) {
+export async function approve(ref, { dryRun = false, transport = process.env.DERABONA_REPLY_TRANSPORT || 'api', xClient, queue: suppliedQueue, batchId } = {}) {
   if (isPaused()) throw new Error('paused');
 
   const drafts = readState('drafts.json', { batches: [] });
-  const { batch, draft } = findDraft(drafts, ref);
+  const batch = batchId ? drafts.batches.find(b => b.id === batchId) : findDraft(drafts, ref).batch;
+  const draft = batchId ? batch?.drafts.find(d => d.id === ref) : findDraft(drafts, ref).draft;
   if (!draft) throw new Error(`no draft matching "${ref}"`);
   if (draft.status !== 'pending') throw new Error(`draft ${draft.id} already ${draft.status}`);
 
   const ageH = (Date.now() - new Date(batch.at).getTime()) / 3.6e6;
-  if (ageH > 12) throw new Error(`batch is ${ageH.toFixed(1)}h old — too stale to reply`);
+  if (!Number.isFinite(ageH) || ageH >= 12) throw new Error(`batch is ${ageH.toFixed(1)}h old — too stale to reply`);
 
   const posts = loadPosts();
   const todays = posts.filter(p => p.date === today() && p.kind === 'reply');
@@ -59,18 +62,25 @@ export async function approve(ref, { dryRun = false } = {}) {
   const dup = recent.find(p => similarity(p.text, draft.reply) >= 0.85);
   if (dup) throw new Error(`too similar to a reply sent ${dup.date}`);
 
-  const x = createClient({ dryRun });
+  if (transport === 'browser' && !dryRun) {
+    const queue = suppliedQueue || new ReplyQueue({ filePath: process.env.DERABONA_REPLY_QUEUE || path.join(STATE_DIR, 'reply-jobs.json') });
+    try {
+      const queued = queue.enqueue({ sourceId: draft.sourceId, sourceUrl: draft.sourceUrl, sourceHandle: draft.handle, sourceText: draft.sourceText, sourceLinks: draft.sourceLinks, replyText: draft.reply, draftId: draft.id, batchId: batch.id, batchAt: batch.at }, { mode: 'approved' });
+      if (queued.status !== 'queued') throw new Error(`reply job already ${queued.status}`);
+      draft.status = 'queued';
+      writeState('drafts.json', drafts);
+      return { draft, queued: true, jobId: queued.id };
+    } finally { if (!suppliedQueue) queue.close(); }
+  }
+
+  const x = xClient || createClient({ dryRun });
   const source = await x.getPost(draft.sourceId);
   if (!source && !dryRun) throw new Error('source post no longer exists — not replying');
-
   const post = await x.createPost({ text: draft.reply, replyToId: draft.sourceId, priority: 3 });
 
   if (!dryRun) {
     draft.status = 'approved';
     draft.tweetId = post.id;
-    for (const other of batch.drafts) {
-      if (other.status === 'pending') other.status = 'skipped';
-    }
     writeState('drafts.json', drafts);
     recordPost({ kind: 'reply', handle: draft.handle, text: draft.reply, tweetId: post.id, sourceId: draft.sourceId, tag: draft.tag });
   }
@@ -96,7 +106,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     for (const ref of refs) {
       try {
         const r = await approve(ref, { dryRun });
-        const msg = `✓ respondido a @${r.draft.handle}\n${r.url}`;
+        const msg = r.queued
+          ? `✓ respuesta en cola (${r.jobId}) para @${r.draft.handle}`
+          : `✓ respondido a @${r.draft.handle}\n${r.url}`;
         console.log(msg);
         if (!dryRun) await sendTelegram(msg);
       } catch (e) {

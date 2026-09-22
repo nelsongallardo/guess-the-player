@@ -1,0 +1,4 @@
+name: derabona-approvals
+description: Topic- and batch-bound approval-first Derabona browser replies
+events:
+  - agent:start

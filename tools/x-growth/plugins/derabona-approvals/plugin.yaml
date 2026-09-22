@@ -1,0 +1,5 @@
+name: derabona-approvals
+version: "1.0.0"
+description: "Consume owner- and topic-bound Derabona batch approvals before conversational dispatch."
+hooks:
+  - pre_gateway_dispatch
