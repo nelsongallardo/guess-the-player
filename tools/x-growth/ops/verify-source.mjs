@@ -24,8 +24,8 @@ try {
  await publisher.inspectSource(job);
  await publisher.page.locator('article').filter({has:publisher.page.locator(`a[href="/${job.sourceHandle}/status/${job.sourceId}"]`)}).locator('[data-testid="reply"]').click();
  const dialog=publisher.page.locator('[role="dialog"]:not(:has([role="dialog"])):visible');
- await dialog.locator('[data-testid="tweetText"]').waitFor();
- await assertSourceSnapshot(job,dialog,{destinations:publisher.destinations});
+ await dialog.locator('[data-testid="tweetText"]').first().waitFor();
+ await assertSourceSnapshot(job,dialog,{composer:true});
  if(!before.equals(fs.readFileSync(queuePath)))throw Error('queue changed during verification');
  console.log(JSON.stringify({authenticated:true,sourceMatches:true,dialogMatches:true,typed:false,submitted:false,jobStateUnchanged:true}));
 } finally {await publisher?.close();release();}

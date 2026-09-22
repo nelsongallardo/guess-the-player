@@ -183,12 +183,9 @@ that blocked job. These were integration defects, not incorrect user approval.
   Published/uncertain jobs never retry. No blocked job is requeued during installation.
 - Approvals and skips never drain the queue. Selection is resolved in the named
   batch, not via a global draft lookup. Existing queue payloads are immutable.
-- Source body and links are checked consistently in the detail view, reply dialog,
-  and public-parent verification. New scouts retain API URL entities. A legacy short
-  URL is resolved by one public HEAD redirect without following its destination;
-  a missing trailing link must match a rendered card exactly. The dialog's separate
-  decorative ellipsis is removed while preserving its full hidden URL characters.
-  No blanket URL stripping or arbitrary appended-URL exception is allowed.
+- The original repair compared source body plus resolved attachment destinations.
+  That exact-attachment policy is superseded by the owner-requested relaxed check
+  below. Scouts still retain URL entities as evidence.
 - Queue expiry is fixed to the original batch timestamp plus 12 hours, not enqueue
   time. It is checked when claiming work and again at the browser submit boundary.
   Uncertain and published-but-unprojected replies participate in duplicate protection.
@@ -217,6 +214,40 @@ maintenance drain exits silently with code zero; actual failures still fail. Nev
 run two consumers or re-send the blocked job as an installation test. If activation
 fails, leave both gates disabled; the printed engineering backup contains the prior
 config/plugin/runtime for controlled restoration, not an automatic unsafe resume.
+
+### Relaxed source check — 22 September 2026
+
+The next Sudanalytics approval exposed a separate false positive: both the detail
+page and reply dialog contained the source's text **and a nested quoted post**.
+The old extractor required exactly one `tweetText` anywhere in the container and
+returned null before comparing the unchanged primary wording. The dialog also
+rendered video/quote URLs as truncated non-anchor labels.
+
+The owner requested rejection only for substantially different source content:
+
+- Extract one primary text block, excluding nested quote/card text. A quote's
+  author or permalink cannot substitute for the primary source's identity.
+- Ignore case, accents, punctuation, emoji, whitespace and URL/card representation.
+  Do not resolve short links or require attachment destinations to match.
+- Compare normalized word multisets using Dice overlap:
+  `2 × shared words / (approved words + rendered words)`. Accept at **0.40 or above**;
+  `source_changed` means the readable primary wording scored below that threshold.
+  This is a deliberately permissive text heuristic, not semantic equivalence:
+  small meaning-changing edits and attachment-only changes may now pass.
+- No source text, quote-only text or ambiguous primary blocks remain blocked as
+  `source_unreadable`, rather than falsely claiming the author edited the post.
+- The source post ID/author, publishing account, approval deadline, reply text,
+  one-submit rule and final immediate-parent/public-permalink verification remain
+  strict. Wrong primary identity is `source_identity_mismatch`; a composer parent
+  mismatch still blocks before typing.
+- Blocked jobs are not retried by changing this policy. Any retry needs a new,
+  explicit approval for that batch/draft; uncertain jobs remain non-resendable.
+
+`test/source-tolerance.test.mjs` reproduces the public Sudanalytics detail/dialog
+structure in local Chromium. `test/source-rendering.test.mjs` retains the original
+broadcast regression and tests the intentionally relaxed attachment/edit policy.
+Read-only live source/dialog validation is distinct from publishing a reply.
+This section describes the source change; activation is a separate release gate.
 
 ## Data — we post the game's REAL daily
 
