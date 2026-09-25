@@ -29,15 +29,17 @@ async def main():
         from datetime import datetime,timezone
         batch=dict(id='2026-09-22-123',at=datetime.now(timezone.utc).isoformat(),drafts=[dict(id='a',n=1,handle='club',sourceId='123',sourceUrl='https://x.com/club/status/123',sourceText='approved source',reply='approved reply',status='pending'),dict(id='b',n=2,status='pending')])
         (state/'drafts.json').write_text(json.dumps(dict(batches=[batch])))
-        spec=importlib.util.spec_from_file_location('process_plugin',ROOT/'plugins/derabona-approvals/__init__.py');assert spec and spec.loader
+        plugin_path=home/'plugins/derabona-approvals/__init__.py';plugin_path.parent.mkdir(parents=True);shutil.copy2(ROOT/'plugins/derabona-approvals/__init__.py',plugin_path)
+        spec=importlib.util.spec_from_file_location('process_plugin',plugin_path);assert spec and spec.loader
         plugin=importlib.util.module_from_spec(spec)
-        with patch.dict(os.environ,HERMES_HOME=str(home)):spec.loader.exec_module(plugin)
+        spec.loader.exec_module(plugin)
         hooks={};plugin.register(SimpleNamespace(register_hook=lambda name,fn:hooks.update({name:fn})))
         runner=object.__new__(GatewayRunner);runner.config=GatewayConfig(platforms={Platform.TELEGRAM:PlatformConfig(enabled=True)})
         runner.session_store=Mock();runner._running_agents={};runner.adapters={Platform.TELEGRAM:SimpleNamespace(send=AsyncMock())};runner._handle_message_with_agent=AsyncMock(side_effect=AssertionError('chat forbidden'))
         source=SessionSource(platform=Platform.TELEGRAM,chat_id=config['chat_id'],thread_id=config['thread_id'],user_id=config['user_id'],chat_type='dm')
         event=MessageEvent(text='derabona '+batch['id']+' 1',message_id='fixture-1',source=source)
-        with patch('hermes_cli.plugins.invoke_hook',side_effect=lambda name,**kw:[hooks[name](**kw)] if name in hooks else []):
+        async def invoke(name,**kw):return [hooks[name](**kw)] if name in hooks else []
+        with patch('hermes_cli.lifecycle.ainvoke_hook',side_effect=invoke):
             for _ in range(2):
                 assert await runner._handle_message(event) is None
                 await asyncio.gather(*list(plugin.TASKS))

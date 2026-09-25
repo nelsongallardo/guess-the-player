@@ -65,6 +65,23 @@ export function classify(post) {
   return { ok: true, topic, tag };
 }
 
+export function approvalMessages(batch) {
+  const lines = [`derabona — ${batch.drafts.length} respuesta(s) para aprobar\n`];
+  for (const d of batch.drafts) {
+    lines.push(`${d.n}. @${d.handle}: "${d.sourceText.slice(0, 100)}${d.sourceText.length > 100 ? '…' : ''}"`);
+    lines.push(`   → "${d.reply}"`);
+    lines.push(`   ${d.sourceUrl}\n`);
+  }
+  lines.push('Para aprobar, copiá el mensaje siguiente y cambiá el número. Para elegir varias, usá 1,3; para omitir, reemplazá el número por skip. Confirmamos con el enlace sólo después de verificar la publicación.');
+  return [lines.join('\n'), `derabona ${batch.id} 1`];
+}
+
+export async function sendApprovalMessages(batch, send = sendTelegram) {
+  const messages = approvalMessages(batch);
+  for (const message of messages) await send(message);
+  return messages;
+}
+
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
   if (isPaused()) return;
@@ -165,17 +182,14 @@ async function main() {
     } finally {release();}
   }
 
-  const lines = [`derabona — ${batch.drafts.length} respuesta(s) para aprobar\n`];
-  for (const d of batch.drafts) {
-    lines.push(`${d.n}. @${d.handle}: "${d.sourceText.slice(0, 100)}${d.sourceText.length > 100 ? '…' : ''}"`);
-    lines.push(`   → "${d.reply}"`);
-    lines.push(`   ${d.sourceUrl}\n`);
+  const messages = approvalMessages(batch);
+  if (dryRun) {
+    for (const [index, message] of messages.entries()) {
+      console.log(`--- would send Telegram message ${index + 1}/${messages.length} ---\n${message}`);
+    }
+  } else {
+    await sendApprovalMessages(batch);
   }
-  lines.push(`Para aprobar, copiá y cambiá el número (podés usar 1,3):\nderabona ${batch.id} 1\nPara descartar: derabona ${batch.id} skip\nLa aprobación va a una cola; confirmamos con el enlace sólo después de verificar la publicación.`);
-  const msg = lines.join('\n');
-
-  if (dryRun) { console.log('--- would send to Telegram ---\n' + msg); }
-  else { await sendTelegram(msg); }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

@@ -101,7 +101,17 @@ An LLM transport/auth failure is distinct from the model answering `SKIP`: if ev
 call fails, the scout exits nonzero so cron failure delivery can alert instead of reporting
 a silent successful run.
 
-The scout includes a batch-bound command: `derabona BATCH_ID 1` (or `1,3` / `skip`). Copy it from the message and change the selection. The engineering plugin accepts it only from the configured owner in the explicit Derabona chat/topic. Bare numbers do not trigger this browser integration. Approval expires after 12 hours.
+One Telegram preview message carries the source post and draft reply. It is followed by a
+second message containing only `derabona BATCH_ID 1`, on its own copyable line. Copy that
+message and change the final number; use `1,3` for multiple replies or replace the number
+with `skip` to discard the batch. The engineering hook accepts the command only from the
+configured owner in the explicit Derabona chat/topic. Bare numbers stay disabled to avoid
+accidental approvals in ordinary conversation. Approval expires after 12 hours.
+
+Drafts now favor a clear, slightly sarcastic football take and a specific question when
+one fits. The joke targets a football opinion, cliché or situation, never a person or
+fanbase; the prompt forbids insults, invented controversy and generic engagement bait.
+Replies remain approval-gated.
 
 Caps enforced in `approve.mjs`, not just the scout: 5 replies/day, never two to the same
 account in a day, and anything ≥85% similar to a reply from the last 14 days is rejected.

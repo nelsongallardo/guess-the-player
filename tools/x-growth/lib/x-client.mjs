@@ -215,7 +215,8 @@ export function createClient({ dryRun = false } = {}) {
         method: 'GET', url, dryRun, label: `timeline ${userId}`,
         cost: COST.read * effective, priority: 4,
       });
-      return out.data || [];
+      // A dry run makes no request, so its placeholder body is not a timeline.
+      return Array.isArray(out.data) ? out.data : [];
     },
 
     // Deleting is free on X's pay-per-usage pricing (no charge listed for
