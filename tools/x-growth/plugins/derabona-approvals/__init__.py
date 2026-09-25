@@ -8,7 +8,10 @@ from pathlib import Path
 import re
 import subprocess
 
-HOME = Path(os.environ.get('HERMES_HOME', Path.home() / '.hermes/profiles/engineering'))
+# A multiplexed gateway serves every profile from one process whose HERMES_HOME
+# is the root home, so resolve the owning profile from the install location
+# (<profile>/plugins/derabona-approvals/__init__.py) instead.
+HOME = Path(__file__).resolve().parents[2]
 CONFIG = HOME / 'derabona-replies.json'
 COMMAND = re.compile(r'^/?derabona\s+(\d{4}-\d{2}-\d{2}-\d+)\s+(skip|[1-9]\d*(?:\s*,\s*[1-9]\d*)*)$', re.I)
 CANDIDATE = re.compile(r'^/?derabona(?=\s|@|$)', re.I)
