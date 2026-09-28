@@ -80858,11 +80858,15 @@ const RankedUI = (()=>{
     // reason once signed in: account-open already carries the point total
     // and reads as "you're ranked" on its own (see $('score').hidden above)
     // - a second "CLASIFICADO · NUBE" pill next to it stated nothing new
-    // and read as a stray, unexplained label. The remaining states
-    // (practice/loading/unavailable) carry information worth a glance
-    // (e.g. practice explicitly warns points won't count), so they still
-    // show.
-    $('play-mode').classList.toggle('play-mode-show',mode!=='guest'&&mode!=='ranked');
+    // and read as a stray, unexplained label. "loading" is hidden for the
+    // same reason again, reported directly: it is purely an internal detail
+    // ("es algo interno de la app que no le interesa al usuario") and,
+    // because it resolves in under a second, showing then immediately
+    // hiding it just adds a one-beat layout shift for no information the
+    // account-open button doesn't already show once it resolves. Only
+    // unavailable/practice remain - genuinely actionable states worth a
+    // glance (e.g. practice explicitly warns points won't count).
+    $('play-mode').classList.toggle('play-mode-show',mode==='unavailable'||mode==='practice');
     $('account-status').textContent=!Accounts.configured?x.disabled:notice?x[notice]||x.unavailable:signed?x.signed:'';
     $('google-login').hidden=signed;$('google-login').disabled=!Accounts.configured||busy||mode==='loading';$('account-pitch').hidden=signed||!Accounts.configured;
     // Once signed in, the generic "here's how progress persistence works"
@@ -80882,14 +80886,26 @@ const RankedUI = (()=>{
     $('reset-progress').hidden=isAccountMode();
     $('ranked-retry').hidden=!['unavailable','practice'].includes(mode);$('ranked-retry').disabled=busy;
     $('practice').hidden=mode!=='unavailable';
-    const starting=busy&&pending?.action==='start';
-    const waiting=mode==='loading'||mode==='ranked'&&starting;
+    // sync() now also runs in the background while Daily is the active tab
+    // (it's the only thing that resolves the shared masthead - see boot()'s
+    // comment), which briefly sets mode='loading' even though Daily's own
+    // panel is already fully rendered and playable in #round-panel. None of
+    // this block should react to that: it exists to cover Unlimited's own
+    // round panel while ITS content isn't ready yet, not to comment on a
+    // background masthead-only sync. Without the DailyUI.isDaily() guard,
+    // #round-panel (which Daily also renders into) flashed hidden and
+    // reappeared via .ranked-wait every time a signed-in visitor landed on
+    // Daily - a much bigger, uglier version of the same "internal loading
+    // state that shouldn't be visible" complaint the #play-mode pill above
+    // already got fixed for.
+    const starting=busy&&pending?.action==='start',daily=DailyUI.isDaily();
+    const waiting=!daily&&(mode==='loading'||mode==='ranked'&&starting);
     $('game-loading-status').hidden=!waiting;
     $('game-loading-text').textContent=language==='es'?(starting?'Preparando tu partida…':signed?'Cargando tu progreso…':'Comprobando tu cuenta…'):(starting?'Preparing your game…':signed?'Loading your progress…':'Checking your account…');
     $('round-panel').setAttribute('aria-busy',String(waiting));
-    $('account-notice').hidden=waiting||!isAccountMode()||mode==='ranked'&&!!cloud?.round;
+    $('account-notice').hidden=daily||waiting||!isAccountMode()||mode==='ranked'&&!!cloud?.round;
     $('account-notice').textContent=mode==='loading'?x.sync:mode==='ranked'?x.done:x.unavailable;
-    document.documentElement.classList.toggle('ranked-wait',isAccountMode()&&(mode!=='ranked'||!cloud?.round||starting));
+    document.documentElement.classList.toggle('ranked-wait',!daily&&isAccountMode()&&(mode!=='ranked'||!cloud?.round||starting));
     // Same reasoning as the #play-mode "ranked" pill above: once signed in
     // and actually ranked, account-open already shows the point total, so
     // a footer line further explaining "cloud progress" restates that
