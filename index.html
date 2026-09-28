@@ -80993,14 +80993,32 @@ const RankedUI = (()=>{
   function accept(data){if(!data||!data.progress||!Object.hasOwn(data,'round'))throw Error('INVALID_RESPONSE');cloud=data;mode='ranked';notice='';NicknamePrompt.maybeOpen(data.profile);}
   async function resumeRequestedSync(){
     const requested=syncRequested;
-    if(!requested||busy||DailyUI.isDaily()||!current(requested.ticket,requested.owner))return;
+    // No longer blocked on DailyUI.isDaily() - see sync()'s own comment;
+    // a re-sync requested while busy is just as valid to run while Daily
+    // is the active tab now that sync() itself is tab-safe.
+    if(!requested||busy||!current(requested.ticket,requested.owner))return;
     syncRequested=null;
     await sync();
   }
+  // This is the only thing that ever moves the shared masthead (#play-mode,
+  // #score, #account-open) off its initial 'loading' state - so it must run
+  // (and resolve mode/cloud) even while Daily is the active tab, not only
+  // for Unlimited. It used to return immediately whenever DailyUI.isDaily()
+  // was true, which left the masthead permanently stuck on "Checking
+  // account..." for every signed-in visitor whose first/default tab is
+  // Daily (the common case). identityCurrent() (account/tab-switch race
+  // guard only) now covers applying the fetched account state regardless of
+  // tab; gameplayCurrent() (the stricter, pre-existing check) still gates
+  // the Unlimited-only side effects - the round-panel focus/scroll and the
+  // auto-start-a-round call - so nothing new happens to the round panel or
+  // starts a round while Daily is what's on screen. render(false,true)
+  // itself is always tab-safe: the shared render() dispatcher already
+  // delegates to whichever of DailyUI/DailyRankedUI or RankedUI.render
+  // actually matches the current tab.
   async function sync(){
-    if(busy){const owner=Accounts.session?.user?.id??userId;if(!DailyUI.isDaily()&&owner===userId)syncRequested={owner,ticket:epoch};return;}if(DailyUI.isDaily())return;syncRequested=null;if(pending)return sendPending();userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),gameplayCurrent=()=>current(ticket,owner)&&!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket;busy=true;mode='loading';update();
-    try{if(!Accounts.session){await Accounts.init(authChanged);if(!gameplayCurrent())return;if(!Accounts.session)throw Error('AUTH_REQUIRED');}const data=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!gameplayCurrent())return;accept(data);}
-    catch{if(gameplayCurrent()){mode='unavailable';notice='unavailable';}}
+    if(busy){const owner=Accounts.session?.user?.id??userId;if(owner===userId)syncRequested={owner,ticket:epoch};return;}syncRequested=null;if(pending)return sendPending();userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),identityCurrent=()=>current(ticket,owner),gameplayCurrent=()=>identityCurrent()&&!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket;busy=true;mode='loading';update();
+    try{if(!Accounts.session){await Accounts.init(authChanged);if(!identityCurrent())return;if(!Accounts.session)throw Error('AUTH_REQUIRED');}const data=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!identityCurrent())return;accept(data);}
+    catch{if(identityCurrent()){mode='unavailable';notice='unavailable';}}
     finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,true);await resumeRequestedSync();}}
     if(gameplayCurrent()&&mode==='ranked'&&!cloud.round){const count=cloud.progress.competitionCounts?.[selected];if(!count||count.answered<count.total)await mutate('start',{competition:selected});}
   }
@@ -81050,11 +81068,23 @@ const RankedUI = (()=>{
     DailyRankedUI.resetIdentity();
     update();render(false,true);
     // Reconcile outside the SDK auth lock; invalidate identity synchronously.
-    const ticket=epoch;setTimeout(()=>{if(!current(ticket,next))return;if(DailyUI.isDaily())DailyRankedUI.sync();else sync();},0);
+    // sync() always runs - see boot()'s matching comment: it's what resolves
+    // the shared masthead out of 'loading', independently of which tab (if
+    // any) also needs DailyRankedUI's own data for the same sign-in.
+    const ticket=epoch;setTimeout(()=>{if(!current(ticket,next))return;sync();if(DailyUI.isDaily())DailyRankedUI.sync();},0);
   }
   async function boot(){
     if(!Accounts.configured)return;const ticket=epoch;
-    try{const session=await Accounts.init(authChanged);if(ticket!==epoch)return;if(session){captureGoogleNameSuggestion(session);if(!DailyUI.isDaily())await sync();else{update();DailyRankedUI.sync();}}else{mode='guest';update();render(false,true);}}
+    // Landing signed-in on Daily (the default tab whenever there's no prior
+    // local Unlimited completion) used to skip sync() entirely in favour of
+    // DailyRankedUI.sync() alone - but sync() is also the only thing that
+    // ever moves `mode` off its initial 'loading' placeholder and refreshes
+    // the shared masthead (#play-mode, #score, #account-open) via update().
+    // DailyRankedUI's own render() never touches any of that. Left alone,
+    // the masthead read "Comprobando cuenta..." forever for exactly this
+    // (very common - it's the default) case, even though Daily itself loaded
+    // fine. Run both: sync() unawaited so it can't delay Daily's own render.
+    try{const session=await Accounts.init(authChanged);if(ticket!==epoch)return;if(session){captureGoogleNameSuggestion(session);if(!DailyUI.isDaily())await sync();else{sync();DailyRankedUI.sync();}}else{mode='guest';update();render(false,true);}}
     catch{if(ticket===epoch){mode=Accounts.hasStoredSession()?'unavailable':'guest';notice='authError';update();render(false,true);}}
   }
   const openAccount=()=>{update();$('account-dialog').showModal();};

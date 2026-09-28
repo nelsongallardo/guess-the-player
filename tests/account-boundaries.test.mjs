@@ -38,16 +38,27 @@ for(const mode of ['ranked','loading','unavailable','practice'])for(const event 
 test('same-user refresh preserves ranked state and pending retry',()=>{const c=ranked();c.ui.seed('ranked');const before=c.ui.snapshot();c.ui.authChanged('TOKEN_REFRESHED',c.Accounts.session);assert.deepEqual(c.ui.snapshot(),before);});
 test('late A mutation response cannot restore A after B event',async()=>{const c=ranked();c.ui.seed('ranked');let release;c.Accounts.request=()=>release?Promise.resolve({progress:{},round:null}):new Promise(r=>release=r);const work=c.ui.sendPending();c.Accounts.session={user:{id:'B'}};c.ui.authChanged('SIGNED_IN',c.Accounts.session);release({progress:{totalPoints:999},round:null});await work;assert.equal(c.ui.snapshot().cloud,null);assert.equal(c.ui.snapshot().pending,null);});
 test('pending A mutation never starts with B current identity',async()=>{const c=ranked();c.ui.seed('unavailable');let calls=0;c.Accounts.request=async()=>{calls++;return {progress:{},round:null}};c.Accounts.session={user:{id:'B'}};await c.ui.sendPending();assert.equal(calls,0);});
-test('signed-in boot starts ranked play only from Unlimited, never Daily',async()=>{
-  for(const [daily,expected] of [[true,[]],[false,['progress','start']]]){
+// sync() used to return immediately whenever Daily was the active tab,
+// which also skipped the only thing that ever resolves the shared masthead
+// (#play-mode, #score) out of its initial 'loading' placeholder - so a
+// signed-in visitor whose default/first tab is Daily (the common case, see
+// DailyUI's own default-mode logic) saw "Comprobando cuenta..." forever
+// even though Daily itself loaded fine. sync() now always fetches account
+// progress for the masthead; only the Unlimited-only side effect (auto-
+// starting a round) stays gated to Unlimited, since mutate('start',...)
+// would be meaningless - and is separately still no-op'd - while Daily is
+// what's on screen.
+test('signed-in boot always syncs ranked progress for the masthead; only auto-starts a round from Unlimited',async()=>{
+  for(const [daily,expected] of [[true,['progress']],[false,['progress','start']]]){
     const c=ranked(daily),actions=[];
     c.Accounts.request=async payload=>{actions.push(payload.action);return {progress:{competitionCounts:{all:{answered:0,total:1}}},round:payload.action==='start'?{id:'round'}:null,profile:{}};};
     await c.ui.boot();
+    await new Promise(resolve=>setImmediate(resolve));
     assert.deepEqual(actions,expected,daily?'Daily account boot':'Unlimited account boot');
   }
 });
-test('auth-state boot reconciliation is also automatic only in Unlimited',async()=>{
-  for(const [daily,expected] of [[true,[]],[false,['progress','start']]]){
+test('auth-state reconciliation always syncs ranked progress for the masthead; only auto-starts a round from Unlimited',async()=>{
+  for(const [daily,expected] of [[true,['progress']],[false,['progress','start']]]){
     const c=ranked(daily,true),actions=[];
     c.Accounts.request=async payload=>{actions.push(payload.action);return {progress:{competitionCounts:{all:{answered:0,total:1}}},round:payload.action==='start'?{id:'round'}:null,profile:{}};};
     c.Accounts.session={user:{id:'B'}};c.ui.authChanged('SIGNED_IN',c.Accounts.session);
@@ -55,15 +66,16 @@ test('auth-state boot reconciliation is also automatic only in Unlimited',async(
     assert.deepEqual(actions,expected,daily?'Daily auth callback':'Unlimited auth callback');
   }
 });
-test('Return to ranked play selects Unlimited before requesting ranked progress',async()=>{
+test('Return to ranked play performs its own fresh sync on top of the masthead sync already done at boot',async()=>{
   const c=ranked(true),actions=[];
   c.Accounts.request=async payload=>{actions.push({action:payload.action,daily:c.DailyUI.isDaily()});return {progress:{competitionCounts:{all:{answered:1,total:1}}},round:null,profile:{}};};
   await c.ui.boot();
-  assert.deepEqual(actions,[],'direct signed-in Daily boot remains deferred');
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.deepEqual(actions,[{action:'progress',daily:true}],'boot already synced ranked progress once for the masthead, while Daily stayed selected');
   c.$('account-ranked').onclick();
   await new Promise(resolve=>setImmediate(resolve));
   assert.equal(c.DailyUI.isDaily(),false,'account control performs a real Daily to Unlimited selection');
-  assert.deepEqual(actions,[{action:'progress',daily:false}],'ranked progress cannot run while Daily remains selected');
+  assert.deepEqual(actions,[{action:'progress',daily:true},{action:'progress',daily:false}],'switching to Unlimited performs its own additional fresh progress sync');
 });
 test('late Unlimited sync cannot project or start ranked after returning to Daily',async()=>{
   const c=ranked(false),actions=[];

@@ -54,11 +54,16 @@ test('sync() only resets the displayed round on a fresh load, not on every hint/
   assert.match(daily,/accept\(data\);pending=null;/);
 });
 
-test('identity resets are wired into both freshGuest and authChanged, and a mid-Daily sign-in triggers DailyRankedUI.sync, not RankedUI.sync',()=>{
+// sync() is what resolves the shared masthead (#play-mode, #score) out of
+// its initial 'loading' placeholder, so both entry points must always run
+// it, not just DailyRankedUI's own sync - a mid-Daily sign-in (or a Daily
+// default landing) used to skip it entirely, leaving the masthead stuck on
+// "Checking account..." forever even though Daily loaded fine.
+test('identity resets are wired into both freshGuest and authChanged, and both boot and a mid-Daily sign-in always sync RankedUI alongside DailyRankedUI',()=>{
   assert.match(game,/DailyRankedUI\.resetIdentity\(\)/);
   assert.match(game,/function freshGuest\(\)\{[^}]*DailyRankedUI\.resetIdentity\(\)/);
-  assert.match(game,/DailyUI\.isDaily\(\)\)DailyRankedUI\.sync\(\);else sync\(\)/);
-  assert.match(game,/if\(!DailyUI\.isDaily\(\)\)await sync\(\);else\{update\(\);DailyRankedUI\.sync\(\);\}/);
+  assert.match(game,/sync\(\);if\(DailyUI\.isDaily\(\)\)DailyRankedUI\.sync\(\);/);
+  assert.match(game,/if\(!DailyUI\.isDaily\(\)\)await sync\(\);else\{sync\(\);DailyRankedUI\.sync\(\);\}/);
 });
 
 test('a signed-in-with-local-progress notice exists, is dismissible, and never deletes the local guest attempt',()=>{
