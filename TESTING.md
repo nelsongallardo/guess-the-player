@@ -1,5 +1,11 @@
 # Verification report
 
+## Footer navigation — 28 September 2026 (local candidate)
+
+- Added About (the existing `#about-game` explanation, not a separate page), Privacy, `contact@derabona.club` and the official X profile to Play and Leaderboard footers. Existing rules, Reset and analytics controls remain in place.
+- Test-first `tests/footer-links.test.mjs` failed for missing links/labels, then passed. Focused Node suites (`footer-links`, SEO, leaderboard page, privacy page, model, social preview, points FAQ, account boundaries): **84 passed, 0 failed**. `git diff --check` passed.
+- A task-scoped Python HTTP server served the candidate `index.html` byte-for-byte at port 4193. Fresh headless Chromium checked both pages in Spanish/English at 375×667: four 44px footer links, localized labels, correct X destination/rel, no horizontal overflow, and the About anchor. Network-disabled `file:` guest play retained ten options and the translated footer. The mobile footer screenshot was reviewed: contained and legible, though somewhat busy. This is local worktree evidence, not a deployed-site or signed-in OAuth check.
+
 ## Public privacy contact — 17 September 2026
 
 - Removed the owner's personal name and direct email address from both languages of `privacy.html`. The only published mail target is `contact@derabona.club`; the page discloses that ImprovMX forwards messages to a private inbox.
