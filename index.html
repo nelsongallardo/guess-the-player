@@ -80065,6 +80065,20 @@ const Accounts = (()=>{
   const configured=!!config.url&&!!config.anonKey&&/^https:\/\//.test(config.url)&&location.protocol!=='file:';
   let client=null,loading=null,session=null,authRevision=0,subscription=null;
   const hasStoredSession=()=>{try{return !!localStorage.getItem(storageKey);}catch{return false;}};
+  // The SDK's own getSession()/exchangeCodeForSession() usually resolve from
+  // local storage with no network at all, but can silently attempt a token
+  // refresh over the network when the stored access token has expired - and
+  // that call accepts no AbortSignal, unlike every fetch() this module makes
+  // (all already timeout-guarded below). Observed stuck on "Checking
+  // account..." indefinitely with no such guard here. Racing it against a
+  // plain timeout can't cancel the underlying SDK call, but it does stop
+  // this module from waiting on it forever, so a genuinely wedged auth
+  // check still fails into the existing 'unavailable'/retry state instead
+  // of hanging every load for a returning signed-in visitor.
+  const withAuthTimeout=promise=>new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>reject(Error('AUTH_TIMEOUT')),10000);
+    promise.then(value=>{clearTimeout(timer);resolve(value);},error=>{clearTimeout(timer);reject(error);});
+  });
   async function load(){
     if(!configured)throw Error('NOT_CONFIGURED');if(client)return client;
     if(!loading)loading=new Promise((resolve,reject)=>{
@@ -80081,8 +80095,8 @@ const Accounts = (()=>{
     const c=await load();let result;
     try{
       if(AuthCallback.error)throw Error('AUTH_CANCELLED');
-      if(AuthCallback.code)result=await c.auth.exchangeCodeForSession(AuthCallback.code);
-      else result=await c.auth.getSession();
+      if(AuthCallback.code)result=await withAuthTimeout(c.auth.exchangeCodeForSession(AuthCallback.code));
+      else result=await withAuthTimeout(c.auth.getSession());
       if(result.error)throw result.error;session=result.data.session;
       // Do not await Supabase operations inside its auth-state lock.
       subscription?.unsubscribe();
@@ -80097,7 +80111,7 @@ const Accounts = (()=>{
     const publicRead=isPublic&&endpoint==='ranked-game'&&payload.action==='leaderboard';
     let credentials=null;
     if(!publicRead||client||session||hasStoredSession()){
-      try{const c=await load(),revision=authRevision,{data,error}=await c.auth.getSession();if(error)throw error;credentials=revision===authRevision?data.session:session;if(!credentials&&!publicRead)throw Error('AUTH_REQUIRED');session=credentials;}
+      try{const c=await load(),revision=authRevision,{data,error}=await withAuthTimeout(c.auth.getSession());if(error)throw error;credentials=revision===authRevision?data.session:session;if(!credentials&&!publicRead)throw Error('AUTH_REQUIRED');session=credentials;}
       catch{if(!publicRead)throw Error('AUTH_REQUIRED');}
     }
     if(!publicRead&&credentials?.user?.id!==expectedUserId)throw Error('AUTH_CHANGED');
