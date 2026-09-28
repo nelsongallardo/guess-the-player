@@ -1,5 +1,11 @@
 # Verification report
 
+## Professional footer redesign — 28 September 2026 (local worktree)
+
+- Test-first footer regressions failed against the pill-link layout, then passed: both pages now pair a small italic brand/metadata lockup with quiet text navigation, a real inline X mark and visible `@derabona_club`; Play puts the unchanged Help/Reset/analytics controls and save status in a separate utility row. The roster language updater now targets `#footer-roster`, keeping the brand intact. Leaderboard's footer phrase translates EN/ES.
+- Focused Node suites (`footer-links`, SEO, leaderboard page, privacy page, model, social preview, points FAQ, account boundaries): **87 passed, 0 failed**. Isolated HTTP port 4197 served both HTML files byte-for-byte (SHA-256 comparison). Fresh named Chromium session verified both pages at 1440, 375 and 320px in EN/ES: four navigation targets, 44px minimum link/control heights, no horizontal overflow, local game choices, no page errors. A network-disabled `file:` copy of `index.html` retained ten choices, translated footer and inline icon. Browser controls opened Help and privacy dialogs, translated roster, and Reset still asked for confirmation; About reached `#about-game`.
+- Visual review used `test-results/footer-index-es-375.png`, `footer-index-en-1440.png`, `footer-leaderboard-en-375.png` and `footer-leaderboard-es-1440.png` (ignored local artifacts, not deployed). Cropped footer images have no page margins by design; page-level viewport bounds were checked separately. This does not verify hosted OAuth, ranked data or production deployment.
+
 ## Footer navigation — 28 September 2026 (local candidate)
 
 - Added About (the existing `#about-game` explanation, not a separate page), Privacy, `contact@derabona.club` and the official X profile to Play and Leaderboard footers. Existing rules, Reset and analytics controls remain in place.
