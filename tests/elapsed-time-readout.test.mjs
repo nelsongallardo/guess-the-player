@@ -7,10 +7,16 @@ const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const block=id=>html.match(new RegExp(`<script id="${id}">([\\s\\S]*?)</script>`))?.[1]??'';
 
 test('round header uses a neutral elapsed-time readout instead of a draining bar',()=>{
-  assert.match(html,/id="elapsed-time"[^>]*class="elapsed-time"[^>]*hidden/);
+  // Not a static [hidden] attribute: the button's own 44px box is reserved
+  // via CSS visibility at all times (including before a clock exists), so
+  // it never pops into existence and shoves the career grid down once a
+  // round becomes ready - see the "is-ready" tests below.
+  assert.match(html,/id="elapsed-time"[^>]*class="elapsed-time"/);
+  assert.doesNotMatch(html,/id="elapsed-time"[^>]*hidden/);
   assert.match(html,/id="elapsed-time-label">Time played</);
   assert.match(html,/id="elapsed-time-value"[^>]*>0:00</);
-  assert.match(html,/\.elapsed-time\{[^}]*min-height:44px/);
+  assert.match(html,/\.elapsed-time\{[^}]*min-height:44px[^}]*visibility:hidden/,'the box is reserved from the start, only its paint is toggled');
+  assert.match(html,/\.elapsed-time\.is-ready\{visibility:visible\}/);
   assert.doesNotMatch(html,/speed-meter-track|speed-meter-fill|speedMeterFraction/);
 });
 
@@ -106,10 +112,27 @@ test('elapsed-time readout is bilingual, freezes, and keeps scoring details on a
   assert.doesNotMatch(html,/id="elapsed-time-note"[^>]*role="status"/,'details must not announce every 250 ms while open');
   assert.doesNotMatch(html,/No time limit|Sin límite de tiempo/);
   assert.match(source,/elapsed-time-value/);
-  assert.match(source,/setAttribute\('aria-label',copy\(\)\.elapsedTimeAria\(value\)\)/);
+  assert.match(source,/setAttribute\('aria-label',t\.elapsedTimeAria\(value\)\)/);
   assert.match(source,/classList\.toggle\('is-frozen',!clock\.playing\)/);
   assert.match(source,/elapsedTimeOpen/);
   assert.match(source,/elapsedTimeWon/,'resolved timing still explains awarded points');
+});
+
+test('the elapsed-time detail popover is inert while a round is still playing, not just unhelpful',()=>{
+  // Reported directly: clicking mid-round only ever repeated the same
+  // number already on the counter. Rather than show a "points if you
+  // answered right now" figure (which would recreate the pressure the
+  // neutral readout deliberately replaced, per DESIGN.md), the control is
+  // made genuinely non-interactive until the round resolves, when the
+  // popover has something the counter doesn't: hints used and points
+  // actually earned.
+  const source=block('game-ui');
+  assert.doesNotMatch(html,/elapsedTimeDetail/,'the old "Ns elapsed" tooltip - a bare restatement of the counter - is gone');
+  assert.match(html,/elapsedTimeAriaPlaying:value=>`Time played \${value}`/,'the accessible name drops the click affordance while playing');
+  assert.match(html,/elapsedTimeAriaPlaying:value=>`Tiempo de juego \${value}`/);
+  assert.match(source,/if\(clock\.playing\)\{\s*meter\.disabled=true;meter\.removeAttribute\('aria-expanded'\);meter\.setAttribute\('aria-label',t\.elapsedTimeAriaPlaying\(value\)\)/,'playing state disables the control and swaps its accessible name');
+  assert.match(source,/\$\('elapsed-time'\)\.addEventListener\('click',\(\)=>\{if\(\$\('elapsed-time'\)\.disabled\)return;/,'a disabled control cannot be toggled open by a click');
+  assert.match(source,/meter\.disabled=false;meter\.setAttribute\('aria-expanded'/,'the control re-enables once the round resolves');
 });
 
 test('every clock source, including ranked, refuses an implausibly old elapsed time',()=>{
