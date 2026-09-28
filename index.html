@@ -264,6 +264,13 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 #account-dialog .account-alias{font-weight:650;color:var(--ink);margin:0 0 14px}
 #account-dialog .account-alias:empty{display:none}
 #account-dialog #enroll-form{display:flex;flex-direction:column;gap:6px}
+#nickname-prompt-dialog{width:min(420px,calc(100% - 24px))}
+.nickname-prompt-field{display:flex;gap:8px;margin-top:16px}
+.nickname-prompt-field input{flex:1;min-width:0;font:inherit;padding:10px;min-height:44px;box-sizing:border-box;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text)}
+#nickname-prompt-shuffle{flex-shrink:0;min-height:44px;min-width:44px;font-size:16px;padding:0}
+#nickname-prompt-status{min-height:1.4em}
+#nickname-prompt-status:not(:empty){color:var(--red)}
+#nickname-prompt-submit{width:100%;margin-top:14px}
 #account-dialog .field-label-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
 #account-dialog .field-label-row label{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.2px}
 #account-dialog .alias-help-region{position:relative;display:inline-flex}
@@ -410,6 +417,7 @@ hasta las 00:00 UTC</span></span></button></div>
 <dialog id="competitions" aria-labelledby="competitions-title"><h2 id="competitions-title">Choose a competition</h2><p id="competitions-intro">Play within one competition, or take on the full roster.</p><div id="competition-options" class="competition-options" role="group" aria-label="Competitions"></div><form method="dialog"><button class="subtle" type="submit" id="competitions-close">Close</button></form></dialog>
 <dialog id="stats-detail" aria-labelledby="stats-detail-title"><h2 id="stats-detail-title">Your score details</h2><div class="stats"><div class="stat"><div class="stat-label" id="stats-detail-streak-label">Current streak</div><div class="stat-value"><strong id="streak">0</strong></div></div><div class="stat"><div class="stat-label" id="stats-detail-best-label">Best streak</div><div class="stat-value"><strong id="best-streak">0</strong></div></div></div><h3 id="history-details-title">Your results on this device</h3><p id="history-empty" class="summary-caption">No finished games yet — your results will appear here after your first recap.</p><ol id="history-list"></ol><p id="history-summary" class="summary-caption"></p><form method="dialog"><button class="subtle" type="submit" id="stats-detail-close">Close</button></form></dialog>
 <dialog id="account-dialog" aria-labelledby="account-title"><h2 id="account-title">Cuenta y progreso</h2><p id="account-pitch" class="account-pitch">Iniciá sesión para competir por puntos con jugadores de todo el mundo.</p><p id="account-detail" class="account-copy"></p><div class="account-stats" id="account-stats" hidden><div class="account-stat"><strong id="stat-points">0</strong><span id="stat-points-label">Puntos</span></div><div class="account-stat"><strong id="stat-answered">0</strong><span id="stat-answered-label">Jugadas</span></div><div class="account-stat"><strong id="stat-correct">0</strong><span id="stat-correct-label">Aciertos</span></div></div><p id="account-status" class="account-status" role="status"></p><div class="account-actions"><button id="google-login" class="google-login" type="button"><svg class="google-login-icon" width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span id="google-login-label">Continuar con Google</span></button><button id="account-ranked" class="subtle" type="button" hidden>Volver a clasificación</button><button id="logout" class="subtle" type="button" hidden>Cerrar sesión</button></div><div class="account-section" id="alias-section"><p id="enrolled-status" class="account-alias" role="status"></p><form id="enroll-form" hidden><div class="field-label-row"><label id="nickname-label" for="public-nickname">Apodo público</label><div id="alias-help-region" class="alias-help-region"><button id="alias-help" class="alias-help" type="button" aria-describedby="alias-tooltip">ⓘ</button><p id="alias-tooltip" class="alias-tooltip" role="tooltip" hidden>Se asigna automáticamente un nombre de animal al azar. Podés agregar o cambiar tu apodo en Cuenta.</p></div></div><input id="public-nickname" name="nickname" autocomplete="off" maxlength="24" minlength="3" value="" aria-describedby="nickname-detail"><p id="nickname-detail" class="field-detail"></p><button id="enroll" class="primary" type="submit">Guardar apodo</button></form></div><div class="account-danger" id="danger-section"><button id="account-delete" class="danger-action" type="button" hidden>Eliminar cuenta</button></div><form method="dialog" class="account-close-row"><button id="account-close" class="subtle" type="submit">Cerrar</button></form></dialog>
+<dialog id="nickname-prompt-dialog" aria-labelledby="nickname-prompt-title"><h2 id="nickname-prompt-title">Elegí tu apodo público</h2><p id="nickname-prompt-detail" class="account-copy">Así vas a aparecer en la clasificación. Podés usar el que te sugerimos o escribir el tuyo - vas a poder cambiarlo después cuando quieras.</p><form id="nickname-prompt-form"><div class="nickname-prompt-field"><input id="nickname-prompt-input" name="nickname" autocomplete="off" maxlength="24" minlength="3" aria-describedby="nickname-prompt-status" required><button id="nickname-prompt-shuffle" class="subtle" type="button" aria-label="Sugerir otro">🔀</button></div><p id="nickname-prompt-status" class="field-detail" role="status" aria-live="polite"></p><button id="nickname-prompt-submit" class="primary" type="submit">Continuar</button></form></dialog>
 <script id="roster-data">
 const PLAYERS = [
   {
@@ -80399,7 +80407,7 @@ function applyLanguage() {
   $('competitions-title').textContent=t.competitionsTitle;$('competitions-intro').textContent=t.competitionsIntro;$('competitions-close').textContent=t.competitionsClose;
   $('competition-badge-label').textContent=t.changeCompetition;$('competition-current').textContent=t.competitions[state.competition];setCompetitionLogo(state.competition);
   $('change-competition-summary').textContent=t.competitionsChange;
-  renderCompetitionOptions();RankedUI.update();DailyUI.translate();
+  renderCompetitionOptions();RankedUI.update();DailyUI.translate();NicknamePrompt.translate();
   try {localStorage.setItem(LANGUAGE_KEY,language);} catch {}
 }
 function renderCompetitionOptions(){
@@ -80612,6 +80620,63 @@ $('reset-progress').addEventListener('click',()=>{
   try{GuestStorage.removeItem(STORAGE_KEY);GuestStorage.removeItem(HISTORY_KEY);GuestStorage.removeItem(LIFETIME_KEY);GuestStorage.removeItem(SEEN_KEY);}catch{}
   seen=new Set();state=CareerGame.create();lifetime=defaultLifetime();resetRoundClock();applyLanguage();render(false,true);showRoundStart();
 });
+// A signed-in account gets a random animal alias immediately and silently
+// (ADR 0007); most players never open Account to change it and just keep
+// "Falcon-a71ea462" forever. Mirrors Reddit's own signup flow (a forced,
+// one-time username prompt, pre-filled with a suggestion so accepting it
+// is one click): the first response that reports profile.nicknamePrompted
+// false opens this dialog and blocks (no Escape, no backdrop-close, no X)
+// until enroll succeeds once - whether the player keeps the suggested
+// animal name as-is or types their own, either way there's nothing left to
+// prompt for, and it never opens again (server-tracked, see
+// docs/adr/0024-mandatory-nickname-prompt.md).
+const NicknamePrompt = (()=>{
+  const ANIMALS=['Otter','Badger','Panda','Koala','Heron','Robin','Finch','Lynx','Seal','Dolphin','Turtle','Falcon','Penguin','Gecko','Wombat','Alpaca'];
+  const suggest=()=>`${ANIMALS[Math.floor(Math.random()*ANIMALS.length)]}-${crypto.randomUUID().replace(/-/g,'').slice(0,8)}`;
+  const TEXT={
+    en:{title:'Choose your public nickname',detail:'This is how you’ll show up on the leaderboard. Use our suggestion or type your own - you can always change it later.',shuffle:'Suggest another',continueLabel:'Continue',taken:'That nickname is already taken - try another.',invalid:'3-24 letters, numbers, spaces, underscore, dot or hyphen.'},
+    es:{title:'Elegí tu apodo público',detail:'Así vas a aparecer en la clasificación. Podés usar el que te sugerimos o escribir el tuyo - vas a poder cambiarlo después cuando quieras.',shuffle:'Sugerir otro',continueLabel:'Continuar',taken:'Ese apodo ya está en uso - probá con otro.',invalid:'3-24 letras, números, espacios, guion bajo, punto o guion.'}
+  };
+  const t=()=>TEXT[language==='en'?'en':'es'];
+  let isOpen=false,busy=false;
+  const translate=()=>{
+    if(!document.getElementById('nickname-prompt-dialog'))return;
+    document.getElementById('nickname-prompt-title').textContent=t().title;
+    document.getElementById('nickname-prompt-detail').textContent=t().detail;
+    document.getElementById('nickname-prompt-shuffle').setAttribute('aria-label',t().shuffle);
+    document.getElementById('nickname-prompt-submit').textContent=t().continueLabel;
+  };
+  const maybeOpen=profile=>{
+    if(!profile||profile.nicknamePrompted||isOpen)return;
+    isOpen=true;translate();
+    document.getElementById('nickname-prompt-input').value=profile.nickname||suggest();
+    document.getElementById('nickname-prompt-status').textContent='';
+    document.getElementById('nickname-prompt-dialog').showModal();
+    document.getElementById('nickname-prompt-input').focus();
+  };
+  document.getElementById('nickname-prompt-dialog').addEventListener('cancel',event=>event.preventDefault());
+  document.getElementById('nickname-prompt-shuffle').addEventListener('click',()=>{
+    document.getElementById('nickname-prompt-input').value=suggest();
+    document.getElementById('nickname-prompt-status').textContent='';
+    document.getElementById('nickname-prompt-input').focus();
+  });
+  document.getElementById('nickname-prompt-form').addEventListener('submit',async event=>{
+    event.preventDefault();
+    if(busy||!Accounts.session)return;
+    const nickname=document.getElementById('nickname-prompt-input').value.trim();
+    if(nickname.length<3||nickname.length>24||!/^[\p{L}\p{N} _.-]+$/u.test(nickname)){document.getElementById('nickname-prompt-status').textContent=t().invalid;return;}
+    const owner=Accounts.session.user.id;
+    busy=true;document.getElementById('nickname-prompt-submit').disabled=true;document.getElementById('nickname-prompt-status').textContent='';
+    try{
+      await Accounts.request({action:'enroll',nickname,idempotencyKey:crypto.randomUUID()},'ranked-game',false,owner);
+      isOpen=false;document.getElementById('nickname-prompt-dialog').close();
+      if(DailyUI.isDaily())DailyRankedUI.sync();else RankedUI.sync();
+    }catch(error){
+      document.getElementById('nickname-prompt-status').textContent=error?.code==='NICKNAME_TAKEN'?t().taken:error?.code==='INVALID_NICKNAME'?t().invalid:t().taken;
+    }finally{busy=false;document.getElementById('nickname-prompt-submit').disabled=false;}
+  });
+  return Object.freeze({maybeOpen,translate});
+})();
 // Server-authoritative Daily Rabona for signed-in accounts. Guests keep the
 // existing pure-local DailyChallenge/DailyUI path untouched - every entry
 // point here is only ever reached when Accounts.session exists (see the
@@ -80638,7 +80703,7 @@ const DailyRankedUI = (()=>{
   // must NOT silently jump the displayed round ahead the instant a round
   // resolves - the player still needs to see that round's feedback/points
   // until they explicitly click Next, exactly like the guest local flow.
-  function accept(data,resetIndex=false){if(!data||!data.daily||!Array.isArray(data.daily.rounds))throw Error('INVALID_RESPONSE');daily=data;if(resetIndex)roundIndex=activeRoundIndex();}
+  function accept(data,resetIndex=false){if(!data||!data.daily||!Array.isArray(data.daily.rounds))throw Error('INVALID_RESPONSE');daily=data;if(resetIndex)roundIndex=activeRoundIndex();NicknamePrompt.maybeOpen(data.profile);}
   async function sync(){
     if(busy)return;
     userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,firstLoad=!daily;
@@ -80903,7 +80968,7 @@ const RankedUI = (()=>{
     if(r.status==='won')$('feedback').append(el('strong',x.win(p.name)),el('span',`+${r.points} ${t().earned}`));else if(r.status==='lost')$('feedback').append(el('strong',x.lost(p.name)));else $('feedback').textContent=r.guesses.length?x.wrong:x.trust;
     $('source-details').hidden=r.status==='playing';if(r.status!=='playing')renderSources(p);else $('source-content').replaceChildren();
   }
-  function accept(data){if(!data||!data.progress||!Object.hasOwn(data,'round'))throw Error('INVALID_RESPONSE');cloud=data;mode='ranked';notice='';}
+  function accept(data){if(!data||!data.progress||!Object.hasOwn(data,'round'))throw Error('INVALID_RESPONSE');cloud=data;mode='ranked';notice='';NicknamePrompt.maybeOpen(data.profile);}
   async function resumeRequestedSync(){
     const requested=syncRequested;
     if(!requested||busy||DailyUI.isDaily()||!current(requested.ticket,requested.owner))return;

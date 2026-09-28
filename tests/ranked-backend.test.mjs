@@ -209,6 +209,9 @@ test('automatic aliases are stable, private, unique under concurrent first reque
   assert.equal(new Set(profiles.map(p=>p.profile?.nickname?.toLowerCase())).size,users.length);
   for(const [i,p] of profiles.entries()) {
     assert.match(p.profile.nickname,aliasPattern);assert.equal(p.profile.enrolled,true);noIdentity(p.profile);
+    // A fresh account's random alias has never been through the mandatory
+    // nickname prompt (ADR 0024) - a human has not seen or confirmed it yet.
+    assert.equal(p.profile.nicknamePrompted,false);
     assert.deepEqual(rpc(users[i],{action:'progress'}).profile,p.profile);
     assert.equal(rpc(users[i],{action:'leaderboard'}).own,null);
   }
@@ -218,6 +221,10 @@ test('automatic aliases are stable, private, unique under concurrent first reque
   assert.equal(rpc(null,{action:'leaderboard'}).total,1);
   const renamed=rpc(uid,mutation('enroll',{nickname:'Custom Otter'}));
   assert.equal(renamed.profile.nickname,'Custom Otter');
+  // enroll is the one action both the mandatory prompt and the ordinary
+  // Account nickname field call - completing it through either path means
+  // there is nothing left to prompt for, ever again for this account.
+  assert.equal(renamed.profile.nicknamePrompted,true);
   assert.deepEqual(rpc(uid,{action:'progress'}).profile,renamed.profile);
   assertError(()=>rpc(users[1],mutation('enroll',{nickname:'custom otter'})),'NICKNAME_TAKEN');
   assert.equal(rpc(uid,{action:'leaderboard'}).own.nickname,'Custom Otter');
@@ -705,4 +712,23 @@ test('daily idempotency replays the cached response for a repeated key after com
   const replay=rpc(uid,body);
   assert.deepEqual(replay,first);
   assertError(()=>rpc(uid,{...body,optionId:randomUUID()}),'IDEMPOTENCY_CONFLICT');
+});
+
+// --- Mandatory nickname prompt (ADR 0024) ---
+test('the mandatory nickname prompt flag is consistent between career and daily projections, and the backfill pattern matches only untouched aliases',()=>{
+  const uid=user();
+  assert.equal(dailyProgress(uid).profile.nicknamePrompted,false);
+  assert.equal(rpc(uid,{action:'progress'}).profile.nicknamePrompted,false);
+  rpc(uid,mutation('enroll',{nickname:'Daily Prompt Test'}));
+  assert.equal(dailyProgress(uid).profile.nicknamePrompted,true);
+  assert.equal(rpc(uid,{action:'progress'}).profile.nicknamePrompted,true);
+  // Exercises the exact predicate 202609280001_mandatory_nickname_prompt.sql
+  // uses to backfill pre-existing accounts: an untouched auto-generated
+  // alias must NOT match (so it keeps nickname_prompted=false and the
+  // player is prompted once), while every real nickname shape already in
+  // use must match (so an already-customized account is never re-prompted).
+  const untouched=['Falcon-a71ea462','Otter-deadbeef','Wombat-00000000'];
+  const customized=['Daily Prompt Test','Custom Otter','nelson','Cesar Augusto','a b','a.b-c_d','FalconFan','Falcon-a71ea46'];
+  for(const nickname of untouched) assert.equal(sql(`select (${quote(nickname)} ~ '^[A-Za-z]+-[0-9a-f]{8}$')::text`),'t',nickname);
+  for(const nickname of customized) assert.equal(sql(`select (${quote(nickname)} ~ '^[A-Za-z]+-[0-9a-f]{8}$')::text`),'f',nickname);
 });
