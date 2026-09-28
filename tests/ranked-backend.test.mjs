@@ -118,7 +118,9 @@ test('additive migration backfills legacy results, preserves custom names and im
   const anonymous=rpc(legacy.anonymous,{action:'progress'});
   assert.match(anonymous.profile?.nickname || '',aliasPattern);
   assert.equal(anonymous.profile.enrolled,true);
-  assert.deepEqual(rpc(legacy.custom,{action:'progress'}).profile,{nickname:'Existing Custom',enrolled:true});
+  // 'Existing Custom' doesn't match the automatic alias pattern, so
+  // 202609280001's backfill correctly marks it already-prompted (ADR 0024).
+  assert.deepEqual(rpc(legacy.custom,{action:'progress'}).profile,{nickname:'Existing Custom',enrolled:true,nicknamePrompted:true});
   assert.equal(rpc(legacy.empty,{action:'progress'}).profile.enrolled,true);
   const legacyUsers=Object.values(legacy).map(quote).join(',');
   for(const t of ['rounds','results','receipts']) assert.deepEqual(json(`select json_agg(x order by user_id) from ranked_private.${t} x where user_id in (${legacyUsers})`),legacySnapshot[t]);
@@ -729,6 +731,6 @@ test('the mandatory nickname prompt flag is consistent between career and daily 
   // use must match (so an already-customized account is never re-prompted).
   const untouched=['Falcon-a71ea462','Otter-deadbeef','Wombat-00000000'];
   const customized=['Daily Prompt Test','Custom Otter','nelson','Cesar Augusto','a b','a.b-c_d','FalconFan','Falcon-a71ea46'];
-  for(const nickname of untouched) assert.equal(sql(`select (${quote(nickname)} ~ '^[A-Za-z]+-[0-9a-f]{8}$')::text`),'t',nickname);
-  for(const nickname of customized) assert.equal(sql(`select (${quote(nickname)} ~ '^[A-Za-z]+-[0-9a-f]{8}$')::text`),'f',nickname);
+  for(const nickname of untouched) assert.equal(sql(`select ${quote(nickname)} ~ '^[A-Za-z]+-[0-9a-f]{8}$'`),'t',nickname);
+  for(const nickname of customized) assert.equal(sql(`select ${quote(nickname)} ~ '^[A-Za-z]+-[0-9a-f]{8}$'`),'f',nickname);
 });
