@@ -104,3 +104,10 @@ research/player-addition-batch11/*
 !research/player-addition-batch11/integrate.py
 !research/player-addition-batch11/update_docs.py
 !research/player-addition-batch11/finish_audit_doc.py
+
+!research/player-addition-batch12/
+research/player-addition-batch12/*
+!research/player-addition-batch12/records.json
+!research/player-addition-batch12/selected-ids.json
+!research/player-addition-batch12/origin-systems.json
+!research/player-addition-batch12/crest-assets.json

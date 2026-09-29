@@ -1985,6 +1985,14 @@ The displayed professional route ends with Genoa in 2003–04. Later low-profile
 Reviewed source links: [585], [586].
 
 <!-- END PLAYER ADDITION BATCH 11 -->
+
+### Daniel Bazán Vera
+
+An itinerant Argentine forward whose 1993–2013 career became a running story in Argentina's lower divisions for its sheer number of registrations: nineteen spells across thirteen clubs in three countries, headlined by five separate stints at Almirante Brown alone. Route, exact years and every spell are corroborated across the Spanish and English Wikipedia editions and independently by BDFA's own division-by-division appearance ledger, which resolves the one point those two Wikipedia editions disagreed on — a brief third 2002 Almirante Brown registration — in favour of including it. Infobae's 2020 career profile independently confirms he never played in Argentina's top-flight Primera División, his forward position and a reported 340 goals across every category he played.
+
+Reviewed source links: [587], [588], [589].
+
+<!-- END PLAYER ADDITION BATCH 12 -->
 Sources:
 [1] https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 [2] https://www.spl.com.sa/en/players/20094/cristiano-ronaldo
@@ -2572,3 +2580,6 @@ Sources:
 [584] https://www.national-football-teams.com/player/13639/Claudio_Taffarel.html
 [585] https://en.wikipedia.org/wiki/Aldair
 [586] https://www.national-football-teams.com/player/13641/Aldair.html
+[587] https://es.wikipedia.org/wiki/Daniel_Bazán_Vera
+[588] https://www.bdfa.com.ar/jugadores-EDUARDO-DANIEL-BAZAN-VERA-4770.html
+[589] https://www.infobae.com/deportes/2020/05/27/la-increible-vida-de-bazan-vera-el-delantero-record-del-ascenso-que-se-agarro-a-trompadas-con-la-barra-de-atlanta-dejo-villa-palito-y-termino-jugando-en-finlandia/

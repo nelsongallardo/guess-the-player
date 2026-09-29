@@ -1,0 +1,50 @@
+[
+  {
+    "id": "daniel-bazan-vera",
+    "name": "Daniel Bazán Vera",
+    "continent": "South America",
+    "country": "Argentina",
+    "position": "Forward",
+    "clubs": [
+      { "name": "Almirante Brown", "years": "1993–1995" },
+      { "name": "Germinal (Rawson)", "years": "1995–1996" },
+      { "name": "Olimpo", "years": "1996–1997" },
+      { "name": "Defensa y Justicia", "years": "1997–1998" },
+      { "name": "Santiago Morning", "years": "1998" },
+      { "name": "Temperley", "years": "1998–1999" },
+      { "name": "Olimpo", "years": "1999–2000", "note": "Second spell." },
+      { "name": "Almirante Brown", "years": "2000–2001", "note": "Second spell." },
+      { "name": "Atlanta", "years": "2001" },
+      { "name": "Almirante Brown", "years": "2002", "note": "Third spell." },
+      { "name": "Inter Turku", "years": "2002–2003" },
+      { "name": "Almirante Brown", "years": "2004", "note": "Fourth spell." },
+      { "name": "Unión de Santa Fe", "years": "2004–2006" },
+      { "name": "Tristán Suárez", "years": "2006–2007" },
+      { "name": "Almagro", "years": "2007" },
+      { "name": "Atlético Rafaela", "years": "2008" },
+      { "name": "Temperley", "years": "2008–2009", "note": "Second spell." },
+      { "name": "Almirante Brown", "years": "2009–2011", "note": "Fifth spell." },
+      { "name": "Gimnasia y Tiro (Salta)", "years": "2011" },
+      { "name": "Tristán Suárez", "years": "2012–2013", "note": "Second spell; final playing season." }
+    ],
+    "sources": [
+      { "url": "https://es.wikipedia.org/wiki/Daniel_Bazán_Vera", "title": "Daniel Bazán Vera - Wikipedia, la enciclopedia libre" },
+      { "url": "https://www.bdfa.com.ar/jugadores-EDUARDO-DANIEL-BAZAN-VERA-4770.html", "title": "EDUARDO DANIEL BAZAN VERA | Delantero | Argentina" },
+      { "url": "https://www.infobae.com/deportes/2020/05/27/la-increible-vida-de-bazan-vera-el-delantero-record-del-ascenso-que-se-agarro-a-trompadas-con-la-barra-de-atlanta-dejo-villa-palito-y-termino-jugando-en-finlandia/", "title": "La increíble vida de Bazán Vera, el delantero récord del Ascenso que se agarró a trompadas con la barra de Atlanta, dejó Villa Palito y terminó jugando en Finlandia - Infobae" }
+    ],
+    "notes": "An itinerant Argentine forward whose 1993-2013 career became a running story in Argentina's lower divisions for its sheer number of registrations: nineteen spells across thirteen clubs in three countries, headlined by five separate stints at Almirante Brown alone (spanning, on and off, nearly two decades). He never played in Argentina's top-flight Primera División - his whole career unfolded across the Primera B/C tiers, a two-year spell in Finland with Inter Turku, and a brief 1998 move to Chile's Santiago Morning. Route, exact years and every spell are corroborated across the Spanish and English Wikipedia editions and independently by BDFA's own division-by-division appearance ledger (which resolves the one point those two Wikipedia editions disagreed on - a brief third 2002 Almirante Brown registration - in favour of including it). Infobae's 2020 career profile independently confirms the never-played-Primera status, his forward position and a reported 340 goals across every category he played. Youth football, any national-team recognition and his post-2013 coaching career (including spells managing Tristán Suárez and later Almirante Brown itself) are excluded.",
+    "status": "retired",
+    "verifiedAt": "2026-09-29",
+    "competitions": [],
+    "esNotes": "Un delantero argentino itinerante cuya carrera (1993-2013) se volvió un tema recurrente en el ascenso argentino por la enorme cantidad de fichajes: diecinueve pasos por trece clubes de tres países, con cinco pasos distintos por Almirante Brown (una relación intermitente de casi dos décadas). Nunca jugó en la Primera División argentina - toda su carrera transcurrió en la Primera B/C, dos años en Finlandia con el Inter Turku, y un breve paso en 1998 por Santiago Morning de Chile. La ruta, los años exactos y cada paso están corroborados por las ediciones en español e inglés de Wikipedia y, de forma independiente, por la planilla de partidos por categoría de BDFA (que resuelve el único punto en el que discrepaban esas dos ediciones de Wikipedia - un breve tercer paso por Almirante Brown en 2002 - a favor de incluirlo). El perfil de carrera de Infobae de 2020 confirma de forma independiente que nunca jugó en Primera, su posición de delantero y un total reportado de 340 goles en todas las categorías. Se excluyen el fútbol juvenil, cualquier reconocimiento en selecciones y su carrera posterior como entrenador (incluyendo pasos dirigiendo a Tristán Suárez y luego al propio Almirante Brown).",
+    "esClubNotes": {
+      "6": "Segundo paso.",
+      "7": "Segundo paso.",
+      "9": "Tercer paso.",
+      "11": "Cuarto paso.",
+      "16": "Segundo paso.",
+      "17": "Quinto paso.",
+      "19": "Segundo paso; última temporada como jugador."
+    }
+  }
+]
