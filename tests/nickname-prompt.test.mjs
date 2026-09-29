@@ -34,8 +34,8 @@ test('the dialog markup exists, is unnamed by any close/X control, and is wired 
   // module ever ingests a fresh server response - call this, so the prompt
   // is checked after every ranked action AND every daily action, whichever
   // mode happens to be active when the account first becomes signed in.
-  assert.match(game,/function accept\(data,resetIndex=false\)\{[^}]*NicknamePrompt\.maybeOpen\(data\.profile\)/);
-  assert.match(game,/function accept\(data\)\{[^}]*NicknamePrompt\.maybeOpen\(data\.profile\)/);
+  assert.match(game,/function accept\(data,resetIndex=false,scoreRevision\)\{[^}]*NicknamePrompt\.maybeOpen\(data\.profile\)/);
+  assert.match(game,/function accept\(data,revision\)[^\n]*NicknamePrompt\.maybeOpen\(data\.profile\)/);
 });
 
 test('the dialog blocks Escape/backdrop dismissal and never opens twice',()=>{

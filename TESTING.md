@@ -1,5 +1,12 @@
 # Verification report
 
+## Daily account masthead total — 29 September 2026 (local candidate, not deployed)
+
+- Forward migration `202609290001_combined_account_score.sql` makes both private career and Daily projections return the sum of career `v2` + Daily results, matching the all-players board. Compared both function definitions against the latest `202609280001` versions: only the career total expression and Daily's new total field differ; nickname-prompt fields, career-only progress and private-schema access stay intact. Hosted migration history and schema were **not** inspected or changed here.
+- Focused Node/native PostgreSQL run (simulated Supabase Auth): **73/75 passed** initially; two tests failed because the existing Node `pg` client shim printed `true` rather than `psql`'s `t`. Corrected the shim's boolean formatting and reran the two failures plus combined-score and private-access tests: **4/4 passed**. The initial run's other 73 passed; this is not a post-correction full-suite claim. Frontend/static suites in that run passed **44/44**.
+- Rendered Chromium with explicit SDK/API mocks: `daily-header-browser-checks.js` passed **14/14**, covering Daily answers/finish, overlapping late career response, mode switch, reload, logout, account switch and Spanish mobile label; not hosted OAuth/API proof. Separate network-disabled `file:` guest check passed: Daily default/10 options, Unlimited hint and scored answer, Next, Spanish reload with session score, no network requests or page errors.
+- Existing `offline-checks.js` and `guest-session-checks.js` did **not** pass: both begin in the now-default Daily mode but assume the Unlimited `state`, so one stalls waiting for Unlimited's Next and the other fails the Unlimited session-storage assertion. The focused guest check selected Unlimited explicitly instead; no checked-in assertion was removed. Deployment requires separate static publication and reviewed manual Supabase migration (prior migrations first), then hosted readback/interactive login smoke verification.
+
 ## Professional footer redesign — 28 September 2026 (local worktree)
 
 - Test-first footer regressions failed against the pill-link layout, then passed: both pages now pair a small italic brand/metadata lockup with quiet text navigation, a real inline X mark and visible `@derabona_club`; Play puts the unchanged Help/Reset/analytics controls and save status in a separate utility row. The roster language updater now targets `#footer-roster`, keeping the brand intact. Leaderboard's footer phrase translates EN/ES.

@@ -659,6 +659,9 @@ test('the same player can score once via career and independently via Daily, wit
   const board=rpc(uid,{action:'leaderboard',competition:'all',limit:100});
   assert.equal(board.own.answered,2);
   assert.equal(board.own.points,80+result.daily.rounds.find(x=>x.roundIndex===0).points);
+  assert.equal(result.totalPoints,board.own.points,'Daily mutation returns the combined account total');
+  assert.equal(dailyProgress(uid).totalPoints,board.own.points,'Daily reload reads the same total');
+  assert.equal(rpc(uid,{action:'progress'}).progress.totalPoints,board.own.points,'Unlimited projection matches the board after Daily');
 });
 
 test('completing all three daily rounds starts a streak; a gap resets it; best streak never decreases',()=>{
