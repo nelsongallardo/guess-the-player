@@ -80850,7 +80850,7 @@ const RankedUI = (()=>{
   // server will actually charge at answer time.
   const roundClock=()=>mode==='ranked'&&cloud?.round?{key:`ranked:${cloud.round.id}`,elapsedMs:Date.now()-Date.parse(cloud.round.startedAt),playing:cloud.round.status==='playing',hints:cloud.round.hints,points:cloud.round.points}:null;
   function update(){
-    const x=t(),signed=!!Accounts.session;
+    const x=t(),signed=!!Accounts.session,daily=DailyUI.isDaily();
     const values={'account-open-label':signed?x.account:x.accountGuest,'guest-ranked-title':x.guestRankedTitle,'guest-ranked-detail':x.guestRankedDetail,'guest-ranked-signin':x.guestRankedSignIn,'account-title':x.title,'account-pitch':x.accountPitch,'account-detail':x.detail,'stat-points-label':x.statPoints,'stat-answered-label':x.statAnswered,'stat-correct-label':x.statCorrect,'google-login-label':x.login,'logout':x.logout,'account-close':x.close,'account-ranked':x.returnRanked,'account-delete':x.delete,'nickname-label':x.nickname,'nickname-detail':x.nicknameDetail,'alias-tooltip':x.aliasTooltip,'enroll':x.enroll,'leaderboard-open-label':x.board,'ranked-retry':x.retry,'practice':x.practiceAction,'reset-progress':x.reset};
     for(const [id,value]of Object.entries(values))$(id).textContent=value;
     $('account-open').classList.toggle('account-open-signed',signed);
@@ -80871,8 +80871,17 @@ const RankedUI = (()=>{
     // hiding it just adds a one-beat layout shift for no information the
     // account-open button doesn't already show once it resolves. Only
     // unavailable/practice remain - genuinely actionable states worth a
-    // glance (e.g. practice explicitly warns points won't count).
-    $('play-mode').classList.toggle('play-mode-show',mode==='unavailable'||mode==='practice');
+    // glance (e.g. practice explicitly warns points won't count) - but only
+    // while Unlimited is what's actually on screen. Reported directly: since
+    // sync() also runs silently in the background while Daily is active (to
+    // resolve the masthead - see boot()'s comment), a failed background
+    // attempt used to surface this same "Ranked play unavailable..." pill
+    // over the Daily panel, unprompted, for a career track the player isn't
+    // even looking at. Daily gets total silence instead; a stale/failed
+    // background state is instead retried the moment the player actually
+    // asks about it by opening Account (see openAccount()) - the existing
+    // account-dialog message is where it belongs, not the main page.
+    $('play-mode').classList.toggle('play-mode-show',!daily&&(mode==='unavailable'||mode==='practice'));
     $('account-status').textContent=!Accounts.configured?x.disabled:notice?x[notice]||x.unavailable:signed?x.signed:'';
     $('google-login').hidden=signed;$('google-login').disabled=!Accounts.configured||busy||mode==='loading';$('account-pitch').hidden=signed||!Accounts.configured;
     // Once signed in, the generic "here's how progress persistence works"
@@ -80904,7 +80913,7 @@ const RankedUI = (()=>{
     // Daily - a much bigger, uglier version of the same "internal loading
     // state that shouldn't be visible" complaint the #play-mode pill above
     // already got fixed for.
-    const starting=busy&&pending?.action==='start',daily=DailyUI.isDaily();
+    const starting=busy&&pending?.action==='start';
     const waiting=!daily&&(mode==='loading'||mode==='ranked'&&starting);
     $('game-loading-status').hidden=!waiting;
     $('game-loading-text').textContent=language==='es'?(starting?'Preparando tu partida…':signed?'Cargando tu progreso…':'Comprobando tu cuenta…'):(starting?'Preparing your game…':signed?'Loading your progress…':'Checking your account…');
@@ -81109,7 +81118,13 @@ const RankedUI = (()=>{
     try{const session=await Accounts.init(authChanged);if(ticket!==epoch)return;if(session){captureGoogleNameSuggestion(session);if(!DailyUI.isDaily())await sync();else{sync();DailyRankedUI.sync();}}else{mode='guest';update();render(false,true);}}
     catch{if(ticket===epoch){mode=Accounts.hasStoredSession()?'unavailable':'guest';notice='authError';update();render(false,true);}}
   }
-  const openAccount=()=>{update();$('account-dialog').showModal();};
+  // A stale 'unavailable' left over from a silent background sync (see the
+  // play-mode-show comment above) gets one fresh, unannounced retry the
+  // moment the player actually opens Account - only a retry that ALSO fails
+  // shows the existing dialog message, so a transient hiccup nobody was
+  // looking at doesn't need to be explained if it's already resolved by the
+  // time they open the dialog.
+  const openAccount=()=>{if(mode==='unavailable')sync();update();$('account-dialog').showModal();};
   $('account-open').onclick=openAccount;$('guest-ranked-signin').onclick=openAccount;$('guest-ranked-reminder-signin').onclick=openAccount;
   $('guest-ranked-reminder-continue').onclick=()=>$('next').click();
   $('google-login').onclick=async()=>{if(busy||!Accounts.configured)return;const engaged=lifetime.rounds||seen.size||loadHistory().length||state.rounds.some(r=>r.guesses.length||r.hints);if(engaged&&!confirm(t().loginWarn))return;busy=true;update();try{await Accounts.login(language);}catch{notice='authError';}finally{busy=false;update();}};
