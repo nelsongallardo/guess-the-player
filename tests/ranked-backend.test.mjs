@@ -257,7 +257,15 @@ test('forced case-insensitive alias collisions retry safely across concurrent ac
 });
 
 test('roster exporter is current and canonical membership/matching scores equal guest model',()=>{
-  execFileSync(process.execPath,[new URL('scripts/export-ranked-roster-220-forward.mjs',root).pathname,'--check']);
+  // scripts/export-ranked-roster-220-forward.mjs --check used to run here
+  // too, but it asserts the LIVE roster is exactly 220 players - it exists
+  // solely to have generated the frozen 210-to-220 migration, so it fails
+  // by design after every later roster-growing batch (the same "frozen
+  // export trap" AGENTS.md documents for the general exporter; see the
+  // matching fix in tests/ranked-roster-220.test.mjs). The rest of this
+  // test already derives its expectations from the live inline model via
+  // vm.runInContext below, not from anything frozen, so it needs no such
+  // guard.
   const html=fs.readFileSync(new URL('index.html',root),'utf8');
   const block=id=>html.match(new RegExp(`<script id="${id}">([\\s\\S]*?)<\\/script>`))[1];
   const ctx=vm.createContext({});vm.runInContext(block('roster-data')+block('game-model'),ctx);
