@@ -80725,13 +80725,13 @@ const DailyRankedUI = (()=>{
   // must NOT silently jump the displayed round ahead the instant a round
   // resolves - the player still needs to see that round's feedback/points
   // until they explicitly click Next, exactly like the guest local flow.
-  function accept(data,resetIndex=false){if(!data||!data.daily||!Array.isArray(data.daily.rounds))throw Error('INVALID_RESPONSE');daily=data;if(resetIndex)roundIndex=activeRoundIndex();NicknamePrompt.maybeOpen(data.profile);}
+  function accept(data,resetIndex=false,scoreRevision){if(!data||!data.daily||!Array.isArray(data.daily.rounds))throw Error('INVALID_RESPONSE');daily=data;if(resetIndex)roundIndex=activeRoundIndex();RankedUI.acceptDailyScore(data.totalPoints,userId,scoreRevision);NicknamePrompt.maybeOpen(data.profile);}
   async function sync(){
     if(busy)return;
-    userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,firstLoad=!daily;
+    userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,firstLoad=!daily,scoreRevision=RankedUI.scoreRevision();
     if(firstLoad)noticeNeeded=localTodayHasProgress();
     busy=true;if(DailyUI.isDaily())render(false,true);
-    try{const data=await Accounts.request({action:'dailyProgress'},'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,true);}
+    try{const data=await Accounts.request({action:'dailyProgress'},'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,true,scoreRevision);}
     catch{}
     finally{if(current(ticket,owner)){busy=false;if(DailyUI.isDaily()){render(false,true);document.getElementById('question').focus({preventScroll:true});}}}
   }
@@ -80743,8 +80743,8 @@ const DailyRankedUI = (()=>{
   }
   async function sendPending(){
     if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;
-    const payload=pending,owner=pendingUserId,ticket=epoch;busy=true;render(false,false);
-    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data);pending=null;}
+    const payload=pending,owner=pendingUserId,ticket=epoch,scoreRevision=RankedUI.scoreRevision();busy=true;render(false,false);
+    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,false,scoreRevision);pending=null;}
     catch(error){if(!current(ticket,owner))return;if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','ROUND_LOCKED','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','IDEMPOTENCY_CONFLICT'].includes(error.code))pending=null;}
     finally{if(current(ticket,owner)){busy=false;render(payload.action==='dailyAnswer',false);const nextButton=document.getElementById('next');if(!nextButton.hidden)nextButton.focus({preventScroll:true});else if(currentRound()?.status!=='playing')document.getElementById('question').focus({preventScroll:true});}}
   }
@@ -80826,7 +80826,13 @@ const RankedUI = (()=>{
   let mode=Accounts.configured&&(Accounts.hasStoredSession()||AuthCallback.code)?'loading':'guest';
   let userId=Accounts.session?.user?.id??null,pendingUserId=null;
   const current=(ticket,owner)=>ticket===epoch&&owner===userId&&owner===(Accounts.session?.user?.id??null);
-  let cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='',syncRequested=null;
+  let cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='',syncRequested=null,scoreTotal=null,scoreRevision=0;
+  // Both server projections carry the same combined total. A response begun
+  // before another mode's accepted response cannot roll the masthead back.
+  function acceptDailyScore(total,owner,revision){
+    if(owner!==userId||owner!==(Accounts.session?.user?.id??null)||!Number.isSafeInteger(total)||total<0||revision!==scoreRevision&&scoreTotal!==null&&total<=scoreTotal)return;
+    scoreTotal=total;scoreRevision++;update();
+  }
   // A one-time, editable nickname suggestion sourced from the Google profile
   // (never sent to the server as-is; the player still has to open the field
   // and click Save for it to become their public alias). Only ever offered
@@ -80883,7 +80889,7 @@ const RankedUI = (()=>{
     // numbers instead (the storage explanation still matters before you've
     // decided to sign in, so it stays for the signed-out pitch).
     $('account-detail').hidden=signed;$('account-stats').hidden=!signed;
-    if(signed&&cloud?.progress){$('stat-points').textContent=String(cloud.progress.totalPoints);$('stat-answered').textContent=String(cloud.progress.answered);$('stat-correct').textContent=String(cloud.progress.correct);}
+    if(signed){$('stat-points').textContent=scoreTotal===null?'—':String(scoreTotal);$('stat-answered').textContent=cloud?.progress?String(cloud.progress.answered):'—';$('stat-correct').textContent=cloud?.progress?String(cloud.progress.correct):'—';}
     $('logout').hidden=!signed;$('logout').disabled=busy;
     $('account-ranked').hidden=!signed||mode==='ranked';$('account-ranked').disabled=busy;
     $('account-delete').hidden=!signed;$('account-delete').disabled=busy;$('danger-section').hidden=!signed;
@@ -80920,7 +80926,7 @@ const RankedUI = (()=>{
     // a footer line further explaining "cloud progress" restates that
     // without adding anything - it read as unexplained jargon. Keep it for
     // practice/loading/unavailable, where it still says something new.
-    if(isAccountMode()){$('save-status').hidden=mode==='ranked';$('save-status').textContent=mode==='ranked'?'':x.unavailable;$('score').textContent=mode==='ranked'?String(cloud?.progress?.totalPoints??0):'—';$('streak').textContent='—';}
+    if(isAccountMode()){$('save-status').hidden=mode==='ranked';$('save-status').textContent=mode==='ranked'?'':x.unavailable;$('score').textContent=scoreTotal===null?'—':String(scoreTotal);$('streak').textContent='—';}
     // Points are only meaningful once there is a real account to compare
     // them against (a leaderboard, other players) - an anonymous guest's
     // in-tab total has no audience, so the masthead hides it entirely
@@ -81015,7 +81021,7 @@ const RankedUI = (()=>{
     if(r.status==='won')$('feedback').append(el('strong',x.win(p.name)),el('span',`+${r.points} ${t().earned}`));else if(r.status==='lost')$('feedback').append(el('strong',x.lost(p.name)));else $('feedback').textContent=r.guesses.length?x.wrong:x.trust;
     $('source-details').hidden=r.status==='playing';if(r.status!=='playing')renderSources(p);else $('source-content').replaceChildren();
   }
-  function accept(data){if(!data||!data.progress||!Object.hasOwn(data,'round'))throw Error('INVALID_RESPONSE');cloud=data;mode='ranked';notice='';NicknamePrompt.maybeOpen(data.profile);}
+  function accept(data,revision){if(!data||!data.progress||!Object.hasOwn(data,'round'))throw Error('INVALID_RESPONSE');cloud=data;const total=data.progress.totalPoints;if(Number.isSafeInteger(total)&&total>=0&&(revision===scoreRevision||scoreTotal===null||total>scoreTotal)){scoreTotal=total;scoreRevision++;}mode='ranked';notice='';NicknamePrompt.maybeOpen(data.profile);}
   async function resumeRequestedSync(){
     const requested=syncRequested;
     // No longer blocked on DailyUI.isDaily() - see sync()'s own comment;
@@ -81041,8 +81047,8 @@ const RankedUI = (()=>{
   // delegates to whichever of DailyUI/DailyRankedUI or RankedUI.render
   // actually matches the current tab.
   async function sync(){
-    if(busy){const owner=Accounts.session?.user?.id??userId;if(owner===userId)syncRequested={owner,ticket:epoch};return;}syncRequested=null;if(pending)return sendPending();userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),identityCurrent=()=>current(ticket,owner),gameplayCurrent=()=>identityCurrent()&&!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket;busy=true;mode='loading';update();
-    try{if(!Accounts.session){await Accounts.init(authChanged);if(!identityCurrent())return;if(!Accounts.session)throw Error('AUTH_REQUIRED');}const data=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!identityCurrent())return;accept(data);}
+    if(busy){const owner=Accounts.session?.user?.id??userId;if(owner===userId)syncRequested={owner,ticket:epoch};return;}syncRequested=null;if(pending)return sendPending();userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),revision=scoreRevision,identityCurrent=()=>current(ticket,owner),gameplayCurrent=()=>identityCurrent()&&!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket;busy=true;mode='loading';update();
+    try{if(!Accounts.session){await Accounts.init(authChanged);if(!identityCurrent())return;if(!Accounts.session)throw Error('AUTH_REQUIRED');}const data=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!identityCurrent())return;accept(data,revision);}
     catch{if(identityCurrent()){mode='unavailable';notice='unavailable';}}
     finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,true);await resumeRequestedSync();}}
     if(gameplayCurrent()&&mode==='ranked'&&!cloud.round){const count=cloud.progress.competitionCounts?.[selected];if(!count||count.answered<count.total)await mutate('start',{competition:selected});}
@@ -81054,7 +81060,7 @@ const RankedUI = (()=>{
     if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingUserId=userId;await sendPending();
   }
   async function sendPending(){
-    if(busy||!pending||DailyUI.isDaily())return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),gameplayCurrent=()=>current(ticket,owner)&&!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket;busy=true;update();renderRanked();
+    if(busy||!pending||DailyUI.isDaily())return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),revision=scoreRevision,gameplayCurrent=()=>current(ticket,owner)&&!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket;busy=true;update();renderRanked();
     // ranked_game's own response IS already a full ranked_private.projection()
     // (round + progress + profile) for every action, hint/answer/start/enroll
     // alike - the same shape a separate {action:'progress'} call would return.
@@ -81063,7 +81069,7 @@ const RankedUI = (()=>{
     // reconfirmation with nothing new to say, on a single-primary Postgres
     // database with no read-replica lag to guard against. Removed - see
     // docs/adr/0013-single-round-trip-ranked-mutations.md.
-    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!gameplayCurrent())return;accept(data);pending=null;
+    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!gameplayCurrent())return;accept(data,revision);pending=null;
     }catch(error){if(!gameplayCurrent())return;mode='unavailable';notice='unavailable';if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','INVALID_NICKNAME','NICKNAME_TAKEN','IDEMPOTENCY_CONFLICT','STALE_VERSION','ROUND_NOT_PLAYING','ROUND_COMPLETE','COMPETITION_COMPLETE','NO_PLAYERS','NO_UNSEEN_PLAYERS'].includes(error.code))pending=null;}
     // newCareer was `true` here unconditionally for every action - hint and
     // answer responses stay on the exact same round/player, so that forced
@@ -81073,7 +81079,7 @@ const RankedUI = (()=>{
     // hint click and every answer, not just when a round genuinely starts.
     finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,payload.action==='start');if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}await resumeRequestedSync();}}
   }
-  function freshGuest(){userId=null;pendingUserId=null;epoch++;cloud=null;pending=null;busy=false;syncRequested=null;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();googleNameSuggestion=null;nicknameSuggestionApplied=false;$('public-nickname').value='';DailyRankedUI.resetIdentity();applyLanguage();render(false,true);}
+  function freshGuest(){userId=null;pendingUserId=null;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;busy=false;syncRequested=null;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();googleNameSuggestion=null;nicknameSuggestionApplied=false;$('public-nickname').value='';DailyRankedUI.resetIdentity();applyLanguage();render(false,true);}
   // Shared by both the initial getSession()/exchangeCodeForSession() result
   // (boot(), including a real fresh OAuth redirect completion) and every
   // later onAuthStateChange event (authChanged()) - a fresh sign-in can
@@ -81088,7 +81094,7 @@ const RankedUI = (()=>{
   function authChanged(event,session){
     const next=session?.user?.id??null;if(next===userId)return;
     if(!next){freshGuest();return;}
-    userId=next;epoch++;cloud=null;pending=null;pendingUserId=null;busy=false;syncRequested=null;notice='';mode='loading';selected='all';
+    userId=next;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;pendingUserId=null;busy=false;syncRequested=null;notice='';mode='loading';selected='all';
     captureGoogleNameSuggestion(session);
     DailyRankedUI.resetIdentity();
     update();render(false,true);
@@ -81142,7 +81148,7 @@ const RankedUI = (()=>{
   $('account-delete').onclick=async()=>{if(busy||prompt(t().deleteConfirm)!=='DELETE')return;const owner=userId,ticket=epoch;busy=true;update();try{await Accounts.request({confirmation:'DELETE'},'account-delete',false,owner);if(!current(ticket,owner))return;await Accounts.logout();if(Accounts.session?.user?.id)return;freshGuest();$('account-dialog').close();}catch{if(current(ticket,owner)){notice='deleteError';busy=false;update();}}};
   window.addEventListener('offline',()=>{if(mode==='ranked'){mode='unavailable';notice='unavailable';update();}});
   // Reconnect is explicit; practice is never silently promoted to ranked.
-  return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync};
+  return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync,acceptDailyScore,scoreRevision:()=>scoreRevision};
 })();
 applyLanguage();render(false,true);RankedUI.boot();
 // #elapsed-time: a neutral count-up readout of the active round clock in

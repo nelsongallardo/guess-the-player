@@ -22,7 +22,7 @@ function ranked(daily=false,runTimers=false){
   const renders=[];
   const c={Accounts:{configured:true,hasStoredSession:()=>true,session:{user:{id:'A'}},init:async()=>c.Accounts.session,request:()=>new Promise(()=>{})},AuthCallback:{},DailyUI:{isDaily:()=>dailyMode,modeEpoch:()=>modeEpoch,choose(next){dailyMode=next==='daily';modeEpoch++;if(!dailyMode)c.ui.sync();return true;}},DailyRankedUI:{resetIdentity(){},sync(){}},NicknamePrompt:{maybeOpen(){}},language:'en',$:node,document:{addEventListener(){},activeElement:null},window:{addEventListener(){}},setTimeout:fn=>{if(runTimers)queueMicrotask(fn);return 0;},crypto:{randomUUID:()=> 'key'},GuestStorage:{clear(){}},seen:new Set(),defaultLifetime:()=>({}),CareerGame:{create:()=>({})},resetRoundClock(){},applyLanguage(){},render(){renders.push(dailyMode?'daily':'unlimited');},PLAYERS:[]};vm.createContext(c);
   let source=html.slice(html.indexOf('const RankedUI = (()=>{'),html.indexOf('\napplyLanguage();render(false,true);RankedUI.boot();'));
-  const returnLine='return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync};';
+  const returnLine='return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync,acceptDailyScore,scoreRevision:()=>scoreRevision};';
   // String.replace on a pattern that no longer matches RankedUI's actual
   // return statement fails SILENTLY (source comes back unchanged), which
   // previously let a real regression through undetected until CI: every

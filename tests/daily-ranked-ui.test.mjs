@@ -49,9 +49,9 @@ test('DailyRankedUI never leaks or checks the correct option client-side; correc
 
 test('sync() only resets the displayed round on a fresh load, not on every hint/answer response',()=>{
   const daily=game.slice(game.indexOf('const DailyRankedUI'),game.indexOf('const RankedUI'));
-  assert.match(daily,/function accept\(data,resetIndex=false\)/);
-  assert.match(daily,/accept\(data,true\)/);
-  assert.match(daily,/accept\(data\);pending=null;/);
+  assert.match(daily,/function accept\(data,resetIndex=false,scoreRevision\)/);
+  assert.match(daily,/accept\(data,true,scoreRevision\)/);
+  assert.match(daily,/accept\(data,false,scoreRevision\);pending=null;/);
 });
 
 // sync() is what resolves the shared masthead (#play-mode, #score) out of

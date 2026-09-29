@@ -11,7 +11,8 @@ try {
   await client.connect();
   const result = await client.query(args.includes('-f') ? fs.readFileSync(arg('-f'),'utf8') : arg('-c'));
   for (const item of Array.isArray(result) ? result : [result]) for (const row of item.rows) {
-    console.log(Object.values(row).map(v=>v===null?'':typeof v==='object'?JSON.stringify(v):String(v)).join('|'));
+    // psql -tA renders booleans as t/f; pg decodes them to JS booleans.
+    console.log(Object.values(row).map(v=>v===null?'':typeof v==='boolean'?(v?'t':'f'):typeof v==='object'?JSON.stringify(v):String(v)).join('|'));
   }
 } catch (error) { console.error(error.message); process.exitCode=1; }
 finally { await client.end(); }
