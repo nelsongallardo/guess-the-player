@@ -20,7 +20,7 @@ test('signed-out online play explains guest score and ranked eligibility before 
   assert.match(ui,/guestRankedTitle:'You’re playing as a guest'/);
   assert.match(ui,/guestRankedDetail:'Your guest score stays in this tab, cannot be transferred after sign-in, and does not appear on the leaderboard\./);
   assert.match(ui,/guestRankedTitle:'Jugás como invitado'/);
-  assert.match(ui,/guestRankedDetail:'Tu puntaje de invitado queda en esta pestaña, no se puede transferir después de iniciar sesión y no aparece en la clasificación\./);
+  assert.match(ui,/guestRankedDetail:'Tu puntaje de invitado queda en esta pestaña, no se puede transferir después de iniciar sesión y no aparece en la tabla\./);
   assert.match(ui,/guestRankedSignIn:'Sign in to compete'/);
   assert.match(ui,/guestRankedSignIn:'Iniciar sesión para competir'/);
   assert.match(html,/id="guest-ranked-reminder-continue"[^>]*type="button"/);
