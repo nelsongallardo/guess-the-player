@@ -18,6 +18,7 @@ let dir, running = false;
 let legacy, legacySnapshot, rosterUpgrade, rosterUpgradeSnapshot, roster210Upgrade, roster210UpgradeSnapshot;
 let roster210ReferenceSnapshot, roster210ActiveProjection;
 let roster220Upgrade, roster220UpgradeSnapshot, roster220ReferenceSnapshot, roster220ActiveProjection;
+let hintUpgrade, hintUpgradeSnapshot, hintUpgradeReceipt;
 const aliasPattern = /^(Otter|Badger|Panda|Koala|Heron|Robin|Finch|Lynx|Seal|Dolphin|Turtle|Falcon|Penguin|Gecko|Wombat|Alpaca)-[0-9a-f]{8}$/;
 const quote = value => "'"+String(value).replaceAll("'","''")+"'";
 const args = () => ['-X','-qAt','-v','ON_ERROR_STOP=1','-h',dir,'-p','55439','-U','postgres','-d','postgres'];
@@ -104,7 +105,26 @@ before(() => {
     ['memberships',json("select coalesce(jsonb_agg(to_jsonb(x) order by player_id,competition),'[]'::jsonb) from ranked_private.memberships x")],
   ]);
   roster220ActiveProjection=rpc(roster220Upgrade.active,{action:'progress'}).round;
-  for(const f of migrations.filter(f=>f>=latestRosterMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:48*1024*1024});
+  const hintMigration='202610040001_position_first_hints.sql';
+  for(const f of migrations.filter(f=>f>=latestRosterMigration&&f<hintMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:48*1024*1024});
+  // Exact current predecessor, with engaged rounds and immutable receipts.
+  hintUpgrade=[0,1,2,3].map(hints=>{
+    const uid=user();let career=start(uid).round;
+    for(let i=0;i<hints;i++){
+      const payload=mutation('hint',{roundId:career.id,expectedVersion:career.version}),response=rpc(uid,payload);
+      if(hints===1)hintUpgradeReceipt={uid,payload,response};career=response.round;
+    }
+    let daily=rpc(uid,{action:'dailyProgress'}).daily.rounds[0];
+    for(let i=0;i<hints;i++)daily=rpc(uid,mutation('dailyHint',{roundIndex:0,expectedVersion:daily.version})).daily.rounds[0];
+    return {uid,hints,career,daily};
+  });
+  hintUpgradeSnapshot=Object.fromEntries(['rounds','daily_rounds','results','daily_results','receipts','daily_streaks'].map(t=>[t,json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${t} x`)]));
+
+  for(const f of migrations.filter(f=>f>=hintMigration)) execFileSync(bin('psql'),[...args(),'-f',new URL(`supabase/migrations/${f}`,root).pathname],{stdio:'pipe',maxBuffer:48*1024*1024});
+  // These earlier assertions test roster preservation, not old clue order.
+  for(const r of [roster210ActiveProjection,roster220ActiveProjection]){
+    r.clueCountry=null;r.cluePosition=sql(`select position from ranked_private.players where id=${quote(r.playerId)}`);
+  }
   console.log('Real PostgreSQL isolated cluster; Supabase auth schema/roles SIMULATED; no cloud services used.');
 });
 after(() => {
@@ -114,7 +134,19 @@ after(() => {
 
 afterEach(()=>sql('delete from auth.users'));
 
-test('additive migration backfills legacy results, preserves custom names and immutable history',()=>{
+// Include hint upgrade assertions before cleanup of the shared upgrade fixtures.
+test('additive migrations preserve history, aliases and active hinted rounds',()=>{
+  for(const [table,snapshot] of Object.entries(hintUpgradeSnapshot))assert.deepEqual(json(`select coalesce(jsonb_agg(to_jsonb(x) order by to_jsonb(x)::text),'[]'::jsonb) from ranked_private.${table} x`),snapshot,table);
+  assert.deepEqual(rpc(hintUpgradeReceipt.uid,hintUpgradeReceipt.payload),hintUpgradeReceipt.response,'old exact receipts remain immutable');
+  for(const fixture of hintUpgrade){
+    const career=rpc(fixture.uid,{action:'progress'}).round,daily=rpc(fixture.uid,{action:'dailyProgress'}).daily.rounds[0];
+    for(const [actual,previous] of [[career,fixture.career],[daily,fixture.daily]]){
+      const p=json(`select jsonb_build_object('country',country,'position',position) from ranked_private.players where id=${quote(actual.playerId)}`);
+      assert.equal(actual.cluePosition,fixture.hints>=1?p.position:null);
+      assert.equal(actual.clueCountry,fixture.hints>=2?p.country:null);
+      assert.deepEqual({...actual,clueCountry:null,cluePosition:null},{...previous,clueCountry:null,cluePosition:null},'only the authorized clues change');
+    }
+  }
   const anonymous=rpc(legacy.anonymous,{action:'progress'});
   assert.match(anonymous.profile?.nickname || '',aliasPattern);
   assert.equal(anonymous.profile.enrolled,true);
@@ -318,7 +350,7 @@ test('single active round, stable opaque randomized options, reload preserves hi
   const raw=JSON.stringify(r);assert(!raw.includes('correct_option'));assert(!raw.includes('candidate_id'));
   const chosen=wrongs(r)[0];r=answer(uid,r,chosen).round;
   r=hint(uid,r).round;
-  assert.equal(r.hints,1);assert(r.clueCountry);assert.equal(r.cluePosition,null);
+  assert.equal(r.hints,1);assert(r.cluePosition);assert.equal(r.clueCountry,null);
   assert.deepEqual(r.guesses,[chosen]);assert.equal(r.startedAt,initial.round.startedAt);
   assert.deepEqual(rpc(uid,{action:'progress'}).round,r);
   assert.deepEqual(start(uid,'brasileirao').round,r);
@@ -624,7 +656,7 @@ test('daily rounds enforce sequential order, hint cap, invalid/duplicate options
 test('daily hint clues are gated exactly like ranked and years reveal at the third hint client-side',()=>{
   const uid=user();dailyProgress(uid);
   let r=dailyHintRPC(uid,0,0).daily.rounds.find(x=>x.roundIndex===0);
-  assert(r.clueCountry);assert.equal(r.cluePosition,null);
+  assert(r.cluePosition);assert.equal(r.clueCountry,null);
   r=dailyHintRPC(uid,0,r.version).daily.rounds.find(x=>x.roundIndex===0);
   assert(r.clueCountry);assert(r.cluePosition);
 });

@@ -12,14 +12,14 @@ for (const [language, markup, heading, terms] of [
     '100 puntos', 'tres respuestas incorrectas', '0 puntos',
     '100, 80, 60', '40 puntos', '2 segundos', '24 segundos', '25%',
     '20 puntos', 'redondea',
-    'país', 'posición', 'años en cada club', 'servidor', 'recargar',
+    'posición', 'nacionalidad', 'años en cada club', 'servidor', 'recargar',
     'una sola vez', 'no se transfieren', 'competición',
   ]],
   ['English', english, 'How do points work?', [
     '100 points', 'three wrong guesses', '0 points',
     '100, 80, 60', '40 points', '2 seconds', '24 seconds', '25%',
     '20 points', 'rounded',
-    'country', 'position', "club's years", 'server', 'refreshing',
+    'position', 'nationality', "club's years", 'server', 'refreshing',
     'only once', 'never transfer', 'competition',
   ]],
 ]) {
