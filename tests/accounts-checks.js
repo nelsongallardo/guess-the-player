@@ -35,7 +35,7 @@ async page => {
       if(body.action==='start'&&body.competition==='la-liga'&&projection.progress.answered===2)return respond({...projection,round:null,completed:true});
       if(body.action==='start'&&projection.round?.status!=='playing')projection.round=createRound(body.competition);
       if(body.action==='enroll')projection.profile={nickname:body.nickname,enrolled:true};
-      if(body.action==='hint'){projection.round.hints++;projection.round.version++;projection.round.clueCountry='Portugal';if(projection.round.hints===2)projection.round.cluePosition='Forward';}
+      if(body.action==='hint'){projection.round.hints++;projection.round.version++;projection.round.cluePosition='Forward';if(projection.round.hints>=2)projection.round.clueCountry='Portugal';}
       if(body.action==='answer'){
         const r=projection.round;r.guesses.push(body.optionId);r.version++;
         if(r.options.find(o=>o.id===body.optionId).label===players.find(p=>p.id===r.playerId).name){r.status='won';r.points=73;}else if(r.guesses.length===3)r.status='lost';

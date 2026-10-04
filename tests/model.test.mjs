@@ -102,9 +102,9 @@ test('invalid/repeated guesses cannot spend attempts or award points twice',()=>
   assert.equal(g.stats(s).score,100);assert.equal(g.next(s),true);assert.equal(g.next(s),false);assert.equal(s.roundIndex,1);
 });
 
-test('hints reveal country, position, then club years (3 max), cost no attempts',()=>{
+test('hints reveal position, nationality, then club years (3 max), cost no attempts',()=>{
   const s=g.create(),p=g.playerAt(s);
-  assert.deepEqual(plain(g.hintValues(p)),[p.country,p.position]);
+  assert.deepEqual(plain(g.hintValues(p)),[p.position,p.country]);
   for(let i=1;i<=3;i++){assert.equal(g.hint(s),true);assert.equal(g.roundAt(s).hints,i);}
   assert.equal(g.hint(s),false,'Capped at 3 - initials was removed, too obvious alongside 5 visible options');
   assert.equal(g.roundAt(s).guesses.length,0);assert.equal(g.stats(s).score,0);
@@ -120,7 +120,7 @@ test('scoring rewards speed and no-hint answers, floors gracefully, and is stabl
   // looking an answer up elsewhere can't out-score a fast, honest guess.
   // See docs/adr/0001-local-results-history-and-speed-based-scoring.md.
   assert.equal(g.pointsFor(0, 0), 100); assert.equal(g.pointsFor(0, 1999), 100); assert.equal(g.pointsFor(0, 2000), 100);
-  // 3 hints are offerable in the UI (country, position, years - see hint()'s
+  // 3 hints are offerable in the UI (position, nationality, years - see hint()'s
   // cap), and pointsFor clamps a stray/legacy hints=4 to the same value as 3,
   // rather than over-penalizing it.
   assert.equal(g.pointsFor(1, 0), 80); assert.equal(g.pointsFor(2, 0), 60); assert.equal(g.pointsFor(3, 0), 40); assert.equal(g.pointsFor(4, 0), 40);
@@ -357,7 +357,7 @@ test('Spanish copy, all 221 career notes and every country/position are translat
   for(const lang of ['en','es']){assert.ok(COPY[lang].footer.includes('221 '));assert.ok(COPY[lang].footer.includes('110 '));assert.ok(COPY[lang].rules.includes('221 '));}
   assert.equal(COPY.es.question,'¿Quién es este jugador?');
   assert.equal(COPY.es.attempts(1),'Queda 1 intento');
-  assert.equal(COPY.es.hints.join('|'),'País|Posición|Años');
+  assert.equal(COPY.es.hints.join('|'),'Posición|Nacionalidad|Años');
   for(const lang of ['en','es']){
     for(const id of ['all',...g.COMPETITION_IDS])assert.ok(COPY[lang].competitions[id],`${lang}.competitions.${id}`);
   }
