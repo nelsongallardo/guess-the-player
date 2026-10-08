@@ -16,11 +16,11 @@ for(const fragment of ['access_token=ATTACKER&refresh_token=REFRESH','refresh_to
 });
 test('PKCE code still exchanges after URL scrubbing',async()=>{const {c,calls}=service('https://example.test/?lang=en&code=LOCAL_CODE');await c.api.init(()=>{});assert.deepEqual(calls,['pkce']);assert.equal(c.location.search,'?lang=en');});
 test('request cannot use B credentials for an operation bound to A',async()=>{const {c,calls,change}=service('https://example.test/',true);await c.api.init(()=>{});change('B');await assert.rejects(c.api.request({action:'enroll'},'ranked-game',false,'A'));assert.deepEqual(calls,[]);});
-function ranked(daily=false,runTimers=false){
+function ranked(daily=false,runTimers=false,initialSession=true){
   let dailyMode=daily,modeEpoch=0;
   const nodes=new Map(),node=id=>{if(!nodes.has(id))nodes.set(id,{value:'all',dataset:{},addEventListener(){},replaceChildren(){},classList:{toggle(){}},querySelector(){return null;},focus(){},scrollIntoView(){},close(){}});return nodes.get(id);};
   const renders=[];
-  const c={playActivated:true,PlayOverview:{leavePractice(){},reset(){c.playActivated=false;},load:()=>c.Accounts.request({action:'overview'}),show(next){dailyMode=next==='daily';c.playActivated=false;return c.PlayOverview.load();}},Accounts:{configured:true,hasStoredSession:()=>true,session:{user:{id:'A'}},init:async()=>c.Accounts.session,request:()=>new Promise(()=>{})},AuthCallback:{},DailyUI:{isDaily:()=>dailyMode,modeEpoch:()=>modeEpoch,choose(next){dailyMode=next==='daily';modeEpoch++;if(!dailyMode)c.ui.sync();return true;}},DailyRankedUI:{resetIdentity(){},sync(){}},NicknamePrompt:{maybeOpen(){},resetIdentity(){}},language:'en',$:node,document:{addEventListener(){},activeElement:null},window:{addEventListener(){}},setTimeout:fn=>{if(runTimers)queueMicrotask(fn);return 0;},crypto:{randomUUID:()=> 'key'},GuestStorage:{clear(){}},seen:new Set(),defaultLifetime:()=>({}),CareerGame:{create:()=>({})},resetRoundClock(){},applyLanguage(){},render(){renders.push(dailyMode?'daily':'unlimited');},PLAYERS:[]};vm.createContext(c);
+  const c={playActivated:true,PlayOverview:{leavePractice(){},reset(){c.playActivated=false;},load:()=>c.Accounts.request({action:'overview'}),show(next){dailyMode=next==='daily';c.playActivated=false;return c.PlayOverview.load();}},Accounts:{configured:true,hasStoredSession:()=>true,session:initialSession?{user:{id:'A'}}:null,init:async()=>c.Accounts.session,request:()=>new Promise(()=>{})},AuthCallback:{},DailyUI:{isDaily:()=>dailyMode,modeEpoch:()=>modeEpoch,choose(next){dailyMode=next==='daily';modeEpoch++;if(!dailyMode)c.ui.sync();return true;}},DailyRankedUI:{resetIdentity(){},sync(){}},NicknamePrompt:{maybeOpen(){},resetIdentity(){}},language:'en',$:node,document:{addEventListener(){},activeElement:null},window:{addEventListener(){}},setTimeout:fn=>{if(runTimers)queueMicrotask(fn);return 0;},crypto:{randomUUID:()=> 'key'},GuestStorage:{clear(){}},seen:new Set(),defaultLifetime:()=>({}),CareerGame:{create:()=>({})},resetRoundClock(){},applyLanguage(){},render(){renders.push(dailyMode?'daily':'unlimited');},PLAYERS:[]};vm.createContext(c);
   let source=html.slice(html.indexOf('const RankedUI = (()=>{'),html.indexOf('\n// Browsing Play is read-only.'));
   const returnLine='return {acceptOverview,update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync,acceptDailyScore,scoreRevision:()=>scoreRevision};';
   // String.replace on a pattern that no longer matches RankedUI's actual
@@ -56,6 +56,21 @@ test('signed-in boot reads only overview regardless of selected mode',async()=>{
     await new Promise(resolve=>setImmediate(resolve));
     assert.deepEqual(actions,expected,daily?'Daily account boot':'Unlimited account boot');
   }
+});
+test('SDK initial-session notification does not discard and duplicate an in-flight boot overview',async()=>{
+  const c=ranked(true,true,false),actions=[];
+  let resolve;
+  c.Accounts.init=async()=>{c.Accounts.session={user:{id:'A'}};return c.Accounts.session;};
+  c.Accounts.request=payload=>{actions.push(payload.action);return new Promise(r=>{resolve=r;});};
+  const boot=c.ui.boot();
+  await new Promise(r=>setImmediate(r));
+  assert.deepEqual(actions,['overview']);
+  const before=c.ui.snapshot();
+  c.ui.authChanged('INITIAL_SESSION',c.Accounts.session);
+  await new Promise(r=>setImmediate(r));
+  assert.deepEqual(actions,['overview'],'the same initial identity must share the existing load');
+  assert.equal(c.ui.snapshot().epoch,before.epoch,'initial notification must not invalidate its response');
+  resolve({});await boot;
 });
 test('auth-state reconciliation returns to read-only overview regardless of selected mode',async()=>{
   for(const [daily,expected] of [[true,['overview']],[false,['overview']]]){
