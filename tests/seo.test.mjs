@@ -12,7 +12,7 @@ const meta = name => {
 };
 
 test('Canonical Spanish page has descriptive title and stable language', () => {
-  assert.match(html, /<html lang="es">/);
+  assert.match(html, /<html\b[^>]*\blang="es"[^>]*>/);
   assert.match(head, /<title>derabona — Adiviná jugadores de fútbol por su carrera<\/title>/);
   assert.match(meta('description'), /Jugá gratis/);
   assert.ok(meta('description').length < 170);

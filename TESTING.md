@@ -1,5 +1,18 @@
 # Verification report
 
+## Connected Play and Groups — 8 October 2026 (verification in progress)
+
+The owner approved the whole-experience design and implementation. Frontend integration and release checks are in progress; this section records only evidence already obtained.
+
+### Compatible backend deployed before frontend
+
+- Forward migration `202610080002_play_overview.sql` adds authenticated, clue-free readiness summaries without starting or advancing gameplay. Native PostgreSQL overview tests passed **7/7**, including fresh replay, predecessor upgrade, exact gameplay snapshots, prior completed UTC day, auth/grants and rate budget. Existing ranked/private-league native suites passed **43/43**. Edge tests passed **14/14**; all three Deno entrypoints type-check.
+- An independent review found no actionable backend defects. The previous dispatcher is preserved as a private delegate; subsequent migrations must deliberately preserve the overview wrapper/delegate split.
+- Hosted preflight confirmed migration registry through `202610080001` and the expected dispatcher. Applied `202610080002` in a guarded repeatable-read transaction with exact before/after fingerprints for account, gameplay/result/receipt and league/history tables; the transaction rejects changed predecessor/schema or protected rows. The migration registry was recorded in that transaction.
+- Hosted readback confirms registry `202610080002`, service-only public RPC execution and denied direct private-delegate execution. The legacy dispatcher body is byte-identical before/after (MD5 `281c624c074d7525bcf2b6ebf2d310f4`). Deployed `ranked-game` Edge version **3**, with the existing `verify_jwt=false` configuration and handler-level verified Auth boundary preserved.
+- A read through the owner's existing signed-in Hermes Chrome session returned HTTP **200**, the four expected overview keys and the actual completed-Daily/existing-career statuses. No new login, guess, hint, group creation/join or live test-account mutation was performed. This proves the hosted read path; it is not a fresh two-account OAuth/invitation acceptance test.
+
+
 ## League standings focus — 8 October 2026
 
 - Replaces the league detail's competing navigation/actions with a breadcrumb and compact header, a native period selector, and the standings. Play Daily is removed from the page. Past champions, options/leave, and scoring explanations use secondary disclosures; the owner invitation flow remains. No backend or scoring change.
