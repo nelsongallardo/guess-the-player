@@ -33,9 +33,19 @@ async page => {
       await req.frame().page().waitForTimeout(250);
       return route.fulfill({headers,contentType:'application/json',body:JSON.stringify({profile:{nickname:'Otter-12345678',enrolled:true,nicknamePrompted},progress:{totalPoints:0,answered:0,correct:0,seenPlayerIds:[],competitionCounts:{all:{answered:0,total:221}}},daily:{date:new Date().toISOString().slice(0,10),status:'ready',completed:0,totalPoints:0,correctCount:0,previous:null},career:{status:'ready',competition:null}})});
     });
+    // Sample every frame of the first load: a stored session must never be
+    // painted as signed out ("Sign in") while the SDK is still reading it.
+    await context.addInitScript(()=>{
+      window.__accountFrames=[];const start=performance.now();
+      const frame=()=>{const b=document.getElementById('account-open');if(b)window.__accountFrames.push({visible:getComputedStyle(b).visibility==='visible'&&!!b.getClientRects().length,label:document.getElementById('account-open-label').textContent});
+        if(performance.now()-start<5000)requestAnimationFrame(frame);};requestAnimationFrame(frame);
+    });
     const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));
     const settled=()=>p.waitForFunction(()=>document.getElementById('nickname-prompt-dialog').open||!document.getElementById('play-retry').hidden);
     await p.goto(origin+'/index.html?lang=en');await settled();
+    {const frames=await p.evaluate(()=>window.__accountFrames);
+      ok(frames.length>0&&frames.every(f=>!f.visible||f.label==='Account'),'Account control stays hidden, never "Sign in", until the stored session resolves');
+      ok(frames.some(f=>!f.visible)&&frames.at(-1).visible&&frames.at(-1).label==='Account','Account control appears once the session is known');}
     ok(await p.locator('#nickname-prompt-dialog').isVisible(),'Successful initial overview survives the real SDK INITIAL_SESSION event');
     ok(count===1,'Startup sends one overview request');
     ok(await p.locator('#play-retry').isHidden(),'No spurious game-load error after successful overview');

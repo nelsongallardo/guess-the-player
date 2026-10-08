@@ -95,10 +95,10 @@ test('visible bilingual copy covers mode, completion status, rollover, and resul
     const copy=ui.copyFor(language);
     for(const key of ['daily','unlimited','challenge','streak','reset','done','pending','temporary','newDaily','loadDaily','share','keepPlaying','won','lost'])assert.ok(copy[key],`${language}.${key}`);
   }
-  assert.equal(ui.copyFor('en').daily,'Daily');
-  assert.equal(ui.copyFor('es').daily,'Diaria');
-  assert.equal(ui.copyFor('en').unlimited,'Unlimited');
-  assert.equal(ui.copyFor('es').unlimited,'Sin límite');
+  assert.equal(ui.copyFor('en').daily,'Daily challenge');
+  assert.equal(ui.copyFor('es').daily,'Desafío diario');
+  assert.equal(ui.copyFor('en').unlimited,'Unlimited play');
+  assert.equal(ui.copyFor('es').unlimited,'Juego sin límite');
   assert.match(ui.copyFor('en').primary,/three (?:careers|players)/i);
   assert.match(ui.copyFor('es').primary,/tres (?:carreras|jugadores)/i);
   assert.doesNotMatch(ui.copyFor('en').primary,/local|ranked/i);
