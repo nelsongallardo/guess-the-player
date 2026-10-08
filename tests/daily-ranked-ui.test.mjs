@@ -79,8 +79,8 @@ test('a signed-in-with-local-progress notice exists, is dismissible, and never d
 test('bilingual copy: ranking-consequence points phrasing, sync error and guest-progress notice all exist for both languages',()=>{
   for(const key of ['pointsRanked','syncError','guestProgressTitle','guestProgressDetail','guestProgressDismiss'])
     assert.match(dailyUi,new RegExp(`${key}:`));
-  assert.match(dailyUi,/pointsRanked:n=>`\$\{n\} points · count toward your rankings`/);
-  assert.match(dailyUi,/pointsRanked:n=>`\$\{n\} puntos · cuentan para tu clasificación`/);
+  assert.match(dailyUi,/pointsRanked:n=>`\+\$\{n\} points · count on the leaderboard`/);
+  assert.match(dailyUi,/pointsRanked:n=>`\+\$\{n\} puntos · suman en la tabla`/);
   // The old "local, non-ranked" points phrasing must stay reserved for the
   // guest-only path and never leak into the signed-in feedback panel.
   const daily=game.slice(game.indexOf('const DailyRankedUI'),game.indexOf('const RankedUI'));

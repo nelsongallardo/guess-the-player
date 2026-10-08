@@ -15,11 +15,11 @@ async page => {
     await p.waitForFunction(()=>!document.documentElement.classList.contains('game-loading'));
     ok(await p.locator('#guest-ranked-status').isVisible(),'Guest eligibility status is visible before the first answer');
     const guestDetail=await p.locator('#guest-ranked-detail').textContent();
-    ok(guestDetail.includes('does not appear on the leaderboard'),'Guest status names the leaderboard consequence');
-    ok(guestDetail.includes('cannot be transferred'),'Guest status states the non-transfer rule before play');
+    ok(guestDetail.includes('don’t count on the leaderboard'),'Guest status names the leaderboard consequence in one line (ADR 0029)');
     ok(await p.locator('#guest-ranked-status').evaluate((status)=>status.compareDocumentPosition(document.querySelector('#round-panel'))&Node.DOCUMENT_POSITION_FOLLOWING),'Guest status precedes the playable round');
     ok(await p.locator('#account-open-label').isVisible()&&await p.locator('#account-open-label').textContent()==='Sign in to compete','Desktop account control has a visible benefit label');
-    await p.locator('#guest-ranked-signin').click();ok(await p.locator('#account-dialog').isVisible(),'Pre-play CTA opens the existing Account dialog');await p.locator('#account-close').click();
+    await p.locator('#guest-ranked-signin').click();ok(await p.locator('#account-dialog').isVisible(),'Pre-play CTA opens the existing Account dialog');
+    ok((await p.locator('#account-detail').textContent()).includes('never imported to your account'),'Account states the non-transfer rule before sign-in');await p.locator('#account-close').click();
     await p.setViewportSize({width:375,height:667});
     const compactLabel=await p.locator('#account-open-label').evaluate(node=>({width:node.getBoundingClientRect().width,clip:getComputedStyle(node).clip,clipPath:getComputedStyle(node).clipPath}));
     ok(compactLabel.width<=1&&(compactLabel.clip!=='auto'||compactLabel.clipPath!=='none'),'Narrow mobile keeps the header label visually compact');

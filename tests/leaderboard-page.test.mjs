@@ -22,10 +22,12 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   // this guardrail being defeated. ADR 0026 likewise added the private
   // friends-league view (~46KB of inline script/markup/CSS; 116KB -> 162KB),
   // again bounded and deliberate. The whole-experience navigation, Help and
-  // draft-preserving creation flow add approximately 7KB (180KB -> 190KB) while
-  // the roster/crest/game-model exclusion stays the real guard.
+  // draft-preserving creation flow add approximately 7KB (180KB -> 190KB), and
+  // ADR 0029's shared header/bottom navigation icons and layout layer add about
+  // 8KB more (187KB -> 195KB), while the roster/crest/game-model exclusion stays
+  // the real guard.
   assert.doesNotMatch(html,/id="(?:roster-data|crest-data|game-model)"/);
-  assert.ok(Buffer.byteLength(html)<190_000,'Standalone board must not duplicate the heavy game artifact');
+  assert.ok(Buffer.byteLength(html)<200_000,'Standalone board must not duplicate the heavy game artifact');
   assert.match(html,/<dialog id="account-dialog"/,'ADR 0014: same account-dialog component as the main game, not a link away from it');
   const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].filter(m=>m[1].trim()&&!m[0].includes('application/ld+json'));
   assert.ok(scripts.length>0);
