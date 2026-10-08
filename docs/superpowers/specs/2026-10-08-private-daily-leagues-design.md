@@ -1,7 +1,7 @@
 # Private Daily leagues
 
 Date: 2026-10-08
-Status: Draft for owner review; not implemented
+Status: Approved by Nelson on 2026-10-08; implementation delegated to Claude Code
 
 ## Intent and confirmed choices
 
@@ -16,7 +16,7 @@ Nelson confirmed:
 - Global leaderboard points must not carry into a league when someone joins.
 - Anyone with an invite link can join after signing in. The owner can remove members and replace the invite link.
 
-Everything below specifies proposed defaults for review, including strict post-join eligibility, UTC boundaries, trophy presentation, ties, limits and deletion behavior. These defaults are not additional recorded owner decisions until this spec is accepted.
+Nelson approved this revised design and requested implementation by Claude Code in a new Herdr panel on 2026-10-08. The defaults below, including strict post-join eligibility, UTC boundaries, trophy presentation, ties, limits and deletion behavior, are the accepted implementation baseline. Record any material departures and their reasons.
 
 ## Player experience
 
@@ -140,4 +140,4 @@ Deployment requires the forward database migration, the new Edge Function and th
 
 This draft is based on fetched `origin/main` at `3624e05` and the existing Daily schema/RPC, account HTTP boundary, standalone leaderboard contract, and ADR 0021. The main checkout has two additional unrelated local commits; they are not incorporated or published by this design work.
 
-This is a design artifact only. No gameplay code, migration, hosted configuration or deployment has changed. After owner review, the next artifact is an implementation plan with exact integration and verification steps.
+At handoff this remains a design artifact: no gameplay code, migration, hosted configuration or deployment has changed. Nelson has authorized Claude Code to implement it. Claude should write the implementation plan with exact integration and verification steps, then execute the authorized work in the existing isolated worktree.
