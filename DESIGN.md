@@ -1,5 +1,7 @@
 # derabona — design & acceptance contract
 
+For a standalone global UI/UX review, start with [UX_DESIGN.md](UX_DESIGN.md): audience, owner feedback, information architecture, visual style, journeys and review brief. This file is the detailed gameplay/technical contract.
+
 ## Product
 A football-career guessing game with offline guest play in one portable `index.html`: no frontend build, framework or external fonts. Optional Google accounts use Supabase Auth, private PostgreSQL state and Edge Functions for persistent ranked play; public browser configuration is not a server credential. Consent-first PostHog analytics remains optional and separate. These are implemented contracts, not a claim of hosted deployment or OAuth verification. See [accounts and leaderboards](docs/leaderboards.md) and [ADR 0006](docs/adr/0006-accounts-and-ranked-progress.md). 221 curated players (and growing with each research batch — see the footer of the app itself for the current total), split 110/111 between European and South American national teams, organized into five competitions (Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão) plus an All Players mode. Data verification precedes app implementation; supporting research lives alongside (not required to play).
 
