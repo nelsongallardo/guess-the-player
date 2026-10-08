@@ -15,6 +15,9 @@ export function dependencies(): Dependencies {
     async rpc(userId,request) {
       return await admin.rpc('ranked_game',{verified_user_id:userId,request});
     },
+    async leagueRpc(userId,request) {
+      return await admin.rpc('private_leagues',{verified_user_id:userId,request});
+    },
     async deleteUser(id) {
       const {error} = await admin.auth.admin.deleteUser(id,false);
       return !error;
