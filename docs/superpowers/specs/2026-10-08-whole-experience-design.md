@@ -2,7 +2,7 @@
 
 Date: 2026-10-08
 
-Status: approved by the owner on 2026-10-08 ("go for it"). Implementation in progress. Existing contracts remain authoritative except for the navigation, masthead and explicit-start changes described here, which the implementation ADR will record.
+Status: approved by the owner on 2026-10-08 ("go for it"). Implemented and locally verified on `ux/site-wayfinding`; see TESTING.md for verification and hosted rollout evidence. ADR 0027 records the changed navigation, masthead and explicit-start contracts.
 
 ## Product problem
 

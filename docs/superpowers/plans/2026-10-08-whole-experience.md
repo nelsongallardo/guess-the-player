@@ -32,39 +32,39 @@
 
 Files: new `supabase/migrations/202610080002_play_overview.sql`, `supabase/functions/_shared/http.ts`, relevant native PostgreSQL/Edge tests. Do not edit frontend files.
 
-- [ ] Inspect current dispatcher, projection and Daily storage; confirm above response shape or notify coordinator before changing it.
-- [ ] Add behavioral native tests: overview before starting returns ready and no gameplay writes; during Daily and after completion returns correct counts; repeated overview leaves existing timestamps/versions/results/receipts unchanged; previous day is separate; no unstarted clues/IDs; unauthorized and extra-key Edge requests rejected.
-- [ ] Implement forward migration and Edge allowlist using existing authorization/rate boundaries. Do not copy/rewrite scoring logic unnecessarily.
-- [ ] Run relevant native suites and Edge tests, plus fresh replay/upgrade. Example boundary: `assert.equal(before.rounds, after.rounds); assert.equal(status.daily.status, 'ready'); assert.equal(status.daily.completed, 0)`; compare complete row snapshots for existing state.
-- [ ] Report exact contract, test commands/counts and deployment prerequisites. Commit only owned files.
+- [x] Inspect current dispatcher, projection and Daily storage; confirm above response shape or notify coordinator before changing it.
+- [x] Add behavioral native tests: overview before starting returns ready and no gameplay writes; during Daily and after completion returns correct counts; repeated overview leaves existing timestamps/versions/results/receipts unchanged; previous day is separate; no unstarted clues/IDs; unauthorized and extra-key Edge requests rejected.
+- [x] Implement forward migration and Edge allowlist using existing authorization/rate boundaries. Do not copy/rewrite scoring logic unnecessarily.
+- [x] Run relevant native suites and Edge tests, plus fresh replay/upgrade. Example boundary: `assert.equal(before.rounds, after.rounds); assert.equal(status.daily.status, 'ready'); assert.equal(status.daily.completed, 0)`; compare complete row snapshots for existing state.
+- [x] Report exact contract, test commands/counts and deployment prerequisites. Commit only owned files.
 
 ## Task 2 — Play and complete journey (game worker)
 
 Files: `index.html`, new focused `tests/site-wayfinding.test.mjs` and `tests/site-wayfinding-checks.js`, existing affected game tests only as required for intentionally changed contracts. Do not edit leaderboard/backend.
 
-- [ ] Read spec and trace all boot/start/clock/auth/URL entrypoints. Write behavioral coverage for overview without starts, activation, return after completion, auth intent and preserved clocks.
-- [ ] Add stable navigation and utilities, responsive compact Play overview, visible Create group/existing-group links and explicit Unlimited alternative; no game clues before Start.
-- [ ] Consume overview exactly as above for accounts. Guests derive status from existing saves without starting clocks. Ensure mandatory nickname confirmation precedes any timed start.
-- [ ] Add result-to-groups continuation, direct retry, contextual hint consequences and corrected bilingual help. Preserve scoring/account/guest/privacy contracts.
-- [ ] Preserve create intent through the existing auth-only friends path. Navigation and mode URLs must distinguish ready versus an already activated view; browser restoration cannot create a new scoring window.
-- [ ] Test local mocked account state and guest HTTP/file flows. Assertions include `expect(startCalls).toEqual([])` before activation, same round/start timestamp after navigation, completed Daily visible on root revisit. Run existing relevant Node/browser suites and report precise baseline exceptions.
-- [ ] Commit owned files and document frontend state/route behavior for integration.
+- [x] Read spec and trace all boot/start/clock/auth/URL entrypoints. Write behavioral coverage for overview without starts, activation, return after completion, auth intent and preserved clocks.
+- [x] Add stable navigation and utilities, responsive compact Play overview, visible Create group/existing-group links and explicit Unlimited alternative; no game clues before Start.
+- [x] Consume overview exactly as above for accounts. Guests derive status from existing saves without starting clocks. Ensure mandatory nickname confirmation precedes any timed start.
+- [x] Add result-to-groups continuation, direct retry, contextual hint consequences and corrected bilingual help. Preserve scoring/account/guest/privacy contracts.
+- [x] Preserve create intent through the existing auth-only friends path. Navigation and mode URLs must distinguish ready versus an already activated view; browser restoration cannot create a new scoring window.
+- [x] Test local mocked account state and guest HTTP/file flows. Assertions include `expect(startCalls).toEqual([])` before activation, same round/start timestamp after navigation, completed Daily visible on root revisit. Run existing relevant Node/browser suites and report precise baseline exceptions.
+- [x] Commit owned files and document frontend state/route behavior for integration.
 
 ## Task 3 — Groups and public standings (board worker)
 
 Files: `leaderboard.html`, relevant leaderboard/league UI tests. Do not edit index/backend. Coordinate exact header/navigation CSS with root after implementing.
 
-- [ ] Implement stable navigation, labeled account/help, remove duplicate public/friends switch; Groups active within group details.
-- [ ] Use group terminology consistently in both languages. Visible Create group for signed-out/empty/populated states; allow draft name before auth and explicit submission after return. Capture/sanitize `create=1` through route allowlists, preserve draft in per-tab storage.
-- [ ] Keep standings primary, weekly filter compact, zero played distinct from absent result, trophy counts and prior-week winners visible. Preserve owner-only invitation and all backend membership/history semantics. No Play Daily CTA inside group detail.
-- [ ] Add direct helpful recovery, joined confirmation, invitation full/completed/partial-day copy and explicit public score scope. Keep destructive actions confirmed and secondary.
-- [ ] Test create intent, signed-out draft restoration, return URLs and Back, signed-in list/detail, language/mobile. Use real local league bridge for writes, never live groups. Commit owned files.
+- [x] Implement stable navigation, labeled account/help, remove duplicate public/friends switch; Groups active within group details.
+- [x] Use group terminology consistently in both languages. Visible Create group for signed-out/empty/populated states; allow draft name before auth and explicit submission after return. Capture/sanitize `create=1` through route allowlists, preserve draft in per-tab storage.
+- [x] Keep standings primary, weekly filter compact, zero played distinct from absent result, trophy counts and prior-week winners visible. Preserve owner-only invitation and all backend membership/history semantics. No Play Daily CTA inside group detail.
+- [x] Add direct helpful recovery, joined confirmation, invitation full/completed/partial-day copy and explicit public score scope. Keep destructive actions confirmed and secondary.
+- [x] Test create intent, signed-out draft restoration, return URLs and Back, signed-in list/detail, language/mobile. Use real local league bridge for writes, never live groups. Commit owned files.
 
 ## Task 4 — Integrate, verify and release (coordinator)
 
-- [ ] Compare both mastheads/navigation at 320, 375 and desktop widths; inspect screenshots and actual user journeys. Verify served files are this checkout.
-- [ ] Run Node 22 relevant/full suite with worktree-local PostgreSQL dependency, source checks, Deno checks/tests, focused browser flows and existing guest/account suites. Track known baseline failures with evidence; do not alter unrelated tests to hide failures.
-- [ ] Independent review of full branch against spec; repair material findings and rerun affected checks.
+- [x] Compare both mastheads/navigation at 320, 375 and desktop widths; inspect screenshots and actual user journeys. Verify served files are this checkout.
+- [x] Run Node 22 relevant/full suite with worktree-local PostgreSQL dependency, source checks, Deno checks/tests, focused browser flows and existing guest/account suites. Track known baseline failures with evidence; do not alter unrelated tests to hide failures.
+- [x] Independent review of full branch against spec; repair material findings and rerun affected checks.
 - [ ] Add ADR, align README/DESIGN/TESTING/AGENTS changed contracts and deployment evidence. Update Obsidian project state and verify its commit/push.
 - [ ] Inspect upstream again and integrate concurrent changes. Create PR, pass CI. Inspect hosted migration registry and deploy compatible backend/Edge before merging frontend (already authorized scope); if unavailable, keep frontend unmerged and report concrete dependency.
 - [ ] Merge without another approval request as authorized, verify Pages artifacts and read-only hosted overview/nav, leave Hermes login untouched. Report what is verified separately from real two-account OAuth or target-user usability testing.
@@ -72,3 +72,10 @@ Files: `leaderboard.html`, relevant leaderboard/league UI tests. Do not edit ind
 ## Execution record
 
 - 2026-10-08: Design approved. Existing clean task worktree contains only audit document. Native coordinated execution with three workers owning independent files; root owns integration, review and release. User's implementation authorization supersedes the skill's redundant plan approval prompt.
+
+- Backend `625934a` independently reviewed and deployed as migration `202610080002` / ranked-game Edge version 3 before frontend. Hosted authenticated overview returned 200; protected-table fingerprints and the legacy dispatcher body were preserved.
+- Game `a6910c0` / `1672bd0` and board `90bed99` / `25317b1` implemented. Independent whole-branch review identified competition continuation, mode controls, dated Daily cache, sharing outcome, final-player result action and score-label gaps; fixes underway before publication.
+- Group (75), public board (59), navigation (64), account (65) and guest (16) browser checks passed; the guest suite completed all 221 offline careers. A full native run during worker edits passed 298/304; five superseded test expectations were updated, and one dirty-tree roster guard requires the committed final tree.
+
+- Review fixes `7ae3e96` and direct-rollover follow-up `d01f36d` verified; independent scoped re-review clean. Full local Node suite 306/306, final affected Daily tests 35/35 and expanded whole-experience browser suite 53/53. Required account/guest and Daily cumulative-score suites pass. Publishing/CI and hosted frontend readback remain next.
+- Real browser/Edge/PostgreSQL connected journey passed 10 checks, including exact earned group points and no timed rows before Start. Added as a reusable browser suite.

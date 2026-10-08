@@ -1,8 +1,19 @@
 # Verification report
 
-## Connected Play and Groups — 8 October 2026 (verification in progress)
+## Connected Play and Groups — 8 October 2026 (local candidate verified; compatible backend deployed)
 
-The owner approved the whole-experience design and implementation. Frontend integration and release checks are in progress; this section records only evidence already obtained.
+The owner approved the whole-experience design and implementation. Local frontend and backend checks are complete; Pages publication and CI are separate release steps. This section records the candidate evidence, not a claim of a target-user usability study.
+
+### Frontend journeys and regression checks
+
+- Full Node 22 suite with worktree-local native PostgreSQL: **306/306**, zero failures/skips, at `f2a746a`. The final direct-rollover fix `d01f36d` subsequently passed **35/35** affected Daily Node tests and the expanded **53/53** whole-experience browser suite. CI checks the final committed branch again before merge.
+- Browser suites: whole experience **53** checks; private groups **75** checks through the real local Edge handler and PostgreSQL; public leaderboard **59**; bilingual navigation **64**; accounts **65**; guest sessions **16** (all **221** offline careers completed); Daily cumulative account points **15**. Account/OAuth SDKs are simulated in these local checks. Browser sessions are headless, non-persistent and worktree-scoped; worker harnesses substituted ports 4175/4176 where necessary and preserved file/save fixtures.
+- An additional **10-check** connected journey uses the real local Edge/PostgreSQL from Play overview → create group → return to Play → complete three Daily players → Show result → group standings → return to completed Play. It proves zero Daily rows before explicit Start and exact agreement between persisted Daily points and the group table. Only Auth/SDK is simulated. Run with the league bridge and `--suite connected-journey-checks.js`.
+- Core coverage includes no clocks/round-start requests during overview, nickname-before-start, completed Daily return, engaged clocks across reload/Back, guest `file:` play and denied storage, explicit competition selection, repeated Daily/Unlimited entry, both overview and direct UTC rollover failure/retry, explicit final-player Show result, actual share/copy/cancel/failure outcomes, create draft through OAuth without automatic creation, invitation privacy, weekly winners and an uncertain create acknowledgement retried with its original key.
+- Account score coverage confirms combined totals across Daily, summary, Unlimited and reload, delayed responses cannot roll totals back, and sign-out/new identities hide or reset old statistics. The former 8px tooltip hover gap reproduced against `d1943ff`; a CSS pointer bridge fixes it, and the original pointer-crossing assertion now passes.
+- Source identifiers pass for 221 player sections and all cited/ledger URLs. Initial Node failures were superseded automatic-start/copy assertions plus a roster guard run during uncommitted worker edits; corrected behavioral clock/identity tests and the committed-tree full run pass. No gameplay/roster assertion was removed to hide a regression.
+- Independent review found and verified fixes for competition intent, stale mode controls, UTC cache reuse, sharing feedback, explicit final-player results and cumulative-score labels. A scoped second pass caught the direct Load new Daily route; its fix was reviewed clean. Mobile visual review confirms visible Create group on the Play overview at 375×667, a focused creation form, consistent labeled navigation and no horizontal overflow at 320px.
+- This does not claim all historical browser suites were rerun, native Safari/Firefox coverage, hosted two-account OAuth acceptance, or observed usability with nontechnical participants.
 
 ### Compatible backend deployed before frontend
 
