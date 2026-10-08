@@ -10,7 +10,7 @@ export type Mode = 'ranked-game'|'account-delete'|'private-leagues';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const competitions = new Set(['all','champions-league','premier-league','la-liga','argentine-primera','brasileirao']);
 const schemas: Record<string,string[]> = {
-  progress: ['action'], start: ['action','competition','idempotencyKey'],
+  overview: ['action'], progress: ['action'], start: ['action','competition','idempotencyKey'],
   hint: ['action','roundId','expectedVersion','idempotencyKey'],
   answer: ['action','roundId','expectedVersion','optionId','idempotencyKey'],
   enroll: ['action','nickname','idempotencyKey'], leaderboard: ['action','competition','limit','offset'],

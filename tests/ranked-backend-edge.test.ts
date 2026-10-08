@@ -105,3 +105,17 @@ Deno.test('account hard deletion needs verified identity and exact confirmation;
   equal(f.calls,[['auth','valid'],['delete',uid]]);
   equal((await fixture({deleteUser:async()=>false}).remove(request({confirmation:'DELETE'}))).status,500);
 });
+
+Deno.test('overview is authenticated, strictly read-shaped, and returns a noncacheable response',async()=>{
+  const f=fixture();
+  const res=await f.run(request({action:'overview'}));equal(res.status,200);equal(res.headers.get('cache-control'),'no-store');
+  equal(f.calls,[['auth','valid'],['rpc',uid,{action:'overview'}]]);
+  for(const auth of [null,'Bearer expired','Bearer forged.payload.sig']){
+    const f=fixture();equal((await f.run(request({action:'overview'},auth))).status,401);
+    equal(f.calls.filter((x:any)=>x[0]==='rpc'),[]);
+  }
+  equal((await fixture({getUser:async()=>({id:uid,is_anonymous:true})}).run(request({action:'overview'}))).status,401);
+  for(const field of ['competition','date','userId','verified_user_id','playerId','points','idempotencyKey']){
+    const f=fixture();equal((await f.run(request({action:'overview',[field]:key}))).status,400);equal(f.calls,[]);
+  }
+});
