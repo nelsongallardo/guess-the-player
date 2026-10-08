@@ -1,5 +1,12 @@
 # Verification report
 
+## 2026-10-09 — Remove signed-in Daily guest-progress notice
+
+The owner asked to remove the "You started today’s daily before signing in…" card as unnecessary. Its markup, `DailyRankedUI` detection/dismiss logic and EN/ES copy are gone; the local guest attempt is still never read into, imported or mutated by the signed-in path.
+
+- Node: Daily/account focused suites **68/68**; `source-check.py` passes.
+- Browser: `daily-header-browser`, `account-startup`, `accounts`, `site-wayfinding`, `guest-session` pass.
+
 ## 2026-10-08 — Mode labels and auth-pending chrome
 
 Refreshing as a signed-in player showed *Sign in* before *Account*, and the mode labels flipped from the markup's *Desafío diario / Juego sin límite* to *Diaria / Sin límite* (EN *Daily / Unlimited*). Labels now match DESIGN.md (*Desafío diario / Juego sin límite*, *Daily challenge / Unlimited play*), Spanish copy no longer uses *la diaria* as a noun, and auth-dependent chrome stays hidden until the stored session resolves.
