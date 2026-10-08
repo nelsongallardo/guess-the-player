@@ -1,5 +1,15 @@
 # Verification report
 
+## League standings focus — 8 October 2026
+
+- Replaces the league detail's competing navigation/actions with a breadcrumb and compact header, a native period selector, and the standings. Play Daily is removed from the page. Past champions, options/leave, and scoring explanations use secondary disclosures; the owner invitation flow remains. No backend or scoring change.
+- Focused Node tests passed **60/60** (`leaderboard-page`, `account-boundaries`, `leaderboard-label`, `seo`, `daily-ui`, `guest-ranked-disclosure`, `points-faq`); source identifiers and diff whitespace checks passed.
+- The real Chromium league suite passed **62 checks** using this worktree's own PostgreSQL/Edge bridge, with Auth/OAuth simulated. It verifies native period selection and browser Back, inline history by keyboard, above-fold standings at desktop/mobile sizes, narrow five-digit account headers, member-only options, cached-heading cleanup on sign-out, and the existing invitation/eligibility/trophy flows.
+- Four additional HTTP/offline `file:` header/play checks passed at 320px in both languages, including a five-digit account score layout fixture, working hint interaction and league navigation.
+- Visual review: English/Spanish owner and member views at 320/375px and desktop. The first table row is about 395px on desktop and 345px on mobile, compared with roughly 715px in the rejected layout. Both pages share the compact brand treatment below 360px to fit authenticated score controls.
+- Existing `leaderboard-checks` still reaches its documented account-dialog timeout after passing navigation, filtering, identity/privacy, and layout checks (mobile first row 543px; desktop 5 complete rows). This is not a full-browser-suite pass. Earlier baseline failures below remain outside this change.
+
+
 ## Friends league UX — 8 October 2026
 
 - Scope: direct game navigation to Friends leagues, bilingual onboarding/list/standings hierarchy, create → invite dialog, owner invitation shortcut, explicit Daily return, and Monday–Sunday weekly labels. No backend, score, roster or migration changes.
