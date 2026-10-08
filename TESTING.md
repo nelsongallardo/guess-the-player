@@ -1,5 +1,15 @@
 # Verification report
 
+## Friends league UX — 8 October 2026
+
+- Scope: direct game navigation to Friends leagues, bilingual onboarding/list/standings hierarchy, create → invite dialog, owner invitation shortcut, explicit Daily return, and Monday–Sunday weekly labels. No backend, score, roster or migration changes.
+- Focused Node selection passed **71/71**: `leaderboard-page`, `account-boundaries`, `leaderboard-label`, `daily-summary`, `daily-ui`, `guest-ranked-disclosure`, `points-faq`, `seo`. Source identifiers and `git diff --check` passed. This is not a full-suite claim.
+- `python3 tests/run-browser.py --suite friends-leagues-checks.js` passed **57 checks** against this worktree on port 4173 and its own local PostgreSQL/real Edge bridge on 54330 (OAuth/SDK simulated). Added coverage: direct mobile discovery, heading/onboarding, creation without opening settings, immediate invitation access, copy confirmation/fallback, sign-out clearing the open invitation, Back during invite loading, narrow standings, and completed-Daily return without replay/reset. Existing join/eligibility/trophy/OAuth-recovery checks remain intact.
+- Additional fresh-context HTTP/offline `file:` smoke checks passed **37/37** across English/Spanish and 320/375px: direct league links, no horizontal overflow, language preserving an engaged round, hint/answer/next, and zero runtime errors. Denying both storage APIs still throws `denied` before gameplay; separately reproduced on unchanged `3014ce2` and this branch. The new league route retains the existing denied-session-storage recovery test.
+- Visually inspected the live signed-in league read path in the owner's Hermes Chrome profile, temporarily substituting only the local leaderboard HTML for preview. No live league or gameplay mutations were performed for verification. Checked English/Spanish, desktop and 375px mobile; 320px layout is also covered by the local suite.
+- Existing browser-suite limitations reproduced: `guest-session-checks` stops at “Guest gameplay is sessionStorage only”; `accounts-checks` stops at “Auth loading hides stale guest career and score”; `leaderboard-checks` passes navigation, filtering, identity/privacy, mobile fit (first row 541px) and desktop density (5 complete rows at 1440×900), then reaches the documented baseline account-dialog timeout. These suites are **not green**; see the earlier baseline comparison below.
+
+
 ## Private Daily leagues — 8 October 2026 (hosted backend applied; Pages pending merge)
 
 - **Hosted backend, 8 October 2026** (project `derabona`, `iaebecfxjwjzkapqdeha`, authorized by Nelson):
