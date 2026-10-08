@@ -2,7 +2,9 @@
 
 Updated: 2026-10-08  
 Scope: the complete website, including repeat visits, gameplay, results, friends, rankings and accounts.  
-Current direction: the game-first correction in PR #38 / ADR 0028.
+Implementation baseline: `ux/game-first`, [PR #38](https://github.com/nelsongallardo/guess-the-player/pull/38), ADR 0028.
+
+Before reviewing production, verify that this PR is merged and its Pages deployment succeeded. Record the actual commit and URL inspected: an older checkout or undeployed live page may still show the rejected overview. The design direction below is not itself deployment evidence.
 
 This is a self-contained handoff for a fresh design or engineering session. It describes the intended experience and the implemented correction, and identifies what still needs observation. Read it before the older design plans. Inspect the current site and source before proposing changes: this document is a dated design baseline, not proof that every interaction is good.
 
@@ -191,11 +193,11 @@ The account header is labeled; an unexplained global score is not displayed ther
 | Daily selected from signed-in practice | Retry account resolution before opening ranked Daily |
 | UTC day changes | Offer/load the new Daily without relabeling yesterday's result as today |
 | Missing or failed group data | State that loading failed; do not invent an empty membership list |
-| Signed out | Fresh guest game; no previous-account group data or totals |
+| Signed out | Fresh guest Unlimited state; a separately saved local Daily attempt/result can resume. Previous-account groups and totals disappear |
 | Portable offline file | Play without network, no unusable sign-in prompt; explain that groups require the online site |
 | Browser storage unavailable | Play in memory with an honest persistence message |
 
-Opening a game starts its clock. Once started, refresh, changing language, switching modes and time away do not grant a scoring reset. Server timestamps stay authoritative; the frontend must not invent a fairer-looking replacement. This is an intentional consequence of immediate entry, replacing the explicit-activation decision in ADR 0027.
+Opening a game starts its clock. Normal same-tab refresh, language changes and mode switches preserve the active clock. Guest clocks are tab-scoped: a new tab starts a new local clock; Unlimited also rejects restored/opener-cloned clocks and clocks older than six hours. A first analytics-consent prompt can delay a brand-new guest clock. Server timestamps stay authoritative: only an untouched ranked career round older than 30 minutes may be replaced under ADR 0023; engaged rounds and Daily are excluded. These established exceptions are not a pause feature. Immediate entry replaces ADR 0027's explicit-activation gate without changing those persistence/scoring rules.
 
 ## 6. Visual system
 
