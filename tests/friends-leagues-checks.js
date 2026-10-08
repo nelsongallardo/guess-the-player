@@ -50,6 +50,8 @@ async page => {
   ok(await text(discover.p,'h1')==='Groups','Groups has its own heading');
   ok(await discover.p.locator('#group-create-open').isVisible(),'Signed-out visitors can discover group creation');
   await discover.p.locator('#group-create-open').click();
+  ok(await text(discover.p,'h1')==='Create a group'&&await discover.p.locator('#friends-signin').isHidden()&&await discover.p.locator('#group-create-open').isHidden(),'Create intent focuses on the name form without duplicate sign-in or creation actions');
+  ok(await discover.p.locator('#league-name-input').evaluate(e=>e.getBoundingClientRect().bottom<=innerHeight),'Group name field is visible in the initial mobile creation view');
   await discover.p.locator('#league-name-input').fill('Thursday Five');
   ok(discover.p.url().includes('create=1')&&await discover.p.evaluate(()=>sessionStorage.getItem('derabona.group-draft.v1'))==='Thursday Five','Create intent and name saved separately without leaking the name in URLs');
   await discover.p.reload();await visible(discover.p,'#league-name-input');
@@ -93,7 +95,7 @@ async page => {
   await owner.ctx.route(SUPA+'/functions/v1/private-leagues',holdManage);
   await owner.p.locator('#league-invite-open').click();await started;
   await owner.p.goBack();releaseManage();
-  await visible(owner.p,'#friends-list');
+  await visible(owner.p,'#league-name-input');
   ok(!await owner.p.locator('#league-invite-dialog').isVisible(),'Browser Back dismisses a loading invitation instead of trapping the destination behind it');
   await owner.ctx.unroute(SUPA+'/functions/v1/private-leagues',holdManage);
   await owner.p.goForward();await visible(owner.p,'#league-view');
