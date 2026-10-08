@@ -54,16 +54,16 @@ test('sync() only resets the displayed round on a fresh load, not on every hint/
   assert.match(daily,/accept\(data,false,scoreRevision\);pending=null;/);
 });
 
-// sync() is what resolves the shared masthead (#play-mode, #score) out of
-// its initial 'loading' placeholder, so both entry points must always run
-// it, not just DailyRankedUI's own sync - a mid-Daily sign-in (or a Daily
-// default landing) used to skip it entirely, leaving the masthead stuck on
-// "Checking account..." forever even though Daily loaded fine.
-test('identity resets are wired into both freshGuest and authChanged, and both boot and a mid-Daily sign-in always sync RankedUI alongside DailyRankedUI',()=>{
-  assert.match(game,/DailyRankedUI\.resetIdentity\(\)/);
+// Identity changes invalidate both gameplay projections, then read only readiness.
+// Actual request routing and late-identity behavior are also exercised by
+// account-boundaries and site-wayfinding's VM/browser journeys.
+test('identity resets clear both gameplay projections and auth entrypoints load only the overview',()=>{
   assert.match(game,/function freshGuest\(\)\{[^}]*DailyRankedUI\.resetIdentity\(\)/);
-  assert.match(game,/sync\(\);if\(DailyUI\.isDaily\(\)\)DailyRankedUI\.sync\(\);/);
-  assert.match(game,/if\(!DailyUI\.isDaily\(\)\)await sync\(\);else\{sync\(\);DailyRankedUI\.sync\(\);\}/);
+  const auth=game.slice(game.indexOf('function authChanged('),game.indexOf('const openAccount=')).replace(/\/\/[^\n]*/g,'');
+  assert.match(auth,/DailyRankedUI\.resetIdentity\(\)/);
+  assert.match(auth,/PlayOverview\.reset\(\)/);
+  assert.match(auth,/PlayOverview\.load\(\)/);
+  assert.doesNotMatch(auth,/DailyRankedUI\.sync\(\)|await sync\(\)|else\{sync\(\)/);
 });
 
 test('a signed-in-with-local-progress notice exists, is dismissible, and never deletes the local guest attempt',()=>{
@@ -76,11 +76,11 @@ test('a signed-in-with-local-progress notice exists, is dismissible, and never d
   assert.doesNotMatch(daily,/localStorage\.removeItem|createPersistence\([^)]*\)\.\w+\([^)]*\)\.(?:guess|hint|next|start)\(/,'must only ever read the local guest document, never mutate it');
 });
 
-test('bilingual copy: server-verified points phrasing, sync error and guest-progress notice all exist for both languages',()=>{
+test('bilingual copy: ranking-consequence points phrasing, sync error and guest-progress notice all exist for both languages',()=>{
   for(const key of ['pointsRanked','syncError','guestProgressTitle','guestProgressDetail','guestProgressDismiss'])
     assert.match(dailyUi,new RegExp(`${key}:`));
-  assert.match(dailyUi,/pointsRanked:n=>`\$\{n\} points · verified by server`/);
-  assert.match(dailyUi,/pointsRanked:n=>`\$\{n\} puntos · verificados por el servidor`/);
+  assert.match(dailyUi,/pointsRanked:n=>`\$\{n\} points · count toward your rankings`/);
+  assert.match(dailyUi,/pointsRanked:n=>`\$\{n\} puntos · cuentan para tu clasificación`/);
   // The old "local, non-ranked" points phrasing must stay reserved for the
   // guest-only path and never leak into the signed-in feedback panel.
   const daily=game.slice(game.indexOf('const DailyRankedUI'),game.indexOf('const RankedUI'));

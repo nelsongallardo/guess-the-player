@@ -82131,6 +82131,7 @@ const AuthRouteUI = (()=>{
   const friendsURL=()=>{const u=new URL('leaderboard.html',location.href);u.search='';u.hash='';u.searchParams.set('view','friends');u.searchParams.set('lang',language);if(AuthRoute.invite)u.searchParams.set('invite','1');if(AuthRoute.create)u.searchParams.set('create','1');return u.href;};
   function translate(){
     const copy=t();document.documentElement.lang=language;document.title=copy.title+' — derabona';$('language').value=language;
+    PlayOverview.translate();$('rules').innerHTML=COPY[language].rules;$('title').innerHTML=COPY[language].brand;$('nav-play').removeAttribute('aria-current');$('nav-groups').setAttribute('aria-current','page');
     $('auth-route-title').textContent=copy.title;$('auth-route-status').textContent=copy[state];
     $('auth-route-retry').hidden=!['cancelled','failed'].includes(state);$('auth-route-retry').textContent=state==='failed'&&Accounts.session?copy.again:copy.retry;
     $('auth-route-back').textContent=copy.back;$('auth-route-back').href=friendsURL();
