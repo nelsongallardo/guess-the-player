@@ -41,17 +41,17 @@ async page => {
   await db('delete from public.test_clock');
   const name='Journey '+Date.now().toString().slice(-7),id=await account(name),user=await makeContext({signedIn:id});
   await user.p.goto(SITE+'/index.html?lang=en');
-  await user.p.waitForFunction(()=>document.querySelector('#account-open-label')?.textContent==='Account'&&!document.querySelector('#play-daily-start').disabled);
-  ok((await db(`select count(*)::int n from ranked_private.daily_rounds where user_id=${q(id)}`))[0].n===0,'Real authenticated overview creates no Daily rows');
-  ok(user.state.requests.every(r=>!['start','dailyProgress'].includes(r.body?.action)),'Overview and group reads send no timed-start request');
+  await user.p.locator('#options button').first().waitFor();
+  ok((await db(`select count(*)::int n from ranked_private.daily_rounds where user_id=${q(id)}`))[0].n===3,'Real authenticated arrival automatically loads the three Daily rounds');
+  ok(!user.state.requests.some(r=>r.body?.action==='start'),'Daily arrival never starts an unrelated Unlimited round');
   await user.p.getByRole('link',{name:'Create a group',exact:true}).click();
   await visible(user.p,'#league-name-input');await user.p.locator('#league-name-input').fill(name);await user.p.locator('#league-create').click();
   await visible(user.p,'#league-invite-dialog');await user.p.locator('#invite-dialog-close').click();
-  ok((await db(`select count(*)::int n from ranked_private.daily_rounds where user_id=${q(id)}`))[0].n===0,'Creating and viewing a group starts no Daily rows');
-  await user.p.locator('#nav-play').click();await user.p.waitForFunction(()=>document.querySelector('#account-open-label')?.textContent==='Account'&&!document.querySelector('#play-daily-start').disabled);
+  ok((await db(`select count(*)::int n from ranked_private.daily_rounds where user_id=${q(id)}`))[0].n===3,'Creating and viewing a group adds no extra Daily rows');
+  await user.p.locator('#nav-play').click();await user.p.locator('#options button').first().waitFor();
   ok(await user.p.getByRole('link',{name:new RegExp(name)}).isVisible(),'New group is discoverable on real authenticated Play overview');
-  await user.p.locator('#play-daily-start').click();await user.p.locator('#options button').first().waitFor({state:'visible'});
-  ok((await db(`select count(*)::int n from ranked_private.daily_rounds where user_id=${q(id)}`))[0].n===3,'Explicit Start creates actual server Daily rounds');
+  await user.p.locator('#options button').first().waitFor({state:'visible'});
+  ok((await db(`select count(*)::int n from ranked_private.daily_rounds where user_id=${q(id)}`))[0].n===3,'Return to Play reuses the actual server Daily rounds');
   for(let i=0;i<3;i++){
     const answer=await user.p.evaluate(i=>DailyChallenge.forDate(new Date().toISOString().slice(0,10)).payloads[i].player.name,i);
     await user.p.locator('#options button').filter({hasText:answer}).click();
@@ -64,8 +64,8 @@ async page => {
   ok(scores.n===3&&scores.total>0,'Three UI answers create authoritative server results');
   await user.p.getByRole('link',{name:new RegExp(name)}).click();await visible(user.p,'#league-view');
   ok((await user.p.locator('#league-entries tr').first().locator('td').nth(2).innerText()).trim()===String(scores.total),'Result group link opens weekly standings with actual earned Daily points');
-  await user.p.locator('#nav-play').click();await user.p.waitForFunction(()=>document.querySelector('#play-daily-start').textContent.includes('View'));
-  ok((await user.p.locator('#play-daily-start').innerText()).includes('View today'),'Return to Play retains actual server Daily completion');
+  await user.p.locator('#nav-play').click();await user.p.locator('#daily-summary').waitFor();
+  ok(await user.p.locator('#daily-summary').isVisible(),'Return to Play directly shows the actual completed Daily');
   ok(errors.length===0,'Integrated real API journey has no browser errors');
   return {passed:true,checks,points:scores.total,evidence:'Real local PostgreSQL and Edge; Auth SDK simulated; browser UI creates group and completes Daily'};
  }finally{for(const ctx of contexts)await ctx.close();}
