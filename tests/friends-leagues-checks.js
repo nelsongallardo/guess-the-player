@@ -68,7 +68,7 @@ async page => {
   await visible(owner.p,'#league-view');await visible(owner.p,'#league-invite-dialog');
   ok(await text(owner.p,'#league-name')==='Weekend Five','League created with trimmed name and opened');
   ok(await text(owner.p,'h1')==='Weekend Five'&&await owner.p.locator('#league-manage').isHidden(),'League name leads the page and settings stay out of the creation flow');
-  ok(await owner.p.locator('#period-week').getAttribute('aria-pressed')==='true'&&!owner.p.url().includes('period='),'This week is the default period without URL period');
+  ok(await owner.p.locator('#league-period').inputValue()==='week'&&!owner.p.url().includes('period='),'This week is the default period without URL period');
   await owner.p.locator('#invite-copy').click();
   const link=await owner.p.evaluate(()=>navigator.clipboard.readText());
   const token=(link.match(/#join=([A-Za-z0-9_-]{43,128})$/)||[])[1];
@@ -79,9 +79,10 @@ async page => {
   await owner.p.waitForFunction(()=>!document.querySelector('#invite-copy').disabled);
   ok(await owner.p.locator('#invite-copy').isEnabled(),'Owner can invite directly without opening league settings');
   await owner.p.keyboard.press('Escape');
-  ok(await owner.p.locator('#league-play').getAttribute('href')==='index.html?daily=1&lang=en','League play action explicitly opens Daily');
+  ok(await owner.p.locator('#league-play').count()===0&&await owner.p.locator('#view-tabs').isHidden(),'League standings have no gameplay action or competing public-board navigation');
   await owner.p.setViewportSize({width:320,height:568});
   ok(await owner.p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Owner standings fit a narrow mobile viewport');
+  ok(await owner.p.evaluate(()=>{document.querySelector('.account-open-score').textContent='12345';return document.documentElement.scrollWidth<=innerWidth;}),'Narrow account header fits a five-digit score');
   await owner.p.setViewportSize({width:1280,height:900});
   let releaseManage,manageStarted;
   const started=new Promise(resolve=>manageStarted=resolve);
@@ -132,15 +133,28 @@ async page => {
     from (values(${q(ownerId)}::uuid,0,90),(${q(ownerId)}::uuid,1,0),(${q(inviteeId)}::uuid,0,40)) v(u,r,p)`);
   await owner.p.locator('#league-refresh').click();
   await owner.p.waitForFunction(()=>document.querySelector('#league-entries tr td:nth-child(3)')?.textContent==='90');
-  await owner.p.locator('#period-today').click();
-  await owner.p.waitForFunction(()=>document.querySelector('#period-today').getAttribute('aria-pressed')==='true');
+  await invitee.p.locator('#league-manage-toggle').click();
+  ok(await invitee.p.locator('#league-leave').isVisible()&&await invitee.p.locator('#league-manage').isHidden()&&await invitee.p.locator('#league-invite-open').isHidden(),'Member options expose leaving without owner-only controls');
+  await invitee.p.locator('#league-manage-toggle').click();
+  await invitee.p.locator('#language').selectOption('es');await invitee.p.evaluate(()=>scrollTo(0,0));
+  await invitee.p.screenshot({path:'test-results/league-focus-member-es.png'});await invitee.p.locator('#language').selectOption('en');
+  await owner.p.locator('#league-period').selectOption('today');
+  await visible(owner.p,'#league-view');await owner.p.waitForFunction(()=>document.querySelector('#league-range').textContent.startsWith('Today'));
   ok(owner.p.url().includes('period=today')&&(await text(owner.p,'#league-range')).startsWith('Today'),'Today period selected explicitly and kept in URL');
   ok((await owner.p.locator('#league-entries tr').nth(1).textContent()).includes('In progress · 1/3'),'Partial Daily shown as in progress');
-  await owner.p.goBack();await owner.p.waitForFunction(()=>document.querySelector('#period-week')?.getAttribute('aria-pressed')==='true');
+  await owner.p.goBack();await visible(owner.p,'#league-view');await owner.p.waitForFunction(()=>document.querySelector('#league-period')?.value==='week');
   ok(!owner.p.url().includes('period='),'Back restores the default weekly view');
   await owner.p.locator('#language').selectOption('es');
-  ok(await text(owner.p,'#period-today')==='Hoy'&&await text(owner.p,'#league-history-open')==='Campeones anteriores','Spanish league controls');
+  ok(await text(owner.p,'#period-today')==='Hoy'&&await text(owner.p,'#history-title')==='Historial de campeones','Spanish league controls');
   await owner.p.locator('#language').selectOption('en');
+  await owner.p.evaluate(()=>scrollTo(0,0));
+  ok(await owner.p.locator('#league-entries tr').first().evaluate(e=>e.getBoundingClientRect().top<450),'Desktop standings start near the header, above the fold');
+  await owner.p.screenshot({path:'test-results/league-focus-desktop.png'});
+  await owner.p.setViewportSize({width:375,height:667});await owner.p.evaluate(()=>scrollTo(0,0));
+  ok(await owner.p.locator('#league-entries tr').first().evaluate(e=>e.getBoundingClientRect().top<450),'Mobile standings start above the fold');
+  ok(await owner.p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Compact league page fits mobile');
+  await owner.p.screenshot({path:'test-results/league-focus-mobile.png'});
+  await owner.p.setViewportSize({width:1280,height:900});
   // ---- Weekly rollover: trophies, keyboard-accessible weeks won, past winners.
   await db(`insert into public.test_clock values(((date_trunc('week',clock_timestamp() at time zone 'utc')+interval '7 days 5 seconds') at time zone 'utc'))`);
   await owner.p.locator('#league-refresh').click();
@@ -152,10 +166,10 @@ async page => {
   await visible(owner.p,'#league-wins');await owner.p.waitForFunction(()=>document.querySelectorAll('#wins-list li').length===1);
   ok((await text(owner.p,'#wins-list li')).includes('90 pts'),'Keyboard opens the specific weeks won with winning total');
   await owner.p.keyboard.press('Escape');
-  await owner.p.locator('#league-history-open').click();await visible(owner.p,'#league-history');
+  await owner.p.locator('#history-title').focus();await owner.p.keyboard.press('Enter');await owner.p.waitForFunction(()=>document.querySelector('#league-history').open);
   await owner.p.waitForFunction(()=>document.querySelectorAll('#history-list li').length===1);
   ok((await text(owner.p,'#history-list li')).includes('Owner Ana · 90 pts'),'Past winners lists the completed week');
-  await owner.p.keyboard.press('Escape');
+  await owner.p.locator('#history-title').click();
   // ---- Network failure: private error + Retry, never a public fallback.
   const before=owner.state.requests.length;owner.state.fail=1;
   await owner.p.locator('#league-refresh').click();await visible(owner.p,'#friends-retry');
@@ -183,7 +197,7 @@ async page => {
   ok((await owner.p.locator('#invite-link-field').inputValue()).includes('#join='),'Clipboard denial exposes a selectable invitation link');
   await owner.p.evaluate(()=>{localStorage.removeItem('derabona.auth.v1');window.dispatchEvent(new StorageEvent('storage',{key:'derabona.auth.v1'}));});
   await visible(owner.p,'#friends-signin');
-  ok(await owner.p.locator('#league-view').isHidden()&&await owner.p.locator('#league-entries tr').count()===0,'Sign-out clears private league DOM');
+  ok(await owner.p.locator('#league-view').isHidden()&&await owner.p.locator('#league-entries tr').count()===0&&await text(owner.p,'h1')==='Friends leagues','Sign-out clears private league DOM and cached heading');
   ok(!await owner.p.locator('#league-invite-dialog').isVisible()&&await owner.p.locator('#invite-link-field').inputValue()==='','Sign-out closes the invitation and clears its token');
   // ---- Denied storage: invitation lost through OAuth → explicit recovery, no fake join.
   const rotated=(await db(`select token from ranked_private.friend_league_invites where league_id=${q(leagueId)}`))[0].token;
