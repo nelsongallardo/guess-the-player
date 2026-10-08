@@ -1,5 +1,23 @@
 # Verification report
 
+## 2026-10-08 — Game-first UX correction
+
+The owner rejected the released overview as cluttered and an extra barrier to play. ADR 0028 restores immediate Daily/explicit Unlimited entry, direct completed results, compact navigation/answers and contextual group discovery. Backend, score constants, roster and migrations are unchanged.
+
+Verified the served isolated worktree on port 4173:
+
+- Focused Node contracts: 86/86 (entry, Daily, accounts, board, FAQ, SEO and analytics).
+- Guest session browser suite: 16 checks, including every one of 221 offline careers, denied storage, saved hints/answers and clock/session continuity.
+- Entry/return browser journeys: 50 checks, including mandatory nickname gating, immediate play, completion, mode switching, clock preservation, sharing, UTC rollover and account failure → practice → ranked Daily recovery.
+- Account browser suite: 65 checks; combined Daily/account score suite: 15; public standings suite: 59. Auth/SDK/API responses are simulated in these suites.
+- Connected browser journey: 10 checks using actual local PostgreSQL and the actual Edge handler, with simulated Auth. Arrival creates only Daily rounds; creation/navigation adds no extra rounds; results finished after joining appear in the group's exact weekly points; return opens the completed result directly.
+- Privacy browser regression: actual PostHog SDK, intercepted ingestion; zero traffic before consent/after decline, sanitized events, identity retention/withdrawal, and blocked-SDK play passed. Its existing career fixture now explicitly selects Unlimited.
+- Visual/layout checks: English and Spanish at 320, 375 and 1100px; direct creation, game and public board fit horizontally; all ten answer targets are at least 44px and their names wrap without clipping. Puzzle begins within 274px of the top even at 320px. Screenshots inspected on mobile and desktop.
+- Independent review found and verified fixes for stale Daily summary after Unlimited switching, Daily recovery from signed-in practice, and an answer CSS rule accidentally hiding competition counts/Completed labels.
+
+These are functional and visual checks, not observation of inexperienced players, native Safari/Firefox verification or a new hosted two-account Google OAuth run. Earlier overview-only browser assertions were updated for the deliberately reversed interaction contract; scoring, identity, saved-state and failure checks remain.
+
+
 ## Connected Play and Groups — 8 October 2026 (local candidate verified; compatible backend deployed)
 
 The owner approved the whole-experience design and implementation. Local frontend and backend checks are complete; Pages publication and CI are separate release steps. This section records the candidate evidence, not a claim of a target-user usability study.

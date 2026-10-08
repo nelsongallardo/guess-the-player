@@ -131,11 +131,11 @@ Account browser tests route-mock SDK/API. Label them as rendered frontend contra
 
 ## Separate release gates
 
-### Play overview and explicit activation
+### Read-only entry status
 
 [ADR 0027](adr/0027-connected-play-and-groups.md) separates checking progress from starting timed gameplay. The authenticated `ranked-game` action `{ "action": "overview" }` returns existing `profile` and `progress` shapes plus `daily` and `career` readiness summaries. It never creates or advances gameplay rounds, changes results/receipts, or returns current/unstarted clues or options. Account initialization and the existing per-account rate budget still apply. `daily.previous` is the most recent fully completed earlier UTC day, separately dated.
 
-Migration `202610080002_play_overview.sql` preserves the prior dispatcher as the private, revoked `ranked_private.ranked_game_before_overview` helper; the public service-only wrapper handles `overview` and delegates all older actions unchanged. Future dispatcher migrations must preserve this delegation and the overview boundary. Existing `dailyProgress` remains a start-capable request for old clients, so the new frontend must not use it to populate the Play overview.
+Migration `202610080002_play_overview.sql` preserves the prior dispatcher as the private, revoked `ranked_private.ranked_game_before_overview` helper; the public service-only wrapper handles `overview` and delegates all older actions unchanged. Future dispatcher migrations must preserve this delegation and the overview boundary. Existing `dailyProgress` remains a start-capable request for old clients, so status-only/auth-only surfaces must never substitute it for overview. Since ADR 0028, the gameplay page automatically proceeds from identity/nickname resolution into its selected mode; the dashboard itself was removed. No backend contract changed.
 
 Run `tests/play-overview-backend.test.mjs` with the documented native PostgreSQL environment for fresh replay, predecessor upgrade, no-write snapshots, prior-day summaries, role/auth boundaries and rate limits. The new frontend requires this forward migration and the updated `ranked-game` Edge allowlist before Pages publication. Deployment evidence belongs in TESTING.md; merely adding this section does not establish hosted rollout.
 

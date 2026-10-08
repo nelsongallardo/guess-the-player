@@ -95,35 +95,14 @@ test('visible bilingual copy covers mode, completion status, rollover, and resul
     const copy=ui.copyFor(language);
     for(const key of ['daily','unlimited','challenge','streak','reset','done','pending','temporary','newDaily','loadDaily','share','keepPlaying','won','lost'])assert.ok(copy[key],`${language}.${key}`);
   }
-  assert.equal(ui.copyFor('en').daily,'Daily challenge');
-  assert.equal(ui.copyFor('es').daily,'Desafío diario');
-  assert.equal(ui.copyFor('en').unlimited,'Unlimited play');
-  assert.equal(ui.copyFor('es').unlimited,'Juego sin límite');
+  assert.equal(ui.copyFor('en').daily,'Daily');
+  assert.equal(ui.copyFor('es').daily,'Diaria');
+  assert.equal(ui.copyFor('en').unlimited,'Unlimited');
+  assert.equal(ui.copyFor('es').unlimited,'Sin límite');
   assert.match(ui.copyFor('en').primary,/three (?:careers|players)/i);
   assert.match(ui.copyFor('es').primary,/tres (?:carreras|jugadores)/i);
   assert.doesNotMatch(ui.copyFor('en').primary,/local|ranked/i);
   assert.doesNotMatch(ui.copyFor('es').primary,/clasificaci[oó]n|navegador/i);
-});
-
-test('each mode button carries a self-contained noun label plus concrete facts',()=>{
-  const {ui}=loadController();
-  for(const language of ['en','es']){
-    const copy=ui.copyFor(language);
-    for(const key of ['dailyFacts','unlimitedFacts']){
-      assert.ok(Array.isArray(copy[key])&&copy[key].length===2,`${language}.${key} is a two-line fact list`);
-      for(const fact of copy[key])assert.ok(fact&&!/·/.test(fact),`${language}.${key} lines carry no separator to dangle at a wrap`);
-    }
-  }
-  // The daily side states the fixed scope; the unlimited side states the open one.
-  assert.match(ui.copyFor('en').dailyFacts.join(' '),/3 players.*00:00 UTC/i);
-  assert.match(ui.copyFor('es').dailyFacts.join(' '),/3 jugadores.*00:00 UTC/i);
-  assert.match(ui.copyFor('en').unlimitedFacts.join(' '),/competition.*as many as you want/i);
-  assert.match(ui.copyFor('es').unlimitedFacts.join(' '),/competición.*los que quieras/i);
-  // Neither label may be a bare verb or a bare adjective: both must read cold.
-  for(const language of ['en','es']){
-    const copy=ui.copyFor(language);
-    for(const key of ['daily','unlimited'])assert.match(copy[key],/\S+\s+\S+/,`${language}.${key} is a multi-word noun phrase`);
-  }
 });
 
 test('"challenge" names the daily mode only, never a ranked round loader',()=>{

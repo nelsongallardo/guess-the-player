@@ -35,14 +35,14 @@ async page=>{
       ok(await p.locator('#stat-points').isVisible()&&await p.locator('#stat-points-label').textContent()==='Lifetime points'&&await p.locator('#score').isHidden(),label);
       await p.locator('#account-close').click();
     };
-    // Signed-in landing reads the account overview; Daily starts explicitly.
+    // Signed-in landing resolves the account and automatically opens Daily.
     // Rows mirror the current frozen descriptor's player IDs, not invented player identities.
     await p.goto(origin+'/index.html?lang=en');
     rounds=await p.evaluate(()=>{const d=DailyChallenge.forDate(new Date().toISOString().slice(0,10));return d.payloads.map((payload,i)=>({roundIndex:i,version:0,playerId:payload.player.id,options:payload.options.map((o,n)=>({id:'option-'+i+'-'+n,label:o.label})),answer:payload.player.name,guesses:[],hints:0,clueCountry:null,cluePosition:null,status:'playing',points:0,startedAt:new Date().toISOString()}));});
-    await p.reload();await p.waitForFunction(()=>document.querySelector('#stat-points').textContent==='12'&&!document.querySelector('#play-daily-start').disabled);
+    await p.reload();await p.waitForFunction(()=>document.querySelector('#stat-points').textContent==='12'&&!document.querySelector('#hint').disabled);
     await accountScore(12,'Daily landing reads labeled combined score from the read-only server overview');
-    ok(!calls.some(c=>['start','dailyProgress'].includes(c.action)),'Browsing account totals does not start either game mode');
-    await p.locator('#play-daily-start').click();await p.waitForFunction(()=>!document.querySelector('#hint').disabled);
+    ok(!calls.some(c=>c.action==='start')&&calls.some(c=>c.action==='dailyProgress'),'Daily arrival opens only Daily, never an unrelated Unlimited round');
+    await p.waitForFunction(()=>!document.querySelector('#hint').disabled);
     await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='1 / 3');
     await accountScore(12,'Hint does not locally mint score');
     holdProgress=true;await p.evaluate(()=>{void RankedUI.sync();});
@@ -58,7 +58,7 @@ async page=>{
     }
     await p.locator('#next').click();
     ok(await p.locator('#daily-summary').isVisible()&&await p.locator('#stat-points').textContent()==='135','Daily finish retains combined score');
-    await p.locator('#play-home').click();await p.locator('#play-unlimited-start').click();await p.waitForFunction(()=>document.querySelector('#stat-points').textContent==='135');
+    await p.locator('#unlimited-mode').click();await p.waitForFunction(()=>document.querySelector('#stat-points').textContent==='135');
     await accountScore(135,'Explicit Unlimited mode switch retains account total');
     await p.reload();await p.waitForFunction(()=>document.querySelector('#score').textContent==='135');
     await accountScore(135,'Reload reads combined score in Account');

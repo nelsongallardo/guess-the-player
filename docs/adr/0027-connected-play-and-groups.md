@@ -2,7 +2,7 @@
 
 Date: 2026-10-08
 
-Status: accepted; implementation verification in progress.
+Status: partly superseded by [ADR 0028](0028-game-first-experience.md): the lobby, explicit Start gate and app-style navigation were rejected after release. Read-only status, identity boundaries, group intent and scoring contracts remain.
 
 ## Context
 
