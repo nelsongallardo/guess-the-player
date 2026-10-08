@@ -20,9 +20,9 @@ function ranked(daily=false,runTimers=false){
   let dailyMode=daily,modeEpoch=0;
   const nodes=new Map(),node=id=>{if(!nodes.has(id))nodes.set(id,{value:'all',dataset:{},addEventListener(){},replaceChildren(){},classList:{toggle(){}},querySelector(){return null;},focus(){},scrollIntoView(){},close(){}});return nodes.get(id);};
   const renders=[];
-  const c={Accounts:{configured:true,hasStoredSession:()=>true,session:{user:{id:'A'}},init:async()=>c.Accounts.session,request:()=>new Promise(()=>{})},AuthCallback:{},DailyUI:{isDaily:()=>dailyMode,modeEpoch:()=>modeEpoch,choose(next){dailyMode=next==='daily';modeEpoch++;if(!dailyMode)c.ui.sync();return true;}},DailyRankedUI:{resetIdentity(){},sync(){}},NicknamePrompt:{maybeOpen(){}},language:'en',$:node,document:{addEventListener(){},activeElement:null},window:{addEventListener(){}},setTimeout:fn=>{if(runTimers)queueMicrotask(fn);return 0;},crypto:{randomUUID:()=> 'key'},GuestStorage:{clear(){}},seen:new Set(),defaultLifetime:()=>({}),CareerGame:{create:()=>({})},resetRoundClock(){},applyLanguage(){},render(){renders.push(dailyMode?'daily':'unlimited');},PLAYERS:[]};vm.createContext(c);
-  let source=html.slice(html.indexOf('const RankedUI = (()=>{'),html.indexOf('\nif(!AuthRoute.active){applyLanguage();render(false,true);RankedUI.boot();}'));
-  const returnLine='return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync,acceptDailyScore,scoreRevision:()=>scoreRevision};';
+  const c={playActivated:true,PlayOverview:{leavePractice(){},reset(){c.playActivated=false;},load:()=>c.Accounts.request({action:'overview'}),show(next){dailyMode=next==='daily';c.playActivated=false;return c.PlayOverview.load();}},Accounts:{configured:true,hasStoredSession:()=>true,session:{user:{id:'A'}},init:async()=>c.Accounts.session,request:()=>new Promise(()=>{})},AuthCallback:{},DailyUI:{isDaily:()=>dailyMode,modeEpoch:()=>modeEpoch,choose(next){dailyMode=next==='daily';modeEpoch++;if(!dailyMode)c.ui.sync();return true;}},DailyRankedUI:{resetIdentity(){},sync(){}},NicknamePrompt:{maybeOpen(){},resetIdentity(){}},language:'en',$:node,document:{addEventListener(){},activeElement:null},window:{addEventListener(){}},setTimeout:fn=>{if(runTimers)queueMicrotask(fn);return 0;},crypto:{randomUUID:()=> 'key'},GuestStorage:{clear(){}},seen:new Set(),defaultLifetime:()=>({}),CareerGame:{create:()=>({})},resetRoundClock(){},applyLanguage(){},render(){renders.push(dailyMode?'daily':'unlimited');},PLAYERS:[]};vm.createContext(c);
+  let source=html.slice(html.indexOf('const RankedUI = (()=>{'),html.indexOf('\n// Browsing Play is read-only.'));
+  const returnLine='return {acceptOverview,update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync,acceptDailyScore,scoreRevision:()=>scoreRevision};';
   // String.replace on a pattern that no longer matches RankedUI's actual
   // return statement fails SILENTLY (source comes back unchanged), which
   // previously let a real regression through undetected until CI: every
@@ -31,7 +31,7 @@ function ranked(daily=false,runTimers=false){
   // exported names in sync with RankedUI's actual `return {...}` in
   // index.html whenever that changes.
   if(!source.includes(returnLine))throw new Error('RankedUI\'s return statement no longer matches this harness\'s extraction pattern - update returnLine in tests/account-boundaries.test.mjs to match index.html');
-  source=source.replace(returnLine,`update=()=>{};renderRanked=()=>{};return {authChanged,sync,sendPending,boot,seed(m){mode=m;cloud={private:'A'};pending={action:'enroll',nickname:'A nickname',idempotencyKey:'A key'};pendingUserId='A';userId='A';epoch=7;},snapshot(){return {mode,cloud,pending,epoch,busy};}};`);
+  source=source.replace(returnLine,`update=()=>{};renderRanked=()=>{};return {authChanged,sync,sendPending,boot,seed(m){mode=m;cloud={private:'A'};pending={action:'answer',optionId:'A option',idempotencyKey:'A key'};pendingUserId='A';userId='A';epoch=7;},snapshot(){return {mode,cloud,pending,epoch,busy};}};`);
   vm.runInContext(source+'\nglobalThis.ui=RankedUI;',c);c.setDaily=value=>{if(dailyMode!==value){dailyMode=value;modeEpoch++;}};c.renders=renders;return c;
 }
 for(const mode of ['ranked','loading','unavailable','practice'])for(const event of ['SIGNED_IN','TOKEN_REFRESHED','USER_UPDATED'])test(`identity change invalidates ${mode} on ${event}`,()=>{const c=ranked();c.ui.seed(mode);c.Accounts.session={user:{id:'B'}};c.ui.authChanged(event,c.Accounts.session);const s=c.ui.snapshot();assert.equal(s.cloud,null);assert.equal(s.pending,null);assert.ok(s.epoch>7);});
@@ -48,8 +48,8 @@ test('pending A mutation never starts with B current identity',async()=>{const c
 // starting a round) stays gated to Unlimited, since mutate('start',...)
 // would be meaningless - and is separately still no-op'd - while Daily is
 // what's on screen.
-test('signed-in boot always syncs ranked progress for the masthead; only auto-starts a round from Unlimited',async()=>{
-  for(const [daily,expected] of [[true,['progress']],[false,['progress','start']]]){
+test('signed-in boot reads only overview regardless of selected mode',async()=>{
+  for(const [daily,expected] of [[true,['overview']],[false,['overview']]]){
     const c=ranked(daily),actions=[];
     c.Accounts.request=async payload=>{actions.push(payload.action);return {progress:{competitionCounts:{all:{answered:0,total:1}}},round:payload.action==='start'?{id:'round'}:null,profile:{}};};
     await c.ui.boot();
@@ -57,8 +57,8 @@ test('signed-in boot always syncs ranked progress for the masthead; only auto-st
     assert.deepEqual(actions,expected,daily?'Daily account boot':'Unlimited account boot');
   }
 });
-test('auth-state reconciliation always syncs ranked progress for the masthead; only auto-starts a round from Unlimited',async()=>{
-  for(const [daily,expected] of [[true,['progress']],[false,['progress','start']]]){
+test('auth-state reconciliation returns to read-only overview regardless of selected mode',async()=>{
+  for(const [daily,expected] of [[true,['overview']],[false,['overview']]]){
     const c=ranked(daily,true),actions=[];
     c.Accounts.request=async payload=>{actions.push(payload.action);return {progress:{competitionCounts:{all:{answered:0,total:1}}},round:payload.action==='start'?{id:'round'}:null,profile:{}};};
     c.Accounts.session={user:{id:'B'}};c.ui.authChanged('SIGNED_IN',c.Accounts.session);
@@ -66,16 +66,16 @@ test('auth-state reconciliation always syncs ranked progress for the masthead; o
     assert.deepEqual(actions,expected,daily?'Daily auth callback':'Unlimited auth callback');
   }
 });
-test('Return to ranked play performs its own fresh sync on top of the masthead sync already done at boot',async()=>{
-  const c=ranked(true),actions=[];
+test('Return to ranked play from ready preserves Unlimited intent without starting a round',async()=>{
+  const c=ranked(true),actions=[];c.playActivated=false;
   c.Accounts.request=async payload=>{actions.push({action:payload.action,daily:c.DailyUI.isDaily()});return {progress:{competitionCounts:{all:{answered:1,total:1}}},round:null,profile:{}};};
   await c.ui.boot();
   await new Promise(resolve=>setImmediate(resolve));
-  assert.deepEqual(actions,[{action:'progress',daily:true}],'boot already synced ranked progress once for the masthead, while Daily stayed selected');
+  assert.deepEqual(actions,[{action:'overview',daily:true}],'boot read only the overview while Daily stayed selected');
   c.$('account-ranked').onclick();
   await new Promise(resolve=>setImmediate(resolve));
   assert.equal(c.DailyUI.isDaily(),false,'account control performs a real Daily to Unlimited selection');
-  assert.deepEqual(actions,[{action:'progress',daily:true},{action:'progress',daily:false}],'switching to Unlimited performs its own additional fresh progress sync');
+  assert.deepEqual(actions,[{action:'overview',daily:true},{action:'overview',daily:false}],'Unlimited intent reads only the overview until explicit activation');
 });
 test('late Unlimited sync cannot project or start ranked after returning to Daily',async()=>{
   const c=ranked(false),actions=[];
@@ -134,8 +134,8 @@ test('Unlimited switch during stale mutation retries the same pending operation 
   await new Promise(resolve=>setImmediate(resolve));
   assert.equal(actions.length,2);
   assert.deepEqual(actions.map(({action,idempotencyKey})=>({action,idempotencyKey})),[
-    {action:'enroll',idempotencyKey:'A key'},
-    {action:'enroll',idempotencyKey:'A key'}
+    {action:'answer',idempotencyKey:'A key'},
+    {action:'answer',idempotencyKey:'A key'}
   ]);
   assert.equal(c.ui.snapshot().pending,null);
   assert.equal(c.ui.snapshot().busy,false);
@@ -151,6 +151,6 @@ test('stale mutation settling while Daily stays selected does not retry',async()
   releaseMutation({progress:{competitionCounts:{all:{answered:1,total:1}}},round:null,profile:{nickname:'A nickname'}});
   await stale;
   await new Promise(resolve=>setImmediate(resolve));
-  assert.deepEqual(actions,['enroll']);
+  assert.deepEqual(actions,['answer']);
   assert.equal(c.DailyUI.isDaily(),true);
 });

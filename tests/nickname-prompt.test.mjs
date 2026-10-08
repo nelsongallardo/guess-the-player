@@ -56,11 +56,12 @@ test('the suggested nickname is the same animal-alias shape the server assigns, 
   assert.match(game,/DEFAULT_ALIAS_PATTERN=\/\^\[A-Za-z\]\+-\[0-9a-f\]\{8\}\$\//);
 });
 
-test('submitting reuses the existing enroll action directly (not RankedUI.mutate, which is gated to ranked mode) and syncs whichever module is active afterward',()=>{
+test('submitting reuses the existing enroll action directly (not RankedUI.mutate, which is gated to ranked mode) and returns to the read-only overview afterward',()=>{
   assert.match(nicknamePrompt,/action:'enroll',nickname,idempotencyKey:crypto\.randomUUID\(\)/);
   assert.match(nicknamePrompt,/Accounts\.request\(\{action:'enroll'/);
   assert.doesNotMatch(nicknamePrompt,/RankedUI\.mutate/);
-  assert.match(nicknamePrompt,/if\(DailyUI\.isDaily\(\)\)DailyRankedUI\.sync\(\);else RankedUI\.sync\(\);/);
+  assert.match(nicknamePrompt,/else PlayOverview\.enrolled\(\);/);
+  assert.doesNotMatch(nicknamePrompt,/DailyRankedUI\.sync\(\)|RankedUI\.sync\(\)/);
 });
 
 test('client-side validation and server error codes are both surfaced inline, never silently dropped',()=>{
