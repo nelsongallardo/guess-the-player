@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script id="auth-callback">
+// Sign-in-only route for private leagues (?auth=friends): Google sign-in,
+// the PKCE callback and mandatory nickname enrollment complete here, then
+// the tab returns to leaderboard.html's Friends view. It never initializes
+// guest, ranked or Daily gameplay (no start/dailyProgress, no local clocks).
+// The pending invitation itself stays in leaderboard.html's per-tab storage;
+// only the non-secret invite=1 marker travels so a lost token can be reported.
+const AuthRoute = (()=>{
+  const params=new URLSearchParams(location.search);
+  const active=params.get('auth')==='friends'&&location.protocol!=='file:';
+  if(active){
+    document.documentElement.classList.add('auth-route');
+    // Registered before game-ui's own listener: a page-cache restore of this
+    // route must not reach resetRoundClock(); reload the route cleanly instead.
+    window.addEventListener('pageshow',event=>{if(event.persisted){event.stopImmediatePropagation();location.reload();}});
+  }
+  return Object.freeze({active,invite:active&&params.get('invite')==='1'});
+})();
 // Capture OAuth secrets in memory, then remove them BEFORE any analytics SDK.
 const AuthCallback = (()=>{
   const url=new URL(location.href),hash=new URLSearchParams(url.hash.slice(1));
@@ -12,6 +29,7 @@ const AuthCallback = (()=>{
     const clean=new URL(url.origin==='null'?url.href:url.origin+url.pathname);clean.search='';clean.hash='';
     const lang=url.searchParams.get('lang');if(lang==='en'||lang==='es')clean.searchParams.set('lang',lang);
     if(url.searchParams.get('unlimited')==='1')clean.searchParams.set('unlimited','1');
+    if(AuthRoute.active){clean.searchParams.set('auth','friends');if(AuthRoute.invite)clean.searchParams.set('invite','1');}
     history.replaceState(null,'',clean.href);
   }
   return callback;
@@ -353,6 +371,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 .daily-card{margin:0 0 14px;padding:12px 14px;border:1px solid #81b6cc;border-radius:12px;background:#e8f5fa;color:var(--ink)}
 .daily-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.daily-card .eyebrow{margin:0 0 4px;color:var(--lime)}.daily-card-primary{font-weight:750;font-size:14px}.daily-card-meta,.daily-card-scope{font:11px var(--mono);color:var(--muted);margin-top:5px}.daily-rollover{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid #81b6cc}.daily-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.daily-actions button{min-height:44px}.daily-share-status{min-height:1.5em;margin-top:6px;font:11px var(--mono);color:var(--muted)}
 @media(max-width:420px){.mode-segmented{width:100%}.mode-segmented button{padding:7px 5px;font-size:12px}.mode-tagline{font-size:9px}.daily-card{padding:10px 11px}.daily-card-head,.daily-rollover{align-items:stretch;flex-direction:column}.daily-rollover button{width:100%}}
+html.auth-route main>*:not(#auth-route),html.auth-route #account-open,html.auth-route .edition,html.auth-route .page-footer{display:none!important}.auth-route-panel{margin:28px 0;padding:24px;border:1px solid var(--celeste);border-radius:12px;background:var(--ink);color:var(--paper)}.auth-route-panel[hidden]{display:none}.auth-route-panel h2{margin:0 0 8px;font-size:1.3rem}.auth-route-panel h2:focus{outline:none}.auth-route-panel p{margin:0 0 16px}.auth-route-actions{display:flex;flex-wrap:wrap;gap:10px}.auth-route-actions button,.auth-route-actions a{min-height:44px;display:inline-flex;align-items:center;padding:0 16px;border-radius:7px;font:inherit;font-weight:700}.auth-route-actions button{border:0;background:var(--paper);color:var(--ink);cursor:pointer}.auth-route-actions a{color:var(--paper);border:1px solid currentColor;text-decoration:none}.auth-route-actions :focus-visible{outline:3px solid var(--celeste);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -373,6 +392,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
   <path d="m79 53 3-5m-9 7-1-4" stroke="#89cff0" stroke-width="2" stroke-linecap="round"/>
 </svg><div><div class="wordmark">derabona</div><h1 id="title">ADIVINÁ AL JUGADOR. <span>DE MEMORIA. DE RABONA.</span></h1></div></a><div class="masthead-right"><select id="language" aria-label="Language / Idioma" title="Language / Idioma"><option value="en">EN</option><option value="es">ES</option></select><span class="edition">FÚTBOL ENTRE AMIGOS</span><button id="account-open" class="subtle account-open" type="button" aria-haspopup="dialog"><svg class="account-open-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><strong id="score" class="account-open-score" hidden>000</strong><span id="account-open-label" class="account-open-text">Cuenta</span></button></div></header>
 <main>
+<section id="auth-route" class="auth-route-panel" aria-labelledby="auth-route-title" hidden><h2 id="auth-route-title" tabindex="-1">Unirte a una liga de amigos</h2><p id="auth-route-status" role="status" aria-live="polite">Comprobando tu cuenta…</p><div class="auth-route-actions"><button id="auth-route-retry" type="button" hidden>Iniciar sesión con Google</button><a id="auth-route-back" class="subtle" href="leaderboard.html?view=friends">Volver a Amigos</a></div></section>
 <div class="page-nav-row"><button id="change-competition" class="competition-badge" type="button" aria-haspopup="dialog"><svg id="competition-badge-trophy" class="competition-badge-icon" width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M6 3h8v3a4 4 0 0 1-8 0V3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 4H3v1a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 4h3v1a3 3 0 0 1-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 9v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 16c0-1.5.8-2 3-2s3 .5 3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only" id="competition-badge-label">Competition</span><img id="competition-current-logo" class="competition-current-logo" alt="" hidden><span id="competition-current" class="competition-badge-value">All Players</span></button><div class="page-nav-actions"><nav class="page-nav" id="page-nav" aria-label="Navegación principal"><a id="leaderboard-open" href="leaderboard.html"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M6 3h8v3a4 4 0 0 1-8 0V3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 4H3v1a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 4h3v1a3 3 0 0 1-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 9v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 16h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 16c0-1.5.8-2 3-2s3 .5 3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="leaderboard-open-label">Tabla</span></a></nav><span id="play-mode" class="play-mode"></span></div></div>
 <div class="mode-segmented" id="mode-segmented" role="group" aria-label="Game mode"><button id="unlimited-mode" type="button" aria-pressed="false"><span class="mode-text"><span id="unlimited-mode-label" class="mode-name">Juego sin límite</span><span id="unlimited-mode-tagline" class="mode-tagline">Elegí competición
 jugá los que quieras</span></span></button><button id="daily-mode" type="button" aria-pressed="true"><span class="mode-text"><span class="mode-head"><span id="daily-mode-label" class="mode-name">Desafío diario</span><span id="daily-mode-status" class="mode-status" aria-hidden="true"></span></span><span id="daily-mode-tagline" class="mode-tagline">3 jugadores
@@ -80826,7 +80846,7 @@ const Accounts = (()=>{
       return session;
     }finally{AuthCallback.code=null;AuthCallback.error=null;}
   }
-  async function login(language){const c=await load();const redirect=new URL(location.href);redirect.search='';redirect.hash='';redirect.searchParams.set('lang',language);if(new URLSearchParams(location.search).get('unlimited')==='1')redirect.searchParams.set('unlimited','1');const {error}=await c.auth.signInWithOAuth({provider:'google',options:{redirectTo:redirect.href,scopes:'email profile'}});if(error)throw error;}
+  async function login(language){const c=await load();const redirect=new URL(location.href);redirect.search='';redirect.hash='';redirect.searchParams.set('lang',language);if(new URLSearchParams(location.search).get('unlimited')==='1')redirect.searchParams.set('unlimited','1');if(AuthRoute.active){redirect.searchParams.set('auth','friends');if(AuthRoute.invite)redirect.searchParams.set('invite','1');}const {error}=await c.auth.signInWithOAuth({provider:'google',options:{redirectTo:redirect.href,scopes:'email profile'}});if(error)throw error;}
   async function request(payload,endpoint='ranked-game',isPublic=false,expectedUserId=session?.user?.id??null){
     if(!configured||navigator.onLine===false)throw Error('UNAVAILABLE');
     // Only the leaderboard is eligible for anonymous fallback, never mutations.
@@ -81053,13 +81073,14 @@ const loadRoundClock=()=>{
   }catch{}
   return null;
 };
-try{history.replaceState({...clockHistoryState,derabonaClockPage:true},'',location.href);}catch{}
+if(!AuthRoute.active)try{history.replaceState({...clockHistoryState,derabonaClockPage:true},'',location.href);}catch{}
 const saveRoundClock=startedAt=>{try{sessionStorage.setItem(CLOCK_KEY,JSON.stringify({playerId:CareerGame.playerAt(state)?.id,startedAt}));if(clockTabId)sessionStorage.setItem(CLOCK_TAB_KEY,clockTabId);}catch{}};
-let roundClockStart=loadRoundClock();
-if(clockTabId)try{sessionStorage.setItem(CLOCK_TAB_KEY,clockTabId);}catch{}
+// The sign-in-only route neither restores, saves nor clears a guest clock.
+let roundClockStart=AuthRoute.active?null:loadRoundClock();
+if(clockTabId&&!AuthRoute.active)try{sessionStorage.setItem(CLOCK_TAB_KEY,clockTabId);}catch{}
 let roundClockWaitingForMode=roundClockStart===null&&DailyUI.requestedMode()==='daily';
 let roundClockWaitingForConsent=roundClockStart===null&&!roundClockWaitingForMode&&Analytics.shouldPauseGameClock();
-if(roundClockStart===null){roundClockStart=Date.now();if(!roundClockWaitingForMode&&!roundClockWaitingForConsent)saveRoundClock(roundClockStart);}
+if(roundClockStart===null){roundClockStart=Date.now();if(!AuthRoute.active&&!roundClockWaitingForMode&&!roundClockWaitingForConsent)saveRoundClock(roundClockStart);}
 function startGuestClockForMode(){
   if(!roundClockWaitingForMode)return;
   roundClockWaitingForMode=false;roundClockStart=Date.now();roundClockWaitingForConsent=Analytics.shouldPauseGameClock();
@@ -81367,7 +81388,7 @@ document.querySelectorAll('#change-competition,#change-competition-summary').for
 }));
 document.querySelectorAll('#stats-detail-open').forEach(b=>b.addEventListener('click',()=>{$('best-streak').textContent=lifetime.bestStreak;renderHistory();$('stats-detail').showModal();}));
 $('help').addEventListener('click',()=>{Analytics.capture('help_opened');$('rules').showModal();});
-$('language').addEventListener('change',()=>{const value=$('language').value;if(value!=='en'&&value!=='es')return;language=value;Analytics.setLanguage(value);Analytics.capture('language_changed');const open=$('source-details').open;applyLanguage();render(false,true);$('source-details').open=open;DailyUI.updateURL(language);});
+$('language').addEventListener('change',()=>{const value=$('language').value;if(value!=='en'&&value!=='es')return;language=value;if(AuthRoute.active){try{localStorage.setItem(LANGUAGE_KEY,value);}catch{}AuthRouteUI.translate();return;}Analytics.setLanguage(value);Analytics.capture('language_changed');const open=$('source-details').open;applyLanguage();render(false,true);$('source-details').open=open;DailyUI.updateURL(language);});
 $('reset-progress').addEventListener('click',()=>{
   if(RankedUI.isAccountMode())return;
   if(!confirm(copy().resetConfirm))return;Analytics.capture("progress_reset");
@@ -81424,7 +81445,7 @@ const NicknamePrompt = (()=>{
     try{
       await Accounts.request({action:'enroll',nickname,idempotencyKey:crypto.randomUUID()},'ranked-game',false,owner);
       isOpen=false;document.getElementById('nickname-prompt-dialog').close();
-      if(DailyUI.isDaily())DailyRankedUI.sync();else RankedUI.sync();
+      if(AuthRoute.active)AuthRouteUI.enrolled();else if(DailyUI.isDaily())DailyRankedUI.sync();else RankedUI.sync();
     }catch(error){
       document.getElementById('nickname-prompt-status').textContent=error?.code==='NICKNAME_TAKEN'?t().taken:error?.code==='INVALID_NICKNAME'?t().invalid:t().taken;
     }finally{busy=false;document.getElementById('nickname-prompt-submit').disabled=false;}
@@ -81552,8 +81573,8 @@ const DailyRankedUI = (()=>{
 })();
 const RankedUI = (()=>{
   const TEXT={
-    en:{account:'Account',accountGuest:'Sign in to compete',guestRankedTitle:'You’re playing as a guest',guestRankedDetail:'Your guest score stays in this tab, cannot be transferred after sign-in, and does not appear on the leaderboard. Sign in before answering to compete.',guestRankedSignIn:'Sign in to compete',accountPitch:'Sign in to compete with players worldwide for points.',scoreLabel:'points',title:'Account and progress',guest:'GUEST · UNRANKED',practice:'PRACTICE · UNRANKED',ranked:'RANKED · CLOUD',loading:'Checking account…',unavailable:'Ranked play unavailable. No offline answers will count. Retry to load authoritative cloud progress, or choose unranked practice.',disabled:'Google sign-in and rankings are not configured yet. Guest play works normally.',detail:'Guest progress stays in this browser tab only, never imported to your account. Sign in once to save your points to the cloud, sync across devices, and get an automatic public nickname — no setup required.',login:'Continue with Google',loginWarn:'Your guest progress will NOT transfer to your account or any leaderboard. Continue to Google? Cancel keeps this guest session.',logout:'Sign out',close:'Close',retry:'Retry / reconnect',practiceAction:'Play unranked practice',returnRanked:'Return to ranked play',signed:'Signed in. Ranked records are permanent; Reset only affects unranked practice.',authError:'Sign-in did not complete. Your guest progress is unchanged. Try again when connected.',nickname:'Nickname (optional)',nicknameDetail:'Changing your nickname is optional (3–24 characters). We suggest your Google name here so you can use it if you like — edit it or clear it to keep your random animal alias instead. We never publish your Google photo.',aliasHelp:'About your public alias',aliasTooltip:'A random animal name is assigned automatically, or use the Google name suggested in Account — change either any time.',enroll:'Save nickname',statPoints:'Points',statAnswered:'Played',statCorrect:'Correct',enrolled:'Public alias: ',aliasLoading:'Loading your public alias…',delete:'Delete account',deleteConfirm:'Permanently delete your account, cloud progress and public leaderboard records? This cannot be undone. Type DELETE to confirm.',deleteError:'Account deletion could not be confirmed. Retry when connected.',board:'Leaderboards',boardDetail:'Global points count the first result for each player once. Competition boards filter those results by club membership, not the league selected when playing. Ties share ranks. Accounts appear automatically under their public alias after a verified result. Unranked scores never count.',global:'Global',empty:'No public scores yet.',boardError:'Leaderboard unavailable. Try again when connected.',boardLoading:'Loading leaderboard…',rank:'Rank',name:'Nickname',points:'Points',answered:'Played',correct:'Correct',own:'Your rank',total:'public players',prev:'Previous',next:'Next',reset:'Reset guest / practice results',done:'No unseen players remain in this competition. Choose another competition. Ranked results cannot be reset.',sync:'Synchronizing ranked progress…',earned:'points · verified by server',rankRules:'Ranked: one open round per account; changing competitions resumes that round. The server keeps the clock running, including time away. Only the first result per player counts, permanently. Guest/practice Reset cannot clear ranked records.',activeRoundBlocked:name=>`You have an open round in ${name} - finish it (win or lose) before starting a different competition.`},
-    es:{account:'Cuenta',accountGuest:'Iniciar sesión para competir',guestRankedTitle:'Jugás como invitado',guestRankedDetail:'Tu puntaje de invitado queda en esta pestaña, no se puede transferir después de iniciar sesión y no aparece en la tabla. Iniciá sesión antes de responder para competir.',guestRankedSignIn:'Iniciar sesión para competir',accountPitch:'Iniciá sesión para competir por puntos con jugadores de todo el mundo.',scoreLabel:'puntos',title:'Cuenta y progreso',guest:'INVITADO · SIN CLASIFICACIÓN',practice:'PRÁCTICA · SIN CLASIFICACIÓN',ranked:'CLASIFICADO · NUBE',loading:'Comprobando cuenta…',unavailable:'Clasificación no disponible. Las respuestas sin conexión no suman. Reintentá para cargar el progreso de la nube o elegí práctica sin clasificación.',disabled:'Google y las clasificaciones todavía no están configurados. Podés jugar como invitado.',detail:'El progreso de invitado queda solo en esta pestaña y nunca se importa a tu cuenta. Iniciá sesión una vez para guardar tus puntos en la nube, sincronizarlos entre dispositivos y obtener un apodo público automático — sin necesidad de configurar nada.',login:'Continuar con Google',loginWarn:'Tu progreso de invitado NO se transfiere a la cuenta ni a la tabla. ¿Continuar con Google? Cancelar conserva esta sesión.',logout:'Cerrar sesión',close:'Cerrar',retry:'Reintentar / reconectar',practiceAction:'Práctica sin clasificación',returnRanked:'Volver a clasificación',signed:'Sesión iniciada. Los resultados clasificados son permanentes; Reiniciar solo afecta la práctica sin clasificación.',authError:'No se completó el inicio de sesión. Tu progreso de invitado no cambió. Reintentá con conexión.',nickname:'Apodo (opcional)',nicknameDetail:'Cambiar tu apodo es opcional (3–24 caracteres). Te sugerimos tu nombre de Google acá por si querés usarlo — podés editarlo o borrarlo para quedarte con tu alias de animal. Nunca publicamos tu foto de Google.',aliasHelp:'Información sobre tu alias público',aliasTooltip:'Se asigna automáticamente un nombre de animal al azar, o podés usar el nombre de Google que te sugerimos en Cuenta — cambiá cualquiera cuando quieras.',enroll:'Guardar apodo',statPoints:'Puntos',statAnswered:'Jugadas',statCorrect:'Aciertos',enrolled:'Alias público: ',aliasLoading:'Cargando tu alias público…',delete:'Eliminar cuenta',deleteConfirm:'¿Eliminar tu cuenta, progreso en la nube y resultados públicos para siempre? No se puede deshacer. Escribí DELETE para confirmar.',deleteError:'No se pudo confirmar la eliminación. Reintentá con conexión.',board:'Tabla',boardDetail:'Los puntos globales cuentan una sola vez el primer resultado de cada jugador. Las tablas por competición filtran por clubes, no por la liga elegida al jugar. Los empates comparten puesto. Las cuentas aparecen automáticamente con su alias público tras un resultado verificado. Los puntos sin clasificación no cuentan.',global:'Global',empty:'Todavía no hay puntos públicos.',boardError:'Tabla no disponible. Reintentá con conexión.',boardLoading:'Cargando tabla…',rank:'Puesto',name:'Apodo',points:'Puntos',answered:'Jugados',correct:'Aciertos',own:'Tu puesto',total:'jugadores públicos',prev:'Anterior',next:'Siguiente',reset:'Reiniciar invitado / práctica',done:'No quedan jugadores sin responder en esta competición. Elegí otra. Los resultados clasificados no se pueden reiniciar.',sync:'Sincronizando progreso clasificado…',earned:'puntos · verificados por el servidor',rankRules:'Clasificado: una ronda abierta por cuenta; cambiar de competición retoma esa ronda. El reloj del servidor sigue corriendo, incluso al salir. Solo cuenta el primer resultado por jugador, para siempre. Reiniciar invitado/práctica no borra resultados clasificados.',activeRoundBlocked:name=>`Tenés una ronda abierta en ${name} - terminala (ganes o pierdas) antes de empezar otra competición.`}
+    en:{account:'Account',accountGuest:'Sign in to compete',guestRankedTitle:'You’re playing as a guest',guestRankedDetail:'Your guest score stays in this tab, cannot be transferred after sign-in, and does not appear on the leaderboard. Sign in before answering to compete.',guestRankedSignIn:'Sign in to compete',accountPitch:'Sign in to compete with players worldwide for points.',scoreLabel:'points',title:'Account and progress',guest:'GUEST · UNRANKED',practice:'PRACTICE · UNRANKED',ranked:'RANKED · CLOUD',loading:'Checking account…',unavailable:'Ranked play unavailable. No offline answers will count. Retry to load authoritative cloud progress, or choose unranked practice.',disabled:'Google sign-in and rankings are not configured yet. Guest play works normally.',detail:'Guest progress stays in this browser tab only, never imported to your account. Sign in once to save your points to the cloud, sync across devices, and get an automatic public nickname — no setup required.',login:'Continue with Google',loginWarn:'Your guest progress will NOT transfer to your account or any leaderboard. Continue to Google? Cancel keeps this guest session.',logout:'Sign out',close:'Close',retry:'Retry / reconnect',practiceAction:'Play unranked practice',returnRanked:'Return to ranked play',signed:'Signed in. Ranked records are permanent; Reset only affects unranked practice.',authError:'Sign-in did not complete. Your guest progress is unchanged. Try again when connected.',nickname:'Nickname (optional)',nicknameDetail:'Changing your nickname is optional (3–24 characters). We suggest your Google name here so you can use it if you like — edit it or clear it to keep your random animal alias instead. We never publish your Google photo.',aliasHelp:'About your public alias',aliasTooltip:'A random animal name is assigned automatically, or use the Google name suggested in Account — change either any time.',enroll:'Save nickname',statPoints:'Points',statAnswered:'Played',statCorrect:'Correct',enrolled:'Public alias: ',aliasLoading:'Loading your public alias…',delete:'Delete account',deleteConfirm:'Permanently delete your account, cloud progress and public leaderboard records? Friends leagues you created are deleted too, with their members, invitations and history, and you leave the others. This cannot be undone. Type DELETE to confirm.',deleteError:'Account deletion could not be confirmed. Retry when connected.',board:'Leaderboards',boardDetail:'Global points count the first result for each player once. Competition boards filter those results by club membership, not the league selected when playing. Ties share ranks. Accounts appear automatically under their public alias after a verified result. Unranked scores never count.',global:'Global',empty:'No public scores yet.',boardError:'Leaderboard unavailable. Try again when connected.',boardLoading:'Loading leaderboard…',rank:'Rank',name:'Nickname',points:'Points',answered:'Played',correct:'Correct',own:'Your rank',total:'public players',prev:'Previous',next:'Next',reset:'Reset guest / practice results',done:'No unseen players remain in this competition. Choose another competition. Ranked results cannot be reset.',sync:'Synchronizing ranked progress…',earned:'points · verified by server',rankRules:'Ranked: one open round per account; changing competitions resumes that round. The server keeps the clock running, including time away. Only the first result per player counts, permanently. Guest/practice Reset cannot clear ranked records.',activeRoundBlocked:name=>`You have an open round in ${name} - finish it (win or lose) before starting a different competition.`},
+    es:{account:'Cuenta',accountGuest:'Iniciar sesión para competir',guestRankedTitle:'Jugás como invitado',guestRankedDetail:'Tu puntaje de invitado queda en esta pestaña, no se puede transferir después de iniciar sesión y no aparece en la tabla. Iniciá sesión antes de responder para competir.',guestRankedSignIn:'Iniciar sesión para competir',accountPitch:'Iniciá sesión para competir por puntos con jugadores de todo el mundo.',scoreLabel:'puntos',title:'Cuenta y progreso',guest:'INVITADO · SIN CLASIFICACIÓN',practice:'PRÁCTICA · SIN CLASIFICACIÓN',ranked:'CLASIFICADO · NUBE',loading:'Comprobando cuenta…',unavailable:'Clasificación no disponible. Las respuestas sin conexión no suman. Reintentá para cargar el progreso de la nube o elegí práctica sin clasificación.',disabled:'Google y las clasificaciones todavía no están configurados. Podés jugar como invitado.',detail:'El progreso de invitado queda solo en esta pestaña y nunca se importa a tu cuenta. Iniciá sesión una vez para guardar tus puntos en la nube, sincronizarlos entre dispositivos y obtener un apodo público automático — sin necesidad de configurar nada.',login:'Continuar con Google',loginWarn:'Tu progreso de invitado NO se transfiere a la cuenta ni a la tabla. ¿Continuar con Google? Cancelar conserva esta sesión.',logout:'Cerrar sesión',close:'Cerrar',retry:'Reintentar / reconectar',practiceAction:'Práctica sin clasificación',returnRanked:'Volver a clasificación',signed:'Sesión iniciada. Los resultados clasificados son permanentes; Reiniciar solo afecta la práctica sin clasificación.',authError:'No se completó el inicio de sesión. Tu progreso de invitado no cambió. Reintentá con conexión.',nickname:'Apodo (opcional)',nicknameDetail:'Cambiar tu apodo es opcional (3–24 caracteres). Te sugerimos tu nombre de Google acá por si querés usarlo — podés editarlo o borrarlo para quedarte con tu alias de animal. Nunca publicamos tu foto de Google.',aliasHelp:'Información sobre tu alias público',aliasTooltip:'Se asigna automáticamente un nombre de animal al azar, o podés usar el nombre de Google que te sugerimos en Cuenta — cambiá cualquiera cuando quieras.',enroll:'Guardar apodo',statPoints:'Puntos',statAnswered:'Jugadas',statCorrect:'Aciertos',enrolled:'Alias público: ',aliasLoading:'Cargando tu alias público…',delete:'Eliminar cuenta',deleteConfirm:'¿Eliminar tu cuenta, progreso en la nube y resultados públicos para siempre? También se eliminan las ligas de amigos que creaste, con sus miembros, invitaciones e historial, y salís de las demás. No se puede deshacer. Escribí DELETE para confirmar.',deleteError:'No se pudo confirmar la eliminación. Reintentá con conexión.',board:'Tabla',boardDetail:'Los puntos globales cuentan una sola vez el primer resultado de cada jugador. Las tablas por competición filtran por clubes, no por la liga elegida al jugar. Los empates comparten puesto. Las cuentas aparecen automáticamente con su alias público tras un resultado verificado. Los puntos sin clasificación no cuentan.',global:'Global',empty:'Todavía no hay puntos públicos.',boardError:'Tabla no disponible. Reintentá con conexión.',boardLoading:'Cargando tabla…',rank:'Puesto',name:'Apodo',points:'Puntos',answered:'Jugados',correct:'Aciertos',own:'Tu puesto',total:'jugadores públicos',prev:'Anterior',next:'Siguiente',reset:'Reiniciar invitado / práctica',done:'No quedan jugadores sin responder en esta competición. Elegí otra. Los resultados clasificados no se pueden reiniciar.',sync:'Sincronizando progreso clasificado…',earned:'puntos · verificados por el servidor',rankRules:'Clasificado: una ronda abierta por cuenta; cambiar de competición retoma esa ronda. El reloj del servidor sigue corriendo, incluso al salir. Solo cuenta el primer resultado por jugador, para siempre. Reiniciar invitado/práctica no borra resultados clasificados.',activeRoundBlocked:name=>`Tenés una ronda abierta en ${name} - terminala (ganes o pierdas) antes de empezar otra competición.`}
   };
   let mode=Accounts.configured&&(Accounts.hasStoredSession()||AuthCallback.code)?'loading':'guest';
   let userId=Accounts.session?.user?.id??null,pendingUserId=null;
@@ -81882,7 +81903,7 @@ const RankedUI = (()=>{
   // Reconnect is explicit; practice is never silently promoted to ranked.
   return {update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync,acceptDailyScore,scoreRevision:()=>scoreRevision};
 })();
-applyLanguage();render(false,true);RankedUI.boot();
+if(!AuthRoute.active){applyLanguage();render(false,true);RankedUI.boot();}
 // #elapsed-time: a neutral count-up readout of the active round clock in
 // guest/practice, Daily and ranked alike (see RankedUI.roundClock() and
 // guestClock() above). It freezes itself the
@@ -81953,8 +81974,55 @@ setInterval(()=>{
   countdown.textContent=`${countdown.dataset.label} ${DailyUI.formatCountdown(Number(countdown.dataset.targetMs)-Date.now())}`;
 },1000);
 // Account CTA is a local UI request, never an OAuth callback or automatic login.
-if(new URLSearchParams(location.search).get('account')==='1'){const u=new URL(location.href);u.searchParams.delete('account');history.replaceState(history.state??null,'',u);$('account-open').click();}
-requestAnimationFrame(()=>{document.documentElement.classList.remove('game-loading');Analytics.start(analyticsContext);});
+if(!AuthRoute.active&&new URLSearchParams(location.search).get('account')==='1'){const u=new URL(location.href);u.searchParams.delete('account');history.replaceState(history.state??null,'',u);$('account-open').click();}
+requestAnimationFrame(()=>{document.documentElement.classList.remove('game-loading');if(!AuthRoute.active)Analytics.start(analyticsContext);});
+</script>
+<script id="auth-route-ui">
+// Private-league sign-in route (see AuthRoute in auth-callback). Reads only
+// the account `progress` projection and may submit the existing mandatory
+// nickname enrollment; it never sends start/dailyProgress or other gameplay.
+const AuthRouteUI = (()=>{
+  'use strict';
+  const TEXT={
+    es:{title:'Unirte a una liga de amigos',checking:'Comprobando tu cuenta…',signing:'Te llevamos a iniciar sesión con Google…',nickname:'Elegí tu apodo público para continuar.',returning:'Listo. Volviendo a Amigos…',cancelled:'No se completó el inicio de sesión. Podés intentarlo de nuevo o volver a Amigos.',failed:'No pudimos conectar con tu cuenta. Revisá la conexión y reintentá.',retry:'Iniciar sesión con Google',again:'Reintentar',back:'Volver a Amigos'},
+    en:{title:'Join a friends league',checking:'Checking your account…',signing:'Taking you to Google sign-in…',nickname:'Choose your public nickname to continue.',returning:'Done. Returning to Friends…',cancelled:'Sign-in was not completed. You can try again or go back to Friends.',failed:'We couldn’t reach your account. Check your connection and retry.',retry:'Sign in with Google',again:'Retry',back:'Back to Friends'}
+  };
+  let state='checking',owner=null;
+  const t=()=>TEXT[language==='en'?'en':'es'];
+  const friendsURL=()=>{const u=new URL('leaderboard.html',location.href);u.search='';u.hash='';u.searchParams.set('view','friends');u.searchParams.set('lang',language);if(AuthRoute.invite)u.searchParams.set('invite','1');return u.href;};
+  function translate(){
+    const copy=t();document.documentElement.lang=language;document.title=copy.title+' — derabona';$('language').value=language;
+    $('auth-route-title').textContent=copy.title;$('auth-route-status').textContent=copy[state];
+    $('auth-route-retry').hidden=!['cancelled','failed'].includes(state);$('auth-route-retry').textContent=state==='failed'&&Accounts.session?copy.again:copy.retry;
+    $('auth-route-back').textContent=copy.back;$('auth-route-back').href=friendsURL();
+    NicknamePrompt.translate();
+  }
+  const set=next=>{state=next;translate();};
+  async function signIn(){set('signing');try{await Accounts.login(language);}catch{set('failed');}}
+  function finish(){set('returning');location.replace(friendsURL());}
+  async function afterSignIn(session){
+    owner=session.user.id;set('checking');
+    try{
+      const data=await Accounts.request({action:'progress'},'ranked-game',false,owner);
+      if(owner!==Accounts.session?.user?.id)return;
+      if(data?.profile&&!data.profile.nicknamePrompted){set('nickname');NicknamePrompt.maybeOpen(data.profile);return;}
+      finish();
+    }catch{if(owner===Accounts.session?.user?.id)set('failed');}
+  }
+  async function boot(){
+    $('auth-route').hidden=false;set('checking');$('auth-route-title').focus({preventScroll:true});
+    if(!Accounts.configured||navigator.onLine===false){set('failed');return;}
+    let session=null;
+    try{session=await Accounts.init(()=>{});}
+    catch(error){set(error?.message==='AUTH_CANCELLED'?'cancelled':'failed');return;}
+    if(session)return afterSignIn(session);
+    // Arriving signed out: go straight to Google; the tab comes back here.
+    signIn();
+  }
+  $('auth-route-retry').addEventListener('click',()=>{if(Accounts.session)afterSignIn(Accounts.session);else signIn();});
+  return Object.freeze({boot,translate,enrolled:finish});
+})();
+if(AuthRoute.active)AuthRouteUI.boot();
 </script>
 </body>
 </html>

@@ -3,7 +3,10 @@ export type Dependencies = {
   getUser: (token: string) => Promise<User | null>;
   rpc: (userId: string | null, request: Record<string, unknown>) => Promise<{ data: unknown; error: { message?: string } | null }>;
   deleteUser: (id: string) => Promise<boolean>;
+  // public.private_leagues; only the private-leagues entrypoint uses it.
+  leagueRpc?: (userId: string, request: Record<string, unknown>) => Promise<{ data: unknown; error: { message?: string } | null }>;
 };
+export type Mode = 'ranked-game'|'account-delete'|'private-leagues';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const competitions = new Set(['all','champions-league','premier-league','la-liga','argentine-primera','brasileirao']);
 const schemas: Record<string,string[]> = {
@@ -21,7 +24,48 @@ export const statuses: Record<string,number> = {
   INVALID_OPTION:400, ROUND_NOT_FOUND:404, VERSION_CONFLICT:409, ROUND_FINISHED:409,
   IDEMPOTENCY_CONFLICT:409, HINT_LIMIT:409, ALREADY_GUESSED:409, NICKNAME_TAKEN:409, RATE_LIMITED:429,
   ROUND_LOCKED:409,
+  INVALID_LEAGUE_NAME:400, FORBIDDEN:403, LEAGUE_UNAVAILABLE:404, INVITE_UNAVAILABLE:404, MEMBER_NOT_FOUND:404,
+  OWNER_CANNOT_LEAVE:409, LEAGUE_LIMIT:409, LEAGUE_FULL:409, NICKNAME_REQUIRED:409,
 };
+// Private leagues: strict per-action allowlists. Clients never send scores,
+// clocks, dates, trophies, owners or account identities; the server derives
+// all of them from the verified caller.
+const leagueSchemas: Record<string,string[]> = {
+  list: ['action'], preview: ['action','token'],
+  standings: ['action','leagueId','period','limit','offset'],
+  history: ['action','leagueId','limit','offset'],
+  memberWins: ['action','leagueId','memberId','limit','offset'],
+  manage: ['action','leagueId'],
+  create: ['action','name','idempotencyKey'],
+  rename: ['action','leagueId','name','expectedVersion','idempotencyKey'],
+  join: ['action','token','idempotencyKey'],
+  leave: ['action','leagueId','idempotencyKey'],
+  remove: ['action','leagueId','memberId','expectedVersion','idempotencyKey'],
+  restore: ['action','leagueId','memberId','expectedVersion','idempotencyKey'],
+  rotateInvite: ['action','leagueId','expectedVersion','idempotencyKey'],
+  delete: ['action','leagueId','expectedVersion','idempotencyKey'],
+};
+const TOKEN = /^[A-Za-z0-9_-]{43,128}$/;
+export function validLeagueName(value: unknown): boolean {
+  if (typeof value !== 'string' || value.trim() !== value || /\p{Cc}/u.test(value)) return false;
+  const length = [...value].length;
+  return length >= 3 && length <= 40;
+}
+export function validateLeague(body: Record<string,unknown>): boolean {
+  const action = body.action;
+  if (typeof action !== 'string' || !Object.hasOwn(leagueSchemas,action)) return false;
+  const fields = leagueSchemas[action];
+  if (Object.keys(body).some(k=>!fields.includes(k))) return false;
+  if (!fields.every(k=>k in body || ['period','limit','offset'].includes(k))) return false;
+  for (const k of ['leagueId','memberId','idempotencyKey']) if (k in body && !validUUID(body[k])) return false;
+  if ('token' in body && (typeof body.token !== 'string' || !TOKEN.test(body.token))) return false;
+  if ('name' in body && !validLeagueName(body.name)) return false;
+  if ('period' in body && !['today','week'].includes(body.period as string)) return false;
+  if ('expectedVersion' in body && (!Number.isInteger(body.expectedVersion) || Number(body.expectedVersion)<0 || Number(body.expectedVersion)>999999999)) return false;
+  if ('limit' in body && (!Number.isInteger(body.limit) || Number(body.limit)<1 || Number(body.limit)>50)) return false;
+  if ('offset' in body && (!Number.isInteger(body.offset) || Number(body.offset)<0 || Number(body.offset)>10000)) return false;
+  return true;
+}
 export function allowedOrigin(origin: string): boolean {
   if (origin === 'https://derabona.club') return true;
   try {
@@ -64,7 +108,7 @@ async function readJSON(req: Request): Promise<Record<string,unknown>> {
   if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw Error('INVALID_REQUEST');
   return parsed;
 }
-export function handler(deps: Dependencies, mode: 'ranked-game'|'account-delete' = 'ranked-game') {
+export function handler(deps: Dependencies, mode: Mode = 'ranked-game') {
   return async (req: Request): Promise<Response> => {
     const origin = req.headers.get('origin');
     const headers = new Headers({'Content-Type':'application/json','Cache-Control':'no-store','Vary':'Origin'});
@@ -81,7 +125,8 @@ export function handler(deps: Dependencies, mode: 'ranked-game'|'account-delete'
     if (req.method!=='POST') {headers.set('Allow','POST, OPTIONS');return error('METHOD_NOT_ALLOWED',405);}
     let body: Record<string,unknown>;
     try { body=await readJSON(req); } catch { return error('INVALID_REQUEST'); }
-    if (mode==='ranked-game' ? !validate(body) : Object.keys(body).length!==1 || body.confirmation!=='DELETE') return error('INVALID_REQUEST');
+    const valid = mode==='ranked-game' ? validate(body) : mode==='private-leagues' ? validateLeague(body) : Object.keys(body).length===1 && body.confirmation==='DELETE';
+    if (!valid) return error('INVALID_REQUEST');
     const auth = req.headers.get('authorization');
     let user: User|null = null;
     // CORS is only a browser boundary, never authentication. getUser verifies
@@ -92,13 +137,15 @@ export function handler(deps: Dependencies, mode: 'ranked-game'|'account-delete'
       try { user=await deps.getUser(match[1]); } catch { return error('UNAUTHORIZED'); }
       if (!user || !validUUID(user.id) || user.is_anonymous) return error('UNAUTHORIZED');
     }
-    if (!user && (mode==='account-delete' || !['leaderboard','dailyStreakLeaderboard'].includes(body.action as string))) return error('UNAUTHORIZED');
+    // Every private-league action, including invitation preview, needs identity.
+    if (!user && (mode!=='ranked-game' || !['leaderboard','dailyStreakLeaderboard'].includes(body.action as string))) return error('UNAUTHORIZED');
     try {
       if (mode==='account-delete') {
         if (!await deps.deleteUser(user!.id)) return error('INTERNAL_ERROR');
         return reply({deleted:true});
       }
-      const result = await deps.rpc(user?.id ?? null,body);
+      if (mode==='private-leagues' && !deps.leagueRpc) return error('INTERNAL_ERROR');
+      const result = mode==='private-leagues' ? await deps.leagueRpc!(user!.id,body) : await deps.rpc(user?.id ?? null,body);
       if (result.error) {
         const code = result.error.message || '';
         return error(Object.hasOwn(statuses,code)?code:'INTERNAL_ERROR');

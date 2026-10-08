@@ -11,3 +11,8 @@ verify_jwt = false
 
 [functions.account-delete]
 verify_jwt = false
+
+# Private Daily leagues: every action requires a verified, non-anonymous user,
+# checked in the function with getUser() like the endpoints above.
+[functions.private-leagues]
+verify_jwt = false
