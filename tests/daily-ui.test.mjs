@@ -39,6 +39,12 @@ test('an already-completed daily defaults to Unlimited on load; an unfinished on
   assert.equal(none.ui.isDaily(),true);
 });
 
+test('a league Daily link opens Daily even after completion without changing the ordinary default',()=>{
+  const result={date:'2026-09-17',completion:{result:'complete'}};
+  assert.equal(loadControllerWithCompletion(result,'https://derabona.club/index.html?daily=1&lang=en').ui.requestedMode(),'daily');
+  assert.equal(loadControllerWithCompletion(result).ui.requestedMode(),'unlimited');
+});
+
 function loadModeSwitch({signedIn=true}={}){
   const actions=[],nodes=new Map();
   const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:false,textContent:'',dataset:{},setAttribute(){},focus(){},classList:{remove(){},toggle(){}}});return nodes.get(id);};
