@@ -13,7 +13,7 @@ async page => {
    return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({status:1})});
   });
   try{
-   await p.goto('https://derabona.club/?private=do-not-collect');await p.waitForSelector('#analytics-banner:visible');
+   await p.goto('https://derabona.club/?unlimited=1&private=do-not-collect');await p.waitForSelector('#analytics-banner:visible');
    if(!blocked)await p.screenshot({path:'test-results/analytics-consent-mobile.png'});
    await p.locator('#hint').click();assert(requests.length===0,'No PostHog traffic before consent, even while playing');
    await p.locator('#analytics-banner [data-analytics-consent="declined"]').click();await p.reload();

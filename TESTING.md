@@ -11,6 +11,7 @@ Verified the served isolated worktree on port 4173:
 - Entry/return browser journeys: 50 checks, including mandatory nickname gating, immediate play, completion, mode switching, clock preservation, sharing, UTC rollover and account failure → practice → ranked Daily recovery.
 - Account browser suite: 65 checks; combined Daily/account score suite: 15; public standings suite: 59. Auth/SDK/API responses are simulated in these suites.
 - Connected browser journey: 10 checks using actual local PostgreSQL and the actual Edge handler, with simulated Auth. Arrival creates only Daily rounds; creation/navigation adds no extra rounds; results finished after joining appear in the group's exact weekly points; return opens the completed result directly.
+- Privacy browser regression: actual PostHog SDK, intercepted ingestion; zero traffic before consent/after decline, sanitized events, identity retention/withdrawal, and blocked-SDK play passed. Its existing career fixture now explicitly selects Unlimited.
 - Visual/layout checks: English and Spanish at 320, 375 and 1100px; direct creation, game and public board fit horizontally; all ten answer targets are at least 44px and their names wrap without clipping. Puzzle begins within 274px of the top even at 320px. Screenshots inspected on mobile and desktop.
 - Independent review found and verified fixes for stale Daily summary after Unlimited switching, Daily recovery from signed-in practice, and an answer CSS rule accidentally hiding competition counts/Completed labels.
 
