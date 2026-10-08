@@ -76477,7 +76477,7 @@ const DailyUI=(()=>{
   const init=()=>{
     if(initialized)return;initialized=true;updateURL(language);try{persistence=DailyChallenge.createPersistence(localStorage);}catch{persistence=DailyChallenge.createPersistence({getItem(){throw Error('STORAGE_UNAVAILABLE');},setItem(){throw Error('STORAGE_UNAVAILABLE');}});}const today=persistence.today();displayedDate=today?.date||currentDate();
     document.getElementById('daily-mode').onclick=()=>choose('daily');document.getElementById('unlimited-mode').onclick=()=>choose('unlimited');document.getElementById('daily-keep-playing').onclick=()=>choose('unlimited');document.getElementById('daily-share').onclick=share;document.getElementById('daily-summary-keep-playing').onclick=()=>PlayOverview.show('unlimited');
-    document.getElementById('daily-load-new').onclick=()=>{displayedDate=currentDate();persistence.today();rolloverReady=false;render(false,true);document.getElementById('question').focus({preventScroll:true});if(Accounts.session)DailyRankedUI.sync();};
+    document.getElementById('daily-load-new').onclick=()=>{displayedDate=currentDate();persistence.today();rolloverReady=false;resultRequested=false;if(Accounts.session){DailyRankedUI.sync();return;}render(false,true);document.getElementById('question').focus({preventScroll:true});};
     document.getElementById('daily-guest-progress-dismiss').onclick=()=>DailyRankedUI.dismissNotice();
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkRollover();});window.addEventListener('focus',checkRollover);window.addEventListener('storage',event=>{if(persistence.handleStorageEvent(event)&&isDaily())render();});
     window.addEventListener('derabona:analytics-consent-resolved',()=>{if(!playActivated)return;if(isDaily())ensureDailyClock();if(dailyClockWaitingForConsent){dailyClockWaitingForConsent=false;dailyClockStart=Date.now();saveDailyClock();}if(!isDaily())return;const a=attempt(),r=a?.game.rounds[a.game.roundIndex];if(r?.startedAt===null)persistence.start(displayedDate);render();});
@@ -81553,12 +81553,13 @@ const DailyRankedUI = (()=>{
   };
   function render(celebrate=false,newCareer=false){
     if(!playActivated||!DailyUI.isDaily())return;
+    discardExpired();document.getElementById('daily-summary').hidden=true;
     document.documentElement.classList.remove('ranked-wait','game-loading');document.getElementById('game-loading-status').hidden=true;
     document.getElementById('guest-ranked-status').hidden=true;document.getElementById('guest-ranked-reminder').hidden=true;document.getElementById('summary-panel').hidden=true;document.getElementById('round-panel').hidden=false;document.getElementById('round-panel').setAttribute('aria-busy',String(busy&&!daily));
     renderStatus();
     const x=DailyUI.copyFor(language);
     document.getElementById('daily-retry').hidden=busy||!!daily&&!pending&&!syncFailed;document.getElementById('daily-retry').textContent=language==='en'?'Retry':'Reintentar';document.getElementById('daily-retry').onclick=()=>pending?sendPending():sync();
-    if(!daily?.daily){document.getElementById('round-panel').hidden=true;document.getElementById('account-notice').hidden=busy;document.getElementById('account-notice').textContent=x.syncError;return;}
+    if(!daily?.daily){document.getElementById('round-panel').hidden=true;document.getElementById('options').replaceChildren();document.getElementById('timeline').replaceChildren();document.getElementById('source-content').replaceChildren();document.getElementById('account-notice').hidden=busy;document.getElementById('account-notice').textContent=x.syncError;return;}
     document.getElementById('account-notice').hidden=!pending&&!syncFailed;
     if(syncFailed)document.getElementById('account-notice').textContent=x.syncError;
     if(pending)document.getElementById('account-notice').textContent=language==='en'?'This action could not be confirmed. Retry checks the same action safely.':'No se pudo confirmar esta acción. Reintentar verifica la misma acción.';
