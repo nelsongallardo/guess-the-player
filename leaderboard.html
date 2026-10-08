@@ -6,10 +6,10 @@
 // and history before any SDK loads, so it never reaches referrers or logs.
 const BoardInvite=(()=>{let token=null;const u=new URL(location.href),h=new URLSearchParams(u.hash.slice(1)),join=h.get('join'),p=new URLSearchParams();
 if(join&&/^[A-Za-z0-9_-]{43,128}$/.test(join)){token=join;try{sessionStorage.setItem('derabona.league-invite.v1',join);}catch{}}
-for(const k of ['competition','lang','view','league','period','invite'])if(u.searchParams.has(k))p.set(k,u.searchParams.get(k));if(token)p.set('view','friends');
+for(const k of ['competition','lang','view','league','period','invite','create'])if(u.searchParams.has(k))p.set(k,u.searchParams.get(k));if(token)p.set('view','friends');
 u.search=p.toString();u.hash='';history.replaceState(null,'',u);return Object.freeze({take(){const v=token;token=null;return v;}});})();</script>
-<title>Tabla — derabona</title><link rel="canonical" href="https://derabona.club/leaderboard.html"><meta name="description" content="La tabla de derabona: puntos verificados, puestos compartidos y tablas por competición."><link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Tabla — derabona"><meta property="og:description" content="La tabla de derabona: puntos verificados, puestos compartidos y tablas por competición."><meta property="og:url" content="https://derabona.club/leaderboard.html"><meta property="og:type" content="website"><meta property="og:image" content="https://derabona.club/assets/derabona-social-es-v1.png"><meta name="twitter:card" content="summary_large_image">
+<title>Clasificación pública — derabona</title><link rel="canonical" href="https://derabona.club/leaderboard.html"><meta name="description" content="La clasificación pública de derabona: puntos verificados, puestos compartidos y tablas por competición."><link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Clasificación pública — derabona"><meta property="og:description" content="La clasificación pública de derabona: puntos verificados, puestos compartidos y tablas por competición."><meta property="og:url" content="https://derabona.club/leaderboard.html"><meta property="og:type" content="website"><meta property="og:image" content="https://derabona.club/assets/derabona-social-es-v1.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://iaebecfxjwjzkapqdeha.supabase.co" crossorigin>
 <style>
 :root{color-scheme:light;--paper:#f7f4eb;--ink:#122a38;--muted:#52636a;--celeste:#89cff0;--line:#d4d8d3;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}a{color:#176180;text-underline-offset:4px}button,select{font:inherit;color:inherit;min-height:44px}button,a,select{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #176180;outline-offset:4px}[hidden]{display:none!important}.shell{width:min(1120px,calc(100% - 64px));margin:auto}.masthead{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:2px solid var(--ink)}.masthead-right{display:flex;align-items:center;gap:16px}.wordmark{display:flex;align-items:center;gap:11px;text-decoration:none}.wordmark-title{display:block;font-family:"Arial Black",Arial,sans-serif;font-style:italic;font-weight:900;font-size:36px;line-height:1.12;letter-spacing:-2px;color:var(--ink)}.wordmark-stack small{display:block;font-family:var(--mono);font-size:8px;letter-spacing:1.75px;color:var(--muted);margin:4px 0 0 3px}.wordmark-stack small span{color:#176180}.mark{width:54px;height:54px;flex-shrink:0}.language{display:flex;align-items:center;gap:8px;font-size:12px}.language label{position:absolute;clip-path:inset(50%)}select{background:#fffdf7;border:1px solid #a9b8b8;border-radius:7px;padding:8px;max-width:100%}#language{font:700 12px var(--mono);letter-spacing:.5px;color:var(--ink);background:transparent;border:1px solid #c7cfcd;border-radius:7px;min-width:44px;padding:8px 10px;cursor:pointer}.account-open{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid #c7cfcd;border-radius:7px;min-height:44px;padding:9px 17px;font-size:12px;font-weight:600;text-decoration:none;color:var(--ink)}.account-open:hover{border-color:var(--muted);background:#fffdf7}.account-open-icon{flex-shrink:0;color:var(--muted)}.account-open-signed .account-open-icon{color:#176180}.account-open-score{font:700 12px var(--mono);color:var(--celeste)}.account-open-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}nav{display:flex;gap:8px;padding:10px 0}nav a{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:9px 17px;border:0;border-radius:100px;text-decoration:none;font-size:12px;font-weight:650;color:var(--paper);background:var(--ink)}nav a:hover{background:#1c394b}nav a svg{flex-shrink:0}.eyebrow{font:10px var(--mono);letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:9px;margin-top:32px;margin-bottom:12px}.eyebrow:before{content:"";width:6px;height:6px;flex-shrink:0;background:#176180;transform:rotate(-15deg)}h1{font-size:clamp(32px,4.3vw,51px);font-weight:850;letter-spacing:-2.3px;line-height:1.05;margin:0 0 16px}p{line-height:1.6}.subtitle{color:var(--muted);margin-bottom:28px}.personal{border:1px solid #b8ced6;border-left:5px solid #176180;background:#e8f0f1;border-radius:8px;padding:18px 22px;margin:24px 0}.personal h2{font-size:14px;margin:0 0 8px}.personal p{margin:8px 0}.own{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}.cta{display:inline-flex;align-items:center;gap:7px;min-height:44px;background:var(--ink);color:var(--paper);border-radius:100px;padding:10px 18px 10px 14px;text-decoration:none;font-weight:700}.cta:hover{background:#1c394b}.cta svg{flex-shrink:0}.toolbar{display:flex;justify-content:space-between;align-items:end;gap:14px;border-top:2px solid var(--ink);padding-top:20px}.toolbar label{display:block;font-size:12px;font-weight:700;margin-bottom:8px}.status{color:var(--muted);font-size:14px;min-height:24px}dialog{color:var(--ink);background:var(--paper);border:1px solid #bdcccd;border-radius:12px;padding:26px;width:min(460px,calc(100% - 32px));max-height:85svh;overflow:auto;box-shadow:0 24px 100px #122a3855}dialog::backdrop{background:#122a38b8;backdrop-filter:blur(4px)}dialog h2{font-size:20px;letter-spacing:-.5px;margin:0 0 4px}dialog form{margin-top:18px;text-align:right}.competition-badge{display:flex;align-items:center;gap:9px;background:var(--celeste);color:var(--ink);border:1px solid #122a3818;border-radius:100px;padding:8px 16px 8px 8px;min-height:44px;font:inherit;cursor:pointer}.competition-badge:hover{background:#a6ddf6}.competition-badge-icon{flex-shrink:0}.competition-badge-value{font-size:13px;font-weight:800;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:50vw}.competition-options{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}.option{position:relative;display:flex;gap:12px;align-items:center;text-align:left;width:100%;min-height:56px;border:1px solid #cbd3ce;border-radius:8px;padding:12px 16px;background:#fffdf7;box-shadow:0 2px 0 #122a3807;transition:background .16s,border-color .16s,transform .16s;font:inherit;font-size:14px;font-weight:650;color:inherit;cursor:pointer}.option:not(:disabled):hover{border-color:#176180;background:#e9f5fa;transform:translateY(-1px)}.option svg{flex-shrink:0;color:#52636a}.option-name{overflow-wrap:anywhere}.option-state{margin-left:auto;color:var(--muted);font-size:13px}.option-logo{width:28px;height:28px;object-fit:contain;flex-shrink:0;margin-right:10px;vertical-align:middle}.competition-current-logo{width:18px;height:18px;object-fit:contain;flex-shrink:0}
@@ -41,6 +41,7 @@ u.search=p.toString();u.hash='';history.replaceState(null,'',u);return Object.fr
 #account-dialog .alias-help{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;min-height:0;padding:0;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:11px;line-height:1;color:var(--muted);cursor:pointer}
 #account-dialog .alias-help:hover{border-color:var(--muted);color:var(--ink)}
 #account-dialog .alias-tooltip{position:absolute;top:calc(100% + 8px);right:0;z-index:5;width:230px;max-width:60vw;background:var(--ink);color:var(--paper);font-size:12px;line-height:1.5;padding:10px 12px;border-radius:8px;box-shadow:0 10px 28px #0003;margin:0}
+#account-dialog .alias-tooltip::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:8px}
 #account-dialog .field-detail{color:var(--muted);font-size:12px;margin:2px 0 4px}
 #account-dialog .field-detail:empty{display:none}
 #account-dialog #enroll{align-self:flex-start;margin-top:6px;background:var(--ink);color:var(--paper);border:0;border-radius:7px;padding:12px 20px;font-weight:700;box-shadow:0 3px 0 var(--celeste)}
@@ -59,7 +60,7 @@ u.search=p.toString();u.hash='';history.replaceState(null,'',u);return Object.fr
 @media(max-width:600px){footer{padding:22px 0 26px}.footer-main{gap:13px}.footer-links{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}}
 .board-loading{border:1px solid var(--line);border-top:3px solid var(--celeste);border-radius:8px;padding:18px;background:#fffdf7}.loading-heading{display:flex;gap:12px;align-items:center;font-weight:700}.board-spinner{width:24px;height:24px;flex:none;border:3px solid #d4e8ee;border-top-color:#176180;border-radius:50%;animation:board-spin .9s linear infinite}.skeleton-row{display:grid;grid-template-columns:28px 1fr 48px;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}.skeleton-row:last-child{border:0}.skeleton-row i{height:12px;background:#dce5e6;border-radius:3px}.skeleton-row i:nth-child(2){max-width:200px}@keyframes board-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.board-spinner{animation:none}}
 html:not(.board-js) #board-loading,html:not(.board-js) #leaderboard-status{display:none}
-.title-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 16px}.title-row h1{margin-right:auto}.title-row .view-tabs{margin:0 0 16px}.view-tabs,.segmented{display:inline-flex;border:1px solid #a9b8b8;border-radius:100px;padding:3px;gap:3px;background:#fffdf7;margin:4px 0 8px}.view-tabs button,.segmented button{border:0;border-radius:100px;background:transparent;padding:8px 16px;font-weight:650}.view-tabs button[aria-pressed="true"],.segmented button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.title-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 16px}.title-row h1{margin-right:auto}
 .friends-view{margin:12px 0}.friends-view h2{margin:8px 0 4px}.friends-lead{margin:0 0 8px}.friends-card{border:1px solid var(--line);border-radius:10px;background:#fffdf7;padding:16px 18px;margin:12px 0}.friends-card h3{margin:0 0 8px;overflow-wrap:anywhere}.friends-notice{color:#7a2020;font-weight:650;margin:6px 0}.friends-notice:empty{display:none}
 .friends-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.friends-form{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px;margin:14px 0}.friends-form label{flex-basis:100%;font-size:12px;font-weight:700;color:var(--muted)}.friends-form input,#invite-link-field{font:inherit;min-height:44px;padding:8px 10px;border:1px solid #a9b8b8;border-radius:7px;flex:1 1 220px;min-width:0;width:100%}.field-help{font-size:13px;color:var(--muted);margin:4px 0;flex-basis:100%}.field-help:empty{display:none}
 button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}.link-button{border:0;background:transparent;padding:8px 0;color:#176180;font-weight:650}.danger-action{border:0;background:transparent;color:#a93637;font-weight:650;padding:8px 0;margin-top:12px}
@@ -70,10 +71,16 @@ button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);
 #league-confirm,#league-wins{width:min(520px,calc(100% - 24px));border:1px solid var(--line);border-radius:12px}#league-history ol,#league-wins ol{max-height:55vh;overflow:auto}
 @media(max-width:600px){#league-table td:nth-child(4),#league-table th:nth-child(4){width:96px;font-size:12px}#league-table td:nth-child(3),#league-table th:nth-child(3){width:52px}.trophy{margin:4px 0 0;display:inline-flex}.friends-card{padding:12px}.league-toolbar .cta{width:100%;justify-content:center}}
 @media(prefers-reduced-motion:reduce){.friends-view *{transition:none!important;animation:none!important}}
-.board-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}.board-nav>a{background:transparent;border:1px solid var(--line);padding:8px 12px;display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:700;text-decoration:none}.board-nav>a:hover{background:#e8f5fa}.board-nav>a:before{content:'←';margin-right:8px}.board-nav .view-tabs{margin:0}.title-row{align-items:center;justify-content:space-between;gap:20px}.title-row h1{margin:12px 0;overflow-wrap:anywhere}.title-row>button{flex-shrink:0;min-height:44px}.view-tabs button{min-height:44px}.subtitle{line-height:1.5}.friends-active .subtitle{max-width:65ch}#friends-status:empty,#friends-notice:empty{display:none}.friends-how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;counter-reset:league-steps;padding:0;margin:0 0 24px;border-block:1px solid var(--line)}.friends-how li{counter-increment:league-steps;position:relative;padding:18px 18px 18px 40px}.friends-how li:before{content:counter(league-steps);position:absolute;left:10px;top:17px;color:#176180;font-size:18px;font-weight:850}.friends-how strong,.friends-how span{display:block}.friends-how strong{font-size:16px;margin-bottom:5px}.friends-how span{font-size:14px;line-height:1.5;color:var(--muted)}.friends-how li+li{border-left:1px solid var(--line)}.friends-create{border-top:1px solid var(--line);margin:24px 0 14px;padding-top:14px}.friends-create summary,.friends-help summary,.league-disclosure summary{cursor:pointer;font-weight:650;min-height:44px;padding:14px 0}.friends-create>p{color:var(--muted);margin:0;max-width:60ch;line-height:1.5}.friends-form{max-width:520px}.friends-form input{flex:1 1 260px}.league-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.league-link{height:100%;padding:18px 44px 18px 18px;margin:0;gap:7px;position:relative;min-height:88px;border-color:var(--line)}.league-link:after{content:'›';position:absolute;right:18px;font-size:28px;color:#176180}.league-link:hover{border-color:#176180;background:#edf5f7}.league-link-name{font-size:20px}.league-link-meta{line-height:1.5}.friends-help,.league-disclosure{border-top:1px solid var(--line);margin:0;padding:0;color:var(--muted)}.friends-help p{font-size:14px;line-height:1.6;max-width:70ch}.friends-help summary,.league-disclosure summary{color:var(--muted);font-size:14px}.friends-create summary:focus-visible,.friends-help summary:focus-visible,.league-disclosure summary:focus-visible{outline:3px solid #176180;outline-offset:3px}
+.title-row{align-items:center;justify-content:space-between;gap:20px}.title-row h1{margin:12px 0;overflow-wrap:anywhere}.title-row>button{flex-shrink:0;min-height:44px}.subtitle{line-height:1.5}.friends-active .subtitle{max-width:65ch}#friends-status:empty,#friends-notice:empty{display:none}.friends-create{border-top:1px solid var(--line);margin:24px 0 14px;padding-top:14px}.friends-create summary,.friends-help summary,.league-disclosure summary{cursor:pointer;font-weight:650;min-height:44px;padding:14px 0}.friends-create>p{color:var(--muted);margin:0;max-width:60ch;line-height:1.5}.friends-form{max-width:520px}.friends-form input{flex:1 1 260px}.league-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.league-link{text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:7px;background:#fffdf7;height:100%;padding:18px 44px 18px 18px;margin:0;gap:7px;position:relative;min-height:88px;border-color:var(--line)}.league-link:after{content:'›';position:absolute;right:18px;font-size:28px;color:#176180}.league-link:hover{border-color:#176180;background:#edf5f7}.league-link-name{font-size:20px}.league-link-meta{line-height:1.5}.friends-help,.league-disclosure{border-top:1px solid var(--line);margin:0;padding:0;color:var(--muted)}.friends-help p{font-size:14px;line-height:1.6;max-width:70ch}.friends-help summary,.league-disclosure summary{color:var(--muted);font-size:14px}.friends-create summary:focus-visible,.friends-help summary:focus-visible,.league-disclosure summary:focus-visible{outline:3px solid #176180;outline-offset:3px}
 .league-detail .title-row h1{font-size:clamp(28px,3.4vw,40px);letter-spacing:-1.4px;margin:8px 0}.league-detail .friends-view{margin-top:0}#league-back{min-height:44px;padding:8px 0;margin:0}#league-meta{margin:0 0 24px;font-size:14px}.league-toolbar{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:18px 0 12px;margin:0;gap:16px}#league-period{font-weight:750;font-size:18px;border:0;border-radius:4px;background:transparent;padding:4px 24px 4px 0;cursor:pointer;min-height:40px;max-width:100%}.league-range{margin:0;font-size:13px;font-weight:400;color:var(--muted)}.refresh-button{display:inline-flex;align-items:center;justify-content:center;width:44px;min-height:44px;border:0!important;background:transparent!important;color:var(--muted);padding:0!important}.refresh-button:hover{color:var(--ink)}#league-table{margin-bottom:16px}#league-table .me{outline:0;background:#e8f5fa}#league-table th{font-size:12px;font-weight:600;color:var(--muted);background:transparent;border-bottom:1px solid var(--line);padding-top:12px;padding-bottom:12px}#league-table td{padding-top:16px;padding-bottom:16px}#league-table .member-name{font-weight:650}#league-table .member-tag{font-size:12px}.league-welcome{padding:10px 0 18px;margin:0;max-width:60ch}.league-welcome strong{font-size:16px}.league-welcome p{font-size:14px;color:var(--muted);margin:4px 0;line-height:1.5}.trophy{min-height:44px}#league-view>.pagination:has(button:not([hidden])){margin:16px 0}#league-view>.pagination:not(:has(button:not([hidden]))){display:none}#league-manage{border:0;border-radius:0;padding:8px 0 20px;margin:0;background:transparent}#league-manage h4{margin:24px 0 8px}#league-options>.danger-action{margin:8px 0 20px}.week-list{margin:0 0 16px}#history-status:empty{display:none}#league-invite-dialog{width:min(480px,calc(100% - 24px));padding:24px}#league-invite-dialog p{line-height:1.6;font-size:15px}#league-invite-dialog h2{font-size:26px;margin-top:0}#invite-copy{width:100%;padding:14px}#invite-copy-status{color:#17613e;min-height:24px}#invite-dialog-status:empty{display:none}#invite-link-field{display:block;margin-top:8px}
-@media(max-width:600px){.board-nav{gap:8px}.board-nav .view-tabs button{padding:8px 10px;font-size:12px}.title-row{gap:12px}.title-row h1{font-size:30px}.league-detail .title-row h1{font-size:28px}.title-row>button{font-size:12px;padding:10px 12px}.friends-how{grid-template-columns:1fr}.friends-how li{padding:12px 8px 12px 32px}.friends-how li:before{top:11px;left:3px}.friends-how li+li{border-left:0;border-top:1px solid var(--line)}.friends-how strong{font-size:15px;margin-bottom:2px}.friends-how span{font-size:13px}.league-list{grid-template-columns:1fr}.league-link-name{font-size:18px}#league-meta{margin-bottom:18px}.league-toolbar{padding-top:12px}#league-period{font-size:17px}#league-table td:nth-child(4),#league-table th:nth-child(4){width:78px}.trophy{margin:4px 0;min-width:44px}#league-table td{padding-top:12px;padding-bottom:12px}}
+@media(max-width:600px){.title-row{gap:12px}.title-row h1{font-size:30px}.league-detail .title-row h1{font-size:28px}.title-row>button{font-size:12px;padding:10px 12px}.league-list{grid-template-columns:1fr}.league-link-name{font-size:18px}#league-meta{margin-bottom:18px}.league-toolbar{padding-top:12px}#league-period{font-size:17px}#league-table td:nth-child(4),#league-table th:nth-child(4){width:78px}.trophy{margin:4px 0;min-width:44px}#league-table td{padding-top:12px;padding-bottom:12px}}
 @media(max-width:360px){.masthead{gap:6px}.masthead .mark{width:30px;height:30px}.masthead .wordmark-title{font-size:24px;letter-spacing:-1.4px}}
+
+/* Shared wayfinding: labels stay visible, including the narrowest layout. */
+.masthead{flex-wrap:wrap}.masthead-right{gap:8px}.account-open-text{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}.account-open-score,.account-open-icon{display:none!important}.account-open,.site-help{font:600 12px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;min-height:44px;padding:9px 12px}.site-help{background:transparent;border:1px solid #c7cfcd;border-radius:7px}.site-nav{display:flex;gap:24px;border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:22px}.site-nav a{background:transparent;color:var(--ink);border-radius:0;padding:0;text-decoration:none;min-height:44px;display:flex;align-items:center;font-size:14px;font-weight:650;border-bottom:3px solid transparent}.site-nav a:hover{background:transparent;color:#176180}.site-nav a[aria-current="page"]{border-color:var(--ink)}#league-back{display:inline-flex;align-items:center;text-decoration:underline;margin:0 0 4px}.friends-create{max-width:600px;margin:18px 0 24px;padding:18px 0;border-block:1px solid var(--line)}.friends-create .friends-form{margin-bottom:0}#group-draft-status:empty{display:none}.title-row #group-create-open{margin-bottom:16px}.last-winners{font-size:14px;line-height:1.5;margin:8px 0 16px;color:var(--muted)}.joined-notice{color:#17613e;font-size:14px;margin:8px 0}.league-welcome{padding-bottom:10px}#league-caption{position:static;width:auto;height:auto;clip-path:none;overflow:visible;font-size:12px}#league-period{font-size:16px}#league-meta{margin-bottom:12px}#league-table th:nth-child(3){font-size:12px}input:focus-visible,summary:focus-visible{outline:3px solid #176180;outline-offset:4px}
+@media(max-width:600px){.masthead{gap:8px}.masthead-right{gap:6px}.account-open,.site-help{padding:8px 10px}.title-row #group-create-open{margin-bottom:8px}.league-detail .title-row h1{font-size:27px}#league-caption{font-size:11px}}
+@media(max-width:580px){.wordmark-stack small{display:block;font-size:8px;letter-spacing:1.75px;line-height:1.5}.wordmark-stack small span{display:inline}.masthead{flex-wrap:wrap;gap:10px}.masthead-right{width:100%;justify-content:flex-end}.masthead .wordmark-title{font-size:29px}.masthead .mark{width:37px;height:37px}.account-open-icon{display:none}.site-nav{gap:0;justify-content:space-between;margin-bottom:8px}.site-nav a{font-size:13px}}
+@media(max-width:360px){.masthead .mark{width:30px;height:30px}.masthead .wordmark-title{font-size:24px;letter-spacing:-1.4px}.wordmark{gap:5px}}
 </style></head><body><div class="shell"><header class="masthead"><a class="wordmark" href="index.html" aria-label="derabona"><svg class="mark" viewBox="0 0 96 96" aria-hidden="true" focusable="false">  <rect width="96" height="96" rx="24" fill="#122a38"/>
   <path d="M13 65C8 42 21 17 44 10" fill="none" stroke="#89cff0" stroke-width="2" stroke-linecap="round"/>
   <circle cx="54" cy="19" r="7" fill="#f7f4eb"/>
@@ -88,9 +95,10 @@ button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);
   <path d="m81 64 4 3-2 5h-4l-2-5Z" fill="#122a38"/>
   <path d="m79 76-2-4m10-6-3 1m-5-8 2 5" stroke="#122a38" stroke-width="1.3"/>
   <path d="m79 53 3-5m-9 7-1-4" stroke="#89cff0" stroke-width="2" stroke-linecap="round"/>
-</svg><span class="wordmark-stack"><span class="wordmark-title">derabona</span><small id="wordmark-tagline">FÚTBOL, DE MEMORIA.</small></span></a><div class="masthead-right"><div class="language"><label for="language" id="language-label">Idioma</label><select id="language"><option value="es">ES</option><option value="en">EN</option></select></div><button id="account-open-link" class="account-open" type="button" aria-haspopup="dialog"><svg class="account-open-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><strong id="account-open-score" class="account-open-score" hidden>000</strong><span id="account-open-link-label" class="account-open-text">Iniciar sesión</span></button></div></header>
+</svg><span class="wordmark-stack"><span class="wordmark-title">derabona</span><small id="wordmark-tagline">FÚTBOL, DE MEMORIA.</small></span></a><div class="masthead-right"><div class="language"><label for="language" id="language-label">Idioma</label><select id="language"><option value="es">ES</option><option value="en">EN</option></select></div><button id="site-help" class="site-help" type="button" aria-haspopup="dialog">Ayuda</button><button id="account-open-link" class="account-open" type="button" aria-haspopup="dialog"><svg class="account-open-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><strong id="account-open-score" class="account-open-score" hidden>000</strong><span id="account-open-link-label" class="account-open-text">Iniciar sesión</span></button></div></header>
+<dialog id="site-help-dialog" aria-labelledby="site-help-title"><h2 id="site-help-title">Cómo jugar</h2><p id="site-help-rules"></p><p id="site-help-groups"></p><p id="site-help-storage"></p><a id="site-help-play" href="index.html?lang=es">Ir a Jugar</a><form method="dialog"><button id="site-help-close">Cerrar</button></form></dialog>
 <dialog id="account-dialog" aria-labelledby="account-title"><h2 id="account-title">Cuenta y progreso</h2><p id="account-pitch" class="account-pitch">Iniciá sesión para competir por puntos con jugadores de todo el mundo.</p><p id="account-detail" class="account-copy"></p><div class="account-stats" id="account-stats" hidden><div class="account-stat"><strong id="stat-points">0</strong><span id="stat-points-label">Puntos</span></div><div class="account-stat"><strong id="stat-answered">0</strong><span id="stat-answered-label">Jugadas</span></div><div class="account-stat"><strong id="stat-correct">0</strong><span id="stat-correct-label">Aciertos</span></div></div><p id="account-status" class="account-status" role="status"></p><div class="account-actions"><a id="google-login" class="google-login" href="index.html?account=1"><svg class="google-login-icon" width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span id="google-login-label">Continuar con Google</span></a><button id="logout" class="subtle" type="button" hidden>Cerrar sesión</button></div><div class="account-section" id="alias-section"><p id="enrolled-status" class="account-alias" role="status"></p><form id="enroll-form" hidden><div class="field-label-row"><label id="nickname-label" for="public-nickname">Apodo público</label><div id="alias-help-region" class="alias-help-region"><button id="alias-help" class="alias-help" type="button" aria-describedby="alias-tooltip">ⓘ</button><p id="alias-tooltip" class="alias-tooltip" role="tooltip" hidden>Se asigna automáticamente un nombre de animal al azar. Podés agregar o cambiar tu apodo acá.</p></div></div><input id="public-nickname" name="nickname" autocomplete="off" maxlength="24" minlength="3" value="" aria-describedby="nickname-detail"><p id="nickname-detail" class="field-detail"></p><button id="enroll" type="submit">Guardar apodo</button></form></div><div class="account-danger" id="danger-section"><button id="account-delete" class="danger-action" type="button" hidden>Eliminar cuenta</button></div><form method="dialog" class="account-close-row"><button id="account-close" class="subtle" type="submit">Cerrar</button></form></dialog>
-<main><nav class="board-nav" aria-label="Navegación principal"><button id="league-back" class="link-button" type="button">← Mis ligas</button><a id="board-play" href="index.html?lang=es">Jugar</a><div id="view-tabs" class="view-tabs" role="group" aria-label="Tablas"><button id="view-public" type="button" aria-pressed="true">General</button><button id="view-friends" type="button" aria-pressed="false">Ligas de amigos</button></div></nav><p class="eyebrow" id="eyebrow">FÚTBOL, DE MEMORIA.</p><div class="title-row"><h1>Tabla</h1><button id="league-invite-open" class="primary" type="button" hidden>Invitar amigos</button></div><p class="subtitle" id="subtitle">Cada carrera cuenta. Compará tus puntos verificados con la comunidad, en la general o por competición.</p>
+<nav class="site-nav" aria-label="Navegación principal"><a id="nav-play" href="index.html?lang=es">Jugar</a><a id="nav-groups" href="leaderboard.html?view=friends&amp;lang=es">Grupos</a><a id="nav-board" href="leaderboard.html?lang=es" aria-current="page">Clasificación</a></nav><main><a id="league-back" class="link-button" href="leaderboard.html?view=friends&amp;lang=es" hidden>Todos los grupos</a><p class="eyebrow" id="eyebrow">FÚTBOL, DE MEMORIA.</p><div class="title-row"><h1>Clasificación pública</h1><button id="group-create-open" class="primary" type="button" hidden>Crear un grupo</button><button id="league-invite-open" class="primary" type="button" hidden>Invitar amigos</button></div><p class="subtitle" id="subtitle">Cada carrera cuenta. Compará tus puntos verificados con la comunidad, en la general o por competición.</p>
 <section id="public-personal" class="personal" aria-labelledby="personal-title"><h2 id="personal-title">Tu lugar en la tabla</h2><p id="leaderboard-own" class="own" aria-live="polite"></p><p id="personal-detail">Los puntos de invitado no pasan a la tabla.</p><a class="cta" id="account-link" href="index.html?account=1"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 3.3c0-1.2 1.3-1.9 2.3-1.3l9 5.7c1 .6 1 2 0 2.6l-9 5.7c-1 .6-2.3-.1-2.3-1.3V3.3Z"/></svg><span id="account-link-label">Iniciar sesión</span></a></section>
 <section id="public-board" aria-labelledby="board-heading"><h2 id="board-heading" class="sr-only">Tabla de posiciones</h2><div class="toolbar"><div><button id="change-board-competition" class="competition-badge" type="button" aria-haspopup="dialog"><svg id="board-competition-trophy" width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M6 3h8v3a4 4 0 0 1-8 0V3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 4H3v1a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 4h3v1a3 3 0 0 1-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 9v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 16c0-1.5.8-2 3-2s3 .5 3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><img id="board-competition-current-logo" class="competition-current-logo" alt="" hidden><span class="sr-only" id="leaderboard-filter-label">Competición</span><span id="board-competition-current" class="competition-badge-value">General</span></button></div></div>
 <dialog id="board-competitions" aria-labelledby="board-competitions-title"><h2 id="board-competitions-title" class="sr-only">Competición</h2><div id="board-competition-options" class="competition-options" role="group"></div><form method="dialog"><button class="subtle" type="submit" id="board-competitions-close">Cerrar</button></form></dialog>
@@ -101,29 +109,29 @@ button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);
 <div id="board-loading" class="board-loading" aria-hidden="true"><div class="loading-heading"><span class="board-spinner"></span><span id="board-loading-label">Cargando tabla…</span></div><div class="skeleton-row"><i></i><i></i><i></i></div><div class="skeleton-row"><i></i><i></i><i></i></div><div class="skeleton-row"><i></i><i></i><i></i></div></div>
 <table id="leaderboard-table" hidden><caption id="board-caption">Puntos verificados · los empates comparten puesto</caption><thead><tr><th scope="col" id="rank-label">Puesto</th><th scope="col" id="name-label">Apodo</th><th scope="col" id="points-label">Puntos</th><th scope="col" id="answered-label">Carreras</th><th scope="col" id="correct-label">Aciertos</th></tr></thead><tbody id="leaderboard-entries"></tbody></table>
 </div><div class="pagination"><button id="board-prev" hidden>Anterior</button><span id="page-range" class="status"></span><button id="board-next" hidden>Siguiente</button></div></section>
-<section id="friends-view" class="friends-view" aria-labelledby="friends-title" aria-busy="false" hidden><h2 id="friends-title" class="sr-only">Ligas de amigos</h2>
-<ol id="friends-how" class="friends-how" hidden><li><strong id="friends-step-create">Armá tu liga</strong><span id="friends-step-create-detail">Poné un nombre y compartí el enlace con tus amigos.</span></li><li><strong id="friends-step-play">Jugá la diaria</strong><span id="friends-step-play-detail">Tres jugadores por día. Una partida cuenta en todas tus ligas.</span></li><li><strong id="friends-step-win">Ganá la semana</strong><span id="friends-step-win-detail">Los puntos se reinician cada lunes. Tus trofeos quedan.</span></li></ol>
+<section id="friends-view" class="friends-view" aria-labelledby="friends-title" aria-busy="false" hidden><h2 id="friends-title" class="sr-only">Grupos</h2>
 <p id="friends-lead" class="friends-lead" hidden></p>
 <p id="friends-status" class="status" role="status" aria-live="polite"></p><p id="friends-notice" class="friends-notice" role="alert"></p><a id="friends-nickname-link" class="cta" href="index.html?auth=friends" hidden>Elegir apodo</a><button id="friends-pending-retry" type="button" hidden>Reintentar</button><button id="friends-retry" type="button" hidden>Reintentar</button>
-<div id="friends-loading" class="board-loading" hidden><div class="loading-heading"><span class="board-spinner" aria-hidden="true"></span><span id="friends-loading-label">Cargando tus ligas…</span></div></div>
-<div id="friends-signin" class="friends-card" hidden><h3 id="friends-signin-title">Iniciá sesión para ver tus ligas</h3><p id="friends-signin-detail"></p><a id="friends-signin-link" class="cta" href="index.html?auth=friends"><span id="friends-signin-label">Iniciar sesión con Google</span></a></div>
-<div id="friends-invite" class="friends-card" hidden><p id="invite-heading" class="eyebrow">Invitación a una liga</p><h3 id="invite-name"></h3><p id="invite-members"></p><p id="invite-zero"></p><p id="invite-played" hidden></p><p id="invite-blocked" class="friends-notice" hidden></p><div class="friends-actions"><button id="invite-join" class="primary" type="button">Unirme a la liga</button><button id="invite-cancel" type="button">Cancelar</button></div></div>
-<div id="friends-list" hidden><h3 id="friends-mine">Mis ligas</h3><ul id="friends-leagues" class="league-list"></ul><p id="friends-empty" hidden></p><details id="league-create-panel" class="friends-create"><summary id="league-create-toggle">Crear una liga</summary><p id="league-create-detail"></p><form id="league-create-form" class="friends-form"><label id="league-name-label" for="league-name-input">Nombre de la liga</label><input id="league-name-input" name="name" maxlength="80" autocomplete="off" aria-describedby="league-name-help" required><p id="league-name-help" class="field-help"></p><button id="league-create" class="primary" type="submit">Crear liga</button></form></details></div>
-<p id="friends-join-help" class="field-help"></p><div id="league-view" hidden><h3 id="league-name" class="sr-only"></h3><p id="league-meta" class="status"></p>
-<div id="league-welcome" class="league-welcome" hidden><strong id="league-welcome-title"></strong><p id="league-welcome-detail"></p></div>
+<div id="friends-loading" class="board-loading" hidden><div class="loading-heading"><span class="board-spinner" aria-hidden="true"></span><span id="friends-loading-label">Cargando tus grupos…</span></div></div>
+<div id="friends-signin" class="friends-card" hidden><h3 id="friends-signin-title">Iniciá sesión para ver tus grupos</h3><p id="friends-signin-detail"></p><a id="friends-signin-link" class="cta" href="index.html?auth=friends"><span id="friends-signin-label">Iniciar sesión con Google</span></a></div>
+<div id="friends-invite" class="friends-card" hidden><p id="invite-heading" class="eyebrow">Invitación a un grupo</p><h3 id="invite-name"></h3><p id="invite-members"></p><p id="invite-zero"></p><p id="invite-played" hidden></p><p id="invite-blocked" class="friends-notice" hidden></p><div class="friends-actions"><button id="invite-join" class="primary" type="button">Unirme al grupo</button><button id="invite-cancel" type="button">Cancelar</button></div></div>
+<div id="friends-list" hidden><h3 id="friends-mine">Tus grupos</h3><ul id="friends-leagues" class="league-list"></ul><p id="friends-empty" hidden></p></div>
+<section id="league-create-panel" class="friends-create" aria-labelledby="league-name-label" hidden><p id="league-create-detail"></p><form id="league-create-form" class="friends-form"><label id="league-name-label" for="league-name-input">Nombre del grupo</label><input id="league-name-input" name="name" maxlength="80" autocomplete="off" aria-describedby="league-name-help" required><p id="league-name-help" class="field-help"></p><button id="league-create" class="primary" type="submit">Crear un grupo</button></form></section>
+<p id="group-draft-status" class="field-help" role="status"></p><a id="group-draft-signin" class="cta" href="index.html?auth=friends&amp;create=1" hidden></a><p id="friends-join-help" class="field-help"></p><div id="league-view" hidden><h3 id="league-name" class="sr-only"></h3><p id="league-meta" class="status"></p>
+<p id="league-joined" class="joined-notice" role="status" hidden></p><div id="league-welcome" class="league-welcome" hidden><strong id="league-welcome-title"></strong><p id="league-welcome-detail"></p></div>
 
 <div class="league-toolbar"><div><label class="sr-only" id="league-period-label" for="league-period">Período</label><select id="league-period"><option id="period-week" value="week">Esta semana</option><option id="period-today" value="today">Hoy</option></select><p id="league-range" class="league-range"></p></div><button id="league-refresh" class="refresh-button" type="button" aria-label="Actualizar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 7a8 8 0 0 1 13.2-1L20 12M4 12l1.2 6A8 8 0 0 0 18.4 17"/></svg></button></div>
 <p id="league-own" class="sr-only" aria-live="polite"></p>
 <table id="league-table"><caption id="league-caption" class="sr-only"></caption><thead><tr><th scope="col" id="league-rank-label">Puesto</th><th scope="col" id="league-name-col">Apodo</th><th scope="col" id="league-points-label">Puntos</th><th scope="col" id="league-progress-label">Progreso</th></tr></thead><tbody id="league-entries"></tbody></table>
 <div class="pagination"><button id="league-prev" type="button" hidden>Anterior</button><button id="league-next" type="button" hidden>Siguiente</button></div>
 
-<details id="league-history" class="league-disclosure"><summary id="history-title">Campeones de cada semana</summary><p id="history-status" class="status" role="status"></p><ol id="history-list" class="week-list"></ol><button id="history-more" type="button" hidden>Ver más</button></details>
-<details id="league-options" class="league-disclosure"><summary id="league-manage-toggle">Opciones de la liga</summary><button id="league-leave" class="danger-action" type="button" hidden>Salir de la liga</button>
+<p id="league-last-winners" class="last-winners" hidden></p><details id="league-history" class="league-disclosure"><summary id="history-title">Campeones de cada semana</summary><p id="history-status" class="status" role="status"></p><ol id="history-list" class="week-list"></ol><button id="history-more" type="button" hidden>Ver más</button></details>
+<details id="league-options" class="league-disclosure"><summary id="league-manage-toggle">Ajustes del grupo</summary><button id="league-leave" class="danger-action" type="button" hidden>Salir del grupo</button>
 <section id="league-manage" class="friends-card" aria-labelledby="league-manage-toggle" hidden><form id="rename-form" class="friends-form"><label id="rename-label" for="rename-input">Cambiar nombre</label><input id="rename-input" maxlength="80" autocomplete="off"><button id="rename-save" type="submit">Guardar</button></form>
 <h4 id="invite-settings-title">Enlace de invitación</h4><p id="invite-settings-detail" class="field-help"></p><button id="invite-rotate" type="button">Reemplazar enlace</button>
-<ul id="manage-members" class="member-list"></ul><h4 id="removed-title" hidden>Quitados</h4><p id="restore-note" class="field-help" hidden></p><ul id="manage-removed" class="member-list"></ul><button id="league-delete" class="danger-action" type="button">Eliminar liga</button></section></details></div>
-<details id="friends-help" class="friends-help"><summary id="friends-help-title">Cómo funcionan las ligas</summary><p id="friends-scoring-help"></p><p id="league-reset" class="field-help"></p><p id="league-trophy-help" class="field-help"></p><p id="friends-privacy" class="field-help"></p></details></section>
-<dialog id="league-invite-dialog" aria-labelledby="invite-link-title"><h2 id="invite-link-title">Invitá a tus amigos</h2><p id="invite-dialog-detail"></p><p id="invite-dialog-status" role="status" aria-live="polite"></p><button id="invite-link-retry" type="button" hidden>Reintentar</button><button id="invite-copy" class="primary" type="button">Copiar enlace</button><p id="invite-copy-status" role="status" aria-live="polite"></p><div id="invite-link-manual" hidden><label id="invite-link-manual-label" for="invite-link-field">Copiá este enlace:</label><input id="invite-link-field" readonly></div><form method="dialog"><button id="invite-dialog-close" type="submit">Listo</button></form></dialog>
+<ul id="manage-members" class="member-list"></ul><h4 id="removed-title" hidden>Quitados</h4><p id="restore-note" class="field-help" hidden></p><ul id="manage-removed" class="member-list"></ul><button id="league-delete" class="danger-action" type="button">Eliminar grupo</button></section></details></div>
+<details id="friends-help" class="friends-help"><summary id="friends-help-title">Cómo funcionan los grupos</summary><p id="friends-scoring-help"></p><p id="league-reset" class="field-help"></p><p id="league-trophy-help" class="field-help"></p><p id="friends-privacy" class="field-help"></p></details></section>
+<dialog id="league-invite-dialog" aria-labelledby="invite-link-title"><h2 id="invite-link-title">Invitá a tus amigos</h2><p id="invite-dialog-detail"></p><p id="invite-dialog-status" role="status" aria-live="polite"></p><button id="invite-link-retry" type="button" hidden>Reintentar</button><button id="invite-copy" class="primary" type="button">Copiar enlace</button><button id="invite-share" type="button" hidden>Compartir enlace</button><p id="invite-copy-status" role="status" aria-live="polite"></p><div id="invite-link-manual" hidden><label id="invite-link-manual-label" for="invite-link-field">Copiá este enlace:</label><input id="invite-link-field" readonly></div><form method="dialog"><button id="invite-dialog-close" type="submit">Listo</button></form></dialog>
 <dialog id="league-confirm" aria-labelledby="league-confirm-title" aria-describedby="league-confirm-body"><h2 id="league-confirm-title"></h2><p id="league-confirm-body"></p><div class="friends-actions"><button id="league-confirm-cancel" type="button">Cancelar</button><button id="league-confirm-ok" class="primary" type="button">Confirmar</button></div></dialog>
 
 <dialog id="league-wins" aria-labelledby="wins-title"><h2 id="wins-title"></h2><p id="wins-status" class="status" role="status"></p><ol id="wins-list" class="week-list"></ol><form method="dialog"><button id="wins-close" type="submit">Cerrar</button></form></dialog>
@@ -140,75 +148,278 @@ const FriendsLeagues = (()=>{
 const $=id=>document.getElementById(id);
 const INVITE_KEY='derabona.league-invite.v1',UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,PAGE=50;
 const T={
- es:{tabs:'Tablas',publicTab:'Tabla general',friendsTab:'Ligas de amigos',title:'Ligas de amigos',lead:'Tu grupo de amigos. Tres jugadores por día. Un campeón cada semana.',
-  signinTitle:'Armá una liga con tus amigos',signinDetail:'Iniciá sesión para crear tu liga o entrar con una invitación. Jugás la misma diaria y comparás tus puntos con tu grupo.',signinInvite:'Iniciá sesión para ver la invitación. Volvés acá automáticamente.',signin:'Iniciar sesión con Google',
-  loading:'Cargando tus ligas…',error:'No pudimos cargar esta liga privada. Revisá la conexión y reintentá.',retry:'Reintentar',refresh:'Actualizar',updating:'Actualizando el historial semanal…',
-  mine:'Mis ligas',none:'Todavía no estás en ninguna liga. Creá una e invitá a tus amigos.',createLabel:'Nombre de la liga',create:'Crear liga',creating:'Creando…',nameHelp:'Entre 3 y 40 caracteres.',
-  members:n=>n===1?'1 miembro':`${n} miembros`,owner:'Sos el dueño',trophyCount:n=>n===1?'1 semana ganada':`${n} semanas ganadas`,
-  inviteTitle:'Invitación a una liga',inviteMembers:n=>n===1?'1 miembro':`${n} miembros`,join:'Unirme a la liga',joining:'Uniéndote…',cancel:'Cancelar',
-  zeroStart:'Empezás con cero puntos en esta liga: no se suman tus puntos de la tabla general ni resultados anteriores, ni siquiera los de hoy. Solo cuentan los resultados de la Rabona diaria que termines después de unirte. Unirte no te da otro intento.',
-  playedToday:'Ya terminaste la Rabona diaria de hoy, así que tu primera oportunidad de sumar en esta liga es mañana.',
-  inviteFull:'Esta liga ya tiene 50 miembros.',inviteLimit:'Ya estás en 10 ligas, el máximo. Salí de una para unirte.',
-  inviteGone:'Esta invitación ya no está disponible. Pedile a quien te invitó un enlace nuevo.',
-  recover:'Iniciaste sesión, pero no pudimos conservar la invitación en esta pestaña (el navegador bloqueó el almacenamiento). Volvé a abrir el enlace original de la invitación.',
-  back:'← Mis ligas',today:'Hoy',week:'Esta semana',periodLabel:'Período',playDaily:'Jugar la diaria',
-  rangeToday:d=>`Hoy, ${d} (UTC)`,rangeWeek:(a,b)=>`Del ${a} al ${b} (UTC)`,reset:'Cada semana arranca de cero el lunes a las 00:00 UTC. El día cambia a las 00:00 UTC.',
-  rank:'Puesto',name:'Apodo',points:'Puntos',progress:'Progreso',caption:'Puntos de la Rabona diaria dentro de la liga · los empates comparten puesto',
-  former:'ex miembro',you:'vos',notPlayed:'No jugó',inProgress:p=>`En curso · ${p}/3`,finished:'Terminó · 3/3',finishedPartial:(c,p)=>`Terminó · cuentan ${c} de ${p}`,finishedBeforeJoin:'Terminó antes de unirse · 0 puntos de liga',
-  days:n=>n===1?'1 día completo':`${n} días completos`,playedWeek:n=>n===1?'1 resultado':`${n} resultados`,
-  own:(r,p)=>`Tu puesto: ${r} · ${p} pts`,ownNone:'Todavía sin puntos en este período. Solo cuenta lo que jugás en la diaria después de unirte.',
-  trophyAria:(n,name)=>`${name}: ${n===1?'1 semana ganada':n+' semanas ganadas'} en esta liga. Ver semanas.`,
-  pastWinners:'Campeones anteriores',historyTitle:'Historial de campeones',historyEmpty:'Todavía no terminó ninguna semana.',noParticipants:'Sin participantes',shared:'Compartido',deleted:'Jugador eliminado',more:'Ver más',close:'Cerrar',
-  winsTitle:name=>`Semanas ganadas por ${name}`,winsEmpty:'Todavía no ganó ninguna semana.',pts:n=>`${n} pts`,
-  leave:'Salir de la liga',leaveTitle:'¿Salir de la liga?',leaveBody:'Dejás de ver esta liga enseguida. Los puntos que ya sumaste esta semana quedan en la tabla como ex miembro y tus trofeos se conservan. Para volver necesitás una invitación.',
-  manage:'Opciones de la liga',rename:'Cambiar nombre',save:'Guardar',inviteLink:'Enlace de invitación',copy:'Copiar enlace',copied:'Enlace copiado.',copyManual:'Copiá este enlace:',rotate:'Reemplazar enlace',
-  rotateTitle:'¿Reemplazar el enlace de invitación?',rotateBody:'El enlace actual deja de funcionar enseguida. Los miembros actuales siguen en la liga.',
-  remove:'Quitar',removeTitle:name=>`¿Quitar a ${name}?`,removeBody:'Pierde el acceso enseguida y no puede volver a unirse, ni con un enlace nuevo, hasta que restaures su acceso. Sus puntos de esta semana y sus trofeos se conservan.',
-  restore:'Permitir volver',removedList:'Quitados',restoreNote:'Permitir volver no lo suma a la liga: tiene que usar una invitación y elegir Unirse.',
-  deleteLeague:'Eliminar liga',deleteTitle:'¿Eliminar la liga?',deleteBody:'Se eliminan la liga, sus miembros, la invitación, el historial y los trofeos. Los resultados de la Rabona diaria de cada jugador no se tocan. No se puede deshacer.',
-  confirm:'Confirmar',ownerTag:'dueño',conflict:'La liga cambió en otro lado. Revisá los datos y volvé a intentar.',
-  unavailable:'Esta liga ya no está disponible para vos.',limit:'Ya estás en 10 ligas, el máximo.',full:'La liga ya tiene 50 miembros.',
-  nicknameNeeded:'Antes de crear o unirte a una liga, elegí tu apodo público.',nicknameLink:'Elegir apodo',ownerLeave:'Como dueño no podés salir: podés eliminar la liga.',
-  badName:'El nombre debe tener entre 3 y 40 caracteres, sin espacios al inicio o al final.',rateLimited:'Demasiadas solicitudes. Esperá un minuto y reintentá.',failedMutation:'No se pudo confirmar el cambio. Reintentá: se vuelve a enviar el mismo pedido.',
-  privacy:'Privada significa que solo los miembros ven la liga, sus miembros y su tabla. Tus resultados siguen contando en la tabla pública como hasta ahora. Las ligas nunca muestran respuestas, pistas, emails ni datos de Google.',
-  monthFormat:'es-AR'},
- en:{tabs:'Boards',publicTab:'Public board',friendsTab:'Friends leagues',title:'Friends leagues',lead:'Your friends. Three players a day. A new champion every week.',
-  signinTitle:'Start a league with your friends',signinDetail:'Sign in to create a league or accept an invitation. Play the same Daily and compare your scores with your group.',signinInvite:'Sign in to see the invitation. You’ll come straight back here.',signin:'Sign in with Google',
-  loading:'Loading your leagues…',error:'We couldn’t load this private league. Check your connection and retry.',retry:'Retry',refresh:'Refresh',updating:'Updating weekly history…',
-  mine:'My leagues',none:'You’re not in any league yet. Create one and invite your friends.',createLabel:'League name',create:'Create league',creating:'Creating…',nameHelp:'3 to 40 characters.',
-  members:n=>n===1?'1 member':`${n} members`,owner:'You own this league',trophyCount:n=>n===1?'1 week won':`${n} weeks won`,
-  inviteTitle:'League invitation',inviteMembers:n=>n===1?'1 member':`${n} members`,join:'Join league',joining:'Joining…',cancel:'Cancel',
-  zeroStart:'You start this league at zero: your public leaderboard points and earlier results don’t carry in, not even today’s. Only Daily Rabona results you finish after joining count. Joining doesn’t give you another attempt.',
-  playedToday:'You already finished today’s Daily Rabona, so your first chance to score in this league is tomorrow.',
-  inviteFull:'This league already has 50 members.',inviteLimit:'You’re already in 10 leagues, the maximum. Leave one to join.',
-  inviteGone:'This invitation isn’t available any more. Ask whoever invited you for a new link.',
-  recover:'You’re signed in, but this tab couldn’t keep the invitation (the browser blocked storage). Please reopen the original invitation link.',
-  back:'← My leagues',today:'Today',week:'This week',periodLabel:'Period',playDaily:'Play the Daily Rabona',
-  rangeToday:d=>`Today, ${d} (UTC)`,rangeWeek:(a,b)=>`${a} to ${b} (UTC)`,reset:'Every week restarts from zero on Monday at 00:00 UTC. The day changes at 00:00 UTC.',
-  rank:'Rank',name:'Nickname',points:'Points',progress:'Progress',caption:'Daily Rabona points inside this league · equal points share rank',
-  former:'former member',you:'you',notPlayed:'Not played',inProgress:p=>`In progress · ${p}/3`,finished:'Finished · 3/3',finishedPartial:(c,p)=>`Finished · ${c} of ${p} count`,finishedBeforeJoin:'Finished before joining · 0 league points',
-  days:n=>n===1?'1 completed day':`${n} completed days`,playedWeek:n=>n===1?'1 result':`${n} results`,
-  own:(r,p)=>`Your rank: ${r} · ${p} pts`,ownNone:'No points this period yet. Only Daily results earned after joining count here.',
-  trophyAria:(n,name)=>`${name}: ${n===1?'1 week won':n+' weeks won'} in this league. View weeks.`,
-  pastWinners:'Past winners',historyTitle:'Past champions',historyEmpty:'No week has finished yet.',noParticipants:'No participants',shared:'Shared',deleted:'Deleted player',more:'Show more',close:'Close',
-  winsTitle:name=>`Weeks won by ${name}`,winsEmpty:'No weeks won yet.',pts:n=>`${n} pts`,
-  leave:'Leave league',leaveTitle:'Leave this league?',leaveBody:'You lose access right away. Points you already earned this week stay on the board as a former member and your trophies are kept. You’ll need an invitation to come back.',
-  manage:'League options',rename:'Rename',save:'Save',inviteLink:'Invitation link',copy:'Copy invite link',copied:'Link copied.',copyManual:'Copy this link:',rotate:'Replace link',
-  rotateTitle:'Replace the invitation link?',rotateBody:'The current link stops working immediately. Current members stay in the league.',
-  remove:'Remove',removeTitle:name=>`Remove ${name}?`,removeBody:'They lose access right away and can’t rejoin, even with a new link, until you restore their eligibility. Their points this week and their trophies are kept.',
-  restore:'Allow back',removedList:'Removed',restoreNote:'Allowing someone back doesn’t add them: they still need an invitation and must choose Join.',
-  deleteLeague:'Delete league',deleteTitle:'Delete this league?',deleteBody:'The league, its members, invitation, history and trophies are deleted. Nobody’s Daily Rabona results are touched. This can’t be undone.',
-  confirm:'Confirm',ownerTag:'owner',conflict:'This league changed elsewhere. Review it and try again.',
-  unavailable:'This league isn’t available to you any more.',limit:'You’re already in 10 leagues, the maximum.',full:'This league already has 50 members.',
-  nicknameNeeded:'Choose your public nickname before creating or joining a league.',nicknameLink:'Choose nickname',ownerLeave:'As the owner you can’t leave: you can delete the league.',
-  badName:'Names need 3 to 40 characters, with no leading or trailing spaces.',rateLimited:'Too many requests. Wait a minute and retry.',failedMutation:'We couldn’t confirm that change. Retry: the same request is sent again.',
-  privacy:'Private means only members see the league, its members and its table. Your results keep counting on the public leaderboard as before. Leagues never show answers, hints, emails or Google data.',
-  monthFormat:'en-GB'}
+  es:{
+  tabs:"Tablas",
+  publicTab:"Tabla general",
+  friendsTab:"Grupos",
+  title:"Grupos",
+  lead:"Creá un grupo privado y competí con tus amigos por los puntos de la diaria de esta semana.",
+  signinTitle:"Competí con tus amigos",
+  signinDetail:"Podés elegir un nombre para tu grupo antes de iniciar sesión. Tus puntos de invitado no se transfieren.",
+  signinInvite:"Este enlace es una invitación a un grupo privado. Iniciá sesión para verlo y decidir si te unís.",
+  signin:"Iniciar sesión con Google",
+  loading:"Cargando tus grupos…",
+  error:"No pudimos cargar este grupo privado. Revisá la conexión y reintentá.",
+  retry:"Reintentar",
+  refresh:"Actualizar",
+  updating:"Actualizando el historial semanal…",
+  mine:"Tus grupos",
+  none:"Todavía no estás en ningun grupo. Creá uno e invitá a tus amigos.",
+  createLabel:"Nombre del grupo",
+  create:"Crear un grupo",
+  creating:"Creando…",
+  nameHelp:"Entre 3 y 40 caracteres.",
+  members:n=>n===1?'1 miembro':`${n} miembros`,
+  owner:"Sos el dueño",
+  trophyCount:n=>n===1?'1 semana ganada':`${n} semanas ganadas`,
+  inviteTitle:"Invitación a un grupo",
+  inviteMembers:n=>n===1?'1 miembro':`${n} miembros`,
+  join:"Unirme al grupo",
+  joining:"Uniéndote…",
+  cancel:"Cancelar",
+  zeroStart:"Empezás con cero puntos en este grupo: no se suman tus puntos de la tabla general ni resultados anteriores, ni siquiera los de hoy. Solo cuentan los resultados de la Rabona diaria que termines después de unirte. Unirte no te da otro intento.",
+  playedToday:"Ya terminaste la Rabona diaria de hoy, así que tu primera oportunidad de sumar en este grupo es mañana.",
+  inviteFull:"Este grupo ya tiene 50 miembros. Pedile al organizador que libere un lugar.",
+  inviteLimit:"Ya estás en 10 grupos, el máximo. Salí de uno para unirte.",
+  inviteGone:"Esta invitación ya no está disponible. Pedile a quien te invitó un enlace nuevo.",
+  recover:"Iniciaste sesión, pero no pudimos conservar la invitación en esta pestaña (el navegador bloqueó el almacenamiento). Volvé a abrir el enlace original de la invitación.",
+  back:"Todos los grupos",
+  today:"Hoy",
+  week:"Esta semana",
+  periodLabel:"Período",
+  playDaily:"Jugar la diaria",
+  rangeToday:d=>`Hoy, ${d} (UTC)`,
+  rangeWeek:(a,b)=>`Del ${a} al ${b} (UTC)`,
+  reset:"Cada semana arranca de cero el lunes a las 00:00 UTC. El día cambia a las 00:00 UTC.",
+  rank:"Puesto",
+  name:"Apodo",
+  points:"Puntos",
+  progress:"Progreso",
+  caption:"Puntos de la diaria en este período · los empates comparten puesto",
+  former:"ex miembro",
+  you:"vos",
+  notPlayed:"Sin juego elegible",
+  inProgress:p=>`En curso · ${p}/3`,
+  finished:"Terminó · 3/3",
+  finishedPartial:(c,p)=>`Terminó · cuentan ${c} de ${p}`,
+  finishedBeforeJoin:"Terminó antes de unirse · 0 puntos de grupo",
+  days:n=>n===1?'1 día completo':`${n} días completos`,
+  playedWeek:n=>n===1?'1 resultado':`${n} resultados`,
+  own:(r,p)=>`Tu puesto: ${r} · ${p} pts`,
+  ownNone:"Todavía sin puntos en este período. Solo cuenta lo que jugás en la diaria después de unirte.",
+  trophyAria:(n,name)=>`${name}: ${n===1?'1 semana ganada':n+' semanas ganadas'} en este grupo. Ver semanas.`,
+  pastWinners:"Campeones anteriores",
+  historyTitle:"Historial de campeones",
+  historyEmpty:"Todavía no hay semanas completas.",
+  noParticipants:"Sin participantes",
+  shared:"Compartido",
+  deleted:"Jugador eliminado",
+  more:"Ver más",
+  close:"Cerrar",
+  winsTitle:name=>`Semanas ganadas por ${name}`,
+  winsEmpty:"Todavía no ganó ninguna semana.",
+  pts:n=>`${n} pts`,
+  leave:"Salir del grupo",
+  leaveTitle:"¿Salir del grupo?",
+  leaveBody:"Dejás de ver este grupo enseguida. Los puntos que ya sumaste esta semana quedan en la tabla como ex miembro y tus trofeos se conservan. Para volver necesitás una invitación.",
+  manage:"Ajustes del grupo",
+  rename:"Cambiar nombre",
+  save:"Guardar",
+  inviteLink:"Enlace de invitación",
+  copy:"Copiar enlace",
+  copied:"Enlace copiado.",
+  copyManual:"Copiá este enlace:",
+  rotate:"Reemplazar enlace",
+  rotateTitle:"¿Reemplazar el enlace de invitación?",
+  rotateBody:"El enlace actual deja de funcionar enseguida. Los miembros actuales siguen en el grupo.",
+  remove:"Quitar",
+  removeTitle:name=>`¿Quitar a ${name}?`,
+  removeBody:"Pierde el acceso enseguida y no puede volver a unirse, ni con un enlace nuevo, hasta que restaures su acceso. Sus puntos de esta semana y sus trofeos se conservan.",
+  restore:"Permitir volver",
+  removedList:"Quitados",
+  restoreNote:"Permitir volver no lo suma al grupo: tiene que usar una invitación y elegir Unirse.",
+  deleteLeague:"Eliminar grupo",
+  deleteTitle:"¿Eliminar el grupo?",
+  deleteBody:"Se eliminan el grupo, sus miembros, la invitación, el historial y los trofeos. Los resultados de la Rabona diaria de cada jugador no se tocan. No se puede deshacer.",
+  confirm:"Confirmar",
+  ownerTag:"dueño",
+  conflict:"El grupo cambió en otro lado. Revisá los datos y volvé a intentar.",
+  unavailable:"Este grupo ya no está disponible para vos.",
+  limit:"Ya estás en 10 grupos, el máximo.",
+  full:"El grupo ya tiene 50 miembros.",
+  nicknameNeeded:"Antes de crear o unirte a un grupo, elegí tu apodo público.",
+  nicknameLink:"Elegir apodo",
+  ownerLeave:"Como dueño no podés salir: podés eliminar el grupo.",
+  badName:"El nombre debe tener entre 3 y 40 caracteres, sin espacios al inicio o al final.",
+  rateLimited:"Demasiadas solicitudes. Esperá un minuto y reintentá.",
+  failedMutation:"No se pudo confirmar el cambio. Reintentá: se vuelve a enviar el mismo pedido.",
+  privacy:"Privado significa que solo los miembros ven el grupo, sus miembros y su tabla. Tus resultados siguen contando en la tabla pública como hasta ahora. Los grupos nunca muestran respuestas, pistas, emails ni datos de Google.",
+  monthFormat:"es-AR",
+  stepCreate:"Armá tu grupo",
+  stepCreateDetail:"Poné un nombre y compartí el enlace con tus amigos.",
+  stepPlay:"Jugá la diaria",
+  stepPlayDetail:"Tres jugadores por día. Una partida cuenta en todas tus grupos.",
+  stepWin:"Ganá la semana",
+  stepWinDetail:"Los puntos se reinician cada lunes. Tus trofeos quedan.",
+  createDetail:"Elegí un nombre para tu grupo. Después te damos un enlace para invitar amigos.",
+  createPlaceholder:"Ej. Los del fútbol del jueves",
+  joinHelp:"¿Te invitaron? Abrí el enlace que te mandaron para unirte.",
+  helpTitle:"Cómo funcionan los puntos y los trofeos",
+  inviteFriends:"Invitar amigos",
+  inviteDetail:"Cualquiera con este enlace puede iniciar sesión y elegir Unirme al grupo.",
+  welcomeTitle:"Tu grupo está lista. Sumá a tus amigos.",
+  welcomeDetail:"Compartí la invitación. Solo cuentan los resultados de la diaria terminados después de unirse.",
+  leagueSubtitle:"Una diaria para todos. Una tabla solo para tu grupo.",
+  trophyHelp:"🏆 Las copas junto a cada nombre muestran las semanas ganadas. Tocá una para ver cuáles.",
+  inviteSettingsDetail:"Si querés dejar de aceptar gente con el enlace anterior, reemplazalo. Los miembros actuales siguen en el grupo.",
+  done:"Listo",
+  createSignin:"Iniciar sesión para crear",
+  draftLost:"El navegador no pudo guardar el nombre. Copialo antes de iniciar sesión y volvé a escribirlo al regresar.",
+  draftReturn:"Revisá el nombre y elegí Crear un grupo para confirmar.",
+  partialToday:"Solo contarán los jugadores de hoy que termines después de unirte.",
+  joined:"Ya sos parte del grupo. Solo cuentan los resultados que termines después de unirte.",
+  lastWeek:"Ganadores de la semana pasada"
+},
+  en:{
+  tabs:"Boards",
+  publicTab:"Public board",
+  friendsTab:"Groups",
+  title:"Groups",
+  lead:"Create a private group and compete with friends for this week’s Daily points.",
+  signinTitle:"Compete with your friends",
+  signinDetail:"You can choose a group name before signing in. Guest points never transfer.",
+  signinInvite:"This link is an invitation to a private group. Sign in to see it and choose whether to join.",
+  signin:"Sign in with Google",
+  loading:"Loading your groups…",
+  error:"We couldn’t load this private group. Check your connection and retry.",
+  retry:"Retry",
+  refresh:"Refresh",
+  updating:"Updating weekly history…",
+  mine:"Your groups",
+  none:"You’re not in any group yet. Create one and invite your friends.",
+  createLabel:"Group name",
+  create:"Create a group",
+  creating:"Creating…",
+  nameHelp:"3 to 40 characters.",
+  members:n=>n===1?'1 member':`${n} members`,
+  owner:"You own this group",
+  trophyCount:n=>n===1?'1 week won':`${n} weeks won`,
+  inviteTitle:"Group invitation",
+  inviteMembers:n=>n===1?'1 member':`${n} members`,
+  join:"Join group",
+  joining:"Joining…",
+  cancel:"Cancel",
+  zeroStart:"You start this group at zero: your public leaderboard points and earlier results don’t carry in, not even today’s. Only Daily Rabona results you finish after joining count. Joining doesn’t give you another attempt.",
+  playedToday:"You already finished today’s Daily Rabona, so your first chance to score in this group is tomorrow.",
+  inviteFull:"This group already has 50 members. Ask the organizer to make space.",
+  inviteLimit:"You’re already in 10 groups, the maximum. Leave one to join.",
+  inviteGone:"This invitation isn’t available any more. Ask whoever invited you for a new link.",
+  recover:"You’re signed in, but this tab couldn’t keep the invitation (the browser blocked storage). Please reopen the original invitation link.",
+  back:"All groups",
+  today:"Today",
+  week:"This week",
+  periodLabel:"Period",
+  playDaily:"Play the Daily Rabona",
+  rangeToday:d=>`Today, ${d} (UTC)`,
+  rangeWeek:(a,b)=>`${a} to ${b} (UTC)`,
+  reset:"Every week restarts from zero on Monday at 00:00 UTC. The day changes at 00:00 UTC.",
+  rank:"Rank",
+  name:"Nickname",
+  points:"Points",
+  progress:"Progress",
+  caption:"Daily points in this period · equal points share rank",
+  former:"former member",
+  you:"you",
+  notPlayed:"No eligible play",
+  inProgress:p=>`In progress · ${p}/3`,
+  finished:"Finished · 3/3",
+  finishedPartial:(c,p)=>`Finished · ${c} of ${p} count`,
+  finishedBeforeJoin:"Finished before joining · 0 group points",
+  days:n=>n===1?'1 completed day':`${n} completed days`,
+  playedWeek:n=>n===1?'1 result':`${n} results`,
+  own:(r,p)=>`Your rank: ${r} · ${p} pts`,
+  ownNone:"No points this period yet. Only Daily results earned after joining count here.",
+  trophyAria:(n,name)=>`${name}: ${n===1?'1 week won':n+' weeks won'} in this group. View weeks.`,
+  pastWinners:"Past winners",
+  historyTitle:"Past champions",
+  historyEmpty:"No completed weeks yet.",
+  noParticipants:"No participants",
+  shared:"Shared",
+  deleted:"Deleted player",
+  more:"Show more",
+  close:"Close",
+  winsTitle:name=>`Weeks won by ${name}`,
+  winsEmpty:"No weeks won yet.",
+  pts:n=>`${n} pts`,
+  leave:"Leave group",
+  leaveTitle:"Leave this group?",
+  leaveBody:"You lose access right away. Points you already earned this week stay on the board as a former member and your trophies are kept. You’ll need an invitation to come back.",
+  manage:"Group settings",
+  rename:"Rename",
+  save:"Save",
+  inviteLink:"Invitation link",
+  copy:"Copy invite link",
+  copied:"Link copied.",
+  copyManual:"Copy this link:",
+  rotate:"Replace link",
+  rotateTitle:"Replace the invitation link?",
+  rotateBody:"The current link stops working immediately. Current members stay in the group.",
+  remove:"Remove",
+  removeTitle:name=>`Remove ${name}?`,
+  removeBody:"They lose access right away and can’t rejoin, even with a new link, until you restore their eligibility. Their points this week and their trophies are kept.",
+  restore:"Allow back",
+  removedList:"Removed",
+  restoreNote:"Allowing someone back doesn’t add them: they still need an invitation and must choose Join.",
+  deleteLeague:"Delete group",
+  deleteTitle:"Delete this group?",
+  deleteBody:"The group, its members, invitation, history and trophies are deleted. Nobody’s Daily Rabona results are touched. This can’t be undone.",
+  confirm:"Confirm",
+  ownerTag:"owner",
+  conflict:"This group changed elsewhere. Review it and try again.",
+  unavailable:"This group isn’t available to you any more.",
+  limit:"You’re already in 10 groups, the maximum.",
+  full:"This group already has 50 members.",
+  nicknameNeeded:"Choose your public nickname before creating or joining a group.",
+  nicknameLink:"Choose nickname",
+  ownerLeave:"As the owner you can’t leave: you can delete the group.",
+  badName:"Names need 3 to 40 characters, with no leading or trailing spaces.",
+  rateLimited:"Too many requests. Wait a minute and retry.",
+  failedMutation:"We couldn’t confirm that change. Retry: the same request is sent again.",
+  privacy:"Private means only members see the group, its members and its table. Your results keep counting on the public leaderboard as before. Groups never show answers, hints, emails or Google data.",
+  monthFormat:"en-GB",
+  stepCreate:"Create your group",
+  stepCreateDetail:"Give your group a name and send your friends the invite link.",
+  stepPlay:"Play the Daily",
+  stepPlayDetail:"Three players a day. One attempt counts in all your groups.",
+  stepWin:"Win the week",
+  stepWinDetail:"Points reset every Monday. Your trophies stay.",
+  createDetail:"Pick a name for your group. Next, get a link to invite your friends.",
+  createPlaceholder:"E.g. Thursday football crew",
+  joinHelp:"Got an invitation? Open the link your friend sent to join their group.",
+  helpTitle:"How points and trophies work",
+  inviteFriends:"Invite friends",
+  inviteDetail:"Anyone with this link can sign in and choose Join group.",
+  welcomeTitle:"Your group is ready. Bring your friends.",
+  welcomeDetail:"Share the invitation. Only Daily results finished after joining count here.",
+  leagueSubtitle:"One Daily for everyone. A leaderboard just for your group.",
+  trophyHelp:"🏆 Trophies beside a name show weeks won. Select one to see which weeks.",
+  inviteSettingsDetail:"Replace the link to stop new people joining with the old one. Current members stay in the group.",
+  done:"Done",
+  createSignin:"Sign in to create",
+  draftLost:"Your browser could not save the name. Copy it before signing in and enter it again when you return.",
+  draftReturn:"Review the name, then choose Create a group to confirm.",
+  partialToday:"Only today’s players you finish after joining will count.",
+  joined:"You have joined the group. Only results you finish after joining count here.",
+  lastWeek:"Last week’s winners"
+}
 };
 let ctx=null,lang='es',identity=null,epoch=0,active=false;
 let screen='idle',notice='',busy=false,pendingMutation=null;
-Object.assign(T.es,{stepCreate:'Armá tu liga',stepCreateDetail:'Poné un nombre y compartí el enlace con tus amigos.',stepPlay:'Jugá la diaria',stepPlayDetail:'Tres jugadores por día. Una partida cuenta en todas tus ligas.',stepWin:'Ganá la semana',stepWinDetail:'Los puntos se reinician cada lunes. Tus trofeos quedan.',createDetail:'Elegí un nombre para tu grupo. Después te damos un enlace para invitar amigos.',createPlaceholder:'Ej. Los del fútbol del jueves',joinHelp:'¿Te invitaron? Abrí el enlace que te mandaron para unirte.',helpTitle:'Cómo funcionan los puntos y los trofeos',inviteFriends:'Invitar amigos',inviteDetail:'Mandá este enlace a tu grupo. Tus amigos inician sesión y eligen Unirse a la liga.',welcomeTitle:'Tu liga está lista. Sumá a tus amigos.',welcomeDetail:'Compartí la invitación y jueguen la diaria. Los puntos se suman solos a la tabla de esta semana.',leagueSubtitle:'Una diaria para todos. Una tabla solo para tu grupo.',trophyHelp:'🏆 Las copas junto a cada nombre muestran las semanas ganadas. Tocá una para ver cuáles.',inviteSettingsDetail:'Si querés dejar de aceptar gente con el enlace anterior, reemplazalo. Los miembros actuales siguen en la liga.',done:'Listo'});
-Object.assign(T.en,{stepCreate:'Create your league',stepCreateDetail:'Give your group a name and send your friends the invite link.',stepPlay:'Play the Daily',stepPlayDetail:'Three players a day. One attempt counts in all your leagues.',stepWin:'Win the week',stepWinDetail:'Points reset every Monday. Your trophies stay.',createDetail:'Pick a name for your group. Next, get a link to invite your friends.',createPlaceholder:'E.g. Thursday football crew',joinHelp:'Got an invitation? Open the link your friend sent to join their league.',helpTitle:'How points and trophies work',inviteFriends:'Invite friends',inviteDetail:'Send this link to your group. Your friends sign in and choose Join league.',welcomeTitle:'Your league is ready. Bring your friends.',welcomeDetail:'Share the invitation, then play the Daily. Your points go straight into this week’s standings.',leagueSubtitle:'One Daily for everyone. A leaderboard just for your group.',trophyHelp:'🏆 Trophies beside a name show weeks won. Select one to see which weeks.',inviteSettingsDetail:'Replace the link to stop new people joining with the old one. Current members stay in the league.',done:'Done'});
+let createIntent=false,draft='',draftLost=false,joined=false,lastWeek=null;
+const DRAFT_KEY='derabona.group-draft.v1';
+try{draft=sessionStorage.getItem(DRAFT_KEY)||'';}catch{}
+function saveDraft(){draft=$('league-name-input').value;try{sessionStorage.setItem(DRAFT_KEY,draft);draftLost=false;return true;}catch{draftLost=true;return false;}}
+function clearDraft(){draft='';draftLost=false;try{sessionStorage.removeItem(DRAFT_KEY);}catch{}}
 let leagues=null,invite=null,inviteState=null,league=null,period='week',periodExplicit=false,offset=0,data=null,manage=null,manageOpen=false,linkShown='';
 let historyData=null,winsData=null,refreshTimer=null,headingLeague=null;
 const t=()=>T[lang];
@@ -232,12 +443,12 @@ async function call(payload,owner=identity){
 }
 const current=(ticket,owner)=>ticket===epoch&&owner===identity&&active;
 // ---- URL state (league UUID and an explicitly chosen period only)
-function urlState(){const s={};if(league)s.league=league;if(league&&periodExplicit)s.period=period;return s;}
-function readURL(params){if($('league-invite-dialog').open)$('league-invite-dialog').close();const id=params.get('league');league=id&&UUID.test(id)?id.toLowerCase():null;const p=params.get('period');periodExplicit=p==='today'||p==='week';period=periodExplicit?p:'week';offset=0;}
+function urlState(){const s={};if(createIntent&&!league)s.create='1';if(league)s.league=league;if(league&&periodExplicit)s.period=period;return s;}
+function readURL(params){createIntent=params.get('create')==='1';joined=false;if($('league-invite-dialog').open)$('league-invite-dialog').close();const id=params.get('league');league=id&&UUID.test(id)?id.toLowerCase():null;const p=params.get('period');periodExplicit=p==='today'||p==='week';period=periodExplicit?p:'week';offset=0;if(league)createIntent=false;}
 // ---- screens
 async function refresh(){
   if(!active)return;
-  const ticket=++epoch,owner=identity;clearTimeout(refreshTimer);$('league-history').open=false;historyData=null;
+  const ticket=++epoch,owner=identity;clearTimeout(refreshTimer);$('league-history').open=false;historyData=null;lastWeek=null;
   if(!owner){screen='signin';render();return;}
   invite=readInvite();
   if(invite){await loadPreview(ticket,owner);return;}
@@ -268,6 +479,7 @@ async function loadLeague(ticket,owner,attempt=0){
   try{
     const result=await call({action:'standings',leagueId:league,period,limit:PAGE,offset},owner);if(!current(ticket,owner))return;
     data=result;screen='league';
+    if(!result.pending)loadLastWeek(ticket,owner,league);
     // Bounded catch-up of unfinalized weeks: never show a premature trophy count.
     if(result.pending&&attempt<6){render();return loadLeague(ticket,owner,attempt+1);}
     if(manageOpen&&result.league.owner)await loadManage(ticket,owner);
@@ -278,6 +490,16 @@ async function loadLeague(ticket,owner,attempt=0){
     screen='error';notice=messageFor(error);
   }
   render();
+}
+async function loadLastWeek(ticket,owner,lid){
+  try{const result=await call({action:'history',leagueId:lid,limit:1,offset:0},owner);if(!current(ticket,owner)||lid!==league)return;lastWeek=result.weeks?.[0]||null;renderLastWeek();}catch{if(current(ticket,owner)&&lid===league){lastWeek=null;renderLastWeek();}}
+}
+function renderLastWeek(){
+  const e=$('league-last-winners'),c=t();
+  const monday=new Date(data?.range?.today+'T00:00:00Z');monday.setUTCDate(monday.getUTCDate()-(monday.getUTCDay()+6)%7-7);
+  const previous=monday.toISOString().slice(0,10);
+  e.hidden=!(lastWeek?.weekStart===previous&&lastWeek.winners?.length);
+  e.textContent=e.hidden?'':c.lastWeek+': '+lastWeek.winners.map(nameOf).join(', ')+' · '+c.pts(lastWeek.winningPoints);
 }
 async function loadManage(ticket,owner){
   try{const result=await call({action:'manage',leagueId:league},owner);if(!current(ticket,owner))return;manage=result;}
@@ -334,24 +556,27 @@ function inviteURL(token){const u=new URL('leaderboard.html',location.href);u.se
 // ---- rendering
 function render(){
   if(!ctx)return;const c=t();
-  $('view-public').textContent=c.publicTab;$('view-friends').textContent=c.friendsTab;$('view-tabs').ariaLabel=c.tabs;
-  $('view-public').setAttribute('aria-pressed',String(!active));$('view-friends').setAttribute('aria-pressed',String(active));
   $('friends-view').hidden=!active;
   const detail=active&&!!league&&['league','loading'].includes(screen);
-  $('league-back').hidden=!detail;$('board-play').hidden=!!detail;$('view-tabs').hidden=!!detail;
+  $('league-back').hidden=!(detail||active&&createIntent);$('league-back').textContent=c.back;$('league-back').href='leaderboard.html?view=friends&lang='+lang;
+  $('group-create-open').hidden=!active||!!detail||!!readInvite()||createIntent;$('group-create-open').textContent=c.create;
+  $('league-create-panel').hidden=!(active&&createIntent&&['signin','list'].includes(screen)&&!readInvite());
+  $('league-create-detail').hidden=createIntent;$('league-create-detail').textContent=c.createDetail;$('league-name-label').textContent=c.createLabel;$('league-name-help').textContent=c.nameHelp;$('league-name-input').placeholder=c.createPlaceholder;
+  if(document.activeElement!==$('league-name-input'))$('league-name-input').value=draft;
+  $('league-create').textContent=busy?c.creating:identity?c.create:c.createSignin;$('league-create').disabled=busy||!!pendingMutation||(leagues?.leagues?.length>=10);
+  $('group-draft-status').hidden=!active||!createIntent||!!detail;$('group-draft-status').textContent=draftLost?c.draftLost:identity&&createIntent?c.draftReturn:'';
+  $('group-draft-signin').hidden=!(active&&createIntent&&draftLost&&!identity);$('group-draft-signin').textContent=c.createSignin;$('group-draft-signin').href=ctx.authURL(false);
   $('league-invite-open').hidden=!(detail&&data?.league.owner);$('subtitle').hidden=!!detail;
   document.querySelector('main').classList.toggle('league-detail',!!detail);
   if(!active)return;
   const inLeague=screen==='league'&&data;
   if(inLeague)headingLeague={id:league,name:data.league.name};
-  const title=detail&&headingLeague?.id===league?headingLeague.name:c.title;
+  const title=detail&&headingLeague?.id===league?headingLeague.name:createIntent?c.create:c.title;
   document.querySelector('h1').textContent=title;
   document.title=title+' — derabona';
-  $('subtitle').textContent=inLeague?c.leagueSubtitle:c.lead;
-  $('friends-how').hidden=!(screen==='signin'&&!readInvite()||screen==='list'&&!leagues?.leagues?.length);
-  for(const [id,key] of [['friends-step-create','stepCreate'],['friends-step-create-detail','stepCreateDetail'],['friends-step-play','stepPlay'],['friends-step-play-detail','stepPlayDetail'],['friends-step-win','stepWin'],['friends-step-win-detail','stepWinDetail']])$(id).textContent=c[key];
+  $('subtitle').textContent=inLeague?c.leagueSubtitle:createIntent?c.createDetail:c.lead;
   $('friends-help-title').textContent=c.helpTitle;$('friends-scoring-help').textContent=c.zeroStart;$('league-reset').textContent=c.reset;$('league-trophy-help').textContent=c.trophyHelp;
-  $('friends-join-help').textContent=c.joinHelp;$('friends-join-help').hidden=!['signin','list'].includes(screen);
+  $('friends-join-help').textContent=c.joinHelp;$('friends-join-help').hidden=createIntent||!['signin','list'].includes(screen);
   $('friends-title').textContent=c.title;$('friends-lead').textContent=c.lead;$('friends-privacy').textContent=c.privacy;
   const show=id=>{for(const s of ['friends-signin','friends-loading','friends-list','friends-invite','league-view'])$(s).hidden=s!==id;};
   $('friends-retry').textContent=c.retry;$('friends-retry').hidden=screen!=='error';
@@ -361,7 +586,7 @@ function render(){
   $('friends-status').textContent=screen==='loading'?c.loading:(screen==='league'&&data?.pending?c.updating:'');
   $('friends-view').setAttribute('aria-busy',String(screen==='loading'||busy));
   if(screen==='signin'){
-    show('friends-signin');$('friends-signin-title').textContent=c.signinTitle;$('friends-signin-detail').textContent=readInvite()?c.signinInvite:c.signinDetail;
+    show(createIntent&&!readInvite()?null:'friends-signin');$('friends-signin-title').textContent=c.signinTitle;$('friends-signin-detail').textContent=readInvite()?c.signinInvite:c.signinDetail;
     $('friends-signin-link').href=ctx.authURL(!!readInvite());$('friends-signin-label').textContent=c.signin;return;
   }
   if(screen==='loading'||screen==='idle'){show('friends-loading');$('friends-loading-label').textContent=c.loading;return;}
@@ -374,34 +599,32 @@ function render(){
 function renderInvite(show){
   const c=t(),s=inviteState;show('friends-invite');
   $('invite-heading').textContent=c.inviteTitle;$('invite-name').textContent=s.league.name;$('invite-members').textContent=c.inviteMembers(s.league.memberCount);
-  $('invite-zero').textContent=c.zeroStart;$('invite-played').hidden=!(s.todayPlayed>=3);$('invite-played').textContent=c.playedToday;
+  $('invite-zero').textContent=c.zeroStart;$('invite-played').hidden=!(s.todayPlayed>0);$('invite-played').textContent=s.todayPlayed>=3?c.playedToday:c.partialToday;
   const blocked=s.full?c.inviteFull:s.atLimit?c.inviteLimit:!s.nicknameReady?c.nicknameNeeded:'';
   $('invite-blocked').textContent=blocked;$('invite-blocked').hidden=!blocked;
   $('invite-join').textContent=busy?c.joining:c.join;$('invite-join').disabled=busy||!!blocked;$('invite-cancel').textContent=c.cancel;$('invite-cancel').disabled=busy;
 }
 function renderList(show){
-  const c=t();show('friends-list');$('friends-mine').textContent=c.mine;
+  const c=t();show(createIntent?null:'friends-list');$('friends-mine').textContent=c.mine;
   const list=$('friends-leagues');list.replaceChildren();
   for(const l of leagues?.leagues||[]){
-    const li=el('li'),b=el('button',undefined,'league-link');b.type='button';
+    const li=el('li'),b=el('a',undefined,'league-link');b.href='leaderboard.html?view=friends&league='+l.id+'&lang='+lang;
     b.append(el('span',l.name,'league-link-name'));
     const meta=[c.members(l.memberCount)];if(l.owner)meta.push(c.owner);if(l.trophies)meta.push('🏆 '+c.trophyCount(l.trophies));
     b.append(el('span',meta.join(' · '),'league-link-meta'));
-    b.onclick=()=>{league=l.id;periodExplicit=false;period='week';offset=0;manageOpen=false;manage=null;notice='';ctx.pushURL();refresh();};
+    b.onclick=event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();createIntent=false;joined=false;league=l.id;periodExplicit=false;period='week';offset=0;manageOpen=false;manage=null;notice='';ctx.pushURL();refresh();};
     li.append(b);list.append(li);
   }
   $('friends-empty').hidden=!!leagues?.leagues?.length;$('friends-empty').textContent=c.none;
-  $('league-create-toggle').textContent=c.create;$('league-create-detail').textContent=c.createDetail;
-  if(!leagues?.leagues?.length)$('league-create-panel').open=true;
-  $('league-name-input').placeholder=c.createPlaceholder;
-  $('league-name-label').textContent=c.createLabel;$('league-name-help').textContent=c.nameHelp;
-  $('league-create').textContent=busy?c.creating:c.create;$('league-create').disabled=busy||(leagues?.leagues?.length>=10);
+
 }
 function renderLeague(show){
   const c=t(),d=data;show('league-view');
   $('league-view').classList.toggle('is-owner',d.league.owner);
   $('league-invite-open').hidden=!d.league.owner;$('league-invite-open').textContent=c.inviteFriends;
   $('league-welcome').hidden=!(d.league.owner&&d.league.memberCount===1);
+  $('league-joined').hidden=!joined;$('league-joined').textContent=c.joined;
+  renderLastWeek();
   $('league-welcome-title').textContent=c.welcomeTitle;$('league-welcome-detail').textContent=c.welcomeDetail;
   $('league-back').textContent=c.back;$('league-name').textContent=d.league.name;
   $('league-meta').textContent=[c.members(d.league.memberCount),d.league.owner?c.owner:''].filter(Boolean).join(' · ');
@@ -452,7 +675,7 @@ async function openInviteLink(){
   if(!data?.league.owner)return;
   const c=t(),ticket=epoch,owner=identity,lid=league,dialog=$('league-invite-dialog');
   $('invite-link-title').textContent=c.inviteFriends;$('invite-dialog-detail').textContent=c.inviteDetail;
-  $('invite-dialog-close').textContent=c.done;$('invite-copy').textContent=c.copy;$('invite-copy').disabled=true;
+  $('invite-dialog-close').textContent=c.done;$('invite-copy').textContent=c.copy;$('invite-copy').disabled=true;$('invite-share').disabled=true;$('invite-share').hidden=!navigator.share;$('invite-share').textContent=lang==='es'?'Compartir enlace':'Share invite link';
   $('invite-copy-status').textContent='';$('invite-dialog-status').textContent=c.loading;
   $('invite-link-retry').hidden=true;$('invite-link-retry').textContent=c.retry;
   linkShown='';$('invite-link-field').value='';$('invite-link-manual').hidden=true;
@@ -460,7 +683,7 @@ async function openInviteLink(){
   await loadManage(ticket,owner);
   if(!current(ticket,owner)||lid!==league||!dialog.open)return;
   $('invite-dialog-status').textContent=manage?'':c.error;
-  $('invite-link-retry').hidden=!!manage;$('invite-copy').disabled=!manage;
+  $('invite-link-retry').hidden=!!manage;$('invite-copy').disabled=!manage;$('invite-share').disabled=!manage;
   if(manage)$('invite-copy').focus();
 }
 // ---- dialogs: past winners and weeks won (bounded pages)
@@ -496,7 +719,7 @@ async function openWins(memberId,nickname){
 }
 // Remove (not just hide) every private value from the document.
 function clearPrivateDOM(){
-  headingLeague=null;
+  headingLeague=null;lastWeek=null;joined=false;$('league-last-winners').textContent='';$('league-last-winners').hidden=true;
   $('league-history').open=false;$('league-options').open=false;
   for(const id of ['league-entries','friends-leagues','manage-members','manage-removed','history-list','wins-list'])$(id).replaceChildren();
   for(const id of ['league-name','league-meta','league-range','league-own','invite-name','invite-members','wins-title','history-status','wins-status'])$(id).textContent='';
@@ -504,14 +727,18 @@ function clearPrivateDOM(){
 }
 // ---- wiring
 function wire(){
+  $('league-name-input').addEventListener('input',()=>{saveDraft();$('group-draft-status').textContent=draftLost?t().draftLost:'';});
+  $('group-create-open').onclick=()=>{createIntent=true;ctx.pushURL();render();$('league-name-input').focus();};
   $('friends-retry').onclick=()=>{notice='';ctx.reload();};
   $('friends-pending-retry').onclick=()=>{if(pendingMutation)mutate(pendingMutation.payload,{onDone:pendingMutation.onDone,retry:true});};
-  $('invite-join').onclick=()=>mutate({action:'join',token:invite},{onDone:async result=>{clearInvite();ctx.clearInviteMarker();league=result.leagueId;periodExplicit=false;period='week';offset=0;ctx.pushURL();await refresh();}});
+  $('invite-join').onclick=()=>mutate({action:'join',token:invite},{onDone:async result=>{clearInvite();ctx.clearInviteMarker();league=result.leagueId;createIntent=false;joined=true;periodExplicit=false;period='week';offset=0;ctx.pushURL();await refresh();}});
   $('invite-cancel').onclick=()=>{clearInvite();ctx.clearInviteMarker();notice='';refresh();};
   $('league-create-form').onsubmit=event=>{event.preventDefault();const name=$('league-name-input').value.trim();
     if([...name].length<3||[...name].length>40||/\p{Cc}/u.test(name)){notice='badName';render();return;}
-    mutate({action:'create',name},{onDone:async result=>{$('league-name-input').value='';$('league-create-panel').open=false;league=result.leagueId;periodExplicit=false;period='week';offset=0;manageOpen=false;ctx.pushURL();await refresh();await openInviteLink();}});};
-  $('league-back').onclick=()=>{league=null;data=null;manage=null;manageOpen=false;notice='';ctx.pushURL();refresh();};
+    createIntent=true;saveDraft();
+    if(!identity){ctx.pushURL(true);if(draftLost){render();return;}location.assign(ctx.authURL(false));return;}
+    mutate({action:'create',name},{onDone:async result=>{clearDraft();createIntent=false;$('league-name-input').value='';league=result.leagueId;periodExplicit=false;period='week';offset=0;manageOpen=false;ctx.pushURL();await refresh();await openInviteLink();}});};
+  $('league-back').onclick=event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();createIntent=false;joined=false;league=null;data=null;manage=null;manageOpen=false;notice='';ctx.pushURL();refresh();};
   $('league-period').onchange=()=>{period=$('league-period').value;periodExplicit=true;offset=0;ctx.pushURL();refresh();};
   $('league-refresh').onclick=()=>{notice='';refresh();};
   $('league-prev').onclick=()=>{offset=Math.max(0,offset-PAGE);refresh();};$('league-next').onclick=()=>{offset+=PAGE;refresh();};
@@ -521,6 +748,7 @@ function wire(){
   $('rename-form').onsubmit=event=>{event.preventDefault();const name=$('rename-input').value.trim();if([...name].length<3||[...name].length>40){notice='badName';render();return;}mutate({action:'rename',leagueId:league,name,expectedVersion:manage.league.version},{onDone:reloadAll});};
   $('league-invite-open').onclick=openInviteLink;$('invite-link-retry').onclick=openInviteLink;
   $('league-invite-dialog').addEventListener('close',()=>{linkShown='';$('invite-link-field').value='';$('invite-copy-status').textContent='';});
+  $('invite-share').onclick=async()=>{if(!manage||!data?.league.owner)return;const owner=identity,lid=league,link=inviteURL(manage.invite.token);try{await navigator.share({title:data.league.name,url:link});if(owner===identity&&lid===league)$('invite-copy-status').textContent=lang==='es'?'Enlace compartido.':'Link shared.';}catch(error){if(error.name!=='AbortError'&&owner===identity&&lid===league){linkShown=link;$('invite-link-manual').hidden=false;$('invite-link-manual-label').textContent=t().copyManual;$('invite-link-field').value=link;$('invite-link-field').focus();$('invite-link-field').select();}}};
   $('invite-copy').onclick=async()=>{
     if(!manage||!data?.league.owner)return;const owner=identity,lid=league,c=t(),link=inviteURL(manage.invite.token);
     try{await navigator.clipboard.writeText(link);if(owner!==identity||lid!==league||!$('league-invite-dialog').open)return;$('invite-copy-status').textContent=c.copied;linkShown='';}
@@ -545,6 +773,7 @@ return {
   // Offline/file: or SDK failure: private error state, never a public fallback.
   unavailable(){epoch++;screen='error';notice='error';render();},
   refresh,render,
+  hasCreate:()=>createIntent,
   hasInvite:()=>!!readInvite()
 };
 })();
@@ -554,7 +783,7 @@ return {
 const ACCOUNT_CONFIG=Object.freeze({url:'https://iaebecfxjwjzkapqdeha.supabase.co',anonKey:'sb_publishable_67zB6W8GnDAwIftLW__xqA_x8sr7Pea'});
 (()=>{
 const $=id=>document.getElementById(id),ids=['all','champions-league','premier-league','la-liga','argentine-primera','brasileirao'],key='derabona.auth.v1',languageKey='touchline.language.v1';
-const text={es:{title:'Tabla',play:'Jugar',nav:'Navegación principal',language:'Idioma',eyebrow:'PUNTOS VERIFICADOS',tagline:'ADIVINÁ AL JUGADOR. <span>DE MEMORIA. DE RABONA.</span>',subtitle:'Cada carrera cuenta. Compará tus puntos verificados con la comunidad, en la general o por competición.',personal:'Tu lugar en la tabla',guest:'Los puntos de invitado no pasan a la tabla.',unavailable:'No pudimos cargar tu posición. Revisá la conexión y reintentá.',first:'Todavía no tenés un puesto en esta competición. Completá tu primer resultado verificado para aparecer, incluso con cero puntos.',signed:'Tu puesto en esta competición, aunque no estés en esta página de resultados.',auth:'No pudimos comprobar tu cuenta. Mostramos la tabla pública; volvé al juego para reconectar.',login:'Iniciar sesión',competition:'Competición',rank:'Puesto',name:'Apodo',points:'Puntos',answered:'Jugadas',correct:'Aciertos',caption:'Puntos verificados · los empates comparten puesto',tied:'empate',loading:'Cargando tabla…',empty:'Todavía no hay resultados verificados en esta competición. El primer puesto está por jugarse.',error:'No pudimos cargar la tabla. Tus resultados guardados no cambian.',offline:'La tabla necesita conexión. Podés seguir jugando como invitado sin conexión.',disabled:'La tabla todavía no está configurada.',retry:'Reintentar',close:'Cerrar',account:'Cuenta',accountTitle:'Cuenta y progreso',accountPitch:'Iniciá sesión para competir por puntos con jugadores de todo el mundo.',accountDetail:'El progreso de invitado queda solo en esta pestaña y nunca se importa a tu cuenta. Iniciá sesión una vez para guardar tus puntos en la nube, sincronizarlos entre dispositivos y obtener un apodo público automático — sin necesidad de configurar nada.',accountSigned:'Sesión iniciada. Los resultados clasificados son permanentes.',logout:'Cerrar sesión',nicknameLabel:'Apodo (opcional)',nicknameDetail:'Cambiar tu apodo es opcional (3–24 caracteres). Te sugerimos tu nombre de Google acá por si querés usarlo — podés editarlo o borrarlo para quedarte con tu alias de animal. Nunca publicamos tu foto de Google.',aliasHelp:'Sobre tu alias público',aliasTooltip:'Se asigna automáticamente un nombre de animal al azar, o podés usar el nombre de Google que te sugerimos acá — cambiá cualquiera cuando quieras.',enrollLabel:'Guardar apodo',enrolledPrefix:'Alias público: ',aliasLoading:'Cargando tu alias público…',deleteLabel:'Eliminar cuenta',deleteConfirm:'¿Eliminar tu cuenta, progreso en la nube y resultados públicos para siempre? También se eliminan las ligas de amigos que creaste, con sus miembros, invitaciones e historial, y salís de las demás. No se puede deshacer. Escribí DELETE para confirmar.',deleteError:'No se pudo confirmar la eliminación. Reintentá con conexión.',accountUnavailable:'No pudimos guardar el cambio. Reintentá con conexión.',nicknameTaken:'Ese apodo ya está en uso. Probá con otro.',statPoints:'Puntos',statAnswered:'Jugadas',statCorrect:'Aciertos',prev:'Anterior',next:'Siguiente',total:'participantes',of:'de',rules:'Cómo se suman los puntos',detail:'Aparecés tras tu primer resultado verificado con cuenta, incluso si terminás con cero puntos. Cada jugador cuenta una sola vez: en la general y en todas sus competiciones. Hasta 100 puntos por acierto; las pistas y el tiempo reducen el puntaje. Los puntos iguales comparten puesto. No se importan partidas de invitado o práctica.',back:'Volver al juego →',privacy:'Privacidad',footerAbout:'Sobre el juego',footerPhrase:'fútbol entre amigos',footerContact:'Contacto',footerNav:'Enlaces del sitio',leagues:['General','Champions League','Premier League','La Liga (España)','Primera División Argentina','Brasileirão (Brasil)']},en:{title:'Leaderboard',play:'Play',nav:'Main navigation',language:'Language',eyebrow:'VERIFIED POINTS',tagline:'GUESS THE PLAYER. <span>FROM MEMORY. WITH A RABONA.</span>',subtitle:'Every career counts. Compare verified points with the community, globally or by competition.',personal:'Your place on the board',guest:'Sign in to save ranked points. Guest points are never imported.',unavailable:'We could not load your position. Check your connection and retry.',first:'No rank in this competition yet. Complete your first verified result to appear, even with zero points.',signed:'Your position in this competition, even when you are outside this page of results.',auth:'We could not check your account. Showing the public board; return to the game to reconnect.',login:'Sign in',competition:'Competition',rank:'Rank',name:'Nickname',points:'Points',answered:'Played',correct:'Correct',caption:'Verified points · equal points share rank',tied:'tied',loading:'Loading leaderboard…',empty:'No verified results in this competition yet. The first place is still to play for.',error:'We could not load the leaderboard. Your saved results are unchanged.',offline:'The leaderboard needs a connection. Offline guest play is still available.',disabled:'The leaderboard is not configured yet.',retry:'Retry',close:'Close',account:'Account',accountTitle:'Account and progress',accountPitch:'Sign in to compete with players worldwide for points.',accountDetail:'Guest progress stays in this browser tab only, never imported to your account. Sign in once to save your points to the cloud, sync across devices, and get an automatic public nickname — no setup required.',accountSigned:'Signed in. Ranked records are permanent.',logout:'Sign out',nicknameLabel:'Nickname (optional)',nicknameDetail:'Changing your nickname is optional (3–24 characters). We suggest your Google name here so you can use it if you like — edit it or clear it to keep your random animal alias instead. We never publish your Google photo.',aliasHelp:'About your public alias',aliasTooltip:'A random animal name is assigned automatically, or use the Google name suggested here — change either any time.',enrollLabel:'Save nickname',enrolledPrefix:'Public alias: ',aliasLoading:'Loading your public alias…',deleteLabel:'Delete account',deleteConfirm:'Permanently delete your account, cloud progress and public leaderboard records? Friends leagues you created are deleted too, with their members, invitations and history, and you leave the others. This cannot be undone. Type DELETE to confirm.',deleteError:'Account deletion could not be confirmed. Retry when connected.',accountUnavailable:'We could not save that change. Retry when connected.',nicknameTaken:'That nickname is already taken. Try another.',statPoints:'Points',statAnswered:'Played',statCorrect:'Correct',prev:'Previous',next:'Next',total:'players',of:'of',rules:'How points count',detail:'You appear after your first verified signed-in result, even with zero points. Each player counts once: globally and in every eligible competition. Earn up to 100 points for a correct answer; hints and time reduce the score. Equal points share rank. Guest and practice games are never imported.',back:'Back to the game →',privacy:'Privacy',footerAbout:'About the game',footerPhrase:'Football with friends',footerContact:'Contact',footerNav:'Site links',leagues:['Global','Champions League','Premier League','La Liga (Spain)','Argentine Primera División','Brasileirão (Brazil)']}};
+const text={es:{title:'Clasificación pública',play:'Jugar',nav:'Navegación principal',language:'Idioma',eyebrow:'PUNTOS VERIFICADOS',tagline:'ADIVINÁ AL JUGADOR. <span>DE MEMORIA. DE RABONA.</span>',subtitle:'Cada carrera cuenta. Compará tus puntos verificados con la comunidad, en la general o por competición.',personal:'Tu lugar en la tabla',guest:'Los puntos de invitado no pasan a la tabla.',unavailable:'No pudimos cargar tu posición. Revisá la conexión y reintentá.',first:'Todavía no tenés un puesto en esta competición. Completá tu primer resultado verificado para aparecer, incluso con cero puntos.',signed:'Tu puesto en esta competición, aunque no estés en esta página de resultados.',auth:'No pudimos comprobar tu cuenta. Mostramos la tabla pública; volvé al juego para reconectar.',login:'Iniciar sesión',competition:'Competición',rank:'Puesto',name:'Apodo',points:'Puntos',answered:'Jugadas',correct:'Aciertos',caption:'Puntos verificados · los empates comparten puesto',tied:'empate',loading:'Cargando tabla…',empty:'Todavía no hay resultados verificados en esta competición. El primer puesto está por jugarse.',error:'No pudimos cargar la tabla. Tus resultados guardados no cambian.',offline:'La tabla necesita conexión. Podés seguir jugando como invitado sin conexión.',disabled:'La tabla todavía no está configurada.',retry:'Reintentar',close:'Cerrar',account:'Cuenta',accountTitle:'Cuenta y progreso',accountPitch:'Iniciá sesión para competir por puntos con jugadores de todo el mundo.',accountDetail:'El progreso de invitado queda solo en esta pestaña y nunca se importa a tu cuenta. Iniciá sesión una vez para guardar tus puntos en la nube, sincronizarlos entre dispositivos y obtener un apodo público automático — sin necesidad de configurar nada.',accountSigned:'Sesión iniciada. Los resultados clasificados son permanentes.',logout:'Cerrar sesión',nicknameLabel:'Apodo (opcional)',nicknameDetail:'Cambiar tu apodo es opcional (3–24 caracteres). Te sugerimos tu nombre de Google acá por si querés usarlo — podés editarlo o borrarlo para quedarte con tu alias de animal. Nunca publicamos tu foto de Google.',aliasHelp:'Sobre tu alias público',aliasTooltip:'Se asigna automáticamente un nombre de animal al azar, o podés usar el nombre de Google que te sugerimos acá — cambiá cualquiera cuando quieras.',enrollLabel:'Guardar apodo',enrolledPrefix:'Alias público: ',aliasLoading:'Cargando tu alias público…',deleteLabel:'Eliminar cuenta',deleteConfirm:'¿Eliminar tu cuenta, progreso en la nube y resultados públicos para siempre? También se eliminan los grupos que creaste, con sus miembros, invitaciones e historial, y salís de las demás. No se puede deshacer. Escribí DELETE para confirmar.',deleteError:'No se pudo confirmar la eliminación. Reintentá con conexión.',accountUnavailable:'No pudimos guardar el cambio. Reintentá con conexión.',nicknameTaken:'Ese apodo ya está en uso. Probá con otro.',statPoints:'Puntos',statAnswered:'Jugadas',statCorrect:'Aciertos',prev:'Anterior',next:'Siguiente',total:'participantes',of:'de',rules:'Cómo se suman los puntos',detail:'Aparecés tras tu primer resultado verificado con cuenta, incluso si terminás con cero puntos. Cada jugador cuenta una sola vez: en la general y en todas sus competiciones. Hasta 100 puntos por acierto; las pistas y el tiempo reducen el puntaje. Los puntos iguales comparten puesto. No se importan partidas de invitado o práctica.',back:'Volver al juego →',privacy:'Privacidad',footerAbout:'Sobre el juego',footerPhrase:'fútbol entre amigos',footerContact:'Contacto',footerNav:'Enlaces del sitio',leagues:['General','Champions League','Premier League','La Liga (España)','Primera División Argentina','Brasileirão (Brasil)']},en:{title:'Public leaderboard',play:'Play',nav:'Main navigation',language:'Language',eyebrow:'VERIFIED POINTS',tagline:'GUESS THE PLAYER. <span>FROM MEMORY. WITH A RABONA.</span>',subtitle:'Every career counts. Compare verified points with the community, globally or by competition.',personal:'Your place on the board',guest:'Sign in to save ranked points. Guest points are never imported.',unavailable:'We could not load your position. Check your connection and retry.',first:'No rank in this competition yet. Complete your first verified result to appear, even with zero points.',signed:'Your position in this competition, even when you are outside this page of results.',auth:'We could not check your account. Showing the public board; return to the game to reconnect.',login:'Sign in',competition:'Competition',rank:'Rank',name:'Nickname',points:'Points',answered:'Played',correct:'Correct',caption:'Verified points · equal points share rank',tied:'tied',loading:'Loading leaderboard…',empty:'No verified results in this competition yet. The first place is still to play for.',error:'We could not load the leaderboard. Your saved results are unchanged.',offline:'The leaderboard needs a connection. Offline guest play is still available.',disabled:'The leaderboard is not configured yet.',retry:'Retry',close:'Close',account:'Account',accountTitle:'Account and progress',accountPitch:'Sign in to compete with players worldwide for points.',accountDetail:'Guest progress stays in this browser tab only, never imported to your account. Sign in once to save your points to the cloud, sync across devices, and get an automatic public nickname — no setup required.',accountSigned:'Signed in. Ranked records are permanent.',logout:'Sign out',nicknameLabel:'Nickname (optional)',nicknameDetail:'Changing your nickname is optional (3–24 characters). We suggest your Google name here so you can use it if you like — edit it or clear it to keep your random animal alias instead. We never publish your Google photo.',aliasHelp:'About your public alias',aliasTooltip:'A random animal name is assigned automatically, or use the Google name suggested here — change either any time.',enrollLabel:'Save nickname',enrolledPrefix:'Public alias: ',aliasLoading:'Loading your public alias…',deleteLabel:'Delete account',deleteConfirm:'Permanently delete your account, cloud progress and public leaderboard records? Groups you created are deleted too, with their members, invitations and history, and you leave the others. This cannot be undone. Type DELETE to confirm.',deleteError:'Account deletion could not be confirmed. Retry when connected.',accountUnavailable:'We could not save that change. Retry when connected.',nicknameTaken:'That nickname is already taken. Try another.',statPoints:'Points',statAnswered:'Played',statCorrect:'Correct',prev:'Previous',next:'Next',total:'players',of:'of',rules:'How points count',detail:'You appear after your first verified signed-in result, even with zero points. Each player counts once: globally and in every eligible competition. Earn up to 100 points for a correct answer; hints and time reduce the score. Equal points share rank. Guest and practice games are never imported.',back:'Back to the game →',privacy:'Privacy',footerAbout:'About the game',footerPhrase:'Football with friends',footerContact:'Contact',footerNav:'Site links',leagues:['Global','Champions League','Premier League','La Liga (Spain)','Argentine Primera División','Brasileirão (Brazil)']}};
 const COMPETITION_LOGOS = {
   "champions-league": {
     "dataUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjIwLjUiIGhlaWdodD0iMjA5LjUiIGZpbGw9Im5vbmUiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDQ0MSA0MTkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8cGF0aCBkPSJtMjkzLjQ0IDEyMy40NGMtMC4yNDQgMC41LTAuNzI3IDAuODQ1LTEuMjgxIDAuOTA5LTEyLjYyOCAxLjQ2NS0yNi4wNDYtMC4yOTEtMzEuMjE5LTEuMTAzLTguNjM2LTguNjI4LTE3Ljk4NS0xOC4yMjUtMjQuODc3LTI2LjYxMi0wLjcwNy0wLjg1OS0wLjc0MS0yLjA4NzYtMC4wOTEtMi45OTI0IDkuODI5LTEzLjcwMyAxOC44My0yNC41NzYgMjIuNjM1LTI4Ljg4MSAxMC44NzItMi4zNjk1IDIxLjcxMy00LjQ2NzEgMjkuMDM0LTQuNzY2MiAwLjU1My0wLjAyMjIgMS4wNzkgMC4yMzI0IDEuNDAzIDAuNjgxMSA5LjQzNyAxMy4xMjYgMTYuMTg3IDI1LjcwMyAxOC4zNTMgMzAuMjk5LTQuMzMzIDExLjY0Mi05LjU0NiAyMy40MDMtMTMuOTU3IDMyLjQ2NnptLTEyLjA0OCAyMi4yMDhjLTYuOTYxIDExLjY1NC0xMi4yNDkgMTguNjgtMTMuOTQ0IDIwLjgxNi0yLjMgMy4yNDctOC4xNjMgMTEuNzA2LTE3LjI3MSAyMC4yNjItMC41ODEgMC41NDYtMS4zMzkgMC44Ni0yLjEzOCAwLjg5NS0xMS40MDYgMC40NzUtMjIuMDExLTAuMzI1LTI2LjE0MS0xLjIyNi0zLjQ5Ny0xLjQ0Ni0xMS42MzYtNS4xMDYtMjEuMjU2LTEwLjQyNS0wLjgzOS0wLjQ2My0xLjMzMy0xLjM2Ny0xLjI3LTIuMzIxIDAuNTAyLTcuNDU3IDIuODY4LTE4LjA3OSA0Ljk2MS0yOS4zMTIgNS4xNzUtOS4wODcgMTAuNTQtMTkuNDU1IDE2LjEwMy0yNy45NzEgMC41ODYtMC44OTYgMS42ODMtMS4zMTMgMi43MTgtMS4wMyAxNi42NTcgNC41NDcgMzEuMTExIDggMzYuOTc5IDkuMzIgOC4wMzUgOS4zMTcgMTUuODIxIDE1Ljg2OCAyMS4wNTkgMTkuOTI5IDAuMzI2IDAuMjUzIDAuNDEgMC43MDkgMC4yIDEuMDYzem0tMTAwLjc4IDE2LjE5NWMtMC44NDQgMC41MjMtMS45MTkgMC40OTUtMi43My0wLjA3OS03LjI1My01LjEzNC0xNS45MDctMTEuNjk1LTIzLjExNS0xOC40My00LjI1Mi03LjI2Ni03LjUzMS0xNi41NjUtOS44Mi0yNC40ODQtMC4xNDgtMC41MS0wLjAzNC0xLjA2MiAwLjMwMi0xLjQ3MyA4LjA4OC05Ljk0MyAxNy43OTUtMTcuODEgMjEuODUzLTIwLjgwNSA5LjE1NSAzLjk0OTIgMTkuNjYzIDcuNDMzMiAyOC44NTUgMTAuNDkgMC45NCAwLjMxMiAxLjYwNCAxLjE1NSAxLjY4MiAyLjE0IDEuMjk2IDE2LjM1MiA0LjI5MiAyOS41NzYgNS4wOTIgMzQuNjI5LTMuNDMyIDMuNjY3LTEyLjQgMTEuOTgtMjIuMTE5IDE4LjAxMnptLTQwLjI4Ni02NC4zNDJjLTEuMi03LjcxOTEtMS45ODktMTUuODI2LTIuMDc2LTE5LjUzOS0wLjE5OS04LjU3MzIgMS4xNjMtMTYuMTY2IDIuNzQ1LTIzLjE5NiAwLjI2LTEuMTUwOCAwLjg1Ny0yLjE5NCAxLjcyOC0yLjk5MTIgNC41OTUtNC4yMDg3IDEyLjkwNC0xMS42MzQgMTguMTQ4LTE0Ljk5NyA0Ljk0My0zLjE2OTIgMTguNjgxLTcuNjA0MSAyNC4zNDYtOS4yNDkzIDEuMDk4LTAuMzIwMSAyLjI2OCAwLjE2ODEgMi44MzMgMS4xNjA3IDAuNjgxIDEuMTk2NSAxLjM5MyAyLjM4NDMgMi4xNDggMy41NTM2IDQuNDYgNi45NDI4IDkuMzc1IDEyLjkyIDExLjQ0NSAxNS41MDktMi43NDQgMTAuODk0LTMuOTEgMjMuMTA5LTQuNDQxIDMzLjQxMy0wLjA1IDAuOTY2Ni0wLjY2NiAxLjgxMzMtMS41NjkgMi4xNjU1LTE0LjMzMyA1LjU5MDYtMjUuMTY2IDkuOTY1LTI4LjgwNiAxMS42NDUtOS44NDggMC40MTU0LTE5LjIyOCAyLjA5MzktMjUuNTU5IDMuMjAwMi0wLjQ0OSAwLjA3OTEtMC44NzItMC4yMjYzLTAuOTQyLTAuNjczN3ptNzIuMjU0LTc0LjgxNmMwLjM5Mi0wLjYwODEgMS4wMzQtMS4wMTM1IDEuNzUyLTEuMTA4NyAxNC43MzktMS45NDY4IDI4LjIyNC0yLjIzMzUgMzMuNDA3LTIuMDkwMiA5LjQzMiA2LjI3MTcgMTguNjQ5IDE0LjU0NyAyNi4wMDUgMjIuMzk1IDAuNTE1IDAuNTUgMC41OTIgMS4zNzgyIDAuMTg1IDIuMDEzNS01LjI0OSA4LjIwODUtMTIuODgzIDE2LjA5LTE2LjIzNiAxOS41MjItMTIuNDM2IDIuOTQzLTI1LjYyIDcuMjI3MS0zNi4zMjEgMTAuNzM5LTEuMDQxIDAuMzQxMS0yLjE4NS0wLjA0NTctMi44MDctMC45NDgtOC4xMi0xMS43OTQtMTMuMjgtMjEuOTA1LTE1LjMwMy0yNS42NTYgMi4xOTYtOS44MzI3IDUuMjY3LTE4LjU4OSA5LjMxOC0yNC44NjV6bTk4LjQ1NSA5Ni44MTdjLTAuMjY0IDAuMTE5LTAuNTY3LTAuMDY3LTAuNTgyLTAuMzU1LTAuNjE4LTEyLjEwNy0xLjczMi0yMy44NzEtMi4zMTUtMjguMTczIDAuMDQ3LTEwLjQ1Ni0xLjY4Ny0yMS4zMDYtMy40MTctMjkuMzA2LTAuMDYyLTAuMjg5MiAwLjE5NC0wLjU0NzYgMC40ODUtMC40ODk1IDkuODk0IDIuMDE5NyAxMy4wNyA1LjcyNDEgMTMuMDcgNS43MjQxLTUuMjM4LTExLjc0MS0xMi43ODUtMjAuNTg5LTIwLjk4OC0yNy4yNzYtNy4wMTMtMTQuNjgtMTUuMDg1LTIxLjQ3LTE1LjA4NS0yMS40NyAwLjY1MyAzLjI0NyAwLjIwMyA2LjkxOTMtMC45NTQgMTAuNzA5LTAuMDczIDAuMjQxLTAuMzQ5IDAuMzU2LTAuNTc2IDAuMjQ2LTEzLjQ0Mi02LjU3MDgtMjcuMzIyLTkuNTcxOS0zMi42OTEtMTAuMzIzLTguMDIzLTMuODk4NS0xNi43ODYtNi40NzgxLTIzLjkxMi04LjQzMzUtMC4xOS0wLjA1MTktMC4yNDItMC4yOTc5LTAuMDg5LTAuNDI1MjMgOS40NTgtNy44NDY0IDE4LjE1OC05Ljg0MzggMTguMTU4LTkuODQzOC0xNS40MDItMC42MTY3OC0yOC42NTkgMi4xNjgtMzkuNzQ0IDYuNDI2Mi0xNi41NjItMS4zMjYzLTI3LjExMiAxLjU1MjUtMjcuMTEyIDEuNTUyNXM0LjU3MyA1LjQ3MDcgNi4zNTEgOC41MTYzYzAuMjE0IDAuMzY4NCAwLjEwMiAwLjg0MDUtMC4yNDkgMS4wODI4LTEwLjQxNyA3LjIxODQtMTcuODkxIDE1LjE0OC0yMC44MzggMTguNDQ5LTMuMjgzIDAuNDQzNy04Ljk2OSAxLjIyODYtMTMuOTM1IDIuNDUyMy0wLjE5OCAwLjA0OTQtMC4zNjYtMC4xNDk2LTAuMjg2LTAuMzM3NCA0Ljk3My0xMS44MzggMTAuMzk0LTE4LjM5MSAxMC4zOTQtMTguMzkxcy0zMS45NjQgMjIuNjgxLTM4LjAyMyA2My40MzhjMCAwIDIuNjMyLTcuMjI0NiAxMS41MzItMTguMTc1IDAuMTE3LTAuMTQzNCAwLjM0NC0wLjExNSAwLjQyIDAuMDU0NCAyLjUyMiA1LjU3OTQgNS40MDUgMTAuNTM0IDYuODU0IDEyLjgwOC00Ljg5NSA3Ljg3MzYtOC4yNzQgMTYuNDU5LTEwLjM1NSAyMy40ODUtMC4wNzIgMC4yNDQtMC4yNTYgMC40NC0wLjQ5NiAwLjUzLTcuNDAzIDIuODA4LTkuMjg5IDUuNDg3LTkuMjg5IDUuNDg3IDEuMTUxIDMuOTI4IDMuNDExIDcuNzU3IDYuMjY2IDExLjM2NiAwLjI0OCAwLjMxMiAwLjM3NCAwLjcwMiAwLjM1NyAxLjEtMC43ODYgMTcuMzk0IDQuODMgMjguODQzIDQuODMgMjguODQzIDEuMjY4LTYuMDc1IDMuNzUxLTExLjk3NiA2Ljg4Ny0xNy41MTQgMC4xMjUtMC4yMjEgMC40MTktMC4yNzYgMC42MTctMC4xMTkgNy4zMDYgNS43OTggMTQuODc0IDEwLjg2NyAxNy44NzcgMTIuNjY3IDEuNTQ5IDMuOTUyIDUuOTg0IDE0LjIwNyAxMS45MSAyNC43MjggMC4xMjQgMC4yMjIgMC4wMjMgMC41MDMtMC4yMTYgMC41OS03LjA5NiAyLjU4My0xNC4zNzYgMy43NTItMjEuMDUxIDIuMTI4IDAgMCA4LjA1IDEwLjAyIDMyLjg4MiAxNC4yOTMgNi44ODkgOC4xMzQgMTUuMjczIDE0Ljg3IDI1LjA2NCAxNy4yMSAwIDAtMi44Ny0zLjE1Mi0zLjU3OS0xNC44OTgtMC4wMTUtMC4yMzggMC4xNzYtMC40NDEgMC40MTUtMC40MzcgNi4xMzEgMC4wOTIgMTQuNDQ4IDAuMjI1IDIyLjA2MS0wLjMyNyAyLjY5OCAyLjEyNSA4LjU4NiA2Ljc5IDE0LjMyOSA5Ljc2MyAwLjI4NiAwLjE0OCAwLjMwNCAwLjU1IDAuMDI5IDAuNzE3LTEwLjA5NSA2LjA5Ny0xNi44MTIgNi42MjgtMTYuODEyIDYuNjI4IDQ1LjcyNyAwLjk3MyA3My4xODItMjguODE1IDczLjE4Mi0yOC44MTUtNy41MzIgNC45NDktMTYuMjMgOC4wMjYtMjQuODg4IDkuODU5LTAuMjkyIDAuMDYyLTAuNTQ4LTAuMTk2LTAuNDg3LTAuNDg4IDEuNjA4LTcuNzY5IDEuMTU3LTE1LjI4MSAxLjA0NC0xNy45MjggMTAuODQ5LTIuNjg4IDIwLjMxMy03LjUzIDI3LjMyLTEyLjQ4IDAuMTQxLTAuMSAwLjMzLTAuMTAxIDAuNDczLTJlLTMgMi45MTcgMi4wMjcgNS40MTMgNC4zMDEgNy45MDQgOC4wODcgMCAwIDQuNzQ0LTYuNzA0IDYuMzc2LTIyLjIzNyAxMS43NDYtMTUuMzE2IDEzLjQ5Mi0zMC45OTMgMTMuNDkyLTMwLjk5My0yLjk0NyA0LjYwMy03LjM5NyA3LjkyLTEyLjYxIDEwLjI5N3ptLTkwLjUzIDE1MS4yM2MtMTkuNjEzIDAtMzcuNDA3IDguNzU3LTQ4LjI2MSAyMS43MDVsMy40NDMgNC4yNDJjOS44NTctMTIuMjQgMjYuNjI2LTIwLjY1NiA0NC44MTgtMjAuNjU2IDE4LjE5NCAwIDM0Ljk2MiA4LjQxNiA0NC44MTkgMjAuNjU2bDMuNDQzLTQuMjQyYy0xMC44NTUtMTIuOTQ4LTI4LjY0OC0yMS43MDUtNDguMjYyLTIxLjcwNXptLTQ1Ljg3NyAyLjc0OWMtMS4yOSAxLjA0Ny0yLjc5IDEuNTU4LTQuMTE0IDEuNDAxLTEuNjc4LTAuMTkyLTIuNjk3LTAuODc4LTQuMzY3LTIuOTM1bC05LjYxOC0xMS43OTktNS4xODYgNC4yMDYgMTAuNDc1IDEyLjg2YzIuMjI2IDIuNzIzIDQuNzY0IDQuMTgxIDcuNzU1IDQuNDU1IDAuMzU0IDAuMDMzIDAuNzA0IDAuMDUxIDEuMDUgMC4wNTQgMi45IDAuMDI1IDUuNTkzLTAuOTk1IDguMjAzLTMuMTAyIDIuOTA3LTIuMzcgNC41MDMtNS4xMjEgNC44NzctOC40MTEgMC4zNC0yLjk4MS0wLjU3MS01Ljc1OC0yLjc5MS04LjQ4OGwtMTAuNDczLTEyLjg1Ni01LjE4NiA0LjIwNiA5LjYxNCAxMS44MDV2MmUtM2MxLjY3NiAyLjA0OSAyLjEzOSAzLjE4NiAxLjk4NCA0Ljg2Ny0wLjExNiAxLjMyMy0wLjkyNiAyLjY4NS0yLjIyMyAzLjczNXptMzUuNDctMzcuMTcyLTE2LjggMy40MDNjLTAuNzY3IDAuMTU1LTEuMzc0IDAuNTM4LTEuNzUxIDEuMTEtMC4zODEgMC41NzEtMC40OTggMS4yNzYtMC4zNDMgMi4wNDFsMy4zNDggMTYuNDYxYzAuNTQ1IDIuNjc3IDEuNzQ4IDQuNjA1IDMuNTc2IDUuNzMxIDEuMjA5IDAuNzQ0IDIuNjU5IDEuMTE2IDQuMzMgMS4xMTUgMC44NTEtMWUtMyAxLjc2LTAuMDk5IDIuNzIyLTAuMjk0bDEwLjUtMi4xMjYtMS4yNjMtNi4yMTQtMTAuMjE1IDIuMDdjLTIuMDkxIDAuNDIyLTIuNzcgMC4xOTEtMy4yNDctMi4xNTFsLTAuMzU5LTEuNzY2IDExLjgxNS0yLjM5My0xLjI0OS02LjE0My0xMS44MTYgMi4zOTItMC44OTctNC40MDcgMTIuOTEzLTIuNjE2LTEuMjY0LTYuMjEzem0zMi42NjggOC45ODIgMTAuMDY3IDIuNjAyIDEuNTkxLTYuMTI2LTEwLjM1Mi0yLjY3NmMtNS42NzQtMS40NjctOS41NiAwLjY1My0xMC45NCA1Ljk2OGwtNC4yMjcgMTYuMjc4Yy0wLjE5NSAwLjc1Ni0wLjExNiAxLjQ2NSAwLjIzMSAyLjA1NSAwLjM0NyAwLjU4OSAwLjkzIDEuMDAzIDEuNjg3IDEuMTk5bDMuODQzIDAuOTkzIDIuNzI0LTEwLjUyOCAxMS42NTEgMy4wMTIgMS41NzQtNi4wNTUtMTEuNjU1LTMuMDE0IDAuNDUzLTEuNzRjMC41OTktMi4zMDggMS4yODktMi41MDIgMy4zNTMtMS45Njh6bTUyLjIzNyAxNC44NjcgMy41NTQtNC4zNzljLTEuNzY1LTEuNzYyLTMuNjAyLTMuNDcyLTUuNTE2LTUuMTItMTkuODg3LTE3LjEzMS00NS42NDgtMjYuNTY0LTcyLjUzNi0yNi41NjQtMjYuODg3IDAtNTIuNjQ3IDkuNDMzLTcyLjUzNiAyNi41NjQtMS45MTMgMS42NDgtMy43NTEgMy4zNTctNS41MTYgNS4xMTlsMy41NTQgNC4zNzljMS43OTUtMS44MTIgMy42NzEtMy41NjkgNS42My01LjI1OCAxOC44Ny0xNi4yNTIgNDMuMzI3LTI1LjIwMiA2OC44NjgtMjUuMjAyczQ5Ljk5OCA4Ljk1IDY4Ljg2NyAyNS4yMDJjMS45NjEgMS42ODkgMy44MzYgMy40NDYgNS42MzEgNS4yNTl6bS0yNy4xMyAyMS43MzIgMS4xNTMtMy45NjktNC45Ni0zLjY5OCAzLjk5NC0yLjg1NSAyLjMxMyAxLjczNCAyLjYyNy04LjgzOS0xNS4yNDQgOS44MzYtNi4yNDktMy41MjggMjMuOTExLTE1LjQ0MWMwLjkyMi0wLjU5NiAyLjE4My0xLjEyMSAzLjc3OSAwLjEwNGwxLjAyMiAwLjc4NmMxLjYxMSAxLjIzOCAxLjM4MSAyLjY1NiAxLjA2NiAzLjYxNWwtNy45MzcgMjcuMjU2LTUuNDc1LTUuMDAxem0tMTEyLjUzIDEyOS4wOGgtMTcuNjM0di0xMy41MTNoMTAuNTA5bDQuMzAyIDMuNjYxaDAuMTQ0di0xMy43OTVoLTAuMTQ0bC00LjMwMiAzLjY2MWgtMTAuNTA5di0xMS43NTVoMTdsNC45MzggNS4yOGgwLjE0bC0wLjU2NC0xMS42ODZoLTM2LjI1OHYwLjE0M2wzLjMxOSA0LjAxMXYzNi4zMTdsLTMuMzE5IDQuMDF2MC4xNDFoMzcuODFsMC45MTctMTMuNDQyaC0wLjE0M2wtNi4yMDYgNi45Njd6bTYuNjYyLTg5LjgxNiAxMi40ODcgMzEuODEzaDYuOTgzbDExLjU2OS0zMi4xNjMgMS45NzMgMjguMDA4LTQuMzc0IDQuMDExdjAuMTQ0aDE4Ljk3NHYtMC4xNDRsLTMuNjY1LTQuMDExLTIuNjg0LTM2LjMxNyAyLjg5NC00LjAxMXYtMC4xMzloLTE1Ljc5OWwtMTAuNzIzIDI5Ljc2OC0xMS41NjktMjkuNzY4aC0xNi4wMTF2MC4xMzlsMy4yNDYgNC4wMTEtMS45MDcgMzYuMzE3LTMuODc2IDQuMDExdjAuMTQ0aDE1LjU4NXYtMC4xNDRsLTMuODc3LTQuMDExIDAuNzc0LTI3LjY1OHptLTUyLjUwNCA4OS43NDVoLTE1LjMwNXYtMzMuOTIybDQuMTYzNS00LjAxMXYtMC4xNDNoLTE4LjkwN3YwLjE0M2wzLjMxODYgNC4wMTF2MzYuMzE3bC0zLjMxODYgMy45Mzl2MC4yMTJoMzUuNDhsMS42OTUtMTQuMDAzaC0wLjE0NGwtNi45ODMgNy40NTd6bS0zNC4xNy01OC4wNzZ2MC4xNDRoMTcuOTg5di0wLjE0NGwtMy4zMTg2LTQuMDExdi0zNi4zMTdsMy4zMTg2LTQuMDExdi0wLjEzOWgtMTcuOTg5djAuMTM5bDMuMjQ1NiA0LjAxMXYxMy41MTRoLTE2LjAxMXYtMTMuNTE0bDMuMjQ1Ni00LjAxMXYtMC4xMzloLTE3Ljk4OHYwLjEzOWwzLjMxNjIgNC4wMTF2MzYuMzE3bC0zLjMxNjIgNC4wMTF2MC4xNDRoMTcuOTg4di0wLjE0NGwtMy4yNDU2LTQuMDExdi0xNS42OTRoMTYuMDExdjE1LjY5NGwtMy4yNDU2IDQuMDExem0yODAuOTQgNTguMTQ3aC0xNy42MzV2LTEzLjUxM2gxMC41MDhsNC4zMDMgMy42NjFoMC4xNDN2LTEzLjc5NWgtMC4xNDNsLTQuMzAzIDMuNjYxaC0xMC41MDh2LTExLjc1NWgxNy4wMDFsNC45MzYgNS4yOGgwLjE0bC0wLjU2Mi0xMS42ODZoLTM2LjI1OHYwLjE0M2wzLjMxOCA0LjAxMXYzNi4zMTdsLTMuMzE4IDQuMDF2MC4xNDFoMzcuODA5bDAuOTE4LTEzLjQ0MmgtMC4xNDRsLTYuMjA1IDYuOTY3em0tMTYxLjg4LTExLjMzMi01LjI4OC0xNy43MzItNi4yMDkgMTcuNzMyaDExLjQ5N3ptMTUuOCAxMy42NTYgMy42NjggNC4wMXYwLjE0MWgtMTkuMTEzdi0wLjE0MWwzLjY2OC00LjAxLTIuMDQ1LTYuOTY3aC0xNS44bC0yLjQwMSA2Ljk2NyAzLjQ1NyA0LjAxdjAuMTQxaC0xNC45NTN2LTAuMTQxbDMuNTI4LTQuMDEgMTMuNzU0LTM2LjMxNy0yLjYxMS00LjAxMXYtMC4xNDNoMTUuMTY1bDEzLjY4MyA0MC40NzF6bS0xODMuMjQtNjYuMjRjLTkuMTcxOCAwLTE1LjAyNi05LjI5Mi0xNS4wMjYtMTcuMzE3IDAtOS44NTIgNS4zNjAxLTE2LjI1NSAxMy4wNDktMTYuMjU1IDIuMDQ1MiAwIDQuMDIyMyAwLjIxMSA1Ljc4NjMgMC43bDYuOTExMSA4LjUxOWgwLjE0MjRsLTAuNDk0Mi0xNC4wNzdjLTEuOTc3MS0wLjc3My02LjI3NjktMS44MzEtMTEuNTY5LTEuODMxLTE2LjM2MiAwLTI1Ljc0NSAxMS4xMjItMjUuNzQ1IDIzLjkzMSAwIDEyLjY3IDkuMDI4MSAyMy43ODcgMjQuNTQ2IDIzLjc4NyA0LjE2MjMgMCAxMC4yOTktMS40MDUgMTQuNTMxLTQuNTcybDAuNjM0My03LjM5aC0wLjE0Yy0zLjU5NjIgMi44MTQtOC43NDk0IDQuNTA1LTEyLjYyNiA0LjUwNXptMjU2Ljg1IDUuNzY5LTMuMjQ1LTQuMDExdi0zNi4zMTdsMy4yNDUtNC4wMTF2LTAuMTM5aC0xNy45ODh2MC4xMzlsMy4zMTYgNC4wMTF2MzYuMzE3bC0zLjMxNiA0LjAxMXYwLjE0NGgxNy45ODh2LTAuMTQ0em0tMzkuNDU4IDQzLjcxOSA0LjQ0MiA0LjAxNXY4LjM3NWMtMS40MTIgMS42MTctMy44OCAyLjk1My03LjE5MyAyLjk1My03LjkwMSAwLTEyLjA2My05LjY0MS0xMi4wNjMtMTcuNzM1IDAtOC43OTggNC40NDYtMTYuMTg3IDEzLjYxNC0xNi4xODcgMi41MzkgMCA1LjIyIDAuMjEyIDcuNDA1IDAuOTgzbDcuMDU1IDcuNmgwLjE0bC0wLjQyNC0xMi4yNDRjLTQuMDktMi4xMTItOS4wMjgtMy4wMjMtMTQuMDM2LTMuMDIzLTE1LjAyMyAwLTI1LjY3NSA5LjIxOS0yNS42NzUgMjQuNDIgMCAxMi43MzYgOC4xODMgMjMuMjk3IDIwLjk0OSAyMy4yOTcgNS41NzQgMCAxMC42NTEtMS4yNjkgMTUuMzc3LTQuNzE1bDUuNTcgNC43MTVoMC4xNDR2LTE4LjQzOWwzLjUyNS00LjAxNXYtMC4xNGgtMTguODN2MC4xNHptLTExLjY3NS02NS4yNTNjMS40MTIgMC40MjIgMy4wMzIgMC42MzIgNC43MjYgMC42MzIgNi4yMDkgMCA4Ljg4OS0zLjM3OCA4Ljg4OS04LjM3NiAwLTUuOTEzLTMuNDU3LTguNzI2LTkuODc4LTguNzI2aC0zLjczN3YxNi40N3ptLTExLjQyNSAxNy41MjN2LTM2LjMxN2wtMy4zMTgtNC4wMTF2LTAuMTM5aDIxLjE2M2MxMi44MzggMCAxOC42OTIgNS44MzcgMTguNjkyIDE0LjcxMSAwIDkuMjE4LTYuOTgzIDE0LjkxOC0xNi41MDUgMTQuOTE4LTMuMTAzIDAtNi4yNzgtMC4yMTItOC42MDctMC43NzN2MTEuNjExbDQuNjU1IDQuMDExdjAuMTQ0aC0xOS4zOTh2LTAuMTQ0bDMuMzE4LTQuMDExem0xMDYuNTctMTQuOTIxYzAtNy43NC0yLjg5MS0yMC4wNTgtMTIuNzY5LTIwLjA1OC03LjkgMC0xMC4xNTcgNy44ODItMTAuMTU3IDEzLjIzIDAgNy44MTQgMy4yNDYgMjAuNDEyIDEyLjc3IDIwLjQxMiA2LjgzOSAwIDEwLjE1Ni02LjQ3NyAxMC4xNTYtMTMuNTg0em0tMTEuODUxIDIwLjYyYy0xMy45NjYgMC0yMi45OTQtMTEuNDcyLTIyLjk5NC0yNC40ODggMC0xMy40NDUgMTAuMzY4LTIzLjIzIDIzLjM0OC0yMy4yMyAxNC4zMTcgMCAyMy40ODggMTEuMTkzIDIzLjQ4OCAyNC4wMDIgMCAxNC42MzktMTEuMDc0IDIzLjcxNi0yMy44NDIgMjMuNzE2em0tMTQuOTE3IDE4LjQ1NSAzLjY2OSA0LjAxMXYyNS40MWMwIDcuMzE4LTMuNTk3IDkuMTQ4LTkuNDUyIDkuMTQ4LTUuOTI2IDAtOS41MjItMS42OTEtOS41MjItOS4xNDh2LTI1LjQxbDMuNjY4LTQuMDExdi0wLjE0M2gtMTguNDEydjAuMTQzbDMuMzE3IDQuMDExdjI1LjQxYzAgMTIuMTcyIDYuMjA3IDE2LjYwOSAxOS40NjYgMTYuNjA5IDEyLjA2MyAwIDE4LjItNC4xNTQgMTguMi0xNi4yNTl2LTI1Ljc2bDMuMjQyLTQuMDExdi0wLjE0M2gtMTQuMTc2djAuMTQzem04NS4xOTEgNS40ODNjMC0zLjE3Mi0yLjQxMS01LjU3LTUuNDUzLTUuNTctMy4wNzUgMC01LjQ4MiAyLjM5OC01LjQ4MiA1LjU3IDAgMy4yMzcgMi40MDcgNS42MTkgNS40ODIgNS42MTkgMy4wNDIgMCA1LjQ1My0yLjM4MiA1LjQ1My01LjYxOXptMS4zNTMgMGMwIDMuODk0LTMuMTQzIDYuNzM0LTYuODA2IDYuNzM0LTMuNjk1IDAtNi44MzMtMi44NC02LjgzMy02LjczNCAwLTMuODQ3IDMuMTM4LTYuNjkxIDYuODMzLTYuNjkxIDMuNjYzIDAgNi44MDYgMi44NDQgNi44MDYgNi42OTF6bS02LjgxNi0wLjQ2NGMwLjk5MiAwIDEuODg1LTAuMDU0IDEuODg1LTEuMjQ5IDAtMC45NjMtMC44NzItMS4xMzctMS42OTktMS4xMzdoLTEuNjAzdjIuMzg2aDEuNDE3em0xLjEwMiAwLjk0NyAyLjE5IDMuNDFoLTEuMzA2bC0yLjAzOS0zLjM1NWgtMS4zNjR2My4zNTVoLTEuMTY3di03Ljc0aDIuOTU0YzEuODM0IDAgMi43MzcgMC42NzUgMi43MzcgMi4xOTkgMCAxLjM4Ni0wLjg3MiAxLjk4NC0yLjAwNSAyLjEzMXptLTIuOTMyLTcwLjQ0OCA0LjMwNCA0LjAxMXYyMy42NDhsLTE4LjEzLTI3Ljc5OGgtMTYuMjk0djAuMTM5bDMuMzE3IDQuMDExdjM2LjMxN2wtMy4zMTcgNC4wMTF2MC4xNDRoMTQuODgzdi0wLjE0NGwtNC4zNzEtNC4wMTF2LTI5LjU2MWwyMi42MzkgMzMuNzE2aDguNDY2di00MC40NzJsMy4zMTQtNC4wMTF2LTAuMTM5aC0xNC44MTF2MC4xMzl6bTQ1LjQ4NCAxNy4wMzRjLTguMTEyLTIuMjUyLTEwLjU4LTMuMjM4LTEwLjU4LTYuOTY3IDAtNC4yOTMgNS41NzQtNS4xNCA5LjEtNS4xNCAyLjk2MyAwIDUuNzE0IDAuMzUgOC4xODMgMS4xMjZsNi43NzEgNy4zMjFoMC4xNGwtMC41NjMtMTIuNjAxYy00LjIzNS0xLjYxNi04LjY3Ny0yLjQ2NC0xMy43NTQtMi40NjQtMTAuNjUyIDAtMjAuODggMy42NjEtMjAuODggMTQuMjIxIDAgNi44MjUgNC43MjYgMTAuOTA3IDE0Ljk1NCAxMy43MjQgNy45MDEgMi4xODEgMTEuNzgxIDMuNTg3IDExLjc4MSA3LjYgMCA0LjY0NC01LjkyNiA1LjYyOC05Ljg3OCA1LjYyOC0zLjMxNCAwLTYuMjc3LTAuNDkxLTguODE4LTEuMjY2bC02LjgzOS04LjQ0NWgtMC4xNDNsMC40OTQgMTMuMzcxYzQuNjU4IDIuMTEyIDEwLjMgMi44ODUgMTUuNTg4IDIuODg1IDExLjQyNyAwIDIxLjAyMS00Ljc4MyAyMS4wMjEtMTQuNDI1IDAtOS4wOC02LjI3Ny0xMS42ODMtMTYuNTc3LTE0LjU2OHptLTMwOS42OCA5LjY0MWgxMS40OTdsLTUuMjg4LTE3LjczNy02LjIwOSAxNy43Mzd6bS0xLjI2OCAxNy44MDhoLTE0Ljk1NHYtMC4xNDRsMy41Mjk0LTQuMDExIDEzLjc1NC0zNi4zMTctMi42MTEtNC4wMTF2LTAuMTM5aDE1LjE2NGwxMy42ODQgNDAuNDY3IDMuNjY4IDQuMDExdjAuMTQ0aC0xOS4xMTR2LTAuMTQ0bDMuNjY5LTQuMDExLTIuMDQ2LTYuOTY3aC0xNS44bC0yLjQgNi45NjcgMy40NTcgNC4wMTF2MC4xNDR6IiBmaWxsPSIjMDAwMDRiIi8+Cjwvc3ZnPgo=",
@@ -586,12 +815,17 @@ let view='public',inviteMarker=false,lang='es',competition='all',offset=0,epoch=
 let googleNameSuggestion=null,nicknameSuggestionApplied=false;
 const DEFAULT_ALIAS_PATTERN=/^[A-Za-z]+-[0-9a-f]{8}$/;
 const stored=()=>{try{return !!localStorage.getItem(key);}catch{return false;}};
+Object.assign(text.es,{title:'Clasificación pública',subtitle:'Puntos acumulados de carreras y diarias con cuenta. En Grupos compiten por la diaria semanal.',statPoints:'Puntos acumulados',help:'Ayuda',groups:'Grupos',board:'Clasificación',helpTitle:'Cómo jugar',helpRules:'Cada jugador tiene diez opciones, tres intentos y tres pistas: posición, nacionalidad y años de los clubes. El tiempo y las pistas reducen los puntos. Al continuar, el reloj de una ronda ya iniciada sigue contando.',helpGroups:'La diaria tiene tres jugadores compartidos. En los grupos solo cuentan los resultados terminados después de unirte; la semana empieza el lunes a las 00:00 UTC. No hay reinicio de resultados con cuenta.',helpStorage:'Los puntos de invitado quedan en esta pestaña y no se transfieren. Tus respuestas de la diaria se guardan en este navegador. Los resultados con cuenta se conservan en la nube.',helpPlay:'Ir a Jugar'});
+Object.assign(text.en,{title:'Public leaderboard',subtitle:'Cumulative account points from careers and Daily play. Groups compare weekly Daily points.',statPoints:'Lifetime points',help:'Help',groups:'Groups',board:'Leaderboard',helpTitle:'How to play',helpRules:'Each player has ten choices, three attempts and three hints: position, nationality and club years. Time and hints reduce points. Continuing a started round keeps its clock running.',helpGroups:'The Daily has three shared players. Groups count only results finished after joining; the week starts on Monday at 00:00 UTC. Account results cannot be reset.',helpStorage:'Guest points stay in this tab and never transfer. Daily answers are saved in this browser. Account results are saved in the cloud.',helpPlay:'Go to Play'});
 function readURL(){const p=new URLSearchParams(location.search);try{lang=localStorage.getItem(languageKey)==='en'?'en':'es';}catch{lang='es';}if(['es','en'].includes(p.get('lang')))lang=p.get('lang');competition=ids.includes(p.get('competition'))?p.get('competition'):'all';view=p.get('view')==='friends'?'friends':'public';inviteMarker=p.get('invite')==='1';FriendsLeagues.readURL(p);FriendsLeagues.setActive(view==='friends');normalize(false);}
 function normalize(push){const u=new URL(location.href);u.search='';u.hash='';if(view==='friends'){u.searchParams.set('view','friends');for(const [k,v] of Object.entries(FriendsLeagues.urlState()))u.searchParams.set(k,v);if(inviteMarker)u.searchParams.set('invite','1');}else u.searchParams.set('competition',competition);u.searchParams.set('lang',lang);history[push?'pushState':'replaceState'](null,'',u);}
 function render(){const t=text[lang];document.documentElement.lang=lang;for(const id of ['public-personal','public-board','public-rules'])$(id).hidden=view==='friends';document.title=t.title+' — derabona';document.querySelector('h1').textContent=t.title;
 $('board-loading').hidden=status!=='loading';$('board-loading-label').textContent=t.loading;$('board-results').setAttribute('aria-busy',String(status==='loading'));
 const labels={'language-label':t.language,eyebrow:t.eyebrow,subtitle:t.subtitle,'personal-title':t.personal,'leaderboard-filter-label':t.competition,'rank-label':t.rank,'name-label':t.name,'points-label':t.points,'answered-label':t.answered,'correct-label':t.correct,'board-caption':t.caption,'board-prev':t.prev,'board-next':t.next,'board-retry':t.retry,'rules-title':t.rules,'rules-detail':t.detail,'bottom-play':t.back,'privacy-link':t.privacy,'footer-about':t.footerAbout,'footer-phrase':t.footerPhrase,'footer-contact':t.footerContact,'board-heading':t.title,'board-competitions-close':t.close};for(const [id,value]of Object.entries(labels))$(id).textContent=value;$('wordmark-tagline').innerHTML=t.tagline;
-FriendsLeagues.setLanguage(lang);$('eyebrow').hidden=true;document.querySelector('main').classList.toggle('friends-active',view==='friends');$('board-play').textContent=t.play;$('board-play').href='index.html?lang='+lang;document.querySelector('.board-nav').ariaLabel=t.nav;
+FriendsLeagues.setLanguage(lang);$('eyebrow').hidden=true;document.querySelector('main').classList.toggle('friends-active',view==='friends');document.querySelector('.site-nav').ariaLabel=t.nav;
+for(const [id,label,href] of [['nav-play',t.play,'index.html?lang='+lang],['nav-groups',t.groups,'leaderboard.html?view=friends&lang='+lang],['nav-board',t.board,'leaderboard.html?lang='+lang]]){const link=$(id);link.textContent=label;link.href=href;if(id===(view==='friends'?'nav-groups':'nav-board'))link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');}
+for(const [id,value] of Object.entries({'site-help':t.help,'site-help-title':t.helpTitle,'site-help-rules':t.helpRules,'site-help-groups':t.helpGroups,'site-help-storage':t.helpStorage,'site-help-play':t.helpPlay,'site-help-close':t.close}))$(id).textContent=value;
+$('site-help-play').href='index.html?lang='+lang;document.querySelector('.wordmark').href='index.html?lang='+lang;
 $('language').value=lang;document.querySelector('.footer-links').ariaLabel=t.footerNav;$('board-competition-current').textContent=t.leagues[ids.indexOf(competition)];renderCompetitionOptions();
 // Same trigger-icon swap as the main game's own competition badge: a real
 // crest once a specific competition is chosen, the trophy icon for "all".
@@ -626,14 +860,11 @@ $('leaderboard-entries').replaceChildren();
     }
   }
 }
-function setIdentity(next){const id=next?.user?.id??null;session=next;if(id===identity)return false;identity=id;epoch++;FriendsLeagues.identityChanged(id);controller?.abort();data=null;status='loading';cloud=null;accountNotice='';
+function setIdentity(next){const id=next?.user?.id??null;session=next;if(id===identity)return false;identity=id;epoch++;FriendsLeagues.identityChanged(id);controller?.abort();data=null;status='loading';cloud=null;accountNotice='';accountBusy=false;
   if(id){const meta=next?.user?.user_metadata;googleNameSuggestion=(meta?.full_name||meta?.name||meta?.given_name||'').trim().slice(0,24)||null;}else googleNameSuggestion=null;
   nicknameSuggestionApplied=false;$('public-nickname').value='';
   render();renderAccountDialog();
-  // Fetch the point total as soon as an identity is known, not only once the
-  // user opens the account dialog - otherwise the masthead badge shows the
-  // icon and a static "000" placeholder indefinitely for anyone who never
-  // clicks it, unlike index.html's own #score, which is always live.
+  // Preload the signed-in account projection; it never starts gameplay.
   if(id)loadAccountProgress();
   return true;}
 async function sdk(){if(client)return client;if(!sdkPromise)sdkPromise=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';s.crossOrigin='anonymous';s.referrerPolicy='no-referrer';const timeout=setTimeout(()=>{s.remove();reject(Error('SDK_TIMEOUT'));},5000);s.onerror=()=>{clearTimeout(timeout);reject(Error('SDK_FAILED'));};s.onload=()=>{clearTimeout(timeout);try{client=window.supabase.createClient(ACCOUNT_CONFIG.url,ACCOUNT_CONFIG.anonKey,{auth:{storageKey:key,persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:'pkce'}});client.auth.onAuthStateChange((event,next)=>{authEpoch++;authFailed=false;if(setIdentity(next))setTimeout(load,0);});resolve(client);}catch(e){reject(e);}};document.head.append(s);}).catch(error=>{sdkPromise=null;throw error;});return sdkPromise;}
@@ -673,13 +904,14 @@ $('change-board-competition').addEventListener('click',()=>{
 // allowlist is configured for index.html), so "Continuar con Google" stays
 // a link to index.html?account=1 rather than calling signInWithOAuth here.
 async function accountRequest(payload,endpoint='ranked-game'){
-  const c=await sdk(),{data,error}=await c.auth.getSession();if(error)throw error;
-  const credentials=data.session;if(!credentials)throw Error('AUTH_REQUIRED');
+  const owner=identity;const c=await sdk(),{data,error}=await c.auth.getSession();if(error)throw error;
+  const credentials=data.session;if(!credentials)throw Error('AUTH_REQUIRED');if(owner!==identity||credentials.user?.id!==owner)throw Error('AUTH_CHANGED');
   const headers={'Content-Type':'application/json',apikey:ACCOUNT_CONFIG.anonKey,Authorization:'Bearer '+credentials.access_token};
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
   try{
     const response=await fetch(ACCOUNT_CONFIG.url+'/functions/v1/'+endpoint,{method:'POST',headers,body:JSON.stringify(payload),signal:controller.signal,referrerPolicy:'no-referrer'});
     const result=await response.json();
+    if(owner!==identity)throw Error('AUTH_CHANGED');
     if(!response.ok){const err=Error(result.error?.code||'UNAVAILABLE');err.code=result.error?.code;throw err;}
     return result;
   }finally{clearTimeout(timer);}
@@ -698,9 +930,9 @@ function renderAccountDialog(){
   // Once signed in, the generic storage-persistence pitch has nothing left
   // to tell you - replace it with the actual numbers instead.
   $('account-detail').hidden=signed;$('account-stats').hidden=!signed;
-  if(signed&&cloud?.progress){$('stat-points').textContent=String(cloud.progress.totalPoints);$('stat-answered').textContent=String(cloud.progress.answered);$('stat-correct').textContent=String(cloud.progress.correct);}
+  for(const [id,key] of [['stat-points','totalPoints'],['stat-answered','answered'],['stat-correct','correct']])$(id).textContent=signed&&cloud?.progress?String(cloud.progress[key]):'—';
   $('account-status').textContent=accountNotice?t[accountNotice]:(signed?t.accountSigned:'');
-  $('google-login').hidden=signed;
+  $('google-login').hidden=signed;$('google-login').href=view==='friends'?'index.html?auth=friends&lang='+lang+(FriendsLeagues.hasInvite()?'&invite=1':'')+(FriendsLeagues.hasCreate()?'&create=1':''):'index.html?account=1&lang='+lang;
   $('logout').hidden=!signed;$('logout').disabled=accountBusy;
   $('alias-section').hidden=!signed;$('danger-section').hidden=!signed;
   $('enroll-form').hidden=!signed;$('enroll').disabled=accountBusy;
@@ -710,7 +942,7 @@ function renderAccountDialog(){
   $('public-nickname').placeholder=cloud?.profile?.nickname||'';
   if(signed&&!nicknameSuggestionApplied&&googleNameSuggestion&&DEFAULT_ALIAS_PATTERN.test(cloud?.profile?.nickname||'')&&document.activeElement!==$('public-nickname')&&!$('public-nickname').value){$('public-nickname').value=googleNameSuggestion;nicknameSuggestionApplied=true;}
   $('account-open-link-label').textContent=signed?t.account:t.login;
-  $('account-open-score').hidden=!signed;$('account-open-score').textContent=cloud?.progress?String(cloud.progress.totalPoints):'000';
+  $('account-open-score').hidden=true;$('account-open-score').textContent=cloud?.progress?String(cloud.progress.totalPoints):'000';
   $('account-open-link').classList.toggle('account-open-signed',signed);
 }
 $('account-open-link').addEventListener('click',()=>{accountNotice='';$('account-dialog').showModal();renderAccountDialog();loadAccountProgress();});
@@ -721,17 +953,17 @@ $('logout').onclick=async()=>{
 };
 $('enroll-form').onsubmit=async event=>{
   event.preventDefault();const nickname=$('public-nickname').value.trim();if(!nickname||accountBusy)return;
-  accountBusy=true;accountNotice='';renderAccountDialog();
+  const owner=identity;accountBusy=true;accountNotice='';renderAccountDialog();
   try{cloud=await accountRequest({action:'enroll',nickname,idempotencyKey:crypto.randomUUID()});$('public-nickname').value='';}
-  catch(error){accountNotice=error.code==='NICKNAME_TAKEN'?'nicknameTaken':'accountUnavailable';}
-  finally{accountBusy=false;renderAccountDialog();}
+  catch(error){if(owner!==identity)return;accountNotice=error.code==='NICKNAME_TAKEN'?'nicknameTaken':'accountUnavailable';}
+  finally{if(owner===identity){accountBusy=false;renderAccountDialog();}}
 };
 $('account-delete').onclick=async()=>{
   if(accountBusy||prompt(text[lang].deleteConfirm)!=='DELETE')return;
-  accountBusy=true;renderAccountDialog();
-  try{await accountRequest({confirmation:'DELETE'},'account-delete');const c=await sdk();await c.auth.signOut({scope:'local'});cloud=null;setIdentity(null);$('account-dialog').close();}
-  catch{accountNotice='deleteError';}
-  finally{accountBusy=false;renderAccountDialog();}
+  const owner=identity;accountBusy=true;renderAccountDialog();
+  try{await accountRequest({confirmation:'DELETE'},'account-delete');const c=await sdk();if(owner!==identity)return;await c.auth.signOut({scope:'local'});if(owner!==identity&&identity!==null)return;cloud=null;setIdentity(null);$('account-dialog').close();}
+  catch{if(owner===identity)accountNotice='deleteError';}
+  finally{if(owner===identity||identity===null){accountBusy=false;renderAccountDialog();}}
 };
 {
   const aliasHelp=$('alias-help'),aliasTooltip=$('alias-tooltip'),aliasRegion=$('alias-help-region');
@@ -748,14 +980,13 @@ $('account-delete').onclick=async()=>{
   $('account-dialog').addEventListener('close',()=>{aliasHovered=false;aliasDismissed=true;renderAliasTooltip();});
 }
 $('language').onchange=()=>{lang=$('language').value;try{localStorage.setItem(languageKey,lang);}catch{}normalize(true);render();};$('board-next').onclick=()=>{offset+=20;load();};$('board-prev').onclick=()=>{offset=Math.max(0,offset-20);load();};$('board-retry').onclick=load;window.addEventListener('popstate',()=>{readURL();offset=0;load();});
-$('view-public').onclick=()=>{if(view==='public')return;view='public';FriendsLeagues.setActive(false);normalize(true);render();load();};
-$('view-friends').onclick=()=>{if(view==='friends')return;view='friends';FriendsLeagues.setActive(true);normalize(true);render();load();};
+$('site-help').onclick=()=>{$('site-help-dialog').showModal();};
 FriendsLeagues.captureInvite(BoardInvite.take());
 FriendsLeagues.attach({url:ACCOUNT_CONFIG.url,anonKey:ACCOUNT_CONFIG.anonKey,
   async session(){if(!stored()&&!client)return null;const c=await sdk(),{data,error}=await c.auth.getSession();if(error)throw error;return data.session;},
   pushURL(replace=false){normalize(!replace);},
   reload(){load();},
-  authURL(withInvite){return 'index.html?auth=friends&lang='+lang+(withInvite?'&invite=1':'');},
+  authURL(withInvite){return 'index.html?auth=friends&lang='+lang+(withInvite?'&invite=1':'')+(FriendsLeagues.hasCreate()?'&create=1':'');},
   inviteMarker:()=>inviteMarker,clearInviteMarker(){if(!inviteMarker)return;inviteMarker=false;normalize(false);}});window.addEventListener('storage',e=>{if(e.key===key||e.key===null){authEpoch++;setIdentity(null);load();}});window.addEventListener('offline',()=>{epoch++;controller?.abort();data=null;status='offline';render();if(view==='friends')FriendsLeagues.unavailable();});readURL();load();
 })();
 </script></body></html>

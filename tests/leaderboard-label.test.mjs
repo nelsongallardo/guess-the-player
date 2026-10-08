@@ -8,22 +8,25 @@ const game=read('index.html'),board=read('leaderboard.html');
 const rankedCopy=vm.runInNewContext('('+game.match(/const RankedUI = \(\(\)=>\{\s*const TEXT=(\{[\s\S]*?\n  \});/)[1]+')');
 const boardCopy=vm.runInNewContext('('+board.match(/const text=(\{[\s\S]*?\});\nconst COMPETITION_LOGOS/)[1]+')');
 
-test('Spanish leaderboard navigation and page naming use Tabla without changing English or routes',()=>{
-  assert.match(game,/<span id="leaderboard-open-label">Tabla<\/span>/);
-  assert.equal(rankedCopy.es.board,'Tabla');
-  assert.equal(rankedCopy.en.board,'Leaderboards');
-  assert.equal(boardCopy.es.title,'Tabla');
-  assert.equal(boardCopy.en.title,'Leaderboard');
-  assert.match(game,/<a[^>]+id="leaderboard-open"[^>]+href="leaderboard\.html"/);
+test('Both pages expose the same three labeled navigation destinations',()=>{
+  for(const html of [game,board]){
+    const nav=html.match(/<nav class="site-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(nav);
+    assert.match(nav,/<a id="nav-play"[^>]*>Jugar<\/a>/);
+    assert.match(nav,/<a id="nav-groups"[^>]*>Grupos<\/a>/);
+    assert.match(nav,/<a id="nav-board"[^>]*>Clasificación<\/a>/);
+  }
+  assert.equal(boardCopy.es.title,'Clasificación pública');
+  assert.equal(boardCopy.en.title,'Public leaderboard');
   assert.match(board,/<link rel="canonical" href="https:\/\/derabona.club\/leaderboard.html">/);
 });
 
-test('Spanish static metadata and accessible loading name the same Tabla destination',()=>{
-  assert.match(board,/<title>Tabla — derabona<\/title>/);
-  assert.match(board,/<meta property="og:title" content="Tabla — derabona">/);
-  assert.match(board,/<meta name="description" content="La tabla de derabona:/);
-  assert.match(board,/<meta property="og:description" content="La tabla de derabona:/);
-  assert.match(board,/<h1>Tabla<\/h1>/);
+test('Public leaderboard metadata states its scope while loading remains translated',()=>{
+  assert.match(board,/<title>Clasificación pública — derabona<\/title>/);
+  assert.match(board,/<meta property="og:title" content="Clasificación pública — derabona">/);
+  assert.match(board,/<meta name="description" content="La clasificación pública de derabona:/);
+  assert.match(board,/<meta property="og:description" content="La clasificación pública de derabona:/);
+  assert.match(board,/<h1>Clasificación pública<\/h1>/);
   assert.match(board,/<p id="leaderboard-status"[^>]+role="status">Cargando tabla…<\/p>/);
   assert.match(board,/<span id="board-loading-label">Cargando tabla…<\/span>/);
   assert.match(board,/<noscript><p>La tabla necesita JavaScript y conexión\./);

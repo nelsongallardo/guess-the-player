@@ -1,5 +1,29 @@
 # Verification report
 
+## Connected Play and Groups — 8 October 2026 (local candidate verified; compatible backend deployed)
+
+The owner approved the whole-experience design and implementation. Local frontend and backend checks are complete; Pages publication and CI are separate release steps. This section records the candidate evidence, not a claim of a target-user usability study.
+
+### Frontend journeys and regression checks
+
+- Full Node 22 suite with worktree-local native PostgreSQL: **306/306**, zero failures/skips, at `f2a746a`. The final direct-rollover fix `d01f36d` subsequently passed **35/35** affected Daily Node tests and the expanded **53/53** whole-experience browser suite. CI checks the final committed branch again before merge.
+- Browser suites: whole experience **53** checks; private groups **75** checks through the real local Edge handler and PostgreSQL; public leaderboard **59**; bilingual navigation **64**; accounts **65**; guest sessions **16** (all **221** offline careers completed); Daily cumulative account points **15**. Account/OAuth SDKs are simulated in these local checks. Browser sessions are headless, non-persistent and worktree-scoped; worker harnesses substituted ports 4175/4176 where necessary and preserved file/save fixtures.
+- An additional **10-check** connected journey uses the real local Edge/PostgreSQL from Play overview → create group → return to Play → complete three Daily players → Show result → group standings → return to completed Play. It proves zero Daily rows before explicit Start and exact agreement between persisted Daily points and the group table. Only Auth/SDK is simulated. Run with the league bridge and `--suite connected-journey-checks.js`.
+- Core coverage includes no clocks/round-start requests during overview, nickname-before-start, completed Daily return, engaged clocks across reload/Back, guest `file:` play and denied storage, explicit competition selection, repeated Daily/Unlimited entry, both overview and direct UTC rollover failure/retry, explicit final-player Show result, actual share/copy/cancel/failure outcomes, create draft through OAuth without automatic creation, invitation privacy, weekly winners and an uncertain create acknowledgement retried with its original key.
+- Account score coverage confirms combined totals across Daily, summary, Unlimited and reload, delayed responses cannot roll totals back, and sign-out/new identities hide or reset old statistics. The former 8px tooltip hover gap reproduced against `d1943ff`; a CSS pointer bridge fixes it, and the original pointer-crossing assertion now passes.
+- Source identifiers pass for 221 player sections and all cited/ledger URLs. Initial Node failures were superseded automatic-start/copy assertions plus a roster guard run during uncommitted worker edits; corrected behavioral clock/identity tests and the committed-tree full run pass. No gameplay/roster assertion was removed to hide a regression.
+- Independent review found and verified fixes for competition intent, stale mode controls, UTC cache reuse, sharing feedback, explicit final-player results and cumulative-score labels. A scoped second pass caught the direct Load new Daily route; its fix was reviewed clean. Mobile visual review confirms visible Create group on the Play overview at 375×667, a focused creation form, consistent labeled navigation and no horizontal overflow at 320px.
+- This does not claim all historical browser suites were rerun, native Safari/Firefox coverage, hosted two-account OAuth acceptance, or observed usability with nontechnical participants.
+
+### Compatible backend deployed before frontend
+
+- Forward migration `202610080002_play_overview.sql` adds authenticated, clue-free readiness summaries without starting or advancing gameplay. Native PostgreSQL overview tests passed **7/7**, including fresh replay, predecessor upgrade, exact gameplay snapshots, prior completed UTC day, auth/grants and rate budget. Existing ranked/private-league native suites passed **43/43**. Edge tests passed **14/14**; all three Deno entrypoints type-check.
+- An independent review found no actionable backend defects. The previous dispatcher is preserved as a private delegate; subsequent migrations must deliberately preserve the overview wrapper/delegate split.
+- Hosted preflight confirmed migration registry through `202610080001` and the expected dispatcher. Applied `202610080002` in a guarded repeatable-read transaction with exact before/after fingerprints for account, gameplay/result/receipt and league/history tables; the transaction rejects changed predecessor/schema or protected rows. The migration registry was recorded in that transaction.
+- Hosted readback confirms registry `202610080002`, service-only public RPC execution and denied direct private-delegate execution. The legacy dispatcher body is byte-identical before/after (MD5 `281c624c074d7525bcf2b6ebf2d310f4`). Deployed `ranked-game` Edge version **3**, with the existing `verify_jwt=false` configuration and handler-level verified Auth boundary preserved.
+- A read through the owner's existing signed-in Hermes Chrome session returned HTTP **200**, the four expected overview keys and the actual completed-Daily/existing-career statuses. No new login, guess, hint, group creation/join or live test-account mutation was performed. This proves the hosted read path; it is not a fresh two-account OAuth/invitation acceptance test.
+
+
 ## League standings focus — 8 October 2026
 
 - Replaces the league detail's competing navigation/actions with a breadcrumb and compact header, a native period selector, and the standings. Play Daily is removed from the page. Past champions, options/leave, and scoring explanations use secondary disclosures; the owner invitation flow remains. No backend or scoring change.

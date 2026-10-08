@@ -37,9 +37,9 @@ test('desktop signed-out account control has a visible benefit-specific label',(
 
 test('rules describe the current ten-option and 221-player game',()=>{
   assert.match(ui,/Pick one of ten players\./);
-  assert.match(ui,/New games contain all 221 players/);
+  assert.match(ui,/New games use the unseen players in your selected competition/);
   assert.match(ui,/Elegí uno de los diez jugadores\./);
-  assert.match(ui,/Las partidas nuevas incluyen los 221 jugadores/);
+  assert.match(ui,/Las partidas nuevas usan los jugadores sin responder de la competición elegida/);
   assert.doesNotMatch(ui,/one of five players|uno de los cinco jugadores|all 70 players|los 70 jugadores/);
   assert.doesNotMatch(html,/id="answer-caption">Five names|<span class="footer-brand">90 PLAYERS/);
 });

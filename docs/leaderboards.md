@@ -131,6 +131,14 @@ Account browser tests route-mock SDK/API. Label them as rendered frontend contra
 
 ## Separate release gates
 
+### Play overview and explicit activation
+
+[ADR 0027](adr/0027-connected-play-and-groups.md) separates checking progress from starting timed gameplay. The authenticated `ranked-game` action `{ "action": "overview" }` returns existing `profile` and `progress` shapes plus `daily` and `career` readiness summaries. It never creates or advances gameplay rounds, changes results/receipts, or returns current/unstarted clues or options. Account initialization and the existing per-account rate budget still apply. `daily.previous` is the most recent fully completed earlier UTC day, separately dated.
+
+Migration `202610080002_play_overview.sql` preserves the prior dispatcher as the private, revoked `ranked_private.ranked_game_before_overview` helper; the public service-only wrapper handles `overview` and delegates all older actions unchanged. Future dispatcher migrations must preserve this delegation and the overview boundary. Existing `dailyProgress` remains a start-capable request for old clients, so the new frontend must not use it to populate the Play overview.
+
+Run `tests/play-overview-backend.test.mjs` with the documented native PostgreSQL environment for fresh replay, predecessor upgrade, no-write snapshots, prior-day summaries, role/auth boundaries and rate limits. The new frontend requires this forward migration and the updated `ranked-game` Edge allowlist before Pages publication. Deployment evidence belongs in TESTING.md; merely adding this section does not establish hosted rollout.
+
 The Pages workflow validates branch pushes, PRs and manual runs with all Node tests (native PostgreSQL included), source/roster parity and Deno checks/tests. Browser suites are separate. Only validated non-PR `main` runs deploy `index.html`, `leaderboard.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. It never deploys Supabase or configures Google - `supabase-deploy.yml` is a separate, manual-only workflow for that (see "Applying migrations to the hosted database" above); it is not part of the Pages workflow and never triggers on push.
 
 Before claiming hosted accounts work, the release owner must verify the intended project's migrations/functions and server-only environment; configure Google provider credentials and authorized Supabase callback; verify canonical/language-preserving redirect allowlists; and exercise real Google login, cancellation, session refresh, cross-device progress, identity rejection, anonymous/enrolled boards, offline practice isolation and approved account deletion/readback. Publish/read back the actual static artifact and privacy page and run deployed browser smoke checks. Keep credentials and disposable-user details out of public artifacts. Provisioning alone, mocked OAuth and local SQL success do not satisfy these gates.

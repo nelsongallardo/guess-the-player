@@ -53,12 +53,18 @@ test('elapsed-time rendering does not depend on animation frames',()=>{
   assert.doesNotMatch(source,/requestAnimationFrame\(tick\)/);
 });
 
-test('Unlimited does not start its session clock while Daily is selected',()=>{
-  const source=block('game-ui');
-  assert.match(source,/roundClockWaitingForMode=roundClockStart===null&&DailyUI\.requestedMode\(\)==='daily'/);
-  assert.match(source,/function startGuestClockForMode\(\)/);
-  assert.match(source,/resetRoundClock=\(\)=>\{roundClockWaitingForMode=DailyUI\.requestedMode\(\)==='daily'/,'a guest reset while Daily is active must remain deferred');
-  assert.match(source,/if\(roundClockWaitingForMode\)try\{sessionStorage\.removeItem\(CLOCK_KEY\)/);
+test('ready mode defers a new Unlimited clock even when Unlimited is selected',()=>{
+  const source=block('game-ui'),start=source.indexOf('let roundClockStart='),end=source.indexOf("window.addEventListener('pageshow'",start);
+  const startup=source.slice(start,end);
+  for(const selected of ['daily','unlimited']){
+    const saved=[],removed=[];
+    const context=vm.createContext({AuthRoute:{active:false},playActivated:false,loadRoundClock:()=>null,clockTabId:null,CLOCK_KEY:'clock',sessionStorage:{setItem(){},removeItem:key=>removed.push(key)},Date:{now:()=>12345},DailyUI:{requestedMode:()=>selected},Analytics:{shouldPauseGameClock:()=>false},saveRoundClock:value=>saved.push(value)});
+    vm.runInContext(startup+';globalThis.start=startGuestClockForMode;globalThis.reset=resetRoundClock;',context);
+    assert.deepEqual(saved,[],selected+' readiness writes no clock');
+    context.reset();assert.deepEqual(saved,[],selected+' reset remains deferred while ready');
+    context.playActivated=true;context.start();assert.deepEqual(saved,[12345],selected+' explicit start saves the clock exactly once');
+    context.start();assert.deepEqual(saved,[12345],'repeated activation cannot restart that clock');
+  }
 });
 
 test('Unlimited preserves the same tab but resets a new or restored browsing context',()=>{
@@ -77,7 +83,32 @@ test('Unlimited preserves the same tab but resets a new or restored browsing con
   assert.match(source,/const CLOCK_TAB_KEY='touchline\.clock-tab\.v1'/,'Unlimited stores a browsing-context identity separately from its clock');
   assert.match(source,/storedClockTab!==null&&storedClockTab!==clockTabId/,'same-tab identity survives full navigations without trusting cloned sessionStorage');
   assert.match(source,/window\.name=clockTabId/,'the per-tab identity itself is not cloned into an opener-created tab');
-  assert.match(source,/addEventListener\('pageshow',event=>\{if\(event\.persisted\)resetRoundClock\(\);\}\)/,'a page-cache restore must start a fresh Unlimited clock');
+
+});
+
+test('same-tab history return preserves a plausible clock while cloned, restored and stale contexts do not',()=>{
+  const source=block('game-ui'),guard=source.match(/const restoredRoundClockStart=(.*?);/)[1],loader=source.match(/const loadRoundClock=([\s\S]*?\n});/)[1];
+  const now=1000000000000;
+  function restore({navigation='back_forward',storedTab='this-tab',historyEntry=true,age=1234,playerId='messi'}={}){
+    const saved={playerId,startedAt:now-age},removed=[];
+    const context={Date:{now:()=>now},CLOCK_KEY:'clock',CLOCK_TAB_KEY:'tab',clockTabId:'this-tab',clockHistoryState:{derabonaClockPage:historyEntry},state:{},CareerGame:{playerAt:()=>({id:'messi'})},performance:{getEntriesByType:()=>[{type:navigation}]},sessionStorage:{getItem:key=>key==='tab'?storedTab:JSON.stringify(saved),removeItem:key=>removed.push(key)}};
+    const value=vm.runInNewContext(`const restoredRoundClockStart=${guard};const loadRoundClock=${loader};loadRoundClock()`,context);
+    return {value,removed};
+  }
+  assert.equal(restore().value,now-1234,'same-tab Back keeps the engaged scoring window');
+  assert.equal(restore({storedTab:'other-tab'}).value,null,'cloned tab identity cannot claim the old clock');
+  assert.equal(restore({navigation:'navigate'}).value,null,'browser-restored marked history is still rejected');
+  assert.equal(restore({navigation:'reload'}).value,now-1234,'ordinary reload retains time');
+  assert.equal(restore({age:6*60*60*1000+1}).value,null,'same-tab history does not bypass the six-hour ceiling');
+  assert.equal(restore({playerId:'ronaldo'}).value,null,'history cannot attach another player’s clock');
+});
+
+test('page-cache restoration returns to readiness without resetting the engaged clock',()=>{
+  const handler=block('game-ui').split('\n').find(line=>line.startsWith("window.addEventListener('pageshow'"));
+  const routes=[];let listener;
+  const context={window:{addEventListener:(_event,fn)=>{listener=fn;}},AuthRoute:{active:false},DailyUI:{requestedMode:()=> 'unlimited'},PlayOverview:{show:(...args)=>routes.push(args)},resetRoundClock(){throw Error('must preserve the clock');}};
+  vm.runInNewContext(handler,context);listener({persisted:false});assert.equal(routes.length,0);listener({persisted:true});assert.deepEqual(routes,[['unlimited',false]]);
+  context.AuthRoute.active=true;listener({persisted:true});assert.equal(routes.length,1,'auth-only route retains its independent restoration lifecycle');
 });
 
 test('Unlimited never trusts a stale clock, even if navigation-type detection is fooled',()=>{

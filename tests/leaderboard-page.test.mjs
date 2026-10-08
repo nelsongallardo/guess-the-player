@@ -10,12 +10,8 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   assert.match(html,/<link[^>]+rel="canonical"[^>]+href="https:\/\/derabona.club\/leaderboard.html"/);
   assert.match(html,/<h1\b/);
   assert.match(html,/<main\b/);
-  // A single contextual nav action (not a two-tab pair with an active-page
-  // indicator): each page only links to the *other* page, so there is
-  // deliberately no aria-current here any more - see DESIGN.md. The
-  // standalone top "Jugar"/"Play" nav button was later removed entirely -
-  // the "Your place on the board" panel's own CTA (login when signed out,
-  // play when signed in) is the one contextual nav action back to the game.
+  // Public standings retain their contextual sign-in/play action alongside
+  // the shared primary navigation.
   assert.match(html,/<a class="cta" id="account-link" href="index\.html\?account=1">/);
   assert.doesNotMatch(html,/<iframe\b|http-equiv="refresh"/i);
   // The full 160-player roster/crest-data/game-model blocks stay
@@ -25,10 +21,11 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   // own picker/account UI - a real, bounded, deliberate size increase, not
   // this guardrail being defeated. ADR 0026 likewise added the private
   // friends-league view (~46KB of inline script/markup/CSS; 116KB -> 162KB),
-  // again bounded and deliberate: the bound below moved 130KB -> 180KB while
+  // again bounded and deliberate. The whole-experience navigation, Help and
+  // draft-preserving creation flow add approximately 7KB (180KB -> 190KB) while
   // the roster/crest/game-model exclusion stays the real guard.
   assert.doesNotMatch(html,/id="(?:roster-data|crest-data|game-model)"/);
-  assert.ok(Buffer.byteLength(html)<180_000,'Standalone board must not duplicate the heavy game artifact');
+  assert.ok(Buffer.byteLength(html)<190_000,'Standalone board must not duplicate the heavy game artifact');
   assert.match(html,/<dialog id="account-dialog"/,'ADR 0014: same account-dialog component as the main game, not a link away from it');
   const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].filter(m=>m[1].trim()&&!m[0].includes('application/ld+json'));
   assert.ok(scripts.length>0);

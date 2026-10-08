@@ -29,10 +29,10 @@ function loadControllerWithCompletion(todayResult,url='https://derabona.club/'){
   return {ui:context.ui,location};
 }
 
-test('an already-completed daily defaults to Unlimited on load; an unfinished one stays on Daily',()=>{
+test('completed and unfinished Daily both stay selected on ordinary arrival',()=>{
   const done=loadControllerWithCompletion({date:'2026-09-17',completion:{result:'complete'}});
-  assert.equal(done.ui.isDaily(),false);
-  assert.equal(done.ui.requestedMode(),'unlimited');
+  assert.equal(done.ui.isDaily(),true);
+  assert.equal(done.ui.requestedMode(),'daily');
   const fresh=loadControllerWithCompletion({date:'2026-09-17',completion:null});
   assert.equal(fresh.ui.isDaily(),true);
   const none=loadControllerWithCompletion(null);
@@ -42,7 +42,7 @@ test('an already-completed daily defaults to Unlimited on load; an unfinished on
 test('a league Daily link opens Daily even after completion without changing the ordinary default',()=>{
   const result={date:'2026-09-17',completion:{result:'complete'}};
   assert.equal(loadControllerWithCompletion(result,'https://derabona.club/index.html?daily=1&lang=en').ui.requestedMode(),'daily');
-  assert.equal(loadControllerWithCompletion(result).ui.requestedMode(),'unlimited');
+  assert.equal(loadControllerWithCompletion(result).ui.requestedMode(),'daily');
 });
 
 function loadModeSwitch({signedIn=true}={}){
@@ -61,7 +61,7 @@ function loadModeSwitch({signedIn=true}={}){
     document:{getElementById:node,addEventListener(){},documentElement:{classList:{remove(){}}}},window:{addEventListener(){}},
     render(){unlimitedRenders++;}
   });
-  vm.runInContext(block('daily-ui')+'\nglobalThis.ui=DailyUI;',context);
+  vm.runInContext(block('daily-ui')+'\nplayActivated=true;globalThis.ui=DailyUI;',context);
   return {ui:context.ui,actions,get unlimitedRenders(){return unlimitedRenders;}};
 }
 
@@ -175,7 +175,7 @@ test('Daily UI renders the current one of three and advances through the existin
   assert.match(source,/progress[^\n]+max\s*=\s*3/);
   assert.match(source,/playerProgress|player progress/i);
   assert.match(source,/const next=.*persistence\.next/);
-  assert.match(source,/daily-result-actions[^\n]+a\.game\.finished/);
+  assert.match(source,/attempt\(\)\?\.completion\)\{requestResult\(\)/,'terminal third player waits for Show result');
   assert.match(game,/if\(DailyUI\.isDaily\(\)\)\{DailyUI\.next\(\);return;\}/);
 });
 
@@ -203,7 +203,7 @@ test('Daily elapsed time is tab-session scoped and separate from Unlimited',()=>
   assert.match(source,/sessionStorage\.setItem\(DAILY_CLOCK_KEY/);
   assert.match(source,/persistence\.guess\(option\.id,displayedDate,dailyClockStart\)/);
   assert.match(source,/startDailyClockFromInteraction=\(\)=>\{[^}]*dailyClockStart=Date\.now\(\)/,'consent-overlay time is excluded when play starts by interaction');
-  assert.match(source,/derabona:analytics-consent-resolved[^;]*;if\(dailyClockWaitingForConsent\)[^}]*dailyClockStart=Date\.now\(\)[^}]*\}if\(!isDaily\(\)\)return/s,'Daily resolves its pending clock even if consent finishes while Unlimited is open');
+  assert.match(source,/derabona:analytics-consent-resolved[^\n]*?;if\(dailyClockWaitingForConsent\)[^}]*dailyClockStart=Date\.now\(\)[^}]*\}if\(!isDaily\(\)\)return/s,'Daily resolves its pending clock even if consent finishes while Unlimited is open');
   assert.match(source,/startGuestClockForMode\(\)/,'Unlimited starts its own clock only when that mode opens');
   assert.doesNotMatch(source,/elapsedMs:Date\.now\(\)-r\.startedAt/,'the visible clock must not include time while the tab was closed');
 });

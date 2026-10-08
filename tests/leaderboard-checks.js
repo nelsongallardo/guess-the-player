@@ -20,9 +20,9 @@ async page => {
  await p.goto('http://127.0.0.1:4173/leaderboard.html?competition=bad&lang=en&code=SECRET&state=SECRET#access_token=SECRET');
  await loading(p,'Deferred initial API');ok(await p.locator('#board-loading-label').textContent()==='Loading leaderboard…'&&await p.locator('#leaderboard-status').getAttribute('role')==='status','English loading has accessible live status');await p.locator('#language').selectOption('es');ok(await p.locator('#board-loading-label').textContent()==='Cargando tabla…','Loading switches to Spanish without another request');await p.locator('#language').selectOption('en');while(!release)await p.waitForTimeout(10);release();release=null;
  await p.locator('#leaderboard-table').waitFor({state:'visible'});await settled(p,'Ready');
- ok(await p.locator('h1').textContent()==='Leaderboard','Standalone English page');
+ ok(await p.locator('h1').textContent()==='Public leaderboard','Standalone English page');
  ok(!p.url().includes('SECRET')&&p.url().includes('competition=all'),'URL normalized and OAuth secrets discarded');
- ok((await p.locator('#bottom-play').textContent()).trim().startsWith('Back'),'Single contextual nav action back to the game');
+ ok((await p.locator('#bottom-play').textContent()).trim().startsWith('Back'),'Public standings retain a contextual route back to Play');
  ok(await p.locator('#leaderboard-entries tr').count()===20&&!await p.locator('#leaderboard-entries img').count(),'Twenty safe text rows');
  ok(!calls.at(-1).headers.authorization,'Guest board anonymous');
  ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Short mobile has no horizontal overflow');
@@ -30,7 +30,7 @@ async page => {
  hold=true;await selectCompetition(p,'brasileirao');await loading(p,'Deferred filter');while(!release)await p.waitForTimeout(10);release();release=null;await p.waitForFunction(()=>document.querySelector('#leaderboard-status').dataset.state==='empty');ok(calls.at(-1).body.offset===0&&await p.locator('#board-next').isHidden(),'Empty filter resets pagination');await settled(p,'Empty');
  fail=true;await selectCompetition(p,'la-liga');await p.locator('#board-retry').waitFor({state:'visible'});await settled(p,'Error');await p.locator('#board-retry').click();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(calls.at(-1).body.competition==='la-liga','Error retry retains competition');
  await p.goBack();await p.waitForFunction(()=>new URL(location.href).searchParams.get('competition')==='brasileirao');await p.goForward();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(boardCompetition(p)==='la-liga','Back and forward restore filter');
- await p.locator('#language').selectOption('es');ok(await p.locator('h1').textContent()==='Tabla'&&await p.locator('#account-link-label').textContent()==='Iniciar sesión','Spanish UI and navigation');
+ await p.locator('#language').selectOption('es');ok(await p.locator('h1').textContent()==='Clasificación pública'&&await p.locator('#account-link-label').textContent()==='Iniciar sesión','Spanish UI and navigation');
  await p.evaluate(()=>{window.mockSession={access_token:'TEST_TOKEN',user:{id:'user-a'}};localStorage.setItem('derabona.auth.v1','MOCK');window.dispatchEvent(new StorageEvent('storage',{key:'derabona.auth.v1'}));});
  await p.waitForFunction(()=>document.querySelector('#leaderboard-own').textContent.includes('42'));ok((await p.locator('#leaderboard-own').textContent()).includes('73'),'Own off-page rank and points');
  fail=true;await selectCompetition(p,'premier-league');await p.locator('#board-retry').waitFor({state:'visible'});ok((await p.locator('#personal-detail').textContent()).includes('No pudimos cargar tu posición'),'Signed-in error does not claim no rank');await p.locator('#board-retry').click();await p.waitForFunction(()=>document.querySelector('#leaderboard-own').textContent.includes('42'));ok(true,'Signed-in error retry restores own rank');
@@ -45,7 +45,29 @@ async page => {
  ok(await p.locator('#account-link').textContent()==='Iniciar sesión','Clear sign-in CTA');await p.locator('#account-link').click();await p.locator('#account-dialog').waitFor({state:'visible'});ok(await p.locator('#account-dialog').evaluate(e=>e.open),'Account CTA opens real dialog');await p.goto('http://127.0.0.1:4173/leaderboard.html?lang=en');await p.locator('#leaderboard-table').waitFor({state:'visible'});
  const invalidCall=calls.find(c=>!['leaderboard','progress'].includes(c.body.action)||(c.body.action==='leaderboard'&&c.body.limit!==20));ok(!invalidCall,'Only read-only leaderboard/progress requests'+(invalidCall?': '+JSON.stringify(invalidCall.body):''));
  await context.clearCookies();await p.evaluate(()=>localStorage.clear());await context.route('https://cdn.jsdelivr.net/npm/@supabase/**',r=>r.abort());await p.evaluate(()=>localStorage.setItem('derabona.auth.v1','MOCK'));await p.reload();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(!calls.at(-1).headers.authorization,'Failed SDK leaves public board usable');
- await p.evaluate(()=>localStorage.clear());await p.goto('http://127.0.0.1:4173/index.html?lang=en');await p.locator('#hint').click();const saved=await p.evaluate(()=>sessionStorage.getItem('touchline.career.v1'));await p.locator('#leaderboard-open').click();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(await p.evaluate(v=>sessionStorage.getItem('touchline.career.v1')===v,saved),'Board does not mutate gameplay save');await p.locator('#bottom-play').click();await p.locator('#hint').waitFor();ok(await p.evaluate(v=>sessionStorage.getItem('touchline.career.v1')===v,saved),'Game-board-game preserves engaged round');
+ await p.evaluate(()=>localStorage.clear());await p.goto('http://127.0.0.1:4173/index.html?lang=en');await p.locator('#play-unlimited-start').click();await p.locator('#hint').click();const saved=await p.evaluate(()=>sessionStorage.getItem('touchline.career.v1'));await p.locator('#nav-board').click();await p.locator('#leaderboard-table').waitFor({state:'visible'});ok(await p.evaluate(v=>sessionStorage.getItem('touchline.career.v1')===v,saved),'Board does not mutate gameplay save');await p.locator('#bottom-play').click();await p.locator('#play-overview').waitFor();ok(await p.evaluate(v=>sessionStorage.getItem('touchline.career.v1')===v,saved),'Game-board-game preserves engaged round');
+ // A late nickname response from the previous account cannot repopulate private data.
+ const race=await page.context().browser().newContext();let finishEnroll,finishProgress;
+ try{
+ await race.addInitScript(()=>{localStorage.setItem('derabona.auth.v1','MOCK');window.currentSession={access_token:'ACCOUNT_A',user:{id:'account-a'}};});
+ await race.route('https://cdn.jsdelivr.net/npm/@supabase/**',r=>r.fulfill({contentType:'application/javascript',body:`window.supabase={createClient:()=>({auth:{getSession:async()=>({data:{session:window.currentSession}}),onAuthStateChange:fn=>window.changeAccount=fn}})};`}));
+ await race.route('**/functions/v1/ranked-game',async r=>{
+   const body=r.request().postDataJSON(),second=r.request().headers().authorization==='Bearer ACCOUNT_B';
+   let result={entries:[],total:0,own:null};
+   if(body.action==='enroll'){await new Promise(resolve=>finishEnroll=resolve);result={profile:{nickname:'Old saved nickname'},progress:{totalPoints:111,answered:3,correct:2}};}
+   if(body.action==='progress'){if(second)await new Promise(resolve=>finishProgress=resolve);result={profile:{nickname:second?'New account':'Old account'},progress:{totalPoints:second?50:111,answered:3,correct:2}};}
+   await r.fulfill({contentType:'application/json',body:JSON.stringify(result)});
+ });
+ const q=await race.newPage();await q.goto('http://127.0.0.1:4173/leaderboard.html?lang=en');await q.locator('#account-open-link').click();
+ await q.waitForFunction(()=>document.querySelector('#stat-points').textContent==='111');
+ await q.locator('#public-nickname').fill('Old saved nickname');await q.locator('#enroll').click();while(!finishEnroll)await q.waitForTimeout(10);
+ await q.evaluate(()=>{window.currentSession={access_token:'ACCOUNT_B',user:{id:'account-b'}};window.changeAccount('SIGNED_IN',window.currentSession);});while(!finishProgress)await q.waitForTimeout(10);
+ ok(await q.locator('#stat-points').textContent()==='—'&&!(await q.locator('#enrolled-status').textContent()).includes('Old'),'Account switch clears previous statistics and alias before the next account loads');
+ finishEnroll();finishEnroll=null;await q.waitForTimeout(100);
+ ok(await q.locator('#stat-points').textContent()==='—'&&!(await q.locator('#enrolled-status').textContent()).includes('Old'),'Late previous-account nickname result cannot restore private data');
+ finishProgress();finishProgress=null;await q.waitForFunction(()=>document.querySelector('#stat-points').textContent==='50');
+ ok((await q.locator('#enrolled-status').textContent()).includes('New account'),'New account projection replaces loading state with its own data');
+ }finally{finishEnroll?.();finishProgress?.();await race.close();}
  // Deterministic virtual-clock deadlines, in isolated contexts, no private cache.
  for(const mode of ['sdk','session']){
  const c=await page.context().browser().newContext({viewport:{width:375,height:667},reducedMotion:'reduce'});let sdkRelease,requests=0;
@@ -55,7 +77,7 @@ async page => {
  await c.route('**/functions/v1/ranked-game',r=>{if(r.request().method()==='OPTIONS')return r.fulfill({status:204,headers:{'access-control-allow-origin':'*','access-control-allow-headers':'*'}});requests++;return r.fulfill({headers:{'access-control-allow-origin':'*'},contentType:'application/json',body:JSON.stringify({entries:[],total:0,own:null})});});
  const q=await c.newPage();await q.clock.install();await q.goto('http://127.0.0.1:4173/leaderboard.html?lang=en',{waitUntil:'domcontentloaded'});await loading(q,'Delayed '+mode);if(mode==='session')await q.waitForFunction(()=>!!window.finishSession);else while(!sdkRelease)await q.waitForTimeout(10);
  ok(requests===0,'No speculative public request during '+mode);
- ok(await q.locator('.board-spinner').evaluate(e=>getComputedStyle(e).animationName==='none'),'Reduced motion disables spinner animation '+mode);
+ ok(await q.locator('#board-loading .board-spinner').evaluate(e=>getComputedStyle(e).animationName==='none'),'Reduced motion disables spinner animation '+mode);
  await q.clock.runFor(5100);await q.waitForFunction(()=>document.querySelector('#leaderboard-status').dataset.state==='empty',{},{timeout:1500});await settled(q,'Timed-out '+mode);ok(requests===1&&(await q.locator('#personal-detail').textContent()).includes('public'),'Bounded '+mode+' falls back once with truthful account warning');
  if(mode==='session'){await q.evaluate(()=>window.finishSession({data:{session:{access_token:'LATE',user:{id:'late'}}},error:null}));await q.clock.runFor(100);ok(requests===1&&await q.locator('#leaderboard-own').textContent()==='','Late session cannot restore private rank');}
  }finally{sdkRelease?.();await c.close();}
