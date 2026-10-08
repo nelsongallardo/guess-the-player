@@ -2,7 +2,7 @@
 
 Date: 2026-10-08
 
-Status: proposed design following the owner's request for a whole-experience review. The audit is complete; this design has not been approved or implemented. It does not supersede the shipped contracts in DESIGN.md or existing ADRs yet.
+Status: approved by the owner on 2026-10-08 ("go for it"). Implementation in progress. Existing contracts remain authoritative except for the navigation, masthead and explicit-start changes described here, which the implementation ADR will record.
 
 ## Product problem
 
