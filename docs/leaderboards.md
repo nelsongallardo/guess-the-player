@@ -27,7 +27,8 @@ A `main` push never applies `supabase/migrations/*.sql` to the live database (se
 - **`.github/workflows/supabase-deploy.yml`**: a manual-only (`workflow_dispatch`, never on push) GitHub Action that runs `supabase db push` against the linked project. Requires repo secrets `SUPABASE_ACCESS_TOKEN`, `SUPABASE_DB_PASSWORD` and `SUPABASE_PROJECT_REF` (see the workflow file's header comment for where each comes from) added once by a repo admin in Settings > Secrets and variables > Actions. Deliberately gated behind a typed confirmation input and never triggered by a push, since it mutates the production schema directly and this repo has more than one person (and agent) pushing to `main`.
 - `supabase/functions/_shared/http.ts`: strict JSON/action validation and verified identity boundary.
 - `supabase/functions/_shared/supabase.ts`: server-only Supabase dependency adapter.
-- `supabase/functions/ranked-game/index.ts`, `supabase/functions/account-delete/index.ts`: Edge entrypoints.
+- `supabase/functions/ranked-game/index.ts`, `supabase/functions/account-delete/index.ts`, `supabase/functions/private-leagues/index.ts`: Edge entrypoints.
+- `supabase/migrations/202610080001_private_daily_leagues.sql` (**not yet applied to the hosted project**): private friends leagues ([ADR 0026](adr/0026-private-daily-leagues.md)). It adds `ranked_private.friend_league_*` tables (RLS on, no client grants), the service-only `public.private_leagues(uuid,jsonb)` RPC, lazy idempotent weekly finalization, an account-deletion trigger that freezes ended weeks before results are deleted, and a Daily-write week cutoff barrier in `public.ranked_game` (otherwise byte-identical to `202609280001`).
 - `supabase/config.toml`: local project/auth settings and function gateway configuration.
 
 ## Standalone leaderboard destination
@@ -133,3 +134,19 @@ Account browser tests route-mock SDK/API. Label them as rendered frontend contra
 The Pages workflow validates branch pushes, PRs and manual runs with all Node tests (native PostgreSQL included), source/roster parity and Deno checks/tests. Browser suites are separate. Only validated non-PR `main` runs deploy `index.html`, `leaderboard.html`, `privacy.html`, `assets/derabona-social-es-v1.png`, `robots.txt`, `sitemap.xml` and `favicon.svg`. It never deploys Supabase or configures Google - `supabase-deploy.yml` is a separate, manual-only workflow for that (see "Applying migrations to the hosted database" above); it is not part of the Pages workflow and never triggers on push.
 
 Before claiming hosted accounts work, the release owner must verify the intended project's migrations/functions and server-only environment; configure Google provider credentials and authorized Supabase callback; verify canonical/language-preserving redirect allowlists; and exercise real Google login, cancellation, session refresh, cross-device progress, identity rejection, anonymous/enrolled boards, offline practice isolation and approved account deletion/readback. Publish/read back the actual static artifact and privacy page and run deployed browser smoke checks. Keep credentials and disposable-user details out of public artifacts. Provisioning alone, mocked OAuth and local SQL success do not satisfy these gates.
+
+## Private friends leagues
+
+Contract summary (details in [ADR 0026](adr/0026-private-daily-leagues.md) and the approved spec):
+
+- Endpoint `POST /functions/v1/private-leagues` → `public.private_leagues(verified_user_id, request)`. Every action needs a verified non-anonymous user. Body ≤ 8,192 bytes, `Cache-Control: no-store`, 60 requests/account/minute in a bucket separate from gameplay.
+- Reads: `list`, `preview{token}`, `standings{leagueId,period:today|week,limit≤50,offset}`, `history{leagueId,…}`, `memberWins{leagueId,memberId,…}`, `manage{leagueId}` (owner only; the only response carrying the invite token).
+- Mutations, each with `idempotencyKey`: `create{name}`, `join{token}`, `leave{leagueId}`, and owner-only `rename`/`remove`/`restore`/`rotateInvite`/`delete` with `expectedVersion`.
+- Errors: `LEAGUE_UNAVAILABLE` (outsider, removed, former or deleted, all indistinguishable), `INVITE_UNAVAILABLE` (invalid, revoked or removed-user invitations, all identical), `FORBIDDEN`, `MEMBER_NOT_FOUND`, `OWNER_CANNOT_LEAVE`, `LEAGUE_LIMIT` (10), `LEAGUE_FULL` (50), `NICKNAME_REQUIRED`, `VERSION_CONFLICT`, `IDEMPOTENCY_CONFLICT`, `INVALID_LEAGUE_NAME`, `RATE_LIMITED`.
+- Local verification (native PostgreSQL, same env vars as above): `node --test tests/private-leagues-backend.test.mjs`, `deno test tests/private-leagues-edge.test.ts`. For browser end-to-end checks, start `node tests/leagues-bridge.mjs` (the real Edge handler on 127.0.0.1:54330 backed by a fresh isolated PostgreSQL; Auth simulated) next to the static server, then run `PLAYWRIGHT_SESSION=<short-name> python3 tests/run-browser.py --suite friends-leagues-checks.js`. Long worktree names can exceed the Unix socket path limit for the default session name.
+
+### Release order (not yet performed)
+
+1. Back up, then apply `202610080001_private_daily_leagues.sql` with the usual reviewed `supabase db push --linked --dry-run` / apply procedure. Read back the registry, the new tables' RLS/grants, the `ranked_game` definition and preservation of existing rounds, results and receipts.
+2. Deploy the `private-leagues` function (`verify_jwt=false`, as configured) and verify authenticated hosted boundaries with disposable accounts: create, preview, join, standings, removal, rotation, deletion, and an account deletion that anonymizes history.
+3. Only then publish Pages (`index.html` sign-in route, `leaderboard.html` Friends view), and verify a real invitation → Google OAuth → nickname → join flow on `https://derabona.club`. Hosted Google redirect matching for `/?lang=…&auth=friends[&invite=1]` must be confirmed there; local checks simulate OAuth.
