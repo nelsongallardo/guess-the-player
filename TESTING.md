@@ -1,5 +1,37 @@
 # Verification report
 
+## Private Daily leagues — 8 October 2026 (local candidate on `feat/private-daily-leagues`; nothing deployed)
+
+- Scope: [ADR 0026](docs/adr/0026-private-daily-leagues.md). Additive migration `202610080001_private_daily_leagues.sql`, `private-leagues` Edge Function, `leaderboard.html` Friends view, `index.html?auth=friends` sign-in-only route. Checked out from fetched `origin/main` `3624e05`, which had not moved when work began.
+- **Native PostgreSQL** (embedded 17.10 runtime, `PG_BIN`/`PG_CLIENT`/`PG_MODULE` as documented; Supabase Auth schema/roles simulated; the league clock simulated through a test-only `ranked_private.utc_now()` override): `tests/private-leagues-backend.test.mjs` passed **12/12**. Coverage:
+  - upgrade from the exact predecessor with byte-identical gameplay rows and exact receipt replay; RLS on and no grants on all new tables;
+  - owner/member/outsider/removed access, with identical generic errors for invalid, revoked and removed-user invitations; invite rotation, restore that does not rejoin, leave, rename and delete;
+  - idempotent replay that rechecks access, so a removed member cannot recover data from an old receipt, and no token appears in any receipt;
+  - 10-league and 50-member caps, including concurrent joins, and a join racing a rotation;
+  - strict post-join eligibility: same-day pre-join exclusion, partial days, zero-point losses, "finished before joining", leave/rejoin with no backfill, and one result counted in two leagues with global leaderboard/progress totals unchanged;
+  - weekly finalization: shared and zero-point wins, empty weeks, shortened first week, a 17-week catch-up in bounded 8/8/1 batches, concurrent finalization awarding once, and immutable history across remove/leave/rename/rejoin;
+  - the Daily cutoff barrier: an in-flight Daily answer is waited for and counted, and a write that waited past Monday is rejected and leaves no result;
+  - account deletion: owned leagues deleted, ended weeks frozen before results are deleted, winners anonymized with no promotion, other players' results untouched;
+  - byte-identical `rounds`/`results`/`daily_rounds`/`daily_results`/`daily_streaks`/`receipts` across every league action;
+  - a separate 60/min league bucket.
+- The existing `tests/ranked-backend.test.mjs` passed **31/31** both before the change (baseline) and with the new migration in the fresh replay.
+- Full `node --test tests/*.test.mjs` after the final commit: **292/292, zero failures/skips**, including both PostgreSQL suites. An earlier pre-commit run failed only the roster data-only guard, as expected for uncommitted `index.html` edits, and `leaderboard-page.test.mjs`'s 130 KB size proxy. That bound was raised to 180 KB with an ADR 0026 comment; its real guard (no roster/crest/game-model blocks) is unchanged.
+- **Deno**: `deno check` of all three entrypoints passed; `deno test tests/ranked-backend-edge.test.ts tests/private-leagues-edge.test.ts` passed **13/13** (mock Auth/RPC, not hosted). `python3 tests/source-check.py` passed. `node scripts/export-ranked-roster.mjs --check` reports "stale" on this branch and identically on unchanged `origin/main`; per AGENTS.md this is not a gate, and no roster data changed.
+- **Browser end to end**: `tests/friends-leagues-checks.js` passed **43/43 checks** in real Chromium. It ran through `tests/leagues-bridge.mjs`: the real `_shared/http.ts` handler on a fresh, fully migrated PostgreSQL. Google OAuth, the Supabase SDK and Auth identities are **simulated**, so this is not hosted OAuth evidence. Covered:
+  - owner create and copy invite;
+  - a signed-out invitee on a 375×667 viewport: `#join=` scrubbed before the SDK, auth route, simulated PKCE return, mandatory nickname, zero-start preview, join;
+  - the auth route sent only `progress`/`enroll`, wrote no guest/Daily clock or game keys, and the database shows zero career/Daily rounds for the invitee;
+  - the token appeared only in preview/join request bodies, never in a URL or the OAuth redirect;
+  - Today/This week with URL/history, Spanish controls, weekly rollover with a keyboard-opened trophy dialog and past winners;
+  - a network failure with private Retry and no public fallback;
+  - removal with Escape-cancellable focused confirmation, removed-member lockout, private DOM removal on sign-out;
+  - denied `sessionStorage` recovery after OAuth with no membership created, and Spanish OAuth cancellation.
+- **Existing browser suites**, per suite against this branch and an unchanged detached `origin/main` worktree served on the same port with the same headless session (`PLAYWRIGHT_SESSION=gtp-leagues`; the default worktree-derived name exceeded the Unix socket path limit):
+  - identical results: `browser-checks`, `career-arrow-checks`, `brand-checks`, `daily-header-browser-checks` and `hint-order-checks` pass on both;
+  - fail identically on unchanged upstream (pre-existing, not caused by this work, not investigated further): `guest-ranked-disclosure-checks` ("Guest eligibility status is visible before the first answer"), `offline-checks` ("Offline deck order"), `mobile-language-checks`, `difficulty-checks`, `expansion-checks`, `origin-checks`, `saved-rivals-checks`, `seo-checks`, `analytics-checks`, `guest-session-checks`, `accounts-checks`, `game-loading-checks` and `nickname-suggestion-checks`;
+  - `leaderboard-checks` stops at the same pre-existing 30 s timeout on both. Before reaching it, the branch first showed a real regression (4 desktop rows instead of 6), fixed by moving the Public/Friends switch onto the title row. After the fix: 6 desktop rows (baseline 6), mobile first row 515 px (baseline 491, limit 600).
+- Not verified (requires owner-authorized hosted work): applying the migration to the hosted project, deploying `private-leagues`, hosted Google redirect matching for `/?lang=…&auth=friends[&invite=1]`, and real invitation/OAuth flows on `derabona.club`. See the release order in [docs/leaderboards.md](docs/leaderboards.md#private-friends-leagues).
+
 ## Position-first hints — 4 October 2026 (local candidate; no production changes)
 
 - Position → nationality → club years now applies to guest/practice and signed-in Daily/Unlimited, including EN/ES labels, help and points FAQ. Existing 1/2/3-hint saves use that order without changing counts, guesses, choices/order, decks, clocks, versions, points or results. Old exact server receipts remain immutable; absent position shows a dash until a fresh authoritative read, never a local roster fallback. [ADR 0025](docs/adr/0025-position-first-hints.md) records this compatibility decision.
