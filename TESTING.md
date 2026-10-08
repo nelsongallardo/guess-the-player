@@ -1,5 +1,17 @@
 # Verification report
 
+## 2026-10-08 — Signed-in startup request race
+
+On the released `52471e5` artifact, seven measured signed-in reloads each sent two `overview` requests before `dailyProgress`. `Accounts.init()` can return its session before Supabase's `INITIAL_SESSION` notification. `RankedUI.boot()` had not yet recorded that identity, so the notification reset the in-flight overview and discarded its response. A redundant request then decided whether startup succeeded. The fix adopts the initial identity before loading; real account changes still invalidate state.
+
+- Node 22 focused suites (`account-boundaries`, `site-wayfinding`, `daily-ui`, `daily-header-score`): **48/48**. The new regression failed before the identity assignment and passes with it.
+- New `account-startup-checks.js`: **8 checks** using the actual Supabase JS SDK, a synthetic stored session and intercepted API responses. A delayed successful first overview plus failing redundant second request reproduces the error screen on baseline; the fix displays the valid response. Genuine failure still offers explicit Retry and never exposes guest gameplay or bypasses nickname enrollment. No hosted OAuth or gameplay writes.
+- Existing account browser suite: **65 checks**; Daily/account score suite: **15**. Entry/return/recovery suite: **51** on the final run. Its first run stopped at the guest Daily reload-clock equality check; unchanged baseline then passed, and the unchanged assertion passed on the final branch run. This appears timing-sensitive and was not weakened. Independent review found no actionable issues and separately passed 46 related Node checks.
+- In the owner's existing signed-in Hermes session, a local HTML preview sent exactly **one overview** per reload (three observations) and displayed the already-completed Daily. No guesses, hints, membership changes or account mutations were performed. Preview routing was removed afterward.
+- Hosted database statement statistics were read-only: ranked RPC averages approximately 15.9 ms, observed maximum approximately 511 ms; private-league average approximately 7.5 ms. Browser/network latency varied; these observations do not establish a quantified speedup.
+- The exact reported production failure did not recur during the measured baseline reloads. Supabase's Management API logs endpoint returned a backend error, including without a custom query, so historical failure responses could not be correlated with the screenshot. This fixes a demonstrated startup race; it is not evidence that every possible network/authentication failure is eliminated.
+
+
 ## 2026-10-08 — Game-first UX correction
 
 The owner rejected the released overview as cluttered and an extra barrier to play. ADR 0028 restores immediate Daily/explicit Unlimited entry, direct completed results, compact navigation/answers and contextual group discovery. Backend, score constants, roster and migrations are unchanged.
