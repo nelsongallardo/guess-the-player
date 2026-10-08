@@ -1,5 +1,15 @@
 # Verification report
 
+## 2026-10-08 — Continuous loading on completed Daily return
+
+The signed-in Hermes baseline rendered an incomplete Daily header for about 495 ms between account readiness and the completed result. The initial loading CSS also hid the branded spinner. Arrival now keeps the same spinner through the account and Daily reads, and selects the completed summary before rendering the response. Cached re-entry and failed reads follow the same loading/recovery contract; answering the last player still requires the explicit Show result action.
+
+- Node 22: **68/68** focused tests (`account-boundaries`, `site-wayfinding`, `daily-ui`, `daily-ranked-ui`, `daily-summary`, `daily-header-score`). Source identifiers and whitespace checks pass.
+- Startup browser regression: **23 checks**, with the real Supabase SDK and synthetic session/intercepted API. The new spinner assertion failed on baseline. Delayed reads, every painted frame, language change, opening Account during loading, repeated/cached entry, failed fresh/cached reads and Retry now pass. A completed arrival sends one `overview` and one `dailyProgress`.
+- Existing browser checks: wayfinding **51**, accounts **65**, Daily account score **15**. These include explicit last-answer feedback, mode switching, UTC rollover, offline `file:` play, denied storage and mobile layout. One initial run hit the previously documented guest reload-clock timing assertion; the unchanged assertion passed on the subsequent runs. No-JS smoke check separately confirms the explanation remains visible without a spinner.
+- Signed-in Hermes preview of the local HTML, reading the existing completed Daily: sampled states changed from spinner at 13 ms directly to summary at 1669 ms, with one overview, one Daily read and no JavaScript errors. No live guesses, hints, group or account mutations. Preview routing was removed. These timings describe this observation, not a performance benchmark.
+- Independent review verified cached failure/recovery and loading ownership. No backend, scoring, persistence or roster changes; no claim of a full local suite or native Safari/Firefox coverage.
+
 ## 2026-10-08 — Signed-in startup request race
 
 On the released `52471e5` artifact, seven measured signed-in reloads each sent two `overview` requests before `dailyProgress`. `Accounts.init()` can return its session before Supabase's `INITIAL_SESSION` notification. `RankedUI.boot()` had not yet recorded that identity, so the notification reset the in-flight overview and discarded its response. A redundant request then decided whether startup succeeded. The fix adopts the initial identity before loading; real account changes still invalidate state.
