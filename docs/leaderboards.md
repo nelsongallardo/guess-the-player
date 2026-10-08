@@ -28,7 +28,7 @@ A `main` push never applies `supabase/migrations/*.sql` to the live database (se
 - `supabase/functions/_shared/http.ts`: strict JSON/action validation and verified identity boundary.
 - `supabase/functions/_shared/supabase.ts`: server-only Supabase dependency adapter.
 - `supabase/functions/ranked-game/index.ts`, `supabase/functions/account-delete/index.ts`, `supabase/functions/private-leagues/index.ts`: Edge entrypoints.
-- `supabase/migrations/202610080001_private_daily_leagues.sql` (**not yet applied to the hosted project**): private friends leagues ([ADR 0026](adr/0026-private-daily-leagues.md)). It adds `ranked_private.friend_league_*` tables (RLS on, no client grants), the service-only `public.private_leagues(uuid,jsonb)` RPC, lazy idempotent weekly finalization, an account-deletion trigger that freezes ended weeks before results are deleted, and a Daily-write week cutoff barrier in `public.ranked_game` (otherwise byte-identical to `202609280001`).
+- `supabase/migrations/202610080001_private_daily_leagues.sql` (**applied to the hosted project 2026-10-08**; see TESTING.md): private friends leagues ([ADR 0026](adr/0026-private-daily-leagues.md)). It adds `ranked_private.friend_league_*` tables (RLS on, no client grants), the service-only `public.private_leagues(uuid,jsonb)` RPC, lazy idempotent weekly finalization, an account-deletion trigger that freezes ended weeks before results are deleted, and a Daily-write week cutoff barrier in `public.ranked_game` (otherwise byte-identical to `202609280001`).
 - `supabase/config.toml`: local project/auth settings and function gateway configuration.
 
 ## Standalone leaderboard destination
@@ -145,7 +145,7 @@ Contract summary (details in [ADR 0026](adr/0026-private-daily-leagues.md) and t
 - Errors: `LEAGUE_UNAVAILABLE` (outsider, removed, former or deleted, all indistinguishable), `INVITE_UNAVAILABLE` (invalid, revoked or removed-user invitations, all identical), `FORBIDDEN`, `MEMBER_NOT_FOUND`, `OWNER_CANNOT_LEAVE`, `LEAGUE_LIMIT` (10), `LEAGUE_FULL` (50), `NICKNAME_REQUIRED`, `VERSION_CONFLICT`, `IDEMPOTENCY_CONFLICT`, `INVALID_LEAGUE_NAME`, `RATE_LIMITED`.
 - Local verification (native PostgreSQL, same env vars as above): `node --test tests/private-leagues-backend.test.mjs`, `deno test tests/private-leagues-edge.test.ts`. For browser end-to-end checks, start `node tests/leagues-bridge.mjs` (the real Edge handler on 127.0.0.1:54330 backed by a fresh isolated PostgreSQL; Auth simulated) next to the static server, then run `PLAYWRIGHT_SESSION=<short-name> python3 tests/run-browser.py --suite friends-leagues-checks.js`. Long worktree names can exceed the Unix socket path limit for the default session name.
 
-### Release order (not yet performed)
+### Release order (steps 1–2 done 2026-10-08)
 
 1. Back up, then apply `202610080001_private_daily_leagues.sql` with the usual reviewed `supabase db push --linked --dry-run` / apply procedure. Read back the registry, the new tables' RLS/grants, the `ranked_game` definition and preservation of existing rounds, results and receipts.
 2. Deploy the `private-leagues` function (`verify_jwt=false`, as configured) and verify authenticated hosted boundaries with disposable accounts: create, preview, join, standings, removal, rotation, deletion, and an account deletion that anonymizes history.

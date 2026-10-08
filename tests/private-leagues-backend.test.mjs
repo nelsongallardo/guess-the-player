@@ -29,7 +29,8 @@ const rankedSQL = (uid,body) => `set role service_role; select public.ranked_gam
 const leagueSQL = (uid,body) => `set role service_role; select public.private_leagues(${uid?quote(uid)+'::uuid':'null'},${quote(JSON.stringify(body))}::jsonb);`;
 const ranked = (uid,body) => json(rankedSQL(uid,body));
 // Raised RPC errors surface like the Edge Function maps them: {error:{code}}.
-const asCode = e => ({error:{code:String(e.stderr||e.message).trim().split('\n')[0]}});
+// Real psql prefixes raised errors with "ERROR:  "; the Node psql stand-in does not.
+const asCode = e => ({error:{code:String(e.stderr||e.message).trim().split('\n')[0].replace(/^ERROR:\s+/,'')}});
 const L = (uid,body) => { try { return json(leagueSQL(uid,body)); } catch(e) { return asCode(e); } };
 const asyncL = async (uid,body) => { try { return JSON.parse(await asyncSQL(leagueSQL(uid,body))); } catch(e) { return asCode(e); } };
 const mut = (action,extra={}) => ({action,...extra,idempotencyKey:randomUUID()});

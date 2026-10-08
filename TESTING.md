@@ -1,6 +1,16 @@
 # Verification report
 
-## Private Daily leagues — 8 October 2026 (local candidate on `feat/private-daily-leagues`; nothing deployed)
+## Private Daily leagues — 8 October 2026 (hosted backend applied; Pages pending merge)
+
+- **Hosted backend, 8 October 2026** (project `derabona`, `iaebecfxjwjzkapqdeha`, authorized by Nelson):
+  - Before: `migration list --linked` showed every local version through `202610040001` applied and only `202610080001` pending; `db push --linked --dry-run` listed exactly that file. Live `ranked_game` source hash `19b836d6…` equalled the `202609280001` body the migration copies from.
+  - Nelson applied it with `supabase db push --linked --yes`. The registry now lists `202610080001` remote.
+  - Aggregate counts were unchanged before and after (23 accounts, 431 rounds, 415 results / 18,040 points, 159 Daily rounds, 83 Daily results / 1,852 points, 1,445 receipts, 11 streaks). Live `ranked_game` hash `281c624c…` equals the new migration's body.
+  - All 8 `friend_league_*` tables have RLS on and no `anon`/`authenticated`/`service_role` table privileges. Only `service_role` may execute `public.private_leagues`, and the account-deletion trigger exists.
+  - `private-leagues` deployed (`functions deploy … --use-api`, then redeployed identically by Nelson). Live HTTP: OPTIONS 204; anonymous `list` and `preview` 401; forged bearer 401; foreign origin 403; injected `userId` 400; `Cache-Control: no-store`.
+  - Signed-in RPC behaviour was checked on the hosted database inside a **rolled-back** transaction with three synthetic Auth rows. Results: create; outsider `LEAGUE_UNAVAILABLE`; preview exposes only name and member count, no token; join; Today standings with `notPlayed` statuses; member `manage` `FORBIDDEN`; bad invite `INVITE_UNAVAILABLE`. Afterwards there were 0 leagues and 0 synthetic users.
+  - Not yet verified: a real Google OAuth invite → join flow on derabona.club, which needs the Pages release.
+- First PR CI run failed only in the new suite's error-code helper: real `psql` prefixes raised errors with `ERROR:  `, the local Node stand-in does not. Fixed in the test helper; the local suite still passes 12/12.
 
 - Scope: [ADR 0026](docs/adr/0026-private-daily-leagues.md). Additive migration `202610080001_private_daily_leagues.sql`, `private-leagues` Edge Function, `leaderboard.html` Friends view, `index.html?auth=friends` sign-in-only route. Checked out from fetched `origin/main` `3624e05`, which had not moved when work began.
 - **Native PostgreSQL** (embedded 17.10 runtime, `PG_BIN`/`PG_CLIENT`/`PG_MODULE` as documented; Supabase Auth schema/roles simulated; the league clock simulated through a test-only `ranked_private.utc_now()` override): `tests/private-leagues-backend.test.mjs` passed **12/12**. Coverage:
