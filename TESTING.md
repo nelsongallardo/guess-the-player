@@ -1,5 +1,14 @@
 # Verification report
 
+## 2026-10-08 — Mode labels and auth-pending chrome
+
+Refreshing as a signed-in player showed *Sign in* before *Account*, and the mode labels flipped from the markup's *Desafío diario / Juego sin límite* to *Diaria / Sin límite* (EN *Daily / Unlimited*). Labels now match DESIGN.md (*Desafío diario / Juego sin límite*, *Daily challenge / Unlimited play*), Spanish copy no longer uses *la diaria* as a noun, and auth-dependent chrome stays hidden until the stored session resolves.
+
+- Node (v26 local, not 22): non-Postgres suites match the unchanged baseline; the same 20 native-PostgreSQL tests fail without `PG_BIN` on both. `source-check.py` passes.
+- `account-startup-checks.js` **25/25**, including a new every-frame assertion that fails on unchanged `origin/main`. `accounts` **65**, `guest-session` **16**, `daily-header-browser` **15**, `site-wayfinding` **51** pass.
+- `leaderboard`, `game-loading`, `guest-ranked-disclosure` and `mobile-language` fail with identical first errors on unchanged `origin/main`; `connected-journey`/`friends-leagues` need the leagues bridge (port 54330), not run.
+- Ad-hoc frame sampling with the SDK held 1.5 s: both pages, ES/EN, signed in and guest. Signed in never painted the signed-out label; guests saw it from the first frame; leaderboard personal panel shows *Cargando tabla…* while pending. 360 px: both labels fit without overflow.
+
 ## 2026-10-08 — Continuous loading on completed Daily return
 
 The signed-in Hermes baseline rendered an incomplete Daily header for about 495 ms between account readiness and the completed result. The initial loading CSS also hid the branded spinner. Arrival now keeps the same spinner through the account and Daily reads, and selects the completed summary before rendering the response. Cached re-entry and failed reads follow the same loading/recovery contract; answering the last player still requires the explicit Show result action.

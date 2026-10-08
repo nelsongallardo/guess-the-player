@@ -95,5 +95,7 @@ test('the Next button label is translated for both the guest and signed-in Daily
 });
 
 test('DailyUI.updateControls prefers server completion state once signed in, never stale local state',()=>{
-  assert.match(dailyUi,/const done=Accounts\.session\?DailyRankedUI\.finished\(\):!!attempt\(\)\?\.completion/);
+  // While a stored session is still being read, local guest completion must
+  // not be shown either: it may belong to a visitor who is about to be signed in.
+  assert.match(dailyUi,/const done=Accounts\.session\?DailyRankedUI\.finished\(\):!Accounts\.pending&&!!attempt\(\)\?\.completion/);
 });
