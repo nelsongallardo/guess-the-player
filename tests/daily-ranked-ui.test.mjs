@@ -89,9 +89,9 @@ test('bilingual copy: ranking-consequence points phrasing, sync error and guest-
 });
 
 test('the Next button label is translated for both the guest and signed-in Daily render paths (a real pre-existing gap this work also closes)',()=>{
-  assert.match(dailyUi,/document\.getElementById\('next-label'\)\.textContent=x\.next;/);
+  assert.match(dailyUi,/document\.getElementById\('next-label'\)\.textContent=roundIndex===2\?\(language==='en'\?'Show result':'Ver resultado'\):x\.next;/);
   const daily=game.slice(game.indexOf('const DailyRankedUI'),game.indexOf('const RankedUI'));
-  assert.match(daily,/document\.getElementById\('next-label'\)\.textContent=y\.next;/);
+  assert.match(daily,/document\.getElementById\('next-label'\)\.textContent=round\.roundIndex===2\?\(language==='en'\?'Show result':'Ver resultado'\):y\.next;/);
 });
 
 test('DailyUI.updateControls prefers server completion state once signed in, never stale local state',()=>{

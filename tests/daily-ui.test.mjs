@@ -175,7 +175,7 @@ test('Daily UI renders the current one of three and advances through the existin
   assert.match(source,/progress[^\n]+max\s*=\s*3/);
   assert.match(source,/playerProgress|player progress/i);
   assert.match(source,/const next=.*persistence\.next/);
-  assert.match(source,/daily-result-actions[^\n]+a\.game\.finished/);
+  assert.match(source,/attempt\(\)\?\.completion\)\{requestResult\(\)/,'terminal third player waits for Show result');
   assert.match(game,/if\(DailyUI\.isDaily\(\)\)\{DailyUI\.next\(\);return;\}/);
 });
 

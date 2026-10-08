@@ -297,6 +297,7 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 #account-dialog .field-label-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
 #account-dialog .field-label-row label{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.2px}
 #account-dialog .alias-help-region{position:relative;display:inline-flex}
+#account-dialog .alias-tooltip::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}
 #account-dialog .alias-help{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;min-height:0;padding:0;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:11px;line-height:1;color:var(--muted);cursor:pointer}
 #account-dialog .alias-help:hover{border-color:var(--muted);color:var(--ink)}
 #account-dialog .alias-tooltip{position:absolute;top:calc(100% + 8px);right:0;z-index:5;width:230px;max-width:60vw;background:var(--ink);color:var(--paper);font-size:12px;line-height:1.5;padding:10px 12px;border-radius:8px;box-shadow:0 10px 28px #0003;margin:0}
@@ -76330,7 +76331,7 @@ const DailyUI=(()=>{
     if(new URLSearchParams(location.search).get('unlimited')==='1')return 'unlimited';
     return 'daily';
   })();
-  let persistence=null,displayedDate=null,rolloverTimer=null,rolloverReady=false,initialized=false,modeEpoch=0;
+  let persistence=null,displayedDate=null,rolloverTimer=null,rolloverReady=false,initialized=false,modeEpoch=0,resultRequested=false;
   const DAILY_CLOCK_KEY='derabona.daily-clock.v1';
   let dailyClockStart=null,dailyClockId=null,dailyClockWaitingForConsent=false;
   const requestedMode=()=>mode;
@@ -76372,7 +76373,7 @@ const DailyUI=(()=>{
     const shareButton=document.getElementById('daily-summary-share'),status=document.getElementById('daily-summary-share-status'),preview=document.getElementById('daily-summary-share-preview');
     shareButton.textContent=x.share;document.getElementById('daily-summary-keep-playing').textContent=x.keepPlaying;
     preview.textContent=shareText({language,challengeNumber,correctCount,totalGuesses,totalHints,totalPoints,currentStreak});preview.hidden=false;
-    shareButton.onclick=async()=>{status.textContent='';try{await share();status.textContent=x.shared;}catch(error){if(error?.name!=='AbortError')status.textContent=x.shareFailed;}finally{shareButton.focus({preventScroll:true});}};
+    shareButton.onclick=async()=>{status.textContent='';try{status.textContent=await share()||'';}catch(error){if(error?.name!=='AbortError')status.textContent=x.shareFailed;}finally{shareButton.focus({preventScroll:true});}};
     document.getElementById('daily-summary').hidden=false;document.getElementById('round-panel').hidden=true;
   };
   const currentModeEpoch=()=>modeEpoch;
@@ -76433,7 +76434,7 @@ const DailyUI=(()=>{
     document.getElementById('guest-ranked-status').hidden=true;document.getElementById('guest-ranked-reminder').hidden=true;document.getElementById('summary-panel').hidden=true;document.getElementById('daily-summary').hidden=true;document.getElementById('round-panel').hidden=false;document.getElementById('round-panel').setAttribute('aria-busy','false');
     const a=attempt(),descriptor=DailyChallenge.forDate(a.date),roundIndex=a.game.roundIndex,p=descriptor.payloads[a.game.roundIndex].player,r=a.game.rounds[a.game.roundIndex],answerId=a.game.deck[a.game.roundIndex],optionList=a.options[a.game.roundIndex],result=r.status,x=copy(),dailyText=copyFor(language);
     if(r.startedAt===null&&!Analytics.shouldPauseGameClock()){persistence.start(displayedDate);return render(celebrate,newCareer);}
-    if(a.completion){
+    if(a.completion&&resultRequested){
       document.getElementById('daily-summary').hidden=false;document.getElementById('round-panel').hidden=true;
       const doc=persistence.read(),review=a.game.deck.map((id,i)=>({name:descriptor.payloads[i].player.name,won:a.game.rounds[i].status==='won'}));
       renderDailySummary({language,challengeNumber:a.challengeNumber,...a.completion,currentStreak:doc.stats.currentStreak,bestStreak:doc.stats.bestStreak,review,nextRolloverAtMs:nextRolloverAt(a.date),share});
@@ -76446,14 +76447,14 @@ const DailyUI=(()=>{
     document.getElementById('attempt-text').textContent=result==='won'?x.found:x.attempts(left);document.getElementById('lives').replaceChildren(...Array.from({length:3},(_,i)=>el('span',undefined,`life${i>=left?' used':''}`)));
     document.getElementById('progress').max=3;document.getElementById('progress').value=roundIndex+(result==='playing'?0:1);document.getElementById('progress-label').textContent=dailyText.playerProgress(roundIndex+1);document.getElementById('round-number').textContent=`#${a.challengeNumber} · ${roundIndex+1}/3`;
     const options=document.getElementById('options');if(options.children.length!==optionList.length||[...options.children].some((button,i)=>button.dataset.optionId!==optionList[i].id)){
-      options.replaceChildren();optionList.forEach((option,i)=>{const button=el('button',undefined,'option');button.type='button';button.dataset.optionId=option.id;button.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',undefined,'option-state'));button.onclick=()=>{startDailyClockFromInteraction();if(!isDaily()||!persistence.guess(option.id,displayedDate,dailyClockStart))return;render(option.id===answerId);const latest=attempt();if(latest.completion)document.getElementById('question').focus({preventScroll:true});else if(latest.game.rounds[latest.game.roundIndex].status!=='playing')document.getElementById('next').focus({preventScroll:true});};options.append(button);});
+      options.replaceChildren();optionList.forEach((option,i)=>{const button=el('button',undefined,'option');button.type='button';button.dataset.optionId=option.id;button.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',undefined,'option-state'));button.onclick=()=>{startDailyClockFromInteraction();if(!isDaily()||!persistence.guess(option.id,displayedDate,dailyClockStart))return;render(option.id===answerId);const latest=attempt();if(latest.completion)document.getElementById('next').focus({preventScroll:true});else if(latest.game.rounds[latest.game.roundIndex].status!=='playing')document.getElementById('next').focus({preventScroll:true});};options.append(button);});
     }
     [...options.children].forEach((button,i)=>{const option=optionList[i],guessed=r.guesses.includes(option.id),correct=result!=='playing'&&option.id===answerId,wrong=guessed&&!correct;button.disabled=result!=='playing'||wrong;button.className='option'+(wrong?' wrong':correct?' correct':result!=='playing'?' muted':'')+(correct&&celebrate&&result==='won'?' goal':'');button.setAttribute('aria-label',`${option.label}${wrong?', '+x.incorrect:correct?', '+x.correct:''}`);button.querySelector('.option-state').textContent=wrong?'×':correct?'✓':'↗';});
     const values=[position(p),country(p),x.yearsRevealed];document.getElementById('hints').replaceChildren(...x.hints.map((label,i)=>el('li',i<r.hints?`${label}: ${values[i]}`:`${i+1}. ${label}`,i<r.hints?'revealed':'')));
-    document.getElementById('hint').disabled=r.hints>=3||result!=='playing';document.getElementById('hint-label').textContent=r.hints>=3?x.allHints:hintAction(r.hints);document.getElementById('hint-count').textContent=`${r.hints} / 3`;document.getElementById('next').hidden=result==='playing'||roundIndex===2;document.getElementById('next-label').textContent=x.next;
+    document.getElementById('hint').disabled=r.hints>=3||result!=='playing';document.getElementById('hint-label').textContent=r.hints>=3?x.allHints:hintAction(r.hints);document.getElementById('hint-count').textContent=`${r.hints} / 3`;document.getElementById('next').hidden=result==='playing';document.getElementById('next-label').textContent=roundIndex===2?(language==='en'?'Show result':'Ver resultado'):x.next;
     const feedback=document.getElementById('feedback');feedback.className=`feedback ${result}`;feedback.replaceChildren();
     if(result==='won')feedback.append(el('strong',`${dailyText.won}: ${p.name}`),el('span',dailyText.points(r.points)));else if(result==='lost')feedback.append(el('strong',`${dailyText.lost}: ${p.name}`),el('span',dailyText.points(0)));else if(r.guesses.length)feedback.append(el('strong',x.wrong),el('span',x.wrongDetail(left)));else feedback.textContent=x.trust;
-    const terminal=result!=='playing';document.getElementById('daily-result-actions').hidden=!a.game.finished;document.getElementById('daily-share-status').textContent='';document.getElementById('source-details').hidden=!terminal;if(terminal)renderSources(p);else document.getElementById('source-content').replaceChildren();
+    const terminal=result!=='playing';document.getElementById('daily-result-actions').hidden=true;document.getElementById('daily-share-status').textContent='';document.getElementById('source-details').hidden=!terminal;if(terminal)renderSources(p);else document.getElementById('source-content').replaceChildren();
     renderStatus();return true;
   };
   const choose=next=>{
@@ -76467,11 +76468,12 @@ const DailyUI=(()=>{
   const share=async()=>{
     if(Accounts.session)return DailyRankedUI.share();
     const a=attempt();if(!a?.completion)return;const x=copyFor(language),text=shareText({language,challengeNumber:a.challengeNumber,...a.completion,currentStreak:persistence.read().stats.currentStreak}),status=document.getElementById('daily-share-status');
-    try{if(typeof navigator.share==='function'){await navigator.share({title:language==='en'?'Derabona Daily':'Derabona diaria',text,url:'https://derabona.club/'});status.textContent=x.shared;}else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);status.textContent=x.copied;}else{const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();if(!document.execCommand('copy'))throw Error('copy');area.remove();status.textContent=x.copied;}}catch(error){if(error?.name!=='AbortError')status.textContent=x.shareFailed;}finally{document.getElementById('daily-share').focus({preventScroll:true});}
+    status.textContent='';try{if(typeof navigator.share==='function'){await navigator.share({title:language==='en'?'Derabona Daily':'Derabona diaria',text,url:'https://derabona.club/'});status.textContent=x.shared;}else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);status.textContent=x.copied;}else{const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();if(!document.execCommand('copy'))throw Error('copy');area.remove();status.textContent=x.copied;}}catch(error){if(error?.name!=='AbortError')status.textContent=x.shareFailed;}finally{document.getElementById('daily-share').focus({preventScroll:true});}return status.textContent;
   };
   const hint=()=>{if(!playActivated)return false;if(Accounts.session)return DailyRankedUI.hint();startDailyClockFromInteraction();if(!isDaily()||!persistence.hint(displayedDate))return false;render();if(document.getElementById('hint').disabled)document.getElementById('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});return true;};
-  const next=()=>{if(!playActivated)return false;if(Accounts.session)return DailyRankedUI.next();if(!isDaily()||!persistence.next(displayedDate))return false;render(false,true);document.getElementById('question').focus({preventScroll:true});return true;};
+  const next=()=>{if(!playActivated)return false;if(Accounts.session)return DailyRankedUI.next();if(isDaily()&&attempt()?.completion){requestResult();return true;}if(!isDaily()||!persistence.next(displayedDate))return false;render(false,true);document.getElementById('question').focus({preventScroll:true});return true;};
   const clock=()=>{if(Accounts.session)return DailyRankedUI.clock();const a=isDaily()?attempt():null,r=a?.game.rounds[a.game.roundIndex];if(!r||!ensureDailyClock())return null;return {key:`daily:${displayedDate}:${a.game.roundIndex}`,elapsedMs:dailyClockWaitingForConsent?0:Date.now()-dailyClockStart,playing:r.status==='playing',hints:r.hints,points:r.points};};
+  const requestResult=()=>{resultRequested=true;render(false,true);document.getElementById('daily-summary-title').focus({preventScroll:true});};
   const init=()=>{
     if(initialized)return;initialized=true;updateURL(language);try{persistence=DailyChallenge.createPersistence(localStorage);}catch{persistence=DailyChallenge.createPersistence({getItem(){throw Error('STORAGE_UNAVAILABLE');},setItem(){throw Error('STORAGE_UNAVAILABLE');}});}const today=persistence.today();displayedDate=today?.date||currentDate();
     document.getElementById('daily-mode').onclick=()=>choose('daily');document.getElementById('unlimited-mode').onclick=()=>choose('unlimited');document.getElementById('daily-keep-playing').onclick=()=>choose('unlimited');document.getElementById('daily-share').onclick=share;document.getElementById('daily-summary-keep-playing').onclick=()=>PlayOverview.show('unlimited');
@@ -76481,7 +76483,7 @@ const DailyUI=(()=>{
     window.addEventListener('derabona:analytics-consent-resolved',()=>{if(!playActivated)return;if(isDaily())ensureDailyClock();if(dailyClockWaitingForConsent){dailyClockWaitingForConsent=false;dailyClockStart=Date.now();saveDailyClock();}if(!isDaily())return;const a=attempt(),r=a?.game.rounds[a.game.roundIndex];if(r?.startedAt===null)persistence.start(displayedDate);render();});
     updateControls();translate();if(isDaily())startRollover();
   };
-  return Object.freeze({requestedMode,copyFor,sanitizeURL,updateURL,shareText,isDaily,modeEpoch:currentModeEpoch,init,translate,render,choose,hint,next,clock,checkRollover,renderDailySummary,nextRolloverAt,formatCountdown,localDocument:()=>persistence?.read()||null,prepare:()=>{init();displayedDate=currentDate();persistence.today();rolloverReady=false;}});
+  return Object.freeze({requestedMode,copyFor,sanitizeURL,updateURL,shareText,isDaily,modeEpoch:currentModeEpoch,init,translate,render,choose,hint,next,clock,checkRollover,renderDailySummary,nextRolloverAt,formatCountdown,localDocument:()=>persistence?.read()||null,requestResult,resultRequested:()=>resultRequested,prepare:(showResult=false)=>{resultRequested=showResult;init();displayedDate=currentDate();persistence.today();rolloverReady=false;updateControls();translate();}});
 })();
 </script>
 <script id="game-model">
@@ -81482,12 +81484,12 @@ const NicknamePrompt = (()=>{
 // addresses rounds by (date,roundIndex) instead of a synthetic round id,
 // since which 3 players apply "today" is deterministic, not a random pick.
 const DailyRankedUI = (()=>{
-  let daily=null,busy=false,pending=null,epoch=0,userId=Accounts.session?.user?.id??null,pendingUserId=null,roundIndex=0,noticeNeeded=false;
+  let daily=null,busy=false,pending=null,pendingDate=null,syncFailed=false,epoch=0,userId=Accounts.session?.user?.id??null,pendingUserId=null,roundIndex=0,noticeNeeded=false;
   const current=(ticket,owner)=>ticket===epoch&&owner===userId&&owner===(Accounts.session?.user?.id??null);
   const finished=()=>!!daily?.daily?.finished;
   const activeRoundIndex=()=>{const rounds=daily?.daily?.rounds;if(!rounds||!rounds.length)return 0;const playing=rounds.find(round=>round.status==='playing');return playing?playing.roundIndex:2;};
   const currentRound=()=>daily?.daily?.rounds?.find(round=>round.roundIndex===roundIndex)||null;
-  const resetIdentity=()=>{userId=Accounts.session?.user?.id??null;pendingUserId=null;epoch++;daily=null;pending=null;busy=false;roundIndex=0;noticeNeeded=false;};
+  const resetIdentity=()=>{userId=Accounts.session?.user?.id??null;pendingUserId=null;epoch++;daily=null;pending=null;pendingDate=null;syncFailed=false;busy=false;roundIndex=0;noticeNeeded=false;};
   const dismissNotice=()=>{noticeNeeded=false;render(false,false);};
   // Only ever informational: a guest attempt from earlier today, still
   // sitting untouched in this browser's local storage, never imported or
@@ -81500,32 +81502,34 @@ const DailyRankedUI = (()=>{
   // must NOT silently jump the displayed round ahead the instant a round
   // resolves - the player still needs to see that round's feedback/points
   // until they explicitly click Next, exactly like the guest local flow.
-  function accept(data,resetIndex=false,scoreRevision){if(!data||!data.daily||!Array.isArray(data.daily.rounds))throw Error('INVALID_RESPONSE');daily=data;if(resetIndex)roundIndex=activeRoundIndex();RankedUI.acceptDailyScore(data.totalPoints,userId,scoreRevision);NicknamePrompt.maybeOpen(data.profile);}
+  function accept(data,resetIndex=false,scoreRevision){if(!data||!data.daily||!Array.isArray(data.daily.rounds)||data.daily.date!==today())throw Error('INVALID_RESPONSE');daily=data;syncFailed=false;if(resetIndex)roundIndex=activeRoundIndex();RankedUI.acceptDailyScore(data.totalPoints,userId,scoreRevision);NicknamePrompt.maybeOpen(data.profile);}
+  const today=()=>new Date().toISOString().slice(0,10);
+  function discardExpired(){if(daily?.daily?.date&&daily.daily.date!==today()||pendingDate&&pendingDate!==today()){epoch++;daily=null;pending=null;pendingDate=null;pendingUserId=null;busy=false;syncFailed=false;roundIndex=0;}}
   async function sync(){
     if(!playActivated)return PlayOverview.load();
-    if(busy)return;
+    discardExpired();if(busy)return;
     userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,firstLoad=!daily,scoreRevision=RankedUI.scoreRevision();
     if(firstLoad)noticeNeeded=localTodayHasProgress();
-    busy=true;if(DailyUI.isDaily())render(false,true);
+    busy=true;syncFailed=false;if(DailyUI.isDaily())render(false,true);
     try{const data=await Accounts.request({action:'dailyProgress'},'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,true,scoreRevision);}
-    catch{}
+    catch{if(current(ticket,owner))syncFailed=true;}
     finally{if(current(ticket,owner)){busy=false;if(DailyUI.isDaily()){render(false,true);document.getElementById('question').focus({preventScroll:true});}}}
   }
   async function mutate(action,extra={}){
-    if(!playActivated||!DailyUI.isDaily()||busy||pending||!daily?.daily)return;
+    if(!playActivated||!DailyUI.isDaily()||busy||pending||!daily?.daily||daily.daily.date!==today())return;
     const round=currentRound();if(!round||round.status!=='playing')return;
     const payload={action,...extra,idempotencyKey:crypto.randomUUID(),roundIndex:round.roundIndex,expectedVersion:round.version};
-    if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingUserId=userId;await sendPending();
+    if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingDate=daily.daily.date;pendingUserId=userId;await sendPending();
   }
   async function sendPending(){
-    if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;
+    discardExpired();if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;
     const payload=pending,owner=pendingUserId,ticket=epoch,scoreRevision=RankedUI.scoreRevision();busy=true;render(false,false);
     try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,false,scoreRevision);pending=null;}
     catch(error){if(!current(ticket,owner))return;if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','ROUND_LOCKED','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','IDEMPOTENCY_CONFLICT'].includes(error.code))pending=null;}
     finally{if(current(ticket,owner)){busy=false;render(payload.action==='dailyAnswer',false);const nextButton=document.getElementById('next');if(!nextButton.hidden)nextButton.focus({preventScroll:true});else if(currentRound()?.status!=='playing')document.getElementById('question').focus({preventScroll:true});}}
   }
   const hint=()=>{if(!playActivated)return false;mutate('dailyHint');return true;};
-  const next=()=>{const round=currentRound();if(!round||round.status==='playing'||roundIndex>=2)return false;roundIndex++;render(false,true);document.getElementById('question').focus({preventScroll:true});return true;};
+  const next=()=>{const round=currentRound();if(!round||round.status==='playing')return false;if(roundIndex>=2){if(finished()){DailyUI.requestResult();return true;}return false;}roundIndex++;render(false,true);document.getElementById('question').focus({preventScroll:true});return true;};
   const clock=()=>{const round=currentRound();if(!round)return null;return {key:`daily:${daily.daily.date}:${round.roundIndex}`,elapsedMs:Date.now()-Date.parse(round.startedAt),playing:round.status==='playing',hints:round.hints,points:round.points};};
   const share=async()=>{
     if(!finished())return;
@@ -81533,9 +81537,9 @@ const DailyRankedUI = (()=>{
       totals={correctCount:rounds.filter(r=>r.status==='won').length,totalGuesses:rounds.reduce((sum,r)=>sum+r.guesses.length,0),totalHints:rounds.reduce((sum,r)=>sum+r.hints,0),totalPoints:rounds.reduce((sum,r)=>sum+(r.points||0),0)},
       text=DailyUI.shareText({language,challengeNumber:daily.daily.challengeNumber,...totals,currentStreak:daily.streak.current}),
       status=document.getElementById('daily-share-status');
-    try{if(typeof navigator.share==='function'){await navigator.share({title:language==='en'?'Derabona Daily':'Derabona diaria',text,url:'https://derabona.club/'});status.textContent=x.shared;}else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);status.textContent=x.copied;}else{const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();if(!document.execCommand('copy'))throw Error('copy');area.remove();status.textContent=x.copied;}}
+    status.textContent='';try{if(typeof navigator.share==='function'){await navigator.share({title:language==='en'?'Derabona Daily':'Derabona diaria',text,url:'https://derabona.club/'});status.textContent=x.shared;}else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);status.textContent=x.copied;}else{const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();if(!document.execCommand('copy'))throw Error('copy');area.remove();status.textContent=x.copied;}}
     catch(error){if(error?.name!=='AbortError')status.textContent=x.shareFailed;}
-    finally{document.getElementById('daily-share').focus({preventScroll:true});}
+    finally{document.getElementById('daily-share').focus({preventScroll:true});}return status.textContent;
   };
   const renderStatus=()=>{
     const x=DailyUI.copyFor(language);
@@ -81553,11 +81557,12 @@ const DailyRankedUI = (()=>{
     document.getElementById('guest-ranked-status').hidden=true;document.getElementById('guest-ranked-reminder').hidden=true;document.getElementById('summary-panel').hidden=true;document.getElementById('round-panel').hidden=false;document.getElementById('round-panel').setAttribute('aria-busy',String(busy&&!daily));
     renderStatus();
     const x=DailyUI.copyFor(language);
-    document.getElementById('daily-retry').hidden=busy||!!daily&&!pending;document.getElementById('daily-retry').textContent=language==='en'?'Retry':'Reintentar';document.getElementById('daily-retry').onclick=()=>pending?sendPending():sync();
+    document.getElementById('daily-retry').hidden=busy||!!daily&&!pending&&!syncFailed;document.getElementById('daily-retry').textContent=language==='en'?'Retry':'Reintentar';document.getElementById('daily-retry').onclick=()=>pending?sendPending():sync();
     if(!daily?.daily){document.getElementById('round-panel').hidden=true;document.getElementById('account-notice').hidden=busy;document.getElementById('account-notice').textContent=x.syncError;return;}
-    document.getElementById('account-notice').hidden=!pending;
+    document.getElementById('account-notice').hidden=!pending&&!syncFailed;
+    if(syncFailed)document.getElementById('account-notice').textContent=x.syncError;
     if(pending)document.getElementById('account-notice').textContent=language==='en'?'This action could not be confirmed. Retry checks the same action safely.':'No se pudo confirmar esta acción. Reintentar verifica la misma acción.';
-    if(daily.daily.finished){
+    if(daily.daily.finished&&DailyUI.resultRequested()){
       document.getElementById('daily-summary').hidden=false;document.getElementById('round-panel').hidden=true;
       const rounds=daily.daily.rounds,totals={correctCount:rounds.filter(r=>r.status==='won').length,totalGuesses:rounds.reduce((sum,r)=>sum+r.guesses.length,0),totalHints:rounds.reduce((sum,r)=>sum+r.hints,0),totalPoints:rounds.reduce((sum,r)=>sum+(r.points||0),0)},
         descriptorAll=DailyChallenge.forDate(daily.daily.date),review=rounds.map((r,i)=>({name:descriptorAll.payloads[i].player.name,won:r.status==='won'}));
@@ -81587,25 +81592,25 @@ const DailyRankedUI = (()=>{
     const values=[round.cluePosition?(language==='es'?(POSITIONS_ES[round.cluePosition]||round.cluePosition):round.cluePosition):null,round.clueCountry?(language==='es'?(COUNTRIES_ES[round.clueCountry]||round.clueCountry):round.clueCountry):null,y.yearsRevealed];
     document.getElementById('hints').replaceChildren(...y.hints.map((label,i)=>el('li',i<round.hints?`${label}: ${values[i]??'—'}`:`${i+1}. ${label}`,i<round.hints?'revealed':'')));
     document.getElementById('hint').disabled=busy||!!pending||round.hints>=3||result!=='playing';document.getElementById('hint-label').textContent=round.hints>=3?y.allHints:hintAction(round.hints);document.getElementById('hint-count').textContent=`${round.hints} / 3`;
-    document.getElementById('next').hidden=result==='playing'||round.roundIndex===2;document.getElementById('next').disabled=busy||!!pending;document.getElementById('next-label').textContent=y.next;
+    document.getElementById('next').hidden=result==='playing';document.getElementById('next').disabled=busy||!!pending;document.getElementById('next-label').textContent=round.roundIndex===2?(language==='en'?'Show result':'Ver resultado'):y.next;
     const feedback=document.getElementById('feedback');feedback.className=`feedback ${result}`;feedback.replaceChildren();
     if(result==='won')feedback.append(el('strong',`${dailyText.won}: ${p.name}`),el('span',dailyText.pointsRanked(round.points)));
     else if(result==='lost')feedback.append(el('strong',`${dailyText.lost}: ${p.name}`),el('span',dailyText.pointsRanked(0)));
     else if(round.guesses.length)feedback.append(el('strong',y.wrong),el('span',y.wrongDetail(left)));
     else feedback.textContent=y.trust;
-    const terminal=result!=='playing';document.getElementById('daily-result-actions').hidden=!daily.daily.finished;document.getElementById('daily-share-status').textContent='';document.getElementById('source-details').hidden=!terminal;if(terminal)renderSources(p);else document.getElementById('source-content').replaceChildren();
+    const terminal=result!=='playing';document.getElementById('daily-result-actions').hidden=true;document.getElementById('daily-share-status').textContent='';document.getElementById('source-details').hidden=!terminal;if(terminal)renderSources(p);else document.getElementById('source-content').replaceChildren();
   }
   return Object.freeze({sync,mutate,hint,next,clock,share,render,finished,resetIdentity,dismissNotice});
 })();
 const RankedUI = (()=>{
   const TEXT={
-    en:{account:'Account',accountGuest:'Sign in to compete',guestRankedTitle:'You’re playing as a guest',guestRankedDetail:'Your guest score stays in this tab, cannot be transferred after sign-in, and does not appear on the leaderboard. Sign in before answering to compete.',guestRankedSignIn:'Sign in to compete',accountPitch:'Sign in to compete with players worldwide for points.',scoreLabel:'points',title:'Account and progress',guest:'GUEST · UNRANKED',practice:'PRACTICE · UNRANKED',ranked:'RANKED · CLOUD',loading:'Checking account…',unavailable:'Ranked play unavailable. No offline answers will count. Retry to load authoritative cloud progress, or choose unranked practice.',disabled:'Google sign-in and rankings are not configured yet. Guest play works normally.',detail:'Guest progress stays in this browser tab only, never imported to your account. Sign in once to save your points to the cloud, sync across devices, and get an automatic public nickname — no setup required.',login:'Continue with Google',loginWarn:'Your guest progress will NOT transfer to your account or any leaderboard. Continue to Google? Cancel keeps this guest session.',logout:'Sign out',close:'Close',retry:'Retry / reconnect',practiceAction:'Play unranked practice',returnRanked:'Return to ranked play',signed:'Signed in. Ranked records are permanent; Reset only affects unranked practice.',authError:'Sign-in did not complete. Your guest progress is unchanged. Try again when connected.',nickname:'Nickname (optional)',nicknameDetail:'Changing your nickname is optional (3–24 characters). We suggest your Google name here so you can use it if you like — edit it or clear it to keep your random animal alias instead. We never publish your Google photo.',aliasHelp:'About your public alias',aliasTooltip:'A random animal name is assigned automatically, or use the Google name suggested in Account — change either any time.',enroll:'Save nickname',statPoints:'Points',statAnswered:'Played',statCorrect:'Correct',enrolled:'Public alias: ',aliasLoading:'Loading your public alias…',delete:'Delete account',deleteConfirm:'Permanently delete your account, cloud progress and public leaderboard records? Friends leagues you created are deleted too, with their members, invitations and history, and you leave the others. This cannot be undone. Type DELETE to confirm.',deleteError:'Account deletion could not be confirmed. Retry when connected.',board:'Leaderboards',boardDetail:'Global points count the first result for each player once. Competition boards filter those results by club membership, not the league selected when playing. Ties share ranks. Accounts appear automatically under their public alias after a verified result. Unranked scores never count.',global:'Global',empty:'No public scores yet.',boardError:'Leaderboard unavailable. Try again when connected.',boardLoading:'Loading leaderboard…',rank:'Rank',name:'Nickname',points:'Points',answered:'Played',correct:'Correct',own:'Your rank',total:'public players',prev:'Previous',next:'Next',reset:'Reset guest / practice results',done:'No unseen players remain in this competition. Choose another competition. Ranked results cannot be reset.',sync:'Synchronizing ranked progress…',earned:'points · count toward your rankings',rankRules:'Ranked: one open round per account; changing competitions resumes that round. The server keeps the clock running, including time away. Only the first result per player counts, permanently. Guest/practice Reset cannot clear ranked records.',activeRoundBlocked:name=>`You have an open round in ${name} - finish it (win or lose) before starting a different competition.`},
-    es:{account:'Cuenta',accountGuest:'Iniciar sesión para competir',guestRankedTitle:'Jugás como invitado',guestRankedDetail:'Tu puntaje de invitado queda en esta pestaña, no se puede transferir después de iniciar sesión y no aparece en la tabla. Iniciá sesión antes de responder para competir.',guestRankedSignIn:'Iniciar sesión para competir',accountPitch:'Iniciá sesión para competir por puntos con jugadores de todo el mundo.',scoreLabel:'puntos',title:'Cuenta y progreso',guest:'INVITADO · SIN CLASIFICACIÓN',practice:'PRÁCTICA · SIN CLASIFICACIÓN',ranked:'CLASIFICADO · NUBE',loading:'Comprobando cuenta…',unavailable:'Clasificación no disponible. Las respuestas sin conexión no suman. Reintentá para cargar el progreso de la nube o elegí práctica sin clasificación.',disabled:'Google y las clasificaciones todavía no están configurados. Podés jugar como invitado.',detail:'El progreso de invitado queda solo en esta pestaña y nunca se importa a tu cuenta. Iniciá sesión una vez para guardar tus puntos en la nube, sincronizarlos entre dispositivos y obtener un apodo público automático — sin necesidad de configurar nada.',login:'Continuar con Google',loginWarn:'Tu progreso de invitado NO se transfiere a la cuenta ni a la tabla. ¿Continuar con Google? Cancelar conserva esta sesión.',logout:'Cerrar sesión',close:'Cerrar',retry:'Reintentar / reconectar',practiceAction:'Práctica sin clasificación',returnRanked:'Volver a clasificación',signed:'Sesión iniciada. Los resultados clasificados son permanentes; Reiniciar solo afecta la práctica sin clasificación.',authError:'No se completó el inicio de sesión. Tu progreso de invitado no cambió. Reintentá con conexión.',nickname:'Apodo (opcional)',nicknameDetail:'Cambiar tu apodo es opcional (3–24 caracteres). Te sugerimos tu nombre de Google acá por si querés usarlo — podés editarlo o borrarlo para quedarte con tu alias de animal. Nunca publicamos tu foto de Google.',aliasHelp:'Información sobre tu alias público',aliasTooltip:'Se asigna automáticamente un nombre de animal al azar, o podés usar el nombre de Google que te sugerimos en Cuenta — cambiá cualquiera cuando quieras.',enroll:'Guardar apodo',statPoints:'Puntos',statAnswered:'Jugadas',statCorrect:'Aciertos',enrolled:'Alias público: ',aliasLoading:'Cargando tu alias público…',delete:'Eliminar cuenta',deleteConfirm:'¿Eliminar tu cuenta, progreso en la nube y resultados públicos para siempre? También se eliminan las ligas de amigos que creaste, con sus miembros, invitaciones e historial, y salís de las demás. No se puede deshacer. Escribí DELETE para confirmar.',deleteError:'No se pudo confirmar la eliminación. Reintentá con conexión.',board:'Tabla',boardDetail:'Los puntos globales cuentan una sola vez el primer resultado de cada jugador. Las tablas por competición filtran por clubes, no por la liga elegida al jugar. Los empates comparten puesto. Las cuentas aparecen automáticamente con su alias público tras un resultado verificado. Los puntos sin clasificación no cuentan.',global:'Global',empty:'Todavía no hay puntos públicos.',boardError:'Tabla no disponible. Reintentá con conexión.',boardLoading:'Cargando tabla…',rank:'Puesto',name:'Apodo',points:'Puntos',answered:'Jugados',correct:'Aciertos',own:'Tu puesto',total:'jugadores públicos',prev:'Anterior',next:'Siguiente',reset:'Reiniciar invitado / práctica',done:'No quedan jugadores sin responder en esta competición. Elegí otra. Los resultados clasificados no se pueden reiniciar.',sync:'Sincronizando progreso clasificado…',earned:'puntos · cuentan para tu clasificación',rankRules:'Clasificado: una ronda abierta por cuenta; cambiar de competición retoma esa ronda. El reloj del servidor sigue corriendo, incluso al salir. Solo cuenta el primer resultado por jugador, para siempre. Reiniciar invitado/práctica no borra resultados clasificados.',activeRoundBlocked:name=>`Tenés una ronda abierta en ${name} - terminala (ganes o pierdas) antes de empezar otra competición.`}
+    en:{account:'Account',accountGuest:'Sign in to compete',guestRankedTitle:'You’re playing as a guest',guestRankedDetail:'Your guest score stays in this tab, cannot be transferred after sign-in, and does not appear on the leaderboard. Sign in before answering to compete.',guestRankedSignIn:'Sign in to compete',accountPitch:'Sign in to compete with players worldwide for points.',scoreLabel:'points',title:'Account and progress',guest:'GUEST · UNRANKED',practice:'PRACTICE · UNRANKED',ranked:'RANKED · CLOUD',loading:'Checking account…',unavailable:'Ranked play unavailable. No offline answers will count. Retry to load authoritative cloud progress, or choose unranked practice.',disabled:'Google sign-in and rankings are not configured yet. Guest play works normally.',detail:'Guest progress stays in this browser tab only, never imported to your account. Sign in once to save your points to the cloud, sync across devices, and get an automatic public nickname — no setup required.',login:'Continue with Google',loginWarn:'Your guest progress will NOT transfer to your account or any leaderboard. Continue to Google? Cancel keeps this guest session.',logout:'Sign out',close:'Close',retry:'Retry / reconnect',practiceAction:'Play unranked practice',returnRanked:'Return to ranked play',signed:'Signed in. Ranked records are permanent; Reset only affects unranked practice.',authError:'Sign-in did not complete. Your guest progress is unchanged. Try again when connected.',nickname:'Nickname (optional)',nicknameDetail:'Changing your nickname is optional (3–24 characters). We suggest your Google name here so you can use it if you like — edit it or clear it to keep your random animal alias instead. We never publish your Google photo.',aliasHelp:'About your public alias',aliasTooltip:'A random animal name is assigned automatically, or use the Google name suggested in Account — change either any time.',enroll:'Save nickname',statPoints:'Lifetime points',statAnswered:'Played',statCorrect:'Correct',enrolled:'Public alias: ',aliasLoading:'Loading your public alias…',delete:'Delete account',deleteConfirm:'Permanently delete your account, cloud progress and public leaderboard records? Friends leagues you created are deleted too, with their members, invitations and history, and you leave the others. This cannot be undone. Type DELETE to confirm.',deleteError:'Account deletion could not be confirmed. Retry when connected.',board:'Leaderboards',boardDetail:'Global points count the first result for each player once. Competition boards filter those results by club membership, not the league selected when playing. Ties share ranks. Accounts appear automatically under their public alias after a verified result. Unranked scores never count.',global:'Global',empty:'No public scores yet.',boardError:'Leaderboard unavailable. Try again when connected.',boardLoading:'Loading leaderboard…',rank:'Rank',name:'Nickname',points:'Points',answered:'Played',correct:'Correct',own:'Your rank',total:'public players',prev:'Previous',next:'Next',reset:'Reset guest / practice results',done:'No unseen players remain in this competition. Choose another competition. Ranked results cannot be reset.',sync:'Synchronizing ranked progress…',earned:'points · count toward your rankings',rankRules:'Ranked: one open round per account; changing competitions resumes that round. The server keeps the clock running, including time away. Only the first result per player counts, permanently. Guest/practice Reset cannot clear ranked records.',activeRoundBlocked:name=>`You have an open round in ${name} - finish it (win or lose) before starting a different competition.`},
+    es:{account:'Cuenta',accountGuest:'Iniciar sesión para competir',guestRankedTitle:'Jugás como invitado',guestRankedDetail:'Tu puntaje de invitado queda en esta pestaña, no se puede transferir después de iniciar sesión y no aparece en la tabla. Iniciá sesión antes de responder para competir.',guestRankedSignIn:'Iniciar sesión para competir',accountPitch:'Iniciá sesión para competir por puntos con jugadores de todo el mundo.',scoreLabel:'puntos',title:'Cuenta y progreso',guest:'INVITADO · SIN CLASIFICACIÓN',practice:'PRÁCTICA · SIN CLASIFICACIÓN',ranked:'CLASIFICADO · NUBE',loading:'Comprobando cuenta…',unavailable:'Clasificación no disponible. Las respuestas sin conexión no suman. Reintentá para cargar el progreso de la nube o elegí práctica sin clasificación.',disabled:'Google y las clasificaciones todavía no están configurados. Podés jugar como invitado.',detail:'El progreso de invitado queda solo en esta pestaña y nunca se importa a tu cuenta. Iniciá sesión una vez para guardar tus puntos en la nube, sincronizarlos entre dispositivos y obtener un apodo público automático — sin necesidad de configurar nada.',login:'Continuar con Google',loginWarn:'Tu progreso de invitado NO se transfiere a la cuenta ni a la tabla. ¿Continuar con Google? Cancelar conserva esta sesión.',logout:'Cerrar sesión',close:'Cerrar',retry:'Reintentar / reconectar',practiceAction:'Práctica sin clasificación',returnRanked:'Volver a clasificación',signed:'Sesión iniciada. Los resultados clasificados son permanentes; Reiniciar solo afecta la práctica sin clasificación.',authError:'No se completó el inicio de sesión. Tu progreso de invitado no cambió. Reintentá con conexión.',nickname:'Apodo (opcional)',nicknameDetail:'Cambiar tu apodo es opcional (3–24 caracteres). Te sugerimos tu nombre de Google acá por si querés usarlo — podés editarlo o borrarlo para quedarte con tu alias de animal. Nunca publicamos tu foto de Google.',aliasHelp:'Información sobre tu alias público',aliasTooltip:'Se asigna automáticamente un nombre de animal al azar, o podés usar el nombre de Google que te sugerimos en Cuenta — cambiá cualquiera cuando quieras.',enroll:'Guardar apodo',statPoints:'Puntos acumulados',statAnswered:'Jugadas',statCorrect:'Aciertos',enrolled:'Alias público: ',aliasLoading:'Cargando tu alias público…',delete:'Eliminar cuenta',deleteConfirm:'¿Eliminar tu cuenta, progreso en la nube y resultados públicos para siempre? También se eliminan las ligas de amigos que creaste, con sus miembros, invitaciones e historial, y salís de las demás. No se puede deshacer. Escribí DELETE para confirmar.',deleteError:'No se pudo confirmar la eliminación. Reintentá con conexión.',board:'Tabla',boardDetail:'Los puntos globales cuentan una sola vez el primer resultado de cada jugador. Las tablas por competición filtran por clubes, no por la liga elegida al jugar. Los empates comparten puesto. Las cuentas aparecen automáticamente con su alias público tras un resultado verificado. Los puntos sin clasificación no cuentan.',global:'Global',empty:'Todavía no hay puntos públicos.',boardError:'Tabla no disponible. Reintentá con conexión.',boardLoading:'Cargando tabla…',rank:'Puesto',name:'Apodo',points:'Puntos',answered:'Jugados',correct:'Aciertos',own:'Tu puesto',total:'jugadores públicos',prev:'Anterior',next:'Siguiente',reset:'Reiniciar invitado / práctica',done:'No quedan jugadores sin responder en esta competición. Elegí otra. Los resultados clasificados no se pueden reiniciar.',sync:'Sincronizando progreso clasificado…',earned:'puntos · cuentan para tu clasificación',rankRules:'Clasificado: una ronda abierta por cuenta; cambiar de competición retoma esa ronda. El reloj del servidor sigue corriendo, incluso al salir. Solo cuenta el primer resultado por jugador, para siempre. Reiniciar invitado/práctica no borra resultados clasificados.',activeRoundBlocked:name=>`Tenés una ronda abierta en ${name} - terminala (ganes o pierdas) antes de empezar otra competición.`}
   };
   let mode=Accounts.configured&&(Accounts.hasStoredSession()||AuthCallback.code)?'loading':'guest';
   let userId=Accounts.session?.user?.id??null,pendingUserId=null;
   const current=(ticket,owner)=>ticket===epoch&&owner===userId&&owner===(Accounts.session?.user?.id??null);
-  let cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='',syncRequested=null,scoreTotal=null,scoreRevision=0;
+  let readyCareer=null,cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='',syncRequested=null,scoreTotal=null,scoreRevision=0;
   // Both server projections carry the same combined total. A response begun
   // before another mode's accepted response cannot roll the masthead back.
   function acceptDailyScore(total,owner,revision){
@@ -81726,9 +81731,9 @@ const RankedUI = (()=>{
     // closes, nothing changes, no explanation). Disable every competition
     // but the active round's own here, with a clear reason, matching the
     // server's actual behavior instead of fighting it client-side.
-    const activeId=cloud?.round?.status==='playing'?cloud.round.competition:null;
+    const activeId=cloud?.round?.status==='playing'?cloud.round.competition:!playActivated&&readyCareer?.status==='playing'?readyCareer.competition:null;
     $('competitions-intro').textContent=activeId?t().activeRoundBlocked(copy().competitions[activeId]):t().rankRules;
-    for(const id of ['all',...CareerGame.COMPETITION_IDS]){const count=cloud?.progress?.competitionCounts?.[id],done=count&&count.answered>=count.total,blocked=activeId&&id!==activeId,b=el('button',undefined,'option'+(blocked?' muted':''));b.type='button';b.disabled=busy||mode!=='ranked'||!!pending||!!done||blocked;const name=el('span',copy().competitions[id],'option-name');if(COMPETITION_LOGOS[id]||id==='all'){const logo=el('img');logo.src=id==='all'?BRAND_MARK_ICON:COMPETITION_LOGOS[id].dataUrl;logo.alt='';logo.className='option-logo';logo.width=28;logo.height=28;name.prepend(logo);}b.append(name,el('span',done?copy().competitionCompleted:blocked?'':count?String(count.total-count.answered):'','option-state'));if(id===competition())b.setAttribute('aria-current','true');b.onclick=()=>{selected=id;$('competitions').close();if(!playActivated){PlayOverview.activate('unlimited');return;}mutate('start',{competition:id});};container.append(b);}
+    for(const id of ['all',...CareerGame.COMPETITION_IDS]){const count=cloud?.progress?.competitionCounts?.[id],done=count&&count.answered>=count.total,blocked=activeId&&id!==activeId,b=el('button',undefined,'option'+(blocked?' muted':''));b.type='button';b.disabled=busy||mode!=='ranked'||!!pending||!!done||blocked;const name=el('span',copy().competitions[id],'option-name');if(COMPETITION_LOGOS[id]||id==='all'){const logo=el('img');logo.src=id==='all'?BRAND_MARK_ICON:COMPETITION_LOGOS[id].dataUrl;logo.alt='';logo.className='option-logo';logo.width=28;logo.height=28;name.prepend(logo);}b.append(name,el('span',done?copy().competitionCompleted:blocked?'':count?String(count.total-count.answered):'','option-state'));if(id===competition())b.setAttribute('aria-current','true');b.onclick=()=>{selected=id;$('competitions').close();if(!playActivated){PlayOverview.activate('unlimited',id);return;}mutate('start',{competition:id});};container.append(b);}
   }
   function renderRanked(newCareer=false){
     if(!playActivated)return;
@@ -81809,7 +81814,7 @@ const RankedUI = (()=>{
     // is the active tab now that sync() itself is tab-safe.
     if(!requested||busy||!current(requested.ticket,requested.owner))return;
     syncRequested=null;
-    await sync();
+    await sync(requested.startCompetition);
   }
   // This is the only thing that ever moves the shared masthead (#play-mode,
   // #score, #account-open) off its initial 'loading' state - so it must run
@@ -81826,13 +81831,13 @@ const RankedUI = (()=>{
   // itself is always tab-safe: the shared render() dispatcher already
   // delegates to whichever of DailyUI/DailyRankedUI or RankedUI.render
   // actually matches the current tab.
-  async function sync(){
+  async function sync(startCompetition=null){
     if(!playActivated)return PlayOverview.load();
-    if(busy){const owner=Accounts.session?.user?.id??userId;if(owner===userId)syncRequested={owner,ticket:epoch};return;}syncRequested=null;if(pending)return sendPending();userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),revision=scoreRevision,identityCurrent=()=>current(ticket,owner),gameplayCurrent=()=>playActivated&&identityCurrent()&&!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket;busy=true;mode='loading';update();
+    if(busy){const owner=Accounts.session?.user?.id??userId;if(owner===userId)syncRequested={owner,ticket:epoch,startCompetition};return;}syncRequested=null;if(pending)return sendPending();userId=Accounts.session?.user?.id??userId;const owner=userId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),revision=scoreRevision,identityCurrent=()=>current(ticket,owner),gameplayCurrent=()=>playActivated&&identityCurrent()&&!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket;busy=true;mode='loading';update();
     try{if(!Accounts.session){await Accounts.init(authChanged);if(!identityCurrent())return;if(!Accounts.session)throw Error('AUTH_REQUIRED');}const data=await Accounts.request({action:'progress'},'ranked-game',false,owner);if(!identityCurrent())return;accept(data,revision);}
     catch{if(identityCurrent()){mode='unavailable';notice='unavailable';}}
     finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,true);await resumeRequestedSync();}}
-    if(gameplayCurrent()&&mode==='ranked'&&!cloud.round){const count=cloud.progress.competitionCounts?.[selected];if(!count||count.answered<count.total)await mutate('start',{competition:selected});}
+    if(gameplayCurrent()&&mode==='ranked'&&(!cloud.round||startCompetition&&cloud.round.status!=='playing')){const target=startCompetition||selected,count=cloud.progress.competitionCounts?.[target];if(!count||count.answered<count.total)await mutate('start',{competition:target});}
   }
   async function mutate(action,extra={}){
     if((!playActivated&&action!=='enroll')||DailyUI.isDaily()&&action!=='enroll'||mode!=='ranked'||busy||pending)return;
@@ -81860,7 +81865,7 @@ const RankedUI = (()=>{
     // hint click and every answer, not just when a round genuinely starts.
     finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,payload.action==='start');if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}await resumeRequestedSync();}}
   }
-  function freshGuest(){playActivated=false;PlayOverview.reset();NicknamePrompt.resetIdentity();userId=null;pendingUserId=null;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;busy=false;syncRequested=null;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();googleNameSuggestion=null;nicknameSuggestionApplied=false;$('public-nickname').value='';DailyRankedUI.resetIdentity();applyLanguage();render(false,true);}
+  function freshGuest(){playActivated=false;PlayOverview.reset();NicknamePrompt.resetIdentity();readyCareer=null;userId=null;pendingUserId=null;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;busy=false;syncRequested=null;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();googleNameSuggestion=null;nicknameSuggestionApplied=false;$('public-nickname').value='';DailyRankedUI.resetIdentity();applyLanguage();render(false,true);}
   // Shared by both the initial getSession()/exchangeCodeForSession() result
   // (boot(), including a real fresh OAuth redirect completion) and every
   // later onAuthStateChange event (authChanged()) - a fresh sign-in can
@@ -81875,7 +81880,7 @@ const RankedUI = (()=>{
   function authChanged(event,session){
     const next=session?.user?.id??null;if(next===userId)return;
     if(!next){freshGuest();return;}
-    playActivated=false;PlayOverview.reset();NicknamePrompt.resetIdentity();userId=next;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;pendingUserId=null;busy=false;syncRequested=null;notice='';mode='loading';selected='all';
+    playActivated=false;PlayOverview.reset();NicknamePrompt.resetIdentity();readyCareer=null;userId=next;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;pendingUserId=null;busy=false;syncRequested=null;notice='';mode='loading';selected='all';
     captureGoogleNameSuggestion(session);
     DailyRankedUI.resetIdentity();
     update();render(false,true);
@@ -81929,7 +81934,7 @@ const RankedUI = (()=>{
   $('account-delete').onclick=async()=>{if(busy||prompt(t().deleteConfirm)!=='DELETE')return;const owner=userId,ticket=epoch;busy=true;update();try{await Accounts.request({confirmation:'DELETE'},'account-delete',false,owner);if(!current(ticket,owner))return;await Accounts.logout();if(Accounts.session?.user?.id)return;freshGuest();$('account-dialog').close();}catch{if(current(ticket,owner)){notice='deleteError';busy=false;update();}}};
   window.addEventListener('offline',()=>{if(mode==='ranked'){mode='unavailable';notice='unavailable';update();}});
   // Reconnect is explicit; practice is never silently promoted to ranked.
-  function acceptOverview(data){userId=Accounts.session?.user?.id??null;cloud={profile:data.profile,progress:data.progress,round:null};scoreTotal=data.progress.totalPoints;mode='ranked';notice='';if(data.career.competition)selected=data.career.competition;update();}
+  function acceptOverview(data){readyCareer=data.career;userId=Accounts.session?.user?.id??null;cloud={profile:data.profile,progress:data.progress,round:null};scoreTotal=data.progress.totalPoints;mode='ranked';notice='';if(data.career.competition)selected=data.career.competition;update();}
   return {acceptOverview,update,render:renderRanked,competitions,isAccountMode,player,competition,mutate,boot,roundClock,sync,acceptDailyScore,scoreRevision:()=>scoreRevision};
 })();
 // Browsing Play is read-only. Only activate() crosses into a timed game.
@@ -82018,14 +82023,15 @@ const PlayOverview=(()=>{
     render();if(Accounts.session&&!practice)load();$('play-title').focus({preventScroll:true});
     if(mode==='unlimited')$('play-unlimited-title').scrollIntoView({block:'nearest'});
   }
-  async function activate(mode){
+  async function activate(mode,startCompetition=null){
     if(loading||failed)return;
     if(Accounts.session&&!practice){if(!overview)return;if(!overview.profile.nicknamePrompted){NicknamePrompt.maybeOpen(overview.profile);return;}if(overview.daily.date!==date()){await load();return;}}
     // Switching the selected mode here is inert; activation happens afterwards.
-    playActivated=false;DailyUI.choose(mode);DailyUI.prepare();playActivated=true;
+    const showResult=mode==='daily'&&(Accounts.session&&!practice?overview.daily.status==='finished':localStatus().status==='finished');
+    playActivated=false;DailyUI.choose(mode);DailyUI.prepare(showResult);playActivated=true;
     const url=new URL(DailyUI.sanitizeURL(mode,language));url.searchParams.set('play','1');try{history.pushState(history.state??null,'',url);}catch{}
     $('play-overview').hidden=true;$('play-context').hidden=false;document.documentElement.classList.remove('play-ready');translate();
-    if(Accounts.session&&!practice){if(mode==='daily'){RankedUI.update();await DailyRankedUI.sync();}else await RankedUI.sync();}
+    if(Accounts.session&&!practice){if(mode==='daily'){RankedUI.update();await DailyRankedUI.sync();}else await RankedUI.sync(startCompetition);}
     else{if(mode==='unlimited')startGuestClockForMode();renderGame();}
     if(!$('daily-summary').hidden)$('daily-summary-title').focus({preventScroll:true});else $('question').focus({preventScroll:true});
   }

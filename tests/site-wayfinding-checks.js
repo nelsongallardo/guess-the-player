@@ -25,10 +25,14 @@ async page=>{
       await p.locator('#options button').filter({hasText:answer}).click();
       if(i<2)await p.locator('#next').click();
     }
+    ok(await p.locator('#daily-summary').isHidden()&&await p.locator('#next-label').textContent()==='Ver resultado','Third player retains terminal feedback with an explicit result action');await p.locator('#next').click();
     ok(await p.locator('#daily-summary').isVisible()&&await p.locator('#result-create').isVisible(),'Completed Daily offers explicit group creation');
     await p.goto(origin+'/index.html?lang=en');
     ok(await p.locator('#play-daily-start').textContent()==='View today’s result','Bare URL retains completed Daily instead of switching modes');
     await p.locator('#play-daily-start').click();ok(await p.locator('#daily-summary').isVisible(),'View result reopens today’s summary');
+    await p.evaluate(()=>Object.defineProperty(navigator,'share',{configurable:true,value:async()=>{throw Error('EXPLICIT_TEST_FAILURE');}}));await p.locator('#daily-summary-share').click();ok(await p.locator('#daily-summary-share-status').textContent()==='Could not share this result','Share failure never announces success');
+    await p.evaluate(()=>Object.defineProperty(navigator,'share',{configurable:true,value:async()=>{throw new DOMException('Cancelled','AbortError');}}));await p.locator('#daily-summary-share').click();ok(await p.locator('#daily-summary-share-status').textContent()==='','Share cancellation remains silent');
+    await p.evaluate(()=>Object.defineProperty(navigator,'share',{configurable:true,value:async()=>{}}));await p.locator('#daily-summary-share').click();ok(await p.locator('#daily-summary-share-status').textContent()==='Result shared','Successful share announces the actual outcome');
     await p.locator('#daily-summary-keep-playing').click();
     ok(await p.locator('#play-overview').isVisible()&&p.url().includes('unlimited=1'),'Play Unlimited resolves to explicit ready state');
     await p.locator('#play-unlimited-start').click();await p.waitForFunction(()=>sessionStorage.getItem('touchline.clock.v1'));
@@ -48,10 +52,10 @@ async page=>{
     ok(errors.length===0,'Guest journeys have no JavaScript exceptions');
   }finally{await context.close();}
   const account=await browser.newContext({viewport:{width:375,height:667}}),calls=[],api='https://wayfinding-account-mock.invalid',user='00000000-0000-4000-8000-000000000123';
-  let nicknamePrompted=false,round=null,failOverview=false,failDaily=false,rounds=[],enrolls=0;
+  let nicknamePrompted=false,round=null,failOverview=false,failDaily=false,rounds=[],enrolls=0,roundCounter=0,serverDate=new Date().toISOString().slice(0,10);
   const profile=()=>({nickname:'Otter-12345678',enrolled:true,nicknamePrompted});
   const progress=()=>({totalPoints:29,answered:1,correct:1,seenPlayerIds:[],competitionCounts:{all:{answered:1,total:221}}});
-  const overview=()=>({profile:profile(),progress:progress(),daily:{date:new Date().toISOString().slice(0,10),status:'ready',completed:0,totalPoints:0,correctCount:0,previous:null},career:{status:round?'playing':'ready',competition:round?.competition||null}});
+  const overview=()=>({profile:profile(),progress:progress(),daily:{date:serverDate,status:'ready',completed:0,totalPoints:0,correctCount:0,previous:null},career:{status:round?.status==='playing'?'playing':round?'resolved':'ready',competition:round?.competition||null}});
   try{
     await account.addInitScript(user=>{localStorage.setItem('derabona.auth.v1','EXPLICIT_MOCK_SESSION');window.__wayAuth={session:{access_token:'EXPLICIT_TOKEN',user:{id:user}},listener:null};},user);
     await account.route('**/index.html*',async route=>{const response=await route.fetch();const html=(await response.text()).replace(/Object\.freeze\(\{url:'[^']*',anonKey:'[^']*'\}\)/,`Object.freeze({url:'${api}',anonKey:'EXPLICIT_PUBLIC_MOCK_KEY'})`);await route.fulfill({response,body:html});});
@@ -63,8 +67,9 @@ async page=>{
       else if(body.action==='list')result={leagues:[{id:'00000000-0000-4000-8000-000000000111',name:'Thursday football',memberCount:2}]};
       else if(body.action==='enroll'){nicknamePrompted=true;enrolls++;result={profile:profile(),progress:progress(),round};}
       else if(body.action==='progress')result={profile:profile(),progress:progress(),round};
-      else if(body.action==='start'){if(!round)round={...rounds[0],id:'00000000-0000-4000-8000-000000000999',competition:'all'};result={profile:profile(),progress:progress(),round};}
-      else if(body.action==='dailyProgress'){result={profile:profile(),totalPoints:29,streak:{current:0,best:0},daily:{date:new Date().toISOString().slice(0,10),rounds,finished:false,challengeNumber:1}};if(failDaily){failDaily=false;result={error:{code:'UNAVAILABLE'}};status=503;}}
+      else if(body.action==='start'){if(!round||round.status!=='playing')round={...rounds[0],id:'00000000-0000-4000-8000-'+String(++roundCounter).padStart(12,'0'),status:'playing',competition:body.competition};result={profile:profile(),progress:progress(),round};}
+      else if(body.action==='dailyAnswer'){const r=rounds[body.roundIndex];r.guesses.push(body.optionId);r.status='won';r.points=11;r.version++;result={profile:profile(),totalPoints:29,streak:{current:0,best:0},daily:{date:serverDate,rounds,finished:rounds.every(r=>r.status!=='playing'),challengeNumber:1}};}
+      else if(body.action==='dailyProgress'){result={profile:profile(),totalPoints:29,streak:{current:0,best:0},daily:{date:serverDate,rounds,finished:rounds.length===3&&rounds.every(r=>r.status!=='playing'),challengeNumber:1}};if(failDaily){failDaily=false;result={error:{code:'UNAVAILABLE'}};status=503;}}
       else throw Error('Unexpected account request '+body.action);
       await route.fulfill({status,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:JSON.stringify(result)});
     });
@@ -81,12 +86,26 @@ async page=>{
     ok(calls.filter(c=>c.action==='start').length===1&&await p.locator('#round-panel').isHidden(),'Reload reads overview without starting or showing a round');
     await p.locator('#play-unlimited-start').click();await p.waitForFunction(()=>document.getElementById('options').children.length===10);
     ok(round.id===roundId&&round.startedAt===started&&calls.filter(c=>c.action==='start').length===1,'Continue preserves server round and timestamp');
+    await p.locator('#play-home').click();await p.waitForFunction(()=>!document.getElementById('play-daily-start').disabled);await p.locator('#play-competition').click();ok(await p.locator('#competition-options button').filter({hasText:'La Liga'}).isDisabled(),'Overview playing-round metadata blocks incompatible competition selection');await p.locator('#competitions-close').click();
+    round.status='won';round.points=29;await p.evaluate(()=>PlayOverview.load());await p.locator('#play-competition').click();await p.locator('#competition-options button').filter({hasText:'La Liga'}).click();await p.waitForFunction(()=>document.getElementById('options').children.length===10);
+    ok(round.competition==='la-liga'&&round.status==='playing'&&calls.filter(c=>c.action==='start').at(-1).competition==='la-liga','Choosing competition after a resolved round explicitly starts the chosen competition');
     await p.locator('#play-home').click();await p.waitForFunction(()=>!document.getElementById('play-daily-start').disabled);failDaily=true;await p.locator('#play-daily-start').click();await p.locator('#daily-retry').waitFor({state:'visible'});
     ok(await p.locator('#round-panel').isHidden(),'Daily failure hides stale Unlimited clues');await p.locator('#daily-retry').click();await p.waitForFunction(()=>document.getElementById('options').children.length===10);
     ok(await p.locator('#round-panel').isVisible(),'Daily direct Retry recovers without mode switching');
+    ok(await p.locator('#daily-card').isVisible()&&await p.locator('#change-competition').isHidden(),'Unlimited to Daily restores mode-specific card and hides competition picker');
+    await p.locator('#play-home').click();await p.waitForFunction(()=>!document.getElementById('play-daily-start').disabled);await p.locator('#play-daily-start').click();await p.waitForFunction(()=>document.getElementById('options').children.length===10);ok(await p.locator('#daily-card').isVisible(),'Daily re-entry restores its hidden context card');
+    for(let i=0;i<3;i++){await p.locator('#options button').first().click();await p.locator('#next').waitFor({state:'visible'});if(i<2)await p.locator('#next').click();}
+    ok(await p.locator('#daily-summary').isHidden()&&await p.locator('#next-label').textContent()==='Show result','Ranked third player also waits for explicit Show result');await p.locator('#next').click();ok(await p.locator('#daily-summary').isVisible(),'Ranked Show result opens the completed summary');
+    await p.locator('#play-home').click();await p.waitForFunction(()=>!document.getElementById('play-daily-start').disabled);
+    const originalDate=serverDate;rounds=rounds.map(r=>({...r,status:'playing',guesses:[],points:0,version:0}));serverDate=new Date(Date.parse(serverDate+'T12:00:00Z')+86400000).toISOString().slice(0,10);
+    await p.evaluate(()=>{window.__originalDate=Date;window.Date=class extends window.__originalDate{constructor(...args){super(...(args.length?args:[window.__originalDate.now()+86400000]));}static now(){return window.__originalDate.now()+86400000;}};});await p.evaluate(()=>PlayOverview.load());failDaily=true;await p.locator('#play-daily-start').click();await p.locator('#daily-retry').waitFor({state:'visible'});
+    ok(await p.locator('#round-panel').isHidden()&&await p.locator('#daily-summary').isHidden(),'UTC rollover failure cannot display yesterday’s cached clues or label its result today');
+    await p.locator('#daily-retry').click();await p.waitForFunction(()=>document.getElementById('options').children.length===10);ok(await p.locator('#round-panel').isVisible(),'UTC rollover failure has direct retry for the new day');
+    await p.evaluate(()=>{window.Date=window.__originalDate;});serverDate=originalDate;
+
     await p.locator('#play-home').click();failOverview=true;await p.reload();await p.locator('#play-retry').waitFor({state:'visible'});
     ok(await p.locator('#play-daily-start').isDisabled()&&await p.locator('#round-panel').isHidden(),'Account overview failure cannot expose guest gameplay');failOverview=false;await p.locator('#play-retry').click();await p.waitForFunction(()=>!document.getElementById('play-daily-start').disabled);
-    await p.locator('#account-open').click();await p.locator('#logout').click();ok(await p.locator('#play-overview').isVisible()&&await p.locator('#play-groups').textContent()==='','Sign-out discards previous identity group data');
+    await p.locator('#account-open').click();ok(await p.locator('#stat-points-label').textContent()==='Lifetime points','Account identifies cumulative points');await p.setViewportSize({width:1100,height:800});await p.locator('#public-nickname').focus();await p.locator('#alias-help').hover();const tooltip=await p.locator('#alias-tooltip').boundingBox();await p.mouse.move(tooltip.x+tooltip.width/2,tooltip.y+tooltip.height/2,{steps:20});ok(await p.locator('#alias-tooltip').isVisible(),'Pointer can cross into the nickname tooltip without dismissing it');await p.locator('#logout').click();ok(await p.locator('#play-overview').isVisible()&&await p.locator('#play-groups').textContent()==='','Sign-out discards previous identity group data');
     ok(errors.length===0,'Account journeys have no JavaScript exceptions');
   }finally{await account.close();}
   return {passed:true,checks:checks.length,labels:checks,requests:calls.map(c=>c.action),errors};
