@@ -6,10 +6,11 @@ async page => {
   const origin='http://127.0.0.1:4173',api='https://explicit-account-mock.invalid';
   const uuid=n=>'00000000-0000-4000-8000-'+String(n).padStart(12,'0');
   const competitions=['all','champions-league','premier-league','la-liga','argentine-primera','brasileirao'];
-  let projection={profile:{nickname:'Otter-4821',enrolled:true},progress:{totalPoints:0,answered:0,correct:0,seenPlayerIds:[],competitionCounts:Object.fromEntries(competitions.map(id=>[id,{answered:0,total:60}]))},round:null};
+  // Existing enrolled account: mandatory nickname onboarding was already completed.
+  let projection={profile:{nickname:'Otter-4821',enrolled:true,nicknamePrompted:true},progress:{totalPoints:0,answered:0,correct:0,seenPlayerIds:[],competitionCounts:Object.fromEntries(competitions.map(id=>[id,{answered:0,total:60}]))},round:null};
   let failAction=null,dropAnswer=false,boardFail=false,nicknameTaken=false,deleteFail=false,holdProgress=false,releaseProgress;
   let players=[],roundCounter=0;const receipts=new Map();
-  const createRound=competition=>{const p=players[roundCounter++%players.length];return {id:uuid(100+roundCounter),version:0,playerId:p.id,competition,options:players.slice(0,5).map((p,i)=>({id:uuid(i+1),label:p.name})),guesses:[],hints:0,clueCountry:null,cluePosition:null,status:'playing',points:0,startedAt:new Date().toISOString()};};
+  const createRound=competition=>{const p=players[roundCounter++%players.length];return {id:uuid(100+roundCounter),version:0,playerId:p.id,competition,options:players.slice(0,10).map((p,i)=>({id:uuid(i+1),label:p.name})),guesses:[],hints:0,clueCountry:null,cluePosition:null,status:'playing',points:0,startedAt:new Date().toISOString()};};
   const context=await browser.newContext({viewport:{width:375,height:667},hasTouch:true});
   try{
     await context.addInitScript(()=>{window.__mockAuth={session:null,calls:[],listener:null};window.__mockLogin=()=>{const m=window.__mockAuth;m.session={access_token:'EXPLICIT_TEST_TOKEN',user:{id:'00000000-0000-4000-8000-000000009999',user_metadata:{full_name:'MUST NEVER PUBLISH',avatar_url:'https://private.invalid/photo'}}};localStorage.setItem('derabona.auth.v1','EXPLICIT_TEST_SESSION');m.listener?.('SIGNED_IN',m.session);};});
@@ -28,13 +29,21 @@ async page => {
         const entries=body.competition==='brasileirao'?[]:all.slice(body.offset,body.offset+body.limit);
         return respond({entries,total:body.competition==='brasileirao'?0:23,own:projection.profile?.enrolled&&projection.progress.answered>0?{rank:22,points:projection.progress.totalPoints}:null,competition:body.competition});
       }
-      if(body.action==='progress'){if(!projection.profile)projection.profile={nickname:'Otter-4821',enrolled:true};if(holdProgress){holdProgress=false;await new Promise(r=>releaseProgress=r);}return respond(projection);}
+      if(body.action==='list')return respond({leagues:[]});
+      // This suite plays only Unlimited. Overview reads the same career/progress
+      // fixture without creating a round; today's Daily remains untouched.
+      if(body.action==='overview'){
+        if(!projection.profile)projection.profile={nickname:'Otter-4821',enrolled:true,nicknamePrompted:true};
+        if(holdProgress){holdProgress=false;await new Promise(r=>releaseProgress=r);}
+        return respond({profile:projection.profile,progress:projection.progress,daily:{date:new Date().toISOString().slice(0,10),status:'ready',completed:0,totalPoints:0,correctCount:0,previous:null},career:{status:projection.round?(projection.round.status==='playing'?'playing':'resolved'):'ready',competition:projection.round?.competition||null}});
+      }
+      if(body.action==='progress'){if(!projection.profile)projection.profile={nickname:'Otter-4821',enrolled:true,nicknamePrompted:true};if(holdProgress){holdProgress=false;await new Promise(r=>releaseProgress=r);}return respond(projection);}
       if(body.action===failAction){failAction=null;return error('VERSION_CONFLICT');}
       if(body.action==='enroll'&&nicknameTaken&&body.nickname==='Neutral Falcon')return error('NICKNAME_TAKEN');
       if(receipts.has(body.idempotencyKey))return respond(receipts.get(body.idempotencyKey));
       if(body.action==='start'&&body.competition==='la-liga'&&projection.progress.answered===2)return respond({...projection,round:null,completed:true});
       if(body.action==='start'&&projection.round?.status!=='playing')projection.round=createRound(body.competition);
-      if(body.action==='enroll')projection.profile={nickname:body.nickname,enrolled:true};
+      if(body.action==='enroll')projection.profile={nickname:body.nickname,enrolled:true,nicknamePrompted:true};
       if(body.action==='hint'){projection.round.hints++;projection.round.version++;projection.round.cluePosition='Forward';if(projection.round.hints>=2)projection.round.clueCountry='Portugal';}
       if(body.action==='answer'){
         const r=projection.round;r.guesses.push(body.optionId);r.version++;
@@ -46,16 +55,16 @@ async page => {
       return respond(projection);
     });
     const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));
-    const ready=()=>p.waitForFunction(()=>document.querySelector('#play-mode').textContent==='RANKED · CLOUD'&&!document.querySelector('#hint').disabled);
+    const ready=async(target=p)=>{if(await target.locator('#play-overview').isVisible())await target.locator('#play-unlimited-start').click();await target.waitForFunction(()=>document.querySelector('#play-mode').textContent==='RANKED · CLOUD'&&!document.querySelector('#hint').disabled);};
     await p.goto(origin+'/index.html?lang=en#access_token=ATTACKER&refresh_token=ATTACKER_REFRESH');
     ok(await p.evaluate(()=>!Accounts.session&&window.__mockAuth.calls.length===0)&&p.url()===origin+'/index.html?lang=en','Unsolicited implicit tokens are scrubbed without importing an account');
-    await p.goto(origin+'/index.html?lang=en');players=await p.evaluate(()=>PLAYERS.slice(0,5).map(p=>({id:p.id,name:p.name})));
-    await p.locator('#hint').click();const guest=await p.evaluate(()=>JSON.stringify({state,lifetime,seen:[...seen]}));
+    await p.goto(origin+'/index.html?lang=en');players=await p.evaluate(()=>PLAYERS.slice(0,10).map(p=>({id:p.id,name:p.name})));
+    await p.locator('#play-unlimited-start').click();await p.locator('#hint').click();const guest=await p.evaluate(()=>JSON.stringify({state,lifetime,seen:[...seen]}));
     await p.locator('#account-open').click();p.once('dialog',d=>d.dismiss());await p.locator('#google-login').click();
     ok(await p.evaluate(()=>window.__mockAuth.calls.length===0),'Pre-login warning cancellation never contacts OAuth');
     p.once('dialog',d=>d.accept());await p.locator('#google-login').click();await p.waitForFunction(()=>document.querySelector('#account-status').textContent.includes('did not complete'));
     ok(await p.evaluate(value=>JSON.stringify({state,lifetime,seen:[...seen]})===value,guest),'Mock OAuth cancellation preserves guest progress');
-    ok(await p.evaluate(()=>window.__mockAuth.calls[0][1].provider==='google'&&window.__mockAuth.calls[0][1].options.redirectTo.endsWith('?lang=en')),'Google provider uses sanitized language redirect');
+    ok(await p.evaluate(()=>window.__mockAuth.calls[0][1].provider==='google'&&new URL(window.__mockAuth.calls[0][1].options.redirectTo).searchParams.get('lang')==='en'&&new URL(window.__mockAuth.calls[0][1].options.redirectTo).searchParams.get('unlimited')==='1'&&!new URL(window.__mockAuth.calls[0][1].options.redirectTo).searchParams.has('play')),'Google provider preserves language and Unlimited intent in a sanitized ready-state redirect');
     await p.locator('#account-close').click();
     // Explicit mocked callback, never a real Google login.
     holdProgress=true;await p.goto(origin+'/index.html?lang=en&code=EXPLICIT_SECRET&state=EXPLICIT_STATE#access_token=EXPLICIT_FRAGMENT&refresh_token=EXPLICIT_REFRESH');
@@ -63,9 +72,10 @@ async page => {
     const loadingGuest=await p.evaluate(()=>JSON.stringify({state,lifetime,seen:[...seen]}));
     await p.evaluate(()=>{for(const id of ['hint','next','replay','reset-progress'])document.getElementById(id).click();document.querySelector('#options button')?.click();});
     ok(await p.evaluate(value=>JSON.stringify({state,lifetime,seen:[...seen]})===value,loadingGuest),'Auth loading guards every gameplay handler against guest leakage');
-    ok(await p.locator('#round-panel').isHidden()&&await p.locator('#score').textContent()==='—','Auth loading hides stale guest career and score');releaseProgress();releaseProgress=null;await ready();
+    ok(await p.locator('#round-panel').isHidden()&&await p.locator('#score').textContent()==='—','Auth loading hides stale guest career and score');releaseProgress();releaseProgress=null;await p.waitForFunction(()=>!document.querySelector('#play-unlimited-start').disabled);
     ok(p.url()===origin+'/index.html?lang=en','Callback code, state and tokens scrub before SDK initialization');
     ok(await p.evaluate(()=>window.__mockAuth.calls[0][2]===location.href&&window.__mockAuth.config.auth.persistSession===true),'Mock auth observes clean URL and persistent account configuration');
+    ok(!calls.some(c=>c.body.action==='start'),'Auth callback loads overview without starting a round');await ready();
     ok(await p.locator('#score').textContent()==='0','Ranked score comes from server, never guest');
     await p.locator('#account-open').click();
     ok(await p.locator('#enrolled-status').textContent()==='Public alias: Otter-4821'&&await p.locator('#nickname-consent').count()===0,'Automatic server animal alias is visible without enrollment gate');
@@ -115,7 +125,7 @@ async page => {
     await p.locator('#hint').click();await p.waitForFunction(()=>document.querySelector('#hint-count').textContent==='3 / 3');
     ok(await p.locator('#timeline').evaluate(el=>el.classList.contains('years-revealed')),'Third ranked hint reveals club years, same as guest/practice');
     ok(await p.locator('#hint').isDisabled(),'Server hint projection enforces three-hint UI cap');
-    const active=projection.round.id;await p.locator('#change-competition').click();await p.locator('#competition-options button').nth(2).click();await p.waitForFunction(()=>!document.querySelector('#options button').disabled);
+    const active=projection.round.id;await p.locator('#change-competition').click();ok(await p.locator('#competition-options button').nth(2).isDisabled(),'An open ranked round disables switching to another competition');await p.locator('#competition-options button').nth(2).evaluate(button=>button.click());await p.keyboard.press('Escape');await p.waitForFunction(()=>!document.querySelector('#options button').disabled);
     ok(projection.round.id===active&&await p.evaluate(()=>document.querySelector('#competition-current').textContent===copy().competitions.all),'Selecting another league cannot replace server active round');
     dropAnswer=true;await p.locator('#options button').first().click();await p.locator('#ranked-retry').waitFor({state:'visible'});
     ok(await p.evaluate(value=>sessionStorage.getItem(STORAGE_KEY)===value,localBefore),'Failed ranked mutation never writes guest state');
@@ -137,7 +147,7 @@ async page => {
     failAction='hint';await p.locator('#hint').click();await p.locator('#practice').waitFor({state:'visible'});await p.locator('#practice').click();const n=calls.length;await p.locator('#hint').click();ok(calls.length===n&&await p.locator('#play-mode').textContent()==='PRACTICE · UNRANKED','Network failure practice requires explicit action and sends no ranked mutation');
     await p.locator('#ranked-retry').click();await ready();ok(await p.locator('#score').textContent()==='73','Reconnect restores authoritative account total without practice import');
     const stableRound=JSON.stringify(projection.round);await p.locator('#language').selectOption('es');ok(await p.locator('#play-mode').textContent()==='CLASIFICADO · NUBE'&&JSON.stringify(projection.round)===stableRound,'Spanish account UI preserves active server round');await p.locator('#language').selectOption('en');
-    const other=await context.newPage();await other.goto(origin+'/index.html?lang=en');await other.waitForFunction(()=>document.querySelector('#play-mode').textContent==='RANKED · CLOUD');ok(await other.locator('#score').textContent()==='73'&&await other.evaluate(()=>RankedUI.player().id)===projection.round.playerId,'Second browser tab resumes same server account and active round');await other.close();
+    const other=await context.newPage();await other.goto(origin+'/index.html?lang=en');await ready(other);ok(await other.locator('#score').textContent()==='73'&&await other.evaluate(()=>RankedUI.player().id)===projection.round.playerId,'Second browser tab resumes same server account and active round');await other.close();
     for(const option of [0,2,3]){await p.locator('#options button').nth(option).click();await p.waitForFunction(()=>document.querySelector('#next').hidden?!document.querySelector('#hint').disabled:!document.querySelector('#next').disabled);}
     ok(projection.round.status==='lost'&&projection.progress.answered===2&&await p.locator('#score').textContent()==='73','Three wrong answers persist first zero-point result without changing score');
     await p.locator('#change-competition').click();await p.locator('#competition-options button').nth(3).click();await p.locator('#account-notice').waitFor({state:'visible'});ok(await p.locator('#round-panel').isHidden()&&await p.locator('#game-loading-status').isHidden(),'Completed start response stays completed despite progress readback of previous finished round');
@@ -148,11 +158,11 @@ async page => {
     deleteFail=true;p.once('dialog',d=>d.accept('DELETE'));await p.locator('#account-delete').click();await p.waitForFunction(()=>document.querySelector('#account-status').textContent.includes('could not be confirmed'));ok(await p.locator('#logout').isVisible(),'Failed deletion retains signed-in state');
     deleteFail=false;p.once('dialog',d=>d.accept('DELETE'));await p.locator('#account-delete').click();await p.waitForFunction(()=>document.querySelector('#play-mode').textContent==='GUEST · UNRANKED');ok(await p.evaluate(()=>lifetime.score===0&&seen.size===0&&!localStorage.getItem('derabona.auth.v1')),'Confirmed deletion clears account session and starts empty guest');
     await p.goto(origin+'/index.html?lang=en&code=EXPLICIT_SECOND_LOGIN');await ready();await p.locator('#account-open').click();await p.locator('#logout').click();await p.waitForFunction(()=>document.querySelector('#play-mode').textContent==='GUEST · UNRANKED');ok(await p.evaluate(()=>lifetime.score===0&&seen.size===0),'Logout starts fresh guest without restoring old progress');
-    await p.locator('#hint').click();const beforeExpiredCode=await p.evaluate(()=>sessionStorage.getItem(STORAGE_KEY));
+    await p.locator('#play-unlimited-start').click();await p.locator('#hint').click();const beforeExpiredCode=await p.evaluate(()=>sessionStorage.getItem(STORAGE_KEY));
     await p.goto(origin+'/index.html?lang=en&code=EXPIRED_PKCE_CODE');await p.waitForFunction(()=>document.querySelector('#account-status').textContent.includes('did not complete'));
     ok(await p.evaluate(value=>sessionStorage.getItem(STORAGE_KEY)===value&&AuthCallback.code===null,beforeExpiredCode)&&p.url()===origin+'/index.html?lang=en','Expired PKCE callback preserves guest save and clears callback secrets');
     await p.evaluate(()=>Accounts.request({action:'leaderboard',competition:'all',limit:20,offset:0},'ranked-game',true));ok(!calls.at(-1).headers.authorization,'Expired PKCE does not block public global leaderboard');
     ok(errors.length===0,'No JavaScript runtime errors in account and leaderboard journeys');
     return {passed:true,backend:'EXPLICIT SDK + API ROUTE MOCKS; NOT hosted OAuth/database verification',checks,errors,requestCount:calls.length};
-  }finally{releaseProgress?.();await context.close();}
+  }catch(error){throw Error(error.message+' | passed: '+checks.join('; ')+' | runtime errors: '+errors.join('; '));}finally{releaseProgress?.();await context.close();}
 }
