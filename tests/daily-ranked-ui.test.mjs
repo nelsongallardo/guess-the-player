@@ -66,18 +66,13 @@ test('identity resets clear both gameplay projections and auth entrypoints load 
   assert.doesNotMatch(auth,/DailyRankedUI\.sync\(\)|await sync\(\)|else\{sync\(\)/);
 });
 
-test('a signed-in-with-local-progress notice exists, is dismissible, and never deletes the local guest attempt',()=>{
-  assert.match(html,/id="daily-guest-progress-notice"[^>]*hidden/);
-  assert.match(html,/id="daily-guest-progress-text"/);
-  assert.match(html,/id="daily-guest-progress-dismiss"[^>]*type="button"/);
-  assert.match(dailyUi,/document\.getElementById\('daily-guest-progress-dismiss'\)\.onclick=\(\)=>DailyRankedUI\.dismissNotice\(\)/);
+test('signed-in Daily never mutates the local guest attempt',()=>{
   const daily=game.slice(game.indexOf('const DailyRankedUI'),game.indexOf('const RankedUI'));
-  assert.match(daily,/localTodayHasProgress/);
   assert.doesNotMatch(daily,/localStorage\.removeItem|createPersistence\([^)]*\)\.\w+\([^)]*\)\.(?:guess|hint|next|start)\(/,'must only ever read the local guest document, never mutate it');
 });
 
-test('bilingual copy: ranking-consequence points phrasing, sync error and guest-progress notice all exist for both languages',()=>{
-  for(const key of ['pointsRanked','syncError','guestProgressTitle','guestProgressDetail','guestProgressDismiss'])
+test('bilingual copy: ranking-consequence points phrasing and sync error exist for both languages',()=>{
+  for(const key of ['pointsRanked','syncError'])
     assert.match(dailyUi,new RegExp(`${key}:`));
   assert.match(dailyUi,/pointsRanked:n=>`\+\$\{n\} points · count on the leaderboard`/);
   assert.match(dailyUi,/pointsRanked:n=>`\+\$\{n\} puntos · suman en la tabla`/);
