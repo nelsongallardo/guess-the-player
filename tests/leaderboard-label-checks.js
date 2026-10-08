@@ -15,9 +15,9 @@ async page => {
       });
       const p=await context.newPage();p.on('pageerror',error=>errors.push(error.message));
       await p.goto(base+'/index.html?unlimited=1&lang=es');
-      await p.locator('#play-unlimited-start').click();await p.locator('#hint').click();
+      await p.locator('#options button').first().waitFor();await p.locator('#hint').click();
       const save=await p.evaluate(()=>sessionStorage.getItem('touchline.career.v1'));
-      for(const [lang,label] of [['es','Clasificación'],['en','Leaderboard'],['es','Clasificación']]){
+      for(const [lang,label] of [['es','Tabla'],['en','Leaderboard'],['es','Tabla']]){
         await p.locator('#language').selectOption(lang);
         ok(await p.locator('#nav-board').textContent()===label,`${width}px ${lang} game navigation: ${label}`);
         ok(await p.getByRole('link',{name:label,exact:true}).count()===1,`${width}px ${lang} accessible navigation name`);
@@ -26,10 +26,10 @@ async page => {
       ok(await p.evaluate(value=>sessionStorage.getItem('touchline.career.v1')===value,save),'Language switch preserves engaged game');
       await p.locator('#nav-board').click();
       await p.locator('#board-loading').waitFor({state:'visible'});
-      for(const [lang,title,loading] of [['es','Clasificación pública','Cargando tabla…'],['en','Public leaderboard','Loading leaderboard…'],['es','Clasificación pública','Cargando tabla…']]){
+      for(const [lang,title,heading,loading] of [['es','Clasificación pública','Tabla general','Cargando tabla…'],['en','Public leaderboard','Leaderboard','Loading leaderboard…'],['es','Clasificación pública','Tabla general','Cargando tabla…']]){
         await p.locator('#language').selectOption(lang);
         ok(await p.title()===title+' — derabona',`${width}px ${lang} document title`);
-        ok(await p.getByRole('heading',{name:title,level:1,exact:true}).count()===1,`${width}px ${lang} accessible page heading`);
+        ok(await p.getByRole('heading',{name:heading,level:1,exact:true}).count()===1,`${width}px ${lang} accessible page heading`);
         ok(await p.locator('#board-heading').textContent()===title,`${width}px ${lang} accessible board-region heading`);
         ok(await p.locator('#leaderboard-status').textContent()===loading&&await p.locator('#board-loading-label').textContent()===loading,`${width}px ${lang} live and visual loading copy`);
         ok(await p.evaluate(()=>location.pathname==='/leaderboard.html'),`${width}px ${lang} route unchanged`);
@@ -46,9 +46,9 @@ async page => {
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:375,height:667}});
   try{
     const p=await context.newPage();await p.goto(base+'/index.html');
-    ok(await p.getByRole('link',{name:'Clasificación',exact:true}).count()===1,'No-JS Spanish navigation uses Clasificación');
+    ok(await p.getByRole('link',{name:'Tabla',exact:true}).count()===1,'No-JS Spanish navigation uses Tabla');
     await p.goto(base+'/leaderboard.html');
-    ok(await p.title()==='Clasificación pública — derabona'&&await p.locator('h1').textContent()==='Clasificación pública','No-JS title and heading state the public leaderboard scope');
+    ok(await p.title()==='Clasificación pública — derabona'&&await p.locator('h1').textContent()==='Tabla general','No-JS title and heading state the public leaderboard scope');
     ok((await p.locator('noscript').textContent()).includes('La tabla necesita JavaScript y conexión.'),'No-JS explanation uses tabla');
   }finally{await context.close();}
   ok(errors.length===0,'No runtime errors');

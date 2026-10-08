@@ -12,12 +12,16 @@ test('Both pages expose the same three labeled navigation destinations',()=>{
   for(const html of [game,board]){
     const nav=html.match(/<nav class="site-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
     assert.ok(nav);
-    assert.match(nav,/<a id="nav-play"[^>]*>Jugar<\/a>/);
-    assert.match(nav,/<a id="nav-groups"[^>]*>Grupos<\/a>/);
-    assert.match(nav,/<a id="nav-board"[^>]*>Clasificación<\/a>/);
+    // ADR 0029: same icon + label links on both pages; Tabla, not Clasificación.
+    const link=(id,label)=>new RegExp(`<a id="${id}"[^>]*><svg class="nav-icon"[\\s\\S]*?</svg><span[^>]*>${label}</span></a>`);
+    assert.match(nav,link('nav-play','Jugar'));
+    assert.match(nav,link('nav-groups','Grupos'));
+    assert.match(nav,link('nav-board','Tabla'));
   }
   assert.equal(boardCopy.es.title,'Clasificación pública');
   assert.equal(boardCopy.en.title,'Public leaderboard');
+  assert.equal(boardCopy.es.heading,'Tabla general');
+  assert.equal(boardCopy.en.heading,'Leaderboard');
   assert.match(board,/<link rel="canonical" href="https:\/\/derabona.club\/leaderboard.html">/);
 });
 
@@ -26,7 +30,7 @@ test('Public leaderboard metadata states its scope while loading remains transla
   assert.match(board,/<meta property="og:title" content="Clasificación pública — derabona">/);
   assert.match(board,/<meta name="description" content="La clasificación pública de derabona:/);
   assert.match(board,/<meta property="og:description" content="La clasificación pública de derabona:/);
-  assert.match(board,/<h1>Clasificación pública<\/h1>/);
+  assert.match(board,/<h1>Tabla general<\/h1>/);
   assert.match(board,/<p id="leaderboard-status"[^>]+role="status">Cargando tabla…<\/p>/);
   assert.match(board,/<span id="board-loading-label">Cargando tabla…<\/span>/);
   assert.match(board,/<noscript><p>La tabla necesita JavaScript y conexión\./);

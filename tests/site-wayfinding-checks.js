@@ -8,10 +8,10 @@ async page=>{
     await p.goto(origin+'/index.html?lang=en');
     await p.locator('#options button').first().waitFor();
     ok(await p.locator('#play-overview').isHidden()&&await p.locator('#round-panel').isVisible(),'Arrival immediately presents the playable Daily');
-    ok(await p.locator('#nav-groups').textContent()==='Create group'&&await p.locator('#nav-groups').getAttribute('href').then(h=>h.includes('create=1')),'Group creation is directly discoverable without exploring');
+    ok(await p.locator('#nav-groups').textContent()==='Groups'&&await p.locator('#nav-groups').isVisible()&&await p.locator('#play-create').getAttribute('href').then(h=>h.includes('create=1')),'Groups stay one tap away and creation is directly offered below the game');
     const clock=await p.evaluate(()=>sessionStorage.getItem('derabona.daily-clock.v1'));
     await p.locator('#language').selectOption('es');
-    ok(await p.locator('#nav-groups').textContent()==='Crear grupo'&&await p.evaluate(()=>sessionStorage.getItem('derabona.daily-clock.v1'))===clock,'Language change preserves active game clock');
+    ok(await p.locator('#nav-groups').textContent()==='Grupos'&&await p.evaluate(()=>sessionStorage.getItem('derabona.daily-clock.v1'))===clock,'Language change preserves active game clock');
     await p.locator('#help').click();
     ok(!/Son gratis|iniciales|filas numeradas/.test(await p.locator('#rules').innerText()),'Help removes contradictory hint and timeline copy');
     await p.locator('#rules button').click();
@@ -63,6 +63,7 @@ async page=>{
       const body=req.postDataJSON();calls.push(body);let result,status=200;
       if(body.action==='overview'){result=overview();if(failOverview){result={error:{code:'UNAVAILABLE'}};status=503;}}
       else if(body.action==='list')result={leagues:[{id:'00000000-0000-4000-8000-000000000111',name:'Thursday football',memberCount:2}]};
+      else if(body.action==='standings'){const own={memberId:'00000000-0000-4000-8000-000000000301',nickname:'Otter-12345678',rank:1,points:33,me:true};result={league:{id:body.leagueId,name:'Thursday football'},period:body.period,entries:[own],own,total:1,offset:0,pending:false};}
       else if(body.action==='enroll'){nicknamePrompted=true;enrolls++;result={profile:profile(),progress:progress(),round};}
       else if(body.action==='progress')result={profile:profile(),progress:progress(),round};
       else if(body.action==='start'){if(!round||round.status!=='playing')round={...rounds[0],id:'00000000-0000-4000-8000-'+String(++roundCounter).padStart(12,'0'),status:'playing',competition:body.competition};result={profile:profile(),progress:progress(),round};}
@@ -92,6 +93,7 @@ async page=>{
     await p.locator('#unlimited-mode').click();await p.locator('#daily-mode').click();await p.waitForFunction(()=>document.getElementById('options').children.length===10);ok(await p.locator('#daily-card').isVisible(),'Daily re-entry restores its hidden context card');
     for(let i=0;i<3;i++){await p.locator('#options button').first().click();await p.locator('#next').waitFor({state:'visible'});if(i<2)await p.locator('#next').click();}
     ok(await p.locator('#daily-summary').isHidden()&&await p.locator('#next-label').textContent()==='Show result','Ranked third player also waits for explicit Show result');await p.locator('#next').click();ok(await p.locator('#daily-summary').isVisible(),'Ranked Show result opens the completed summary');
+    await p.locator('#result-group-table li').first().waitFor();ok(await p.locator('#result-groups-title').textContent()==='Thursday football'&&(await p.locator('#result-group-table').textContent()).includes('Otter-12345678')&&calls.filter(c=>c.action==='standings').every(c=>c.period==='week'),'Ranked result shows where you stand in your group this week');
     const directOriginalDate=serverDate;serverDate=new Date(Date.parse(serverDate+'T12:00:00Z')+86400000).toISOString().slice(0,10);rounds=rounds.map(r=>({...r,status:'playing',guesses:[],points:0,version:0}));
     await p.evaluate(()=>{window.__originalDate=Date;window.Date=class extends window.__originalDate{constructor(...args){super(...(args.length?args:[window.__originalDate.now()+86400000]));}static now(){return window.__originalDate.now()+86400000;}};DailyUI.checkRollover();});failDaily=true;await p.locator('#daily-load-new').click();await p.locator('#daily-retry').waitFor({state:'visible'});
     ok(await p.locator('#daily-summary').isHidden()&&await p.locator('#round-panel').isHidden(),'Ranked direct UTC rollover failure hides yesterday’s summary and clues');await p.locator('#daily-retry').click();await p.waitForFunction(()=>document.getElementById('options').children.length===10);
