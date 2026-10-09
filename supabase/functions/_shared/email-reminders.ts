@@ -195,18 +195,21 @@ export async function syncContact(job: SyncJob, vendor: Vendor, languageField: s
   if (!job.email || !job.language || !job.source) return { outcome: 'failed', detail: 'incomplete_job' };
   const fields = { [languageField]: job.language };
   if (current.kind === 'not_found') {
-    // A new explicit opt-in starts pending (vendor confirmation). The owner
-    // cohort is created subscribed, subject to the vendor's own rules.
-    const created = await vendor.createContact(job.email, job.source === 'user_opt_in' ? 'pending' : 'subscribed', fields);
+    // Single opt-in: the address is Auth-verified and the account ticked the
+    // box itself (the list has double opt-in off, so "pending" would never
+    // receive anything). The owner cohort is likewise created subscribed.
+    const created = await vendor.createContact(job.email, 'subscribed', fields);
     return created.kind === 'ok' ? { outcome: 'done', vendorStatus: created.value.status, contactId: created.value.id } : fail(created);
   }
   const existing = current.value;
   if (existing.status === 'unsubscribed') {
-    // Never override a vendor unsubscribe for the owner cohort. A new explicit
-    // opt-in asks the vendor to reconfirm rather than resubscribing directly.
+    // Never override a vendor unsubscribe for the owner cohort. Only a new,
+    // explicit opt-in by the account itself resubscribes.
     if (job.source !== 'user_opt_in') return { outcome: 'done', detail: 'vendor_unsubscribed', vendorStatus: 'unsubscribed', contactId: existing.id };
-    const reconfirm = await vendor.updateContact(existing.id, { status: 'pending', fields });
-    return reconfirm.kind === 'ok' ? { outcome: 'done', vendorStatus: reconfirm.value.status, contactId: reconfirm.value.id } : fail(reconfirm);
+  }
+  if (existing.status !== 'subscribed' && job.source === 'user_opt_in') {
+    const resubscribed = await vendor.updateContact(existing.id, { status: 'subscribed', fields });
+    return resubscribed.kind === 'ok' ? { outcome: 'done', vendorStatus: resubscribed.value.status, contactId: resubscribed.value.id } : fail(resubscribed);
   }
   const updated = await vendor.updateContact(existing.id, { fields });
   return updated.kind === 'ok' ? { outcome: 'done', vendorStatus: updated.value.status, contactId: updated.value.id } : fail(updated);

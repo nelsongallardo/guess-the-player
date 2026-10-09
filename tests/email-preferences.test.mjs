@@ -100,7 +100,7 @@ test('a failed reminder save after the nickname shows a dismissible notice and a
   assert.equal(h.dom['reminder-save'].disabled,false);
   h.dom['reminder-form'].fire('submit');await settle();
   assert.equal(h.env.calls[2].payload.requestId,h.env.calls[1].payload.requestId,'an uncertain attempt is retried with the same request ID');
-  assert.match(h.dom['reminder-status'].textContent,/pendiente de confirmación/);
+  assert.match(h.dom['reminder-status'].textContent,/los estamos preparando/);
   assert.equal(h.dom['reminder-error'].textContent,'');
   // An unavailable read also leaves the explicit intent for Account.
   const u=harness({responses:[]});

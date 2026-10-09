@@ -127,9 +127,9 @@ function fakeVendor(initial: Record<string, Contact> = {}, fault?: (op: string) 
 }
 const job = (over: Partial<SyncJob>): SyncJob => ({ jobId: 1, leaseToken: rid, kind: 'subscribe', source: 'user_opt_in', language: 'es', email: 'a@b.co', destinationKey: destinationKey('a@b.co'), contactId: null, ...over });
 
-Deno.test('a new explicit opt-in is created pending; the owner cohort subscribed; existing state is read first', async () => {
-  const optIn = fakeVendor(); equal(await syncContact(job({}), optIn.v, 'Language'), { outcome: 'done', vendorStatus: 'pending', contactId: optIn.contacts[vendorContactKey('a@b.co')].id });
-  equal(optIn.ops, [['get', vendorContactKey('a@b.co')], ['create', 'pending', { Language: 'es' }]]);
+Deno.test('new explicit opt-ins and the owner cohort are created subscribed; existing state is read first', async () => {
+  const optIn = fakeVendor(); equal(await syncContact(job({}), optIn.v, 'Language'), { outcome: 'done', vendorStatus: 'subscribed', contactId: optIn.contacts[vendorContactKey('a@b.co')].id });
+  equal(optIn.ops, [['get', vendorContactKey('a@b.co')], ['create', 'subscribed', { Language: 'es' }]]);
   const owner = fakeVendor(); equal((await syncContact(job({ source: 'owner_requested_existing_friends' }), owner.v, 'Language')).vendorStatus, 'subscribed');
   equal(owner.ops[1], ['create', 'subscribed', { Language: 'es' }]);
   // Existing subscribed contact: fields only, never a status write.
@@ -138,14 +138,14 @@ Deno.test('a new explicit opt-in is created pending; the owner cohort subscribed
   equal(existing.ops[1], ['update', 'c1', { fields: { Language: 'en' } }]);
 });
 
-Deno.test('sync never overrides a vendor unsubscribe for the owner cohort; an explicit re-opt-in asks to reconfirm', async () => {
+Deno.test('sync never overrides a vendor unsubscribe for the owner cohort; an explicit re-opt-in resubscribes', async () => {
   const held = { [vendorContactKey('a@b.co')]: { id: 'c1', status: 'unsubscribed' as const } };
   const owner = fakeVendor(held);
   equal(await syncContact(job({ source: 'owner_requested_existing_friends' }), owner.v, 'Language'), { outcome: 'done', detail: 'vendor_unsubscribed', vendorStatus: 'unsubscribed', contactId: 'c1' });
   equal(owner.ops.length, 1, 'read only');
   const optIn = fakeVendor({ [vendorContactKey('a@b.co')]: { id: 'c1', status: 'unsubscribed' } });
-  equal((await syncContact(job({}), optIn.v, 'Language')).vendorStatus, 'pending');
-  equal(optIn.ops[1], ['update', 'c1', { status: 'pending', fields: { Language: 'es' } }]);
+  equal((await syncContact(job({}), optIn.v, 'Language')).vendorStatus, 'subscribed');
+  equal(optIn.ops[1], ['update', 'c1', { status: 'subscribed', fields: { Language: 'es' } }]);
 });
 
 Deno.test('unsubscribe before sync, retire, delete, and vendor outages', async () => {
@@ -213,7 +213,7 @@ Deno.test('sync pass reports vendor outcomes back with the lease token, and peri
   const vendor = fakeVendor({ cx: { id: 'cx', status: 'unsubscribed' } });
   await runWorker({ workerRpc: w.rpc, vendor: vendor.v, config }, 'sync');
   const complete = w.calls.find(c => c.action === 'completeSync');
-  equal([complete.jobId, complete.leaseToken, complete.outcome, complete.vendorStatus], [7, rid, 'done', 'pending']);
+  equal([complete.jobId, complete.leaseToken, complete.outcome, complete.vendorStatus], [7, rid, 'done', 'subscribed']);
   equal(w.calls.find(c => c.action === 'observe'), { action: 'observe', destinationKey: destinationKey('x@y.z'), contactId: 'cx', status: 'unsubscribed' });
   ok(!w.calls.some(c => c.action === 'claimDispatch'), 'sync task does not dispatch');
 });

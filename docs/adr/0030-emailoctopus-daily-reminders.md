@@ -47,6 +47,6 @@ EmailOctopus API v2 (retrieved 2026-10-09) supports contact create/read/update/d
 ## Consequences
 
 - Live sends need owner setup: an EmailOctopus account, list, language field, two automations, an authenticated sender domain, a webhook endpoint and secrets. They also need an explicit release decision. See [docs/email-reminders.md](../email-reminders.md).
-- Whether an API-created `pending` contact receives the vendor's double opt-in email depends on the list's double opt-in setting. This must be proven on a test list before new-user delivery is enabled. Until then, explicitly opted-in users stay `pending` and receive nothing.
+- **Amended 2026-10-09: single opt-in.** The owner's EmailOctopus list has double opt-in off, so an API-created `pending` contact would never receive anything. Explicit opt-ins, and explicit re-opt-ins after an unsubscribe, are therefore created or updated as `subscribed`. The address is the account's verified Auth email and the account ticked the box itself. The owner cohort still never resubscribes a vendor unsubscribe. After a re-opt-in, delivery resumes once the vendor's `contact.updated` webhook confirms `subscribed`.
 - The legacy cohort's vendor eligibility, including any attestation EmailOctopus requires for contacts added without a confirmation form, is an owner/vendor question, not something this code asserts.
 - A reminder can still arrive after a completion that races the final eligibility check, or not arrive on a day skipped by the vendor gap or an `uncertain` outcome.

@@ -82,7 +82,7 @@ async page => {
       ok(await noOverflow(s.p),'Account reminder section fits 320px');
       const save=await s.p.locator('#reminder-save').boundingBox();ok(save&&save.height>=44,'Save is a 44px touch target');
       await s.p.locator('#reminder-save').click();
-      await s.p.waitForFunction(()=>document.querySelector('#reminder-status').textContent.includes('pendiente de confirmación'));
+      await s.p.waitForFunction(()=>document.querySelector('#reminder-status').textContent.includes('los estamos preparando'));
       const sets=s.calls.filter(c=>c.body.action==='set');ok(sets.length===2&&sets[0].body.requestId===sets[1].body.requestId,'Retry reuses the uncertain request ID');
       ok((await s.p.locator('#reminder-detail').textContent()).includes('friend+derabona@example.com'),'Account shows its own verified address');
       await s.p.keyboard.press('Escape');await s.p.locator('#account-dialog').waitFor({state:'hidden'});
@@ -102,7 +102,7 @@ async page => {
       await s.p.locator('#reminder-enabled').focus();await s.p.keyboard.press('Space');
       ok(await s.p.locator('#reminder-enabled').isChecked(),'Checkbox is keyboard operable');
       await s.p.locator('#reminder-save').click();
-      await s.p.waitForFunction(()=>document.querySelector('#reminder-status').textContent.includes('waiting for confirmation'));
+      await s.p.waitForFunction(()=>document.querySelector('#reminder-status').textContent.includes('being set up'));
       ok(s.preference.language==='en','Saved language is English');
       await s.p.keyboard.press('Escape');
       await s.p.selectOption('#language','es');
