@@ -1,5 +1,14 @@
 # Verification report
 
+## 2026-10-09 — Daily email reminders (ADR 0030; local candidate, delivery inactive)
+
+- Native PostgreSQL (`tests/email-reminders-backend.test.mjs`, 14 tests): new accounts default off; explicit opt-in/out, idempotency and stale versions; frozen owner cohort (no later accounts, no overrides, no consent fields); suppression and out-of-order events; one dispatch per destination/UTC date under concurrent workers; uncertain/skipped expiry; completed-Daily skip and recheck without gameplay writes; deletion and address-change cleanup. Existing ranked, league and overview PostgreSQL suites still pass with the migration applied.
+- Deno (`tests/email-reminders-edge.test.ts`, 13 tests): mock Auth/RPC/EmailOctopus only. Covers JWT and field injection, vendor outcome classification, sync rules, worker secret, and webhook HMAC over raw bytes.
+- Node: `tests/email-preferences.test.mjs` runs the shared UI module in a vm with a fake DOM; `tests/email-templates.test.mjs` checks copy and vendor tags.
+- Browser (`email-preferences-checks.js`, route-mocked SDK/API): ES/EN, 320 px, failure notice and retry, leaderboard parity, guest and `file:` play make no requests. `accounts-checks`, `guest-session-checks`, `account-startup-checks`, `site-wayfinding-checks`, `daily-header-browser-checks` and `analytics-checks` pass. The last three needed mocks for the new endpoint, with reminder reads logged apart from gameplay.
+- Pre-existing failures, reproduced identically on unchanged `origin/main` (`8c2f96f`): `leaderboard-checks` (expects heading "Public leaderboard"), `offline-checks` and `nickname-suggestion-checks` (click timeout), `game-loading-checks` (SDK loader aria-busy) and `mobile-language-checks` ("Every player checked"). `connected-journey-checks` and `friends-leagues-checks` need `tests/leagues-bridge.mjs` on port 54330 and were not run.
+- Not verified: EmailOctopus account and API behavior, double opt-in, webhook delivery, the hosted migration and functions, the scheduler, and real mail. No contact was imported and no email was sent.
+
 ## 2026-10-09 — Remove signed-in Daily guest-progress notice
 
 The owner asked to remove the "You started today’s daily before signing in…" card as unnecessary. Its markup, `DailyRankedUI` detection/dismiss logic and EN/ES copy are gone; the local guest attempt is still never read into, imported or mutated by the signed-in path.

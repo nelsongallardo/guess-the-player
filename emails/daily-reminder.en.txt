@@ -1,0 +1,15 @@
+Your daily Derabona challenge
+
+How many players can you get today? Open Derabona and play the daily challenge.
+
+Play the daily challenge: https://derabona.club/?lang=en&utm_source=emailoctopus&utm_medium=email&utm_campaign=daily_reminder
+
+The challenge changes at 00:00 UTC. The link opens the challenge available when you visit.
+
+--
+You are receiving this because your derabona account has daily reminders turned on: either you turned them on, or you were added as one of the first players. We email at most once a day, and only if you have not finished the challenge yet.
+Unsubscribe: {{UnsubscribeURL}}
+You can also turn them off from “Account” on derabona.
+
+{{SenderInfo}}
+Sent with EmailOctopus: {{RewardsURL}}

@@ -1,0 +1,15 @@
+Tu desafío diario de derabona
+
+¿Cuántos jugadores sacás hoy? Entrá a derabona y jugá el desafío diario.
+
+Jugar el desafío: https://derabona.club/?lang=es&utm_source=emailoctopus&utm_medium=email&utm_campaign=daily_reminder
+
+El desafío se renueva a las 00:00 UTC. El enlace abre el desafío disponible cuando lo visites.
+
+--
+Recibís este email porque tu cuenta de derabona tiene activados los recordatorios diarios: los activaste vos o te sumamos como uno de los primeros jugadores. Te escribimos como máximo una vez por día y solo si todavía no completaste el desafío.
+Darme de baja: {{UnsubscribeURL}}
+También podés desactivarlos desde «Cuenta» en derabona.
+
+{{SenderInfo}}
+Enviado con EmailOctopus: {{RewardsURL}}
