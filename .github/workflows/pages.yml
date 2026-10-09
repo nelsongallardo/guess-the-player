@@ -42,8 +42,8 @@ jobs:
           deno-version: v2.x
       - name: Validate Edge Functions and HTTP boundary tests
         run: |
-          deno check supabase/functions/ranked-game/index.ts supabase/functions/account-delete/index.ts supabase/functions/private-leagues/index.ts
-          deno test tests/ranked-backend-edge.test.ts tests/private-leagues-edge.test.ts
+          deno check supabase/functions/ranked-game/index.ts supabase/functions/account-delete/index.ts supabase/functions/private-leagues/index.ts supabase/functions/email-preferences/index.ts supabase/functions/email-reminders-worker/index.ts supabase/functions/emailoctopus-webhook/index.ts
+          deno test tests/ranked-backend-edge.test.ts tests/private-leagues-edge.test.ts tests/email-reminders-edge.test.ts
   deploy:
     needs: validate
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
