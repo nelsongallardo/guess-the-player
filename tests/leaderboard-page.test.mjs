@@ -24,10 +24,12 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   // again bounded and deliberate. The whole-experience navigation, Help and
   // draft-preserving creation flow add approximately 7KB (180KB -> 190KB), and
   // ADR 0029's shared header/bottom navigation icons and layout layer add about
-  // 8KB more (187KB -> 195KB), while the roster/crest/game-model exclusion stays
-  // the real guard.
+  // 8KB more (187KB -> 195KB). ADR 0030's email-reminder Account section and
+  // its shared bilingual module (Account parity with index.html) add about 14KB
+  // (195KB -> 209KB), while the roster/crest/game-model exclusion stays the
+  // real guard.
   assert.doesNotMatch(html,/id="(?:roster-data|crest-data|game-model)"/);
-  assert.ok(Buffer.byteLength(html)<200_000,'Standalone board must not duplicate the heavy game artifact');
+  assert.ok(Buffer.byteLength(html)<215_000,'Standalone board must not duplicate the heavy game artifact');
   assert.match(html,/<dialog id="account-dialog"/,'ADR 0014: same account-dialog component as the main game, not a link away from it');
   const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].filter(m=>m[1].trim()&&!m[0].includes('application/ld+json'));
   assert.ok(scripts.length>0);

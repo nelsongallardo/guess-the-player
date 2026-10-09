@@ -49,7 +49,7 @@ async page=>{
     const denied=await browser.newContext();try{await denied.addInitScript(()=>{for(const key of ['localStorage','sessionStorage'])Object.defineProperty(window,key,{get(){throw Error('DENIED');}});});const d=await denied.newPage();d.on('pageerror',e=>errors.push(e.message));await d.goto(origin+'/index.html?lang=en');await d.locator('#options button').first().waitFor();ok(await d.locator('#options button').count()===10,'Blocked storage retains guest play');}finally{await denied.close();}
     ok(errors.length===0,'Guest journeys have no JavaScript exceptions');
   }finally{await context.close();}
-  const account=await browser.newContext({viewport:{width:375,height:667}}),calls=[],api='https://wayfinding-account-mock.invalid',user='00000000-0000-4000-8000-000000000123';
+  const account=await browser.newContext({viewport:{width:375,height:667}}),calls=[],reminderCalls=[],api='https://wayfinding-account-mock.invalid',user='00000000-0000-4000-8000-000000000123';
   let nicknamePrompted=false,round=null,failOverview=false,failDaily=false,rounds=[],enrolls=0,roundCounter=0,serverDate=new Date().toISOString().slice(0,10);
   const profile=()=>({nickname:'Otter-12345678',enrolled:true,nicknamePrompted});
   const progress=()=>({totalPoints:29,answered:1,correct:1,seenPlayerIds:[],competitionCounts:{all:{answered:1,total:221}}});
@@ -60,8 +60,12 @@ async page=>{
     await account.route('https://cdn.jsdelivr.net/npm/@supabase/**',route=>route.fulfill({contentType:'application/javascript',body:`window.supabase={createClient:()=>({auth:{getSession:async()=>({data:{session:window.__wayAuth.session},error:null}),onAuthStateChange:fn=>{window.__wayAuth.listener=fn;return {data:{subscription:{unsubscribe(){}}}}},signOut:async()=>{const m=window.__wayAuth;m.session=null;localStorage.removeItem('derabona.auth.v1');m.listener?.('SIGNED_OUT',null);return {error:null}}}})};`}));
     await account.route(api+'/**',async route=>{
       const req=route.request();if(req.method()==='OPTIONS')return route.fulfill({status:204,headers:{'access-control-allow-origin':'*','access-control-allow-headers':'*'}});
-      const body=req.postDataJSON();calls.push(body);let result,status=200;
-      if(body.action==='overview'){result=overview();if(failOverview){result={error:{code:'UNAVAILABLE'}};status=503;}}
+      const body=req.postDataJSON();let result,status=200;
+      // ADR 0030: the first-sign-in prompt and Account read the separate reminder preference (logged apart from gameplay).
+      const reminder=req.url().endsWith('/email-preferences');
+      if(reminder)reminderCalls.push(body.action);else calls.push(body);
+      if(reminder)result={preference:{enabled:false,language:null,version:0,source:null,deliveryStatus:'disabled',suppressedReason:null,email:null,emailAvailable:false}};
+      else if(body.action==='overview'){result=overview();if(failOverview){result={error:{code:'UNAVAILABLE'}};status=503;}}
       else if(body.action==='list')result={leagues:[{id:'00000000-0000-4000-8000-000000000111',name:'Thursday football',memberCount:2}]};
       else if(body.action==='standings'){const own={memberId:'00000000-0000-4000-8000-000000000301',nickname:'Otter-12345678',rank:1,points:33,me:true};result={league:{id:body.leagueId,name:'Thursday football'},period:body.period,entries:[own],own,total:1,offset:0,pending:false};}
       else if(body.action==='enroll'){nicknamePrompted=true;enrolls++;result={profile:profile(),progress:progress(),round};}
@@ -74,6 +78,7 @@ async page=>{
     });
     const p=await account.newPage();p.on('pageerror',e=>errors.push(e.message));await p.goto(origin+'/index.html?lang=en');await p.locator('#nickname-prompt-dialog').waitFor({state:'visible'});
     ok(calls.every(c=>['overview','list'].includes(c.action)),'Account arrival uses overview/list only, never start/progress/dailyProgress');
+    ok(reminderCalls.every(action=>action==='get'),'Account arrival reminder requests are read-only');
     await p.evaluate(()=>PlayOverview.activate('daily'));ok(!calls.some(c=>c.action==='dailyProgress'),'Mandatory nickname blocks timed activation');
     rounds=await p.evaluate(()=>DailyChallenge.forDate(new Date().toISOString().slice(0,10)).payloads.map((p,i)=>({roundIndex:i,version:0,playerId:p.player.id,options:p.options,guesses:[],hints:0,status:'playing',points:0,startedAt:new Date(Date.now()-45000).toISOString()})));
     await p.locator('#nickname-prompt-submit').click();await p.locator('#nickname-prompt-dialog').waitFor({state:'hidden'});await p.locator('#options button').first().waitFor();

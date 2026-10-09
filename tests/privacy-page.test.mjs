@@ -22,3 +22,16 @@ test('privacy page explains contact-message forwarding in both languages', () =>
   assert.match(privacy, /ImprovMX reenvía los mensajes/i);
   assert.match(privacy, /ImprovMX forwards messages/i);
 });
+
+test('privacy page explains reminders separately from analytics, with truthful enrollment sources', () => {
+  for (const [heading, unchecked, legacy, separate] of [
+    ['Recordatorios diarios por email', /La casilla viene desmarcada/, /a pedido del creador de derabona: no marcaron esa casilla/, /independientes del permiso de analítica/],
+    ['Daily email reminders', /The box starts unchecked/, /at the request of derabona’s creator: they did not tick that box/, /independent of analytics permission/],
+  ]) {
+    assert.ok(privacy.includes(`>${heading}</h2>`));
+    assert.match(privacy, unchecked);
+    assert.match(privacy, legacy);
+    assert.match(privacy, separate);
+  }
+  assert.equal((privacy.match(/EmailOctopus/g) ?? []).length >= 6, true);
+});

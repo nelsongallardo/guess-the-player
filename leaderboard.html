@@ -46,6 +46,7 @@ u.search=p.toString();u.hash='';history.replaceState(null,'',u);return Object.fr
 #account-dialog .field-detail:empty{display:none}
 #account-dialog #enroll{align-self:flex-start;margin-top:6px;background:var(--ink);color:var(--paper);border:0;border-radius:7px;padding:12px 20px;font-weight:700;box-shadow:0 3px 0 var(--celeste)}
 #account-dialog #enroll:hover{background:#1c394b}
+#reminder-section h3{margin:0 0 6px;font-size:15px}#reminder-form{display:flex;flex-direction:column;gap:10px}#reminder-form[hidden],.reminder-toggle[hidden],.reminder-notice[hidden]{display:none}.reminder-toggle{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;cursor:pointer;padding:6px 0}#account-dialog .reminder-toggle input,#nickname-prompt-dialog .reminder-toggle input{width:22px;height:22px;min-height:0;margin:0;padding:0;flex:none;display:inline-block}.reminder-language{display:flex;flex-direction:column;gap:4px}.reminder-language label{font-size:12px;font-weight:700;color:var(--muted)}.reminder-language select{font:inherit;min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:transparent;color:inherit;max-width:240px}.reminder-error{color:#a93637;font-size:13px;margin:0}.reminder-error:empty{display:none}#reminder-save{align-self:flex-start;min-height:44px}#reminder-retry{margin-top:8px;min-height:44px}
 #account-dialog .account-danger{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
 #account-dialog .danger-action{display:inline-flex;align-items:center;min-height:44px;background:transparent;border:0;padding:0;color:#a93637;font-size:12px;font-weight:650;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 #account-dialog .danger-action:hover{color:#7a2020}
@@ -170,7 +171,7 @@ footer{margin-top:28px}
   <path d="m79 53 3-5m-9 7-1-4" stroke="#89cff0" stroke-width="2" stroke-linecap="round"/>
 </svg><span class="wordmark-stack"><span class="wordmark-title">derabona</span><small id="wordmark-tagline">FÚTBOL, DE MEMORIA.</small></span></a><nav class="site-nav" aria-label="Navegación principal"><a id="nav-play" href="index.html?lang=es"><svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7l3.5 2.5-1.3 4h-4.4l-1.3-4z"/></svg><span>Jugar</span></a><a id="nav-groups" href="leaderboard.html?view=friends&amp;lang=es"><svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.8"/><path d="M16.5 14.2c2.8.3 5 2.4 5 5.3"/></svg><span>Grupos</span></a><a id="nav-board" href="leaderboard.html?lang=es" aria-current="page"><svg class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span>Tabla</span></a></nav><div class="masthead-right"><div class="language"><label for="language" id="language-label">Idioma</label><select id="language"><option value="es">ES</option><option value="en">EN</option></select></div><button id="account-open-link" class="account-open account-pending" type="button" aria-haspopup="dialog"><svg class="account-open-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><strong id="account-open-score" class="account-open-score" hidden>000</strong><span id="account-open-link-label" class="account-open-text">Iniciar sesión</span></button></div></header>
 <dialog id="site-help-dialog" aria-labelledby="site-help-title"><h2 id="site-help-title">Cómo jugar</h2><p id="site-help-rules"></p><p id="site-help-groups"></p><p id="site-help-storage"></p><a id="site-help-play" href="index.html?lang=es">Ir a Jugar</a><form method="dialog"><button id="site-help-close">Cerrar</button></form></dialog>
-<dialog id="account-dialog" aria-labelledby="account-title"><h2 id="account-title">Cuenta y progreso</h2><p id="account-pitch" class="account-pitch">Iniciá sesión para competir por puntos con jugadores de todo el mundo.</p><p id="account-detail" class="account-copy"></p><div class="account-stats" id="account-stats" hidden><div class="account-stat"><strong id="stat-points">0</strong><span id="stat-points-label">Puntos acumulados</span></div><div class="account-stat"><strong id="stat-answered">0</strong><span id="stat-answered-label">Sin límite: jugados</span></div><div class="account-stat"><strong id="stat-correct">0</strong><span id="stat-correct-label">Sin límite: acertados</span></div></div><p id="account-status" class="account-status" role="status"></p><div class="account-actions"><a id="google-login" class="google-login" href="index.html?account=1"><svg class="google-login-icon" width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span id="google-login-label">Continuar con Google</span></a><button id="logout" class="subtle" type="button" hidden>Cerrar sesión</button></div><div class="account-section" id="alias-section"><p id="enrolled-status" class="account-alias" role="status"></p><form id="enroll-form" hidden><div class="field-label-row"><label id="nickname-label" for="public-nickname">Apodo público</label><div id="alias-help-region" class="alias-help-region"><button id="alias-help" class="alias-help" type="button" aria-describedby="alias-tooltip">ⓘ</button><p id="alias-tooltip" class="alias-tooltip" role="tooltip" hidden>Se asigna automáticamente un nombre de animal al azar. Podés agregar o cambiar tu apodo acá.</p></div></div><input id="public-nickname" name="nickname" autocomplete="off" maxlength="24" minlength="3" value="" aria-describedby="nickname-detail"><p id="nickname-detail" class="field-detail"></p><button id="enroll" type="submit">Guardar apodo</button></form></div><div class="account-danger" id="danger-section"><button id="account-delete" class="danger-action" type="button" hidden>Eliminar cuenta</button></div><form method="dialog" class="account-close-row"><button id="account-close" class="subtle" type="submit">Cerrar</button></form></dialog>
+<dialog id="account-dialog" aria-labelledby="account-title"><h2 id="account-title">Cuenta y progreso</h2><p id="account-pitch" class="account-pitch">Iniciá sesión para competir por puntos con jugadores de todo el mundo.</p><p id="account-detail" class="account-copy"></p><div class="account-stats" id="account-stats" hidden><div class="account-stat"><strong id="stat-points">0</strong><span id="stat-points-label">Puntos acumulados</span></div><div class="account-stat"><strong id="stat-answered">0</strong><span id="stat-answered-label">Sin límite: jugados</span></div><div class="account-stat"><strong id="stat-correct">0</strong><span id="stat-correct-label">Sin límite: acertados</span></div></div><p id="account-status" class="account-status" role="status"></p><div class="account-actions"><a id="google-login" class="google-login" href="index.html?account=1"><svg class="google-login-icon" width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span id="google-login-label">Continuar con Google</span></a><button id="logout" class="subtle" type="button" hidden>Cerrar sesión</button></div><div class="account-section" id="alias-section"><p id="enrolled-status" class="account-alias" role="status"></p><form id="enroll-form" hidden><div class="field-label-row"><label id="nickname-label" for="public-nickname">Apodo público</label><div id="alias-help-region" class="alias-help-region"><button id="alias-help" class="alias-help" type="button" aria-describedby="alias-tooltip">ⓘ</button><p id="alias-tooltip" class="alias-tooltip" role="tooltip" hidden>Se asigna automáticamente un nombre de animal al azar. Podés agregar o cambiar tu apodo acá.</p></div></div><input id="public-nickname" name="nickname" autocomplete="off" maxlength="24" minlength="3" value="" aria-describedby="nickname-detail"><p id="nickname-detail" class="field-detail"></p><button id="enroll" type="submit">Guardar apodo</button></form></div><div class="account-section reminder-section" id="reminder-section" hidden><h3 id="reminder-title">Recordatorios por email</h3><p id="reminder-status" class="account-copy" role="status" aria-live="polite"></p><form id="reminder-form" hidden><label class="reminder-toggle" for="reminder-enabled"><input id="reminder-enabled" type="checkbox"><span id="reminder-enabled-label">Quiero recibir un recordatorio diario por email. Puedo darme de baja cuando quiera.</span></label><div class="reminder-language"><label id="reminder-language-label" for="reminder-language">Idioma de los emails</label><select id="reminder-language"><option value="es">Español</option><option value="en">English</option></select></div><p id="reminder-detail" class="field-detail"></p><p id="reminder-error" class="reminder-error" role="alert"></p><button id="reminder-save" class="primary" type="submit" disabled>Guardar</button></form><button id="reminder-retry" class="subtle" type="button" hidden>Reintentar</button></div><div class="account-danger" id="danger-section"><button id="account-delete" class="danger-action" type="button" hidden>Eliminar cuenta</button></div><form method="dialog" class="account-close-row"><button id="account-close" class="subtle" type="submit">Cerrar</button></form></dialog>
 <main><a id="league-back" class="link-button" href="leaderboard.html?view=friends&amp;lang=es" hidden>Todos los grupos</a><p class="eyebrow" id="eyebrow">FÚTBOL, DE MEMORIA.</p><div class="title-row"><h1>Tabla general</h1><button id="group-create-open" class="primary" type="button" hidden>Crear un grupo</button><button id="league-invite-open" class="primary" type="button" hidden>Invitar amigos</button></div><p class="subtitle" id="subtitle">Cada carrera cuenta. Compará tus puntos verificados con la comunidad, en la general o por competición.</p>
 <section id="public-personal" class="personal" aria-labelledby="personal-title"><h2 id="personal-title">Tu lugar en la tabla</h2><p id="leaderboard-own" class="own" aria-live="polite"></p><p id="personal-detail">Los puntos de invitado no pasan a la tabla.</p><a class="cta" id="account-link" href="index.html?account=1"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 3.3c0-1.2 1.3-1.9 2.3-1.3l9 5.7c1 .6 1 2 0 2.6l-9 5.7c-1 .6-2.3-.1-2.3-1.3V3.3Z"/></svg><span id="account-link-label">Iniciar sesión</span></a></section>
 <section id="public-board" aria-labelledby="board-heading"><h2 id="board-heading" class="sr-only">Tabla de posiciones</h2><div class="toolbar"><div><button id="change-board-competition" class="competition-badge" type="button" aria-haspopup="dialog"><svg id="board-competition-trophy" width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M6 3h8v3a4 4 0 0 1-8 0V3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 4H3v1a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 4h3v1a3 3 0 0 1-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 9v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 16c0-1.5.8-2 3-2s3 .5 3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><img id="board-competition-current-logo" class="competition-current-logo" alt="" hidden><span class="sr-only" id="leaderboard-filter-label">Competición</span><span id="board-competition-current" class="competition-badge-value">General</span></button></div></div>
@@ -870,6 +871,175 @@ return {
 };
 })();
 </script>
+<script id="email-reminders">
+// Optional daily email reminders (ADR 0030). The same block ships in
+// index.html and leaderboard.html; each page passes a small host adapter
+// (authenticated request, current account, UI language). Only the signed-in
+// account's own email-preferences endpoint is called, and only when Account
+// or the first-sign-in nickname dialog opens. EmailOctopus is never contacted
+// from the browser, nothing runs in portable file: play, and nothing here
+// touches gameplay, scoring, clocks or analytics.
+const EmailReminders=(()=>{
+  'use strict';
+  const CONSENT='daily-v1-20261009';
+  const TEXT={
+    es:{title:'Recordatorios por email',optIn:'Quiero recibir un recordatorio diario por email. Puedo darme de baja cuando quiera.',language:'Idioma de los emails',save:'Guardar',saving:'Guardando…',retry:'Reintentar',loading:'Cargando tus recordatorios…',unavailable:'No pudimos cargar tus recordatorios. Probá de nuevo.',
+      sentTo:email=>`Email: ${email}. Como máximo un recordatorio por día, solo si todavía no completaste el desafío diario.`,noEmail:'Tu cuenta no tiene un email verificado, así que no podemos enviarte recordatorios.',
+      on:'Activados.',off:'Desactivados.',pending:'Activados · pendiente de confirmación.',settingUp:'Activados · los estamos preparando.',
+      owner:'Te sumamos a los recordatorios como uno de los primeros jugadores de derabona. Podés desactivarlos cuando quieras.',
+      unsubscribed:'Te diste de baja desde un email. Si los volvés a activar, vas a tener que confirmarlo.',addressChanged:'El email de tu cuenta cambió. Volvé a activarlos para recibirlos en la nueva dirección.',
+      suppressed:'No podemos enviar emails a esta dirección. Escribinos a contact@derabona.club si querés reactivarlos.',
+      saveError:'No se pudo guardar. Probá de nuevo.',conflict:'Tus recordatorios cambiaron en otro lugar. Revisá y guardá de nuevo.',inUse:'Otra cuenta ya usa este email para recordatorios.',rateLimited:'Demasiados intentos. Esperá un minuto y probá de nuevo.',
+      promptFailed:'No pudimos activar tus recordatorios por email. Podés intentarlo de nuevo en Cuenta.',openAccount:'Abrir Cuenta',dismiss:'Cerrar aviso'},
+    en:{title:'Email reminders',optIn:'Email me a daily reminder. I can unsubscribe at any time.',language:'Email language',save:'Save',saving:'Saving…',retry:'Retry',loading:'Loading your reminders…',unavailable:'We couldn’t load your reminders. Please try again.',
+      sentTo:email=>`Email: ${email}. At most one reminder a day, only if you haven’t finished the daily challenge yet.`,noEmail:'Your account has no verified email, so we can’t send you reminders.',
+      on:'On.',off:'Off.',pending:'On · waiting for confirmation.',settingUp:'On · being set up.',
+      owner:'You were added to reminders as one of derabona’s first players. You can turn them off at any time.',
+      unsubscribed:'You unsubscribed from an email. If you turn them back on, you’ll need to confirm.',addressChanged:'Your account email changed. Turn reminders back on to get them at the new address.',
+      suppressed:'We can’t send email to this address. Write to contact@derabona.club if you want them back.',
+      saveError:'Couldn’t save. Please try again.',conflict:'Your reminders changed somewhere else. Check and save again.',inUse:'Another account already uses this email for reminders.',rateLimited:'Too many attempts. Wait a minute and try again.',
+      promptFailed:'We couldn’t turn on your email reminders. You can try again in Account.',openAccount:'Open Account',dismiss:'Dismiss'}
+  };
+  let host=null,state='idle',pref=null,owner=null,epoch=0,saving=false,message='',touched=false,intent=null,loading=null,attempt=null;
+  const $=id=>document.getElementById(id);
+  const lang=()=>host&&host.language()==='en'?'en':'es';
+  const t=()=>TEXT[lang()];
+  const userId=()=>host&&host.configured()?host.userId()||null:null;
+  // A response only counts for the account and identity epoch that asked.
+  const current=(ticket,uid)=>ticket===epoch&&uid===userId();
+  function accept(data){
+    const p=data&&data.preference;
+    if(!p||typeof p.enabled!=='boolean'||!Number.isInteger(p.version)||!['pending','enabled','disabled','suppressed'].includes(p.deliveryStatus))throw Error('INVALID_RESPONSE');
+    pref=p;state='ready';
+  }
+  const desired=()=>({enabled:$('reminder-enabled').checked,language:$('reminder-language').value==='en'?'en':'es'});
+  function changed(){if(!pref)return false;const d=desired();return d.enabled!==pref.enabled||(d.enabled&&d.language!==pref.language);}
+  function statusText(x){
+    if(pref.deliveryStatus==='suppressed')return x.suppressed;
+    if(!pref.enabled)return pref.suppressedReason==='unsubscribed'?x.unsubscribed:pref.suppressedReason==='address_changed'?x.addressChanged:x.off;
+    if(pref.deliveryStatus==='enabled')return x.on;
+    return pref.source==='owner_requested_existing_friends'?x.settingUp:x.pending;
+  }
+  function errorText(error){
+    const x=t(),code=error&&error.code;
+    return code==='VERSION_CONFLICT'?x.conflict:code==='EMAIL_UNAVAILABLE'?x.noEmail:code==='REMINDERS_SUPPRESSED'?x.suppressed:code==='DESTINATION_IN_USE'?x.inUse:code==='RATE_LIMITED'?x.rateLimited:x.saveError;
+  }
+  function render(){
+    if(!host)return;
+    const x=t(),signed=!!userId(),section=$('reminder-section');
+    const row=$('nickname-prompt-reminder-row');
+    if(row){
+      // The first-sign-in invitation is only for accounts with no reminder
+      // history; an already enrolled (or opted-out) account keeps its state.
+      row.hidden=!signed||!!(pref&&(pref.version>0||!pref.emailAvailable));
+      $('nickname-prompt-reminder-label').textContent=x.optIn;
+    }
+    const notice=$('reminder-notice');
+    if(notice){$('reminder-notice-text').textContent=x.promptFailed;$('reminder-notice-open').textContent=x.openAccount;$('reminder-notice-dismiss').setAttribute('aria-label',x.dismiss);if(!signed)notice.hidden=true;}
+    if(!section)return;
+    section.hidden=!signed;
+    $('reminder-title').textContent=x.title;$('reminder-enabled-label').textContent=x.optIn;$('reminder-language-label').textContent=x.language;
+    $('reminder-retry').textContent=x.retry;$('reminder-save').textContent=saving?x.saving:x.save;
+    const ready=signed&&state==='ready'&&!!pref;
+    $('reminder-form').hidden=!ready;$('reminder-retry').hidden=!signed||state!=='unavailable';
+    if(ready&&!touched){
+      $('reminder-enabled').checked=pref.enabled;
+      // Seeded from the UI language until the account has its own; later
+      // game-language switches never change a saved email language.
+      $('reminder-language').value=pref.language||lang();
+    }
+    let status=!signed?'':state==='loading'?x.loading:state==='unavailable'?x.unavailable:ready?statusText(x):'';
+    if(ready&&pref.enabled&&pref.source==='owner_requested_existing_friends'&&!touched)status+=' '+x.owner;
+    $('reminder-status').textContent=status;
+    $('reminder-error').textContent=message;
+    if(ready){
+      $('reminder-detail').textContent=pref.email?x.sentTo(pref.email):x.noEmail;
+      const blocked=pref.deliveryStatus==='suppressed'||(!pref.emailAvailable&&!pref.enabled);
+      $('reminder-enabled').disabled=saving||blocked;
+      $('reminder-language').disabled=saving||!$('reminder-enabled').checked;
+      $('reminder-save').disabled=saving||!changed();
+    }
+  }
+  async function load(){
+    const uid=userId();
+    if(!uid){render();return;}
+    if(loading&&owner===uid)return loading;
+    owner=uid;const ticket=epoch;
+    if(!pref)state='loading';
+    render();
+    loading=(async()=>{
+      try{const data=await host.request({action:'get'},uid);if(!current(ticket,uid))return;accept(data);
+        if(intent&&!pref.enabled&&pref.deliveryStatus!=='suppressed'){$('reminder-enabled').checked=true;$('reminder-language').value=intent.language;touched=true;message=t().promptFailed;}
+        intent=null;}
+      catch{if(current(ticket,uid)&&!pref)state='unavailable';}
+      finally{if(current(ticket,uid)){loading=null;render();}}
+    })();
+    return loading;
+  }
+  async function save(){
+    if(saving||state!=='ready'||!changed())return false;
+    const uid=userId(),ticket=epoch,d=desired();
+    const body=d.enabled?{action:'set',enabled:true,language:d.language,consentVersion:CONSENT,expectedVersion:pref.version}:{action:'set',enabled:false,expectedVersion:pref.version};
+    // An uncertain attempt is retried with the same request ID, never a new one.
+    const shape=JSON.stringify(body);
+    if(!attempt||attempt.shape!==shape)attempt={shape,requestId:crypto.randomUUID()};
+    saving=true;message='';render();
+    try{
+      const data=await host.request({...body,requestId:attempt.requestId},uid);
+      if(!current(ticket,uid))return false;
+      accept(data);touched=false;attempt=null;intent=null;hideNotice();return true;
+    }catch(error){
+      if(!current(ticket,uid))return false;
+      message=errorText(error);
+      if(error&&['VERSION_CONFLICT','EMAIL_UNAVAILABLE','REMINDERS_SUPPRESSED','DESTINATION_IN_USE'].includes(error.code)){attempt=null;saving=false;await load();}
+      return false;
+    }finally{if(current(ticket,uid)){saving=false;render();}}
+  }
+  function showNotice(){const n=$('reminder-notice');if(n){render();n.hidden=false;}}
+  function hideNotice(){const n=$('reminder-notice');if(n)n.hidden=true;}
+  // First sign-in: the checkbox is unchecked by default and only local intent
+  // until the nickname is submitted. The nickname has already succeeded when
+  // this runs; a reminder failure never blocks it or play.
+  function promptOpened(){const box=$('nickname-prompt-reminder');if(box)box.checked=false;render();load();}
+  async function promptCompleted(checked){
+    const uid=userId();
+    if(!checked||!uid)return;
+    const ticket=epoch,language=lang();
+    try{
+      // Reuse the preference read when the prompt opened.
+      if(loading)await loading;
+      if(!pref||owner!==uid)await load();
+      if(!current(ticket,uid))return;
+      if(!pref)throw Error('UNAVAILABLE');
+      if(pref.enabled)return;
+      $('reminder-enabled').checked=true;$('reminder-language').value=language;touched=true;
+      if(!await save()&&current(ticket,uid)){message=message||t().promptFailed;showNotice();}
+    }catch{
+      if(!current(ticket,uid))return;
+      intent={language};showNotice();
+    }
+  }
+  function resetIdentity(){
+    epoch++;state='idle';pref=null;owner=null;saving=false;message='';touched=false;intent=null;loading=null;attempt=null;
+    const box=$('nickname-prompt-reminder');if(box)box.checked=false;
+    hideNotice();render();
+  }
+  function init(adapter){
+    host=adapter;
+    if($('reminder-form')){
+      $('reminder-form').addEventListener('submit',event=>{event.preventDefault();save();});
+      $('reminder-retry').addEventListener('click',()=>{load();});
+      for(const id of ['reminder-enabled','reminder-language'])$(id).addEventListener('change',()=>{touched=true;message='';render();});
+    }
+    if($('reminder-notice')){
+      $('reminder-notice-dismiss').addEventListener('click',hideNotice);
+      $('reminder-notice-open').addEventListener('click',()=>{hideNotice();host.openAccount();});
+    }
+    render();
+  }
+  return Object.freeze({init,open:load,translate:render,resetIdentity,promptOpened,promptCompleted});
+})();
+</script>
 <script id="leaderboard-app">
 'use strict';
 const ACCOUNT_CONFIG=Object.freeze({url:'https://iaebecfxjwjzkapqdeha.supabase.co',anonKey:'sb_publishable_67zB6W8GnDAwIftLW__xqA_x8sr7Pea'});
@@ -954,7 +1124,7 @@ $('leaderboard-entries').replaceChildren();
     }
   }
 }
-function setIdentity(next){const id=next?.user?.id??null;session=next;if(id===identity)return false;identity=id;epoch++;FriendsLeagues.identityChanged(id);controller?.abort();data=null;status='loading';cloud=null;accountNotice='';accountBusy=false;
+function setIdentity(next){const id=next?.user?.id??null;session=next;if(id===identity)return false;identity=id;EmailReminders.resetIdentity();epoch++;FriendsLeagues.identityChanged(id);controller?.abort();data=null;status='loading';cloud=null;accountNotice='';accountBusy=false;
   if(id){const meta=next?.user?.user_metadata;googleNameSuggestion=(meta?.full_name||meta?.name||meta?.given_name||'').trim().slice(0,24)||null;}else googleNameSuggestion=null;
   nicknameSuggestionApplied=false;$('public-nickname').value='';
   render();renderAccountDialog();
@@ -1039,7 +1209,10 @@ function renderAccountDialog(){
   $('account-open-score').hidden=true;$('account-open-score').textContent=cloud?.progress?String(cloud.progress.totalPoints):'000';
   $('account-open-link').classList.toggle('account-open-signed',signed);
 }
-$('account-open-link').addEventListener('click',()=>{accountNotice='';$('account-dialog').showModal();renderAccountDialog();loadAccountProgress();});
+$('account-open-link').addEventListener('click',()=>{accountNotice='';$('account-dialog').showModal();renderAccountDialog();loadAccountProgress();EmailReminders.open();});
+// Email reminders (ADR 0030): the same module and endpoint as index.html; reads only when Account opens.
+EmailReminders.init({configured:()=>location.protocol!=='file:'&&!!ACCOUNT_CONFIG.url&&!!ACCOUNT_CONFIG.anonKey,userId:()=>identity,language:()=>lang,
+  request:(payload,owner)=>owner===identity?accountRequest(payload,'email-preferences'):Promise.reject(Error('AUTH_CHANGED')),openAccount:()=>$('account-open-link').click()});
 $('logout').onclick=async()=>{
   if(accountBusy)return;accountBusy=true;renderAccountDialog();
   try{const c=await sdk();await c.auth.signOut({scope:'local'});}catch{}
@@ -1073,7 +1246,7 @@ $('account-delete').onclick=async()=>{
   $('account-dialog').addEventListener('keydown',event=>{if(event.key==='Escape'&&!aliasTooltip.hidden){aliasDismissed=true;renderAliasTooltip();event.preventDefault();event.stopPropagation();}});
   $('account-dialog').addEventListener('close',()=>{aliasHovered=false;aliasDismissed=true;renderAliasTooltip();});
 }
-$('language').onchange=()=>{lang=$('language').value;try{localStorage.setItem(languageKey,lang);}catch{}normalize(true);render();};$('board-next').onclick=()=>{offset+=20;load();};$('board-prev').onclick=()=>{offset=Math.max(0,offset-20);load();};$('board-retry').onclick=load;window.addEventListener('popstate',()=>{readURL();offset=0;load();});
+$('language').onchange=()=>{lang=$('language').value;try{localStorage.setItem(languageKey,lang);}catch{}normalize(true);render();EmailReminders.translate();};$('board-next').onclick=()=>{offset+=20;load();};$('board-prev').onclick=()=>{offset=Math.max(0,offset-20);load();};$('board-retry').onclick=load;window.addEventListener('popstate',()=>{readURL();offset=0;load();});
 $('site-help').onclick=()=>{$('site-help-dialog').showModal();};
 FriendsLeagues.captureInvite(BoardInvite.take());
 FriendsLeagues.attach({url:ACCOUNT_CONFIG.url,anonKey:ACCOUNT_CONFIG.anonKey,

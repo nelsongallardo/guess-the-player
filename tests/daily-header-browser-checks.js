@@ -16,7 +16,9 @@ async page=>{
     await context.route(api+'/**',async route=>{
       const req=route.request();if(req.method()==='OPTIONS')return route.fulfill({status:204,headers:{'access-control-allow-origin':'*','access-control-allow-headers':'*'}});
       const body=req.postDataJSON();calls.push(body);let result;
-      if(body.action==='progress'){result=progress();if(holdProgress){holdProgress=false;await new Promise(resolve=>releaseProgress=resolve);}}
+      // ADR 0030: the first-sign-in prompt and Account read the separate reminder preference.
+      if(req.url().endsWith('/email-preferences'))result={preference:{enabled:false,language:null,version:0,source:null,deliveryStatus:'disabled',suppressedReason:null,email:null,emailAvailable:false}};
+      else if(body.action==='progress'){result=progress();if(holdProgress){holdProgress=false;await new Promise(resolve=>releaseProgress=resolve);}}
       else if(body.action==='list')result={leagues:[]};
       else if(body.action==='overview'){
         const completed=otherAccount?0:rounds.filter(r=>r.status!=='playing').length;
