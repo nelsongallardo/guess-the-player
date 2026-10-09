@@ -16,3 +16,20 @@ verify_jwt = false
 # checked in the function with getUser() like the endpoints above.
 [functions.private-leagues]
 verify_jwt = false
+
+# Daily email reminders (ADR 0030). email-preferences verifies the user with
+# getUser() like the endpoints above. The worker authenticates the scheduler
+# with its own X-Reminder-Worker-Secret, and the webhook with EmailOctopus's
+# HMAC signature; neither accepts a user JWT.
+[functions.email-preferences]
+verify_jwt = false
+
+[functions.email-reminders-worker]
+verify_jwt = false
+
+[functions.emailoctopus-webhook]
+verify_jwt = false
+
+# Public Daily career card image for the reminder email (today or earlier only).
+[functions.daily-card]
+verify_jwt = false

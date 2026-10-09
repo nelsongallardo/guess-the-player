@@ -295,6 +295,11 @@ dialog{background:var(--paper);border:1px solid #bdcccd;border-radius:12px;box-s
 #nickname-prompt-status{min-height:1.4em}
 #nickname-prompt-status:not(:empty){color:var(--red)}
 #nickname-prompt-submit{width:100%;margin-top:14px}
+#reminder-section h3{margin:0 0 6px;font-size:15px}#reminder-form{display:flex;flex-direction:column;gap:10px}#reminder-form[hidden],.reminder-toggle[hidden],.reminder-notice[hidden]{display:none}.reminder-toggle{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;cursor:pointer;padding:6px 0}#account-dialog .reminder-toggle input,#nickname-prompt-dialog .reminder-toggle input{width:22px;height:22px;min-height:0;margin:0;padding:0;flex:none;display:inline-block}.reminder-language{display:flex;flex-direction:column;gap:4px}.reminder-language label{font-size:12px;font-weight:700;color:var(--muted)}.reminder-language select{font:inherit;min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:transparent;color:inherit;max-width:240px}.reminder-error{color:#a93637;font-size:13px;margin:0}.reminder-error:empty{display:none}#reminder-save{align-self:flex-start;min-height:44px}#reminder-retry{margin-top:8px;min-height:44px}
+#nickname-prompt-dialog .reminder-toggle{margin-top:12px;font-size:13px}
+.reminder-notice{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;width:min(460px,calc(100% - 32px));box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 44px 12px 14px;border-radius:10px;background:var(--panel);color:var(--text);border:1px solid var(--line);box-shadow:0 10px 28px #0003}
+.reminder-notice p{margin:0;flex:1 1 220px;font-size:13px;line-height:1.45}.reminder-notice .subtle{min-height:44px}.reminder-notice-close{position:absolute;top:4px;right:4px;min-width:44px;min-height:44px;border:0;background:transparent;color:inherit;font-size:20px;cursor:pointer}
+@media(max-width:800px){.reminder-notice{bottom:calc(84px + env(safe-area-inset-bottom))}}
 #account-dialog .field-label-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
 #account-dialog .field-label-row label{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.2px}
 #account-dialog .alias-help-region{position:relative;display:inline-flex}
@@ -615,8 +620,8 @@ hasta las 00:00 UTC</span></span></button></div></div>
 <dialog id="rules" aria-labelledby="rules-title"><h2 id="rules-title">Read the career.<br>Name the legend.</h2><ol><li>Follow the club badges from the beginning to the latest club. <b>National teams are never in the timeline.</b></li><li>In <b>Unlimited</b>, pick a <b>competition</b> from the selector above the game — Champions League, Premier League, La Liga, the Argentine Primera División, the Brasileirão, or All Players — to choose which careers you will be quizzed on. Rival names prioritize similar career origins and eras.</li><li>Pick one of ten players. You have <b>three attempts</b>; a wrong answer is disabled.</li><li>Need help? Hints reveal <b>position → nationality → each club’s years</b>. Each hint lowers the maximum points.</li><li>A correct round earns <b>up to 100 points</b> — less per hint used, and less the slower you answer. Once you open a player, the clock keeps running while you navigate elsewhere. Speed matters a lot: the score bottoms out by <b>24 seconds</b>, so an instant, honest guess is always worth far more than a slow one (including one looked up elsewhere). A lost round resets the streak, not your score.<div class="score-example"><p>Example, no hints used</p><ul class="score-bars"><li><span class="score-bar-time">0–2s</span><span class="score-bar-track"><span class="score-bar-fill" style="width:100%"></span></span><span class="score-bar-value">100</span></li><li><span class="score-bar-time">13s</span><span class="score-bar-track"><span class="score-bar-fill" style="width:63%"></span></span><span class="score-bar-value">63</span></li><li><span class="score-bar-time">24s+</span><span class="score-bar-track"><span class="score-bar-fill" style="width:25%"></span></span><span class="score-bar-value">25</span></li></ul></div></li><li>Finish the round to unlock <b>Next Player</b>. Every player in your deck appears once before the final whistle.</li><li>Once you answer a player — right or wrong — they stay excluded across competitions. Only guest/practice progress can be cleared with <b>Reset my results</b>. A competition shows <b>Completed</b> in the picker once none are left.</li></ol><p>The roster has 221 researched players. Senior reserve teams and actual return spells are included. Parallel reserve/first-team years can overlap. A <b>Tour loan</b> or <b>Signing*</b> badge identifies an exceptional non-competitive spell; details and sources appear after the answer.</p><p>Positions are broad playing roles. This is a researched snapshot, not a live transfer feed. Crests identify clubs, not historical kit designs.</p><p>No account, tracking, or internet needed. Progress is saved locally when your browser allows it. Club marks belong to their owners; this is an unofficial fan game.</p><form method="dialog"><button class="primary" type="submit">Let’s play <span aria-hidden="true">→</span></button></form></dialog>
 <dialog id="competitions" aria-labelledby="competitions-title"><h2 id="competitions-title">Choose a competition</h2><p id="competitions-intro">Play within one competition, or take on the full roster.</p><div id="competition-options" class="competition-options" role="group" aria-label="Competitions"></div><form method="dialog"><button class="subtle" type="submit" id="competitions-close">Close</button></form></dialog>
 <dialog id="stats-detail" aria-labelledby="stats-detail-title"><h2 id="stats-detail-title">Your score details</h2><div class="stats"><div class="stat"><div class="stat-label" id="stats-detail-streak-label">Current streak</div><div class="stat-value"><strong id="streak">0</strong></div></div><div class="stat"><div class="stat-label" id="stats-detail-best-label">Best streak</div><div class="stat-value"><strong id="best-streak">0</strong></div></div></div><h3 id="history-details-title">Your results on this device</h3><p id="history-empty" class="summary-caption">No finished games yet — your results will appear here after your first recap.</p><ol id="history-list"></ol><p id="history-summary" class="summary-caption"></p><form method="dialog"><button class="subtle" type="submit" id="stats-detail-close">Close</button></form></dialog>
-<dialog id="account-dialog" aria-labelledby="account-title"><h2 id="account-title">Cuenta y progreso</h2><p id="account-pitch" class="account-pitch">Iniciá sesión para competir por puntos con jugadores de todo el mundo.</p><p id="account-detail" class="account-copy"></p><div class="account-stats" id="account-stats" hidden><div class="account-stat"><strong id="stat-points">0</strong><span id="stat-points-label">Puntos acumulados</span></div><div class="account-stat"><strong id="stat-answered">0</strong><span id="stat-answered-label">Sin límite: jugados</span></div><div class="account-stat"><strong id="stat-correct">0</strong><span id="stat-correct-label">Sin límite: acertados</span></div></div><p id="account-status" class="account-status" role="status"></p><div class="account-actions"><button id="google-login" class="google-login" type="button"><svg class="google-login-icon" width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span id="google-login-label">Continuar con Google</span></button><button id="account-ranked" class="subtle" type="button" hidden>Volver a clasificación</button><button id="logout" class="subtle" type="button" hidden>Cerrar sesión</button></div><div class="account-section" id="alias-section"><p id="enrolled-status" class="account-alias" role="status"></p><form id="enroll-form" hidden><div class="field-label-row"><label id="nickname-label" for="public-nickname">Apodo público</label><div id="alias-help-region" class="alias-help-region"><button id="alias-help" class="alias-help" type="button" aria-describedby="alias-tooltip">ⓘ</button><p id="alias-tooltip" class="alias-tooltip" role="tooltip" hidden>Se asigna automáticamente un nombre de animal al azar. Podés agregar o cambiar tu apodo en Cuenta.</p></div></div><input id="public-nickname" name="nickname" autocomplete="off" maxlength="24" minlength="3" value="" aria-describedby="nickname-detail"><p id="nickname-detail" class="field-detail"></p><button id="enroll" class="primary" type="submit">Guardar apodo</button></form></div><div class="account-danger" id="danger-section"><button id="account-delete" class="danger-action" type="button" hidden>Eliminar cuenta</button></div><form method="dialog" class="account-close-row"><button id="account-close" class="subtle" type="submit">Cerrar</button></form></dialog>
-<dialog id="nickname-prompt-dialog" aria-labelledby="nickname-prompt-title"><h2 id="nickname-prompt-title">Elegí tu apodo público</h2><p id="nickname-prompt-detail" class="account-copy">Así vas a aparecer en la tabla. Podés usar el que te sugerimos o escribir el tuyo - vas a poder cambiarlo después cuando quieras.</p><form id="nickname-prompt-form"><div class="nickname-prompt-field"><input id="nickname-prompt-input" name="nickname" autocomplete="off" maxlength="24" minlength="3" aria-describedby="nickname-prompt-status" required><button id="nickname-prompt-shuffle" class="subtle" type="button" aria-label="Sugerir otro">🔀</button></div><p id="nickname-prompt-status" class="field-detail" role="status" aria-live="polite"></p><button id="nickname-prompt-submit" class="primary" type="submit">Continuar</button></form></dialog>
+<dialog id="account-dialog" aria-labelledby="account-title"><h2 id="account-title">Cuenta y progreso</h2><p id="account-pitch" class="account-pitch">Iniciá sesión para competir por puntos con jugadores de todo el mundo.</p><p id="account-detail" class="account-copy"></p><div class="account-stats" id="account-stats" hidden><div class="account-stat"><strong id="stat-points">0</strong><span id="stat-points-label">Puntos acumulados</span></div><div class="account-stat"><strong id="stat-answered">0</strong><span id="stat-answered-label">Sin límite: jugados</span></div><div class="account-stat"><strong id="stat-correct">0</strong><span id="stat-correct-label">Sin límite: acertados</span></div></div><p id="account-status" class="account-status" role="status"></p><div class="account-actions"><button id="google-login" class="google-login" type="button"><svg class="google-login-icon" width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span id="google-login-label">Continuar con Google</span></button><button id="account-ranked" class="subtle" type="button" hidden>Volver a clasificación</button><button id="logout" class="subtle" type="button" hidden>Cerrar sesión</button></div><div class="account-section" id="alias-section"><p id="enrolled-status" class="account-alias" role="status"></p><form id="enroll-form" hidden><div class="field-label-row"><label id="nickname-label" for="public-nickname">Apodo público</label><div id="alias-help-region" class="alias-help-region"><button id="alias-help" class="alias-help" type="button" aria-describedby="alias-tooltip">ⓘ</button><p id="alias-tooltip" class="alias-tooltip" role="tooltip" hidden>Se asigna automáticamente un nombre de animal al azar. Podés agregar o cambiar tu apodo en Cuenta.</p></div></div><input id="public-nickname" name="nickname" autocomplete="off" maxlength="24" minlength="3" value="" aria-describedby="nickname-detail"><p id="nickname-detail" class="field-detail"></p><button id="enroll" class="primary" type="submit">Guardar apodo</button></form></div><div class="account-section reminder-section" id="reminder-section" hidden><h3 id="reminder-title">Recordatorios por email</h3><p id="reminder-status" class="account-copy" role="status" aria-live="polite"></p><form id="reminder-form" hidden><label class="reminder-toggle" for="reminder-enabled"><input id="reminder-enabled" type="checkbox"><span id="reminder-enabled-label">Quiero recibir un recordatorio diario por email. Puedo darme de baja cuando quiera.</span></label><div class="reminder-language"><label id="reminder-language-label" for="reminder-language">Idioma de los emails</label><select id="reminder-language"><option value="es">Español</option><option value="en">English</option></select></div><p id="reminder-detail" class="field-detail"></p><p id="reminder-error" class="reminder-error" role="alert"></p><button id="reminder-save" class="primary" type="submit" disabled>Guardar</button></form><button id="reminder-retry" class="subtle" type="button" hidden>Reintentar</button></div><div class="account-danger" id="danger-section"><button id="account-delete" class="danger-action" type="button" hidden>Eliminar cuenta</button></div><form method="dialog" class="account-close-row"><button id="account-close" class="subtle" type="submit">Cerrar</button></form></dialog>
+<dialog id="nickname-prompt-dialog" aria-labelledby="nickname-prompt-title"><h2 id="nickname-prompt-title">Elegí tu apodo público</h2><p id="nickname-prompt-detail" class="account-copy">Así vas a aparecer en la tabla. Podés usar el que te sugerimos o escribir el tuyo - vas a poder cambiarlo después cuando quieras.</p><form id="nickname-prompt-form"><div class="nickname-prompt-field"><input id="nickname-prompt-input" name="nickname" autocomplete="off" maxlength="24" minlength="3" aria-describedby="nickname-prompt-status" required><button id="nickname-prompt-shuffle" class="subtle" type="button" aria-label="Sugerir otro">🔀</button></div><label class="reminder-toggle" id="nickname-prompt-reminder-row" for="nickname-prompt-reminder" hidden><input id="nickname-prompt-reminder" type="checkbox"><span id="nickname-prompt-reminder-label">Quiero recibir un recordatorio diario por email. Puedo darme de baja cuando quiera.</span></label><p id="nickname-prompt-status" class="field-detail" role="status" aria-live="polite"></p><button id="nickname-prompt-submit" class="primary" type="submit">Continuar</button></form></dialog><div id="reminder-notice" class="reminder-notice" role="status" hidden><p id="reminder-notice-text">No pudimos activar tus recordatorios por email. Podés intentarlo de nuevo en Cuenta.</p><button id="reminder-notice-open" class="subtle" type="button">Abrir Cuenta</button><button id="reminder-notice-dismiss" class="reminder-notice-close" type="button" aria-label="Cerrar aviso">×</button></div>
 <script id="roster-data">
 const PLAYERS = [
   {
@@ -81052,6 +81057,175 @@ const Accounts = (()=>{
   return {configured,hasStoredSession,init,login,request,logout,get session(){return session;},get pending(){return !settled;}};
 })();
 </script>
+<script id="email-reminders">
+// Optional daily email reminders (ADR 0030). The same block ships in
+// index.html and leaderboard.html; each page passes a small host adapter
+// (authenticated request, current account, UI language). Only the signed-in
+// account's own email-preferences endpoint is called, and only when Account
+// or the first-sign-in nickname dialog opens. EmailOctopus is never contacted
+// from the browser, nothing runs in portable file: play, and nothing here
+// touches gameplay, scoring, clocks or analytics.
+const EmailReminders=(()=>{
+  'use strict';
+  const CONSENT='daily-v1-20261009';
+  const TEXT={
+    es:{title:'Recordatorios por email',optIn:'Quiero recibir un recordatorio diario por email. Puedo darme de baja cuando quiera.',language:'Idioma de los emails',save:'Guardar',saving:'Guardando…',retry:'Reintentar',loading:'Cargando tus recordatorios…',unavailable:'No pudimos cargar tus recordatorios. Probá de nuevo.',
+      sentTo:email=>`Email: ${email}. Como máximo un recordatorio por día, solo si todavía no completaste el desafío diario.`,noEmail:'Tu cuenta no tiene un email verificado, así que no podemos enviarte recordatorios.',
+      on:'Activados.',off:'Desactivados.',pending:'Activados · los estamos preparando.',settingUp:'Activados · los estamos preparando.',
+      owner:'Te sumamos a los recordatorios como uno de los primeros jugadores de derabona. Podés desactivarlos cuando quieras.',
+      unsubscribed:'Te diste de baja desde un email. Podés volver a activarlos acá.',addressChanged:'El email de tu cuenta cambió. Volvé a activarlos para recibirlos en la nueva dirección.',
+      suppressed:'No podemos enviar emails a esta dirección. Escribinos a contact@derabona.club si querés reactivarlos.',
+      saveError:'No se pudo guardar. Probá de nuevo.',conflict:'Tus recordatorios cambiaron en otro lugar. Revisá y guardá de nuevo.',inUse:'Otra cuenta ya usa este email para recordatorios.',rateLimited:'Demasiados intentos. Esperá un minuto y probá de nuevo.',
+      promptFailed:'No pudimos activar tus recordatorios por email. Podés intentarlo de nuevo en Cuenta.',openAccount:'Abrir Cuenta',dismiss:'Cerrar aviso'},
+    en:{title:'Email reminders',optIn:'Email me a daily reminder. I can unsubscribe at any time.',language:'Email language',save:'Save',saving:'Saving…',retry:'Retry',loading:'Loading your reminders…',unavailable:'We couldn’t load your reminders. Please try again.',
+      sentTo:email=>`Email: ${email}. At most one reminder a day, only if you haven’t finished the daily challenge yet.`,noEmail:'Your account has no verified email, so we can’t send you reminders.',
+      on:'On.',off:'Off.',pending:'On · being set up.',settingUp:'On · being set up.',
+      owner:'You were added to reminders as one of derabona’s first players. You can turn them off at any time.',
+      unsubscribed:'You unsubscribed from an email. You can turn them back on here.',addressChanged:'Your account email changed. Turn reminders back on to get them at the new address.',
+      suppressed:'We can’t send email to this address. Write to contact@derabona.club if you want them back.',
+      saveError:'Couldn’t save. Please try again.',conflict:'Your reminders changed somewhere else. Check and save again.',inUse:'Another account already uses this email for reminders.',rateLimited:'Too many attempts. Wait a minute and try again.',
+      promptFailed:'We couldn’t turn on your email reminders. You can try again in Account.',openAccount:'Open Account',dismiss:'Dismiss'}
+  };
+  let host=null,state='idle',pref=null,owner=null,epoch=0,saving=false,message='',touched=false,intent=null,loading=null,attempt=null;
+  const $=id=>document.getElementById(id);
+  const lang=()=>host&&host.language()==='en'?'en':'es';
+  const t=()=>TEXT[lang()];
+  const userId=()=>host&&host.configured()?host.userId()||null:null;
+  // A response only counts for the account and identity epoch that asked.
+  const current=(ticket,uid)=>ticket===epoch&&uid===userId();
+  function accept(data){
+    const p=data&&data.preference;
+    if(!p||typeof p.enabled!=='boolean'||!Number.isInteger(p.version)||!['pending','enabled','disabled','suppressed'].includes(p.deliveryStatus))throw Error('INVALID_RESPONSE');
+    pref=p;state='ready';
+  }
+  const desired=()=>({enabled:$('reminder-enabled').checked,language:$('reminder-language').value==='en'?'en':'es'});
+  function changed(){if(!pref)return false;const d=desired();return d.enabled!==pref.enabled||(d.enabled&&d.language!==pref.language);}
+  function statusText(x){
+    if(pref.deliveryStatus==='suppressed')return x.suppressed;
+    if(!pref.enabled)return pref.suppressedReason==='unsubscribed'?x.unsubscribed:pref.suppressedReason==='address_changed'?x.addressChanged:x.off;
+    if(pref.deliveryStatus==='enabled')return x.on;
+    return pref.source==='owner_requested_existing_friends'?x.settingUp:x.pending;
+  }
+  function errorText(error){
+    const x=t(),code=error&&error.code;
+    return code==='VERSION_CONFLICT'?x.conflict:code==='EMAIL_UNAVAILABLE'?x.noEmail:code==='REMINDERS_SUPPRESSED'?x.suppressed:code==='DESTINATION_IN_USE'?x.inUse:code==='RATE_LIMITED'?x.rateLimited:x.saveError;
+  }
+  function render(){
+    if(!host)return;
+    const x=t(),signed=!!userId(),section=$('reminder-section');
+    const row=$('nickname-prompt-reminder-row');
+    if(row){
+      // The first-sign-in invitation is only for accounts with no reminder
+      // history; an already enrolled (or opted-out) account keeps its state.
+      row.hidden=!signed||!!(pref&&(pref.version>0||!pref.emailAvailable));
+      $('nickname-prompt-reminder-label').textContent=x.optIn;
+    }
+    const notice=$('reminder-notice');
+    if(notice){$('reminder-notice-text').textContent=x.promptFailed;$('reminder-notice-open').textContent=x.openAccount;$('reminder-notice-dismiss').setAttribute('aria-label',x.dismiss);if(!signed)notice.hidden=true;}
+    if(!section)return;
+    section.hidden=!signed;
+    $('reminder-title').textContent=x.title;$('reminder-enabled-label').textContent=x.optIn;$('reminder-language-label').textContent=x.language;
+    $('reminder-retry').textContent=x.retry;$('reminder-save').textContent=saving?x.saving:x.save;
+    const ready=signed&&state==='ready'&&!!pref;
+    $('reminder-form').hidden=!ready;$('reminder-retry').hidden=!signed||state!=='unavailable';
+    if(ready&&!touched){
+      $('reminder-enabled').checked=pref.enabled;
+      // Seeded from the UI language until the account has its own; later
+      // game-language switches never change a saved email language.
+      $('reminder-language').value=pref.language||lang();
+    }
+    let status=!signed?'':state==='loading'?x.loading:state==='unavailable'?x.unavailable:ready?statusText(x):'';
+    if(ready&&pref.enabled&&pref.source==='owner_requested_existing_friends'&&!touched)status+=' '+x.owner;
+    $('reminder-status').textContent=status;
+    $('reminder-error').textContent=message;
+    if(ready){
+      $('reminder-detail').textContent=pref.email?x.sentTo(pref.email):x.noEmail;
+      const blocked=pref.deliveryStatus==='suppressed'||(!pref.emailAvailable&&!pref.enabled);
+      $('reminder-enabled').disabled=saving||blocked;
+      $('reminder-language').disabled=saving||!$('reminder-enabled').checked;
+      $('reminder-save').disabled=saving||!changed();
+    }
+  }
+  async function load(){
+    const uid=userId();
+    if(!uid){render();return;}
+    if(loading&&owner===uid)return loading;
+    owner=uid;const ticket=epoch;
+    if(!pref)state='loading';
+    render();
+    loading=(async()=>{
+      try{const data=await host.request({action:'get'},uid);if(!current(ticket,uid))return;accept(data);
+        if(intent&&!pref.enabled&&pref.deliveryStatus!=='suppressed'){$('reminder-enabled').checked=true;$('reminder-language').value=intent.language;touched=true;message=t().promptFailed;}
+        intent=null;}
+      catch{if(current(ticket,uid)&&!pref)state='unavailable';}
+      finally{if(current(ticket,uid)){loading=null;render();}}
+    })();
+    return loading;
+  }
+  async function save(){
+    if(saving||state!=='ready'||!changed())return false;
+    const uid=userId(),ticket=epoch,d=desired();
+    const body=d.enabled?{action:'set',enabled:true,language:d.language,consentVersion:CONSENT,expectedVersion:pref.version}:{action:'set',enabled:false,expectedVersion:pref.version};
+    // An uncertain attempt is retried with the same request ID, never a new one.
+    const shape=JSON.stringify(body);
+    if(!attempt||attempt.shape!==shape)attempt={shape,requestId:crypto.randomUUID()};
+    saving=true;message='';render();
+    try{
+      const data=await host.request({...body,requestId:attempt.requestId},uid);
+      if(!current(ticket,uid))return false;
+      accept(data);touched=false;attempt=null;intent=null;hideNotice();return true;
+    }catch(error){
+      if(!current(ticket,uid))return false;
+      message=errorText(error);
+      if(error&&['VERSION_CONFLICT','EMAIL_UNAVAILABLE','REMINDERS_SUPPRESSED','DESTINATION_IN_USE'].includes(error.code)){attempt=null;saving=false;await load();}
+      return false;
+    }finally{if(current(ticket,uid)){saving=false;render();}}
+  }
+  function showNotice(){const n=$('reminder-notice');if(n){render();n.hidden=false;}}
+  function hideNotice(){const n=$('reminder-notice');if(n)n.hidden=true;}
+  // First sign-in: the checkbox is unchecked by default and only local intent
+  // until the nickname is submitted. The nickname has already succeeded when
+  // this runs; a reminder failure never blocks it or play.
+  function promptOpened(){const box=$('nickname-prompt-reminder');if(box)box.checked=false;render();load();}
+  async function promptCompleted(checked){
+    const uid=userId();
+    if(!checked||!uid)return;
+    const ticket=epoch,language=lang();
+    try{
+      // Reuse the preference read when the prompt opened.
+      if(loading)await loading;
+      if(!pref||owner!==uid)await load();
+      if(!current(ticket,uid))return;
+      if(!pref)throw Error('UNAVAILABLE');
+      if(pref.enabled)return;
+      $('reminder-enabled').checked=true;$('reminder-language').value=language;touched=true;
+      if(!await save()&&current(ticket,uid)){message=message||t().promptFailed;showNotice();}
+    }catch{
+      if(!current(ticket,uid))return;
+      intent={language};showNotice();
+    }
+  }
+  function resetIdentity(){
+    epoch++;state='idle';pref=null;owner=null;saving=false;message='';touched=false;intent=null;loading=null;attempt=null;
+    const box=$('nickname-prompt-reminder');if(box)box.checked=false;
+    hideNotice();render();
+  }
+  function init(adapter){
+    host=adapter;
+    if($('reminder-form')){
+      $('reminder-form').addEventListener('submit',event=>{event.preventDefault();save();});
+      $('reminder-retry').addEventListener('click',()=>{load();});
+      for(const id of ['reminder-enabled','reminder-language'])$(id).addEventListener('change',()=>{touched=true;message='';render();});
+    }
+    if($('reminder-notice')){
+      $('reminder-notice-dismiss').addEventListener('click',hideNotice);
+      $('reminder-notice-open').addEventListener('click',()=>{hideNotice();host.openAccount();});
+    }
+    render();
+  }
+  return Object.freeze({init,open:load,translate:render,resetIdentity,promptOpened,promptCompleted});
+})();
+</script>
 <script id="analytics">
 const Analytics = (()=>{
   'use strict';
@@ -81366,7 +81540,7 @@ function applyLanguage() {
   $('competitions-title').textContent=t.competitionsTitle;$('competitions-intro').textContent=t.competitionsIntro;$('competitions-close').textContent=t.competitionsClose;
   $('competition-badge-label').textContent=t.changeCompetition;$('competition-current').textContent=t.competitions[state.competition];setCompetitionLogo(state.competition);
   $('change-competition-summary').textContent=t.competitionsChange;
-  renderCompetitionOptions();RankedUI.update();DailyUI.translate();NicknamePrompt.translate();PlayOverview.translate();
+  renderCompetitionOptions();RankedUI.update();DailyUI.translate();NicknamePrompt.translate();PlayOverview.translate();EmailReminders.translate();
   try {localStorage.setItem(LANGUAGE_KEY,language);} catch {}
 }
 function renderCompetitionOptions(){
@@ -81613,6 +81787,7 @@ const NicknamePrompt = (()=>{
     document.getElementById('nickname-prompt-status').textContent='';
     document.getElementById('nickname-prompt-dialog').showModal();
     document.getElementById('nickname-prompt-input').focus();
+    EmailReminders.promptOpened();
   };
   document.getElementById('nickname-prompt-dialog').addEventListener('cancel',event=>event.preventDefault());
   document.getElementById('nickname-prompt-shuffle').addEventListener('click',()=>{
@@ -81631,15 +81806,19 @@ const NicknamePrompt = (()=>{
       await Accounts.request({action:'enroll',nickname,idempotencyKey:crypto.randomUUID()},'ranked-game',false,owner);
       if(ticket!==promptEpoch||owner!==Accounts.session?.user?.id)return;
       isOpen=false;document.getElementById('nickname-prompt-dialog').close();
+      // Optional, separate and after the nickname succeeded: never blocks it.
+      EmailReminders.promptCompleted(document.getElementById('nickname-prompt-reminder').checked);
       if(AuthRoute.active)AuthRouteUI.enrolled();else PlayOverview.enrolled();
     }catch(error){
       if(ticket!==promptEpoch||owner!==Accounts.session?.user?.id)return;
       document.getElementById('nickname-prompt-status').textContent=error?.code==='NICKNAME_TAKEN'?t().taken:error?.code==='INVALID_NICKNAME'?t().invalid:t().taken;
     }finally{if(ticket===promptEpoch){busy=false;document.getElementById('nickname-prompt-submit').disabled=false;}}
   });
-  const resetIdentity=()=>{promptEpoch++;isOpen=false;busy=false;document.getElementById('nickname-prompt-dialog').close();document.getElementById('nickname-prompt-input').value='';document.getElementById('nickname-prompt-status').textContent='';document.getElementById('nickname-prompt-submit').disabled=false;};
+  const resetIdentity=()=>{EmailReminders.resetIdentity();promptEpoch++;isOpen=false;busy=false;document.getElementById('nickname-prompt-dialog').close();document.getElementById('nickname-prompt-input').value='';document.getElementById('nickname-prompt-status').textContent='';document.getElementById('nickname-prompt-submit').disabled=false;};
   return Object.freeze({maybeOpen,translate,resetIdentity});
 })();
+EmailReminders.init({configured:()=>Accounts.configured,userId:()=>Accounts.session?.user?.id??null,language:()=>language,
+  request:(payload,owner)=>Accounts.request(payload,'email-preferences',false,owner),openAccount:()=>document.getElementById('account-open').click()});
 // Server-authoritative Daily Rabona for signed-in accounts. Guests keep the
 // existing pure-local DailyChallenge/DailyUI path untouched - every entry
 // point here is only ever reached when Accounts.session exists (see the
@@ -82069,7 +82248,7 @@ const RankedUI = (()=>{
   // shows the existing dialog message, so a transient hiccup nobody was
   // looking at doesn't need to be explained if it's already resolved by the
   // time they open the dialog.
-  const openAccount=()=>{if(mode==='unavailable')sync();update();$('account-dialog').showModal();};
+  const openAccount=()=>{if(mode==='unavailable')sync();update();$('account-dialog').showModal();EmailReminders.open();};
   $('account-open').onclick=openAccount;$('guest-ranked-signin').onclick=openAccount;$('guest-ranked-reminder-signin').onclick=openAccount;
   $('guest-ranked-reminder-continue').onclick=()=>$('next').click();
   $('google-login').onclick=async()=>{if(busy||!Accounts.configured)return;const engaged=lifetime.rounds||seen.size||loadHistory().length||state.rounds.some(r=>r.guesses.length||r.hints);if(engaged&&!confirm(t().loginWarn))return;busy=true;update();try{await Accounts.login(language);}catch{notice='authError';}finally{busy=false;update();}};

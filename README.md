@@ -108,4 +108,6 @@ Club crests/names remain their owners' trademarks/copyright. Public image-source
 
 Optional **consent-first PostHog EU analytics** measures visits/gameplay only after Allow analytics. Declining does not affect guest or account play; permission can be withdrawn under Privacy and analytics. No recordings, autocapture or advertising. Google/Supabase account identity is functional account data, not analytics identity: no account IDs, nicknames, Google names/photos, emails or tokens go to PostHog. Offline/local play makes no analytics requests. See [analytics details](docs/analytics.md), [privacy page](privacy.html) and [dashboard](https://eu.posthog.com/project/273163/dashboard/949592).
 
+Signed-in players can opt in to an optional **daily email reminder** sent through EmailOctopus (unchecked by default, unsubscribe any time, independent of analytics). Delivery is disabled until the owner activates it; see [email reminders](docs/email-reminders.md) and [ADR 0030](docs/adr/0030-emailoctopus-daily-reminders.md).
+
 Privacy enquiries go to `contact@derabona.club`. ImprovMX forwards that public alias to a private inbox; the private destination and forwarding credentials must not be committed or copied into project documentation. See [contact operations](docs/contact.md).

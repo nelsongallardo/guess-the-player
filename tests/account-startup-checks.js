@@ -2,7 +2,7 @@
 // Exercises INITIAL_SESSION timing; never contacts hosted Auth or gameplay.
 async page => {
   const browser=page.context().browser(),origin='http://127.0.0.1:4173',api='https://startup-api.invalid';
-  const context=await browser.newContext(),checks=[],errors=[],calls=[];
+  const context=await browser.newContext(),checks=[],errors=[],calls=[],reminderCalls=[];
   const ok=(value,label)=>{if(!value)throw Error(label);checks.push(label);};
   const user='00000000-0000-4000-8000-000000004321';
   let count=0,failAll=false,nicknamePrompted=false,rounds=[],overviewHold=null,dailyHold=null,failDaily=false;
@@ -17,7 +17,10 @@ async page => {
     await context.route(api+'/**',async route=>{
       const req=route.request(),headers={'access-control-allow-origin':'*','access-control-allow-headers':'*'};
       if(req.method()==='OPTIONS')return route.fulfill({status:204,headers});
-      const body=req.postDataJSON();calls.push(body.action);
+      const body=req.postDataJSON();
+      // ADR 0030: the prompt and Account read the separate reminder preference (logged apart from gameplay).
+      if(req.url().endsWith('/email-preferences')){reminderCalls.push(body.action);return route.fulfill({headers,contentType:'application/json',body:'{"preference":{"enabled":false,"language":null,"version":0,"source":null,"deliveryStatus":"disabled","suppressedReason":null,"email":null,"emailAvailable":false}}'});}
+      calls.push(body.action);
       if(body.action==='list')return route.fulfill({headers,contentType:'application/json',body:'{"leagues":[]}'});
       if(body.action==='dailyProgress'){
         if(dailyHold){dailyHold.seen();await dailyHold.wait;}
@@ -55,6 +58,7 @@ async page => {
     count=0;failAll=false;await p.locator('#play-retry').click();await p.locator('#nickname-prompt-dialog').waitFor();
     ok(count===1,'Explicit retry recovers using one request');
     ok(calls.every(action=>['overview','list'].includes(action)),'Startup never bypasses nickname enrollment or starts a puzzle');
+    ok(reminderCalls.every(action=>action==='get'),'Startup reminder requests are read-only');
     // Returning to a finished Daily must remain one loading scene until the
     // authoritative Daily response, even though overview resolves earlier.
     rounds=await p.evaluate(()=>DailyChallenge.forDate(new Date().toISOString().slice(0,10)).payloads.map((p,i)=>({roundIndex:i,version:1,playerId:p.player.id,options:p.options,guesses:[p.options.find(o=>o.label===p.player.name).id],hints:0,clueCountry:null,cluePosition:null,status:'won',points:25,startedAt:new Date().toISOString()})));
