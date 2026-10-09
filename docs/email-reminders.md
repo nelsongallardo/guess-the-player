@@ -32,7 +32,17 @@ Edge Function secrets (`supabase secrets set`, never in git or HTML):
 
 If any EmailOctopus value is missing, the worker makes no vendor request and only reconciles locally. If the webhook secret or list ID is missing, the webhook returns 503.
 
-## Owner/vendor setup (not done; needs the owner)
+## Current setup (2026-10-09)
+
+- **EmailOctopus:**
+  - List "derabona · recordatorio diario" (`f501b9d2-c3ca-11f1-8bf3-db0a513fea80`), with a `Language` field and double opt-in off.
+  - Draft automations "Recordatorio diario (ES)" (`4df682d0-c3d4-11f1-91de-03d5a6c835c4`) and "Daily reminder (EN)" (`de8cfbb2-c3d4-11f1-ab94-03ff1672a0f6`). Both are "Manually via the API", allow repeats, have Google Analytics link tracking off, and send one email from "derabona" <contact@derabona.club> using the repo templates.
+  - Webhook "derabona reminders" pointing at the `emailoctopus-webhook` function, for contact created/updated/deleted plus bounced, complained and unsubscribed.
+  - The owner verified the domain; the sender-info postal address is set and private.
+- **Supabase secrets set:** `EMAILOCTOPUS_API_KEY`, `EMAILOCTOPUS_LIST_ID`, `EMAILOCTOPUS_LANGUAGE_FIELD`, `EMAILOCTOPUS_AUTOMATION_ES`, `EMAILOCTOPUS_AUTOMATION_EN` and `REMINDER_WORKER_SECRET`.
+- **Still open:** the owner must set `EMAILOCTOPUS_WEBHOOK_SECRET` and click Start on both automations.
+
+## Owner/vendor setup (reference)
 
 1. **EmailOctopus account and plan.** Check contact and send limits for about 25 contacts × 30 emails a month. On the free Starter plan the template must keep `{{RewardsURL}}`; remove it on a paid plan.
 2. **Sender.** Choose the From name, From address and Reply-To (for example `contact@derabona.club`). Authenticate `derabona.club` in EmailOctopus using only the records it generates. **Keep the existing ImprovMX MX records and root SPF.** If EmailOctopus needs an SPF include, merge it into the one existing SPF record instead of adding a second. ImprovMX forwarding does not verify an outgoing sender. DNS changes need separate authorization.
