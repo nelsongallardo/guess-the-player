@@ -29,3 +29,7 @@ verify_jwt = false
 
 [functions.emailoctopus-webhook]
 verify_jwt = false
+
+# Public Daily career card image for the reminder email (today or earlier only).
+[functions.daily-card]
+verify_jwt = false

@@ -37,5 +37,6 @@ export function reminderConfig(): ReminderConfig {
     automations: { es: Deno.env.get('EMAILOCTOPUS_AUTOMATION_ES') ?? '', en: Deno.env.get('EMAILOCTOPUS_AUTOMATION_EN') ?? '' },
     languageField: Deno.env.get('EMAILOCTOPUS_LANGUAGE_FIELD') ?? 'Language',
     batch: 25,
+    cardBaseUrl: `${Deno.env.get('SUPABASE_URL') ?? ''}/functions/v1/daily-card`,
   };
 }

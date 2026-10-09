@@ -17,7 +17,17 @@ export type ReminderConfig = {
   automations: { es: string; en: string };
   languageField: string;
   batch: number;
+  // Public URL of the on-demand daily-card function.
+  cardBaseUrl: string;
 };
+
+// Today's challenge number (#1 is 2026-09-17 UTC, as in DailyChallenge.forDate)
+// and the card URL for that date; daily-card renders it on demand.
+export function dailyCard(nowMs: number, baseUrl: string) {
+  const date = new Date(nowMs).toISOString().slice(0, 10);
+  const challengeNumber = Math.floor((Date.parse(date) - Date.UTC(2026, 8, 17)) / 86400000) + 1;
+  return { date, challengeNumber, url: `${baseUrl}?date=${date}` };
+}
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const CONSENT_VERSION = 'daily-v1-20261009';
@@ -248,6 +258,15 @@ export async function runWorker(deps: WorkerDependencies, task: 'tick' | 'sync' 
     const start = await rpcData(rpc, { action: 'startDispatch', token });
     if (!start.send) { report.skipped++; continue; }
     const automation = config.automations[start.language as 'es' | 'en'];
+    // The automation email reads today's card and number from contact fields,
+    // so they are written right before the queue call. Without them the email
+    // would show a stale puzzle, so a failed write means no send today.
+    const card = dailyCard(deps.now?.() ?? Date.now(), config.cardBaseUrl);
+    const fields = await vendor.updateContact(start.contactId, { fields: { DailyCard: card.url, DailyNumber: String(card.challengeNumber) } });
+    if (fields.kind !== 'ok') {
+      await rpcData(rpc, { action: 'finishDispatch', token, outcome: 'failed', detail: 'card_update_failed' });
+      report.refused++; continue;
+    }
     const queued = await vendor.queue(automation, start.contactId);
     // 204 is acceptance, not inbox delivery. An unknown result is recorded as
     // uncertain and never re-sent that date.

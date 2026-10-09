@@ -1,10 +1,12 @@
-Tu desafío diario de derabona
+DESAFÍO DIARIO #{{DailyNumber}}
 
-¿Cuántos jugadores sacás hoy? Entrá a derabona y jugá el desafío diario.
+¿Quién hizo esta carrera?
 
-Jugar el desafío: https://derabona.club/?lang=es&utm_source=emailoctopus&utm_medium=email&utm_campaign=daily_reminder
+Este es el primer jugador del desafío de hoy. Tenés 10 opciones, 3 intentos y hasta 3 pistas.
 
-El desafío se renueva a las 00:00 UTC. El enlace abre el desafío disponible cuando lo visites.
+Adiviná quién es → https://derabona.club/?lang=es&utm_source=emailoctopus&utm_medium=email&utm_campaign=daily_reminder
+
+Después vienen 2 jugadores más. El desafío cambia a las 00:00 UTC: si abrís este email más tarde, el link te lleva al desafío vigente.
 
 --
 Recibís este email porque tu cuenta de derabona tiene activados los recordatorios diarios: los activaste vos o te sumamos como uno de los primeros jugadores. Te escribimos como máximo una vez por día y solo si todavía no completaste el desafío.

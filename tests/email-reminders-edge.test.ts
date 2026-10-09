@@ -164,7 +164,7 @@ Deno.test('unsubscribe before sync, retire, delete, and vendor outages', async (
 });
 
 // ------------------------------------------------------------------- worker
-const config: ReminderConfig = { workerSecret: 's'.repeat(40), automations: { es: 'auto-es', en: 'auto-en' }, languageField: 'Language', batch: 25 };
+const config: ReminderConfig = { workerSecret: 's'.repeat(40), automations: { es: 'auto-es', en: 'auto-en' }, languageField: 'Language', batch: 25, cardBaseUrl: 'https://cards.test/daily-card' };
 function workerRpc(script: Record<string, (body: any) => unknown>) {
   const calls: any[] = [];
   return { calls, rpc: async (body: Record<string, unknown>) => { calls.push(body); return { data: (script[body.action as string] ?? (() => ({})))(body), error: null }; } };
@@ -197,10 +197,19 @@ Deno.test('dispatch: accepted, refused and timeout-after-acceptance outcomes; sk
   const vendor = fakeVendor({}, op => null);
   let n = 0;
   vendor.v.queue = async (a, c) => { vendor.ops.push(['queue', a, c]); n++; return n === 1 ? { kind: 'ok', value: null } : n === 2 ? { kind: 'definite', status: 409 } : { kind: 'uncertain' }; };
-  const report = await runWorker({ workerRpc: w.rpc, vendor: vendor.v, config }, 'dispatch');
-  equal(vendor.ops, [['queue', 'auto-es', 'c-t1'], ['queue', 'auto-en', 'c-t2'], ['queue', 'auto-es', 'c-t3']]);
+  vendor.v.updateContact = async (id, patch) => { vendor.ops.push(['fields', id, patch.fields]); return { kind: 'ok', value: { id, status: 'subscribed' } }; };
+  // 2026-10-10 is challenge #24.
+  const report = await runWorker({ workerRpc: w.rpc, vendor: vendor.v, config, now: () => Date.parse('2026-10-10T16:05:00Z') }, 'dispatch');
+  const fields = { DailyCard: 'https://cards.test/daily-card?date=2026-10-10', DailyNumber: '24' };
+  equal(vendor.ops, [['fields', 'c-t1', fields], ['queue', 'auto-es', 'c-t1'], ['fields', 'c-t2', fields], ['queue', 'auto-en', 'c-t2'], ['fields', 'c-t3', fields], ['queue', 'auto-es', 'c-t3']]);
   equal(outcomes, [['t1', 'accepted', undefined], ['t2', 'failed', 'vendor_409'], ['t3', 'uncertain', undefined]]);
   equal([report.dispatched, report.refused, report.uncertain, report.skipped], [1, 1, 1, 1]);
+  // A failed card write means no queue call (no stale puzzle).
+  const noCard = workerRpc({ ...quiet, claimDispatch: () => ({ dispatchEnabled: true, inWindow: true, items: [{ token: 't9' }] }), startDispatch: () => ({ send: true, contactId: 'c9', language: 'es' }), finishDispatch: b => { outcomes.push([b.token, b.outcome, b.detail]); return { accepted: true }; } });
+  const down = fakeVendor({}, op => op === 'update' ? { kind: 'uncertain' } : null);
+  await runWorker({ workerRpc: noCard.rpc, vendor: down.v, config }, 'dispatch');
+  equal(down.ops.filter((o: any) => o[0] === 'queue'), []);
+  equal(outcomes.at(-1), ['t9', 'failed', 'card_update_failed']);
   // The worker itself never retries a queue call.
   equal(w.calls.filter(c => c.action === 'claimDispatch').length, 1);
 });

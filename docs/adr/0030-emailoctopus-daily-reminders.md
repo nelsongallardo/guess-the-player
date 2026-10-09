@@ -44,6 +44,15 @@ EmailOctopus API v2 (retrieved 2026-10-09) supports contact create/read/update/d
 - **Short generic content.** One call to action, `https://derabona.club/?lang=es|en`, and campaign UTMs from the existing allowlist. No clue, answer, score, challenge number or personal identifier.
 - **Browser surface.** An unchecked checkbox in the first-sign-in nickname dialog, and an "Email reminders" section in Account on `index.html` and `leaderboard.html`. Nickname completion never waits on or fails because of reminders. No vendor request is ever made from a browser, and portable `file:` play makes no reminder request.
 
+## Amendment 2026-10-09: today's first player in the email
+
+The owner asked for a more engaging email that shows the first Daily challenge.
+- A public `daily-card` Edge Function renders the card on demand from the deployed `index.html`: its Daily schedule, frozen Daily payloads and embedded crests.
+  - New players, crests or a longer schedule therefore need no export or pre-render step.
+  - It shows only what round 1 shows before any hint (crests and club names in order) and returns 404 for any date after today (UTC), so upcoming puzzles cannot leak.
+- Right before each queue call, the worker writes `DailyCard` (`…/daily-card?date=YYYY-MM-DD`) and `DailyNumber` onto the contact. If that write fails, it does not send, rather than risk a stale puzzle.
+- **Tradeoff:** a recipient sees round 1's career before opening the game, so they can think before the server clock starts. The same was already possible by previewing the Daily signed out, and it applies equally to everyone who gets the email.
+
 ## Consequences
 
 - Live sends need owner setup: an EmailOctopus account, list, language field, two automations, an authenticated sender domain, a webhook endpoint and secrets. They also need an explicit release decision. See [docs/email-reminders.md](../email-reminders.md).

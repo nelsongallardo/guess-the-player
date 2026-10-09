@@ -1,10 +1,12 @@
-Your daily Derabona challenge
+DAILY CHALLENGE #{{DailyNumber}}
 
-How many players can you get today? Open Derabona and play the daily challenge.
+Whose career is this?
 
-Play the daily challenge: https://derabona.club/?lang=en&utm_source=emailoctopus&utm_medium=email&utm_campaign=daily_reminder
+This is the first player in today's challenge. You get 10 options, 3 guesses and up to 3 hints.
 
-The challenge changes at 00:00 UTC. The link opens the challenge available when you visit.
+Guess the player → https://derabona.club/?lang=en&utm_source=emailoctopus&utm_medium=email&utm_campaign=daily_reminder
+
+Two more players follow. The challenge changes at 00:00 UTC: if you open this email later, the link takes you to the current challenge.
 
 --
 You are receiving this because your derabona account has daily reminders turned on: either you turned them on, or you were added as one of the first players. We email at most once a day, and only if you have not finished the challenge yet.

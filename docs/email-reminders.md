@@ -40,6 +40,7 @@ If any EmailOctopus value is missing, the worker makes no vendor request and onl
   - Webhook "derabona reminders" pointing at the `emailoctopus-webhook` function, for contact created/updated/deleted plus bounced, complained and unsubscribed.
   - The owner verified the domain; the sender-info postal address is set and private.
 - **Supabase secrets set:** `EMAILOCTOPUS_API_KEY`, `EMAILOCTOPUS_LIST_ID`, `EMAILOCTOPUS_LANGUAGE_FIELD`, `EMAILOCTOPUS_AUTOMATION_ES`, `EMAILOCTOPUS_AUTOMATION_EN` and `REMINDER_WORKER_SECRET`.
+- **Daily card:** the public `daily-card` function draws today's first-player card from the live site, and the worker writes `DailyCard`/`DailyNumber` onto the contact before each send. Both are EmailOctopus list fields, and both automations use the redesigned templates.
 - **Still open:** the owner must set `EMAILOCTOPUS_WEBHOOK_SECRET` and click Start on both automations.
 
 ## Owner/vendor setup (reference)
