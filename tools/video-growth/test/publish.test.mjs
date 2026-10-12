@@ -192,11 +192,45 @@ test('late edits, source drift, an unavailable host, PAUSE or TikTok stop before
     assert.equal(s.buffer.calls.create, 0, label);
     assert.equal(fs.readFileSync(path.join(s.stateDir, 'intents.jsonl'), 'utf8'), '', label);
   }
+});
+
+const tiktokJob = () => {
   const t = licensed();
   t.targets = [{ platform: 'tiktok', channelId: 'mock-tt', nativeAccount: '@mock', publishAtUtc: '2026-10-19T16:00:00Z', privacy: 'public_to_everyone', madeForKids: false, interactions: { comments: true, duet: false, stitch: false }, disclosures: { aiGenerated: true, promotional: true } }];
-  const s = setup({ job: t, cfg: config({ buffer: { organizationId: 'mock-org', channels: [{ platform: 'tiktok', channelId: 'mock-tt', nativeAccount: '@mock' }] } }) });
+  return t;
+};
+const tiktokSetup = results => {
+  const s = setup({ job: tiktokJob(), results, cfg: config({ buffer: { organizationId: 'mock-org', channels: [{ platform: 'tiktok', channelId: 'mock-tt', nativeAccount: '@mock' }] } }) });
   s.deps.derivative = { ...DERIV, platform: 'tiktok' };
-  await assert.rejects(publishTarget({ ...s.deps }, { job: t, channelId: 'mock-tt', nowUtc: NOW }), /TikTok/);
+  return s;
+};
+
+test('an approved TikTok target creates exactly one Buffer draft and never a self-publishing post', async () => {
+  const sent = [];
+  const s = tiktokSetup({ create: [{ kind: 'created', postId: 'post_t', status: 'draft' }], read: [], list: [] });
+  s.buffer.createPost = async input => { sent.push(input); return { kind: 'created', postId: 'post_t', status: 'draft' }; };
+  const out = await publishTarget(s.deps, { job: s.job, channelId: 'mock-tt', nowUtc: NOW });
+  assert.equal(out.state, 'created');
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0].saveToDraft, true);
+  assert.deepEqual(sent[0].metadata, { tiktok: { isAiGenerated: true } });
+  await assert.rejects(publishTarget(s.deps, { job: s.job, channelId: 'mock-tt', nowUtc: NOW }), /already/);
+  assert.equal(sent.length, 1);
+});
+
+test('reconcile waits on an unfinished TikTok draft and stops polling once its slot has passed', async () => {
+  const s = tiktokSetup({ create: [{ kind: 'created', postId: 'post_t', status: 'draft' }], read: [], list: [] });
+  await publishTarget(s.deps, { job: s.job, channelId: 'mock-tt', nowUtc: NOW });
+  const input = buildCreatePostInput({ payload: approvalPayload({ job: s.job, target: s.job.targets[0], derivative: s.deps.derivative }), assetUrl: URL_OK });
+  const post = over => () => ({ id: 'post_t', status: 'draft', text: input.text, dueAt: input.dueAt, schedulingType: 'automatic', notificationStatus: null, channelId: 'mock-tt', channelService: 'tiktok',
+    assets: [{ source: URL_OK }], metadata: { __typename: 'TiktokPostMetadata', isAiGenerated: true }, sentAt: null, externalLink: null, ...over });
+  const drafts = fakeBuffer({ create: [], read: Array.from({ length: 20 }, () => post({})), list: [] });
+  assert.equal((await reconcileTarget({ ...s.deps, buffer: drafts }, { job: s.job, channelId: 'mock-tt', nowUtc: NOW, sleep: async () => {} })).state, 'awaiting_owner_finish');
+  assert.equal((await reconcileTarget({ ...s.deps, buffer: drafts }, { job: s.job, channelId: 'mock-tt', nowUtc: '2026-10-19T16:01:00Z', sleep: async () => {} })).state, 'awaiting_owner_finish');
+  assert.equal(drafts.calls.read, 2, 'an unfinished draft will not publish; polling it is pointless');
+  const sent = fakeBuffer({ create: [], read: [post({ status: 'sent', sentAt: '2026-10-19T16:00:04Z', externalLink: 'https://www.tiktok.com/@mock/video/7300000000000000000' })], list: [] });
+  assert.equal((await reconcileTarget({ ...s.deps, buffer: sent }, { job: s.job, channelId: 'mock-tt', nowUtc: '2026-10-19T16:05:00Z', sleep: async () => {} })).state, 'public_verification_pending');
+  assert.equal(drafts.calls.create + sent.calls.create, 0);
 });
 
 test('dry-run reports every failing gate and writes nothing', async () => {

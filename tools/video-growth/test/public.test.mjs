@@ -68,10 +68,48 @@ test('an intentionally private smoke test cannot satisfy public acceptance', asy
   assert.ok(r.reasons.some(x => /non-public/.test(x)));
 });
 
-test('non-native permalinks and TikTok are refused', async () => {
+test('non-native permalinks are refused', async () => {
   assert.equal((await check(ytPage(), evidence({ url: 'https://evil.example.com/shorts/abcdefghijk' }), target, 'https://evil.example.com/shorts/abcdefghijk')).verdict, 'public_unverified');
-  const t = await verifyPublic({ target: { platform: 'tiktok', nativeAccount: '@mock', privacy: 'public_to_everyone' }, input, externalLink: 'https://www.tiktok.com/@mock/video/123', fetchPublic: async () => '', ownerEvidence: evidence() });
-  assert.equal(t.verdict, 'public_unverified');
+});
+
+// TikTok: the official oEmbed endpoint answers only for public videos and names
+// the author and caption. Privacy, interactions and the promotional label are
+// not machine-readable, so the owner's observation must confirm each one.
+const TT_LINK = 'https://www.tiktok.com/@derabona.club/video/7300000000000000000';
+const ttTarget = { platform: 'tiktok', nativeAccount: '@derabona.club', privacy: 'public_to_everyone', interactions: { comments: true, duet: false, stitch: false }, disclosures: { aiGenerated: true, promotional: true } };
+const ttInput = { text: 'Cinco clubes, un jugador. ¿Lo sacás? #futbol #quienes' };
+const oembed = (over = {}) => JSON.stringify({ author_unique_id: 'derabona.club', author_url: 'https://www.tiktok.com/@derabona.club', title: ttInput.text, embed_product_id: '7300000000000000000', ...over });
+const ttEvidence = (over = {}) => evidence({ url: TT_LINK, privacyOk: true, interactionsOk: true, promotionalLabelVisible: true, ...over });
+const ttCheck = (body, ev = ttEvidence(), t = ttTarget, link = TT_LINK) => {
+  const urls = [];
+  return verifyPublic({ target: t, input: ttInput, externalLink: link, fetchPublic: async u => { urls.push(u); if (body instanceof Error) throw body; return body; }, ownerEvidence: ev }).then(r => ({ ...r, urls }));
+};
+
+test('a TikTok post verifies from the official oEmbed author and caption plus the owner confirming the hand-set controls', async () => {
+  const r = await ttCheck(oembed());
+  assert.equal(r.verdict, 'public_verified', r.reasons.join());
+  assert.deepEqual(r.urls, [`https://www.tiktok.com/oembed?url=${encodeURIComponent(TT_LINK)}`]);
+});
+
+test('a TikTok post stays unverified on any machine mismatch or a missing owner confirmation', async () => {
+  const cases = [
+    [oembed({ author_unique_id: 'someoneelse' })],
+    [oembed({ title: 'otro texto' })],
+    [oembed({ embed_product_id: '1' })],
+    ['<html>not json</html>'],
+    [new Error('HTTP 404')],
+    [oembed(), ttEvidence({ privacyOk: false })],
+    [oembed(), ttEvidence({ interactionsOk: undefined })],
+    [oembed(), ttEvidence({ promotionalLabelVisible: false })],
+    [oembed(), ttEvidence({ disclosureVisible: false })],
+    [oembed(), null],
+    [oembed(), ttEvidence(), { ...ttTarget, privacy: 'self_only' }],
+    [oembed(), ttEvidence({ url: 'https://www.tiktok.com/@someoneelse/video/7300000000000000000' }), ttTarget, 'https://www.tiktok.com/@someoneelse/video/7300000000000000000'],
+  ];
+  for (const [body, ev, t, link] of cases) {
+    const r = await ttCheck(body, ev === undefined ? ttEvidence() : ev, t, link);
+    assert.equal(r.verdict, 'public_unverified', JSON.stringify([String(body).slice(0, 40), ev, t?.privacy, link]));
+  }
 });
 
 test('the verdict is appended to the target ledger', async () => {

@@ -10,7 +10,8 @@ import { buildCreatePostInput, classifyReadback } from './buffer.mjs';
 import { openLedger, targetKey } from './ledger.mjs';
 import { acquireLock } from './lock.mjs';
 
-const TERMINAL_PROVIDER = new Set(['public_verification_pending', 'error', 'not_scheduled']);
+// An unfinished TikTok draft never sends itself, so polling it is pointless.
+const TERMINAL_PROVIDER = new Set(['public_verification_pending', 'error', 'not_scheduled', 'awaiting_owner_finish']);
 
 function findTarget(job, channelId) {
   const target = job.targets.find(t => t.channelId === channelId);
@@ -121,7 +122,7 @@ export async function reconcileTarget(deps, { job, channelId, nowUtc, sleep = ms
     const reads = Date.parse(nowUtc) < Date.parse(target.publishAtUtc) ? 1 : maxReads;
     let last = st.state, cls = null;
     for (let i = 0; i < reads; i++) {
-      cls = classifyReadback(await deps.buffer.readPost(st.postId), { postId: st.postId, input, platform: target.platform });
+      cls = classifyReadback(await deps.buffer.readPost(st.postId), { postId: st.postId, input, platform: target.platform, nativeAccount: target.nativeAccount });
       if (cls.state !== last) {
         ledger.append({ type: 'status', key, state: cls.state, externalLink: cls.externalLink ?? null, sentAt: cls.sentAt ?? null, error: cls.error ?? null, at: nowUtc });
         last = cls.state;

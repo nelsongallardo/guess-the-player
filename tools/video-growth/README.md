@@ -1,6 +1,6 @@
 # video-growth
 
-Narrated vertical career puzzles for YouTube Shorts, published only as approved Buffer posts. TikTok is prepared for in the code but its automatic publishing is blocked. Gates, status and content rules: [docs/video-growth.md](../../docs/video-growth.md).
+Narrated vertical career puzzles for YouTube Shorts and TikTok, sent only as approved Buffer posts. YouTube posts are scheduled by the tool. TikTok posts are **draft-only**: the tool creates a Buffer draft and the owner sets TikTok's privacy, comment/Duet/Stitch and promotional label in Buffer, then schedules it. Gates, status and content rules: [docs/video-growth.md](../../docs/video-growth.md).
 
 **Runtime is off.** Nothing here is scheduled. The default config refuses every paid or network write, and there is no cron, installer or wrapper.
 
@@ -9,7 +9,7 @@ Narrated vertical career puzzles for YouTube Shorts, published only as approved 
 ```sh
 cd tools/video-growth
 npm ci                      # pinned playwright 1.57.0; uses the local Chromium cache
-node --test test/           # 99 tests; vendor calls are mocked
+node --test test/           # 107 tests; vendor calls are mocked
 ```
 
 Requires Node 22+, `ffmpeg` and `ffprobe` on `PATH` (libx264, libmp3lame, aac, ebur128, astats).
@@ -37,7 +37,9 @@ Each step is a separate command at a separate permission boundary.
 git fetch origin                                                          # fresh upstream for source checks
 node preflight.mjs --mode offline --state STATE                           # gate report, no network
 node prepare.mjs --state STATE --campaign pilot-20261019 --job v01 \
-  --publish-at 2026-10-19T16:00:00Z --seed v01 --youtube-privacy public --made-for-kids false
+  --publish-at 2026-10-19T16:00:00Z --seed v01 --made-for-kids false --platform youtube --youtube-privacy public
+# or, for TikTok (every choice explicit; the owner applies them in Buffer):
+#   --platform tiktok --tiktok-privacy public_to_everyone --tiktok-comments true --tiktok-duet false --tiktok-stitch false
 # PAID, owner-approved only:
 ELEVENLABS_API_KEY=… node narrate.mjs --manifest STATE/jobs/v01.json --platform youtube --state STATE \
   --voice-id VOICE --model-id eleven_multilingual_v2 --settings '{"stability":0.5,"similarity_boost":0.75}' \
@@ -52,8 +54,13 @@ node publish.mjs --init-ledger --state STATE                              # once
 node publish.mjs --manifest STATE/jobs/v01.json --channel CH --derivative PRIVATE/v01/youtube.mp4 --asset-url URL --state STATE   # dry run
 BUFFER_API_KEY=… node preflight.mjs --mode readonly --target youtube --state STATE
 BUFFER_API_KEY=… node publish.mjs ... --submit                           # G6+, separately authorized
+# TikTok: --submit creates a Buffer DRAFT and prints the settings to apply. Open it in Buffer,
+# set who can view, comments/Duet/Stitch and "Promotional content", leave caption/video/time
+# unchanged, and schedule it at the slot with Automatic publishing. Reconcile reports
+# awaiting_owner_finish until you do.
 BUFFER_API_KEY=… node reconcile.mjs --readonly --manifest … --channel CH --derivative … --asset-url URL --state STATE
 node verify-public.mjs --manifest … --channel CH --derivative … --asset-url URL --state STATE --owner-evidence PRIVATE/v01-evidence.json
+#   TikTok evidence also needs privacyOk, interactionsOk and promotionalLabelVisible: true.
 node report.mjs --state STATE --campaign pilot-20261019 [--metrics METRICS.json] > PRIVATE/pilot-20261019.csv
 ```
 

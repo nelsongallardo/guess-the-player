@@ -16,6 +16,7 @@ const num = v => (typeof v === 'number' && Number.isFinite(v) ? String(v) : NA);
 const NEXT = {
   none: 'not submitted', intent: 'reconcile (never resend)', uncertain: 'reconcile (never resend)', rejected: 'fix payload and get a new approval',
   created: 'reconcile after the slot', scheduled: 'reconcile after the slot', sending: 'reconcile', not_scheduled: 'investigate: Buffer holds it as draft/approval',
+  awaiting_owner_finish: 'owner: set TikTok privacy, interactions and promotional label in Buffer, then schedule at the slot',
   error: 'investigate Buffer error', public_verification_pending: 'verify public page + owner evidence', public_unverified: 'collect owner evidence',
   public_verified: 'collect metrics at checkpoints',
 };

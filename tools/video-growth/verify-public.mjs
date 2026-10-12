@@ -2,6 +2,7 @@
 // Record public-delivery evidence for one sent target (read-only GET of the
 // public page). Owner evidence is a JSON file written after actually watching:
 // { observedBy, observedAtUtc, url, playable, careerOrderOk, revealOk, audioOk, disclosureVisible }
+// TikTok adds { privacyOk, interactionsOk, promotionalLabelVisible } for the settings applied by hand in Buffer.
 //
 //   node verify-public.mjs --manifest JOB.json --channel ID --derivative OUT.mp4 --asset-url URL --state DIR [--owner-evidence FILE]
 

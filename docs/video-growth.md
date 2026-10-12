@@ -1,6 +1,6 @@
 # Short-form video lane (TikTok / YouTube Shorts)
 
-`tools/video-growth/` turns one verified Derabona career into a narrated 1080 × 1920 puzzle video (question → thinking pause → answer) and, behind owner gates, hands an approved derivative to Buffer for one YouTube Shorts or TikTok post. It is a standalone operator tool. It does not change `index.html`, rankings, accounts, emails, migrations or the X tools in `tools/x-growth/`.
+`tools/video-growth/` turns one verified Derabona career into a narrated 1080 × 1920 puzzle video (question → thinking pause → answer) and, behind owner gates, hands an approved derivative to Buffer for one YouTube Shorts post or one TikTok draft. It is a standalone operator tool. It does not change `index.html`, rankings, accounts, emails, migrations or the X tools in `tools/x-growth/`.
 
 The owner's plan lives in the Obsidian vault (`projects/derabona/2026-10-12-tiktok-youtube-shorts-implementation-plan.md`). This page records what the code actually enforces.
 
@@ -8,13 +8,13 @@ The owner's plan lives in the Obsidian vault (`projects/derabona/2026-10-12-tikt
 
 | Layer | State |
 |---|---|
-| Code and offline tests | On branch `feat/derabona-shortform`: 99 tests (`node --test tools/video-growth/test/`). Vendor calls are mocked; rendering and encoding are real (Playwright + FFmpeg) |
+| Code and offline tests | On branch `feat/derabona-shortform`: 107 tests (`node --test tools/video-growth/test/`). Vendor calls are mocked; rendering and encoding are real (Playwright + FFmpeg) |
 | Runtime | **Disabled.** `enabled:false`, empty target allowlist, every cap `0`. No cron or scheduler exists |
 | ElevenLabs narration | Client, cache, spend caps and clipping check implemented. **No real request made.** The paid plan, voice choice and two-voice audition are still pending (G2/G4) |
 | Rendered samples | Only tone/silent mock renders exist, for tests and layout review. **No narrated sample exists** (G3) |
 | Media host | Verifier implemented. **No host chosen, uploaded to or fetched** (G4) |
-| Buffer | YouTube mapping, read-only discovery, intent ledger, reconciliation and public readback are implemented. **No authenticated read or write has run** (G1/G6) |
-| TikTok automatic publishing | **Hard-blocked in code.** Buffer's `TikTokPostMetadataInput` has only `isAiGenerated` and `title`. It has no privacy, comment/Duet/Stitch or "Promotional content" disclosure field, so the controls TikTok requires cannot be sent. `prepare.mjs` creates YouTube targets only |
+| Buffer | YouTube and TikTok-draft mapping, read-only discovery, intent ledger, reconciliation and public readback are implemented. One owner-authorized read-only lookup ran on 2026-10-12: the organization has TikTok `derabona.club` and X connected, **no YouTube channel**. **No Buffer write has run** (G1/G6) |
+| TikTok | **Draft-only** (owner decision 2026-10-12). Buffer's `TikTokPostMetadataInput` has only `isAiGenerated` and `title` (confirmed against the live schema), with no privacy, comment/Duet/Stitch or "Promotional content" field. The tool sends `saveToDraft: true` with the AI label and can never schedule a TikTok post itself. The owner applies the approved settings in Buffer and schedules it. **Unverified:** whether Buffer's composer offers privacy and comment/Duet/Stitch for TikTok, and whether TikTok accepts the media host's URL |
 | YouTube Shorts | Mapping implemented. Blocked until G1–G6 evidence exists |
 
 ## Gates
@@ -25,7 +25,7 @@ Nothing past G0 is authorized. Each gate needs recorded evidence before the code
 |---|---|---|
 | G0 scope | Owner authorized implementation in a fresh worktree (2026-10-12) | This branch |
 | G1 account | Exact Buffer organization, channel IDs, service and native handle/channel ID in the private config allowlist | `lib/config.mjs`, `lib/buffer.mjs` channel checks |
-| G2 rights/policy | Paid ElevenLabs commercial rights and voice, crest/font rights, TikTok disclosure route, YouTube AI/kids/privacy review | `license` block of the job manifest; TikTok hard block |
+| G2 rights/policy | Paid ElevenLabs commercial rights and voice, crest/font rights, TikTok disclosure route, YouTube AI/kids/privacy review | `license` block of the job manifest; TikTok draft-only mapping |
 | G3 quality | Three narrated, listened-to, phone-reviewed samples | Owner review; `render.mjs` QA report |
 | G4 spend/hosting | Fixed costs recorded, variable cap > 0, approved host on the allowlist | `lib/spend.mjs`, `lib/hosting.mjs` |
 | G5 asset approval | Receipt bound to the canonical digest of the target payload and derivative bytes | `lib/approval.mjs` |
@@ -41,6 +41,7 @@ Nothing past G0 is authorized. Each gate needs recorded evidence before the code
 - Public object keys, titles and captions never contain the answer.
 - The renderer draws one PNG per visual state from an offline template. It checks that every element sits inside the proposed safe box (x 72–900, y 180–1500), that club names are at least 36 px (12.5 px at a 375 px phone width) and that captions are at least 44 px and fit. It then proves, on the encoded MP4, that the frame before the reveal is the thinking state. The finished mix targets −16 LUFS with a true peak of −1 dBTP or lower. Careers longer than 8 clubs are rejected rather than squeezed.
 - `public_verified` needs the public YouTube page to show the exact channel ID, title, description, public visibility and playability, **and** an owner observation (playback, club order, reveal timing, audio, visible AI label). A bot wall or a parsing failure records `public_unverified`; it never verifies.
+- For TikTok, TikTok's official oEmbed endpoint (public videos only) must show the approved account, video ID and caption, **and** the owner must confirm the same items plus the privacy, comment/Duet/Stitch settings and the visible promotional label, because those were set by hand and cannot be read by machine.
 
 ## Write safety
 
@@ -48,7 +49,7 @@ Buffer writes have no idempotency key. The publisher therefore:
 
 1. holds an exclusive lock and refuses to run if the ledger is missing or malformed;
 2. writes an fsynced `intent` line before any network call;
-3. sends at most one `createPost` per `(campaign, asset, channel, slot)` key;
+3. sends at most one `createPost` per `(campaign, asset, channel, slot)` key (for TikTok that one call creates a draft);
 4. records a timeout, dropped connection or 5xx as `uncertain` and never re-creates it; `reconcile.mjs` looks for the post instead;
 5. treats each platform target independently.
 

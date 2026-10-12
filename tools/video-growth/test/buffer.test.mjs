@@ -40,8 +40,49 @@ test('privacy and audience are never defaulted', () => {
   assert.throws(() => buildCreatePostInput({ payload: { ...ytPayload(), target: { ...ytPayload().target, madeForKids: undefined } }, assetUrl: URL_OK }), /madeForKids/);
 });
 
-test('TikTok automatic publishing is hard-blocked because its controls are not representable', () => {
-  assert.throws(() => buildCreatePostInput({ payload: ttPayload(), assetUrl: URL_OK.replace('youtube', 'tiktok') }), /TikTok.*blocked/s);
+const TT_URL = URL_OK.replace('youtube', 'tiktok');
+
+// Owner-approved 2026-10-12: TikTok goes only as a Buffer draft. Buffer's API
+// cannot carry TikTok privacy, comment/Duet/Stitch or the promotional label, so
+// the owner sets them in Buffer and schedules; the tool can never auto-publish.
+test('TikTok maps to a Buffer draft carrying only the AI label; the owner finishes the native controls', () => {
+  const p = ttPayload();
+  assert.deepEqual(buildCreatePostInput({ payload: p, assetUrl: TT_URL }), {
+    channelId: 'mock-tt', text: p.script.caption,
+    assets: [{ video: { url: TT_URL } }],
+    schedulingType: 'automatic', mode: 'customScheduled', dueAt: '2026-10-19T16:00:00Z',
+    saveToDraft: true, needsApproval: false, aiAssisted: true,
+    metadata: { tiktok: { isAiGenerated: true } },
+  });
+});
+
+test('a TikTok input that could schedule itself or carries invented fields is refused', () => {
+  const ok = buildCreatePostInput({ payload: ttPayload(), assetUrl: TT_URL });
+  const bad = [
+    { ...ok, saveToDraft: false },
+    { ...ok, metadata: { tiktok: { isAiGenerated: true, privacyLevel: 'PUBLIC_TO_EVERYONE' } } },
+    { ...ok, metadata: { tiktok: { isAiGenerated: false } } },
+    { ...ok, metadata: { youtube: {} } },
+    { ...ok, schedulingType: 'notification' },
+    { ...ok, needsApproval: true },
+  ];
+  for (const input of bad) assert.throws(() => assertSupportedInput(input, 'tiktok'), JSON.stringify(input).slice(0, 80));
+  const noChoices = ttPayload(); noChoices.target.interactions = null;
+  assert.throws(() => buildCreatePostInput({ payload: noChoices, assetUrl: TT_URL }), /interactions/);
+  const noPrivacy = ttPayload(); noPrivacy.target.privacy = 'public';
+  assert.throws(() => buildCreatePostInput({ payload: noPrivacy, assetUrl: TT_URL }), /privacy/);
+});
+
+test('TikTok readback: a draft waits for the owner, the AI label must survive, sent needs our native permalink', () => {
+  const input = buildCreatePostInput({ payload: ttPayload(), assetUrl: TT_URL });
+  const post = over => ({ id: 'post_t', status: 'draft', text: input.text, dueAt: input.dueAt, schedulingType: 'automatic', notificationStatus: null, channelId: 'mock-tt', channelService: 'tiktok',
+    assets: [{ source: TT_URL }], metadata: { __typename: 'TiktokPostMetadata', isAiGenerated: true }, sentAt: null, externalLink: null, ...over });
+  const cls = over => classifyReadback(post(over), { postId: 'post_t', input, platform: 'tiktok', nativeAccount: '@mockhandle' });
+  assert.equal(cls({}).state, 'awaiting_owner_finish');
+  assert.equal(cls({ status: 'scheduled' }).state, 'scheduled');
+  assert.equal(cls({ status: 'sent', sentAt: '2026-10-19T16:00:04Z', externalLink: 'https://www.tiktok.com/@mockhandle/video/7300000000000000000' }).state, 'public_verification_pending');
+  assert.throws(() => cls({ metadata: { __typename: 'TiktokPostMetadata', isAiGenerated: false } }), /TikTok metadata/);
+  assert.throws(() => cls({ status: 'sent', sentAt: '2026-10-19T16:00:04Z', externalLink: 'https://www.tiktok.com/@someoneelse/video/7300000000000000000' }), /permalink/);
 });
 
 test('invented fields, thumbnail URLs, notification mode and drafts are rejected', () => {
@@ -144,7 +185,7 @@ test('offline preflight makes no network call and fails while gates are closed',
   const res = spawnSync(process.execPath, ['--import', noNet, path.join(HERE, '../preflight.mjs'), '--mode', 'offline', '--state', state], { encoding: 'utf8' });
   assert.equal(res.status, 1, res.stderr);
   assert.match(res.stdout, /enabled: false/);
-  assert.match(res.stdout, /tiktok: BLOCKED/);
+  assert.match(res.stdout, /tiktok: draft-only/);
   assert.ok(!/network used/.test(res.stdout + res.stderr));
   const ro = spawnSync(process.execPath, ['--import', noNet, path.join(HERE, '../preflight.mjs'), '--mode', 'readonly', '--target', 'youtube', '--state', state], { encoding: 'utf8', env: { ...process.env, BUFFER_API_KEY: '' } });
   assert.equal(ro.status, 1);

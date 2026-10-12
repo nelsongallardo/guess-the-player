@@ -2,15 +2,16 @@
 // reference retrieved 2026-10-12 (llms-full.txt sha256 77d6faad…5508).
 //
 // TikTok: TikTokPostMetadataInput has only `isAiGenerated` and `title` (photo
-// posts). There is no privacy level, comment/Duet/Stitch control or "Your
-// brand / Promotional content" disclosure, so the controls TikTok requires for
-// promotional synthetic-voice posts cannot be sent. Automatic TikTok posting
-// is blocked in code until Buffer documents those controls.
+// posts; confirmed against the live schema 2026-10-12). There is no privacy
+// level, comment/Duet/Stitch control or "Promotional content" disclosure, so a
+// TikTok target is only ever sent as a Buffer draft (owner decision
+// 2026-10-12). The owner applies the approved native settings in Buffer and
+// schedules it there; this code can never make a TikTok post publish itself.
 
 import { PRIVACY } from './manifest.mjs';
 
 export const BUFFER_ENDPOINT = 'https://api.buffer.com';
-export const TIKTOK_BLOCK = 'TikTok automatic publishing is blocked: Buffer exposes no privacy, interaction or commercial-disclosure fields for TikTok videos (G2)';
+export const TIKTOK_DRAFT_ONLY = 'TikTok is draft-only: Buffer exposes no privacy, interaction or promotional-disclosure fields, so the owner sets them in Buffer and schedules the draft';
 
 const POST_FIELDS = `id status text dueAt sentAt externalLink schedulingType notificationStatus channelId channelService
   assets { source mimeType } error { message }
@@ -31,7 +32,7 @@ const CHANNELS_QUERY = `query Channels($input: ChannelsInput!) {
 
 export function buildCreatePostInput({ payload, assetUrl }) {
   const { target, script } = payload;
-  if (target.platform === 'tiktok') throw new Error(TIKTOK_BLOCK);
+  if (target.platform === 'tiktok') return buildTiktokDraftInput({ target, script, assetUrl });
   if (target.platform !== 'youtube') throw new Error(`unsupported platform ${target.platform}`);
   if (!PRIVACY.youtube.includes(target.privacy)) throw new Error('YouTube privacy must be an explicit owner choice; it is never defaulted');
   if (typeof target.madeForKids !== 'boolean') throw new Error('madeForKids must be an explicit owner choice');
@@ -49,6 +50,24 @@ export function buildCreatePostInput({ payload, assetUrl }) {
   return assertSupportedInput(input, target.platform);
 }
 
+// The approved privacy/interaction/promotional choices travel in the approval
+// payload for the owner to apply by hand; they are required here so a draft is
+// never created without them.
+function buildTiktokDraftInput({ target, script, assetUrl }) {
+  if (!PRIVACY.tiktok.includes(target.privacy)) throw new Error('TikTok privacy must be an explicit owner choice; it is never defaulted');
+  if (!target.interactions || ['comments', 'duet', 'stitch'].some(k => typeof target.interactions[k] !== 'boolean')) throw new Error('TikTok interactions must record explicit comments/duet/stitch choices');
+  if (typeof target.disclosures?.promotional !== 'boolean') throw new Error('TikTok promotional disclosure must be an explicit owner choice');
+  const input = {
+    channelId: target.channelId,
+    text: script.caption,
+    assets: [{ video: { url: assetUrl } }],
+    schedulingType: 'automatic', mode: 'customScheduled', dueAt: target.publishAtUtc,
+    saveToDraft: true, needsApproval: false, aiAssisted: true,
+    metadata: { tiktok: { isAiGenerated: target.disclosures.aiGenerated === true } },
+  };
+  return assertSupportedInput(input, 'tiktok');
+}
+
 const TOP = ['channelId', 'text', 'assets', 'schedulingType', 'mode', 'dueAt', 'saveToDraft', 'needsApproval', 'aiAssisted', 'metadata'];
 const YT = ['title', 'categoryId', 'privacy', 'madeForKids', 'license', 'embeddable', 'notifySubscribers', 'isAiGenerated'];
 const sameKeys = (o, keys) => o && typeof o === 'object' && Object.keys(o).length === keys.length && keys.every(k => k in o);
@@ -56,15 +75,19 @@ const onlyKeys = (o, keys) => o && typeof o === 'object' && Object.keys(o).every
 
 // Whitelist of exactly what this lane sends. Anything else is a defect.
 export function assertSupportedInput(input, platform) {
-  if (platform === 'tiktok') throw new Error(TIKTOK_BLOCK);
+  if (!['youtube', 'tiktok'].includes(platform)) throw new Error(`unsupported platform ${platform}`);
   if (!sameKeys(input, TOP)) throw new Error('CreatePostInput has unsupported or missing fields');
   if (input.schedulingType !== 'automatic') throw new Error('only automatic publishing is allowed; notification posts are not delivery');
   if (input.mode !== 'customScheduled' || typeof input.dueAt !== 'string') throw new Error('posts must be custom-scheduled at the approved UTC slot');
-  if (input.saveToDraft !== false || input.needsApproval !== false || input.aiAssisted !== true) throw new Error('draft/approval/aiAssisted flags differ from the approved contract');
+  if (input.saveToDraft !== (platform === 'tiktok') || input.needsApproval !== false || input.aiAssisted !== true) throw new Error('draft/approval/aiAssisted flags differ from the approved contract (TikTok must be a draft, YouTube must not)');
   if (!Array.isArray(input.assets) || input.assets.length !== 1 || !sameKeys(input.assets[0], ['video'])) throw new Error('exactly one video asset is required');
   const v = input.assets[0].video;
   if (!onlyKeys(v, ['url', 'metadata']) || typeof v.url !== 'string') throw new Error('video asset has unsupported fields (thumbnailUrl is rejected by Buffer)');
-  if ('metadata' in v) throw new Error('thumbnailOffset is only supported for TikTok/Instagram/Pinterest, not YouTube');
+  if ('metadata' in v) throw new Error('thumbnailOffset is not part of the approved contract');
+  if (platform === 'tiktok') {
+    if (!sameKeys(input.metadata, ['tiktok']) || !sameKeys(input.metadata.tiktok, ['isAiGenerated']) || input.metadata.tiktok.isAiGenerated !== true) throw new Error('TikTok metadata must be exactly { isAiGenerated: true }');
+    return input;
+  }
   if (!sameKeys(input.metadata, ['youtube']) || !sameKeys(input.metadata.youtube, YT)) throw new Error('YouTube metadata has unsupported or missing fields');
   return input;
 }
@@ -135,11 +158,11 @@ export function assertChannelMatches(channel, allow, organizationId) {
 
 const LINKS = {
   youtube: /^https:\/\/(?:www\.)?youtube\.com\/(?:shorts\/|watch\?v=)[A-Za-z0-9_-]{11}$|^https:\/\/youtu\.be\/[A-Za-z0-9_-]{11}$/,
-  tiktok: /^https:\/\/(?:www\.)?tiktok\.com\/@[A-Za-z0-9._]+\/video\/\d+$/,
+  tiktok: /^https:\/\/(?:www\.)?tiktok\.com\/@([A-Za-z0-9._]+)\/video\/\d+$/,
 };
 
 // Provider state only. `sent` never means public: it starts public verification.
-export function classifyReadback(post, { postId, input, platform }) {
+export function classifyReadback(post, { postId, input, platform, nativeAccount }) {
   if (!post || post.id !== postId) throw new Error('Buffer post ID mismatch');
   if (post.channelId !== input.channelId || post.channelService !== platform) throw new Error('Buffer post channel mismatch');
   if (post.text !== input.text) throw new Error('Buffer stored text differs from the approved text');
@@ -152,15 +175,21 @@ export function classifyReadback(post, { postId, input, platform }) {
       || ['title', 'privacy', 'madeForKids', 'license', 'embeddable', 'notifySubscribers', 'isAiGenerated'].some(k => m[k] !== want[k])) {
       throw new Error('Buffer stored YouTube metadata differs from the approved values');
     }
+  } else if (post.metadata?.__typename !== 'TiktokPostMetadata' || post.metadata.isAiGenerated !== true) {
+    throw new Error('Buffer stored TikTok metadata lost the AI-generated label');
   }
   switch (post.status) {
-    case 'draft': case 'needs_approval': return { state: 'not_scheduled', verified: false };
+    // A TikTok draft is the expected hand-off: the owner applies the native settings and schedules it.
+    case 'draft': return { state: platform === 'tiktok' ? 'awaiting_owner_finish' : 'not_scheduled', verified: false };
+    case 'needs_approval': return { state: 'not_scheduled', verified: false };
     case 'scheduled': return { state: 'scheduled', verified: false };
     case 'sending': return { state: 'sending', verified: false };
     case 'error': return { state: 'error', verified: false, error: String(post.error?.message ?? 'unknown').slice(0, 200) };
     case 'sent':
       if (!post.sentAt || !Number.isFinite(Date.parse(post.sentAt))) throw new Error('sent post has no sentAt');
-      if (!LINKS[platform].test(post.externalLink ?? '')) throw new Error('sent post has no valid native permalink');
+      const link = (post.externalLink ?? '').match(LINKS[platform]);
+      if (!link) throw new Error('sent post has no valid native permalink');
+      if (platform === 'tiktok' && link[1] !== String(nativeAccount ?? '').replace(/^@/, '')) throw new Error('TikTok permalink is not on the approved account');
       return { state: 'public_verification_pending', verified: false, externalLink: post.externalLink, sentAt: post.sentAt };
     default: throw new Error(`undocumented Buffer status ${post.status}`);
   }

@@ -9,7 +9,7 @@
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 import { loadConfig, validateConfig, isPaused } from './lib/config.mjs';
-import { createBufferClient, assertChannelMatches, TIKTOK_BLOCK } from './lib/buffer.mjs';
+import { createBufferClient, assertChannelMatches, TIKTOK_DRAFT_ONLY } from './lib/buffer.mjs';
 
 const { values: a } = parseArgs({ options: { mode: { type: 'string' }, target: { type: 'string' }, state: { type: 'string' } } });
 if (!['offline', 'readonly'].includes(a.mode) || !a.state || (a.mode === 'readonly' && !['youtube', 'tiktok'].includes(a.target))) {
@@ -33,10 +33,9 @@ const gates = {
 console.log(`enabled: ${config.enabled}`);
 for (const [k, v] of Object.entries(gates)) console.log(`${v ? 'OPEN  ' : 'CLOSED'} ${k}`);
 console.log('youtube: mapping implemented; delivery unverified until G6 smoke readback');
-console.log(`tiktok: BLOCKED — ${TIKTOK_BLOCK}`);
+console.log(`tiktok: draft-only — ${TIKTOK_DRAFT_ONLY}`);
 
 if (a.mode === 'readonly') {
-  if (a.target === 'tiktok') { console.error(TIKTOK_BLOCK); process.exit(1); }
   if (!process.env.BUFFER_API_KEY) { console.error('BUFFER_API_KEY is not set; owner-approved engineering secret required for read-only discovery'); process.exit(1); }
   try {
     const client = createBufferClient({ apiKey: process.env.BUFFER_API_KEY });

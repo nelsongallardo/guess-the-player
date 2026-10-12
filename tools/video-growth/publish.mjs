@@ -40,6 +40,16 @@ try {
   };
   const out = await publishTarget(deps, { job, channelId: a.channel, nowUtc, dryRun: !a.submit });
   console.log(JSON.stringify(out, null, 2));
+  if (!out.dryRun && out.state === 'created' && target.platform === 'tiktok') {
+    const on = v => (v ? 'on' : 'off');
+    console.log([
+      'TikTok DRAFT created. It will not publish until you finish it in Buffer:',
+      `  1. Open the draft for ${target.nativeAccount} (Buffer post ${out.postId}). Do not change the caption, video or time.`,
+      `  2. Who can view: ${target.privacy}. Comments ${on(target.interactions.comments)}, Duet ${on(target.interactions.duet)}, Stitch ${on(target.interactions.stitch)}.`,
+      `  3. Promotional content ("Your brand"): ${on(target.disclosures.promotional)}. AI-generated: on (already set).`,
+      `  4. Schedule it for ${target.publishAtUtc} (UTC) with Automatic publishing, then run reconcile.mjs --readonly.`,
+    ].join('\n'));
+  }
   if (out.dryRun ? !out.ok : out.state !== 'created') process.exitCode = 1;
 } catch (e) {
   console.error(`publish refused: ${e.message}`);
