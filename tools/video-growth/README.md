@@ -9,7 +9,7 @@ Narrated vertical career puzzles for YouTube Shorts, published only as approved 
 ```sh
 cd tools/video-growth
 npm ci                      # pinned playwright 1.57.0; uses the local Chromium cache
-node --test test/           # 97 tests; vendor calls are mocked
+node --test test/           # 99 tests; vendor calls are mocked
 ```
 
 Requires Node 22+, `ffmpeg` and `ffprobe` on `PATH` (libx264, libmp3lame, aac, ebur128, astats).

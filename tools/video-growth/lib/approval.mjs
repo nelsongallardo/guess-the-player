@@ -18,6 +18,7 @@ export function approvalPayload({ job, target, derivative }) {
   assertValidJob(job);
   if (!licenseComplete(job.license)) throw new Error('license is incomplete: paid commercial TTS plan, voice, model and evidence must be recorded');
   if (!job.targets.includes(target)) throw new Error('target is not part of this job');
+  if (target.channelId.startsWith('sample-') || target.nativeAccount.startsWith('sample-')) throw new Error('sample placeholder targets are for review renders only and cannot be approved');
   if (derivative?.platform !== target.platform || !/^[0-9a-f]{64}$/.test(derivative.sha256 ?? '')) throw new Error('derivative must be the hashed render for this platform');
   const script = buildScript(job.career, target.platform);
   const errors = validateScript(script, job.career);

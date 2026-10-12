@@ -109,3 +109,10 @@ test('approve.mjs --review-only prints the digest and writes nothing', () => {
   assert.notEqual(noFlag.status, 0);
   assert.ok(!fs.existsSync(path.join(state, 'approvals.jsonl')));
 });
+
+test('placeholder sample targets can never be approved', () => {
+  const j = licensed();
+  j.targets[0].channelId = 'sample-unassigned';
+  j.targets[0].nativeAccount = 'sample-unassigned';
+  assert.throws(() => approvalPayload({ job: j, target: j.targets[0], derivative: derivative() }), /sample/);
+});

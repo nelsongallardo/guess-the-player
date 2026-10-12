@@ -8,7 +8,7 @@ The owner's plan lives in the Obsidian vault (`projects/derabona/2026-10-12-tikt
 
 | Layer | State |
 |---|---|
-| Code and offline tests | On branch `feat/derabona-shortform`: 97 tests (`node --test tools/video-growth/test/`). Vendor calls are mocked; rendering and encoding are real (Playwright + FFmpeg) |
+| Code and offline tests | On branch `feat/derabona-shortform`: 99 tests (`node --test tools/video-growth/test/`). Vendor calls are mocked; rendering and encoding are real (Playwright + FFmpeg) |
 | Runtime | **Disabled.** `enabled:false`, empty target allowlist, every cap `0`. No cron or scheduler exists |
 | ElevenLabs narration | Client, cache, spend caps and clipping check implemented. **No real request made.** The paid plan, voice choice and two-voice audition are still pending (G2/G4) |
 | Rendered samples | Only tone/silent mock renders exist, for tests and layout review. **No narrated sample exists** (G3) |

@@ -31,6 +31,10 @@ async function gatesFor(deps, { job, target, nowUtc, ledger, dryRun }) {
     const st = ledger.state(key);
     if (st.state === 'rejected' && st.digest === d) throw new Error('this payload was rejected; a changed payload with a new approval is required');
     if (st.state !== 'none' && st.state !== 'rejected') throw new Error(`target already ${st.state} (unresolved or done); reconcile, never resend`);
+    // The same video on the same channel at another slot is still a duplicate post.
+    const prefix = `${job.campaignId}|${job.assetId}|${target.channelId}|`;
+    const sibling = ledger.keys().find(k => k !== key && k.startsWith(prefix) && ledger.state(k).state !== 'rejected');
+    if (sibling) throw new Error(`asset already ${ledger.state(sibling).state} on this channel at another slot (${sibling.slice(prefix.length)}); cancel/reconcile that post first`);
   });
   await gate('lane enabled/allowlisted', () => writeGate(deps.config, { stateDir: deps.stateDir, target }));
   await gate('approval receipt', () => {

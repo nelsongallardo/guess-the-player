@@ -238,3 +238,13 @@ test('reconcile polls the stored ID within a bounded budget and never treats sen
   assert.equal(openLedger(s.stateDir).state(targetKey({ job: s.job, target: s.job.targets[0] })).state, 'public_verification_pending');
   assert.equal(pending.calls.create + sent.calls.create, 0);
 });
+
+test('re-approving the same asset for a new slot on the same channel cannot create a second post', async () => {
+  const s = setup({ results: { create: [{ kind: 'created', postId: 'post_1', status: 'scheduled' }, { kind: 'created', postId: 'post_dup', status: 'scheduled' }], read: [], list: [] } });
+  assert.equal((await run(s)).state, 'created');
+  const moved = structuredClone(s.job);
+  moved.targets[0].publishAtUtc = '2026-10-19T18:00:00Z';
+  approveAll(s.stateDir, moved);
+  await assert.rejects(publishTarget(s.deps, { job: moved, channelId: 'mock-yt-channel', nowUtc: NOW }), /already/);
+  assert.equal(s.buffer.calls.create, 1);
+});
