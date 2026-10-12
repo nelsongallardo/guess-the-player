@@ -49,7 +49,10 @@ ffprobe -v error -show_streams -show_format -of json PRIVATE/v01/youtube.mp4
 # Owner watches with and without sound, checks proof-375-*.png and the QA JSON, then:
 node approve.mjs --manifest STATE/jobs/v01.json --platform youtube --derivative PRIVATE/v01/youtube.mp4 --state STATE --review-only
 node approve.mjs ... --approve --approver Nelson --digest <digest shown> --expires 2026-10-19T15:00:00Z
-# Upload PRIVATE/v01/youtube.mp4 to the approved host at the opaque key from lib/hosting.mjs publicObjectKey (manual, G4).
+# Upload to the approved bucket at the opaque key from lib/hosting.mjs publicObjectKey (manual):
+gcloud storage cp PRIVATE/v01/tiktok.mp4 gs://derabona-video-media/v/<assetId>/<sha16>-tiktok.mp4
+#   --asset-url https://derabona-video-media.storage.googleapis.com/v/<assetId>/<sha16>-tiktok.mp4
+#   config: hosting.allowedHosts ["derabona-video-media.storage.googleapis.com"]
 node publish.mjs --init-ledger --state STATE                              # once per lane
 node publish.mjs --manifest STATE/jobs/v01.json --channel CH --derivative PRIVATE/v01/youtube.mp4 --asset-url URL --state STATE   # dry run
 BUFFER_API_KEY=… node preflight.mjs --mode readonly --target youtube --state STATE
