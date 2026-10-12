@@ -41,7 +41,7 @@ node prepare.mjs --state STATE --campaign pilot-20261019 --job v01 \
 # or, for TikTok (every choice explicit; the owner applies them in Buffer):
 #   --platform tiktok --tiktok-privacy public_to_everyone --tiktok-comments true --tiktok-duet false --tiktok-stitch false
 # Narration: Azure AI Speech free F0 tier (config rates.ttsUsdPerCharacter 0; caps.ttsCharacters bounds use):
-AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=eastus node narrate.mjs --provider azure --voice-name es-AR-TomasNeural \
+AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=eastus node narrate.mjs --provider azure --voice-name es-AR-ElenaNeural   # owner-chosen voice \
   --manifest STATE/jobs/v01.json --platform tiktok --state STATE --out PRIVATE/v01-narration.json --authorize-spend
 # (ElevenLabs remains available: --provider elevenlabs --voice-id … --model-id … --settings '…')
 node render.mjs --manifest STATE/jobs/v01.json --narration PRIVATE/v01-narration.json --platform youtube --out PRIVATE/v01
