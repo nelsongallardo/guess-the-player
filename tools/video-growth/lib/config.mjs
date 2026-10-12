@@ -12,7 +12,7 @@ export function defaultConfig() {
     enabled: false,
     buffer: { organizationId: null, channels: [] },
     caps: { variableUsd: 0, ttsCharacters: 0 },
-    rates: { ttsUsdPerCharacter: null },
+    rates: { ttsUsdPerCharacter: null, storageUsdPerGbMonth: null, egressUsdPerGb: null },
     hosting: { allowedHosts: [] },
     tts: { authorized: false },
   };
@@ -22,7 +22,7 @@ const SHAPE = {
   schemaVersion: null, enabled: null,
   buffer: ['organizationId', 'channels'],
   caps: ['variableUsd', 'ttsCharacters'],
-  rates: ['ttsUsdPerCharacter'],
+  rates: ['ttsUsdPerCharacter', 'storageUsdPerGbMonth', 'egressUsdPerGb'],
   hosting: ['allowedHosts'],
   tts: ['authorized'],
 };
@@ -50,6 +50,10 @@ export function validateConfig(c) {
   for (const k of ['variableUsd', 'ttsCharacters']) if (!Number.isFinite(c.caps[k]) || c.caps[k] < 0) err(`caps.${k} must be a non-negative number`);
   const rate = c.rates.ttsUsdPerCharacter;
   if (rate !== null && !(Number.isFinite(rate) && rate > 0)) err('rates.ttsUsdPerCharacter must be a positive number or null (unknown)');
+  for (const k of ['storageUsdPerGbMonth', 'egressUsdPerGb']) {
+    const v = c.rates[k];
+    if (v !== null && !(Number.isFinite(v) && v >= 0)) err(`rates.${k} must be a non-negative number or null (unknown)`);
+  }
   if (!Array.isArray(c.hosting.allowedHosts) || c.hosting.allowedHosts.some(h => typeof h !== 'string' || !/^[a-z0-9.-]+\.[a-z]{2,}$/.test(h))) err('hosting.allowedHosts must be DNS hostnames');
   if (typeof c.tts.authorized !== 'boolean') err('tts.authorized must be a boolean');
   return errors;

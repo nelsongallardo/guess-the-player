@@ -47,7 +47,7 @@ export function validConfig(overrides = {}) {
       channels: [{ platform: 'youtube', channelId: 'mock-yt-channel', nativeAccount: 'UCmockmockmockmockmockmo' }],
     },
     caps: { variableUsd: 5, ttsCharacters: 2000 },
-    rates: { ttsUsdPerCharacter: 0.0003 },
+    rates: { ttsUsdPerCharacter: 0.0003, storageUsdPerGbMonth: 0.015, egressUsdPerGb: 0 },
     hosting: { allowedHosts: ['media.example.org'] },
     tts: { authorized: true },
     ...overrides,
