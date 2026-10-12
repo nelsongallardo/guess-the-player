@@ -1,0 +1,15 @@
+{
+  "name": "derabona-video-growth",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "microsoft-cognitiveservices-speech-sdk": "1.51.0",
+    "playwright": "1.57.0"
+  }
+}

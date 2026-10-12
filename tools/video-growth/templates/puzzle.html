@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<!-- Offline 1080x1920 frame template. No network, no external fonts.
+     Everything visible lives inside the content box x=72..900, y=180..1500
+     (a proposed safe area, re-checked against real platform overlays at G3). -->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  html, body { width: 1080px; height: 1920px; overflow: hidden }
+  body {
+    background: #122a38;
+    background-image: radial-gradient(ellipse at 20% 0%, #1d4258 0, transparent 55%);
+    color: #f7f4eb; font-family: Arial, Helvetica, sans-serif;
+  }
+  #box { position: absolute; left: 72px; top: 180px; width: 828px; height: 1320px; display: flex; flex-direction: column }
+  #top { height: 150px; display: flex; align-items: center; font-family: "Arial Black", Arial, sans-serif; font-weight: 900; line-height: 1.4; overflow: hidden }
+  #top.cta { color: #89cff0 }
+  .hookbig { color: #ffd166; font-family: "Arial Black", Arial, sans-serif; font-weight: 900; line-height: 1.4; max-height: 820px; flex: 0 0 auto; overflow: hidden; text-align: left }
+  .club.hidden { visibility: hidden }
+  #clubs { list-style: none; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; overflow: hidden }
+  .club { display: flex; align-items: center; gap: 18px; background: #fffdf7; color: #122a38; border-radius: 18px; padding: 0 22px; overflow: hidden; flex: 0 0 auto }
+  .num { font: 700 30px ui-monospace, Menlo, monospace; color: #176180; min-width: 44px; text-align: right }
+  .crest { object-fit: contain; flex: 0 0 auto }
+  .name { flex: 1; min-width: 0; font-weight: 700; line-height: 1.18; overflow: hidden }
+  #answer { height: 205px; display: flex; flex-direction: column; justify-content: center; overflow: hidden }
+  #answer .label { font: 700 30px ui-monospace, Menlo, monospace; letter-spacing: 3px; color: #89cff0; text-transform: uppercase }
+  #answer .who { font-family: "Arial Black", Arial, sans-serif; font-weight: 900; line-height: 1.4; overflow: hidden }
+  #answer .count { font-family: "Arial Black", Arial, sans-serif; font-size: 140px; color: #ffd166; line-height: 1.4 }
+  #captions { height: 125px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; overflow: hidden }
+  #captions span { display: block; max-width: 828px; white-space: nowrap; overflow: hidden; background: #0b1a24e6; padding: 2px 14px; border-radius: 8px; font-weight: 700; font-size: 44px; line-height: 1.15 }
+</style></head>
+<body>
+<div id="box">
+  <div id="top" data-role="top"></div>
+  <ol id="clubs" data-role="clubs"></ol>
+  <div id="answer" data-role="answer"></div>
+  <div id="captions" data-role="captions"></div>
+</div>
+<script>
+const BOX = { x0: 72, x1: 900, y0: 180, y1: 1500 };
+const MIN_CLUB_FONT = 36;
+const overflows = el => el.scrollWidth > el.clientWidth + 0.5 || el.scrollHeight > el.clientHeight + 0.5;
+
+// Largest font in [min,max] that fits: one line first, then up to maxLines.
+function fit(el, max, min, maxLines, wrapFirst = false) {
+  for (const wrap of wrapFirst ? [true] : [false, true]) {
+    if (wrap && maxLines < 2) break;
+    el.style.whiteSpace = wrap ? 'normal' : 'nowrap';
+    for (let size = max; size >= min; size -= 2) {
+      el.style.fontSize = size + 'px';
+      const lines = Math.round(el.scrollHeight / parseFloat(getComputedStyle(el).lineHeight));
+      if (!overflows(el) && (!wrap || lines <= maxLines)) return { size, ok: true };
+    }
+  }
+  el.style.fontSize = min + 'px';
+  return { size: min, ok: false };
+}
+
+let last = null;
+function renderCaptions(s, errors) {
+  const cap = document.getElementById('captions');
+  cap.innerHTML = '';
+  if ((s.captionLines || []).length > 2) errors.push('caption has more than two lines');
+  for (const line of s.captionLines || []) {
+    const span = document.createElement('span'); span.textContent = line; cap.append(span);
+    if (span.scrollWidth > span.clientWidth + 0.5) errors.push(`caption line overflows: "${line}"`);
+  }
+}
+function renderState(s) {
+  const errors = [];
+  const top = document.getElementById('top');
+  top.className = s.phase === 'cta' ? 'cta' : '';
+  top.textContent = s.phase === 'hook' ? '' : s.top || '';
+  if (top.textContent && !fit(top, s.phase === 'cta' ? 72 : 64, 44, 2).ok) errors.push('top text does not fit');
+
+  const list = document.getElementById('clubs');
+  list.innerHTML = '';
+  if (s.phase === 'hook') {
+    // The challenge hook fills the empty card area before the first club.
+    const h = document.createElement('div'); h.className = 'hookbig'; h.textContent = s.top || '';
+    list.append(h);
+    if (!fit(h, 130, 72, 5, true).ok) errors.push('hook does not fit');
+    last = { errors, minClubFont: Infinity };
+    for (const id of ['answer', 'captions']) document.getElementById(id).innerHTML = '';
+    renderCaptions(s, errors);
+    document.body.dataset.ready = String(Date.now());
+    return;
+  }
+  const n = s.clubs.length;
+  const rowH = Math.min(150, Math.floor((list.clientHeight - (n - 1) * 10) / n));
+  const crestPx = Math.min(110, rowH - 18);
+  let minClubFont = Infinity;
+  s.clubs.forEach((c, i) => {
+    const li = document.createElement('li');
+    li.className = c.hidden ? 'club hidden' : 'club'; li.style.height = rowH + 'px';
+    const num = document.createElement('span'); num.className = 'num'; num.textContent = String(i + 1).padStart(2, '0');
+    li.append(num);
+    if (c.crest) { const img = document.createElement('img'); img.className = 'crest'; img.src = c.crest; img.alt = ''; img.style.width = img.style.height = crestPx + 'px'; li.append(img); }
+    const name = document.createElement('span'); name.className = 'name'; name.textContent = c.name;
+    name.style.maxHeight = (rowH - 8) + 'px';
+    li.append(name);
+    list.append(li);
+    const f = fit(name, Math.min(52, Math.floor(rowH * 0.5)), MIN_CLUB_FONT, 2);
+    if (!f.ok) errors.push(`club label "${c.name}" is unreadable at ${MIN_CLUB_FONT}px`);
+    minClubFont = Math.min(minClubFont, f.size);
+  });
+
+  const ans = document.getElementById('answer');
+  ans.innerHTML = '';
+  if (s.phase === 'think') {
+    const c = document.createElement('div'); c.className = 'count'; c.textContent = String(s.countdown); ans.append(c);
+  } else if (s.answerName) {
+    const l = document.createElement('div'); l.className = 'label'; l.textContent = s.answerLabel; ans.append(l);
+    const w = document.createElement('div'); w.className = 'who'; w.textContent = s.answerName; w.style.maxHeight = '150px'; ans.append(w);
+    if (!fit(w, 84, 52, 2).ok) errors.push('answer name does not fit');
+  }
+
+  renderCaptions(s, errors);
+  last = { errors, minClubFont };
+  document.body.dataset.ready = String(Date.now());
+}
+
+function measure() {
+  const errors = [...last.errors];
+  for (const el of document.querySelectorAll('#box *')) {
+    if (!el.textContent.trim() && el.tagName !== 'IMG') continue;
+    const r = el.getBoundingClientRect();
+    if (r.width === 0 && r.height === 0) continue;
+    if (r.left < BOX.x0 - 0.5 || r.right > BOX.x1 + 0.5 || r.top < BOX.y0 - 0.5 || r.bottom > BOX.y1 + 0.5) {
+      errors.push(`${el.className || el.tagName} is outside the content box`);
+    }
+  }
+  for (const id of ['top', 'clubs', 'answer', 'captions']) if (overflows(document.getElementById(id))) errors.push(`${id} area overflows`);
+  return { errors: [...new Set(errors)], minClubFontPx: last.minClubFont, text: document.body.innerText };
+}
+</script>
+</body></html>
