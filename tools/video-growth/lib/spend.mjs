@@ -1,5 +1,6 @@
 // Spend reservations. Every attempt is reserved (and assumed billed) before the
-// request; an unknown rate or a zero cap stops paid work. This is a local
+// request; an unknown rate or a zero cap stops paid work. A free tier is a
+// known rate of 0: it needs no USD cap but still counts against ttsCharacters. This is a local
 // guard, not an invoice: reconcile against the vendor's usage after the fact.
 
 import fs from 'node:fs';
@@ -24,7 +25,7 @@ export function createSpendLedger(file, config) {
 
   function reserve(entry) {
     const t = totals();
-    if (!(config.caps.variableUsd > 0)) throw new Error('variable spend cap is 0; paid work is not approved');
+    if (entry.usd > 0 && !(config.caps.variableUsd > 0)) throw new Error('variable spend cap is 0; paid work is not approved');
     if (t.reservedUsd + entry.usd > config.caps.variableUsd + 1e-9) throw new Error(`spend cap reached: ${t.reservedUsd.toFixed(4)} + ${entry.usd.toFixed(4)} > ${config.caps.variableUsd} USD`);
     if ((entry.characters ?? 0) && t.characters + entry.characters > config.caps.ttsCharacters) throw new Error(`TTS character cap reached (${config.caps.ttsCharacters})`);
     state.entries.push({ ...entry, at: new Date().toISOString() });
@@ -37,7 +38,7 @@ export function createSpendLedger(file, config) {
     attempts: key => state.entries.filter(e => e.kind === 'tts' && e.key === key).length,
     reserveTts({ key, characters }) {
       const rate = config.rates.ttsUsdPerCharacter;
-      if (!(Number.isFinite(rate) && rate > 0)) throw new Error('TTS rate is unknown; record the current plan rate before paid work');
+      if (!(Number.isFinite(rate) && rate >= 0)) throw new Error('TTS rate is unknown; record the current plan rate (0 for a free tier) before TTS work');
       return reserve({ kind: 'tts', key, characters, usd: characters * rate });
     },
     reserveOther({ kind, key, usd }) {

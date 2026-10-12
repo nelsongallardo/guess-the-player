@@ -8,15 +8,17 @@ import path from 'node:path';
 import { assertValidJob, digest, isUtc } from './manifest.mjs';
 import { buildScript, validateScript } from './script.mjs';
 
+const VOICE_ID = { elevenlabs: /^[A-Za-z0-9]{10,40}$/, azure: /^[a-z]{2,3}-[A-Z]{2}-[A-Za-z]+Neural$/ };
+
 export function licenseComplete(l) {
-  return !!l && l.ttsProvider === 'elevenlabs' && typeof l.ttsPlan === 'string' && !!l.ttsPlan
-    && l.ttsCommercialUse === true && /^[A-Za-z0-9]{10,40}$/.test(l.voiceId ?? '')
+  return !!l && Object.hasOwn(VOICE_ID, l.ttsProvider ?? '') && typeof l.ttsPlan === 'string' && !!l.ttsPlan.trim()
+    && l.ttsCommercialUse === true && VOICE_ID[l.ttsProvider].test(l.voiceId ?? '')
     && typeof l.modelId === 'string' && !!l.modelId && typeof l.evidence === 'string' && !!l.evidence.trim();
 }
 
 export function approvalPayload({ job, target, derivative }) {
   assertValidJob(job);
-  if (!licenseComplete(job.license)) throw new Error('license is incomplete: paid commercial TTS plan, voice, model and evidence must be recorded');
+  if (!licenseComplete(job.license)) throw new Error('license is incomplete: commercial TTS provider, plan, voice, model and evidence must be recorded');
   if (!job.targets.includes(target)) throw new Error('target is not part of this job');
   if (target.channelId.startsWith('sample-') || target.nativeAccount.startsWith('sample-')) throw new Error('sample placeholder targets are for review renders only and cannot be approved');
   if (derivative?.platform !== target.platform || !/^[0-9a-f]{64}$/.test(derivative.sha256 ?? '')) throw new Error('derivative must be the hashed render for this platform');

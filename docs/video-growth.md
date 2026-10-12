@@ -8,10 +8,10 @@ The owner's plan lives in the Obsidian vault (`projects/derabona/2026-10-12-tikt
 
 | Layer | State |
 |---|---|
-| Code and offline tests | On branch `feat/derabona-shortform`: 107 tests (`node --test tools/video-growth/test/`). Vendor calls are mocked; rendering and encoding are real (Playwright + FFmpeg) |
+| Code and offline tests | On branch `feat/derabona-shortform`: 113 tests (`node --test tools/video-growth/test/`). Vendor calls are mocked; rendering and encoding are real (Playwright + FFmpeg) |
 | Runtime | **Disabled.** `enabled:false`, empty target allowlist, every cap `0`. No cron or scheduler exists |
-| ElevenLabs narration | Client, cache, spend caps and clipping check implemented. **No real request made.** The paid plan, voice choice and two-voice audition are still pending (G2/G4) |
-| Rendered samples | Only tone/silent mock renders exist, for tests and layout review. **No narrated sample exists** (G3) |
+| Narration | **Azure AI Speech, free F0 tier** (owner choice 2026-10-12, instead of paid ElevenLabs): `es-AR-TomasNeural` / `es-AR-ElenaNeural` through the official Speech SDK (pinned 1.51.0). Caption timing comes from Azure's word boundaries. One audition sample (Marcelo) was narrated with both voices and rendered on 2026-10-12. The ElevenLabs client remains as an option |
+| Rendered samples | One narrated TikTok audition sample per Azure voice (private, scratch). Three owner-reviewed samples are still needed (G3) |
 | Media host | Verifier implemented. **No host chosen, uploaded to or fetched** (G4) |
 | Buffer | YouTube and TikTok-draft mapping, read-only discovery, intent ledger, reconciliation and public readback are implemented. One owner-authorized read-only lookup ran on 2026-10-12: the organization has TikTok `derabona.club` and X connected, **no YouTube channel**. **No Buffer write has run** (G1/G6) |
 | TikTok | **Draft-only** (owner decision 2026-10-12). Buffer's `TikTokPostMetadataInput` has only `isAiGenerated` and `title` (confirmed against the live schema), with no privacy, comment/Duet/Stitch or "Promotional content" field. The tool sends `saveToDraft: true` with the AI label and can never schedule a TikTok post itself. The owner applies the approved settings in Buffer and schedules it. **Unverified:** whether Buffer's composer offers privacy and comment/Duet/Stitch for TikTok, and whether TikTok accepts the media host's URL |

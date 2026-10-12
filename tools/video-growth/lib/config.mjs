@@ -49,7 +49,7 @@ export function validateConfig(c) {
   });
   for (const k of ['variableUsd', 'ttsCharacters']) if (!Number.isFinite(c.caps[k]) || c.caps[k] < 0) err(`caps.${k} must be a non-negative number`);
   const rate = c.rates.ttsUsdPerCharacter;
-  if (rate !== null && !(Number.isFinite(rate) && rate > 0)) err('rates.ttsUsdPerCharacter must be a positive number or null (unknown)');
+  if (rate !== null && !(Number.isFinite(rate) && rate >= 0)) err('rates.ttsUsdPerCharacter must be a non-negative number (0 for a free tier) or null (unknown)');
   for (const k of ['storageUsdPerGbMonth', 'egressUsdPerGb']) {
     const v = c.rates[k];
     if (v !== null && !(Number.isFinite(v) && v >= 0)) err(`rates.${k} must be a non-negative number or null (unknown)`);

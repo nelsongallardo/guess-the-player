@@ -9,7 +9,7 @@ Narrated vertical career puzzles for YouTube Shorts and TikTok, sent only as app
 ```sh
 cd tools/video-growth
 npm ci                      # pinned playwright 1.57.0; uses the local Chromium cache
-node --test test/           # 107 tests; vendor calls are mocked
+node --test test/           # 113 tests; vendor calls are mocked
 ```
 
 Requires Node 22+, `ffmpeg` and `ffprobe` on `PATH` (libx264, libmp3lame, aac, ebur128, astats).
@@ -40,10 +40,10 @@ node prepare.mjs --state STATE --campaign pilot-20261019 --job v01 \
   --publish-at 2026-10-19T16:00:00Z --seed v01 --made-for-kids false --platform youtube --youtube-privacy public
 # or, for TikTok (every choice explicit; the owner applies them in Buffer):
 #   --platform tiktok --tiktok-privacy public_to_everyone --tiktok-comments true --tiktok-duet false --tiktok-stitch false
-# PAID, owner-approved only:
-ELEVENLABS_API_KEY=… node narrate.mjs --manifest STATE/jobs/v01.json --platform youtube --state STATE \
-  --voice-id VOICE --model-id eleven_multilingual_v2 --settings '{"stability":0.5,"similarity_boost":0.75}' \
-  --out PRIVATE/v01-narration.json --authorize-spend
+# Narration: Azure AI Speech free F0 tier (config rates.ttsUsdPerCharacter 0; caps.ttsCharacters bounds use):
+AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=eastus node narrate.mjs --provider azure --voice-name es-AR-TomasNeural \
+  --manifest STATE/jobs/v01.json --platform tiktok --state STATE --out PRIVATE/v01-narration.json --authorize-spend
+# (ElevenLabs remains available: --provider elevenlabs --voice-id … --model-id … --settings '…')
 node render.mjs --manifest STATE/jobs/v01.json --narration PRIVATE/v01-narration.json --platform youtube --out PRIVATE/v01
 ffprobe -v error -show_streams -show_format -of json PRIVATE/v01/youtube.mp4
 # Owner watches with and without sound, checks proof-375-*.png and the QA JSON, then:

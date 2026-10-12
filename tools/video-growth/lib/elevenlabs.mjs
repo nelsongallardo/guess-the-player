@@ -59,6 +59,7 @@ export function createElevenLabsClient({ apiKey, fetchImpl = globalThis.fetch, t
 }
 
 export function ttsCacheKey(r) {
+  if (r.provider === 'azure') return digest({ provider: 'azure', text: r.text, voiceName: r.voiceName, outputFormat: r.outputFormat });
   return digest({ text: r.text, voiceId: r.voiceId, modelId: r.modelId, voiceSettings: r.voiceSettings, dictionaryLocators: r.dictionaryLocators ?? [], outputFormat: r.outputFormat });
 }
 
