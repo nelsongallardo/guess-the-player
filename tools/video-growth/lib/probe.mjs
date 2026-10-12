@@ -31,6 +31,22 @@ export async function audioStats(file) {
   return { peakDb, durationSec, clipped: peakDb >= CLIP_DBFS };
 }
 
+// Mean absolute grey-level distance between one encoded frame and two PNGs,
+// at 108x192. Used to prove which state an encoded frame actually shows.
+function gray(input, select = '') {
+  const vf = `${select}scale=108:192,format=gray`;
+  return new Promise((resolve, reject) => {
+    execFile('ffmpeg', ['-v', 'error', '-i', input, '-vf', vf, '-frames:v', '1', '-f', 'rawvideo', '-'],
+      { encoding: 'buffer', maxBuffer: 1 << 24 }, (e, out) => (e || !out.length ? reject(new Error(`ffmpeg could not extract a frame from ${input}`)) : resolve(out)));
+  });
+}
+
+export async function frameDistance(video, frameIndex, pngA, pngB) {
+  const [f, a, b] = await Promise.all([gray(video, `select=eq(n\\,${frameIndex}),`), gray(pngA), gray(pngB)]);
+  const dist = (x, y) => { let s = 0; for (let i = 0; i < x.length; i++) s += Math.abs(x[i] - y[i]); return s / x.length; };
+  return { toA: dist(f, a), toB: dist(f, b) };
+}
+
 // Integrated loudness and true peak of a finished file.
 export async function loudness(file) {
   const { stderr } = await run('ffmpeg', ['-hide_banner', '-nostats', '-i', file, '-af', 'ebur128=peak=true', '-f', 'null', '-']);
