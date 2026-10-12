@@ -168,7 +168,11 @@ export function classifyReadback(post, { postId, input, platform, nativeAccount 
   if (post.text !== input.text) throw new Error('Buffer stored text differs from the approved text');
   if (Date.parse(post.dueAt) !== Date.parse(input.dueAt)) throw new Error('Buffer due time differs from the approved slot');
   if (post.schedulingType !== 'automatic' || post.notificationStatus != null) throw new Error('post is on the notification route; that is not automated delivery');
-  if (post.assets?.length !== 1 || post.assets[0].source !== input.assets[0].video.url) throw new Error('Buffer stored media differs from the approved asset');
+  // Once Buffer processes a post it swaps our URL for its own copy (seen on the
+  // first TikTok send, 2026-10-12), keyed by channel and post ID. Accept only that.
+  const bufferCopy = new RegExp(`^https://buffer-updates-media-backfill-bucket\\.s3\\.amazonaws\\.com/[^/]+/${input.channelId}/${postId}_video\\.mp4$`);
+  const src = post.assets?.[0]?.source;
+  if (post.assets?.length !== 1 || (src !== input.assets[0].video.url && !bufferCopy.test(src ?? ''))) throw new Error('Buffer stored media differs from the approved asset');
   if (platform === 'youtube') {
     const m = post.metadata, want = input.metadata.youtube;
     if (m?.__typename !== 'YoutubePostMetadata' || m.category?.categoryId !== want.categoryId

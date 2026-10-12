@@ -4,7 +4,7 @@
 //
 //   node render.mjs --manifest JOB.json --narration NARRATION.json --platform youtube --out DIR
 //
-// NARRATION.json: { question: {audioPath,text,alignment,requestId}, answer: {...}, cta: {...}|null }
+// NARRATION.json: { hook, clubs, question, answer, cta }, each {audioPath,text,alignment,requestId}
 // as written by narrate.mjs.
 
 import fs from 'node:fs';

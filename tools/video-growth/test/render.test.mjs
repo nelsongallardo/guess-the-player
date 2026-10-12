@@ -28,34 +28,34 @@ function segment(dir, name, text, seconds) {
   };
 }
 
-function narrationFor(dir, script, { q = 2.2, a = 1.6, c = 2.4 } = {}) {
+function narrationFor(dir, script, { h = 2.4, cl = 9, q = 2.2, a = 1.6, c = 2.4 } = {}) {
   return {
+    hook: segment(dir, 'h', script.narration.hook, h),
+    clubs: segment(dir, 'cl', script.narration.clubs, cl),
     question: segment(dir, 'q', script.narration.question, q),
     answer: segment(dir, 'a', script.narration.answer, a),
-    cta: script.narration.cta ? segment(dir, 'c', script.narration.cta, c) : null,
+    cta: segment(dir, 'c', script.narration.cta, c),
   };
 }
+const durations = (over = {}) => ({ hook: 2.4, clubs: 9, question: 2.2, answer: 1.6, cta: 2.4, ...over });
 
 const crestUrls = (playerId) => {
   const p = snap.players.find(x => x.id === playerId);
   return p.clubCrests.map(ref => snap.crests[ref].dataUrl);
 };
 
-test('timeline keeps five quiet seconds before the reveal and lands in 22–30 s', () => {
-  const t = planTimeline({ platform: 'youtube', questionSec: 2.2, answerSec: 1.6, ctaSec: 2.4 });
+test('timeline plays hook, clubs and question, keeps five quiet seconds before the reveal and lands in 15–40 s', () => {
+  const t = planTimeline({ durations: durations() });
+  assert.ok(t.hook.end <= t.clubs.start && t.clubs.end <= t.question.start);
   assert.ok(t.revealAt - t.question.end >= 5);
-  assert.ok(t.end >= 22 && t.end <= 30);
+  assert.ok(t.end >= 15 && t.end <= 40);
   assert.equal(t.answer.start, t.revealAt);
   assert.ok(t.cta.start >= t.answer.end);
-  const tt = planTimeline({ platform: 'tiktok', questionSec: 2.2, answerSec: 1.6, ctaSec: null });
-  assert.equal(tt.cta, null);
-  assert.ok(tt.end >= 22 && tt.end <= 30);
 });
 
 test('overlong narration is rejected instead of squeezed', () => {
-  assert.throws(() => planTimeline({ platform: 'youtube', questionSec: 20, answerSec: 1.6, ctaSec: 2.4 }), /30/);
-  assert.throws(() => planTimeline({ platform: 'tiktok', questionSec: 2, answerSec: 12, ctaSec: null }), /30/);
-  assert.throws(() => planTimeline({ platform: 'tiktok', questionSec: 2, answerSec: 1.5, ctaSec: 2 }), /TikTok/);
+  assert.throws(() => planTimeline({ durations: durations({ clubs: 30 }) }), /40/);
+  assert.throws(() => planTimeline({ durations: durations({ cta: undefined }) }), /cta/);
 });
 
 test('eight clubs stay readable at phone-feed size inside the content box', async () => {
@@ -93,7 +93,7 @@ test('a full YouTube render encodes to spec, keeps the answer out of every pre-r
   assert.equal(v.r_frame_rate, '30/1');
   assert.equal(a.codec_name, 'aac');
   const dur = Number(probe.format.duration);
-  assert.ok(dur >= 22 && dur <= 30, `duration ${dur}`);
+  assert.ok(dur >= 15 && dur <= 40, `duration ${dur}`);
   const bytes = fs.readFileSync(out.mp4Path);
   assert.ok(bytes.indexOf('moov') < bytes.indexOf('mdat'), 'faststart');
   const tags = JSON.stringify(probe.format.tags ?? {}) + JSON.stringify(v.tags ?? {}) + JSON.stringify(a.tags ?? {});
@@ -124,14 +124,15 @@ test('a full YouTube render encodes to spec, keeps the answer out of every pre-r
   assert.equal(proof.streams[0].width, 375);
 });
 
-test('a TikTok render has no call to action or brand text in any frame', { timeout: 240000 }, async () => {
+test('a TikTok render shows derabona.club only on the end card', { timeout: 240000 }, async () => {
   const dir = tmp();
   const career = careerFor(snap, 'cristiano-ronaldo');
   const script = buildScript(career, 'tiktok');
   const out = await renderVideo({ career, script, narration: narrationFor(dir, script), crests: crestUrls('cristiano-ronaldo'), outDir: dir, crestMode: 'text-only' });
-  assert.ok(out.keyframes.every(k => !/derabona|jugá|\.club/i.test(k.text)));
+  assert.ok(out.keyframes.filter(k => k.phase !== 'cta').every(k => !/derabona/i.test(k.text.replace(/Jugá más carreras como esta en derabona\.club\./, ''))));
+  assert.ok(out.keyframes.some(k => k.phase === 'cta' && /derabona\.club/.test(k.text)));
   const dur = Number((await ffprobeJson(out.mp4Path)).format.duration);
-  assert.ok(dur >= 22 && dur <= 30);
+  assert.ok(dur >= 15 && dur <= 40);
 });
 
 test('render inputs are re-derived from the pinned commit and must match the job hashes', async () => {

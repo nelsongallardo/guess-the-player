@@ -18,6 +18,7 @@ import { loadConfig } from './lib/config.mjs';
 import { buildScript, validateScript } from './lib/script.mjs';
 import { createElevenLabsClient, createTtsCache, narrateSegment } from './lib/elevenlabs.mjs';
 import { createAzureTtsClient } from './lib/azure-tts.mjs';
+import { SEGMENTS } from './lib/render.mjs';
 import { createSpendLedger } from './lib/spend.mjs';
 
 const { values: a } = parseArgs({ options: {
@@ -47,7 +48,7 @@ try {
     ? { provider: 'azure', voiceName: a['voice-name'], outputFormat: 'Audio24Khz96KBitRateMonoMp3' }
     : { voiceId: a['voice-id'], modelId: a['model-id'], voiceSettings: JSON.parse(a.settings), dictionaryLocators: a.dictionary ? JSON.parse(a.dictionary) : [], outputFormat: 'mp3_44100_128' };
   const narration = {};
-  for (const seg of ['question', 'answer', 'cta']) {
+  for (const seg of SEGMENTS) {
     const text = script.narration[seg];
     if (text == null) { narration[seg] = null; continue; }
     const r = await narrateSegment(deps, { ...base, text });

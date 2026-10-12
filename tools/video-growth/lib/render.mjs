@@ -10,6 +10,7 @@ import { canonicalJson, sha256 } from './manifest.mjs';
 import { wordsFromAlignment, buildCues, toSrt } from './captions.mjs';
 import { audioStats, ffprobeJson, loudness, run } from './probe.mjs';
 import { MAX_CLUBS } from './select.mjs';
+import { clubsLine } from './script.mjs';
 
 const TEMPLATE = path.join(path.dirname(fileURLToPath(import.meta.url)), '../templates/puzzle.html');
 
@@ -17,22 +18,27 @@ export const FPS = 30;
 export const WIDTH = 1080;
 export const HEIGHT = 1920;
 export const CONTENT_BOX = Object.freeze({ x0: 72, x1: 900, y0: 180, y1: 1500 });
-export const TIMING = Object.freeze({ questionStart: 0.4, minQuiet: 5, nominalReveal: 18, ctaGap: 0.6, tail: 1.2, target: 25, min: 22, max: 30 });
+// Narration segments in play order (owner-requested engaging format, 2026-10-12).
+export const SEGMENTS = Object.freeze(['hook', 'clubs', 'question', 'answer', 'cta']);
+export const TIMING = Object.freeze({ start: 0.3, gap: 0.35, minQuiet: 5, ctaGap: 0.5, tail: 1.2, min: 15, max: 40 });
 export const CAPTION = Object.freeze({ maxCharsPerLine: 24, maxLines: 2, holdSec: 0.3 });
 export const LOUDNESS = Object.freeze({ lufs: -16, truePeakTarget: -2, truePeakMax: -1, tolerance: 1.5 });
 
 const toFrame = t => Math.ceil(t * FPS - 1e-6) / FPS;
 
-export function planTimeline({ platform, questionSec, answerSec, ctaSec }) {
-  if (platform === 'tiktok' && ctaSec != null) throw new Error('TikTok derivative has no CTA segment');
-  for (const [k, v] of Object.entries({ questionSec, answerSec })) if (!(Number.isFinite(v) && v > 0)) throw new Error(`${k} must be a measured positive duration`);
-  const question = { start: TIMING.questionStart, end: TIMING.questionStart + questionSec };
-  const revealAt = toFrame(Math.max(question.end + TIMING.minQuiet, TIMING.nominalReveal));
-  const answer = { start: revealAt, end: revealAt + answerSec };
-  const cta = ctaSec ? { start: answer.end + TIMING.ctaGap, end: answer.end + TIMING.ctaGap + ctaSec } : null;
-  const end = toFrame(Math.max((cta ?? answer).end + TIMING.tail, TIMING.target));
+// hook → clubs → question, then at least minQuiet seconds of countdown before
+// the reveal, then answer → cta. Durations are the measured narration lengths.
+export function planTimeline({ durations }) {
+  for (const k of SEGMENTS) if (!(Number.isFinite(durations?.[k]) && durations[k] > 0)) throw new Error(`${k} must be a measured positive duration`);
+  const seg = {};
+  let t = TIMING.start;
+  for (const k of ['hook', 'clubs', 'question']) { seg[k] = { start: t, end: t + durations[k] }; t = seg[k].end + TIMING.gap; }
+  const revealAt = toFrame(seg.question.end + TIMING.minQuiet);
+  seg.answer = { start: revealAt, end: revealAt + durations.answer };
+  seg.cta = { start: seg.answer.end + TIMING.ctaGap, end: seg.answer.end + TIMING.ctaGap + durations.cta };
+  const end = toFrame(Math.max(seg.cta.end + TIMING.tail, TIMING.min));
   if (end > TIMING.max) throw new Error(`narration needs ${end.toFixed(2)} s; videos must end by ${TIMING.max} s — shorten the script, do not speed it up`);
-  return { question, thinkStart: revealAt - TIMING.minQuiet, revealAt, answer, cta, end };
+  return { ...seg, thinkStart: revealAt - TIMING.minQuiet, revealAt, end };
 }
 
 async function withPage(fn) {
@@ -63,9 +69,7 @@ export async function layoutCheck({ clubs, answerName, captionLines }) {
 const fold = s => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 
 function captionCues(narration, timeline) {
-  const segs = [['question', timeline.question.start], ['answer', timeline.answer.start], ['cta', timeline.cta?.start]];
-  const cues = segs.filter(([k]) => narration[k]).flatMap(([k, offset]) =>
-    buildCues(wordsFromAlignment(narration[k].text, narration[k].alignment, offset), CAPTION));
+  const cues = SEGMENTS.flatMap(k => buildCues(wordsFromAlignment(narration[k].text, narration[k].alignment, timeline[k].start), CAPTION));
   return cues.map((c, i) => ({ ...c, showUntil: Math.min(c.end + CAPTION.holdSec, cues[i + 1]?.start ?? Infinity, timeline.end) }));
 }
 
@@ -73,37 +77,38 @@ export async function renderVideo({ career, script, narration, crests, outDir, c
   if (!['embedded', 'text-only'].includes(crestMode)) throw new Error('crestMode must be embedded or text-only');
   assertClubCount(script.clubs);
   if (crestMode === 'embedded' && crests?.length !== script.clubs.length) throw new Error('every club needs its embedded crest');
-  for (const k of ['question', 'answer']) if (narration[k]?.text !== script.narration[k]) throw new Error(`narration.${k} does not match the approved script text`);
-  if ((narration.cta?.text ?? null) !== script.narration.cta) throw new Error('narration.cta does not match the approved script text');
+  for (const k of SEGMENTS) if (narration[k]?.text !== script.narration[k]) throw new Error(`narration.${k} does not match the approved script text`);
   fs.mkdirSync(outDir, { recursive: true, mode: 0o700 });
 
   const stats = {};
-  for (const k of ['question', 'answer', 'cta']) if (narration[k]) {
+  for (const k of SEGMENTS) {
     stats[k] = await audioStats(narration[k].audioPath);
     if (stats[k].clipped) throw new Error(`${k} narration is clipped`);
   }
-  const timeline = planTimeline({ platform: script.platform, questionSec: stats.question.durationSec, answerSec: stats.answer.durationSec, ctaSec: stats.cta?.durationSec ?? null });
+  const timeline = planTimeline({ durations: Object.fromEntries(SEGMENTS.map(k => [k, stats[k].durationSec])) });
   const cues = captionCues(narration, timeline);
 
   const F = t => Math.round(t * FPS);
-  const endF = F(timeline.end), revealF = F(timeline.revealAt), thinkF = revealF - TIMING.minQuiet * FPS, ctaF = timeline.cta ? F(timeline.cta.start) : Infinity;
+  const endF = F(timeline.end), revealF = F(timeline.revealAt), thinkF = revealF - TIMING.minQuiet * FPS, ctaF = F(timeline.cta.start), clubsF = F(timeline.clubs.start);
+  // Each card appears on the first spoken character of its club name.
+  const cardF = clubsLine(script.clubs).starts.map(i => F(timeline.clubs.start + narration.clubs.alignment.character_start_times_seconds[i]));
   const clubs = script.clubs.map((name, i) => ({ name, crest: crestMode === 'embedded' ? crests[i] : null }));
   const stateAt = f => {
-    const phase = f < thinkF ? 'clues' : f < revealF ? 'think' : f >= ctaF ? 'cta' : 'reveal';
+    const phase = f < clubsF ? 'hook' : f < thinkF ? 'clues' : f < revealF ? 'think' : f >= ctaF ? 'cta' : 'reveal';
     const t = f / FPS;
     const cue = cues.find(c => t >= c.start - 1e-6 && t < c.showUntil - 1e-6);
+    const shown = phase === 'hook' ? 0 : phase === 'clues' ? cardF.filter(cf => f >= cf).length : clubs.length;
     return {
-      phase, clubs,
-      top: phase === 'cta' ? script.onScreen.cta : phase === 'think' ? script.onScreen.think : script.onScreen.prompt,
+      phase, clubs: clubs.map((c, i) => ({ ...c, hidden: i >= shown })),
+      top: { hook: script.onScreen.hook, clues: script.onScreen.prompt, think: script.onScreen.think, reveal: script.onScreen.prompt, cta: script.onScreen.cta }[phase],
       countdown: phase === 'think' ? Math.ceil((revealF - f) / FPS) : null,
       answerLabel: phase === 'reveal' || phase === 'cta' ? script.onScreen.answerLabel : null,
       answerName: phase === 'reveal' || phase === 'cta' ? career.name : null,
       captionLines: cue?.lines ?? [],
     };
   };
-  const bounds = new Set([0, thinkF, revealF, endF]);
+  const bounds = new Set([0, clubsF, thinkF, revealF, ctaF, endF, ...cardF]);
   for (let k = 1; k < TIMING.minQuiet; k++) bounds.add(revealF - k * FPS);
-  if (Number.isFinite(ctaF)) bounds.add(ctaF);
   for (const c of cues) { bounds.add(F(c.start)); bounds.add(F(c.showUntil)); }
   const starts = [...bounds].filter(f => f >= 0 && f < endF).sort((a, b) => a - b);
 
@@ -138,10 +143,17 @@ export async function renderVideo({ career, script, narration, crests, outDir, c
   });
 
   const mp4Path = path.join(outDir, `${script.platform}.mp4`);
-  const segs = ['question', 'answer', 'cta'].filter(k => narration[k]);
-  const inputs = segs.flatMap(k => ['-i', narration[k].audioPath]);
-  const delays = segs.map((k, i) => `[${i + 1}:a]adelay=${Math.round(timeline[k].start * 1000)}:all=1[s${i}]`);
-  const filter = `${delays.join(';')};${segs.map((_, i) => `[s${i}]`).join('')}amix=inputs=${segs.length}:normalize=0:duration=longest,`
+  // Countdown ticks (one per second of the quiet window) and a reveal chime:
+  // generated tones, so no music licence is involved.
+  const tick = path.join(outDir, 'tick.wav'), chime = path.join(outDir, 'chime.wav');
+  await run('ffmpeg', ['-v', 'error', '-y', '-f', 'lavfi', '-i', 'sine=frequency=1300:duration=0.07', '-af', 'afade=t=out:st=0.02:d=0.05,volume=0.30', tick]);
+  await run('ffmpeg', ['-v', 'error', '-y', '-f', 'lavfi', '-i', 'sine=frequency=880:duration=0.45', '-f', 'lavfi', '-i', 'sine=frequency=1320:duration=0.45',
+    '-filter_complex', '[0][1]amix=inputs=2:normalize=0,afade=t=out:st=0.1:d=0.35,volume=0.30', chime]);
+  const sfx = [...Array.from({ length: TIMING.minQuiet }, (_, k) => [tick, timeline.thinkStart + k]), [chime, timeline.revealAt - 0.15]];
+  const tracks = [...SEGMENTS.map(k => [narration[k].audioPath, timeline[k].start]), ...sfx];
+  const inputs = tracks.flatMap(([file]) => ['-i', file]);
+  const delays = tracks.map(([, at], i) => `[${i + 1}:a]adelay=${Math.round(at * 1000)}:all=1[s${i}]`);
+  const filter = `${delays.join(';')};${tracks.map((_, i) => `[s${i}]`).join('')}amix=inputs=${tracks.length}:normalize=0:duration=longest,`
     + `apad=whole_dur=${timeline.end},atrim=0:${timeline.end},loudnorm=I=${LOUDNESS.lufs}:TP=${LOUDNESS.truePeakTarget}:LRA=11,aresample=48000,aformat=channel_layouts=stereo[aout]`;
   await run('ffmpeg', ['-v', 'error', '-y', '-framerate', String(FPS), '-i', path.join(frameDir, 'f%05d.png'), ...inputs,
     '-filter_complex', filter, '-map', '0:v', '-map', '[aout]',
@@ -149,13 +161,14 @@ export async function renderVideo({ career, script, narration, crests, outDir, c
     '-c:a', 'aac', '-b:a', '160k', '-t', String(timeline.end), '-movflags', '+faststart', '-map_metadata', '-1',
     '-fflags', '+bitexact', '-flags:v', '+bitexact', '-flags:a', '+bitexact', mp4Path]);
   fs.rmSync(frameDir, { recursive: true, force: true });
+  fs.rmSync(tick, { force: true }); fs.rmSync(chime, { force: true });
   fs.chmodSync(mp4Path, 0o600);
 
   const covering = f => keyframes.find(k => f >= k.start * FPS - 1e-6 && f < k.start * FPS + k.frames - 1e-6);
   const thinkPng = covering(revealF - 1).png;
   const revealPng = covering(revealF).png;
   const proofs = [];
-  for (const [label, png] of [['clues', covering(0).png], ['think', thinkPng], ['reveal', revealPng]]) {
+  for (const [label, png] of [['hook', covering(0).png], ['clues', covering(thinkF - 1).png], ['think', thinkPng], ['reveal', revealPng], ['cta', covering(endF - 1).png]]) {
     const proof = path.join(outDir, `proof-375-${label}.png`);
     await run('ffmpeg', ['-v', 'error', '-y', '-i', png, '-vf', 'scale=375:-1', proof]);
     proofs.push(proof);
@@ -171,11 +184,11 @@ export async function renderVideo({ career, script, narration, crests, outDir, c
     sizeBytes: fs.statSync(mp4Path).size,
     durationSec: Number(probe.format.duration),
     streams: probe.streams.map(s => ({ codec: s.codec_name, type: s.codec_type, width: s.width, height: s.height, pixFmt: s.pix_fmt, rate: s.r_frame_rate, sampleRate: s.sample_rate })),
-    timeline, cues, quietBeforeRevealSec: timeline.revealAt - timeline.question.end,
+    timeline, cardTimesSec: cardF.map(f => f / FPS), cues, quietBeforeRevealSec: timeline.revealAt - timeline.question.end,
     loudness: loud,
     loudnessOk: Math.abs(loud.lufs - LOUDNESS.lufs) <= LOUDNESS.tolerance && loud.truePeakDb <= LOUDNESS.truePeakMax,
     segmentStats: stats,
-    narrationVerified: segs.every(k => typeof narration[k].requestId === 'string' && narration[k].requestId.length > 0),
+    narrationVerified: SEGMENTS.every(k => typeof narration[k].requestId === 'string' && narration[k].requestId.length > 0),
     crestMode, minClubFontPx: Math.min(...keyframes.map(k => k.minClubFontPx)),
     keyframes: keyframes.map(k => ({ start: k.start, frames: k.frames, phase: k.phase, png: path.basename(k.png) })),
     proofs: proofs.map(p => path.basename(p)),

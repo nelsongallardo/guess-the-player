@@ -10,7 +10,8 @@ test('both platforms build valid source-only scripts', () => {
     const s = buildScript(riquelme, platform);
     assert.deepEqual(validateScript(s, riquelme), [], platform);
     assert.equal(s.narration.answer, 'Era Juan Román Riquelme.');
-    assert.match(s.narration.question, /Mirá los clubes\. ¿Quién es\?/);
+    assert.match(s.narration.question, /¿Quién es\?/);
+    assert.equal(s.narration.clubs, 'Arrancó en Boca Juniors. Pasó por Barcelona. Luego, Villarreal. Volvió a Boca Juniors. Y después, Argentinos Juniors.');
   }
 });
 
@@ -50,15 +51,13 @@ test('copy that presents an evergreen video as today\'s Daily is rejected', () =
   }
 });
 
-test('TikTok copy carries no brand, URL or call to action', () => {
+test('copy may point only to derabona.club', () => {
   const s = buildScript(riquelme, 'tiktok');
-  assert.equal(s.narration.cta, null);
-  assert.equal(s.onScreen.cta, null);
-  for (const promo of ['Jugá en derabona.club', 'derabona', 'link en la bio', 'www.example.com', 'https://x.y']) {
-    assert.ok(validateScript({ ...s, onScreen: { ...s.onScreen, think: promo } }, riquelme).some(e => /TikTok/.test(e)), promo);
-    assert.ok(validateScript({ ...s, caption: `¿Quién es? ${promo}` }, riquelme).some(e => /TikTok/.test(e)), promo);
+  assert.match(s.caption, /derabona\.club/);
+  for (const link of ['www.example.com', 'https://x.y', 'otro.club', 'mirá juegos.com']) {
+    assert.ok(validateScript({ ...s, caption: `¿Quién es? ${link}` }, riquelme).some(e => /derabona\.club/.test(e)), link);
   }
-  assert.ok(validateScript({ ...s, narration: { ...s.narration, cta: 'Jugá más' } }, riquelme).some(e => /TikTok/.test(e)));
+  assert.ok(validateScript({ ...s, narration: { ...s.narration, clubs: 'Arrancó en Boca Juniors.' } }, riquelme).some(e => /clubs/.test(e)));
 });
 
 test('platform length limits are enforced', () => {
