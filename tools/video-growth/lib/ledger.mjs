@@ -27,6 +27,22 @@ export function initLedger(stateDir) {
   fsyncDir(stateDir);
 }
 
+export function reduceState(entries, key) {
+  const s = { state: 'none', digest: null, derivativeSha256: null, postId: null, intentAt: null, incidents: 0, externalLink: null, sentAt: null, publicVerifiedAt: null };
+  for (const e of entries.filter(x => x.key === key)) {
+    switch (e.type) {
+      case 'intent': Object.assign(s, { state: 'intent', digest: e.digest, derivativeSha256: e.derivativeSha256 ?? null, postId: null, intentAt: e.at }); break;
+      case 'created': case 'attached': Object.assign(s, { state: 'created', postId: e.postId }); break;
+      case 'rejected': s.state = 'rejected'; break;
+      case 'uncertain': s.state = 'uncertain'; break;
+      case 'status': Object.assign(s, { state: e.state, externalLink: e.externalLink ?? s.externalLink, sentAt: e.sentAt ?? s.sentAt }); break;
+      case 'incident': s.incidents++; break;
+      case 'public': s.state = e.verdict; s.publicVerifiedAt = e.verdict === 'public_verified' ? e.at : null; break;
+    }
+  }
+  return s;
+}
+
 export function openLedger(stateDir) {
   const file = path.join(stateDir, LEDGER_FILE);
   if (!fs.existsSync(file)) throw new Error(`intent ledger ${file} is missing; if any remote work may exist this is a reconciliation incident`);
@@ -37,21 +53,7 @@ export function openLedger(stateDir) {
     return e;
   });
 
-  function state(key) {
-    const s = { state: 'none', digest: null, postId: null, intentAt: null, incidents: 0, externalLink: null, sentAt: null };
-    for (const e of entries.filter(x => x.key === key)) {
-      switch (e.type) {
-        case 'intent': Object.assign(s, { state: 'intent', digest: e.digest, postId: null, intentAt: e.at }); break;
-        case 'created': case 'attached': Object.assign(s, { state: 'created', postId: e.postId }); break;
-        case 'rejected': s.state = 'rejected'; break;
-        case 'uncertain': s.state = 'uncertain'; break;
-        case 'status': Object.assign(s, { state: e.state, externalLink: e.externalLink ?? s.externalLink, sentAt: e.sentAt ?? s.sentAt }); break;
-        case 'incident': s.incidents++; break;
-        case 'public': s.state = e.verdict; break;
-      }
-    }
-    return s;
-  }
+  const state = key => reduceState(entries, key);
 
   function append(entry) {
     if (!TYPES.has(entry.type) || typeof entry.key !== 'string') throw new Error('refusing to append an unknown ledger event');

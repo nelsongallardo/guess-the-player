@@ -209,6 +209,10 @@ test('dry-run reports every failing gate and writes nothing', async () => {
   assert.equal(out.ok, false);
   assert.ok(out.gates.some(g => !g.ok && /disabled/.test(g.error)));
   assert.ok(out.gates.some(g => !g.ok && /404/.test(g.error)));
+  const unlicensed = setup();
+  unlicensed.job.license.ttsPlan = null;
+  const noPayload = await publishTarget(unlicensed.deps, { job: unlicensed.job, channelId: 'mock-yt-channel', nowUtc: NOW, dryRun: true });
+  assert.ok(noPayload.gates.every(g => g.ok || !/Cannot|undefined/.test(g.error)), JSON.stringify(noPayload.gates));
   assert.equal(s.buffer.calls.create, 0);
   assert.deepEqual(fs.readFileSync(path.join(s.stateDir, 'intents.jsonl')), ledgerBefore);
   assert.deepEqual(fs.readdirSync(s.stateDir).sort(), listing);

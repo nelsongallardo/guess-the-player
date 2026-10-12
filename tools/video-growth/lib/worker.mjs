@@ -43,7 +43,10 @@ async function gatesFor(deps, { job, target, nowUtc, ledger, dryRun }) {
     if (errors.length) throw new Error(errors.join('; '));
   });
   await gate('hosted bytes', () => deps.verifyHost(deps.assetUrl, { expected: deps.derivative }));
-  const input = await gate('Buffer input', () => buildCreatePostInput({ payload, assetUrl: deps.assetUrl }));
+  const input = await gate('Buffer input', () => {
+    if (!payload) throw new Error('no valid payload to map');
+    return buildCreatePostInput({ payload, assetUrl: deps.assetUrl });
+  });
   return { gates, key, digest: d, input };
 }
 
@@ -59,7 +62,7 @@ export async function publishTarget(deps, { job, channelId, nowUtc, dryRun = fal
     const ledger = openLedger(deps.stateDir);
     const { key, digest: d, input } = await gatesFor(deps, { job, target, nowUtc, ledger, dryRun: false });
     writeGate(deps.config, { stateDir: deps.stateDir, target }); // PAUSE re-checked at the boundary
-    ledger.append({ type: 'intent', key, digest: d, inputDigest: digest(input), at: nowUtc });
+    ledger.append({ type: 'intent', key, digest: d, inputDigest: digest(input), derivativeSha256: deps.derivative.sha256, at: nowUtc });
     let result;
     try { result = await deps.buffer.createPost(input); }
     catch (e) {

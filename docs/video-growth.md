@@ -8,14 +8,14 @@ The owner's plan lives in the Obsidian vault (`projects/derabona/2026-10-12-tikt
 
 | Layer | State |
 |---|---|
-| Code and offline tests | Implemented on `feat/derabona-shortform`; all vendor calls are mocked in tests |
+| Code and offline tests | On branch `feat/derabona-shortform`: 97 tests (`node --test tools/video-growth/test/`). Vendor calls are mocked; rendering and encoding are real (Playwright + FFmpeg) |
 | Runtime | **Disabled.** `enabled:false`, empty target allowlist, every cap `0`. No cron or scheduler exists |
-| ElevenLabs narration | Client implemented; **no real request made**. Paid plan, voice choice and audition are pending (G2/G4) |
-| Rendered samples | Only silent/tone mock renders used by tests. **No narrated sample exists** (G3) |
-| Media host | Verifier implemented; **no host chosen or configured** (G4) |
-| Buffer | Payload mapping, read-only discovery and the intent ledger are implemented; **no authenticated read or write has run** (G1/G6) |
-| TikTok automatic publishing | **Hard-blocked in code.** Buffer's `TikTokPostMetadataInput` has only `isAiGenerated` and `title`; it has no privacy, comment/Duet/Stitch or "Promotional content" disclosure field, so the controls TikTok requires cannot be represented |
-| YouTube Shorts | Mapping implemented; blocked until G1–G6 evidence exists |
+| ElevenLabs narration | Client, cache, spend caps and clipping check implemented. **No real request made.** The paid plan, voice choice and two-voice audition are still pending (G2/G4) |
+| Rendered samples | Only tone/silent mock renders exist, for tests and layout review. **No narrated sample exists** (G3) |
+| Media host | Verifier implemented. **No host chosen, uploaded to or fetched** (G4) |
+| Buffer | YouTube mapping, read-only discovery, intent ledger, reconciliation and public readback are implemented. **No authenticated read or write has run** (G1/G6) |
+| TikTok automatic publishing | **Hard-blocked in code.** Buffer's `TikTokPostMetadataInput` has only `isAiGenerated` and `title`. It has no privacy, comment/Duet/Stitch or "Promotional content" disclosure field, so the controls TikTok requires cannot be sent. `prepare.mjs` creates YouTube targets only |
+| YouTube Shorts | Mapping implemented. Blocked until G1–G6 evidence exists |
 
 ## Gates
 
@@ -29,7 +29,7 @@ Nothing past G0 is authorized. Each gate needs recorded evidence before the code
 | G3 quality | Three narrated, listened-to, phone-reviewed samples | Owner review; `render.mjs` QA report |
 | G4 spend/hosting | Fixed costs recorded, variable cap > 0, approved host on the allowlist | `lib/spend.mjs`, `lib/hosting.mjs` |
 | G5 asset approval | Receipt bound to the canonical digest of the target payload and derivative bytes | `lib/approval.mjs` |
-| G6 smoke | Separate authorization; exact native readback | `publish.mjs --submit`, `lib/verify-public.mjs` |
+| G6 smoke | Separate authorization; exact native readback plus an owner observation record | `publish.mjs --submit`, `reconcile.mjs`, `verify-public.mjs` |
 | G7/G8 | Pilot and any automation | Not implemented as a scheduler |
 
 ## Content rules the code enforces
@@ -39,6 +39,8 @@ Nothing past G0 is authorized. Each gate needs recorded evidence before the code
 - Scripts contain only the ordered clubs and the verified name. Numbers, trophies, fees, "today"/Daily wording and any name token before the reveal are rejected. TikTok copy carries no brand, URL or call to action.
 - The reveal is at least 5 seconds after the question ends; the whole video is 22–30 seconds. Captions come only from ElevenLabs alignment; missing or inconsistent timing blocks rendering.
 - Public object keys, titles and captions never contain the answer.
+- The renderer draws one PNG per visual state from an offline template. It checks that every element sits inside the proposed safe box (x 72–900, y 180–1500), that club names are at least 36 px (12.5 px at a 375 px phone width) and that captions are at least 44 px and fit. It then proves, on the encoded MP4, that the frame before the reveal is the thinking state. The finished mix targets −16 LUFS with a true peak of −1 dBTP or lower. Careers longer than 8 clubs are rejected rather than squeezed.
+- `public_verified` needs the public YouTube page to show the exact channel ID, title, description, public visibility and playability, **and** an owner observation (playback, club order, reveal timing, audio, visible AI label). A bot wall or a parsing failure records `public_unverified`; it never verifies.
 
 ## Write safety
 
