@@ -81247,6 +81247,9 @@ const Analytics = (()=>{
     }catch{return {};}
   })();
   const sdkFields=new Set(['token','distinct_id','$device_id','$session_id','$window_id','$lib','$lib_version','$browser','$browser_version','$os','$os_version','$device_type','$screen_width','$screen_height','$viewport_width','$viewport_height','$process_person_profile']);
+  const referrerHost=(()=>{
+    try{const url=new URL(document.referrer);return ['http:','https:'].includes(url.protocol)?url.hostname:'';}catch{return '';}
+  })();
   const online=location.protocol==='https:'&&location.hostname==='derabona.club';
   const privacySignal=()=>navigator.globalPrivacyControl===true||navigator.doNotTrack==='1';
   let choice=null,lang='es',context=()=>({}),loading=false,ready=false,sdk=null,queue=[],pageviewSent=false;
@@ -81268,13 +81271,16 @@ const Analytics = (()=>{
     const out={};for(const [key,value]of Object.entries({...base,...extra}))if(fields.has(key)&&(typeof value==='boolean'||(typeof value==='number'&&Number.isFinite(value))||(typeof value==='string'&&value.length<=64)))out[key]=value;
     out.language=lang;out.$current_url='https://derabona.club/';out.$host='derabona.club';out.$pathname='/';out.$geoip_disable=true;
     Object.assign(out,utm);
-    try{out.referrer_host=new URL(document.referrer).hostname;}catch{out.referrer_host='';}
+    out.referrer_host=referrerHost;
     return out;
   }
   function beforeSend(event){
     if(!allowed()||!events.has(event.event))return null;
     const clean={};for(const [key,value]of Object.entries(event.properties||{}))if(sdkFields.has(key)||fields.has(key)||['$current_url','$host','$pathname','$geoip_disable','referrer_host'].includes(key))clean[key]=value;
     clean.$current_url='https://derabona.club/';clean.$pathname='/';clean.$host='derabona.club';clean.$geoip_disable=true;clean.$process_person_profile=false;
+    // PostHog's source/channel reports read this standard field. Derive both
+    // fields here so SDK-persisted referrers cannot reintroduce URLs or old sources.
+    clean.referrer_host=referrerHost;clean.$referring_domain=referrerHost;
     return {...event,properties:clean};
   }
   function capture(event,extra){
