@@ -19,7 +19,7 @@ The owner selected **consent-first analytics with persistent anonymous identity*
 - Autocapture, pageleave capture, recordings, surveys, heatmaps, automatic exceptions, performance capture and feature-flag evaluation are disabled. Only explicit events below are allowed. Person profiles are never created.
 - Project-side IP anonymization is enabled. SDK `ip:false` and `$geoip_disable:true` further suppress IP/geolocation event enrichment. PostHog still necessarily receives a network request after consent; do not describe this as collecting no personal data or as a blanket legal-compliance guarantee.
 - Event filtering preserves the SDK-required public `token` property; deleting it makes the SDK drop events after `before_send`, even when hooks appear to fire. Tests must assert actual transport and backend ingestion, not only entry into the hook.
-- Event filtering strips full referrer URLs, query strings, fragments, free text and automatic person-property payloads. The current URL is always `https://derabona.club/`; only the referrer hostname is retained. SDK anonymous/session IDs and basic browser/device properties are retained after consent.
+- Event filtering strips full referrer URLs, query strings, fragments, free text and automatic person-property payloads. The current URL is always `https://derabona.club/`; only the HTTP(S) referrer hostname is retained, as both the existing `referrer_host` event property and PostHog's standard `$referring_domain`. Both are derived from the current document, overriding any SDK-persisted source. Empty, malformed and non-HTTP(S) referrers produce empty values. SDK anonymous/session IDs and basic browser/device properties are retained after consent.
 - One narrow, disclosed exception to the stripped query string: `utm_source`/`utm_medium`/`utm_campaign`, if present, are read once from `location.search` at load (before any later `history.replaceState` call elsewhere in the app can remove them) and attached to every event for that tab session, so a specific social post/campaign can be attributed in PostHog. Nothing else from the query string is retained, and PostHog's own automatic UTM-to-person-property capture stays off either way (`person_profiles:'never'`, `autocapture:false`) - these three values travel only as regular, allowlisted event properties, the same as `language` or `competition`. The consent dialog (both languages) discloses this explicitly rather than claiming zero URL parameters are ever sent.
 
 ## Accounts remain separate
@@ -38,6 +38,12 @@ Google/Supabase requests provide optional account functionality and do not requi
 - `language_changed`, `help_opened`, `progress_reset`: explicit UI actions.
 
 Allowlisted context: language, competition, public player ID, round index, guess/hint counts, outcome and round points. No answer text, user-entered values, full saved-game objects, user name or email is collected. The charts describe **consenting visitors**, not all visitors. Consent bias and ad blockers mean these counts are not a complete traffic census.
+
+## Referral and campaign reports
+
+PostHog's Web Analytics referring-domain and channel reports use the standard `$referring_domain` event property to derive session attribution. Before the 2026-10-14 fix, our filter dropped that property while retaining `referrer_host`, so those built-in reports could not use the recorded hostname. For earlier data, use a `$pageview` Trends insight broken down by the **event** property `referrer_host`; `utm_source`/`utm_medium`/`utm_campaign` are also available on tagged arrivals. The fix affects newly captured events, not historical rows or the entry source of an already-started session.
+
+An absent referrer is unknown: it can be a direct visit, a browser/app that omits the referrer, or a redirect that loses it. Missing historical sources cannot be reconstructed. Use the three supported UTM fields on links you publish to distinguish campaigns when the browser provides no referrer. Internal `derabona.club` navigation and `accounts.google.*` sign-in returns are not acquisition sources; exclude them when interpreting the raw event breakdown. No new attribution cookies, account linkage, full referrer URL capture or IP enrichment are introduced.
 
 ## Verification and delivery
 

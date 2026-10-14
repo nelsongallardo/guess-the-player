@@ -13,7 +13,7 @@ async page => {
    return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({status:1})});
   });
   try{
-   await p.goto('https://derabona.club/?unlimited=1&private=do-not-collect');await p.waitForSelector('#analytics-banner:visible');
+   await p.goto('https://derabona.club/?unlimited=1&private=do-not-collect',{referer:'https://www.google.com/search?q=do-not-collect'});await p.waitForSelector('#analytics-banner:visible');
    if(!blocked)await p.screenshot({path:'test-results/analytics-consent-mobile.png'});
    await p.locator('#hint').click();assert(requests.length===0,'No PostHog traffic before consent, even while playing');
    await p.locator('#analytics-banner [data-analytics-consent="declined"]').click();await p.reload();
@@ -35,6 +35,7 @@ async page => {
    assert(requests.filter(r=>r.method==='POST').length>=events.length,'Events must reach SDK transport, not merely before_send');
    for(const name of ['hint_used','answer_submitted','round_completed','language_changed'])assert(events.some(e=>e.event===name),'Captured '+name);
    assert(events.every(e=>e.properties.$current_url==='https://derabona.club/'),'No query or fragment capture');
+   assert(events.every(e=>e.properties.$referring_domain==='www.google.com'&&e.properties.referrer_host==='www.google.com'),'Standard PostHog source and legacy referrer fields contain only the arriving hostname');
    assert(events.every(e=>!('$referrer'in e.properties)&&!('$initial_referrer'in e.properties)),'No full referrer URL');
    await p.reload();await p.waitForFunction(()=>window.posthog?.__loaded&&posthog.has_opted_in_capturing());
    assert(await p.evaluate(()=>posthog.get_distinct_id())===id,'Anonymous identity persists after accepted reload');

@@ -1,5 +1,13 @@
 # Verification report
 
+## 2026-10-14 — PostHog referral attribution (local candidate)
+
+- The privacy filter now emits the current HTTP(S) referrer hostname as `$referring_domain` as well as `referrer_host`. Full referrer URLs, query/fragment values, SDK person payloads and IP enrichment remain excluded; consent gates are unchanged.
+- Node 22: **84/84** focused tests passed (`analytics`, `account-boundaries`, `model`, `seo`, `social-preview`); source identifiers and `git diff --check` passed. The new analytics regression first failed on the missing standard field, then passed for HTTP(S), empty, malformed and non-web referrers, including stale SDK-field replacement.
+- `analytics-checks.js` passed with the real CDN SDK and intercepted ingestion, including a Google-referrer arrival, no traffic before consent/after decline, withdrawal, persistent anonymous identity and gameplay with the SDK blocked.
+- Separate live EU project `273163` readback of marker `referral-20261014-1791965682776`: four events (`$pageview` + `round_viewed` for each of two fresh browser contexts). The local candidate was served at the canonical URL via a browser route override; SDK and ingestion were real. Both event and session referring domains were correct: `www.google.com` → **Organic Search**, `l.instagram.com` with `utm_source=instagram`/`utm_medium=social` → **Organic Social**. `$referrer` and `$session_entry_referrer` were absent; `$current_url` was the sanitized home URL. Bot-filter override and verification properties existed only in the test harness. Readbacks are in ignored `test-results/`.
+- This verifies candidate ingestion, not a deployed release. Existing historical events and already-started session entry sources are not rewritten.
+
 ## 2026-10-09 — Daily email reminders (ADR 0030; local candidate, delivery inactive)
 
 - Native PostgreSQL (`tests/email-reminders-backend.test.mjs`, 14 tests): new accounts default off; explicit opt-in/out, idempotency and stale versions; frozen owner cohort (no later accounts, no overrides, no consent fields); suppression and out-of-order events; one dispatch per destination/UTC date under concurrent workers; uncertain/skipped expiry; completed-Daily skip and recheck without gameplay writes; deletion and address-change cleanup. Existing ranked, league and overview PostgreSQL suites still pass with the migration applied.
