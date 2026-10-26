@@ -25,3 +25,10 @@ Read and back up current project 273163 insights; update existing Top referrers 
 ## Integration and release
 
 Review isolated commits, run relevant suites plus full Node/native PostgreSQL and Edge CI gates, real browser checks, fresh production baseline/candidate performance comparison. Publish a reviewed PR; integrate/deploy authorized work after checks, verify exact live artifact and marked ingestion. Record changes, limitations and external write readbacks in Obsidian state.md; commit/push that path and verify remote. Do not publish the primary checkout's unrelated four commits.
+
+## Execution record — 26 October 2026
+
+- Loading, narrow layout, lossless PNGs and compact data implemented; generator/audit now preserves the format and distinguishes encoding changes from pixel drift.
+- Cross-mode/page consented events and campaign preservation implemented. Independent review found a retry snapshot defect; fixed and verified against the original failing case, including a mode switch before retry.
+- Fourteen PostHog report definitions updated/read back; marked live backend events and verification exclusions confirmed. Search Console inspected with the Hermes profile, sitemap submitted and leaderboard indexing requested; sitemap fetch remains unresolved at Google.
+- Relevant browser suites and 28 Edge tests pass. Final full Node/native PostgreSQL run and deployment verification recorded in TESTING.md and project state.
