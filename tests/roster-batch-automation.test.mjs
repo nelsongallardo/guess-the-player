@@ -15,6 +15,19 @@ const verifiedDistractors = JSON.parse(fs.readFileSync(path.join(root, 'research
 const batchFiles = ['records.json', 'selected-ids.json', 'origin-systems.json', 'crest-assets.json', 'peer-bank-records.json', 'audit-allowlist.json'];
 
 
+// Mutate parsed roster values, independent of their whitespace representation.
+function mutateInlinePlayers(html, change) {
+  const block = /(<script id="roster-data">\s*const PLAYERS\s*=\s*)([\s\S]*?)(;*\s*<\/script>)/;
+  const match = html.match(block);
+  assert.ok(match, 'Inline roster literal exists');
+  const players = JSON.parse(match[2]);
+  change(players);
+  const replacement = JSON.stringify(players);
+  assert.ok(replacement !== JSON.stringify(JSON.parse(match[2])), 'Fixture changes roster data');
+  return html.replace(block, () => match[1] + replacement + match[3]);
+}
+
+
 function copyBatch(target) {
   for (const name of batchFiles) fs.copyFileSync(path.join(batch10, name), path.join(target, name));
 }
@@ -64,6 +77,26 @@ test('rejects a truncated crest that contains only the PNG signature', () => {
 });
 
 
+test('audit rejects a different valid PNG instead of accepting any optimized crest', () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'derabona-roster-pixel-drift-'));
+  copyBatch(temp);
+  const crestsPath = path.join(temp, 'crest-assets.json');
+  const crests = JSON.parse(fs.readFileSync(crestsPath, 'utf8'));
+  const [club, replacementClub] = Object.keys(crests);
+  assert.ok(crests[club].dataUrl !== crests[replacementClub].dataUrl);
+  const dimensions = value => Buffer.from(value.split(',')[1], 'base64').subarray(16, 24);
+  assert.deepEqual(dimensions(crests[club].dataUrl), dimensions(crests[replacementClub].dataUrl),
+    'A same-sized replacement must still fail the pixel comparison');
+  crests[club].dataUrl = crests[replacementClub].dataUrl;
+  fs.writeFileSync(crestsPath, `${JSON.stringify(crests)}\n`);
+  const result = spawnSync(process.execPath, [scriptPath, 'audit', '--batch-dir', temp], { cwd: root, encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  const report = JSON.parse(result.stdout);
+  assert.ok(report.errors.includes(`${club} crest differs from the reviewed batch asset`));
+  assert.ok(!report.errors.some(error => /not a complete decodable PNG/.test(error)), 'Valid image rejected for its changed appearance');
+});
+
+
 test('fails closed when selected-ids.json has an unsupported shape', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'derabona-roster-selected-'));
   copyBatch(temp);
@@ -90,11 +123,8 @@ test('fails closed when inline PLAYERS drift from canonical verified players', (
   fs.mkdirSync(path.join(temp, 'research'));
   fs.copyFileSync(path.join(root, 'research', 'verified-players.json'), path.join(temp, 'research', 'verified-players.json'));
   fs.copyFileSync(path.join(root, 'research', 'verified-distractors.json'), path.join(temp, 'research', 'verified-distractors.json'));
-  const players = JSON.parse(fs.readFileSync(path.join(root, 'research', 'verified-players.json'), 'utf8'));
   const originalHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const original = JSON.stringify(players[0].notes);
-  const html = originalHtml.replace(`"notes": ${original}`, `"notes": ${JSON.stringify(`${players[0].notes} Drift.`)}`);
-  assert.notEqual(html, originalHtml);
+  const html = mutateInlinePlayers(originalHtml, players => { players[0].notes += ' Drift.'; });
   fs.writeFileSync(path.join(temp, 'index.html'), html);
   const result = spawnSync(process.execPath, [scriptPath, 'audit', '--root', temp, '--batch-dir', batch10], { cwd: root, encoding: 'utf8' });
   assert.equal(result.status, 1);
@@ -131,8 +161,10 @@ test('audit rejects generated incorrectOptions drift and integrate repairs it', 
   fs.copyFileSync(path.join(root, 'research', 'verified-players.json'), path.join(temp, 'research', 'verified-players.json'));
   fs.copyFileSync(path.join(root, 'research', 'verified-distractors.json'), path.join(temp, 'research', 'verified-distractors.json'));
   const originalHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const html = originalHtml.replace('      "Zinedine Zidane",\n', '');
-  assert.notEqual(html, originalHtml);
+  const html = mutateInlinePlayers(originalHtml, players => {
+    assert.ok(players[0].incorrectOptions.length > 0);
+    players[0].incorrectOptions.pop();
+  });
   fs.writeFileSync(path.join(temp, 'index.html'), html);
 
   const auditResult = spawnSync(process.execPath, [scriptPath, 'audit', '--root', temp, '--batch-dir', batch10], { cwd: root, encoding: 'utf8' });
@@ -293,6 +325,12 @@ test('core integration is deterministic and updates coordinated data only', asyn
   );
   assert.equal(once.verifiedPlayers.length, 2);
   assert.equal(once.bank.length, 0);
+  const rosterLiteral = once.html.match(/const PLAYERS = ([\s\S]*?);<\/script>/)[1];
+  const crestLiteral = once.html.match(/const CREST_ASSETS = ([\s\S]*?);<\/script>/)[1];
+  assert.ok(rosterLiteral.length <= JSON.stringify(JSON.parse(rosterLiteral)).replace(/</g, '\\u003c').length + 4,
+    'Integration keeps one compact row per player');
+  assert.ok(crestLiteral.length <= JSON.stringify(JSON.parse(crestLiteral)).length + 10,
+    'Integration keeps compact crest rows');
   assert.match(once.html, /"New Player"/);
   assert.match(once.html, /"Nuevo\."/);
   assert.match(once.html, /"New FC"/);
