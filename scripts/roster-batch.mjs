@@ -98,6 +98,7 @@ function validatePngDataUrl(dataUrl) {
   let sawIdat = false;
   let sawIend = false;
   const idat = [];
+  const chunks = new Map();
   while (offset < png.length) {
     if (offset + 12 > png.length) throw new Error('truncated PNG chunk');
     const length = png.readUInt32BE(offset);
@@ -107,6 +108,8 @@ function validatePngDataUrl(dataUrl) {
     const typeAndData = png.subarray(offset + 4, offset + 8 + length);
     if (pngCrc32(typeAndData) !== png.readUInt32BE(offset + 8 + length)) throw new Error(`invalid ${type} CRC`);
     const data = png.subarray(offset + 8, offset + 8 + length);
+    if (!chunks.has(type)) chunks.set(type, []);
+    chunks.get(type).push(data);
     if (!ihdr) {
       if (type !== 'IHDR' || length !== 13) throw new Error('PNG must begin with a 13-byte IHDR');
       ihdr = data;
@@ -126,12 +129,90 @@ function validatePngDataUrl(dataUrl) {
   const width = ihdr.readUInt32BE(0);
   const height = ihdr.readUInt32BE(4);
   if (!width || !height) throw new Error('invalid PNG dimensions');
-  if (!inflateSync(Buffer.concat(idat)).length) throw new Error('empty PNG image data');
+  const scanlines = inflateSync(Buffer.concat(idat));
+  if (!scanlines.length) throw new Error('empty PNG image data');
+  return { width, height, ihdr, chunks, scanlines };
+}
+
+// Lossless PNG optimization can reorder palettes, change scanline filters and
+// recompress IDAT without changing a crest. Compare its decoded pixels and
+// ancillary metadata, never accept a different image merely because it is PNG.
+// Fail closed for formats outside the embedded 8-bit/palette asset pipeline.
+function pngAppearance(dataUrl) {
+  const { width, height, ihdr, chunks, scanlines } = validatePngDataUrl(dataUrl);
+  if ([...chunks.keys()].some(type => /^[A-Z]/.test(type) && !['IHDR', 'PLTE', 'IDAT', 'IEND'].includes(type)) ||
+      ['PLTE', 'tRNS'].some(type => (chunks.get(type)?.length ?? 0) > 1)) {
+    throw new Error('Unsupported or duplicate PNG chunk for pixel comparison');
+  }
+  const depth = ihdr[8], type = ihdr[9], channels = { 0: 1, 2: 3, 3: 1, 4: 2, 6: 4 }[type];
+  if (!channels || ihdr[10] || ihdr[11] || ihdr[12] ||
+      !(depth === 8 || [0, 3].includes(type) && [1, 2, 4].includes(depth))) {
+    throw new Error('Unsupported PNG encoding for pixel comparison');
+  }
+  const stride = Math.ceil(width * channels * depth / 8), bpp = Math.max(1, Math.ceil(channels * depth / 8));
+  if (scanlines.length !== (stride + 1) * height) throw new Error('Invalid PNG scanline length');
+  const decoded = Buffer.alloc(stride * height);
+  for (let y = 0; y < height; y += 1) {
+    const filter = scanlines[y * (stride + 1)];
+    if (filter > 4) throw new Error('Invalid PNG scanline filter');
+    for (let x = 0; x < stride; x += 1) {
+      const offset = y * stride + x;
+      const left = x >= bpp ? decoded[offset - bpp] : 0;
+      const up = y ? decoded[offset - stride] : 0;
+      const corner = y && x >= bpp ? decoded[offset - stride - bpp] : 0;
+      const p = left + up - corner, a = Math.abs(p - left), b = Math.abs(p - up), c = Math.abs(p - corner);
+      const predictor = [0, left, up, Math.floor((left + up) / 2), a <= b && a <= c ? left : b <= c ? up : corner][filter];
+      decoded[offset] = (scanlines[y * (stride + 1) + x + 1] + predictor) & 255;
+    }
+  }
+  const palette = chunks.get('PLTE')?.[0], alpha = chunks.get('tRNS')?.[0];
+  if (type === 3 && (!palette?.length || palette.length % 3 || palette.length / 3 > 2 ** depth)) throw new Error('Invalid PNG palette');
+  if (alpha && (type === 0 && alpha.length !== 2 || type === 2 && alpha.length !== 6 ||
+      type === 3 && alpha.length > palette.length / 3 || [4, 6].includes(type))) throw new Error('Invalid PNG transparency');
+  const rgba = Buffer.alloc(width * height * 4);
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const offset = y * stride + x * channels;
+      const sample = depth === 8 ? decoded[offset] : (decoded[y * stride + Math.floor(x * depth / 8)] >> (8 - depth - x * depth % 8)) & ((1 << depth) - 1);
+      let r, g, b, a = 255;
+      if (type === 3) {
+        if (sample * 3 + 2 >= palette.length) throw new Error('PNG palette index out of range');
+        [r, g, b] = palette.subarray(sample * 3, sample * 3 + 3); a = alpha?.[sample] ?? 255;
+      } else if (type === 0 || type === 4) {
+        r = g = b = Math.round(sample * 255 / ((1 << depth) - 1));
+        a = type === 4 ? decoded[offset + 1] : alpha && sample === alpha.readUInt16BE(0) ? 0 : 255;
+      } else {
+        [r, g, b] = decoded.subarray(offset, offset + 3);
+        a = type === 6 ? decoded[offset + 3] : alpha && r === alpha.readUInt16BE(0) && g === alpha.readUInt16BE(2) && b === alpha.readUInt16BE(4) ? 0 : 255;
+      }
+      rgba.set([r, g, b, a], (y * width + x) * 4);
+    }
+  }
+  const metadata = [...chunks].filter(([type]) => !['IHDR', 'PLTE', 'tRNS', 'IDAT', 'IEND'].includes(type))
+    .sort(([a], [b]) => a.localeCompare(b)).map(([type, values]) => [type, values.map(value => value.toString('base64'))]);
+  return { width, height, rgba, metadata };
+}
+
+function samePngAppearance(left, right) {
+  if (left === right) return true;
+  try {
+    const a = pngAppearance(left), b = pngAppearance(right);
+    return a.width === b.width && a.height === b.height && a.rgba.equals(b.rgba)
+      && JSON.stringify(a.metadata) === JSON.stringify(b.metadata);
+  }
+  catch { return false; }
 }
 
 function replaceAssignedJson(source, marker, value) {
   const found = extractAssignedJson(source, marker);
-  return source.slice(0, found.start) + serializeInlineJson(value) + source.slice(found.end);
+  // Bulk data stays compact after future roster integrations. Keep one row per
+  // record for review, and retain the same script-safe escaping as other data.
+  const serialized = marker === JSON_DECODER_MARKERS.players
+    ? '[\n' + value.map(player => serializeInlineJson(player, 0)).join(',\n') + '\n]'
+    : marker === JSON_DECODER_MARKERS.crests
+      ? '{\n' + Object.entries(value).map(([key, asset]) => '  ' + serializeInlineJson(key, 0) + ': ' + serializeInlineJson(asset, 0)).join(',\n') + '\n}'
+      : serializeInlineJson(value);
+  return source.slice(0, found.start) + serialized + source.slice(found.end);
 }
 
 function scriptBlock(html, id) {
@@ -405,7 +486,7 @@ function validateBatch(batch, currentPlayers, currentBank, html) {
     }
     if (state === 'integrated') {
       const embedded = inlineCrests[asset.sourceURL];
-      if (!embedded || embedded.dataUrl !== asset.dataUrl) {
+      if (!embedded || !samePngAppearance(embedded.dataUrl, asset.dataUrl)) {
         errors.push(`${club} crest differs from the reviewed batch asset`);
       }
     }

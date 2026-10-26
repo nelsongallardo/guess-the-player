@@ -29,7 +29,8 @@ test('Leaderboard ships as a real independent static page with canonical metadat
   // (195KB -> 209KB), while the roster/crest/game-model exclusion stays the
   // real guard.
   assert.doesNotMatch(html,/id="(?:roster-data|crest-data|game-model)"/);
-  assert.ok(Buffer.byteLength(html)<215_000,'Standalone board must not duplicate the heavy game artifact');
+  // Consent UI and the shared privacy-filtered analytics module add ~18 KB.
+  assert.ok(Buffer.byteLength(html)<240_000,'Standalone board must not duplicate the heavy game artifact');
   assert.match(html,/<dialog id="account-dialog"/,'ADR 0014: same account-dialog component as the main game, not a link away from it');
   const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].filter(m=>m[1].trim()&&!m[0].includes('application/ld+json'));
   assert.ok(scripts.length>0);

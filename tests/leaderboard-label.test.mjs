@@ -6,7 +6,8 @@ import vm from 'node:vm';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 const game=read('index.html'),board=read('leaderboard.html');
 const rankedCopy=vm.runInNewContext('('+game.match(/const RankedUI = \(\(\)=>\{\s*const TEXT=(\{[\s\S]*?\n  \});/)[1]+')');
-const boardCopy=vm.runInNewContext('('+board.match(/const text=(\{[\s\S]*?\});\nconst COMPETITION_LOGOS/)[1]+')');
+const boardApp=board.match(/<script id="leaderboard-app">([\s\S]*?)<\/script>/)[1];
+const boardCopy=vm.runInNewContext('('+boardApp.match(/const text=(\{[\s\S]*?\});\nconst COMPETITION_LOGOS/)[1]+')');
 
 test('Both pages expose the same three labeled navigation destinations',()=>{
   for(const html of [game,board]){

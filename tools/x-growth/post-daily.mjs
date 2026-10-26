@@ -46,7 +46,7 @@ export function composeText(daily, withLink) {
   const first = daily.rounds[0].player;
   const header = `Rabona Diaria #${daily.challengeNumber}`;
   const tail = withLink
-    ? `¿Quién es?\n${SITE_URL}`
+    ? `¿Quién es?\n${SITE_URL}?utm_source=x&utm_medium=social&utm_campaign=daily_${daily.challengeNumber}`
     : `¿Quién es? Los tres están en ${SITE_BARE}`;
 
   const full = `${header}\n\nLos mismos tres jugadores para todos hoy. Este es el primero:\n\n${careerString(first)}\n\n${tail}`;

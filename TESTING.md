@@ -1,5 +1,14 @@
 # Verification report
 
+## 2026-10-26 — SEO, loading and consented attribution
+
+- All gameplay modes now emit consented accepted-action events, with mode/access context; Groups and Leaderboard have the same consent/withdrawal controls and sanitized pageviews. Campaign tags are captured before OAuth/invite URL cleanup. A lost-response Daily answer remains measurable exactly once after a mode switch and same-key retry; actions begun before consent are not backfilled. Independent review reproduced and verified that regression.
+- Real SDK browser coverage passes guest Daily, ranked Daily, ranked Unlimited, Groups and Leaderboard with explicitly simulated accounts. It checks no pre-consent traffic, secret-free payloads, successful actions, uncertain-response retries, withdrawal and no historical completions on reload. Privacy/SDK-blocking, SEO, account startup, accounts, Daily header, leaderboard, friends leagues, wayfinding and guest-session suites pass; friends use the real handler/native PostgreSQL bridge with simulated Auth.
+- All 221 offline rounds and 495 crest assets pass. Lossless optimization preserves decoded pixels/dimensions/profiles/attribution, roster values and the frozen Daily schedule. Paired compressed mobile lab runs improve performance 36→53, CLS 0.320→0.002 and LCP 14.04→13.30 seconds. These are local lab comparisons; LCP remains poor and this is not field Core Web Vitals evidence.
+- All seven Deno entrypoints check successfully and all 28 Edge boundary tests pass. Full Node/native PostgreSQL results are recorded below after final integration.
+- Live EU PostHog readback of `seo_attribution_20261026_c4d63a7_v2` confirms **26 events**, including one hint/answer/completion for each of guest Daily, ranked Daily and ranked Unlimited, plus Groups/Leaderboard pageviews. Full properties retain canonical URLs and hostname-only referrers, no private identity/auth fields or person-profile writes. The account backend was simulated; PostHog SDK/ingestion were real. The verification marker and bot-filter override exist only in the ignored harness. Saved dashboard queries exclude all 12 marked verification sessions; real acquisition remains 2 email campaigns + 2 Unknown in the rolling seven-day window. Backend visibility took several minutes.
+- PostHog project 273163: 14 saved insight queries read back and executed after acquisition, historical-source, funnel and mode-coverage repairs. Existing dashboard layout retained; all verification activity excluded. Historical missing sources/modes remain Unknown. Search Console submission/indexing results and the unresolved sitemap fetch status are in docs/seo.md.
+
 ## 2026-10-14 — PostHog referral attribution (local candidate)
 
 - The privacy filter now emits the current HTTP(S) referrer hostname as `$referring_domain` as well as `referrer_host`. Full referrer URLs, query/fragment values, SDK person payloads and IP enrichment remain excluded; consent gates are unchanged.

@@ -18,6 +18,33 @@ The game’s canonical URL is **https://derabona.club/**; the standalone ranking
 
 ## Performance evidence and caveats
 
+### 26 October 2026: current roster and startup repair
+
+The current 221-player file contains 495 embedded crest assets. A lossless PNG pass reduced their combined size from **2,393,209 to 2,025,245 bytes** (15.4%). Every decoded RGBA pixel, image dimension, ICC color profile, crest key and attribution field was checked against revision `8c9168e`. This pass does not requantize the already indexed images. Reproduce it with:
+
+```sh
+uv run --with pyoxipng --with pillow python scripts/optimize-crests-lossless.py --source-ref 8c9168e
+```
+
+The roster literal is compacted to one unchanged JSON object per player. Together these changes reduce the complete HTML from **6,926,152 to 5,904,919 bytes**, and a same-settings gzip comparison from **2,695,824 to 2,528,848 bytes** (6.2%). The script IDs, all roster values and every other script block remain unchanged by this optimization, including the frozen Daily payload and schedule. No runtime dependency or external asset fetch was added.
+
+The initial `play-ready` class hides the round panel, so the old reservation on that panel never took effect. The friends card and explanation appeared above the fold and then moved below it when the game rendered. Initial space is now reserved on the visible loading status and removed with `game-loading`; the ready round retains no minimum height. The masthead also reserves account-label width and uses phone spacing that fits the Spanish sign-in label at 320px (previous document width: 330px).
+
+Two paired mobile Lighthouse 13.5 samples against the same local gzip server measured:
+
+| Metric | Baseline `8c9168e` | Candidate |
+| --- | --- | --- |
+| Performance | 36 / 36 | 53 / 53 |
+| LCP | 14.044 / 14.046 s | 13.302 / 13.302 s |
+| CLS | 0.31956 / 0.31956 | 0.00215 / 0.00215 |
+| Accessibility / best practices / SEO | 100 / 100 / 100 | 100 / 100 / 100 |
+
+These are paired lab measurements, not hosted deployment or field Core Web Vitals evidence. The large single-file transfer still produces poor simulated mobile LCP; the largest improvement is layout stability. The earlier same-day live audit scored 31–32 with LCP 14.1–14.3 seconds and CLS 0.32. Do not compare fine-grained timing across the live and local environments.
+
+Verification used Node 22: model, SEO, social-preview and frozen-Daily tests (56), then account boundaries, points FAQ, Daily UI/summary/ranked UI (64), plus literal source checks. Chromium checks passed for SEO/no-JS/early shell, 320/390/1280px startup layout, account startup/recovery (26 checks), saved rivals in both languages over HTTP and `file:`, and all **221 offline rounds / 495 crest sources** with zero network requests and denied-storage recovery. Phone and desktop screenshots were inspected. The legacy offline/saved-rivals/SEO tests now explicitly enter Unlimited when asserting Unlimited state; Daily remains the normal product entry route. Tests ran through a worktree-local port-4174 harness with the runner's hard-coded 4173 URLs substituted, in a fresh non-persistent session. Raw reports and screenshots are ignored under `test-results/`; this is a focused selection, not a full-browser-suite claim.
+
+### Earlier release evidence
+
 Baseline live Lighthouse mobile run on 13 September 2026 (`test-results/seo-before.json`): performance **31**, accessibility **100**, best practices **100**, SEO **100**. Simulated FCP/LCP **16.8 seconds**, CLS **0.494**. This is a lab sample, not field Core Web Vitals and not a ranking metric. The initial SEO score already passed the basic checklist; the work goes beyond that checklist.
 
 Original embedded PNG payload: **3,060,219 bytes**. Optimized PNG payload: **743,566 bytes**. All 156 keys and metadata are retained. Reproduce optimization from the original revision rather than requantizing an already optimized file:
@@ -30,7 +57,7 @@ Local checks eliminated the measured startup layout shift. Production performanc
 
 ## Loading: what actually waits
 
-The badges are embedded PNGs, not a set of third-party image downloads. A fresh visitor first transfers and parses the portable game HTML; a signed-in visitor also waits for the pinned account SDK/session and authoritative cloud progress, plus a round start and confirmation when needed. Do not bypass these identity/scoring boundaries or silently show guest gameplay as ranked to hide latency.
+The badges are embedded PNGs, not a set of third-party image downloads. A fresh visitor first transfers and parses the portable game HTML; a signed-in visitor also waits for the pinned account SDK/session and authoritative cloud progress, plus a round start when needed (its response already contains the authoritative projection; there is no confirmation read-back). Do not bypass these identity/scoring boundaries or silently show guest gameplay as ranked to hide latency.
 
 On 13 September 2026, three fresh anonymous Chromium samples of release `0488d19` observed the club grid in **182–325ms**, with **796,632 bytes transferred as the encoded HTML body** (1,664,000 decoded). The standalone leaderboard HTML reached DOMContentLoaded in **20–106ms**, then its public API read took **461–549ms**; an earlier separate sample took **849ms** for that read. These unthrottled lab samples are not signed-in measurements or promises about mobile networks. Evidence is in ignored `test-results/loading-timing-before.json`.
 
@@ -41,7 +68,7 @@ The remaining online wait needs visible, truthful loading feedback, not fake per
 ```sh
 node --test tests/model.test.mjs tests/social-preview.test.mjs tests/seo.test.mjs
 python3 tests/source-check.py
-python3 tests/run-browser.py --suite seo-checks.js --suite brand-checks.js --suite offline-checks.js --suite origin-checks.js --suite saved-rivals-checks.js
+python3 tests/run-browser.py --suite seo-checks.js --suite account-startup-checks.js --suite offline-checks.js --suite saved-rivals-checks.js
 npx --yes lighthouse https://derabona.club/ --quiet --chrome-flags='--headless' --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=test-results/seo-live.json
 ```
 
@@ -49,7 +76,9 @@ Also verify public redirects, raw HTML without JS, image and favicon responses, 
 
 ## Account-side follow-up
 
-- Verify ownership of `derabona.club` in Google Search Console, submit `https://derabona.club/sitemap.xml`, and inspect the canonical home page for indexing. A public sitemap or a successful crawler-style fetch is **not** proof of submission, indexing or ranking.
+- Search Console was inspected through the owner's existing Hermes profile on 26 October 2026. Web search for 28 September–24 October showed **5 clicks, 28 impressions, 17.9% CTR and average position 6.5**. The home page is indexed with its declared canonical. These are small-sample search metrics, not analytics visitor totals.
+- Submitted `https://derabona.club/sitemap.xml` for the first time. Google acknowledged submission but still reported **Couldn't fetch**, zero discovered pages on the 12:18 UTC recheck. Public normal/Googlebot-style HTTP requests return 200 XML; the reason for Google's fetch failure is unconfirmed. Recheck processing later; submission is not successful processing.
+- The bare leaderboard URL was unknown to Google. Its live test passed, indexing was allowed, and an indexing request was accepted. The `?view=friends` variant was indexed despite declaring the bare leaderboard canonical, with Google choosing the variant. Recheck canonical selection after recrawl; do not remove useful routes or repeatedly request indexing.
 - Review actual queries, impressions and clicks after Google has crawled the changes. Do not promise immediate indexing or a search position.
 - Consider original football content only if it is genuinely useful. Do not mass-generate thin player/competition doorway pages or publish answers solely to stuff keywords.
 - Keep previews and discovery separate: messaging apps cache cards independently from Google Search.

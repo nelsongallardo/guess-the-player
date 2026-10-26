@@ -20,7 +20,7 @@ async page => {
  await p.goto('http://127.0.0.1:4173/leaderboard.html?competition=bad&lang=en&code=SECRET&state=SECRET#access_token=SECRET');
  await loading(p,'Deferred initial API');ok(await p.locator('#board-loading-label').textContent()==='Loading leaderboard…'&&await p.locator('#leaderboard-status').getAttribute('role')==='status','English loading has accessible live status');await p.locator('#language').selectOption('es');ok(await p.locator('#board-loading-label').textContent()==='Cargando tabla…','Loading switches to Spanish without another request');await p.locator('#language').selectOption('en');while(!release)await p.waitForTimeout(10);release();release=null;
  await p.locator('#leaderboard-table').waitFor({state:'visible'});await settled(p,'Ready');
- ok(await p.locator('h1').textContent()==='Public leaderboard','Standalone English page');
+ ok(await p.locator('h1').textContent()==='Leaderboard','Standalone English page');
  ok(!p.url().includes('SECRET')&&p.url().includes('competition=all'),'URL normalized and OAuth secrets discarded');
  ok((await p.locator('#bottom-play').textContent()).trim().startsWith('Back'),'Public standings retain a contextual route back to Play');
  ok(await p.locator('#leaderboard-entries tr').count()===20&&!await p.locator('#leaderboard-entries img').count(),'Twenty safe text rows');

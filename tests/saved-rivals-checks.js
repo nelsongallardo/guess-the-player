@@ -1,7 +1,7 @@
 async page => {
  const ok=(v,m)=>{if(!v)throw Error(m);},results=[];
  const run=async(p,url,language)=>{
-  const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto(url.split('?')[0]+'?lang='+language);ok(await p.evaluate(()=>document.documentElement.lang)===language,'Requested language loaded');
+  const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto(url.split('?')[0]+'?unlimited=1&lang='+language);ok(await p.evaluate(()=>document.documentElement.lang)===language,'Requested language loaded');
   // Seed real earned history through the existing finished-game renderer.
   await p.evaluate(()=>{state=CareerGame.create();while(!state.finished){CareerGame.answer(state,CareerGame.playerAt(state).name);CareerGame.next(state);}render(false,true);});
   const history=await p.evaluate(()=>sessionStorage.getItem('touchline.history.v1'));ok(history&&JSON.parse(history).length>0,'Real completed history seeded');

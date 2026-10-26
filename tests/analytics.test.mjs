@@ -4,14 +4,14 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const source=()=>{const m=html.match(/<script id="analytics">([\s\S]*?)<\/script>/);assert.ok(m,'Analytics module exists');return m[1];};
-function harness({host='derabona.club',protocol='https:',stored=null,denied=false,networkOffline=false,dnt=false,search='',referrer='https://example.org/private?email=secret@example.com'}={}){
+function harness({host='derabona.club',protocol='https:',stored=null,denied=false,networkOffline=false,dnt=false,search='',pathname='/',page='play',gpc=false,referrer='https://example.org/private?email=secret@example.com'}={}){
  const storage=new Map(stored?[['derabona.analytics-consent.v1',stored]]:[]),requests=[],sent=[];
  const node=()=>({hidden:true,textContent:'',setAttribute(){},addEventListener(){},close(){},showModal(){},open:false});
  const elements=new Map();const get=id=>{if(!elements.has(id))elements.set(id,node());return elements.get(id);};
  const document={referrer,getElementById:get,querySelectorAll:()=>[],createElement:()=>({}),head:{appendChild:s=>requests.push(s)}};
  let config;const sdk={init:(token,c)=>{config=c;c.loaded(sdk);},opt_in_capturing(){},opt_out_capturing(){},capture:(event,properties)=>{const result=config.before_send({event,properties:{token:'public-project-token',distinct_id:'anonymous-test','$current_url':'https://derabona.club/?secret=yes',email:'never@example.com',...properties}});if(result)sent.push(result);}};
- const c=vm.createContext({document,location:{hostname:host,protocol,search},navigator:{doNotTrack:dnt?'1':null,globalPrivacyControl:false,onLine:!networkOffline},localStorage:{get length(){return storage.size;},key:i=>[...storage.keys()][i],removeItem:k=>storage.delete(k),getItem:k=>{if(denied)throw Error('denied');return storage.get(k)||null;},setItem:(k,v)=>{if(denied)throw Error('denied');storage.set(k,v);}},URL,URLSearchParams,console,setTimeout,clearTimeout,window:{posthog:sdk},Map,Set});
- vm.runInContext(source(),c);const api=vm.runInContext('Analytics',c);api.start(()=>({language:'es',competition:'all',player_id:'test',round_index:1}));
+ const c=vm.createContext({document,location:{hostname:host,protocol,search,pathname},navigator:{doNotTrack:dnt?'1':null,globalPrivacyControl:gpc,onLine:!networkOffline},localStorage:{get length(){return storage.size;},key:i=>[...storage.keys()][i],removeItem:k=>storage.delete(k),getItem:k=>{if(denied)throw Error('denied');return storage.get(k)||null;},setItem:(k,v)=>{if(denied)throw Error('denied');storage.set(k,v);}},URL,URLSearchParams,console,setTimeout,clearTimeout,window:{posthog:sdk},Map,Set});
+ vm.runInContext(source(),c);const api=vm.runInContext('Analytics',c);api.start(()=>({language:'es',page,competition:'all',player_id:'test',round_index:1}));
  return {api,requests,sent,storage,load:()=>requests[0].onload(),config:()=>config};
 }
 test('No PostHog request or capture before affirmative consent',()=>{const h=harness();h.api.capture('hint_used');assert.equal(h.requests.length,0);assert.equal(h.sent.length,0);assert.equal(h.api.getConsent(),null);});
@@ -44,4 +44,50 @@ test('PostHog source attribution uses only the current HTTP referrer hostname, n
   assert.equal(e.properties.referrer_host,hostname);
   for(const key of ['$referrer','$initial_referrer','$session_entry_referrer','$set'])assert.equal(key in e.properties,false,key);
  }
+});
+
+test('Board pageviews use a safe canonical pathname and never manufacture a viewed round',()=>{
+ const h=harness({stored:'accepted',pathname:'/leaderboard.html',page:'groups',search:'?view=friends&league=private-id&code=secret&utm_source=reddit'});h.load();
+ assert.deepEqual(h.sent.map(e=>e.event),['$pageview']);
+ assert.equal(h.sent[0].properties.$current_url,'https://derabona.club/leaderboard.html');
+ assert.equal(h.sent[0].properties.$pathname,'/leaderboard.html');
+ assert.equal(h.sent[0].properties.page,'groups');
+ assert.equal(h.sent[0].properties.league,undefined);
+});
+test('Gameplay context admits only known mode/access/page categories',()=>{
+ const h=harness({stored:'accepted'});h.load();h.api.capture('answer_submitted',{mode:'daily',access:'ranked',page:'play',correct:true});
+ assert.equal(h.sent.at(-1).properties.mode,'daily');assert.equal(h.sent.at(-1).properties.access,'ranked');
+ h.api.capture('answer_submitted',{mode:'private-name',access:'user@example.com',page:'league-secret'});
+ for(const key of ['mode','access','page'])assert.equal(h.sent.at(-1).properties[key],undefined);
+});
+test('GPC blocks analytics on board as well as play',()=>{
+ const h=harness({stored:'accepted',pathname:'/leaderboard.html',page:'leaderboard',gpc:true});
+ assert.equal(h.requests.length,0);assert.equal(h.sent.length,0);
+});
+
+test('Successful gameplay transitions capture once, with no historical or denied completion replay',()=>{
+ const h=harness({stored:'accepted'});h.load();const before={key:'server-round-secret',mode:'daily',access:'ranked',player_id:'messi',round_index:1,status:'playing',guess_count:0,hints:0,points:0};
+ const after={...before,status:'won',guess_count:1,points:75};
+ h.api.recordMutation(before,after);h.api.recordMutation(before,after);
+ assert.equal(h.sent.filter(e=>e.event==='answer_submitted').length,1);
+ assert.equal(h.sent.filter(e=>e.event==='round_completed').length,1);
+ const done=h.sent.find(e=>e.event==='round_completed');assert.equal(done.properties.mode,'daily');assert.equal(done.properties.access,'ranked');assert.equal(done.properties.points,75);assert.equal(done.properties.result,'won');assert.equal(done.properties.key,undefined);
+ const count=h.sent.length;h.api.recordMutation(after,after);h.api.observeRound(after);h.api.observeRound(after);
+ assert.equal(h.sent.filter(e=>e.event==='round_completed').length,1,'rendering a completed round never records completion');
+ h.api.setConsent(false);h.api.recordMutation({...before,key:'other'},{...after,key:'other'});h.api.setConsent(true);
+ assert.equal(h.sent.filter(e=>e.event==='round_completed').length,1,'denied actions never replay after consent');
+});
+test('Round observation follows the actual displayed mode and hints require an accepted increment',()=>{
+ const h=harness({stored:'accepted'});h.load();const r={key:'daily:2026-10-26:0',mode:'daily',access:'guest',player_id:'messi',status:'playing',guess_count:0,hints:0};
+ h.api.observeRound(r);h.api.observeRound(r);assert.equal(h.sent.filter(e=>e.event==='round_viewed'&&e.properties.mode==='daily').length,1);
+ h.api.recordMutation(r,{...r,hints:1});h.api.recordMutation(r,{...r,hints:1});
+ assert.equal(h.sent.filter(e=>e.event==='hint_used').length,1);
+ h.api.recordMutation(r,{...r,key:'different',hints:2});assert.equal(h.sent.filter(e=>e.event==='hint_used').length,1,'mismatched round responses are not actions');
+});
+
+test('An action begun before consent is not backfilled by a later retry',()=>{
+ const h=harness(),r={key:'old',mode:'daily',access:'ranked',status:'playing',guess_count:0,hints:0};
+ const before=h.api.beginMutation(r);assert.equal(before,null);h.api.setConsent(true);h.load();
+ h.api.recordMutation(before,{...r,status:'won',guess_count:1});
+ assert.equal(h.sent.filter(e=>e.event==='round_completed').length,0);
 });

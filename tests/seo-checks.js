@@ -20,7 +20,40 @@ async page => {
     await summary.click();assert(!await faq.evaluate(el=>el.open),'Pointer closes points FAQ');
     await p.setViewportSize({width:375,height:812});
   };
-  const base='http://127.0.0.1:4173/index.html';
+  const base='http://127.0.0.1:4173/index.html?unlimited=1';
+  // The initial shell must keep below-game content out of the viewport until
+  // the puzzle replaces the loader; a hidden round panel cannot reserve space.
+  for(const width of [320,390,1280]){
+    const ctx=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
+    try{
+      await ctx.addInitScript(()=>{
+        window.startupShifts=[];
+        new PerformanceObserver(list=>{for(const entry of list.getEntries())if(!entry.hadRecentInput)startupShifts.push(entry.value);}).observe({type:'layout-shift',buffered:true});
+      });
+      const p=await ctx.newPage();await p.goto(base.split('?')[0]);
+      await p.waitForFunction(()=>!document.documentElement.classList.contains('game-loading'));
+      await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+      const geometry=await p.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,cls:startupShifts.reduce((sum,value)=>sum+value,0),roundMinHeight:getComputedStyle(document.querySelector('#round-panel')).minHeight}));
+      assert(geometry.scroll<=width,'Spanish masthead fits '+width);
+      assert(geometry.cls<.1,'Startup layout remains stable '+width+': '+geometry.cls);
+      assert(geometry.roundMinHeight==='0px','Ready round has no permanent loading reservation');
+      if(width===390||width===1280)await p.screenshot({path:'test-results/seo-ready-'+width+'.png'});
+      results.push({startup:geometry});
+    }finally{await ctx.close();}
+  }
+  const early=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  try{
+    // Stop after the visible shell: no roster, crests, model or UI has run.
+    await early.route('**/index.html*',async route=>{
+      const response=await route.fetch(),html=await response.text();
+      await route.fulfill({response,body:html.slice(0,html.indexOf('<script id="roster-data">'))+'</body></html>'});
+    });
+    const p=await early.newPage();await p.goto(base);
+    assert(await p.locator('#game-loading-status').isVisible(),'Branded loader paints before bulk data');
+    assert(await p.locator('.loading-spinner').evaluate(el=>getComputedStyle(el).animationName)==='none','Early loader respects reduced motion');
+    assert(await p.locator('.play-friends').evaluate(el=>el.getBoundingClientRect().top>=innerHeight),'Initial reservation prevents below-game content flashing above the fold');
+    results.push('Early shell loading before embedded data');
+  }finally{await early.close();}
   const noJS=await browser.newContext({javaScriptEnabled:false});
   try {
     const p=await noJS.newPage();await p.goto(base);
@@ -35,7 +68,7 @@ async page => {
     try{
       if(kind==='saved')await ctx.addInitScript(()=>localStorage.setItem('touchline.language.v1','en'));
       const p=await ctx.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
-      const url=kind==='offline'?__FILE_URL__.split('?')[0]:base+(kind==='query'?'?lang=en':'');
+      const url=kind==='offline'?__FILE_URL__.split('?')[0]+'?unlimited=1':base+(kind==='query'?'&lang=en':'');
       await p.goto(url);await p.waitForFunction(()=>!document.documentElement.classList.contains('game-loading'));
       const lang=['query','saved'].includes(kind)?'en':'es';
       assert(await p.locator('html').getAttribute('lang')===lang,'Language precedence: '+kind);

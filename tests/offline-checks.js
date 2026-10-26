@@ -7,7 +7,8 @@ async page => {
     const file=await isolated.newPage();
     file.on('pageerror',error=>errors.push(error.message));
     file.on('request',request=>{if(/^https?:/.test(request.url()))requests.push(request.url());});
-    await file.goto(__FILE_URL__);
+    // This suite exercises the Unlimited deck; Daily is the normal entry route.
+    await file.goto(__FILE_URL__+'&unlimited=1');
     ok(await file.locator('#options button').count()===10,'Single file loads with browser network offline');
     const total=await file.evaluate(()=>PLAYERS.length);
     for(let i=0;i<total;i++){

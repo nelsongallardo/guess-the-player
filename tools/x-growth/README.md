@@ -62,7 +62,7 @@ read `$0.005`, user read `$0.010`.
 A real link every day costs `30 × $0.205 = $6.15/month` in posts alone — more than
 the entire cap, before a single reply. So:
 
-- **Sundays** (`DERABONA_LINK_DAYS`, default `0`) carry a full `https://derabona.club/`.
+- **Sundays** (`DERABONA_LINK_DAYS`, default `0`) carry a full `https://derabona.club/?utm_source=x&utm_medium=social&utm_campaign=daily_<number>` for consented campaign attribution.
 - **Every other day** ends with a bare `derabona.club`, which X still auto-links in the
   rendered post. The route to the game survives; the $0.20 charge does not.
 - The reveal never carries a paid link.
