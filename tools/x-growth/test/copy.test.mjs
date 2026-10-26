@@ -99,4 +99,13 @@ for (const text of good) {
 }
 
 console.log(`\n${fail ? `${fail} FAILED` : 'ALL COPY TESTS PASSED'}`);
+// Clickable campaign links identify the published Daily without personal data.
+const linkedDaily=dailyFor(new Date(EPOCH_DAY*86400000).toISOString().slice(0,10));
+const campaignLink=new URL(composeText(linkedDaily,true).match(/https:\/\/\S+/)[0]);
+assert.equal(campaignLink.origin,'https://derabona.club');
+assert.equal(campaignLink.searchParams.get('utm_source'),'x');
+assert.equal(campaignLink.searchParams.get('utm_medium'),'social');
+assert.equal(campaignLink.searchParams.get('utm_campaign'),'daily_'+linkedDaily.challengeNumber);
+
 process.exit(fail ? 1 : 0);
+

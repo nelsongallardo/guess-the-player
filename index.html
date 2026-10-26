@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script id="campaign-entry">
+// Read only the three disclosed campaign fields before OAuth/invite URL scrubbing.
+// Kept in memory only; no requests or analytics persistence before consent.
+const CampaignEntry=(()=>{const out={};try{const p=new URLSearchParams(location.search);for(const k of ['utm_source','utm_medium','utm_campaign']){const v=p.get(k);if(v&&v.length<=64)out[k]=v;}}catch{}return Object.freeze(out);})();
+</script>
 <script id="auth-callback">
 // Sign-in-only route for private leagues (?auth=friends): Google sign-in,
 // the PKCE callback and mandatory nickname enrollment complete here, then
@@ -76543,6 +76548,7 @@ const DailyUI=(()=>{
   };
   const currentModeEpoch=()=>modeEpoch;
   const attempt=()=>persistence?.read().attempts[displayedDate]||null;
+  const analyticsRound=()=>{const a=attempt(),r=a?.game.rounds[a.game.roundIndex];return Analytics.snapshot(r,{key:`daily:guest:${a?.date}:${a?.game.roundIndex}`,mode:'daily',access:'guest',player_id:a?.game.deck[a.game.roundIndex],round_index:(a?.game.roundIndex??0)+1});};
   const currentDailyClockId=()=>{const a=attempt();return a?`${displayedDate}:${a.game.roundIndex}`:null;};
   const saveDailyClock=()=>{try{sessionStorage.setItem(DAILY_CLOCK_KEY,JSON.stringify({id:dailyClockId,startedAt:dailyClockStart}));}catch{}};
   const ensureDailyClock=()=>{
@@ -76599,11 +76605,13 @@ const DailyUI=(()=>{
     const a=attempt(),descriptor=DailyChallenge.forDate(a.date),roundIndex=a.game.roundIndex,p=descriptor.payloads[a.game.roundIndex].player,r=a.game.rounds[a.game.roundIndex],answerId=a.game.deck[a.game.roundIndex],optionList=a.options[a.game.roundIndex],result=r.status,x=copy(),dailyText=copyFor(language);
     if(r.startedAt===null&&!Analytics.shouldPauseGameClock()){persistence.start(displayedDate);return render(celebrate,newCareer);}
     if(a.completion&&resultRequested){
+      Analytics.observeRound(null);
       document.getElementById('daily-summary').hidden=false;document.getElementById('round-panel').hidden=true;
       const doc=persistence.read(),review=a.game.deck.map((id,i)=>({name:descriptor.payloads[i].player.name,won:a.game.rounds[i].status==='won'}));
       renderDailySummary({language,challengeNumber:a.challengeNumber,...a.completion,currentStreak:doc.stats.currentStreak,bestStreak:doc.stats.bestStreak,review,nextRolloverAtMs:nextRolloverAt(a.date),share});
       return;
     }
+    Analytics.observeRound(analyticsRound());
     document.getElementById('answer-caption').textContent=x.chances;
     if(newCareer||document.getElementById('timeline').dataset.dailyPlayer!==p.id){renderCareer(p);document.getElementById('timeline').dataset.dailyPlayer=p.id;document.getElementById('timeline-scroll').scrollLeft=0;document.getElementById('source-details').open=false;}
     document.getElementById('timeline').classList.toggle('years-revealed',r.hints>=3);
@@ -76611,7 +76619,7 @@ const DailyUI=(()=>{
     document.getElementById('attempt-text').textContent=result==='won'?x.found:x.attempts(left);document.getElementById('lives').replaceChildren(...Array.from({length:3},(_,i)=>el('span',undefined,`life${i>=left?' used':''}`)));
     document.getElementById('progress').max=3;document.getElementById('progress').value=roundIndex+(result==='playing'?0:1);document.getElementById('progress-label').textContent=dailyText.playerProgress(roundIndex+1);document.getElementById('round-number').textContent=`#${a.challengeNumber} · ${roundIndex+1}/3`;
     const options=document.getElementById('options');if(options.children.length!==optionList.length||[...options.children].some((button,i)=>button.dataset.optionId!==optionList[i].id)){
-      options.replaceChildren();optionList.forEach((option,i)=>{const button=el('button',undefined,'option');button.type='button';button.dataset.optionId=option.id;button.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',undefined,'option-state'));button.onclick=()=>{startDailyClockFromInteraction();if(!isDaily()||!persistence.guess(option.id,displayedDate,dailyClockStart))return;render(option.id===answerId);const latest=attempt();if(latest.completion)document.getElementById('next').focus({preventScroll:true});else if(latest.game.rounds[latest.game.roundIndex].status!=='playing')document.getElementById('next').focus({preventScroll:true});};options.append(button);});
+      options.replaceChildren();optionList.forEach((option,i)=>{const button=el('button',undefined,'option');button.type='button';button.dataset.optionId=option.id;button.append(el('span',String.fromCharCode(65+i),'option-letter'),el('span',option.label,'option-name'),el('span',undefined,'option-state'));button.onclick=()=>{startDailyClockFromInteraction();const before=analyticsRound();if(!isDaily()||!persistence.guess(option.id,displayedDate,dailyClockStart))return;Analytics.recordMutation(before,analyticsRound());render(option.id===answerId);const latest=attempt();if(latest.completion)document.getElementById('next').focus({preventScroll:true});else if(latest.game.rounds[latest.game.roundIndex].status!=='playing')document.getElementById('next').focus({preventScroll:true});};options.append(button);});
     }
     [...options.children].forEach((button,i)=>{const option=optionList[i],guessed=r.guesses.includes(option.id),correct=result!=='playing'&&option.id===answerId,wrong=guessed&&!correct;button.disabled=result!=='playing'||wrong;button.className='option'+(wrong?' wrong':correct?' correct':result!=='playing'?' muted':'')+(correct&&celebrate&&result==='won'?' goal':'');button.setAttribute('aria-label',`${option.label}${wrong?', '+x.incorrect:correct?', '+x.correct:''}`);button.querySelector('.option-state').textContent=wrong?'×':correct?'✓':'↗';});
     const values=[position(p),country(p),x.yearsRevealed];document.getElementById('hints').replaceChildren(...x.hints.map((label,i)=>el('li',i<r.hints?`${label}: ${values[i]}`:`${i+1}. ${label}`,i<r.hints?'revealed':'')));
@@ -76634,7 +76642,7 @@ const DailyUI=(()=>{
     const a=attempt();if(!a?.completion)return;const x=copyFor(language),text=shareText({language,challengeNumber:a.challengeNumber,...a.completion,currentStreak:persistence.read().stats.currentStreak}),status=document.getElementById('daily-share-status');
     status.textContent='';try{if(typeof navigator.share==='function'){await navigator.share({title:language==='en'?'Derabona Daily':'Derabona diaria',text,url:'https://derabona.club/'});status.textContent=x.shared;}else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);status.textContent=x.copied;}else{const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();if(!document.execCommand('copy'))throw Error('copy');area.remove();status.textContent=x.copied;}}catch(error){if(error?.name!=='AbortError')status.textContent=x.shareFailed;}finally{document.getElementById('daily-share').focus({preventScroll:true});}return status.textContent;
   };
-  const hint=()=>{if(!playActivated)return false;if(Accounts.session)return DailyRankedUI.hint();startDailyClockFromInteraction();if(!isDaily()||!persistence.hint(displayedDate))return false;render();if(document.getElementById('hint').disabled)document.getElementById('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});return true;};
+  const hint=()=>{if(!playActivated)return false;if(Accounts.session)return DailyRankedUI.hint();startDailyClockFromInteraction();const before=analyticsRound();if(!isDaily()||!persistence.hint(displayedDate))return false;Analytics.recordMutation(before,analyticsRound());render();if(document.getElementById('hint').disabled)document.getElementById('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});return true;};
   const next=()=>{if(!playActivated)return false;if(Accounts.session)return DailyRankedUI.next();if(isDaily()&&attempt()?.completion){requestResult();return true;}if(!isDaily()||!persistence.next(displayedDate))return false;render(false,true);document.getElementById('question').focus({preventScroll:true});return true;};
   const clock=()=>{if(Accounts.session)return DailyRankedUI.clock();const a=isDaily()?attempt():null,r=a?.game.rounds[a.game.roundIndex];if(!r||!ensureDailyClock())return null;return {key:`daily:${displayedDate}:${a.game.roundIndex}`,elapsedMs:dailyClockWaitingForConsent?0:Date.now()-dailyClockStart,playing:r.status==='playing',hints:r.hints,points:r.points};};
   const requestResult=()=>{resultRequested=true;render(false,true);document.getElementById('daily-summary-title').focus({preventScroll:true});};
@@ -81232,14 +81240,14 @@ const Analytics = (()=>{
   // This is a public ingestion token, not a personal/admin API key.
   const TOKEN='phc_yFExTpbLyKsrVayo4NFKeD6yHS4ku6ZdDgwT53KWt2oN',KEY='derabona.analytics-consent.v1';
   const events=new Set(['$pageview','round_viewed','answer_submitted','hint_used','round_completed','competition_selected','competition_completed','language_changed','help_opened','progress_reset']);
-  const fields=new Set(['language','competition','player_id','round_index','guess_count','hints','result','points','correct','utm_source','utm_medium','utm_campaign']);
+  const fields=new Set(['language','competition','player_id','round_index','guess_count','hints','result','points','correct','utm_source','utm_medium','utm_campaign','mode','access','page']);
   // The one deliberate, narrow exception to "no URL parameters": captured
   // once at load, before any later history.replaceState/URL-scrubbing call
   // elsewhere in the app can remove them, and reused for the whole tab
   // session (a single-page app only ever has this one real navigation).
   // Everything else about the URL - the rest of the query string, the path,
   // fragments - stays stripped; see properties()'s hardcoded $current_url.
-  const utm=(()=>{
+  const utm=typeof CampaignEntry!=='undefined'?CampaignEntry:(()=>{
     try{
       const params=new URLSearchParams(location.search),out={};
       for(const key of ['utm_source','utm_medium','utm_campaign']){const value=params.get(key);if(value&&value.length<=64)out[key]=value;}
@@ -81252,12 +81260,15 @@ const Analytics = (()=>{
   })();
   const online=location.protocol==='https:'&&location.hostname==='derabona.club';
   const privacySignal=()=>navigator.globalPrivacyControl===true||navigator.doNotTrack==='1';
+  const pathname=location.pathname==='/leaderboard.html'?'/leaderboard.html':'/';
+  const valid=(key,value)=>({mode:['daily','unlimited'],access:['guest','ranked','practice'],page:['play','groups','leaderboard']}[key]?.includes(value)??(typeof value==='boolean'||(typeof value==='number'&&Number.isFinite(value))||(typeof value==='string'&&value.length<=64)));
+  let started=false,observedRound=null,lastViewed=null;const recorded=new Set();
   let choice=null,lang='es',context=()=>({}),loading=false,ready=false,sdk=null,queue=[],pageviewSent=false;
   try{const saved=localStorage.getItem(KEY);if(saved==='accepted'||saved==='declined')choice=saved;}catch{}
   const allowed=()=>online&&navigator.onLine!==false&&choice==='accepted'&&!privacySignal();
   const text={
-    es:{title:'¿Nos ayudás a mejorar derabona?',short:'Con tu permiso medimos visitas y partidas con PostHog. Sin grabaciones de pantalla. Podés decir que no y jugar igual.',allow:'Permitir analítica',decline:'No, gracias',settings:'Privacidad y analítica',close:'Cerrar',status:{accepted:'Permiso de analítica: permitido.',declined:'Permiso de analítica: rechazado.',pending:'La analítica está desactivada hasta que la permitas.'},signal:'Tu navegador solicita no ser rastreado: no enviamos analítica.',offline:'Las partidas locales y sin conexión no se rastrean.',detail:'Si aceptás, PostHog (región UE) recibe visitas y eventos del juego: competición, intentos, pistas, resultados e idioma, junto con datos básicos del navegador y un identificador anónimo guardado en este navegador para medir visitas posteriores. No pedimos tu nombre ni tu email; no enviamos texto libre ni la URL completa. Si llegaste desde un link con utm_source/utm_medium/utm_campaign (por ejemplo, una red social), guardamos solo esos tres campos para saber qué publicación te trajo — el resto de la URL (ruta, otros parámetros) se descarta igual. La captura automática de clics, las grabaciones de sesión y el almacenamiento de IP en los eventos están desactivados. El progreso de invitado dura esta sesión de pestaña; el progreso clasificado con cuenta se guarda en la nube, independientemente del permiso de analítica. No enviamos nombres de Google, emails, IDs de cuenta ni tokens a PostHog. Podés retirar el permiso acá cuando quieras: se detienen los envíos futuros y se elimina el identificador analítico local; los eventos ya enviados no se borran automáticamente.'},
-    en:{title:'Help us improve derabona?',short:'With your permission, PostHog measures visits and gameplay. No screen recordings. You can decline and play normally.',allow:'Allow analytics',decline:'No thanks',settings:'Privacy and analytics',close:'Close',status:{accepted:'Analytics permission: allowed.',declined:'Analytics permission: declined.',pending:'Analytics is disabled until you allow it.'},signal:'Your browser requests no tracking: analytics is disabled.',offline:'Local and offline play is not tracked.',detail:'If you accept, PostHog (EU region) receives visits and game events: competition, guesses, hints, results and language, plus basic browser information and an anonymous identifier stored in this browser to measure returning visits. We do not ask for your name or email, and do not send free text or the full URL. If you arrived via a link with utm_source/utm_medium/utm_campaign (for example, a social media post), we keep only those three fields to tell which post brought you here — the rest of the URL (path, any other parameters) is still discarded. Automatic click capture, session recordings and IP storage in events are disabled. Guest progress stays in this tab session; signed-in ranked progress is stored in the cloud, independently of analytics permission. Google names, emails, account IDs and tokens are never sent to PostHog. You can withdraw permission here at any time: future collection stops and the local analytics identifier is removed; previously sent events are not automatically deleted.'}
+    es:{title:'¿Nos ayudás a mejorar derabona?',short:'Con tu permiso medimos visitas y partidas con PostHog. Sin grabaciones de pantalla. Podés decir que no y jugar igual.',allow:'Permitir analítica',decline:'No, gracias',settings:'Privacidad y analítica',close:'Cerrar',status:{accepted:'Permiso de analítica: permitido.',declined:'Permiso de analítica: rechazado.',pending:'La analítica está desactivada hasta que la permitas.'},signal:'Tu navegador solicita no ser rastreado: no enviamos analítica.',offline:'Las partidas locales y sin conexión no se rastrean.',detail:'Si aceptás, PostHog (región UE) recibe visitas a Jugar, Grupos y Tabla, y eventos del desafío diario y juego sin límite: modo invitado, práctica o clasificado, competición, intentos, pistas, resultados e idioma, junto con datos básicos del navegador y un identificador anónimo guardado en este navegador para medir visitas posteriores. No pedimos tu nombre ni tu email; no enviamos texto libre ni la URL completa. Si llegaste desde un link con utm_source/utm_medium/utm_campaign (por ejemplo, una red social), guardamos solo esos tres campos para saber qué publicación te trajo — Solo distinguimos la página del juego y la de tablas; las rutas privadas, otros parámetros y fragmentos se descartan. La captura automática de clics, las grabaciones de sesión y el almacenamiento de IP en los eventos están desactivados. El progreso de invitado dura esta sesión de pestaña; el progreso clasificado con cuenta se guarda en la nube, independientemente del permiso de analítica. No enviamos nombres de Google, emails, IDs de cuenta ni tokens a PostHog. Podés retirar el permiso acá cuando quieras: se detienen los envíos futuros y se elimina el identificador analítico local; los eventos ya enviados no se borran automáticamente.'},
+    en:{title:'Help us improve derabona?',short:'With your permission, PostHog measures visits and gameplay. No screen recordings. You can decline and play normally.',allow:'Allow analytics',decline:'No thanks',settings:'Privacy and analytics',close:'Close',status:{accepted:'Analytics permission: allowed.',declined:'Analytics permission: declined.',pending:'Analytics is disabled until you allow it.'},signal:'Your browser requests no tracking: analytics is disabled.',offline:'Local and offline play is not tracked.',detail:'If you accept, PostHog (EU region) receives visits to Play, Groups and Leaderboard, and Daily and Unlimited game events: guest, practice or ranked mode, competition, guesses, hints, results and language, plus basic browser information and an anonymous identifier stored in this browser to measure returning visits. We do not ask for your name or email, and do not send free text or the full URL. If you arrived via a link with utm_source/utm_medium/utm_campaign (for example, a social media post), we keep only those three fields to tell which post brought you here — Only the game and board page paths are distinguished; private paths, other parameters and fragments are discarded. Automatic click capture, session recordings and IP storage in events are disabled. Guest progress stays in this tab session; signed-in ranked progress is stored in the cloud, independently of analytics permission. Google names, emails, account IDs and tokens are never sent to PostHog. You can withdraw permission here at any time: future collection stops and the local analytics identifier is removed; previously sent events are not automatically deleted.'}
   };
   function update(){
     const t=text[lang],el=id=>document.getElementById(id);
@@ -81268,27 +81279,50 @@ const Analytics = (()=>{
   }
   function properties(extra={}){
     let base={};try{base=context()||{};}catch{}
-    const out={};for(const [key,value]of Object.entries({...base,...extra}))if(fields.has(key)&&(typeof value==='boolean'||(typeof value==='number'&&Number.isFinite(value))||(typeof value==='string'&&value.length<=64)))out[key]=value;
-    out.language=lang;out.$current_url='https://derabona.club/';out.$host='derabona.club';out.$pathname='/';out.$geoip_disable=true;
+    const out={};for(const [key,value]of Object.entries({...observedRound,...base,...extra}))if(fields.has(key)&&valid(key,value))out[key]=value;
+    out.language=lang;out.$current_url='https://derabona.club'+pathname;out.$host='derabona.club';out.$pathname=pathname;out.$geoip_disable=true;
     Object.assign(out,utm);
     out.referrer_host=referrerHost;
     return out;
   }
   function beforeSend(event){
     if(!allowed()||!events.has(event.event))return null;
-    const clean={};for(const [key,value]of Object.entries(event.properties||{}))if(sdkFields.has(key)||fields.has(key)||['$current_url','$host','$pathname','$geoip_disable','referrer_host'].includes(key))clean[key]=value;
-    clean.$current_url='https://derabona.club/';clean.$pathname='/';clean.$host='derabona.club';clean.$geoip_disable=true;clean.$process_person_profile=false;
+    const clean={};for(const [key,value]of Object.entries(event.properties||{}))if(sdkFields.has(key)||(fields.has(key)&&valid(key,value))||['$current_url','$host','$pathname','$geoip_disable','referrer_host'].includes(key))clean[key]=value;
+    clean.$current_url='https://derabona.club'+pathname;clean.$pathname=pathname;clean.$host='derabona.club';clean.$geoip_disable=true;clean.$process_person_profile=false;
     // PostHog's source/channel reports read this standard field. Derive both
     // fields here so SDK-persisted referrers cannot reintroduce URLs or old sources.
     clean.referrer_host=referrerHost;clean.$referring_domain=referrerHost;
     return {...event,properties:clean};
   }
   function capture(event,extra){
-    try{if(!allowed()||!events.has(event))return;const entry=[event,properties(extra)];if(ready)sdk.capture(...entry);else if(queue.length<30)queue.push(entry);}catch{}
+    try{if(!started||!allowed()||!events.has(event))return;const entry=[event,properties(extra)];if(ready)sdk.capture(...entry);else if(queue.length<30)queue.push(entry);}catch{}
+  }
+  function snapshot(round,extra={}){
+    if(!round)return null;
+    const result=extra.result||round.status;
+    if(!['playing','won','lost'].includes(result))return null;
+    return {key:extra.key||round.id,guess_count:round.guesses?.length||0,hints:round.hints||0,points:round.points||0,...extra,result};
+  }
+  function observeRound(round){
+    observedRound=round;
+    if(!round){lastViewed=null;return;}
+    if(started&&allowed()&&round.key!==lastViewed){lastViewed=round.key;capture('round_viewed');}
+  }
+  function recordMutation(before,after){
+    if(!started||!allowed()||!before||!after||before.key!==after.key)return;
+    // Called only after an accepted action, never from reads or render paths.
+    const prior=before.result||before.status,result=after.result||after.status;
+    const emit=(event,suffix,extra={})=>{const key=String(after.key)+':'+suffix;if(recorded.has(key))return;recorded.add(key);capture(event,{...after,result,...extra});};
+    if(prior!=='playing')return;
+    if(after.guess_count===before.guess_count+1)emit('answer_submitted','guess:'+after.guess_count,{correct:result==='won'});
+    if(after.hints===before.hints+1)emit('hint_used','hint:'+after.hints);
+    if(['won','lost'].includes(result)&&after.guess_count===before.guess_count+1)emit('round_completed','completed');
   }
   function activate(){
     if(!allowed())return;
-    if(!pageviewSent){capture('$pageview');capture('round_viewed');pageviewSent=true;}
+    if(!started)return;
+    if(!pageviewSent){capture('$pageview');pageviewSent=true;}
+    if(observedRound&&observedRound.key!==lastViewed){lastViewed=observedRound.key;capture('round_viewed');}
     if(ready){try{sdk.opt_in_capturing();}catch{}return;}
     if(loading)return;loading=true;
     try{
@@ -81322,7 +81356,7 @@ const Analytics = (()=>{
   }
   function setLanguage(value){lang=value==='en'?'en':'es';update();}
   function start(getContext){
-    context=getContext;try{lang=context().language==='en'?'en':'es';}catch{}
+    context=getContext;started=true;try{lang=context().language==='en'?'en':'es';}catch{}
     const choiceBeforeStart=choice;
     // Consent can change in another tab after this script's initial storage read
     // but before deferred startup installs the storage listener. Reconcile that
@@ -81336,7 +81370,7 @@ const Analytics = (()=>{
     if(choice!=='accepted')clearIdentity();update();activate();
     if(choice!==null&&choice!==choiceBeforeStart)window.dispatchEvent?.(new Event('derabona:analytics-consent-resolved'));
   }
-  return {start,capture,setConsent,setLanguage,getConsent:()=>choice,shouldPauseGameClock:()=>online&&choice===null&&!privacySignal()};
+  return {start,capture,snapshot,observeRound,recordMutation,setConsent,setLanguage,getConsent:()=>choice,shouldPauseGameClock:()=>online&&choice===null&&!privacySignal()};
 })();
 </script>
 <script id="game-ui">
@@ -81530,7 +81564,7 @@ const hintValues=p=>[position(p),country(p),copy().yearsRevealed];
 const hintAction=n=>language==='en'?`Show ${['position','nationality','club years'][n]} · lowers points`:`Ver ${['posición','nacionalidad','años en clubes'][n]} · resta puntos`;
 const ABOUT_ES = $('about-game').innerHTML;
 const ABOUT_EN = "<h2 id=\"about-title\">A free football player guessing game</h2><p>In <strong>derabona</strong>, every badge is a clue: follow the clubs and years in a career to identify the footballer. Play this football quiz on your phone or computer, without creating an account or installing an app.</p><details><summary>How to play derabona</summary><ol><li>Read the career from the first club, left to right, then continue on the next row.</li><li>Choose one of ten players, in guest, practice or ranked play. You have three attempts; incorrect answers are ruled out.</li><li>Need help? Ask for a hint: position, nationality, or each club's years - up to three, the same in either mode. Faster correct answers and fewer hints earn more points.</li></ol><p>Careers include senior clubs, reserve teams competing in senior leagues and actual return spells. Career notes and sources appear after you answer.</p></details><details id=\"points-faq\"><summary>How do points work?</summary><p>Each correct answer earns up to <strong>100 points</strong>; three wrong guesses end the round with <strong>0 points</strong>. Wrong guesses do not directly deduct points, but the clock keeps running. There is no streak multiplier.</p><p><strong>Hints:</strong> there are three, the same in guest, practice or ranked play - position, nationality, and each club's years. With no hints, one, two or three, the maximum is 100, 80, 60 or 40 points.</p><p><strong>Time:</strong> you keep that maximum for the first 2 seconds. It then decreases gradually to 25% at 24 seconds and drops no further - enough to answer from memory, not enough to look the answer up elsewhere. The result is rounded to the nearest whole point. For example, answering correctly at 24 seconds with one hint earns 20 points.</p><p><strong>Rankings:</strong> the server clock keeps running while you are away; refreshing does not restart it. Each footballer counts only once toward your total: you cannot replay them to improve the result. Their points also appear in each competition they belong to, without adding extra points to your global total. Guest and practice points never transfer to the rankings.</p></details><details><summary>Players from Europe and South America</summary><p>There are 221 players: 110 from Europe and 111 from South America. Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão, or all players. Competitions filter quiz targets; rival names are matched by career origin and era.</p></details><details><summary>Saved progress and offline play</summary><p>Guest points, streak and answered players last for this tab session: refresh retains them and normal close ends them (browser session restore may retain them). Blocked storage means reloading restarts. Optional Google sign-in saves ranked progress across devices without importing guest scores. Reset only clears unranked results.</p><p>You can <a href=\"/index.html\" download=\"derabona.html\">download the game as an HTML file</a> and open it offline. Club badges are included. JavaScript must be enabled; no account or external service is required.</p></details>";
-function analyticsContext(){if(RankedUI.isAccountMode())return {language};const r=CareerGame.roundAt(state),p=CareerGame.playerAt(state);return {language,competition:state.competition,player_id:p?.id,round_index:state.roundIndex+1,guess_count:r?.guesses.length||0,hints:r?.hints||0,result:CareerGame.outcome(state),points:r?.points||0};}
+function analyticsContext(){const base={language,page:'play',mode:DailyUI.isDaily()?'daily':'unlimited',access:Accounts.session?(RankedUI.isAccountMode()||DailyUI.isDaily()?'ranked':'practice'):'guest'};if(DailyUI.isDaily()||RankedUI.isAccountMode())return base;const r=CareerGame.roundAt(state),p=CareerGame.playerAt(state);return {...base,competition:state.competition,player_id:p?.id,round_index:state.roundIndex+1,guess_count:r?.guesses.length||0,hints:r?.hints||0,result:CareerGame.outcome(state),points:r?.points||0};}
 function applyLanguage() {
   const t=copy();document.documentElement.lang=language;document.title=t.title;Analytics.setLanguage(language);
   $('footer-about').textContent=t.footerAbout;$('footer-privacy').textContent=t.footerPrivacy;$('footer-contact').textContent=t.footerContact;document.querySelector('.footer-links').ariaLabel=t.footerNav;
@@ -81563,7 +81597,7 @@ function renderCompetitionOptions(){
     // panel would push the masthead itself off-screen above the fold,
     // which reads as "the page jumped to the bottom." Just close the
     // dialog and let the page stay where the player already was.
-    b.addEventListener('click',()=>{const wasReady=!playActivated;playActivated=true;const next=startGame(state.difficulty,id);if(!next)return;state=next;Analytics.capture("competition_selected");Analytics.capture("round_viewed");resetRoundClock();applyLanguage();PlayOverview.render();render(false,true);$('competitions').close();(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});});
+    b.addEventListener('click',()=>{const wasReady=!playActivated;playActivated=true;const next=startGame(state.difficulty,id);if(!next)return;state=next;Analytics.capture("competition_selected");resetRoundClock();applyLanguage();PlayOverview.render();render(false,true);$('competitions').close();(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});});
     container.append(b);
   });
 }
@@ -81652,11 +81686,13 @@ function render(celebrate=false,newCareer=false){
   $('score').textContent=String(lifetime.score).padStart(3,'0');$('streak').textContent=lifetime.streak;
   $('round-panel').hidden=state.finished;$('summary-panel').hidden=!state.finished;
   if(state.finished){
+    Analytics.observeRound(null);
     $('final-score').textContent=lifetime.score.toLocaleString(language==='es'?'es-ES':'en-GB');$('summary-caption').textContent=t.recap(stats,state.deck.length);$('review').replaceChildren();
     state.rounds.forEach((row,i)=>{const won=CareerGame.outcome(state,i)==='won',li=el('li');li.append(el('span',CareerGame.playerAt(state,i).name),el('span',won?t.reviewWon:t.reviewLost,won?'review-won':'review-lost'));$('review').append(li);});
     recordHistoryIfNeeded(stats);renderHistory();
     save();return;
   }
+  Analytics.observeRound(Analytics.snapshot(r,{key:`unlimited:guest:${state.gameId||state.createdAt}:${state.roundIndex}:${p.id}`,...analyticsContext(),result}));
   if(newCareer||!$('timeline').childElementCount){renderCareer(p);$('timeline-scroll').scrollLeft=0;$('source-details').open=false;}
   // Club years are hidden by default (see .club-years CSS) and only shown
   // once the 3rd hint is spent, same cost as country/position.
@@ -81729,7 +81765,7 @@ function render(celebrate=false,newCareer=false){
 }
 function showRoundStart(){(state.finished?$('summary-panel'):$('round-panel')).scrollIntoView({block:'start',behavior:'auto'});(state.finished?$('summary-title'):$('question')).focus({preventScroll:true});}
 $('hint').addEventListener('click',()=>{if(!playActivated)return;if(DailyUI.isDaily()){DailyUI.hint();return;}if(RankedUI.isAccountMode()){RankedUI.mutate('hint');return;}startGuestClockFromInteraction();if(CareerGame.hint(state)){Analytics.capture("hint_used");render();if($('hint').disabled)$('options').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}});
-$('next').addEventListener('click',()=>{if(!playActivated)return;if(DailyUI.isDaily()){DailyUI.next();return;}if(RankedUI.isAccountMode()){RankedUI.mutate('start',{competition:RankedUI.competition()});return;}guestRankedReminderOpen=false;if(CareerGame.next(state)){Analytics.capture(state.finished?"competition_completed":"round_viewed");resetRoundClock();render(false,true);showRoundStart();}});
+$('next').addEventListener('click',()=>{if(!playActivated)return;if(DailyUI.isDaily()){DailyUI.next();return;}if(RankedUI.isAccountMode()){RankedUI.mutate('start',{competition:RankedUI.competition()});return;}guestRankedReminderOpen=false;if(CareerGame.next(state)){if(state.finished)Analytics.capture("competition_completed");resetRoundClock();render(false,true);showRoundStart();}});
 $('replay').addEventListener('click',()=>{
   if(RankedUI.isAccountMode())return;
   if(!state.finished)return;
@@ -81838,6 +81874,7 @@ const DailyRankedUI = (()=>{
   const finished=()=>!!daily?.daily?.finished;
   const activeRoundIndex=()=>{const rounds=daily?.daily?.rounds;if(!rounds||!rounds.length)return 0;const playing=rounds.find(round=>round.status==='playing');return playing?playing.roundIndex:2;};
   const currentRound=()=>daily?.daily?.rounds?.find(round=>round.roundIndex===roundIndex)||null;
+  const analyticsRound=()=>Analytics.snapshot(currentRound(),{key:`daily:ranked:${userId}:${daily?.daily?.date}:${roundIndex}`,mode:'daily',access:'ranked',player_id:currentRound()?.playerId,round_index:roundIndex+1});
   const resetIdentity=()=>{userId=Accounts.session?.user?.id??null;pendingUserId=null;epoch++;daily=null;pending=null;pendingDate=null;syncFailed=false;busy=false;roundIndex=0;};
   // resetIndex only applies on a fresh load (sync()): a hint/answer response
   // must NOT silently jump the displayed round ahead the instant a round
@@ -81866,8 +81903,8 @@ const DailyRankedUI = (()=>{
   }
   async function sendPending(){
     discardExpired();if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;
-    const payload=pending,owner=pendingUserId,ticket=epoch,scoreRevision=RankedUI.scoreRevision();busy=true;render(false,false);
-    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,false,scoreRevision);pending=null;}
+    const payload=pending,owner=pendingUserId,ticket=epoch,scoreRevision=RankedUI.scoreRevision(),analyticsBefore=analyticsRound();busy=true;render(false,false);
+    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,false,scoreRevision);Analytics.recordMutation(analyticsBefore,analyticsRound());pending=null;}
     catch(error){if(!current(ticket,owner))return;if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','ROUND_LOCKED','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','IDEMPOTENCY_CONFLICT'].includes(error.code))pending=null;}
     finally{if(current(ticket,owner)){busy=false;render(payload.action==='dailyAnswer',false);const nextButton=document.getElementById('next');if(!nextButton.hidden)nextButton.focus({preventScroll:true});else if(currentRound()?.status!=='playing')document.getElementById('question').focus({preventScroll:true});}}
   }
@@ -81910,6 +81947,7 @@ const DailyRankedUI = (()=>{
     if(syncFailed)document.getElementById('account-notice').textContent=x.syncError;
     if(pending)document.getElementById('account-notice').textContent=language==='en'?'This action could not be confirmed. Retry checks the same action safely.':'No se pudo confirmar esta acción. Reintentar verifica la misma acción.';
     if(daily.daily.finished&&DailyUI.resultRequested()){
+      Analytics.observeRound(null);
       document.getElementById('daily-summary').hidden=false;document.getElementById('round-panel').hidden=true;
       const rounds=daily.daily.rounds,totals={correctCount:rounds.filter(r=>r.status==='won').length,totalGuesses:rounds.reduce((sum,r)=>sum+r.guesses.length,0),totalHints:rounds.reduce((sum,r)=>sum+r.hints,0),totalPoints:rounds.reduce((sum,r)=>sum+(r.points||0),0)},
         descriptorAll=DailyChallenge.forDate(daily.daily.date),review=rounds.map((r,i)=>({name:descriptorAll.payloads[i].player.name,won:r.status==='won'}));
@@ -81917,6 +81955,7 @@ const DailyRankedUI = (()=>{
       return;
     }
     const round=currentRound();if(!round)return;
+    Analytics.observeRound(analyticsRound());
     const descriptor=DailyChallenge.forDate(daily.daily.date),p=descriptor.payloads[round.roundIndex].player,result=round.status,y=copy(),dailyText=x;
     document.getElementById('answer-caption').textContent=y.chances;
     if(newCareer||document.getElementById('timeline').dataset.dailyPlayer!==p.id){renderCareer(p);document.getElementById('timeline').dataset.dailyPlayer=p.id;document.getElementById('timeline-scroll').scrollLeft=0;document.getElementById('source-details').open=false;}
@@ -81973,6 +82012,7 @@ const RankedUI = (()=>{
   let googleNameSuggestion=null,nicknameSuggestionApplied=false;
   const DEFAULT_ALIAS_PATTERN=/^[A-Za-z]+-[0-9a-f]{8}$/;
   const t=()=>TEXT[language],isAccountMode=()=>!['guest','practice'].includes(mode);
+  const analyticsRound=()=>Analytics.snapshot(cloud?.round,{key:`unlimited:ranked:${userId}:${cloud?.round?.id}`,mode:'unlimited',access:'ranked',player_id:cloud?.round?.playerId,competition:cloud?.round?.competition});
   const player=()=>isAccountMode()&&cloud?.round?PLAYERS.find(p=>p.id===cloud.round.playerId):null;
   const competition=()=>cloud?.round?.competition||selected;
   // startedAt is the server's persisted clock (survives reload/time away, see
@@ -82092,6 +82132,7 @@ const RankedUI = (()=>{
     if(mode!=='ranked'||!cloud?.round)return;
     $('guest-ranked-reminder').hidden=true;
     const r=cloud.round,p=player(),x=copy();if(!p){mode='unavailable';update();return;}
+    Analytics.observeRound(analyticsRound());
     $('summary-panel').hidden=true;$('round-panel').hidden=false;
     // Ranked rounds are server-authoritative and, since ADR 0012, generate
     // the same 10 options (1 correct + 9 rivals) as guest/practice's own
@@ -82198,7 +82239,7 @@ const RankedUI = (()=>{
     if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingUserId=userId;await sendPending();
   }
   async function sendPending(){
-    if(busy||!pending||DailyUI.isDaily()&&pending.action!=='enroll')return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),revision=scoreRevision,gameplayCurrent=()=>current(ticket,owner)&&(payload.action==='enroll'||!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket);busy=true;update();renderRanked();
+    if(busy||!pending||DailyUI.isDaily()&&pending.action!=='enroll')return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),revision=scoreRevision,analyticsBefore=analyticsRound(),gameplayCurrent=()=>current(ticket,owner)&&(payload.action==='enroll'||!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket);busy=true;update();renderRanked();
     // ranked_game's own response IS already a full ranked_private.projection()
     // (round + progress + profile) for every action, hint/answer/start/enroll
     // alike - the same shape a separate {action:'progress'} call would return.
@@ -82207,7 +82248,7 @@ const RankedUI = (()=>{
     // reconfirmation with nothing new to say, on a single-primary Postgres
     // database with no read-replica lag to guard against. Removed - see
     // docs/adr/0013-single-round-trip-ranked-mutations.md.
-    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!gameplayCurrent())return;accept(data,revision);pending=null;
+    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!gameplayCurrent())return;accept(data,revision);if(payload.action==='answer'||payload.action==='hint')Analytics.recordMutation(analyticsBefore,analyticsRound());pending=null;
     }catch(error){if(!gameplayCurrent())return;mode='unavailable';notice='unavailable';if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','INVALID_NICKNAME','NICKNAME_TAKEN','IDEMPOTENCY_CONFLICT','STALE_VERSION','ROUND_NOT_PLAYING','ROUND_COMPLETE','COMPETITION_COMPLETE','NO_PLAYERS','NO_UNSEEN_PLAYERS'].includes(error.code))pending=null;}
     // newCareer was `true` here unconditionally for every action - hint and
     // answer responses stay on the exact same round/player, so that forced
@@ -82388,6 +82429,7 @@ const PlayOverview=(()=>{
     activate(mode,null,false);
   }
   async function activate(mode,startCompetition=null,focus=true){
+    Analytics.observeRound(null);
     if(loading||failed||AuthRoute.active)return;
     if(Accounts.session&&!practice){if(!overview)return;if(!overview.profile.nicknamePrompted){NicknamePrompt.maybeOpen(overview.profile);return;}if(overview.daily.date!==date()){await load();return;}}
     playActivated=false;DailyUI.choose(mode);DailyUI.prepare(mode==='daily'&&!Accounts.session&&localFinished());playActivated=true;

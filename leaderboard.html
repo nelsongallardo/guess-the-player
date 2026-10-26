@@ -1,5 +1,10 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer">
+<script id="campaign-entry">
+// Read only the three disclosed campaign fields before OAuth/invite URL scrubbing.
+// Kept in memory only; no requests or analytics persistence before consent.
+const CampaignEntry=(()=>{const out={};try{const p=new URLSearchParams(location.search);for(const k of ['utm_source','utm_medium','utm_campaign']){const v=p.get(k);if(v&&v.length<=64)out[k]=v;}}catch{}return Object.freeze(out);})();
+</script>
 <script id="board-url-privacy">// This page never consumes authentication callbacks. A private-league
 // invitation arrives only as #join=<token>: it is captured into this tab's
 // own storage (memory if storage is denied) and removed from the visible URL
@@ -155,6 +160,10 @@ footer{margin-top:28px}
 .footer-links .site-help{padding:8px 0;border:0;justify-content:flex-start;text-align:left;font-size:12px;color:var(--muted)}
 @media(max-width:600px){.competition-badge{width:auto}}
 @media(max-width:360px){.masthead .wordmark-title{font-size:24px}}
+
+/* Shared consent controls, independent of account identity and gameplay. */
+.analytics-banner{position:fixed;z-index:20;bottom:12px;left:50%;transform:translateX(-50%);width:min(640px,calc(100% - 24px));padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 32px #122a3833}
+.analytics-banner h2{font-size:16px;margin:0 0 6px}.analytics-banner p{font-size:13px;margin:0 0 10px}.analytics-actions{display:flex;gap:8px;flex-wrap:wrap}.analytics-actions button{padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font-size:13px;min-height:44px;cursor:pointer}#privacy-dialog{max-width:540px;width:calc(100% - 32px)}#privacy-dialog p{line-height:1.65;font-size:14px}@media(max-width:800px){.analytics-banner{bottom:calc(74px + env(safe-area-inset-bottom))}}
 </style></head><body><div class="shell"><header class="masthead"><a class="wordmark" href="index.html" aria-label="derabona"><svg class="mark" viewBox="0 0 96 96" aria-hidden="true" focusable="false">  <rect width="96" height="96" rx="24" fill="#122a38"/>
   <path d="M13 65C8 42 21 17 44 10" fill="none" stroke="#89cff0" stroke-width="2" stroke-linecap="round"/>
   <circle cx="54" cy="19" r="7" fill="#f7f4eb"/>
@@ -209,7 +218,11 @@ footer{margin-top:28px}
 <dialog id="league-confirm" aria-labelledby="league-confirm-title" aria-describedby="league-confirm-body"><h2 id="league-confirm-title"></h2><p id="league-confirm-body"></p><div class="friends-actions"><button id="league-confirm-cancel" type="button">Cancelar</button><button id="league-confirm-ok" class="primary" type="button">Confirmar</button></div></dialog>
 
 <dialog id="league-wins" aria-labelledby="wins-title"><h2 id="wins-title"></h2><p id="wins-status" class="status" role="status"></p><ol id="wins-list" class="week-list"></ol><form method="dialog"><button id="wins-close" type="submit">Cerrar</button></form></dialog>
-<section id="public-rules" class="explanation" aria-labelledby="rules-title"><h2 id="rules-title">Cómo se suman los puntos</h2><p id="rules-detail">Aparecés tras tu primer resultado verificado con cuenta, incluso si terminás con cero puntos. Cada jugador cuenta una sola vez: en la general y en todas sus competiciones. Hasta 100 puntos por acierto; las pistas y el tiempo reducen el puntaje. Los puntos iguales comparten puesto. No se importan partidas de invitado o práctica.</p><a id="bottom-play" href="index.html">Volver al juego →</a></section></main><footer><div class="footer-main"><div class="footer-identity"><strong>derabona</strong><span class="footer-detail" id="footer-phrase">fútbol entre amigos</span></div><nav class="footer-links" aria-label="Enlaces del sitio"><button id="site-help" class="site-help" type="button" aria-haspopup="dialog">Ayuda</button><a href="index.html#about-game" id="footer-about">Sobre el juego</a><a href="privacy.html" id="privacy-link">Privacidad</a><a href="mailto:contact@derabona.club" id="footer-contact">Contacto</a><a class="footer-x" href="https://x.com/derabona_club" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.89-7.53L5.47 22H2.33l7.25-8.29L1.9 2h6.41l4.42 6.82L18.9 2Zm-1.1 18h1.73L7.36 3.89H5.5L17.8 20Z"/></svg><span>@derabona_club</span></a></nav></div></footer></div>
+<section id="public-rules" class="explanation" aria-labelledby="rules-title"><h2 id="rules-title">Cómo se suman los puntos</h2><p id="rules-detail">Aparecés tras tu primer resultado verificado con cuenta, incluso si terminás con cero puntos. Cada jugador cuenta una sola vez: en la general y en todas sus competiciones. Hasta 100 puntos por acierto; las pistas y el tiempo reducen el puntaje. Los puntos iguales comparten puesto. No se importan partidas de invitado o práctica.</p><a id="bottom-play" href="index.html">Volver al juego →</a></section></main><footer><div class="footer-main"><div class="footer-identity"><strong>derabona</strong><span class="footer-detail" id="footer-phrase">fútbol entre amigos</span></div><nav class="footer-links" aria-label="Enlaces del sitio"><button id="site-help" class="site-help" type="button" aria-haspopup="dialog">Ayuda</button><a href="index.html#about-game" id="footer-about">Sobre el juego</a><button type="button" id="analytics-settings" class="site-help" aria-haspopup="dialog">Privacidad y analítica</button><a href="privacy.html" id="privacy-link">Privacidad</a><a href="mailto:contact@derabona.club" id="footer-contact">Contacto</a><a class="footer-x" href="https://x.com/derabona_club" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.89-7.53L5.47 22H2.33l7.25-8.29L1.9 2h6.41l4.42 6.82L18.9 2Zm-1.1 18h1.73L7.36 3.89H5.5L17.8 20Z"/></svg><span>@derabona_club</span></a></nav></div></footer></div>
+<section id="analytics-banner" class="analytics-banner" aria-labelledby="analytics-title" hidden>
+<h2 id="analytics-title">¿Nos ayudás a mejorar derabona?</h2><p id="analytics-intro">Con tu permiso medimos visitas y partidas con PostHog. Sin grabaciones de pantalla. Podés decir que no y jugar igual.</p>
+<div class="analytics-actions"><button type="button" data-analytics-consent="accepted">Permitir analítica</button><button type="button" data-analytics-consent="declined">No, gracias</button><button id="analytics-details" type="button">Info</button></div></section>
+<dialog id="privacy-dialog" aria-labelledby="privacy-title"><h2 id="privacy-title">Privacidad y analítica</h2><p id="privacy-status"></p><p id="privacy-detail">La analítica requiere tu permiso. Las partidas locales y sin conexión no se rastrean.</p><div class="analytics-actions"><button type="button" data-analytics-consent="accepted">Permitir analítica</button><button type="button" data-analytics-consent="declined">No, gracias</button><button id="privacy-close" type="button">Cerrar</button></div><p><a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">PostHog · Privacy</a></p></dialog>
 <script id="friends-leagues">
 // Private Daily leagues (ADR 0026). Every request is authenticated and bound
 // to the identity and league/period that started it; a failure shows a
@@ -1040,6 +1053,145 @@ const EmailReminders=(()=>{
   return Object.freeze({init,open:load,translate:render,resetIdentity,promptOpened,promptCompleted});
 })();
 </script>
+<script id="analytics">
+const Analytics = (()=>{
+  'use strict';
+  // This is a public ingestion token, not a personal/admin API key.
+  const TOKEN='phc_yFExTpbLyKsrVayo4NFKeD6yHS4ku6ZdDgwT53KWt2oN',KEY='derabona.analytics-consent.v1';
+  const events=new Set(['$pageview','round_viewed','answer_submitted','hint_used','round_completed','competition_selected','competition_completed','language_changed','help_opened','progress_reset']);
+  const fields=new Set(['language','competition','player_id','round_index','guess_count','hints','result','points','correct','utm_source','utm_medium','utm_campaign','mode','access','page']);
+  // The one deliberate, narrow exception to "no URL parameters": captured
+  // once at load, before any later history.replaceState/URL-scrubbing call
+  // elsewhere in the app can remove them, and reused for the whole tab
+  // session (a single-page app only ever has this one real navigation).
+  // Everything else about the URL - the rest of the query string, the path,
+  // fragments - stays stripped; see properties()'s hardcoded $current_url.
+  const utm=typeof CampaignEntry!=='undefined'?CampaignEntry:(()=>{
+    try{
+      const params=new URLSearchParams(location.search),out={};
+      for(const key of ['utm_source','utm_medium','utm_campaign']){const value=params.get(key);if(value&&value.length<=64)out[key]=value;}
+      return out;
+    }catch{return {};}
+  })();
+  const sdkFields=new Set(['token','distinct_id','$device_id','$session_id','$window_id','$lib','$lib_version','$browser','$browser_version','$os','$os_version','$device_type','$screen_width','$screen_height','$viewport_width','$viewport_height','$process_person_profile']);
+  const referrerHost=(()=>{
+    try{const url=new URL(document.referrer);return ['http:','https:'].includes(url.protocol)?url.hostname:'';}catch{return '';}
+  })();
+  const online=location.protocol==='https:'&&location.hostname==='derabona.club';
+  const privacySignal=()=>navigator.globalPrivacyControl===true||navigator.doNotTrack==='1';
+  const pathname=location.pathname==='/leaderboard.html'?'/leaderboard.html':'/';
+  const valid=(key,value)=>({mode:['daily','unlimited'],access:['guest','ranked','practice'],page:['play','groups','leaderboard']}[key]?.includes(value)??(typeof value==='boolean'||(typeof value==='number'&&Number.isFinite(value))||(typeof value==='string'&&value.length<=64)));
+  let started=false,observedRound=null,lastViewed=null;const recorded=new Set();
+  let choice=null,lang='es',context=()=>({}),loading=false,ready=false,sdk=null,queue=[],pageviewSent=false;
+  try{const saved=localStorage.getItem(KEY);if(saved==='accepted'||saved==='declined')choice=saved;}catch{}
+  const allowed=()=>online&&navigator.onLine!==false&&choice==='accepted'&&!privacySignal();
+  const text={
+    es:{title:'¿Nos ayudás a mejorar derabona?',short:'Con tu permiso medimos visitas y partidas con PostHog. Sin grabaciones de pantalla. Podés decir que no y jugar igual.',allow:'Permitir analítica',decline:'No, gracias',settings:'Privacidad y analítica',close:'Cerrar',status:{accepted:'Permiso de analítica: permitido.',declined:'Permiso de analítica: rechazado.',pending:'La analítica está desactivada hasta que la permitas.'},signal:'Tu navegador solicita no ser rastreado: no enviamos analítica.',offline:'Las partidas locales y sin conexión no se rastrean.',detail:'Si aceptás, PostHog (región UE) recibe visitas a Jugar, Grupos y Tabla, y eventos del desafío diario y juego sin límite: modo invitado, práctica o clasificado, competición, intentos, pistas, resultados e idioma, junto con datos básicos del navegador y un identificador anónimo guardado en este navegador para medir visitas posteriores. No pedimos tu nombre ni tu email; no enviamos texto libre ni la URL completa. Si llegaste desde un link con utm_source/utm_medium/utm_campaign (por ejemplo, una red social), guardamos solo esos tres campos para saber qué publicación te trajo — Solo distinguimos la página del juego y la de tablas; las rutas privadas, otros parámetros y fragmentos se descartan. La captura automática de clics, las grabaciones de sesión y el almacenamiento de IP en los eventos están desactivados. El progreso de invitado dura esta sesión de pestaña; el progreso clasificado con cuenta se guarda en la nube, independientemente del permiso de analítica. No enviamos nombres de Google, emails, IDs de cuenta ni tokens a PostHog. Podés retirar el permiso acá cuando quieras: se detienen los envíos futuros y se elimina el identificador analítico local; los eventos ya enviados no se borran automáticamente.'},
+    en:{title:'Help us improve derabona?',short:'With your permission, PostHog measures visits and gameplay. No screen recordings. You can decline and play normally.',allow:'Allow analytics',decline:'No thanks',settings:'Privacy and analytics',close:'Close',status:{accepted:'Analytics permission: allowed.',declined:'Analytics permission: declined.',pending:'Analytics is disabled until you allow it.'},signal:'Your browser requests no tracking: analytics is disabled.',offline:'Local and offline play is not tracked.',detail:'If you accept, PostHog (EU region) receives visits to Play, Groups and Leaderboard, and Daily and Unlimited game events: guest, practice or ranked mode, competition, guesses, hints, results and language, plus basic browser information and an anonymous identifier stored in this browser to measure returning visits. We do not ask for your name or email, and do not send free text or the full URL. If you arrived via a link with utm_source/utm_medium/utm_campaign (for example, a social media post), we keep only those three fields to tell which post brought you here — Only the game and board page paths are distinguished; private paths, other parameters and fragments are discarded. Automatic click capture, session recordings and IP storage in events are disabled. Guest progress stays in this tab session; signed-in ranked progress is stored in the cloud, independently of analytics permission. Google names, emails, account IDs and tokens are never sent to PostHog. You can withdraw permission here at any time: future collection stops and the local analytics identifier is removed; previously sent events are not automatically deleted.'}
+  };
+  function update(){
+    const t=text[lang],el=id=>document.getElementById(id);
+    const values={'analytics-title':t.title,'analytics-intro':t.short,'analytics-settings':t.settings,'privacy-title':t.settings,'privacy-detail':t.detail,'privacy-close':t.close,'privacy-status':!online?t.offline:privacySignal()?t.signal:t.status[choice||'pending']};
+    for(const [id,value]of Object.entries(values)){const n=el(id);if(n)n.textContent=value;}
+    for(const n of document.querySelectorAll('[data-analytics-consent]'))n.textContent=n.getAttribute('data-analytics-consent')==='accepted'?t.allow:t.decline;
+    if(el('analytics-banner'))el('analytics-banner').hidden=!online||choice!==null||privacySignal();
+  }
+  function properties(extra={}){
+    let base={};try{base=context()||{};}catch{}
+    const out={};for(const [key,value]of Object.entries({...observedRound,...base,...extra}))if(fields.has(key)&&valid(key,value))out[key]=value;
+    out.language=lang;out.$current_url='https://derabona.club'+pathname;out.$host='derabona.club';out.$pathname=pathname;out.$geoip_disable=true;
+    Object.assign(out,utm);
+    out.referrer_host=referrerHost;
+    return out;
+  }
+  function beforeSend(event){
+    if(!allowed()||!events.has(event.event))return null;
+    const clean={};for(const [key,value]of Object.entries(event.properties||{}))if(sdkFields.has(key)||(fields.has(key)&&valid(key,value))||['$current_url','$host','$pathname','$geoip_disable','referrer_host'].includes(key))clean[key]=value;
+    clean.$current_url='https://derabona.club'+pathname;clean.$pathname=pathname;clean.$host='derabona.club';clean.$geoip_disable=true;clean.$process_person_profile=false;
+    // PostHog's source/channel reports read this standard field. Derive both
+    // fields here so SDK-persisted referrers cannot reintroduce URLs or old sources.
+    clean.referrer_host=referrerHost;clean.$referring_domain=referrerHost;
+    return {...event,properties:clean};
+  }
+  function capture(event,extra){
+    try{if(!started||!allowed()||!events.has(event))return;const entry=[event,properties(extra)];if(ready)sdk.capture(...entry);else if(queue.length<30)queue.push(entry);}catch{}
+  }
+  function snapshot(round,extra={}){
+    if(!round)return null;
+    const result=extra.result||round.status;
+    if(!['playing','won','lost'].includes(result))return null;
+    return {key:extra.key||round.id,guess_count:round.guesses?.length||0,hints:round.hints||0,points:round.points||0,...extra,result};
+  }
+  function observeRound(round){
+    observedRound=round;
+    if(!round){lastViewed=null;return;}
+    if(started&&allowed()&&round.key!==lastViewed){lastViewed=round.key;capture('round_viewed');}
+  }
+  function recordMutation(before,after){
+    if(!started||!allowed()||!before||!after||before.key!==after.key)return;
+    // Called only after an accepted action, never from reads or render paths.
+    const prior=before.result||before.status,result=after.result||after.status;
+    const emit=(event,suffix,extra={})=>{const key=String(after.key)+':'+suffix;if(recorded.has(key))return;recorded.add(key);capture(event,{...after,result,...extra});};
+    if(prior!=='playing')return;
+    if(after.guess_count===before.guess_count+1)emit('answer_submitted','guess:'+after.guess_count,{correct:result==='won'});
+    if(after.hints===before.hints+1)emit('hint_used','hint:'+after.hints);
+    if(['won','lost'].includes(result)&&after.guess_count===before.guess_count+1)emit('round_completed','completed');
+  }
+  function activate(){
+    if(!allowed())return;
+    if(!started)return;
+    if(!pageviewSent){capture('$pageview');pageviewSent=true;}
+    if(observedRound&&observedRound.key!==lastViewed){lastViewed=observedRound.key;capture('round_viewed');}
+    if(ready){try{sdk.opt_in_capturing();}catch{}return;}
+    if(loading)return;loading=true;
+    try{
+      const script=document.createElement('script');script.async=true;script.crossOrigin='anonymous';script.src='https://eu-assets.i.posthog.com/static/array.js';
+      script.onerror=()=>{loading=false;queue=[];pageviewSent=false;};
+      script.onload=()=>{
+        loading=false;if(!allowed()){queue=[];return;}
+        try{sdk=window.posthog;sdk.init(TOKEN,{
+          api_host:'https://eu.i.posthog.com',ui_host:'https://eu.posthog.com',defaults:'2026-05-30',
+          persistence:'localStorage',person_profiles:'never',ip:false,
+          autocapture:false,capture_pageview:false,capture_pageleave:false,capture_dead_clicks:false,capture_heatmaps:false,capture_performance:false,capture_exceptions:false,
+          disable_session_recording:true,disable_surveys:true,advanced_disable_feature_flags:true,disable_external_dependency_loading:true,
+          opt_out_capturing_by_default:true,opt_out_persistence_by_default:true,respect_dnt:true,request_batching:false,
+          before_send:beforeSend,
+          loaded:instance=>{sdk=instance;if(!allowed()){queue=[];sdk.opt_out_capturing();return;}sdk.opt_in_capturing();ready=true;const pending=queue;queue=[];for(const entry of pending)if(allowed())try{sdk.capture(...entry);}catch{}}
+        });}catch{ready=false;queue=[];}
+      };
+      document.head.appendChild(script);
+    }catch{loading=false;queue=[];}
+  }
+  function clearIdentity(){
+    // Withdrawal must clean a prior visit's ID even if the SDK is blocked or still loading.
+    const stores=[];try{stores.push(localStorage);}catch{}try{stores.push(sessionStorage);}catch{}
+    for(const store of stores)try{for(let i=store.length-1;i>=0;i--){const key=store.key(i);if(key?.startsWith('ph_'+TOKEN))store.removeItem(key);}}catch{}
+  }
+  function setConsent(accept){
+    choice=accept?'accepted':'declined';try{localStorage.setItem(KEY,choice);}catch{}
+    if(!accept){queue=[];try{sdk?.opt_out_capturing({clear_persistence:true});}catch{}clearIdentity();}
+    else activate();update();
+    window.dispatchEvent?.(new Event('derabona:analytics-consent-resolved'));
+  }
+  function setLanguage(value){lang=value==='en'?'en':'es';update();}
+  function start(getContext){
+    context=getContext;started=true;try{lang=context().language==='en'?'en':'es';}catch{}
+    const choiceBeforeStart=choice;
+    // Consent can change in another tab after this script's initial storage read
+    // but before deferred startup installs the storage listener. Reconcile that
+    // gap before rendering or activating analytics.
+    try{const saved=localStorage.getItem(KEY);choice=saved==='accepted'?'accepted':saved==='declined'?'declined':null;}catch{}
+    for(const n of document.querySelectorAll('[data-analytics-consent]'))n.addEventListener('click',()=>{setConsent(n.getAttribute('data-analytics-consent')==='accepted');document.getElementById('privacy-dialog')?.close();});
+    document.getElementById('analytics-settings')?.addEventListener('click',()=>{update();document.getElementById('privacy-dialog').showModal();});
+    document.getElementById('analytics-details')?.addEventListener('click',()=>document.getElementById('privacy-dialog').showModal());
+    document.getElementById('privacy-close')?.addEventListener('click',()=>document.getElementById('privacy-dialog').close());
+    window.addEventListener?.('storage',event=>{if(event.key!==KEY)return;choice=event.newValue==='accepted'?'accepted':event.newValue==='declined'?'declined':null;if(!allowed()){queue=[];try{sdk?.opt_out_capturing({clear_persistence:true});}catch{}clearIdentity();}else activate();update();if(choice!==null)window.dispatchEvent?.(new Event('derabona:analytics-consent-resolved'));});
+    if(choice!=='accepted')clearIdentity();update();activate();
+    if(choice!==null&&choice!==choiceBeforeStart)window.dispatchEvent?.(new Event('derabona:analytics-consent-resolved'));
+  }
+  return {start,capture,snapshot,observeRound,recordMutation,setConsent,setLanguage,getConsent:()=>choice,shouldPauseGameClock:()=>online&&choice===null&&!privacySignal()};
+})();
+</script>
 <script id="leaderboard-app">
 'use strict';
 const ACCOUNT_CONFIG=Object.freeze({url:'https://iaebecfxjwjzkapqdeha.supabase.co',anonKey:'sb_publishable_67zB6W8GnDAwIftLW__xqA_x8sr7Pea'});
@@ -1083,7 +1235,7 @@ Object.assign(text.es,{title:'Clasificación pública',subtitle:'Puntos acumulad
 Object.assign(text.en,{title:'Public leaderboard',subtitle:'Cumulative account points from careers and Daily play. Groups compare weekly Daily points.',statPoints:'Lifetime points',help:'Help',groups:'Groups',board:'Leaderboard',helpTitle:'How to play',helpRules:'Each player has ten choices, three attempts and three hints: position, nationality and club years. Time and hints reduce points. Continuing a started round keeps its clock running.',helpGroups:'The Daily has three shared players. Groups count only results finished after joining; the week starts on Monday at 00:00 UTC. Account results cannot be reset.',helpStorage:'Guest points stay in this tab and never transfer. Daily answers are saved in this browser. Account results are saved in the cloud.',helpPlay:'Go to Play'});
 function readURL(){const p=new URLSearchParams(location.search);try{lang=localStorage.getItem(languageKey)==='en'?'en':'es';}catch{lang='es';}if(['es','en'].includes(p.get('lang')))lang=p.get('lang');competition=ids.includes(p.get('competition'))?p.get('competition'):'all';view=p.get('view')==='friends'?'friends':'public';inviteMarker=p.get('invite')==='1';FriendsLeagues.readURL(p);FriendsLeagues.setActive(view==='friends');normalize(false);}
 function normalize(push){const u=new URL(location.href);u.search='';u.hash='';if(view==='friends'){u.searchParams.set('view','friends');for(const [k,v] of Object.entries(FriendsLeagues.urlState()))u.searchParams.set(k,v);if(inviteMarker)u.searchParams.set('invite','1');}else u.searchParams.set('competition',competition);u.searchParams.set('lang',lang);history[push?'pushState':'replaceState'](null,'',u);}
-function render(){const t=text[lang];document.documentElement.lang=lang;for(const id of ['public-personal','public-board','public-rules'])$(id).hidden=view==='friends';document.title=t.title+' — derabona';document.querySelector('h1').textContent=t.heading;
+function render(){Analytics.setLanguage(lang);const t=text[lang];document.documentElement.lang=lang;for(const id of ['public-personal','public-board','public-rules'])$(id).hidden=view==='friends';document.title=t.title+' — derabona';document.querySelector('h1').textContent=t.heading;
 $('board-loading').hidden=status!=='loading';$('board-loading-label').textContent=t.loading;$('board-results').setAttribute('aria-busy',String(status==='loading'));
 const labels={'language-label':t.language,eyebrow:t.eyebrow,subtitle:t.subtitle,'personal-title':t.personal,'leaderboard-filter-label':t.competition,'rank-label':t.rank,'name-label':t.name,'points-label':t.points,'answered-label':t.answered,'correct-label':t.correct,'board-caption':t.caption,'board-prev':t.prev,'board-next':t.next,'board-retry':t.retry,'rules-title':t.rules,'rules-detail':t.detail,'bottom-play':t.back,'privacy-link':t.privacy,'footer-about':t.footerAbout,'footer-phrase':t.footerPhrase,'footer-contact':t.footerContact,'board-heading':t.title,'board-competitions-close':t.close};for(const [id,value]of Object.entries(labels))$(id).textContent=value;$('wordmark-tagline').innerHTML=t.tagline;
 FriendsLeagues.setLanguage(lang);$('eyebrow').hidden=true;document.querySelector('main').classList.toggle('friends-active',view==='friends');document.querySelector('.site-nav').ariaLabel=t.nav;
@@ -1246,14 +1398,14 @@ $('account-delete').onclick=async()=>{
   $('account-dialog').addEventListener('keydown',event=>{if(event.key==='Escape'&&!aliasTooltip.hidden){aliasDismissed=true;renderAliasTooltip();event.preventDefault();event.stopPropagation();}});
   $('account-dialog').addEventListener('close',()=>{aliasHovered=false;aliasDismissed=true;renderAliasTooltip();});
 }
-$('language').onchange=()=>{lang=$('language').value;try{localStorage.setItem(languageKey,lang);}catch{}normalize(true);render();EmailReminders.translate();};$('board-next').onclick=()=>{offset+=20;load();};$('board-prev').onclick=()=>{offset=Math.max(0,offset-20);load();};$('board-retry').onclick=load;window.addEventListener('popstate',()=>{readURL();offset=0;load();});
-$('site-help').onclick=()=>{$('site-help-dialog').showModal();};
+$('language').onchange=()=>{lang=$('language').value;Analytics.setLanguage(lang);Analytics.capture('language_changed');try{localStorage.setItem(languageKey,lang);}catch{}normalize(true);render();EmailReminders.translate();};$('board-next').onclick=()=>{offset+=20;load();};$('board-prev').onclick=()=>{offset=Math.max(0,offset-20);load();};$('board-retry').onclick=load;window.addEventListener('popstate',()=>{readURL();offset=0;load();});
+$('site-help').onclick=()=>{Analytics.capture('help_opened');$('site-help-dialog').showModal();};
 FriendsLeagues.captureInvite(BoardInvite.take());
 FriendsLeagues.attach({url:ACCOUNT_CONFIG.url,anonKey:ACCOUNT_CONFIG.anonKey,
   async session(){if(!stored()&&!client)return null;const c=await sdk(),{data,error}=await c.auth.getSession();if(error)throw error;return data.session;},
   pushURL(replace=false){normalize(!replace);},
   reload(){load();},
   authURL(withInvite){return 'index.html?auth=friends&lang='+lang+(withInvite?'&invite=1':'')+(FriendsLeagues.hasCreate()?'&create=1':'');},
-  inviteMarker:()=>inviteMarker,clearInviteMarker(){if(!inviteMarker)return;inviteMarker=false;normalize(false);}});window.addEventListener('storage',e=>{if(e.key===key||e.key===null){authEpoch++;setIdentity(null);load();}});window.addEventListener('offline',()=>{epoch++;controller?.abort();data=null;status='offline';render();if(view==='friends')FriendsLeagues.unavailable();});readURL();load();
+  inviteMarker:()=>inviteMarker,clearInviteMarker(){if(!inviteMarker)return;inviteMarker=false;normalize(false);}});window.addEventListener('storage',e=>{if(e.key===key||e.key===null){authEpoch++;setIdentity(null);load();}});window.addEventListener('offline',()=>{epoch++;controller?.abort();data=null;status='offline';render();if(view==='friends')FriendsLeagues.unavailable();});readURL();Analytics.start(()=>({language:lang,page:view==='friends'?'groups':'leaderboard'}));load();
 })();
 </script></body></html>

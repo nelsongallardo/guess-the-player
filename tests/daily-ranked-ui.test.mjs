@@ -51,7 +51,7 @@ test('sync() only resets the displayed round on a fresh load, not on every hint/
   const daily=game.slice(game.indexOf('const DailyRankedUI'),game.indexOf('const RankedUI'));
   assert.match(daily,/function accept\(data,resetIndex=false,scoreRevision\)/);
   assert.match(daily,/accept\(data,true,scoreRevision\)/);
-  assert.match(daily,/accept\(data,false,scoreRevision\);pending=null;/);
+  assert.match(daily,/accept\(data,false,scoreRevision\);[\s\S]*?pending=null;/);
 });
 
 // Identity changes invalidate both gameplay projections, then read only readiness.
