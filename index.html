@@ -6418,7 +6418,7 @@ const Analytics = (()=>{
     if(choice!=='accepted')clearIdentity();update();activate();
     if(choice!==null&&choice!==choiceBeforeStart)window.dispatchEvent?.(new Event('derabona:analytics-consent-resolved'));
   }
-  return {start,capture,snapshot,observeRound,recordMutation,setConsent,setLanguage,getConsent:()=>choice,shouldPauseGameClock:()=>online&&choice===null&&!privacySignal()};
+  return {start,capture,snapshot,observeRound,recordMutation,beginMutation:round=>started&&allowed()?round:null,setConsent,setLanguage,getConsent:()=>choice,shouldPauseGameClock:()=>online&&choice===null&&!privacySignal()};
 })();
 </script>
 <script id="game-ui">
@@ -6612,7 +6612,7 @@ const hintValues=p=>[position(p),country(p),copy().yearsRevealed];
 const hintAction=n=>language==='en'?`Show ${['position','nationality','club years'][n]} · lowers points`:`Ver ${['posición','nacionalidad','años en clubes'][n]} · resta puntos`;
 const ABOUT_ES = $('about-game').innerHTML;
 const ABOUT_EN = "<h2 id=\"about-title\">A free football player guessing game</h2><p>In <strong>derabona</strong>, every badge is a clue: follow the clubs and years in a career to identify the footballer. Play this football quiz on your phone or computer, without creating an account or installing an app.</p><details><summary>How to play derabona</summary><ol><li>Read the career from the first club, left to right, then continue on the next row.</li><li>Choose one of ten players, in guest, practice or ranked play. You have three attempts; incorrect answers are ruled out.</li><li>Need help? Ask for a hint: position, nationality, or each club's years - up to three, the same in either mode. Faster correct answers and fewer hints earn more points.</li></ol><p>Careers include senior clubs, reserve teams competing in senior leagues and actual return spells. Career notes and sources appear after you answer.</p></details><details id=\"points-faq\"><summary>How do points work?</summary><p>Each correct answer earns up to <strong>100 points</strong>; three wrong guesses end the round with <strong>0 points</strong>. Wrong guesses do not directly deduct points, but the clock keeps running. There is no streak multiplier.</p><p><strong>Hints:</strong> there are three, the same in guest, practice or ranked play - position, nationality, and each club's years. With no hints, one, two or three, the maximum is 100, 80, 60 or 40 points.</p><p><strong>Time:</strong> you keep that maximum for the first 2 seconds. It then decreases gradually to 25% at 24 seconds and drops no further - enough to answer from memory, not enough to look the answer up elsewhere. The result is rounded to the nearest whole point. For example, answering correctly at 24 seconds with one hint earns 20 points.</p><p><strong>Rankings:</strong> the server clock keeps running while you are away; refreshing does not restart it. Each footballer counts only once toward your total: you cannot replay them to improve the result. Their points also appear in each competition they belong to, without adding extra points to your global total. Guest and practice points never transfer to the rankings.</p></details><details><summary>Players from Europe and South America</summary><p>There are 221 players: 110 from Europe and 111 from South America. Choose Champions League, Premier League, La Liga, Argentine Primera División, Brasileirão, or all players. Competitions filter quiz targets; rival names are matched by career origin and era.</p></details><details><summary>Saved progress and offline play</summary><p>Guest points, streak and answered players last for this tab session: refresh retains them and normal close ends them (browser session restore may retain them). Blocked storage means reloading restarts. Optional Google sign-in saves ranked progress across devices without importing guest scores. Reset only clears unranked results.</p><p>You can <a href=\"/index.html\" download=\"derabona.html\">download the game as an HTML file</a> and open it offline. Club badges are included. JavaScript must be enabled; no account or external service is required.</p></details>";
-function analyticsContext(){const base={language,page:'play',mode:DailyUI.isDaily()?'daily':'unlimited',access:Accounts.session?(RankedUI.isAccountMode()||DailyUI.isDaily()?'ranked':'practice'):'guest'};if(DailyUI.isDaily()||RankedUI.isAccountMode())return base;const r=CareerGame.roundAt(state),p=CareerGame.playerAt(state);return {...base,competition:state.competition,player_id:p?.id,round_index:state.roundIndex+1,guess_count:r?.guesses.length||0,hints:r?.hints||0,result:CareerGame.outcome(state),points:r?.points||0};}
+function analyticsContext(){const base={language,page:'play',mode:DailyUI.isDaily()?'daily':'unlimited',access:Accounts.pending?undefined:Accounts.session?(RankedUI.isAccountMode()||DailyUI.isDaily()?'ranked':'practice'):'guest'};if(DailyUI.isDaily()||RankedUI.isAccountMode())return base;const r=CareerGame.roundAt(state),p=CareerGame.playerAt(state);return {...base,competition:state.competition,player_id:p?.id,round_index:state.roundIndex+1,guess_count:r?.guesses.length||0,hints:r?.hints||0,result:CareerGame.outcome(state),points:r?.points||0};}
 function applyLanguage() {
   const t=copy();document.documentElement.lang=language;document.title=t.title;Analytics.setLanguage(language);
   $('footer-about').textContent=t.footerAbout;$('footer-privacy').textContent=t.footerPrivacy;$('footer-contact').textContent=t.footerContact;document.querySelector('.footer-links').ariaLabel=t.footerNav;
@@ -6917,20 +6917,20 @@ EmailReminders.init({configured:()=>Accounts.configured,userId:()=>Accounts.sess
 // addresses rounds by (date,roundIndex) instead of a synthetic round id,
 // since which 3 players apply "today" is deterministic, not a random pick.
 const DailyRankedUI = (()=>{
-  let daily=null,busy=false,pending=null,pendingDate=null,syncFailed=false,epoch=0,userId=Accounts.session?.user?.id??null,pendingUserId=null,roundIndex=0;
+  let daily=null,busy=false,pending=null,pendingAnalytics=null,pendingDate=null,syncFailed=false,epoch=0,userId=Accounts.session?.user?.id??null,pendingUserId=null,roundIndex=0;
   const current=(ticket,owner)=>ticket===epoch&&owner===userId&&owner===(Accounts.session?.user?.id??null);
   const finished=()=>!!daily?.daily?.finished;
   const activeRoundIndex=()=>{const rounds=daily?.daily?.rounds;if(!rounds||!rounds.length)return 0;const playing=rounds.find(round=>round.status==='playing');return playing?playing.roundIndex:2;};
   const currentRound=()=>daily?.daily?.rounds?.find(round=>round.roundIndex===roundIndex)||null;
-  const analyticsRound=()=>Analytics.snapshot(currentRound(),{key:`daily:ranked:${userId}:${daily?.daily?.date}:${roundIndex}`,mode:'daily',access:'ranked',player_id:currentRound()?.playerId,round_index:roundIndex+1});
-  const resetIdentity=()=>{userId=Accounts.session?.user?.id??null;pendingUserId=null;epoch++;daily=null;pending=null;pendingDate=null;syncFailed=false;busy=false;roundIndex=0;};
+  const analyticsRound=(index=roundIndex)=>{const round=daily?.daily?.rounds?.find(r=>r.roundIndex===index);return Analytics.snapshot(round,{key:`daily:ranked:${userId}:${daily?.daily?.date}:${index}`,mode:'daily',access:'ranked',player_id:round?.playerId,round_index:index+1});};
+  const resetIdentity=()=>{userId=Accounts.session?.user?.id??null;pendingUserId=null;epoch++;daily=null;pending=null;pendingAnalytics=null;pendingDate=null;syncFailed=false;busy=false;roundIndex=0;};
   // resetIndex only applies on a fresh load (sync()): a hint/answer response
   // must NOT silently jump the displayed round ahead the instant a round
   // resolves - the player still needs to see that round's feedback/points
   // until they explicitly click Next, exactly like the guest local flow.
   function accept(data,resetIndex=false,scoreRevision){if(!data||!data.daily||!Array.isArray(data.daily.rounds)||data.daily.date!==today())throw Error('INVALID_RESPONSE');daily=data;syncFailed=false;if(resetIndex)roundIndex=activeRoundIndex();RankedUI.acceptDailyScore(data.totalPoints,userId,scoreRevision);NicknamePrompt.maybeOpen(data.profile);}
   const today=()=>new Date().toISOString().slice(0,10);
-  function discardExpired(){if(daily?.daily?.date&&daily.daily.date!==today()||pendingDate&&pendingDate!==today()){epoch++;daily=null;pending=null;pendingDate=null;pendingUserId=null;busy=false;syncFailed=false;roundIndex=0;}}
+  function discardExpired(){if(daily?.daily?.date&&daily.daily.date!==today()||pendingDate&&pendingDate!==today()){epoch++;daily=null;pending=null;pendingAnalytics=null;pendingDate=null;pendingUserId=null;busy=false;syncFailed=false;roundIndex=0;}}
   async function sync(){
     if(!playActivated)return PlayOverview.load();
     discardExpired();if(busy){if(DailyUI.isDaily())render(false,true);return;}
@@ -6947,13 +6947,13 @@ const DailyRankedUI = (()=>{
     if(!playActivated||!DailyUI.isDaily()||busy||pending||!daily?.daily||daily.daily.date!==today())return;
     const round=currentRound();if(!round||round.status!=='playing')return;
     const payload={action,...extra,idempotencyKey:crypto.randomUUID(),roundIndex:round.roundIndex,expectedVersion:round.version};
-    if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingDate=daily.daily.date;pendingUserId=userId;await sendPending();
+    if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingAnalytics=Analytics.beginMutation(analyticsRound());pendingDate=daily.daily.date;pendingUserId=userId;await sendPending();
   }
   async function sendPending(){
     discardExpired();if(busy||!pending)return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;
-    const payload=pending,owner=pendingUserId,ticket=epoch,scoreRevision=RankedUI.scoreRevision(),analyticsBefore=analyticsRound();busy=true;render(false,false);
-    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,false,scoreRevision);Analytics.recordMutation(analyticsBefore,analyticsRound());pending=null;}
-    catch(error){if(!current(ticket,owner))return;if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','ROUND_LOCKED','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','IDEMPOTENCY_CONFLICT'].includes(error.code))pending=null;}
+    const payload=pending,owner=pendingUserId,ticket=epoch,scoreRevision=RankedUI.scoreRevision(),analyticsBefore=pendingAnalytics;busy=true;render(false,false);
+    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!current(ticket,owner))return;accept(data,false,scoreRevision);Analytics.recordMutation(analyticsBefore,analyticsRound(payload.roundIndex));pending=null;pendingAnalytics=null;}
+    catch(error){if(!current(ticket,owner))return;if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','ROUND_LOCKED','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','IDEMPOTENCY_CONFLICT'].includes(error.code)){pending=null;pendingAnalytics=null;}}
     finally{if(current(ticket,owner)){busy=false;render(payload.action==='dailyAnswer',false);const nextButton=document.getElementById('next');if(!nextButton.hidden)nextButton.focus({preventScroll:true});else if(currentRound()?.status!=='playing')document.getElementById('question').focus({preventScroll:true});}}
   }
   const hint=()=>{if(!playActivated)return false;mutate('dailyHint');return true;};
@@ -7044,7 +7044,7 @@ const RankedUI = (()=>{
   let mode=Accounts.configured&&(Accounts.hasStoredSession()||AuthCallback.code)?'loading':'guest';
   let userId=Accounts.session?.user?.id??null,pendingUserId=null;
   const current=(ticket,owner)=>ticket===epoch&&owner===userId&&owner===(Accounts.session?.user?.id??null);
-  let readyCareer=null,cloud=null,busy=false,pending=null,epoch=0,selected='all',notice='',syncRequested=null,scoreTotal=null,scoreRevision=0;
+  let readyCareer=null,cloud=null,busy=false,pending=null,pendingAnalytics=null,epoch=0,selected='all',notice='',syncRequested=null,scoreTotal=null,scoreRevision=0;
   // Both server projections carry the same combined total. A response begun
   // before another mode's accepted response cannot roll the masthead back.
   function acceptDailyScore(total,owner,revision){
@@ -7284,10 +7284,10 @@ const RankedUI = (()=>{
     if((!playActivated&&action!=='enroll')||DailyUI.isDaily()&&action!=='enroll'||mode!=='ranked'||busy||pending)return;
     const payload={action,...extra,idempotencyKey:crypto.randomUUID()};
     if(action==='hint'||action==='answer'){if(!cloud?.round||cloud.round.status!=='playing')return;payload.roundId=cloud.round.id;payload.expectedVersion=cloud.round.version;}
-    if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingUserId=userId;await sendPending();
+    if(userId!==(Accounts.session?.user?.id??null))return;pending=payload;pendingAnalytics=Analytics.beginMutation(analyticsRound());pendingUserId=userId;await sendPending();
   }
   async function sendPending(){
-    if(busy||!pending||DailyUI.isDaily()&&pending.action!=='enroll')return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),revision=scoreRevision,analyticsBefore=analyticsRound(),gameplayCurrent=()=>current(ticket,owner)&&(payload.action==='enroll'||!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket);busy=true;update();renderRanked();
+    if(busy||!pending||DailyUI.isDaily()&&pending.action!=='enroll')return;if(pendingUserId!==userId||userId!==(Accounts.session?.user?.id??null))return;const payload=pending,owner=pendingUserId,ticket=epoch,modeTicket=DailyUI.modeEpoch(),revision=scoreRevision,analyticsBefore=pendingAnalytics,gameplayCurrent=()=>current(ticket,owner)&&(payload.action==='enroll'||!DailyUI.isDaily()&&DailyUI.modeEpoch()===modeTicket);busy=true;update();renderRanked();
     // ranked_game's own response IS already a full ranked_private.projection()
     // (round + progress + profile) for every action, hint/answer/start/enroll
     // alike - the same shape a separate {action:'progress'} call would return.
@@ -7296,8 +7296,8 @@ const RankedUI = (()=>{
     // reconfirmation with nothing new to say, on a single-primary Postgres
     // database with no read-replica lag to guard against. Removed - see
     // docs/adr/0013-single-round-trip-ranked-mutations.md.
-    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!gameplayCurrent())return;accept(data,revision);if(payload.action==='answer'||payload.action==='hint')Analytics.recordMutation(analyticsBefore,analyticsRound());pending=null;
-    }catch(error){if(!gameplayCurrent())return;mode='unavailable';notice='unavailable';if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','INVALID_NICKNAME','NICKNAME_TAKEN','IDEMPOTENCY_CONFLICT','STALE_VERSION','ROUND_NOT_PLAYING','ROUND_COMPLETE','COMPETITION_COMPLETE','NO_PLAYERS','NO_UNSEEN_PLAYERS'].includes(error.code))pending=null;}
+    try{const data=await Accounts.request(payload,'ranked-game',false,owner);if(!gameplayCurrent())return;accept(data,revision);if(payload.action==='answer'||payload.action==='hint')Analytics.recordMutation(analyticsBefore,analyticsRound());pending=null;pendingAnalytics=null;
+    }catch(error){if(!gameplayCurrent())return;mode='unavailable';notice='unavailable';if(['VERSION_CONFLICT','ROUND_FINISHED','ROUND_NOT_FOUND','HINT_LIMIT','ALREADY_GUESSED','INVALID_OPTION','INVALID_REQUEST','INVALID_NICKNAME','NICKNAME_TAKEN','IDEMPOTENCY_CONFLICT','STALE_VERSION','ROUND_NOT_PLAYING','ROUND_COMPLETE','COMPETITION_COMPLETE','NO_PLAYERS','NO_UNSEEN_PLAYERS'].includes(error.code)){pending=null;pendingAnalytics=null;}}
     // newCareer was `true` here unconditionally for every action - hint and
     // answer responses stay on the exact same round/player, so that forced
     // renderRanked()'s "is this actually a new career?" check
@@ -7306,7 +7306,7 @@ const RankedUI = (()=>{
     // hint click and every answer, not just when a round genuinely starts.
     finally{if(current(ticket,owner)){busy=false;applyLanguage();render(false,payload.action==='start');if(mode==='ranked'&&cloud?.round){if(payload.action==='start'){$('round-panel').scrollIntoView({block:'start'});$('question').focus({preventScroll:true});}else (cloud.round.status!=='playing'?$('next'):$('options').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}await resumeRequestedSync();}}
   }
-  function freshGuest(){playActivated=false;PlayOverview.reset();NicknamePrompt.resetIdentity();readyCareer=null;userId=null;pendingUserId=null;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;busy=false;syncRequested=null;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();googleNameSuggestion=null;nicknameSuggestionApplied=false;$('public-nickname').value='';DailyRankedUI.resetIdentity();applyLanguage();render(false,true);}
+  function freshGuest(){playActivated=false;PlayOverview.reset();NicknamePrompt.resetIdentity();readyCareer=null;userId=null;pendingUserId=null;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;pendingAnalytics=null;busy=false;syncRequested=null;notice='';mode='guest';selected='all';GuestStorage.clear();seen=new Set();lifetime=defaultLifetime();state=CareerGame.create();resetRoundClock();googleNameSuggestion=null;nicknameSuggestionApplied=false;$('public-nickname').value='';DailyRankedUI.resetIdentity();applyLanguage();render(false,true);}
   // Shared by both the initial getSession()/exchangeCodeForSession() result
   // (boot(), including a real fresh OAuth redirect completion) and every
   // later onAuthStateChange event (authChanged()) - a fresh sign-in can
@@ -7321,7 +7321,7 @@ const RankedUI = (()=>{
   function authChanged(event,session){
     const next=session?.user?.id??null;if(next===userId)return;
     if(!next){freshGuest();return;}
-    playActivated=false;PlayOverview.reset();NicknamePrompt.resetIdentity();readyCareer=null;userId=next;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;pendingUserId=null;busy=false;syncRequested=null;notice='';mode='loading';selected='all';
+    playActivated=false;PlayOverview.reset();NicknamePrompt.resetIdentity();readyCareer=null;userId=next;epoch++;cloud=null;scoreTotal=null;scoreRevision++;pending=null;pendingAnalytics=null;pendingUserId=null;busy=false;syncRequested=null;notice='';mode='loading';selected='all';
     captureGoogleNameSuggestion(session);
     DailyRankedUI.resetIdentity();
     update();render(false,true);

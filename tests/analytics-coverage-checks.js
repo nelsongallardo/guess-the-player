@@ -31,10 +31,10 @@ async page => {
    if(b.action==='list')return reply({leagues:[]});
    if(b.action==='leaderboard')return reply({entries:[],total:0,own:null,competition:'all'});
    if(b.action==='overview')return reply({profile,progress,daily:{date,status:'ready',completed:0,totalPoints:0,correctCount:0,previous:null},career:{status:'ready',competition:null}});
-   const target=daily?rounds[b.roundIndex??0]:round;
+   const dailyAction=b.action.startsWith('daily'),target=dailyAction?rounds[b.roundIndex??0]:round;
    if(['hint','dailyHint'].includes(b.action)){target.hints++;target.version++;}
    if(['answer','dailyAnswer'].includes(b.action)){target.guesses.push(b.optionId);target.version++;target.status='won';target.points=73;}
-   const data=daily?{profile,totalPoints:73,streak:{current:0,best:0},daily:{date,challengeNumber:fixture.daily.challengeNumber,rounds,finished:false}}:{profile,progress,round};
+   const data=dailyAction?{profile,totalPoints:73,streak:{current:0,best:0},daily:{date,challengeNumber:fixture.daily.challengeNumber,rounds,finished:false}}:{profile,progress,round};
    if(b.idempotencyKey)receipts.set(b.idempotencyKey,JSON.parse(JSON.stringify(data)));
    if(['answer','dailyAnswer'].includes(b.action)&&dropAnswer){dropAnswer=false;return r.abort('failed');}
    return reply(data);
@@ -59,7 +59,7 @@ async page => {
     if(ranked){
      await p.waitForFunction(()=>document.querySelector('#account-notice').textContent.includes('Retry')||document.querySelector('#account-retry')&&!document.querySelector('#account-retry').hidden);
      assert(await p.evaluate(()=>coverageEvents.filter(e=>e.event==='round_completed').length)===0,'Uncertain mutation does not record success');
-     if(daily)await p.locator('#daily-retry').click();
+     if(daily){await p.locator('#unlimited-mode').click();await p.locator('#daily-mode').click();await p.locator('#daily-retry').click();}
      else {await p.locator('#account-open').click();await p.waitForFunction(()=>coverageEvents.some(e=>e.event==='round_completed'));await p.locator('#account-close').click();}
     }
     await p.waitForFunction(()=>coverageEvents.some(e=>e.event==='round_completed'));

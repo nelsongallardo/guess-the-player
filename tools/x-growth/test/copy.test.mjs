@@ -108,4 +108,3 @@ assert.equal(campaignLink.searchParams.get('utm_medium'),'social');
 assert.equal(campaignLink.searchParams.get('utm_campaign'),'daily_'+linkedDaily.challengeNumber);
 
 process.exit(fail ? 1 : 0);
-

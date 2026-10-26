@@ -1189,7 +1189,7 @@ const Analytics = (()=>{
     if(choice!=='accepted')clearIdentity();update();activate();
     if(choice!==null&&choice!==choiceBeforeStart)window.dispatchEvent?.(new Event('derabona:analytics-consent-resolved'));
   }
-  return {start,capture,snapshot,observeRound,recordMutation,setConsent,setLanguage,getConsent:()=>choice,shouldPauseGameClock:()=>online&&choice===null&&!privacySignal()};
+  return {start,capture,snapshot,observeRound,recordMutation,beginMutation:round=>started&&allowed()?round:null,setConsent,setLanguage,getConsent:()=>choice,shouldPauseGameClock:()=>online&&choice===null&&!privacySignal()};
 })();
 </script>
 <script id="leaderboard-app">

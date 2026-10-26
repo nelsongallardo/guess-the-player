@@ -84,3 +84,10 @@ test('Round observation follows the actual displayed mode and hints require an a
  assert.equal(h.sent.filter(e=>e.event==='hint_used').length,1);
  h.api.recordMutation(r,{...r,key:'different',hints:2});assert.equal(h.sent.filter(e=>e.event==='hint_used').length,1,'mismatched round responses are not actions');
 });
+
+test('An action begun before consent is not backfilled by a later retry',()=>{
+ const h=harness(),r={key:'old',mode:'daily',access:'ranked',status:'playing',guess_count:0,hints:0};
+ const before=h.api.beginMutation(r);assert.equal(before,null);h.api.setConsent(true);h.load();
+ h.api.recordMutation(before,{...r,status:'won',guess_count:1});
+ assert.equal(h.sent.filter(e=>e.event==='round_completed').length,0);
+});
