@@ -76,7 +76,9 @@ Also verify public redirects, raw HTML without JS, image and favicon responses, 
 
 ## Account-side follow-up
 
-- Verify ownership of `derabona.club` in Google Search Console, submit `https://derabona.club/sitemap.xml`, and inspect the canonical home page for indexing. A public sitemap or a successful crawler-style fetch is **not** proof of submission, indexing or ranking.
+- Search Console was inspected through the owner's existing Hermes profile on 26 October 2026. Web search for 28 September–24 October showed **5 clicks, 28 impressions, 17.9% CTR and average position 6.5**. The home page is indexed with its declared canonical. These are small-sample search metrics, not analytics visitor totals.
+- Submitted `https://derabona.club/sitemap.xml` for the first time. Google acknowledged submission but still reported **Couldn't fetch**, zero discovered pages on the 12:18 UTC recheck. Public normal/Googlebot-style HTTP requests return 200 XML; the reason for Google's fetch failure is unconfirmed. Recheck processing later; submission is not successful processing.
+- The bare leaderboard URL was unknown to Google. Its live test passed, indexing was allowed, and an indexing request was accepted. The `?view=friends` variant was indexed despite declaring the bare leaderboard canonical, with Google choosing the variant. Recheck canonical selection after recrawl; do not remove useful routes or repeatedly request indexing.
 - Review actual queries, impressions and clicks after Google has crawled the changes. Do not promise immediate indexing or a search position.
 - Consider original football content only if it is genuinely useful. Do not mass-generate thin player/competition doorway pages or publish answers solely to stuff keywords.
 - Keep previews and discovery separate: messaging apps cache cards independently from Google Search.
