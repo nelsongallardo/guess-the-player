@@ -53,9 +53,18 @@ The owner asked for a more engaging email that shows the first Daily challenge.
 - Right before each queue call, the worker writes `DailyCard` (`…/daily-card?date=YYYY-MM-DD`) and `DailyNumber` onto the contact. If that write fails, it does not send, rather than risk a stale puzzle.
 - **Tradeoff:** a recipient sees round 1's career before opening the game, so they can think before the server clock starts. The same was already possible by previewing the Daily signed out, and it applies equally to everyone who gets the email.
 
+## Amendment 2026-10-31: weekly instead of daily
+
+The owner reduced the frequency to once a week so subscribers do not tire of the emails. Migration `202610310001_weekly_email_reminders.sql`:
+- adds `settings.send_isodow` (ISO weekday, UTC). The owner chose **Sunday** (`7`). `in_window()` is now true only on that weekday inside the existing 16:00–20:00 UTC window, and claim, start and preview all read it.
+- raises `min_gap_seconds` from 24h + 2 min to six days, so changing `send_isodow` mid-week can never send twice within six days. With a weekly cadence the send time no longer drifts.
+- adds consent version `weekly-v1-20261031` for the new wording and keeps `daily-v1-20261009` accepted for pages cached before the release. Existing subscribers, including the owner cohort, keep their preferences and simply receive fewer emails than before.
+
+Everything else stands: the email still invites the recipient to that day's Daily, is skipped if that Daily is already complete, and a skipped or `uncertain` week is not backfilled. The ledger guarantee is still at most one attempted dispatch per destination and UTC date.
+
 ## Consequences
 
 - Live sends need owner setup: an EmailOctopus account, list, language field, two automations, an authenticated sender domain, a webhook endpoint and secrets. They also need an explicit release decision. See [docs/email-reminders.md](../email-reminders.md).
 - **Amended 2026-10-09: single opt-in.** The owner's EmailOctopus list has double opt-in off, so an API-created `pending` contact would never receive anything. Explicit opt-ins, and explicit re-opt-ins after an unsubscribe, are therefore created or updated as `subscribed`. The address is the account's verified Auth email and the account ticked the box itself. The owner cohort still never resubscribes a vendor unsubscribe. After a re-opt-in, delivery resumes once the vendor's `contact.updated` webhook confirms `subscribed`.
 - The legacy cohort's vendor eligibility, including any attestation EmailOctopus requires for contacts added without a confirmation form, is an owner/vendor question, not something this code asserts.
-- A reminder can still arrive after a completion that races the final eligibility check, or not arrive on a day skipped by the vendor gap or an `uncertain` outcome.
+- A reminder can still arrive after a completion that races the final eligibility check, or not arrive on a send day skipped by the vendor gap or an `uncertain` outcome. Since the weekly amendment, a skipped Sunday means no email that week.

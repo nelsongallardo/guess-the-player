@@ -9,7 +9,7 @@ Guess the player → https://derabona.club/?lang=en&utm_source=emailoctopus&utm_
 Two more players follow. The challenge changes at 00:00 UTC: if you open this email later, the link takes you to the current challenge.
 
 --
-You are receiving this because your derabona account has daily reminders turned on: either you turned them on, or you were added as one of the first players. We email at most once a day, and only if you have not finished the challenge yet.
+You are receiving this because your derabona account has weekly reminders turned on: either you turned them on, or you were added as one of the first players. We email at most once a week, and only if you have not finished that day’s challenge yet.
 Unsubscribe: {{UnsubscribeURL}}
 You can also turn them off from “Account” on derabona.
 

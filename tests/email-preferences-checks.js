@@ -1,4 +1,4 @@
-// REAL Chromium checks for optional daily email reminders (ADR 0030), with an
+// REAL Chromium checks for optional weekly email reminders (ADR 0030), with an
 // EXPLICIT route-mocked Supabase SDK, gameplay API and email-preferences API.
 // They prove rendered frontend behavior only: NOT Google OAuth, the database,
 // EmailOctopus, or delivered mail.
@@ -7,7 +7,7 @@ async page => {
   const ok=(value,label)=>{if(!value)throw Error(label);checks.push(label);};
   const origin='http://127.0.0.1:4173',api='https://explicit-reminder-mock.invalid';
   const competitions=['all','champions-league','premier-league','la-liga','argentine-primera','brasileirao'];
-  const CONSENT='daily-v1-20261009';
+  const CONSENT='weekly-v1-20261031';
   async function session({prompted=true,width=390,height=780,pref=null,failSet=0,failGet=0,userId='00000000-0000-4000-8000-000000009999'}={}){
     const calls=[];let preference=pref??{enabled:false,language:null,version:0,source:null,deliveryStatus:'disabled',suppressedReason:null,email:'friend+derabona@example.com',emailAvailable:true};
     let profile={nickname:'Otter-4821aaaa',enrolled:true,nicknamePrompted:prompted},fails={set:failSet,get:failGet};
@@ -46,7 +46,7 @@ async page => {
       await s.p.locator('#nickname-prompt-dialog').waitFor({state:'visible'});
       await s.p.locator('#nickname-prompt-reminder-row').waitFor({state:'visible'});
       ok(await s.p.locator('#nickname-prompt-reminder').isChecked()===false,'Prompt reminder checkbox is unchecked by default');
-      ok((await s.p.locator('#nickname-prompt-reminder-label').textContent())==='Quiero recibir un recordatorio diario por email. Puedo darme de baja cuando quiera.','Spanish consent copy is exact');
+      ok((await s.p.locator('#nickname-prompt-reminder-label').textContent())==='Quiero recibir un recordatorio semanal por email. Puedo darme de baja cuando quiera.','Spanish consent copy is exact');
       ok(JSON.stringify(prefCalls(s.calls))==='["get"]','Opening the prompt only reads the preference');
       await s.p.locator('#nickname-prompt-submit').click();
       await s.p.locator('#nickname-prompt-dialog').waitFor({state:'hidden'});
@@ -96,7 +96,7 @@ async page => {
       await s.p.locator('#account-open').click();
       await s.p.locator('#reminder-form').waitFor({state:'visible'});
       ok((await s.p.locator('#reminder-title').textContent())==='Email reminders','English section title');
-      ok((await s.p.locator('#reminder-enabled-label').textContent())==='Email me a daily reminder. I can unsubscribe at any time.','English consent copy is exact');
+      ok((await s.p.locator('#reminder-enabled-label').textContent())==='Email me a weekly reminder. I can unsubscribe at any time.','English consent copy is exact');
       ok(await s.p.locator('#reminder-language').inputValue()==='en','Email language is seeded from the UI language');
       ok(await s.p.locator('#reminder-save').isDisabled(),'Nothing to save until the player changes something');
       await s.p.locator('#reminder-enabled').focus();await s.p.keyboard.press('Space');

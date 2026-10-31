@@ -1,4 +1,4 @@
-// Daily email reminders (ADR 0030): real isolated PostgreSQL. The Supabase
+// Weekly email reminders (ADR 0030): real isolated PostgreSQL. The Supabase
 // auth schema/roles are SIMULATED (auth.users carries the email columns the
 // migration reads) and so is the reminder clock: reminder_private.utc_now()
 // is replaced after migration by a version reading public.test_clock.
@@ -20,7 +20,7 @@ const pgBin = process.env.PG_BIN || (fs.existsSync('/opt/homebrew/opt/postgresql
 const bin = cmd => cmd === 'psql' && process.env.PG_CLIENT ? process.env.PG_CLIENT : pgBin ? path.join(pgBin,cmd) : cmd;
 const PORT = '55447';
 const NEW_MIGRATION = '202610090001_email_reminders.sql';
-const CONSENT = 'daily-v1-20261009';
+const CONSENT = 'weekly-v1-20261031';
 let dir, running = false, upgrade;
 const quote = value => "'"+String(value).replaceAll("'","''")+"'";
 const args = () => ['-X','-qAt','-v','ON_ERROR_STOP=1','-h',dir,'-p',PORT,'-U','postgres','-d','postgres'];
@@ -113,7 +113,7 @@ afterEach(() => {
   sql(`delete from auth.users; delete from reminder_private.sync_jobs; delete from reminder_private.dispatches;
        delete from reminder_private.suppressed_destinations; delete from reminder_private.vendor_events;
        delete from reminder_private.cohort_members; delete from reminder_private.cohorts;
-       update reminder_private.settings set dispatch_enabled=false;`);
+       update reminder_private.settings set dispatch_enabled=false,send_isodow=7;`);
 });
 
 test('upgrade from the current predecessor leaves gameplay untouched and exposes only service-role entry points',()=>{
@@ -129,6 +129,8 @@ test('upgrade from the current predecessor leaves gameplay untouched and exposes
   }
   assert.equal(sql(`select has_schema_privilege('authenticated','reminder_private','usage')`),'f');
   assert.equal(A({action:'getSettings'}).dispatchEnabled,false,'delivery ships inactive');
+  assert.deepEqual(json(`select jsonb_build_array(send_isodow,min_gap_seconds,consent_versions) from reminder_private.settings`),
+    [7,518400,['weekly-v1-20261031','daily-v1-20261009']],'weekly on Sundays, six-day gap, both consent wordings accepted');
 });
 
 test('a new account defaults to off; reading the preference writes no preference or gameplay state',()=>{
@@ -161,6 +163,13 @@ test('explicit opt-in records consent wording version and server time; disable i
   const off=disable(uid);
   assert.deepEqual([off.preference.enabled,off.preference.version,off.preference.deliveryStatus],[false,2,'disabled']);
   assert.deepEqual(jobs().map(j=>[j.kind,j.preference_version]),[['subscribe',1],['unsubscribe',2]]);
+});
+
+test('pages cached before the weekly change can still opt in with the daily wording version',()=>{
+  const uid=user();
+  assert.equal(enable(uid,{consentVersion:'daily-v1-20261009'}).preference.enabled,true);
+  assert.equal(pref(uid).consent_version,'daily-v1-20261009','the wording the account actually saw is recorded');
+  assert.equal(code(enable(user(),{consentVersion:'daily-v0'})),'INVALID_REQUEST');
 });
 
 test('the endpoint accepts no address, identity, vendor, timestamp or status from the client',()=>{
@@ -297,36 +306,55 @@ test('vendor events: hard suppression is permanent, old events never restore del
   assert.equal(code(enable(user({email:'X@example.com'}))),'REMINDERS_SUPPRESSED');
 });
 
-test('dispatch is inactive by default, then sends at most once per destination and UTC date',()=>{
-  setClock('2026-10-09T15:00:00Z');
+test('dispatch is inactive by default, then sends only on the send weekday, at most once per destination and date',()=>{
+  // 2026-10-11 and 2026-10-18 are Sundays, the default send day.
+  setClock('2026-10-11T15:00:00Z');
   const a=subscribedUser('a@example.com'),b=subscribedUser('b@example.com');
   const pending=user({email:'p@example.com'});enable(pending);
-  setClock('2026-10-09T16:05:00Z');
+  setClock('2026-10-11T16:05:00Z');
   assert.deepEqual(W({action:'claimDispatch'}),{dispatchEnabled:false,items:[]},'nothing is claimed while inactive');
   assert.deepEqual(W({action:'previewDispatch'}).counts,{eligible:2,vendor_not_subscribed:1});
   enableDelivery();
-  setClock('2026-10-09T15:59:00Z');
+  setClock('2026-10-11T15:59:00Z');
   assert.deepEqual(W({action:'claimDispatch'}).items,[],'outside the window');
-  setClock('2026-10-09T16:05:00Z');
+  setClock('2026-10-10T16:05:00Z');
+  assert.equal(W({action:'previewDispatch'}).inWindow,false);
+  assert.deepEqual(W({action:'claimDispatch'}).items,[],'inside the hours but not the send weekday');
+  setClock('2026-10-11T16:05:00Z');
   const calls=send();
   assert.equal(calls.length,2);
   assert.deepEqual(new Set(calls.map(c=>c.language)),new Set(['es']));
   assert.deepEqual(send(),[],'same date: never again');
-  setClock('2026-10-09T19:55:00Z');
+  setClock('2026-10-11T19:55:00Z');
   assert.deepEqual(send(),[]);
-  // Next UTC date, after the 24h vendor gap plus margin.
-  setClock('2026-10-10T16:05:00Z');
-  assert.deepEqual(send(),[],'inside the 24-hour vendor minimum gap');
-  setClock('2026-10-10T16:10:00Z');
-  assert.equal(send().length,2);
+  for(const day of ['12','13','14','15','16','17']){
+    setClock(`2026-10-${day}T16:05:00Z`);
+    assert.deepEqual(send(),[],`no reminder on 2026-10-${day}`);
+  }
+  setClock('2026-10-18T16:05:00Z');
+  assert.equal(send().length,2,'the next Sunday');
   assert.equal(json(`select count(*) from reminder_private.dispatches where status='accepted'`),4);
   void a;void b;
 });
 
+test('changing the send weekday mid-week never sends twice within six days',()=>{
+  setClock('2026-10-11T15:00:00Z');
+  subscribedUser('moved-day@example.com');enableDelivery();
+  setClock('2026-10-11T16:05:00Z');
+  assert.equal(send().length,1);
+  sql('update reminder_private.settings set send_isodow=3');
+  setClock('2026-10-14T16:05:00Z');
+  assert.equal(W({action:'previewDispatch'}).inWindow,true);
+  assert.deepEqual(send(),[],'Wednesday is now the send day, but the Sunday email was three days ago');
+  assert.deepEqual(W({action:'previewDispatch'}).counts,{min_gap:1});
+  setClock('2026-10-21T16:05:00Z');
+  assert.equal(send().length,1,'the following Wednesday');
+});
+
 test('two concurrent workers claiming the same destination and date reach the queue once',async()=>{
-  setClock('2026-10-09T15:00:00Z');
+  setClock('2026-10-11T15:00:00Z');
   subscribedUser('race@example.com');enableDelivery();
-  setClock('2026-10-09T16:05:00Z');
+  setClock('2026-10-11T16:05:00Z');
   const results=await Promise.all([asyncW({action:'claimDispatch'}),asyncW({action:'claimDispatch'}),asyncW({action:'claimDispatch'})]);
   const tokens=results.flatMap(r=>r.items.map(i=>i.token));
   assert.equal(tokens.length,1);
@@ -335,35 +363,33 @@ test('two concurrent workers claiming the same destination and date reach the qu
 });
 
 test('a crash after the vendor call becomes uncertain and is never retried; a crash before it is skipped',()=>{
-  setClock('2026-10-09T15:00:00Z');
+  setClock('2026-10-11T15:00:00Z');
   subscribedUser('crash1@example.com');subscribedUser('crash2@example.com');enableDelivery();
-  setClock('2026-10-09T16:05:00Z');
+  setClock('2026-10-11T16:05:00Z');
   const [one,two]=W({action:'claimDispatch',leaseSeconds:60}).items;
   assert.equal(W({action:'startDispatch',token:one.token}).send,true); // vendor call made, response lost
-  setClock('2026-10-09T16:20:00Z');
+  setClock('2026-10-11T16:20:00Z');
   assert.deepEqual(W({action:'claimDispatch'}).items,[]);
   assert.deepEqual(json(`select jsonb_object_agg(token,status) from reminder_private.dispatches`),{[one.token]:'uncertain',[two.token]:'skipped'});
   assert.equal(W({action:'startDispatch',token:two.token}).send,false);
   // A definite late outcome may still be recorded for the uncertain one.
   assert.equal(W({action:'finishDispatch',token:one.token,outcome:'accepted'}).accepted,true);
-  setClock('2026-10-10T16:05:00Z');
-  assert.equal(send().length,1,'the skipped destination is eligible the next day');
-  setClock('2026-10-10T16:25:00Z');
-  assert.equal(send().length,1,'the uncertain one waits out the full gap from its start');
+  setClock('2026-10-18T16:05:00Z');
+  assert.equal(send().length,2,'next week both are eligible again; neither was retried on its own date');
 });
 
 test('dispatch skips completed Dailies and rechecks eligibility before the vendor call, without touching gameplay',()=>{
-  setClock('2026-10-09T15:00:00Z');
+  setClock('2026-10-11T15:00:00Z');
   const done=subscribedUser('done@example.com'),partial=subscribedUser('partial@example.com'),late=subscribedUser('late@example.com');
-  for(const r of [0,1,2])addDailyResult(done,'2026-10-09',r);
-  addDailyResult(partial,'2026-10-09',0);
-  for(const r of [0,1,2])addDailyResult(late,'2026-10-08',r);
-  enableDelivery();setClock('2026-10-09T16:05:00Z');
+  for(const r of [0,1,2])addDailyResult(done,'2026-10-11',r);
+  addDailyResult(partial,'2026-10-11',0);
+  for(const r of [0,1,2])addDailyResult(late,'2026-10-10',r);
+  enableDelivery();setClock('2026-10-11T16:05:00Z');
   const before=gameplay();
   const items=W({action:'claimDispatch'}).items;
   assert.equal(items.length,2,'completed today is skipped; a partial or yesterday-complete Daily is not');
   // Completion between claim and send is caught by the recheck.
-  for(const r of [1,2])addDailyResult(partial,'2026-10-09',r);
+  for(const r of [1,2])addDailyResult(partial,'2026-10-11',r);
   const after=gameplay();
   const starts=items.map(i=>W({action:'startDispatch',token:i.token}));
   assert.deepEqual(starts.map(s=>s.send).sort(),[false,true]);
@@ -373,9 +399,9 @@ test('dispatch skips completed Dailies and rechecks eligibility before the vendo
 });
 
 test('deleted accounts and changed addresses are ineligible immediately and leave cleanup work',()=>{
-  setClock('2026-10-09T15:00:00Z');
+  setClock('2026-10-11T15:00:00Z');
   const gone=subscribedUser('gone@example.com'),moved=subscribedUser('old@example.com');
-  enableDelivery();setClock('2026-10-09T16:05:00Z');
+  enableDelivery();setClock('2026-10-11T16:05:00Z');
   const [first]=W({action:'claimDispatch',limit:1}).items;
   sql(`delete from auth.users where id=${quote(gone)}`);
   sql(`update auth.users set email='new@example.com' where id=${quote(moved)}`);
@@ -394,7 +420,7 @@ test('deleted accounts and changed addresses are ineligible immediately and leav
   const claimed=W({action:'claimSync'}).jobs;
   assert.deepEqual(claimed.map(j=>j.kind).sort(),['delete','retire']);
   for(const j of claimed)W({action:'completeSync',jobId:j.jobId,leaseToken:j.leaseToken,outcome:'retry',detail:'vendor_unavailable'});
-  setClock('2026-10-09T18:00:00Z');
+  setClock('2026-10-11T18:00:00Z');
   for(const j of W({action:'claimSync'}).jobs)W({action:'completeSync',jobId:j.jobId,leaseToken:j.leaseToken,outcome:'done'});
   assert.deepEqual(jobs(`kind in ('delete','retire')`).map(j=>[j.status,j.email]),[['done',null],['done',null]]);
   assert.equal(enable(moved).preference.email,'new@example.com');

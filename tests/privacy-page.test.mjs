@@ -25,8 +25,8 @@ test('privacy page explains contact-message forwarding in both languages', () =>
 
 test('privacy page explains reminders separately from analytics, with truthful enrollment sources', () => {
   for (const [heading, unchecked, legacy, separate] of [
-    ['Recordatorios diarios por email', /La casilla viene desmarcada/, /a pedido del creador de derabona: no marcaron esa casilla/, /independientes del permiso de analítica/],
-    ['Daily email reminders', /The box starts unchecked/, /at the request of derabona’s creator: they did not tick that box/, /independent of analytics permission/],
+    ['Recordatorios semanales por email', /La casilla viene desmarcada/, /a pedido del creador de derabona: no marcaron esa casilla/, /independientes del permiso de analítica/],
+    ['Weekly email reminders', /The box starts unchecked/, /at the request of derabona’s creator: they did not tick that box/, /independent of analytics permission/],
   ]) {
     assert.ok(privacy.includes(`>${heading}</h2>`));
     assert.match(privacy, unchecked);
