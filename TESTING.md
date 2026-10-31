@@ -17,6 +17,12 @@
 - Separate live EU project `273163` readback of marker `referral-20261014-1791965682776`: four events (`$pageview` + `round_viewed` for each of two fresh browser contexts). The local candidate was served at the canonical URL via a browser route override; SDK and ingestion were real. Both event and session referring domains were correct: `www.google.com` → **Organic Search**, `l.instagram.com` with `utm_source=instagram`/`utm_medium=social` → **Organic Social**. `$referrer` and `$session_entry_referrer` were absent; `$current_url` was the sanitized home URL. Bot-filter override and verification properties existed only in the test harness. Readbacks are in ignored `test-results/`.
 - This verifies candidate ingestion, not a deployed release. Existing historical events and already-started session entry sources are not rewritten.
 
+## 2026-10-31 — Weekly email reminders (ADR 0030 amendment; local candidate)
+
+- Migration `202610310001_weekly_email_reminders.sql`: Sunday-only `send_isodow` gate, six-day minimum gap, weekly consent version, daily version still accepted.
+- Native PostgreSQL (`tests/email-reminders-backend.test.mjs`, embedded 17.10 runtime in the worktree): reworked dispatch tests on Sunday dates. They cover no send on Saturday or Monday through Saturday, the next Sunday sends, a mid-week weekday change cannot send twice within six days, and the cached daily consent version still opts in. Focused Node selection (`email-reminders-backend`, `email-preferences`, `email-templates`, `privacy-page`, `leaderboard-page`): 33/33 passed. Deno `email-reminders-edge`: 13/13 passed.
+- Not verified: the hosted migration, Edge redeploy, vendor template update or any real Sunday send.
+
 ## 2026-10-09 — Daily email reminders (ADR 0030; local candidate, delivery inactive)
 
 - Native PostgreSQL (`tests/email-reminders-backend.test.mjs`, 14 tests): new accounts default off; explicit opt-in/out, idempotency and stale versions; frozen owner cohort (no later accounts, no overrides, no consent fields); suppression and out-of-order events; one dispatch per destination/UTC date under concurrent workers; uncertain/skipped expiry; completed-Daily skip and recheck without gameplay writes; deletion and address-change cleanup. Existing ranked, league and overview PostgreSQL suites still pass with the migration applied.

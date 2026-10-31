@@ -30,7 +30,10 @@ export function dailyCard(nowMs: number, baseUrl: string) {
 }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-export const CONSENT_VERSION = 'daily-v1-20261009';
+export const CONSENT_VERSION = 'weekly-v1-20261031';
+// Pages cached before the weekly change still send the daily wording's
+// version; the database accepts both (202610310001).
+const CONSENT_VERSIONS = [CONSENT_VERSION, 'daily-v1-20261009'];
 export const preferenceStatuses: Record<string, number> = {
   UNAUTHORIZED: 401, INVALID_REQUEST: 400, VERSION_CONFLICT: 409, IDEMPOTENCY_CONFLICT: 409,
   EMAIL_UNAVAILABLE: 409, REMINDERS_SUPPRESSED: 409, DESTINATION_IN_USE: 409, RATE_LIMITED: 429,
@@ -52,7 +55,7 @@ export function validatePreference(body: Record<string, unknown>): boolean {
   if (typeof body.enabled !== 'boolean') return false;
   if (!Number.isInteger(body.expectedVersion) || Number(body.expectedVersion) < 0 || Number(body.expectedVersion) > 999999999) return false;
   if (typeof body.requestId !== 'string' || !UUID.test(body.requestId)) return false;
-  if (enable && (!['es','en'].includes(body.language as string) || body.consentVersion !== CONSENT_VERSION)) return false;
+  if (enable && (!['es','en'].includes(body.language as string) || !CONSENT_VERSIONS.includes(body.consentVersion as string))) return false;
   return true;
 }
 

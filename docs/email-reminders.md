@@ -1,12 +1,13 @@
-# Daily email reminders (EmailOctopus)
+# Weekly email reminders (EmailOctopus)
 
-Decision record: [ADR 0030](adr/0030-emailoctopus-daily-reminders.md). This page is the operating runbook. **Delivery ships inactive.** Merging or deploying this code sends no email, imports no contact and starts no schedule.
+Decision record: [ADR 0030](adr/0030-emailoctopus-daily-reminders.md), including its 2026-10-31 weekly amendment. Reminders go out once a week, on Sundays by default. The file and function names still say "daily" because the email invites people to that day's Daily challenge. This page is the operating runbook. **Delivery ships inactive.** Merging or deploying this code sends no email, imports no contact and starts no schedule.
 
 ## What runs where
 
 | Piece | Where | Purpose |
 |---|---|---|
 | `supabase/migrations/202610090001_email_reminders.sql` | Postgres, private `reminder_private` schema | Preferences, frozen owner cohort, sync outbox, dispatch ledger and suppression; `service_role`-only RPCs |
+| `supabase/migrations/202610310001_weekly_email_reminders.sql` | Same schema | Weekly cadence: `send_isodow` weekday gate, six-day minimum gap, weekly consent version |
 | `email-preferences` | Edge Function, `verify_jwt=false`, checks `getUser()` | Browser `get`/`set` for the signed-in account only |
 | `email-reminders-worker` | Edge Function, `verify_jwt=false`, checks `X-Reminder-Worker-Secret` | Address reconciliation, contact sync, periodic vendor reads and dispatch |
 | `emailoctopus-webhook` | Edge Function, `verify_jwt=false`, checks `EmailOctopus-Signature` | Unsubscribe/bounce/complaint/confirmation events; only hashed addresses reach the database |
@@ -43,9 +44,18 @@ If any EmailOctopus value is missing, the worker makes no vendor request and onl
 - **Daily card:** the public `daily-card` function draws today's first-player card from the live site, and the worker writes `DailyCard`/`DailyNumber` onto the contact before each send. Both are EmailOctopus list fields, and both automations use the redesigned templates.
 - **Still open:** the owner must set `EMAILOCTOPUS_WEBHOOK_SECRET` and click Start on both automations.
 
+## Weekly release order (2026-10-31)
+
+Each step needs explicit authorization. The order matters, because the new pages send the `weekly-v1-20261031` consent version, which only the new migration and Edge code accept.
+
+1. Apply `202610310001_weekly_email_reminders.sql` (see Deployment below). Read back `select send_isodow, min_gap_seconds, consent_versions, dispatch_enabled from reminder_private.settings;`, expecting `7`, `518400`, both consent versions, and `dispatch_enabled` unchanged. From this point the live cron sends on Sundays only.
+2. Redeploy `email-preferences`, which accepts both consent versions.
+3. Merge to `main`, so Pages publishes the weekly wording on `index.html`, `leaderboard.html` and `privacy.html`.
+4. Paste the updated footers from `emails/daily-reminder.{es,en}.{html,txt}` into both EmailOctopus automations. The vendor keeps its own copy, so the repo change alone does not alter sent emails.
+
 ## Owner/vendor setup (reference)
 
-1. **EmailOctopus account and plan.** Check contact and send limits for about 25 contacts × 30 emails a month. On the free Starter plan the template must keep `{{RewardsURL}}`; remove it on a paid plan.
+1. **EmailOctopus account and plan.** Check contact and send limits for about 25 contacts × 5 emails a month (weekly; it was 30 when reminders were daily). On the free Starter plan the template must keep `{{RewardsURL}}`; remove it on a paid plan.
 2. **Sender.** Choose the From name, From address and Reply-To (for example `contact@derabona.club`). Authenticate `derabona.club` in EmailOctopus using only the records it generates. **Keep the existing ImprovMX MX records and root SPF.** If EmailOctopus needs an SPF include, merge it into the one existing SPF record instead of adding a second. ImprovMX forwarding does not verify an outgoing sender. DNS changes need separate authorization.
 3. **`{{SenderInfo}}`.** EmailOctopus requires a physical postal address in account settings for its sender-info footer. The owner must supply one: a business address, PO box or mail-forwarding address.
 4. **List** (done 2026-10-09: list `f501b9d2-c3ca-11f1-8bf3-db0a513fea80`, "derabona · recordatorio diario", with a `Language` text field). **Double opt-in is off**, so the worker uses single opt-in and creates explicit opt-ins as `subscribed` (ADR 0030 amendment). The notes below applied to the earlier double-opt-in design:
@@ -80,7 +90,7 @@ node scripts/email-reminders-cohort.mjs apply   --cohort existing-friends-202610
 - Sender name and address, Reply-To, the authenticated domain and the `{{SenderInfo}}` address.
 - Cohort: cutoff, frozen member count, manifest digest and the dry-run breakdown (`enroll`, `deleted`, `no_verified_email`, `existing_preference`, `destination_suppressed`, `duplicate_destination`). State the Spanish default.
 - The `dispatch-preview` counts by reason.
-- The schedule: one tick every 5 minutes. The send window is 16:00–20:00 UTC (13:00–17:00 Argentina), a proposed default that the owner has not chosen. The vendor gap rule (24h + 2 min) makes the send time drift later by up to about five minutes a day, and a date is occasionally skipped. Missed days are never backfilled.
+- The schedule: one tick every 5 minutes. Sends happen only on `send_isodow` (owner-chosen Sunday, `7`) inside the 16:00–20:00 UTC window (13:00–17:00 Argentina; the window is a proposed default that the owner has not chosen). A six-day minimum gap applies, so a weekday change cannot cause two emails within six days. A missed or skipped week is never backfilled.
 - Rendered emails in both languages, taken from the vendor's test send to an approved recipient, plus a confirmation that the double opt-in flow works.
 
 ## Activation and rollback
@@ -92,14 +102,17 @@ select public.email_reminders_admin('{"action":"setDispatch","enabled":true,"con
 -- then run supabase/manual/email-reminders-schedule.sql
 ```
 
+Change the send day (ISO weekday, 1 = Monday … 7 = Sunday, UTC) with `update reminder_private.settings set send_isodow=<n>, updated_at=clock_timestamp();`, then read it back. The six-day gap still applies to the first send after a change.
+
 Pause or roll back with either `select public.email_reminders_admin('{"action":"setDispatch","enabled":false}'::jsonb);` or `select cron.unschedule('derabona-email-reminders');`.
 
 **Readback before claiming anything is live:** `cron.job` contains the job; `cron.job_run_details` shows successful ticks; `reminder_private.dispatches` has `accepted` rows for the date; and EmailOctopus shows each automation's sends. A 204 from the queue endpoint means *accepted*, not delivered.
 
 ## Guarantees and limits
 
+- At most one reminder a week: one send weekday, plus a six-day minimum gap between attempted dispatches.
 - At most one *attempted* dispatch per destination and UTC date. An unknown outcome is recorded as `uncertain` and never retried that date. This is not exactly-once delivery.
-- A Daily completed after the final eligibility check can still receive that day's reminder.
+- A Daily completed after the final eligibility check can still receive that day's reminder. A Sunday whose Daily is already complete gets no email that week.
 - Vendor suppression always wins:
   - Bounce and complaint are permanent for the account and the address.
   - An unsubscribe needs a new explicit opt-in followed by vendor confirmation.

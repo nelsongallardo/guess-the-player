@@ -885,7 +885,7 @@ return {
 })();
 </script>
 <script id="email-reminders">
-// Optional daily email reminders (ADR 0030). The same block ships in
+// Optional weekly email reminders (ADR 0030). The same block ships in
 // index.html and leaderboard.html; each page passes a small host adapter
 // (authenticated request, current account, UI language). Only the signed-in
 // account's own email-preferences endpoint is called, and only when Account
@@ -894,18 +894,18 @@ return {
 // touches gameplay, scoring, clocks or analytics.
 const EmailReminders=(()=>{
   'use strict';
-  const CONSENT='daily-v1-20261009';
+  const CONSENT='weekly-v1-20261031';
   const TEXT={
-    es:{title:'Recordatorios por email',optIn:'Quiero recibir un recordatorio diario por email. Puedo darme de baja cuando quiera.',language:'Idioma de los emails',save:'Guardar',saving:'Guardando…',retry:'Reintentar',loading:'Cargando tus recordatorios…',unavailable:'No pudimos cargar tus recordatorios. Probá de nuevo.',
-      sentTo:email=>`Email: ${email}. Como máximo un recordatorio por día, solo si todavía no completaste el desafío diario.`,noEmail:'Tu cuenta no tiene un email verificado, así que no podemos enviarte recordatorios.',
+    es:{title:'Recordatorios por email',optIn:'Quiero recibir un recordatorio semanal por email. Puedo darme de baja cuando quiera.',language:'Idioma de los emails',save:'Guardar',saving:'Guardando…',retry:'Reintentar',loading:'Cargando tus recordatorios…',unavailable:'No pudimos cargar tus recordatorios. Probá de nuevo.',
+      sentTo:email=>`Email: ${email}. Como máximo un recordatorio por semana, solo si todavía no completaste el desafío diario de ese día.`,noEmail:'Tu cuenta no tiene un email verificado, así que no podemos enviarte recordatorios.',
       on:'Activados.',off:'Desactivados.',pending:'Activados · los estamos preparando.',settingUp:'Activados · los estamos preparando.',
       owner:'Te sumamos a los recordatorios como uno de los primeros jugadores de derabona. Podés desactivarlos cuando quieras.',
       unsubscribed:'Te diste de baja desde un email. Podés volver a activarlos acá.',addressChanged:'El email de tu cuenta cambió. Volvé a activarlos para recibirlos en la nueva dirección.',
       suppressed:'No podemos enviar emails a esta dirección. Escribinos a contact@derabona.club si querés reactivarlos.',
       saveError:'No se pudo guardar. Probá de nuevo.',conflict:'Tus recordatorios cambiaron en otro lugar. Revisá y guardá de nuevo.',inUse:'Otra cuenta ya usa este email para recordatorios.',rateLimited:'Demasiados intentos. Esperá un minuto y probá de nuevo.',
       promptFailed:'No pudimos activar tus recordatorios por email. Podés intentarlo de nuevo en Cuenta.',openAccount:'Abrir Cuenta',dismiss:'Cerrar aviso'},
-    en:{title:'Email reminders',optIn:'Email me a daily reminder. I can unsubscribe at any time.',language:'Email language',save:'Save',saving:'Saving…',retry:'Retry',loading:'Loading your reminders…',unavailable:'We couldn’t load your reminders. Please try again.',
-      sentTo:email=>`Email: ${email}. At most one reminder a day, only if you haven’t finished the daily challenge yet.`,noEmail:'Your account has no verified email, so we can’t send you reminders.',
+    en:{title:'Email reminders',optIn:'Email me a weekly reminder. I can unsubscribe at any time.',language:'Email language',save:'Save',saving:'Saving…',retry:'Retry',loading:'Loading your reminders…',unavailable:'We couldn’t load your reminders. Please try again.',
+      sentTo:email=>`Email: ${email}. At most one reminder a week, only if you haven’t finished that day’s daily challenge yet.`,noEmail:'Your account has no verified email, so we can’t send you reminders.',
       on:'On.',off:'Off.',pending:'On · being set up.',settingUp:'On · being set up.',
       owner:'You were added to reminders as one of derabona’s first players. You can turn them off at any time.',
       unsubscribed:'You unsubscribed from an email. You can turn them back on here.',addressChanged:'Your account email changed. Turn reminders back on to get them at the new address.',

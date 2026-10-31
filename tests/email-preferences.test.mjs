@@ -10,8 +10,8 @@ import vm from 'node:vm';
 const index=readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const board=readFileSync(new URL('../leaderboard.html',import.meta.url),'utf8');
 const block=html=>html.match(/<script id="email-reminders">([\s\S]*?)<\/script>/)?.[1];
-const ES='Quiero recibir un recordatorio diario por email. Puedo darme de baja cuando quiera.';
-const EN='Email me a daily reminder. I can unsubscribe at any time.';
+const ES='Quiero recibir un recordatorio semanal por email. Puedo darme de baja cuando quiera.';
+const EN='Email me a weekly reminder. I can unsubscribe at any time.';
 const UID='11111111-1111-4111-8111-111111111111',OTHER='22222222-2222-4222-8222-222222222222';
 const IDS=['reminder-section','reminder-title','reminder-status','reminder-form','reminder-enabled','reminder-enabled-label','reminder-language','reminder-language-label',
   'reminder-detail','reminder-error','reminder-save','reminder-retry','nickname-prompt-reminder-row','nickname-prompt-reminder','nickname-prompt-reminder-label',
@@ -82,7 +82,7 @@ test('an unchecked first-sign-in choice enrolls nothing; checked saves only afte
   g.dom['nickname-prompt-reminder'].checked=true;
   assert.equal(g.env.calls.length,1,'checking the box is only local intent');
   await g.api.promptCompleted(true);await settle();
-  assert.deepEqual(g.env.calls[1],{owner:UID,payload:{action:'set',enabled:true,language:'es',consentVersion:'daily-v1-20261009',expectedVersion:0,requestId:'00000000-0000-4000-8000-000000000001'}});
+  assert.deepEqual(g.env.calls[1],{owner:UID,payload:{action:'set',enabled:true,language:'es',consentVersion:'weekly-v1-20261031',expectedVersion:0,requestId:'00000000-0000-4000-8000-000000000001'}});
   assert.ok(!('email' in g.env.calls[1].payload)&&!('userId' in g.env.calls[1].payload));
   assert.equal(g.dom['reminder-notice'].hidden,true);
 });

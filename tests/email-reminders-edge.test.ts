@@ -43,6 +43,7 @@ Deno.test('preferences need a verified non-anonymous user; forged or missing JWT
 Deno.test('the preference body never carries an address, identity, vendor state, time or source', () => {
   equal(validatePreference({ action: 'get' }), true);
   equal(validatePreference(set), true);
+  equal(validatePreference({ ...set, consentVersion: 'daily-v1-20261009' }), true, 'pages cached before the weekly wording');
   equal(validatePreference({ action: 'set', enabled: false, expectedVersion: 1, requestId: rid }), true);
   for (const field of ['email', 'userId', 'user_id', 'verified_user_id', 'contactId', 'status', 'deliveryStatus', 'source', 'consentedAt', 'timestamp'])
     equal([field, validatePreference({ ...set, [field]: 'x' })], [field, false]);

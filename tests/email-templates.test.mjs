@@ -1,4 +1,4 @@
-// Daily reminder templates (ADR 0030): copy, required EmailOctopus merge tags,
+// Weekly reminder templates (ADR 0030): copy, required EmailOctopus merge tags,
 // the daily card fields and a single canonical CTA. Rendering in real mail
 // clients is NOT verified here.
 import {readFileSync} from 'node:fs';
